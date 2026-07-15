@@ -127,7 +127,7 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.split("Informations générales")[1]            
             elif len(text_normal) < 20 and "infobox--frwiki noarchive" in portion_of_wikipedia_page_text:
                 text_normal = portion_of_wikipedia_page_text.split("infobox--frwiki noarchive")[1]
-            elif len(text_normal) < 20:
+            if len(text_normal) < 20:
                 text_normal = portion_of_wikipedia_page_text
             
             for i in range (1,100):
@@ -167,7 +167,13 @@ class WikiPeopleData():
                 if "Activité</th>" in text_normal:
                     job = text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")
                 else:
-                    job = text_normal.split("</a></th></tr>")[0].split(">")[-1]
+                    if "Activité principale</th>" not in text_normal:
+                        job = text_normal.split("</a></th></tr>")[0].split(">")[-1]
+                    else:
+                        job = text_normal.split("Activité principale</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")
+                
+                    # if '<' in job or '=' in job:
+                    #     job = "jobo"
             else:
                 job = text_normal.split("Activités</th>")[1].split("<a href=")[1].split(" title=")[0].replace('"',"")
             
@@ -175,15 +181,15 @@ class WikiPeopleData():
             job = job.replace("_"," ")
             town_birth_place = ""
             country_birth_place = ""
+            town_death_place = ""
+            country_death_place = ""
             birth_date = ""
             death_date = "alive"
             age = "dead"
             is_alive = True
             born_before_chirst = False
             died_before_christ = False
-            birth_date_abs = ""
-            death_date_abs = ""
-
+            
             if "Lieu de naissance" in text_normal:
                 town_birth_place = text_normal.split("Lieu de naissance")[1].split("</a>")[0].split("title=")[1].split(">")[1]
                 try:
@@ -233,11 +239,22 @@ class WikiPeopleData():
                 except:
                     town_birth_place = ""
                 
-                try:
-                    town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
-                except:
-                    town_birth_place = text_normal.split("<a href=")[4].split(" title=")[0].replace('"',"")
                 
+                try:
+                    
+                    town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
+                    
+                    if town_birth_place.isdigit() and " " not in town_birth_place:
+                        town_birth_place = text_normal.split("<a href=")[4].split(" title=")[1].split(">")[0].replace('"',"")
+
+                    elif town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place:
+                        town_birth_place = text_normal.split("<a href=")[4].split(" title=")[1].split(">")[0].replace('"',"")
+                    
+                except:
+                    try:
+                        town_birth_place = text_normal.split("<a href=")[4].split(" title=")[0].replace('"',"")
+                    except:
+                        pass
 
                 #
                 #print(text_normal.split("<a href=")[11])
@@ -279,6 +296,7 @@ class WikiPeopleData():
                 
                 #print(text_normal.split("<a href=")[4])
 
+            # print(birth_date)
             if "décès" not in text_normal.lower():
                 #print(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}")
                 
@@ -288,13 +306,14 @@ class WikiPeopleData():
                 # Get the relativedelta between two dates
                 delta = relativedelta.relativedelta(end_date, start_date)
                 age = delta.years
-                is_alive = False
 
 
             else:
                 #print(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}")
                 if born_before_chirst:
                     #print(birth_date.split("-"))
+                    if len(birth_date) == 4:
+                        birth_date+="-01-01"
                     
                     try:
                         year_start = int(birth_date.split("-")[1]) * -1 + ABSOLUTE_DATE_VALUE
@@ -308,6 +327,7 @@ class WikiPeopleData():
 
                         age = self.get_age_between_two_date(year_start,month_start,day_start,year_end,month_end,day_end)
                     except:
+                        
                         if birth_date + ABSOLUTE_DATE_VALUE <= death_date + ABSOLUTE_DATE_VALUE:
                             age = (death_date + ABSOLUTE_DATE_VALUE) - (birth_date + ABSOLUTE_DATE_VALUE)
                         else:
@@ -320,7 +340,9 @@ class WikiPeopleData():
                     # age = delta.years
 
                 else:
-
+                    if len(birth_date) == 4:
+                        birth_date+="-01-01"
+                    
                     try:
                         start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
                         end_date = datetime.strptime(f"{death_date.split("-")[0]}-{str(int(death_date.split("-")[1]))}-{str(int(death_date.split("-")[2]))}", "%Y-%m-%d")
@@ -335,7 +357,16 @@ class WikiPeopleData():
                             age = (death_date + ABSOLUTE_DATE_VALUE) - (birth_date + ABSOLUTE_DATE_VALUE)
                         else:
                             age = (birth_date + ABSOLUTE_DATE_VALUE) - (death_date + ABSOLUTE_DATE_VALUE)
+                    
+            if "Lieu de décès" in text_normal:
+                town_death_place = text_normal.split("Lieu de décès")[1].split(' title=')[1].split(">")[0].replace('"',"")
+                country_death_place = self.get_country_of_a_town(town_death_place,"")
 
+            elif "décès" in text_normal.lower():
+                town_death_place = text_normal.split("Décès")[1].split(')')[1].split(' title=')[1].split(">")[0].replace('"',"")
+                country_death_place = self.get_country_of_a_town(town_death_place,"")
+
+            
             town_birth_place = town_birth_place.replace("_"," ")
             if "(" in town_birth_place and ")" in town_birth_place:
                 town_birth_place = town_birth_place.split("(")[0]
@@ -344,6 +375,10 @@ class WikiPeopleData():
             print(f"Job: {job}")
             print(f"Town birth place: {town_birth_place}")
             print(f"Country birth place: {country_birth_place}")
+            if is_alive is False:
+                print(f"Town death place: {town_death_place}")
+                print(f"Country death place: {country_death_place}")
+            
             print(f"Birth date: {birth_date}")
             print(f"Death date: {death_date}")
             print(f"Age: {age}")
@@ -366,6 +401,9 @@ toto.get_user_information("Emmanuel_Macron")
 toto.get_user_information("Alexandre_le_Grand")
 toto.get_user_information("Brandon_Johnson_(homme_politique)")
 toto.get_user_information("Jean_de_La_Fontaine")
+toto.get_user_information("William_Shakespeare")
+toto.get_user_information("Selena_Gomez")
+
 # MEH USER
 
 # BAD USER
@@ -375,3 +413,4 @@ toto.get_user_information("Jean_de_La_Fontaine")
 
 #toto.get_user_information("Brandon_Johnson_(homme_politique)")
 # Selena_Gomez
+toto.get_user_information("Moliere")
