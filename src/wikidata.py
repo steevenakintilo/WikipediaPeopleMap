@@ -92,14 +92,33 @@ class WikiPeopleData():
             html = entry.get_item().content.tobytes().decode("utf-8", errors="replace")
             portion_of_wikipedia_page_text = html[:100000]
             text_normal = portion_of_wikipedia_page_text
+
             for i in range (1,100):
                 text_normal = text_normal.replace("\n"*i,"\n")
 
+            soup = BeautifulSoup(text_normal, "html.parser")
 
-            reset_file("loto.txt")
-            write_into_file("loto.txt",text_normal)
+            page_text = soup.get_text(" ", strip=True)
 
-            return text_normal.split('title="Liste des pays du monde">Pays</a>')[1].split("data-sort-value=")[1].split(">")[0].replace('"',"")
+            localisation_direction = ""
+            localisation_sud = f'{page_text.split("Coordonnées")[1].split('sud')[0]}'
+            localisation_est = f'{page_text.split("Coordonnées")[1].split('est')[0]}'
+            localisation_ouest = f'{page_text.split("Coordonnées")[1].split('ouest')[0]}'
+            localisation_nord = f'{page_text.split("Coordonnées")[1].split('nord')[0]}'
+
+            if len(localisation_est) - 2 == len(localisation_ouest):
+                localisation_direction = "ouest"
+            elif len(localisation_nord) < len(localisation_sud) and len(localisation_nord) < len(localisation_ouest) and len(localisation_nord) < len(localisation_est):
+                localisation_direction = "nord"
+            elif len(localisation_sud) < len(localisation_nord) and len(localisation_sud) < len(localisation_ouest) and len(localisation_sud) < len(localisation_est):
+                localisation_direction = "sud"
+            elif len(localisation_est) < len(localisation_nord) and len(localisation_est) < len(localisation_est):
+                localisation_direction = "est"
+
+            localisation = f'{page_text.split("Coordonnées")[1].split(localisation_direction)[0]}{localisation_direction[0].upper()}'.replace("nord","N").replace("ouest","O").replace("sud","S").replace("est","E")
+            localisation = localisation.replace("O","W")
+
+            return localisation.strip()
         except:
             return "Undifined"
 
@@ -123,7 +142,7 @@ class WikiPeopleData():
             if page_split.index("né") < page_split.index("née"):
                 boy_score+=1
         elif "né" in page_split:
-            print(page_split.index("né"),page_split.index("né"),page_split.index("né"))
+            #print(page_split.index("né"),page_split.index("né"),page_split.index("né"))
             boy_score+=1
         
         if "est un" in page_text[:PAGE_CHARS_CHECKER] and "est une" not in page_text[:PAGE_CHARS_CHECKER]:
@@ -166,8 +185,22 @@ class WikiPeopleData():
         elif boy_score > girl_score:
             return "Man"
         return "Woman"
-                
-    def get_user_information(self, page_name:str):
+    
+    def country_to_continent(self,country:str) -> str:
+        """A function that return the continent of a given country"""
+        country = country.lower().replace("-"," ")
+        list_of_continents_name = ["Africa","America","Asia","Europe","Oceania"]
+        list_of_continents_name = ["Afrique","Amerique","Asie","Europe","Océanie"]
+        
+        for continent_list , continent_name in zip(LIST_OF_CONTINENTS,list_of_continents_name):
+            for country_name in continent_list:
+                country_name = country_name.replace("-"," ")
+                if country == country_name:
+                    return continent_name
+
+        return "Undifined"
+
+    def get_user_information(self, page_name:str) -> None:
         """A function that get user information (age,date of birth,death,place of birth,death...)"""
         try:
 
@@ -263,12 +296,15 @@ class WikiPeopleData():
             died_before_christ = False
             gender = self.get_gender_of_a_person(html[:1000000])
             preciseness_level = 100
-            
+            continent_of_birth = ""
+            continent_of_death = ""
+            birth_town_localisation = ""
+            death_town_localisation = ""
+            list_of_unpreciseness_data = []
             if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
                 
                 if "<td>Inconnu" in text_normal:
                     town_birth_place = "Undifined"
-                    print("okgrkgprepo")
                 else:
                     town_birth_place = text_normal.split("Lieu de naissance")[1].split("</a>")[0].split("title=")[1].split(">")[1]
                     if " " in town_birth_place:
@@ -381,7 +417,7 @@ class WikiPeopleData():
 
                 if "U-" in birth_date:
                     whole_birth_date = text_normal.split("Date de naissance")[1].split("<td>")[1].split("<")[0].split(" ")
-                    print(birth_date)
+                    #print(birth_date)
                     try:
                         birth_date = f"{self.convert_before_christ_to_date(birth_date)}-{MONTH_TO_NUMBER_DICT[whole_birth_date[1]]}-{whole_birth_date[0]}"
                     except:
@@ -491,46 +527,78 @@ class WikiPeopleData():
             
             town_birth_place = town_birth_place.replace("_"," ")
 
+            if town_birth_place != "Undifined" and len(town_birth_place) != 0:
+                birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
+            if is_alive is False:
+                if town_death_place != "Undifined" and len(town_death_place) != 0:
+                    death_town_localisation = self.get_localisation_of_a_town(town_death_place)
+            
+            if country_birth_place != "Undifined" and len(country_birth_place) != 0:
+                continent_of_birth = self.country_to_continent(country_birth_place)
+            
+            if country_death_place != "Undifined" and len(country_death_place) != 0:
+                continent_of_death = self.country_to_continent(country_death_place)
+            
             if town_birth_place == "" or town_birth_place == "Undifined":
                 preciseness_level -= 10
-                print("town_birth_place is bad")
+                #print("town_birth_place is bad")
+                list_of_unpreciseness_data.append("town_birth_place is unknown")
 
             if country_birth_place == "" or country_birth_place == "Undifined":
                 preciseness_level -= 10
-                print("country_birth_place is bad")
+                #print("country_birth_place is bad")
+                list_of_unpreciseness_data.append("country_birth_place is unknown")
 
             if is_alive is False:
                 if town_death_place == "":
                     preciseness_level -= 10
-                    print("town_death_place is bad")
+                    #print("town_death_place is bad")
+                    list_of_unpreciseness_data.append("town_death_place is unknown")
 
                 if country_death_place == "":
                     preciseness_level -= 10
+                    list_of_unpreciseness_data.append("country_death_place is unknown")
                     print("country_death_place is bad")
 
             if birth_date == death_date:
                 preciseness_level -= 10
-                print("birth_date == death_date")
+                list_of_unpreciseness_data.append("birth_date and death_date may be the same")   
+                #print("birth_date == death_date")
 
             if len(birth_date) < 2:
                 preciseness_level -= 10
-                print("birth_date is bad")
+                list_of_unpreciseness_data.append("birth_date is bad")
+                #print("birth_date is bad")
 
             if len(death_date) < 2:
                 preciseness_level -= 10
-                print("death_date is bad")
+                list_of_unpreciseness_data.append("death_date is bad")
+                #print("death_date is bad")
 
             try:
                 birth_year = int(birth_date.split("-")[0])
                 if birth_year < 1900 or "-" not in birth_date:
                     preciseness_level -= 10
-                    print("birth_date is imprecise")
+                    list_of_unpreciseness_data.append("birth_date is the year 1900")
+                    #print("birth_date is imprecise")
+            except Exception:
+                pass
+            
+            try:
+                birth_year = int(birth_date.split("-")[0])
+                death_year = int(death_date.split("-")[0])
+                
+                if birth_year > death_year:
+                    preciseness_level -= 10
+                    list_of_unpreciseness_data.append("birth_date is after death_date")
+                    #print("birth_date and death_date are imprecise")
             except Exception:
                 pass
             
             if born_before_chirst:
-                print("user is born before christ")
-                preciseness_level-= 20
+                #print("user is born before christ")
+                list_of_unpreciseness_data.append("User is born before christ")
+                preciseness_level-= 10
             
             # try:
             #     death_year = int(death_date.split("-")[0])
@@ -540,15 +608,26 @@ class WikiPeopleData():
             # except Exception:
             #     pass   
 
+
+
+
             if "(" in town_birth_place and ")" in town_birth_place:
                 town_birth_place = town_birth_place.split("(")[0]
             print(f"Page name: {page_name}")
             print(f"Page url: https://fr.wikipedia.org/wiki/{page_name}")
             print(f"Job: {job}")
             print(f"Town birth place: {town_birth_place}")
+            print(f"Birth Town localisation: {birth_town_localisation}")
             print(f"Country birth place: {country_birth_place}")
+            if continent_of_birth != "Undifined" and len(continent_of_birth) != 0:
+                print(f"Continent of birth: {continent_of_birth}")
+            
+            if continent_of_death != "Undifined" and len(continent_of_death) != 0:
+                print(f"Continent of death: {continent_of_death}")
+            
             if is_alive is False:
                 print(f"Town death place: {town_death_place}")
+                print(f"Death Town localisation: {death_town_localisation}")
                 print(f"Country death place: {country_death_place}")
             print(f"Birth date: {birth_date}")
             print(f"Death date: {death_date}")
@@ -558,12 +637,12 @@ class WikiPeopleData():
                 print(f"Dead before Christ: {died_before_christ}")
             print(f"Age: {age}")
             print(f"Is Alive: {is_alive}")
-            print(f"Town localisation:")
             print(f"Gender: {gender}")
 
             
             
             print(f"Preciseness Level {preciseness_level}")
+            print(f"List of unpreciseness data {list_of_unpreciseness_data}")
             print(f"Today date: {today_date_str}")
             print("\n"*5)
             #print('Years, Months, Days between two dates is')
@@ -584,6 +663,9 @@ toto.get_user_information("Brandon_Johnson_(homme_politique)")
 toto.get_user_information("Jean_de_La_Fontaine")
 toto.get_user_information("William_Shakespeare")
 toto.get_user_information("Selena_Gomez")
+toto.get_user_information("Charlemagne")
+
+
 
 # MEH USER
 
@@ -594,4 +676,3 @@ toto.get_user_information("Selena_Gomez")
 
 #toto.get_user_information("Brandon_Johnson_(homme_politique)")
 # Selena_Gomez
-toto.get_user_information("Charlemagne")
