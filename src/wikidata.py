@@ -323,7 +323,7 @@ class WikiPeopleData():
             town_death_place = ""
             country_death_place = ""
             birth_date = ""
-            death_date = "alive"
+            death_date = ""
             age = "dead"
             is_alive = True
             born_before_chirst = False
@@ -394,7 +394,6 @@ class WikiPeopleData():
                 if "décès" in text_normal.lower():
                     death_date = text_normal.split("Date de décès")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
                     is_alive = False
-
                 if "U-" in birth_date:
                     whole_birth_date = text_normal.split("Date de naissance")[1].split("<td>")[1].split("<")[0].split(" ")
                     birth_date = f"{self.convert_before_christ_to_date(birth_date)}-{MONTH_TO_NUMBER_DICT[whole_birth_date[1]]}-{whole_birth_date[0]}"
@@ -492,7 +491,6 @@ class WikiPeopleData():
                     except:
                         pass
                     is_alive = False
-
                 if "U-" in birth_date:
                     try:
                         whole_birth_date = text_normal.split("Date de naissance")[1].split("<td>")[1].split("<")[0].split(" ")
@@ -630,8 +628,12 @@ class WikiPeopleData():
                 except:
                     pass
             
-
-
+            
+            if len(str(birth_date)) > 4 and "-" not in str(birth_date[0]):
+                if death_date == birth_date and int(birth_date.split("-")[0]) >= 1900:
+                    is_alive = True
+            if is_alive and len(str(birth_date)) == 4:
+                age = 2026 - int(birth_date)
             if "id=" in job:
                 job = ""
             town_birth_place = town_birth_place.replace("_"," ")
@@ -651,6 +653,7 @@ class WikiPeopleData():
             
             if country_death_place != "Undifined" and len(country_death_place) != 0:
                 continent_of_death = self.country_to_continent(country_death_place)
+            
             
             if job == "":
                 preciseness_level -= 20
@@ -679,15 +682,14 @@ class WikiPeopleData():
                 if country_death_place == "":
                     preciseness_level -= 20
                     list_of_unpreciseness_data.append("country_death_place is unknown")
-                    print("country_death_place is bad")
                 if death_town_localisation == "":
                     preciseness_level -= 10
                     list_of_unpreciseness_data.append("death town localisation is unknown")
 
-            if birth_date == death_date:
-                preciseness_level -= 40
-                list_of_unpreciseness_data.append("birth_date and death_date may be the same")   
-                #print("birth_date == death_date")
+                if birth_date == death_date:
+                    preciseness_level -= 40
+                    list_of_unpreciseness_data.append("birth_date and death_date may be the same")   
+                    #print("birth_date == death_date")
 
             try:
                 if len(birth_date) < 2:
@@ -746,7 +748,9 @@ class WikiPeopleData():
             if "(" in town_birth_place and ")" in town_birth_place:
                 town_birth_place = town_birth_place.split("(")[0]
             
-            print_data = True
+            print_data = False
+            if int(preciseness_level/2) < 70:
+                print_data = True
             if print_data:
                 print(f"Page name: {page_name}")
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name}")
@@ -821,8 +825,10 @@ class WikiPeopleData():
                 "list_of_unpreciseness_data":list_of_unpreciseness_data
 
             }
-            print(user_info_dict)
-            print("-------"*120)
+
+            if int(preciseness_level/2) < 70:
+                print(user_info_dict)
+                print("-------"*120)
             #print('Years, Months, Days between two dates is')
             #print(delta.years, 'Years,', delta.months, 'months,', delta.days, 'days')
             return True
@@ -850,14 +856,14 @@ toto = WikiPeopleData()
 # toto.get_user_information("Louis_XV")
 
 
-list_of_all_people = print_file_content(r"C:\Users\sakin\Desktop\code\six-degrees-of-separation-wikipedia\src\real_people_dir\real_people_diff_withouth_doublon.txt").split("\n")[0:100]
-ok = 0
-for idx , people in enumerate(list_of_all_people):
-    user_info = toto.get_user_information(people.replace('"',""))
-    if user_info is False:
-        ok+=1
-        print(idx,ok)
-        quit()
+# list_of_all_people = print_file_content(r"C:\Users\sakin\Desktop\code\six-degrees-of-separation-wikipedia\src\real_people_dir\real_people_diff_withouth_doublon.txt").split("\n")[0:100]
+# ok = 0
+# for idx , people in enumerate(list_of_all_people):
+#     user_info = toto.get_user_information(people.replace('"',""))
+#     if user_info is False:
+#         ok+=1
+#         print(idx,ok)
+#         quit()
 
 
 # TO TEST 
