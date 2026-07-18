@@ -245,7 +245,6 @@ class WikiPeopleData():
                 country_name = country_name.replace("-"," ")
                 if country == country_name:
                     return continent_name
-
         return "Undifined"
 
     def get_user_information(self, page_name:str) -> None:
@@ -751,7 +750,14 @@ class WikiPeopleData():
                     except:
                         town_death_place_href = ""
                 except:
-                    pass
+                    try:
+                        town_death_place = text_normal.split("Décès")[1].split('(')[2].split("title=")[1].replace('"',"").strip()
+                        for line in text_normal.split("Décès")[1].split("href="): 
+                            if town_death_place.lower() in line.lower() and "title=" in line.lower():
+                                town_death_place_href = unquote(line.split(" title=")[0].replace('"',""))
+                                break
+                    except:
+                        pass
             
             
             if len(str(birth_date)) > 4 and "-" not in str(birth_date[0]):
@@ -866,10 +872,11 @@ class WikiPeopleData():
             town_death_place = town_death_place.replace("en:","").replace("fr:","")
                 
             town_birth_place = town_birth_place.replace("_"," ")
+            town_death_place = town_death_place.replace("_"," ")
             job = unquote(job)
             town_birth_place = unquote(town_birth_place)
             country_birth_place = unquote(country_birth_place)
-            death_town_localisation = unquote(death_town_localisation)
+            town_death_place = unquote(town_death_place)
             country_death_place = unquote(country_death_place)
             
             if town_birth_place != "Undifined" and len(town_birth_place) != 0:
@@ -882,12 +889,25 @@ class WikiPeopleData():
                     if death_town_localisation == "Undifined" or len(death_town_localisation) == "" and town_death_place_href != "":
                         death_town_localisation = self.get_localisation_of_a_town(town_death_place_href)
             
+            if town_birth_place == town_death_place and len(birth_town_localisation) != 0 and len(town_birth_place) != 0:
+                death_town_localisation = birth_town_localisation
+            
+            if town_birth_place == town_death_place and len(death_town_localisation) != 0 and len(town_birth_place) != 0:
+                death_town_localisation = birth_town_localisation
+                                    
+            if birth_town_localisation == death_town_localisation:
+                if len(country_birth_place) != 0 and len(country_death_place) == 0:
+                    country_death_place = country_birth_place
+                
+                if len(country_death_place) != 0 and len(country_birth_place) == 0:
+                    country_death_place = country_birth_place
+
             if country_birth_place != "Undifined" and len(country_birth_place) != 0:
                 continent_of_birth = self.country_to_continent(country_birth_place)
             
             if country_death_place != "Undifined" and len(country_death_place) != 0:
                 continent_of_death = self.country_to_continent(country_death_place)
-            
+                
             
             if job == "":
                 preciseness_level -= 20
@@ -1012,7 +1032,7 @@ class WikiPeopleData():
             if town_death_place == "":
                 country_death_place = ""
                 death_town_localisation = ""
-                continent_of_birth = ""
+                continent_of_death = ""
             
             if print_data:
                 print(f"Page name: {page_name}")
@@ -1078,9 +1098,11 @@ class WikiPeopleData():
                 "town_birth_place":town_birth_place,
                 "birth_town_localisation":birth_town_localisation,
                 "country_birth_place":country_birth_place,
+                "continent_of_birth":continent_of_birth,
                 "birth_date":birth_date,
                 "birth_death_localisation":death_town_localisation,
                 "country_death_place":country_death_place,
+                "continent_of_death":continent_of_death,
                 "death_date":death_date,
                 "born_before_christ":born_before_chirst,
                 "died_before_christ":died_before_christ,
@@ -1175,4 +1197,4 @@ toto = WikiPeopleData()
 #Abdelhakim_Omrani
 #Abdelbassit_Ben_Dahman
 #
-toto.get_user_information("Abdelhakim_Omrani")
+toto.get_user_information("Abdelhamid_Benrabah")
