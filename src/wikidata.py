@@ -349,6 +349,10 @@ class WikiPeopleData():
             soup = BeautifulSoup(html[:100000], "html.parser")
             page_text_plain_text = soup.get_text(" ", strip=True)
 
+            soup = BeautifulSoup(text_normal, "html.parser")
+            page_text_small_text = soup.get_text(" ", strip=True)
+            
+
             if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
                 
 
@@ -467,7 +471,6 @@ class WikiPeopleData():
 
                 
                 try:
-                    
                     town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
                     try:
                         town_birth_place_href = text_normal.text_normal.split("<a href=")[3].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
@@ -526,9 +529,25 @@ class WikiPeopleData():
                         
                     if town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH:
                         town_birth_place = ""
+
+                    
+                    try:
+                        if town_birth_place == "":
+                            town_birth_place_year = text_normal.split("Naissance")[1].split("datetime=")[1].split("-")[0].replace('"',"").strip()
+                            town_birth_place = page_text_small_text.split(town_birth_place_year)[1].split(" ")[1]
+                    except:
+                        pass
+                    
+                    try:
+                        if town_birth_place == "":
+                            town_birth_place_year = text_normal.split("Naissance")[1].split("datetime=")[1].split('" ')[0].replace('"',"").strip()
+                            town_birth_place = page_text_small_text.split(town_birth_place_year)[1].split(" ")[1]
+                    except:
+                        pass
+                    
                     
                 except:
-                
+                    
                     try:
                         if town_birth_place[0:4].isdigit() and " " in town_birth_place and town_birth_place.count(" ") > 1:
                             town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
@@ -539,13 +558,16 @@ class WikiPeopleData():
                                     town_birth_place = text_normal.split("<a href=")[i]
                                     break
                             town_birth_place = town_birth_place.split("title=")[1].split(">")[0].replace('"',"")
-                            
+                        
                         else:
                             town_birth_place = text_normal.split("<a href=")[4].split(" title=")[0].replace('"',"")
-                        try:
-                            town_birth_place_href = text_normal.split("<a href=")[4].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
-                        except:
-                            town_birth_place_href = ""
+                            if "%C3%" in town_birth_place or "class=" in town_birth_place:
+                                town_birth_place = text_normal.split("<a href=")[6].split(" title=")[0].replace('"',"")
+                            else:
+                                try:
+                                    town_birth_place_href = text_normal.split("<a href=")[4].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
+                                except:
+                                    town_birth_place_href = ""
 
                     except:
                         pass
@@ -773,6 +795,9 @@ class WikiPeopleData():
             if gender == "Man":
                 determiner = "un"
                 job_player = "joueur"
+            if "id=" in job:
+                job = ""
+            
             try:
                 if is_alive and len(job.strip()) <= 1:
                     if "est un" in page_text_plain_text:
@@ -858,8 +883,6 @@ class WikiPeopleData():
                             
             except:
                 pass    
-            if "id=" in job:
-                job = ""
             
             
             if job == town_birth_place:
@@ -1192,9 +1215,6 @@ toto = WikiPeopleData()
 # CHARLEMAGNE
 
 # A TEST
-#Abdelhamid Benrabah
-#Abdelhamid Aït Boudlal
-#Abdelhakim_Omrani
-#Abdelbassit_Ben_Dahman
 #
-toto.get_user_information("Abdelhamid_Benrabah")
+
+toto.get_user_information("Abdelbassit_Ben_Dahman")
