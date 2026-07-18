@@ -153,7 +153,7 @@ class WikiPeopleData():
         except:
             return "Undifined"
 
-    def get_gender_of_a_person(self,page_text:str) ->  str:
+    def get_gender_of_a_person(self,page_text:str,is_alive:bool) ->  str:
         """A function that get the gender of a person"""
         
         boy_score = 0
@@ -184,10 +184,11 @@ class WikiPeopleData():
             if "est une" not in split_text[0]:
                 boy_score+=1
         
-        if "était un" in page_text[:PAGE_CHARS_CHECKER] and "était une" not in page_text[:PAGE_CHARS_CHECKER]:
+        
+        if "était un" in page_text[:PAGE_CHARS_CHECKER] and "était une" not in page_text[:PAGE_CHARS_CHECKER] and is_alive is False:
             boy_score+=1
         
-        if "était un" in page_text[:PAGE_CHARS_CHECKER] and "était une" in page_text[:PAGE_CHARS_CHECKER]:
+        if "était un" in page_text[:PAGE_CHARS_CHECKER] and "était une" in page_text[:PAGE_CHARS_CHECKER] and is_alive is False:
             split_text = page_text.split("était un")
             if "était une" not in split_text[0]:
                 boy_score+=1
@@ -213,10 +214,10 @@ class WikiPeopleData():
             if "est un" not in split_text[0]:
                 girl_score+=1
 
-        if "était une" in page_text[:PAGE_CHARS_CHECKER] and "était un" not in page_text[:PAGE_CHARS_CHECKER]:
+        if "était une" in page_text[:PAGE_CHARS_CHECKER] and "était un" not in page_text[:PAGE_CHARS_CHECKER] and is_alive is False:
             girl_score+=1
         
-        if "était un" in page_text[:PAGE_CHARS_CHECKER] and "était une" in page_text[:PAGE_CHARS_CHECKER]:
+        if "était un" in page_text[:PAGE_CHARS_CHECKER] and "était une" in page_text[:PAGE_CHARS_CHECKER] and is_alive is False:
             split_text = page_text.split("est une")
             if "était un" not in split_text[0]:
                 girl_score+=1
@@ -337,7 +338,6 @@ class WikiPeopleData():
             is_alive = True
             born_before_chirst = False
             died_before_christ = False
-            gender = self.get_gender_of_a_person(html[:1000000])
             preciseness_level = 200
             continent_of_birth = ""
             continent_of_death = ""
@@ -347,25 +347,32 @@ class WikiPeopleData():
             town_birth_place_href = ""
             town_death_place_href = ""
             birth_year_is_real_but_month_and_day_are_not = False
+            soup = BeautifulSoup(html[:100000], "html.parser")
+            page_text_plain_text = soup.get_text(" ", strip=True)
+
             if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
                 
-                if "<td>Inconnu" in text_normal:
-                    town_birth_place = "Undifined"
-                else:
-                    town_birth_place = text_normal.split("Lieu de naissance")[1].split("</a>")[0].split("title=")[1].split(">")[1]
-                    try:
-                        town_birth_place_href = text_normal.split("Lieu de naissance")[1].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
-                    except:
-                        town_birth_place_href = ""
 
-                    if " " in town_birth_place:
-                        if town_birth_place.split(" ")[1] in LIST_OF_MONTH:
-                            town_birth_place = text_normal.split("Lieu de naissance")[1].split("</a>")[2].split("title=")[1].split(">")[1]
+
+                try:
+                    if "<td>Inconnu" in text_normal:
+                        town_birth_place = "Undifined"
+                    else:
+                        town_birth_place = text_normal.split("Lieu de naissance")[1].split("</a>")[0].split("title=")[1].split(">")[1]
                         try:
                             town_birth_place_href = text_normal.split("Lieu de naissance")[1].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
                         except:
                             town_birth_place_href = ""
 
+                        if " " in town_birth_place:
+                            if town_birth_place.split(" ")[1] in LIST_OF_MONTH:
+                                town_birth_place = text_normal.split("Lieu de naissance")[1].split("</a>")[2].split("title=")[1].split(">")[1]
+                            try:
+                                town_birth_place_href = text_normal.split("Lieu de naissance")[1].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
+                            except:
+                                town_birth_place_href = ""
+                except:
+                    pass
                 # print(text_normal.split("Lieu de naissance")[1].split("</a>")[0])
                 # if town_birth_place.isdigit() and " " not in town_birth_place:
                 #     town_birth_place = text_normal.split("<a href=")[4].split(" title=")[1].split(">")[0].replace('"',"")
@@ -752,6 +759,99 @@ class WikiPeopleData():
                     is_alive = True
             if is_alive and len(str(birth_date)) == 4:
                 age = 2026 - int(birth_date)
+            
+            gender = self.get_gender_of_a_person(html[:1000000],is_alive)
+
+            job_player = "joueuse"
+            determiner = "une"
+            if gender == "Man":
+                determiner = "un"
+                job_player = "joueur"
+            try:
+                if is_alive and len(job.strip()) <= 1:
+                    if "est un" in page_text_plain_text:
+                        list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
+                        for index,element in enumerate(list_of_element_after_sentence):
+                            if len(element) > 1:
+                                job = element
+                                job_index = index
+                                break 
+                        
+                        job_ = job
+                        if job == job_player or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
+                            job_index = 0
+                            particle = "de"
+                            for index , element in enumerate(list_of_element_after_sentence):
+                                if element.startswith("d'"):
+                                    job_index = index
+                                    particle = "d'"
+                                    break
+
+                                if element == "de":
+                                    job_index = index + 1
+                                    break
+                            job = f"{determiner} de {list_of_element_after_sentence[job_index]}"  
+                            if particle != "de":
+                                job = f"{job_} {list_of_element_after_sentence[job_index]}"  
+                  
+                elif is_alive is False and job.strip() == "":
+                    if "était un" in page_text_plain_text:
+                        list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
+                        job_index = 0
+                        for index,element in enumerate(list_of_element_after_sentence):
+                            if len(element) > 1:
+                                job = element
+                                job_index = index
+                                break 
+                        
+                        job_ = job
+                        if job == job_player or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
+                            job_index = 0
+                            particle = "de"
+                            for index , element in enumerate(list_of_element_after_sentence):
+                                if element.startswith("d'"):
+                                    job_index = index
+                                    particle = "d'"
+                                    break
+
+                                if element == "de":
+                                    job_index = index + 1
+                                    break
+                            job = f"{determiner} de {list_of_element_after_sentence[job_index]}"  
+                            if particle != "de":
+                                job = f"{job_} {list_of_element_after_sentence[job_index]}"  
+                
+                    elif "est un" in page_text_plain_text:
+                        list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
+                        job_index = 0
+
+                        for index,element in enumerate(list_of_element_after_sentence):
+                            if len(element) > 1:
+                                job = element
+                                job_index = index
+                                break 
+                        
+                        job_ = job
+                        if job == job_player or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
+                            job_index = 0
+                            particle = "de"
+                            for index , element in enumerate(list_of_element_after_sentence):
+                                if element.startswith("d'"):
+                                    job_index = index
+                                    particle = "d'"
+                                    break
+
+                                if element == "de":
+                                    job_index = index + 1
+                                    break
+                            job = f"{determiner} de {list_of_element_after_sentence[job_index]}"  
+                            if particle != "de":
+                                job = f"{job_} {list_of_element_after_sentence[job_index]}"  
+                
+                                
+                            
+            except:
+                pass    
             if "id=" in job:
                 job = ""
             
@@ -771,7 +871,7 @@ class WikiPeopleData():
             country_birth_place = unquote(country_birth_place)
             death_town_localisation = unquote(death_town_localisation)
             country_death_place = unquote(country_death_place)
-
+            
             if town_birth_place != "Undifined" and len(town_birth_place) != 0:
                 birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
                 if birth_town_localisation == "Undifined" or len(birth_town_localisation) == "" and town_birth_place_href != "":
@@ -1023,16 +1123,18 @@ toto = WikiPeopleData()
 # toto.get_user_information("Selena_Gomez")
 # toto.get_user_information("Charlemagne")
 # toto.get_user_information("Louis_XV")
-
+# toto.get_user_information("Moliere")
 
 # start = time.time()
         
-# list_of_all_people = print_file_content(r"C:\Users\sakin\Desktop\code\six-degrees-of-separation-wikipedia\src\real_people_dir\real_people_diff_withouth_doublon.txt").split("\n")[0:1000]
+# list_of_all_people = print_file_content(r"C:\Users\sakin\Desktop\code\six-degrees-of-separation-wikipedia\src\real_people_dir\real_people_diff_withouth_doublon.txt").split("\n")[0:10000]
 # ok = 0
 # for idx , people in enumerate(list_of_all_people):
 #     if people.isdigit():
 #         continue
-    
+
+#     reset_file("counting.txt")
+#     write_into_file("counting.txt",idx)
 #     if len(people) >= 4:
 #         if people[0:4].isdigit() and " " in people and ("aux" in people or "dans" in people):
 #             continue
@@ -1068,6 +1170,9 @@ toto = WikiPeopleData()
 # CHARLEMAGNE
 
 # A TEST
-#Aage Birch
-
-toto.get_user_information("Charlemagne")
+#Abdelhamid Benrabah
+#Abdelhamid Aït Boudlal
+#Abdelhakim_Omrani
+#Abdelbassit_Ben_Dahman
+#
+toto.get_user_information("Abdelhakim_Omrani")
