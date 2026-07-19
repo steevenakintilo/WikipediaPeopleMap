@@ -1,4 +1,5 @@
 """A file that handle all the information"""
+import json
 import traceback
 import time
 import unicodedata
@@ -30,6 +31,10 @@ class WikiPeopleData():
         self.zim = Archive(r"../wikipedia_fr_all_maxi_2026-02.zim")
         self.today_date : datetime = datetime.now().date()
         self.list_of_country : list[str] = print_file_content("list_of_country.txt").split("\n")
+        self.list_of_wikipedia_page_of_real_people : list[str] = print_file_content("list_of_wikipedia_page_of_real_people.txt").split("\n")
+        with open("people_dict_power_ranking.json", "r", encoding="utf-8") as file:
+            self.power_ranking_json = json.load(file)
+                
 
     def clean_title(self,title:str) -> str:
         """A function that clean a wikipedia title"""
@@ -513,7 +518,6 @@ class WikiPeopleData():
                         pass
                     try:
                         if town_birth_place == "" or "%C3%" in town_birth_place:
-                            print("ici")
                             town_birth_place_year = text_normal.split("Naissance")[1].split("datetime=")[1].split("-")[0].replace('"',"").strip()
                             town_birth_place = page_text_small_text.split(town_birth_place_year)[1].split(" ")[1]
                     except:
@@ -1176,6 +1180,20 @@ class WikiPeopleData():
                 death_town_localisation = ""
                 continent_of_death = ""
             
+            power_ranking = self.power_ranking_json[page_name.replace("_","")]
+            position = list(self.power_ranking_json.keys()).index(page_name.replace("_","")) + 1
+            last_position = len(list(self.power_ranking_json.keys()))
+            if position == 1:
+                position = 0
+            position_pourcentage = round((position * 100) / last_position,2)
+
+            if str(round((position * 100) / last_position,4))[0] == "0":
+                position_pourcentage = round((position * 100) / last_position,5)
+            # try:
+            #     power_ranking = self.power_ranking_json[page_name.replace("_","")]
+            # except:
+            #     power_ranking = 0
+            
             if print_data:
                 print(f"Page name: {page_name}")
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name}")
@@ -1203,9 +1221,10 @@ class WikiPeopleData():
                 print(f"Age: {age}")
                 print(f"Is Alive: {is_alive}")
                 print(f"Gender: {gender}")
-
-                
-                
+                print(f"Power ranking: {power_ranking}")
+                print(f"Positition: {position}/{last_position}")
+                print(f"Position %: {position_pourcentage}")
+                print(f"Number of wikipedia page: {last_position}")
                 print(f"Preciseness Level {int(preciseness_level/2)}")
                 print(f"List of unpreciseness data {list_of_unpreciseness_data}")
                 print(f"Today date: {today_date_str}")
@@ -1229,9 +1248,16 @@ class WikiPeopleData():
             if born_before_chirst and died_before_christ is False:
                 born_before_christ_and_died_after_christ
 
+            if page_name not in self.list_of_wikipedia_page_of_real_people:
+                write_into_file("list_of_wikipedia_page_of_real_people.txt",page_name+"\n")
+
             if page_name[0] == "'":
                 page_name = page_name[1:]
                 page_name = "%27"+page_name
+            
+            # print(f"Positition: {position}/{last_position}")
+            # print(f"Position %: {position_pourcentage}")
+            # print(f"Number of wikipedia page: {last_position}")
             
             user_info_dict = {
                 "page_name":page_name,
@@ -1254,6 +1280,10 @@ class WikiPeopleData():
                 "age":age,
                 "is_alive":is_alive,
                 "gender":gender,
+                "power_ranking":power_ranking,
+                "position":position,
+                "position_percentage":position_pourcentage,
+                "number_of_wikipedia_page":last_position,
                 "preciseness_level":int(preciseness_level/2),
                 "list_of_unpreciseness_data":list_of_unpreciseness_data
 
@@ -1265,14 +1295,19 @@ class WikiPeopleData():
             #print('Years, Months, Days between two dates is')
             #print(delta.years, 'Years,', delta.months, 'months,', delta.days, 'days')
             return True
-        except:
+        except Exception as e:
             traceback.print_exc()
+            if "Cannot find entry" in str(e):
+                write_into_file("list_of_wikipedia_page_of_non_real_people.txt",page_name+"\n")
+                #return False
             if page_name[0] == "'":
                 page_name = page_name[1:]
                 page_name = "%27"+page_name
 
+            if page_name not in self.list_of_wikipedia_page_of_real_people:
+                write_into_file("list_of_wikipedia_page_of_non_real_people.txt",page_name+"\n")
             print(f"https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
-            return False
+            #return False
     def start(self):
         """blabla"""
 
@@ -1294,7 +1329,7 @@ do_time_test = False
 if do_time_test:
     start = time.time()
             
-    list_of_all_people = print_file_content(r"C:\Users\sakin\Desktop\code\six-degrees-of-separation-wikipedia\src\real_people_dir\real_people_diff_withouth_doublon.txt").split("\n")[0:10000]
+    list_of_all_people = print_file_content(r"C:\Users\sakin\Desktop\code\six-degrees-of-separation-wikipedia\src\real_people_dir\real_people_diff_withouth_doublon.txt").split("\n")
     ok = 0
     for idx , people in enumerate(list_of_all_people):
         if people.isdigit():
@@ -1307,7 +1342,7 @@ if do_time_test:
         if len(people) >= 4:
             if people[0:4].isdigit() and " " in people and ("aux" in people or "dans" in people):
                 continue
-            
+        
         user_info = toto.get_user_information(people.replace('"',""),False)
         if user_info is False:
             ok+=1
@@ -1339,6 +1374,6 @@ if do_time_test:
 # Abby_Jane_Morrell
 # Abdelhalim_Abdelouahab
 # Abdel_Gadir_Salim
+# Thomas Edison
 
-
-toto.get_user_information("Inoxtag",True)
+toto.get_user_information("Thomas Edison",True)
