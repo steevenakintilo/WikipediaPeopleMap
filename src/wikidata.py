@@ -67,10 +67,12 @@ class WikiPeopleData():
     def get_country_of_a_town(self,town:str,potential_birth_country:str="") -> str:
         """A function that get the country of a town"""
         try:
+            
             if len(town) == 0:
                 return "Undifined"
             if town == "Undifined":
                 return "Undifined"
+            
             entry = self.zim.get_entry_by_title(self.clean_title(town))
 
             html = entry.get_item().content.tobytes().decode("utf-8", errors="replace")
@@ -79,8 +81,8 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.replace("\n"*i,"\n")
 
 
-            reset_file("loto.txt")
-            write_into_file("loto.txt",portion_of_wikipedia_page_text)
+            #reset_file("loto.txt")
+            #write_into_file("loto.txt",portion_of_wikipedia_page_text)
             return text_normal.split('title="Liste des pays du monde">Pays</a>')[1].split("data-sort-value=")[1].split(">")[0].replace('"',"")
         except:
             
@@ -259,7 +261,7 @@ class WikiPeopleData():
                     return continent_name
         return "Undifined"
 
-    def get_user_information(self, page_name:str,force_print_data:bool=False) -> None:
+    def get_user_information(self, page_name:str,force_print_data:bool=False) -> bool:
         """A function that get user information (age,date of birth,death,place of birth,death...)"""
         try:
 
@@ -273,8 +275,12 @@ class WikiPeopleData():
             # Lieu de décès
             # Activité principale
             # Activité
-            entry = self.zim.get_entry_by_title(self.clean_title(page_name))
 
+            try:
+                entry = self.zim.get_entry_by_title(self.clean_title(page_name))
+            except:
+                write_into_file("list_of_wikipedia_page_of_non_real_people.txt",page_name+"\n")
+                return False
             html = entry.get_item().content.tobytes().decode("utf-8", errors="replace")
             portion_of_wikipedia_page_text = html[:100000]
             sub_job = []
@@ -298,16 +304,17 @@ class WikiPeopleData():
 
 
 
-            reset_file("toto.txt")
-            write_into_file("toto.txt",text_normal)
+            # reset_file("coto.txt")
+            # write_into_file("coto.txt",text_normal)
 
             today_date_str = str(self.today_date)
             
             try:
                 if "Activités</th>" not in text_normal:
                         
-                    if "Activité</th>" in text_normal:    
+                    if "Activité</th>" in text_normal:
                         job = text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")
+                    
                     elif "Profession</th>" in text_normal:
                         job = text_normal.split("Profession</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")
                     
@@ -332,14 +339,20 @@ class WikiPeopleData():
                         # if '<' in job or '=' in job:
                         #     job = "jobo"
                 else:
-                    job = text_normal.split("Activités</th>")[1].split("<a href=")[1].split(" title=")[0].replace('"',"")
+                    try:
+                        job = text_normal.split("Activités</th>")[1].split("<a href=")[1].split(" title=")[1].split("<")[0].split(">")[1].strip()
+                    except:
+                        job = text_normal.split("Activités</th>")[1].split("<a href=")[1].split(" title=")[0].replace('"',"")
                     #print("job ", text_normal.split("Activités</th>")[1].split("<a href=")[8])
                     
             except:
                 pass  
 
-                      
-            job = job.replace("_"," ")
+            
+            try:
+                job = job.replace("_"," ")
+            except:
+                pass
             town_birth_place = ""
             country_birth_place = ""
             town_death_place = ""
@@ -484,14 +497,8 @@ class WikiPeopleData():
                 #print(birth_date)
             else:
 
-
-                try:
-                    town_birth_place = text_normal.split("<a href=")[4].split(" title=")[0].replace('"',"")  
-                except:
-                    town_birth_place = ""
                 
                 try:
-
                     if town_birth_place == "" or "%C3%" in town_birth_place:
                         town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
                         try:
@@ -592,7 +599,6 @@ class WikiPeopleData():
                     
                     try:
                         if town_birth_place == "" or "%C3%" in town_birth_place:
-                            print("ici")
                             town_birth_place_year = text_normal.split("Naissance")[1].split("datetime=")[1].split("-")[0].replace('"',"").strip()
                             town_birth_place = page_text_small_text.split(town_birth_place_year)[1].split(" ")[1]
                     except:
@@ -646,16 +652,22 @@ class WikiPeopleData():
                 birth_index = 1
                 for i , line in enumerate(text_normal.split("datetime=")):
                     if "Date de naissance" in line or "Naissance" in line:
-                        
                         birth_index = i
                 
                 if birth_index == 0:
                     birth_index = 2
 
+
                 try:
                     birth_date = text_normal.split("datetime=")[birth_index - 1].split(" ")[0].replace('"',"")
+                    if "<" in birth_date or ">" in birth_date:
+                        birth_date = text_normal.split("datetime=")[birth_index].split(" ")[0].replace('"',"")
                 except:
                     pass
+                if len(birth_date) <= 4 and birth_date.isdigit():
+                    birth_date+="-01-01"
+                    birth_year_is_real_but_month_and_day_are_not =  True
+                
                 if "décès" in text_normal.lower():
                     try:
                         death_date = text_normal.split("datetime=")[birth_index].split(" ")[0].replace('"',"")
@@ -736,7 +748,7 @@ class WikiPeopleData():
                 if born_before_chirst:
                     #print(birth_date.split("-"))
                     try:
-                        if len(birth_date) == 4:
+                        if len(birth_date) <= 4 and birth_date.isdigit():
                             birth_date+="-01-01"
                             birth_year_is_real_but_month_and_day_are_not =  True
                         if birth_date[0] == "0":
@@ -779,7 +791,7 @@ class WikiPeopleData():
 
                 else:
                     try:
-                        if len(birth_date) == 4:
+                        if len(birth_date) <= 4 and birth_date.isdigit():
                             birth_date+="-01-01"
                             birth_year_is_real_but_month_and_day_are_not = True
                         if birth_date[0] == "0":
@@ -834,6 +846,7 @@ class WikiPeopleData():
                     country_death_place = self.get_country_of_a_town(town_death_place,"")
                     town_death_place_ =  town_death_place
                     country_death_place_ = country_death_place
+                    
                     try:
                         town_death_place_href = text_normal.split("Décès")[1].split(')')[1].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
                     except:
@@ -858,13 +871,18 @@ class WikiPeopleData():
                     #         town_birth_place = potential_place[1].strip()
                 
                     #print(page_text_small_text.split(death_year))
-                except:
+                except:                
                     try:
                         town_death_place = text_normal.split("Décès")[1].split('(')[2].split("title=")[1].replace('"',"").strip()
                         for line in text_normal.split("Décès")[1].split("href="): 
                             if town_death_place.lower() in line.lower() and "title=" in line.lower():
                                 town_death_place_href = unquote(line.split(" title=")[0].replace('"',""))
                                 break
+                        if len(town_death_place_href) != 0:
+                            country_death_place = self.get_country_of_a_town(town_death_place_href,"")
+                        else:
+                            country_death_place = self.get_country_of_a_town(town_death_place,"")
+                        
                     except:
                         pass
             
@@ -887,13 +905,18 @@ class WikiPeopleData():
             if gender == "Man":
                 determiner = "un"
                 job_player = "joueur"
-            if "id=" in job:
-                job = ""
+
+            try:
+                if "id=" in job:
+                    job = ""
+            except:
+                job = ""    
             
-            
-            if "<" in job or ">" in job:
-                job = ""
-            
+            try:
+                if "<" in job or ">" in job:
+                    job = ""
+            except:
+                job = ""    
             try:
                 if is_alive and len(job.strip()) <= 1:
                     if "est un" in page_text_plain_text:
@@ -981,12 +1004,35 @@ class WikiPeopleData():
                 pass    
             
             
-            #print(town_birth_place,job)
-            
+            try:
+                potential_new_job = print_file_content("potential_new_job.txt").split("\n")
+                if job == town_birth_place and len(job) != 0 and job not in potential_new_job and job not in JOBS and job not in self.list_of_country and job not in CITIES:
+                    print("JOB: " , job)
+                    write_into_file("potential_new_job.txt",job+"\n")
+                    write_into_file("potential_new_job_page.txt",page_name+"\n")
+                    
+            except:
+                pass
+
             if job == town_birth_place:
+
+                if town_birth_place in CITIES:
+                    town_birth_place = job
+                    country_birth_place = self.get_country_of_a_town(town_birth_place,"")
+                    continent_of_birth = self.country_to_continent(country_birth_place)
+                else:
+                    try:
+                        town_birth_place = text_normal.split("<a href=")[2].split(" title=")[0].replace('"',"")
+                        if town_birth_place != job and town_birth_place != "":
+                            country_birth_place = self.get_country_of_a_town(town_birth_place,"")
+                            continent_of_birth = self.country_to_continent(country_birth_place)       
+                    except:
+                        town_birth_place = ""
+                    
                 if job not in JOBS:
                     job = ""
-                town_birth_place = ""
+                if (town_birth_place == job or town_birth_place == "") and town_birth_place not in CITIES:
+                    town_birth_place = ""
             if len(job) <= 1:
                 job = ""
             town_birth_place = town_birth_place.replace("en:","").replace("fr:","")
@@ -1180,15 +1226,26 @@ class WikiPeopleData():
                 death_town_localisation = ""
                 continent_of_death = ""
             
-            power_ranking = self.power_ranking_json[page_name.replace("_","")]
-            position = list(self.power_ranking_json.keys()).index(page_name.replace("_","")) + 1
-            last_position = len(list(self.power_ranking_json.keys()))
-            if position == 1:
-                position = 0
-            position_pourcentage = round((position * 100) / last_position,2)
 
-            if str(round((position * 100) / last_position,4))[0] == "0":
-                position_pourcentage = round((position * 100) / last_position,5)
+
+            try:
+                power_ranking = self.power_ranking_json[page_name.replace("_","")]
+                position = list(self.power_ranking_json.keys()).index(page_name.replace("_","")) + 1
+                last_position = len(list(self.power_ranking_json.keys()))
+                if position == 1:
+                    position = 0
+                position_pourcentage = round((position * 100) / last_position,2)
+
+                if str(round((position * 100) / last_position,4))[0] == "0":
+                    position_pourcentage = round((position * 100) / last_position,5)
+            except:
+                power_ranking = 0
+                position = -999
+                last_position = len(list(self.power_ranking_json.keys()))
+                position_pourcentage = -999
+            
+            
+            
             # try:
             #     power_ranking = self.power_ranking_json[page_name.replace("_","")]
             # except:
@@ -1295,18 +1352,15 @@ class WikiPeopleData():
             #print('Years, Months, Days between two dates is')
             #print(delta.years, 'Years,', delta.months, 'months,', delta.days, 'days')
             return True
-        except Exception as e:
+        except:
             traceback.print_exc()
-            if "Cannot find entry" in str(e):
-                write_into_file("list_of_wikipedia_page_of_non_real_people.txt",page_name+"\n")
-                #return False
-            if page_name[0] == "'":
-                page_name = page_name[1:]
-                page_name = "%27"+page_name
+            write_into_file("list_of_wikipedia_page_of_real_people.txt",page_name+"\n")
+            # if page_name[0] == "'":
+            #     page_name = page_name[1:]
+            #     page_name = "%27"+page_name
 
-            if page_name not in self.list_of_wikipedia_page_of_real_people:
-                write_into_file("list_of_wikipedia_page_of_non_real_people.txt",page_name+"\n")
-            print(f"https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
+            
+            # print(f"https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
             #return False
     def start(self):
         """blabla"""
@@ -1325,17 +1379,22 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
-do_time_test = False
+do_time_test = True
 if do_time_test:
     start = time.time()
             
     list_of_all_people = print_file_content(r"C:\Users\sakin\Desktop\code\six-degrees-of-separation-wikipedia\src\real_people_dir\real_people_diff_withouth_doublon.txt").split("\n")
+    #list_of_all_people = list(set(list_of_all_people))
     ok = 0
     for idx , people in enumerate(list_of_all_people):
+        if idx < 568262:
+            if idx % 10000 == 0:
+                print(idx)
+            continue
         if people.isdigit():
             continue
         
-        if idx % 1000 == 0:
+        if idx % 10000 == 0:
             print(idx)
             reset_file("counting.txt")
             write_into_file("counting.txt",idx)
@@ -1344,10 +1403,10 @@ if do_time_test:
                 continue
         
         user_info = toto.get_user_information(people.replace('"',""),False)
-        if user_info is False:
-            ok+=1
-            print(idx,ok)
-            quit()
+        # if user_info is False:
+        #     ok+=1
+        #     print(idx,ok)
+        #     quit()
 
     end = time.time()
     print(f"Execution time: {end - start:.6f} seconds")
@@ -1367,13 +1426,11 @@ if do_time_test:
 # CHARLEMAGNE
 
 # A TEST
-# -Z-
 # Abas_(Arménie)
 # Abba_Jifar_II
 # Abbas_Fahdel
 # Abby_Jane_Morrell
 # Abdelhalim_Abdelouahab
 # Abdel_Gadir_Salim
-# Thomas Edison
 
-toto.get_user_information("Thomas Edison",True)
+toto.get_user_information("Abas (Arménie)",True)
