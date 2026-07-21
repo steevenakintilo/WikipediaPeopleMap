@@ -253,8 +253,6 @@ OCEANIA = [
 
 LIST_OF_CONTINENTS = [AFRICA,AMERICA,ASIA,EUROPE,OCEANIA]
 
-MINIMAL_PRECISSENES_SCORE = 65
-
 JOBS = [
     "Écrivain",
     "Auteur",
@@ -1738,3 +1736,5 @@ CITIES = [
     "Suippes",
     "Litomyšl"
 ]
+
+MINIMAL_PRECISSENES_SCORE = 650
