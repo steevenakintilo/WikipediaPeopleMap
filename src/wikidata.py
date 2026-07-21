@@ -306,8 +306,9 @@ class WikiPeopleData():
 
 
 
-            # reset_file("coto.txt")
-            # write_into_file("coto.txt",text_normal)
+            reset_file("coto.txt")
+            write_into_file("coto.txt",text_normal)
+            write_into_file("blabla.txt",html)
 
             today_date_str = str(self.today_date)
             
@@ -385,9 +386,6 @@ class WikiPeopleData():
             whole_page_text_plain_text = soup.get_text(" ", strip=True)
             
             if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
-                
-
-
                 try:
                     if "<td>Inconnu" in text_normal:
                         town_birth_place = "Undefined"
@@ -501,8 +499,6 @@ class WikiPeopleData():
 
                 #print(birth_date)
             else:
-
-                
                 try:
                     if town_birth_place == "" or "%C3%" in town_birth_place:
                         town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
@@ -669,6 +665,7 @@ class WikiPeopleData():
                         birth_date = text_normal.split("datetime=")[birth_index].split(" ")[0].replace('"',"")
                 except:
                     pass
+                
                 if len(birth_date) <= 4 and birth_date.isdigit():
                     birth_date+="-01-01"
                     birth_year_is_real_but_month_and_day_are_not =  True
@@ -715,7 +712,33 @@ class WikiPeopleData():
             death_date_is_between_two_date = False
             
 
-            
+            if len(death_date) <= 4 and death_date.isdigit():
+                death_date+="-01-01"
+                death_year_is_real_but_month_and_day_are_not =  True
+
+
+            if death_date != "" and death_date != "Undefined" and death_date == birth_date:
+                if "né en" in page_text_plain_text:
+                    if page_text_plain_text.split("né en")[1].strip().split(" ")[0].replace(",","").replace("-","").isdigit():
+                        birth_date = ""
+                        birth_date = f"{page_text_plain_text.split("né en")[1].strip().split(" ")[0].replace(",","").replace("-","")}-01-01"
+                if "née en" in page_text_plain_text:
+                    if page_text_plain_text.split("née en")[1].strip().split(" ")[0].replace(",","").replace("-","").isdigit():
+                        birth_date = ""
+                        birth_date = f"{page_text_plain_text.split("née en")[1].strip().split(" ")[0].replace(",","").replace("-","")}-01-01"
+                
+                if is_alive is False:
+                    
+                    if "mort en" in page_text_plain_text:
+                        if page_text_plain_text.split("mort en")[1].strip().split(" ")[0].replace("-","").replace(",","").isdigit():
+                            death_date = ""
+                            death_date = f"{page_text_plain_text.split("mort en")[1].strip().split(" ")[0].replace(",","").replace("-","")}-01-01"
+                    if "morte en" in page_text_plain_text:
+                        if page_text_plain_text.split("morte en")[1].strip().split(" ")[0].replace("-","").replace(",","").isdigit():
+                            death_date = ""
+                            death_date = f"{page_text_plain_text.split("morte en")[1].strip().split(" ")[0].replace(",","").replace("-","")}-01-01"
+                    
+                
             try:
                 birth_year = int(birth_date.split("-")[0])
                 death_year = int(death_date.split("-")[0])
@@ -1499,11 +1522,10 @@ if do_time_test:
 # CHARLEMAGNE
 
 # A TEST
-# Abas_(Arménie)
 # Abba_Jifar_II
 # Abbas_Fahdel
 # Abby_Jane_Morrell
 # Abdelhalim_Abdelouahab
 # Abdel_Gadir_Salim
 
-toto.get_user_information("Xavier_Niel",True)
+toto.get_user_information("Abba_Jifar_II",True)
