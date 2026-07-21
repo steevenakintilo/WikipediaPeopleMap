@@ -658,6 +658,13 @@ class WikiPeopleData():
                     country_birth_place = self.get_country_of_a_town(town_birth_place)
                 
                 
+
+                try:
+                    if town_birth_place.isdigit():
+                        if "Naissance" in text_normal:
+                            town_birth_place = text_normal.split("Naissance")[1].split("title=")[2].split("<")[0].split(">")[1].strip()
+                except:
+                    town_birth_place = ""
                 birth_index = 1
                 for i , line in enumerate(text_normal.split("datetime=")):
                     if "Date de naissance" in line or "Naissance" in line:
@@ -1530,9 +1537,8 @@ if do_time_test:
 # CHARLEMAGNE
 
 # A TEST
-# Abbas_Fahdel
 # Abby_Jane_Morrell
 # Abdelhalim_Abdelouahab
 # Abdel_Gadir_Salim
 
-toto.get_user_information("Abbas_Fahdel",True)
+toto.get_user_information("Abby_Jane_Morrell",True)
