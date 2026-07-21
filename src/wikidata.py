@@ -508,6 +508,7 @@ class WikiPeopleData():
                             town_birth_place_href = ""
 
 
+                    
                     skip_the_rest = False
                     try:
                         if (town_birth_place.isdigit() and " " not in town_birth_place) or (town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place) or (town_birth_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH):
@@ -614,6 +615,7 @@ class WikiPeopleData():
                     
                     
                 except:
+                    
                     try:
                         if town_birth_place[0:4].isdigit() and " " in town_birth_place and town_birth_place.count(" ") > 1:
                             town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
@@ -639,7 +641,13 @@ class WikiPeopleData():
                     except:
                         
                         pass
-                
+                    
+                    try:
+                        if "%C3%" in town_birth_place or "class=" in town_birth_place:
+                            if "Naissance" in text_normal:
+                                town_birth_place = text_normal.split("Naissance")[1].split("<a href=")[1].split(">")[0].split('"')[1].strip()
+                    except:
+                        town_birth_place = ""    
                 
                 #
                 
@@ -1522,10 +1530,9 @@ if do_time_test:
 # CHARLEMAGNE
 
 # A TEST
-# Abba_Jifar_II
 # Abbas_Fahdel
 # Abby_Jane_Morrell
 # Abdelhalim_Abdelouahab
 # Abdel_Gadir_Salim
 
-toto.get_user_information("Abba_Jifar_II",True)
+toto.get_user_information("Abbas_Fahdel",True)
