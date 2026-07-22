@@ -74,7 +74,10 @@ class WikiPeopleData():
                 return "Undefined"
             if town == "Undefined":
                 return "Undefined"
-            
+            if len(potential_birth_country) != 0:
+                if potential_birth_country[0] == "":
+                    potential_birth_country = potential_birth_country[1:]
+
             entry = self.zim.get_entry_by_title(self.clean_title(town))
 
             html = entry.get_item().content.tobytes().decode("utf-8", errors="replace")
@@ -83,23 +86,27 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.replace("\n"*i,"\n")
 
 
-            #reset_file("loto.txt")
-            #write_into_file("loto.txt",portion_of_wikipedia_page_text)
+            reset_file("loto.txt")
+            write_into_file("loto.txt",portion_of_wikipedia_page_text)
             return text_normal.split('title="Liste des pays du monde">Pays</a>')[1].split("data-sort-value=")[1].split(">")[0].replace('"',"")
         except:
             
             try:
                 if potential_birth_country in portion_of_wikipedia_page_text and len(potential_birth_country) > 1:            
                     return potential_birth_country
-                blabla = 'title="États-Unis">États-Unis'
+                list_of_found_country = []
+                list_of_found_index = []
                 for country in self.list_of_country:
                     country_html_checker = f'title="{country}">{country}'
-                    if country_html_checker in text_normal:
-                        return country
-
+                    for index , line in enumerate(text_normal.split("\n")):
+                        if country_html_checker.lower().replace("_"," ") in line.lower().replace("_"," "):
+                            list_of_found_country.append(country)
+                            list_of_found_index.append(index)
+                            #return country
+                if len(list_of_found_country) != 0:
+                    return list_of_found_country[list_of_found_index.index(min(list_of_found_index))]
                 return "Undefined"
             except:
-
                 return "Undefined"
 
     def birth_year_to_time_period(self,birth_year:int):
@@ -278,6 +285,19 @@ class WikiPeopleData():
                     return continent_name
         return "Undefined"
 
+
+    def country_to_region_of_the_world(self,country:str) -> str:
+        """A function that return the region of the world of a given country"""
+        country = country.lower().replace("-"," ")
+
+        for region_list , region_name in zip(LIST_OF_REGIONS,LIST_OF_REGIONS_NAME):
+            for country_name in region_list:
+                country_name = country_name.replace("-"," ")
+                country = country.replace("-"," ")
+                if country.lower() == country_name.lower():
+                    return region_name
+        return "Undefined"
+    
     def get_user_information(self, page_name:str,force_print_data:bool=False) -> bool:
         """A function that get user information (age,date of birth,death,place of birth,death...)"""
         try:
@@ -518,13 +538,37 @@ class WikiPeopleData():
                     if town_birth_place == "" or "%C" in town_birth_place:
                         town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
                         try:
-                            town_birth_place_href = text_normal.text_normal.split("<a href=")[3].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
+                            town_birth_place_href = text_normal.split("<a href=")[3].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
                         except:
                             town_birth_place_href = ""
 
+                            
 
                     
                     skip_the_rest = False
+                    
+                    try:
+                        town_birth_place_year = text_normal.split("Naissance")[1].split("datetime=")[1].split("-")[0].replace('"',"").strip()
+                        town_birth_place = page_text_small_text.split(town_birth_place_year)[1].split(" ")[1]
+                            
+                        if town_birth_place == "(":
+                            potential_place = page_text_small_text.split(town_birth_place_year)[1].split(")")[1].strip().split(",")
+                            town_birth_place = potential_place[0].strip()
+                            if page_text_small_text.split(town_birth_place_year)[1].split(")")[1].strip().count(",") >= 2:
+                                town_birth_place = potential_place[1].strip()
+                        for i in range(3):
+                            if town_birth_place != "" and town_birth_place != "Undefined" and town_birth_place in text_normal.split("<a href=")[3 + i]:
+                                try:
+                                    town_birth_place_href = text_normal.split("<a href=")[3 + i].split("title=")[0].strip()
+                                    town_birth_place_href = unquote(town_birth_place_href.replace('"',""))
+                                    
+                                except:
+                                    town_birth_place_href = ""
+                                break
+                        skip_the_rest = True 
+                    except:
+                        town_birth_place_year = ""
+                        town_birth_place = ""
                     try:
                         if (town_birth_place.isdigit() and " " not in town_birth_place) or (town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place) or (town_birth_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH):
                             try:
@@ -535,6 +579,7 @@ class WikiPeopleData():
                                     town_birth_place = potential_place[0].strip()
                                     if page_text_small_text.split(town_birth_place_year)[1].split(")")[1].strip().count(",") >= 2:
                                         town_birth_place = potential_place[1].strip()
+                                    
                             except:
                                 town_birth_place_year = text_normal.split("Naissance")[1].split("datetime=")[1].split("-")[0].replace('"',"").strip()
                             skip_the_rest = True
@@ -555,10 +600,20 @@ class WikiPeopleData():
                     except:
                         pass
                     
+                    # for i in range(3):
+                    #     #     if town_birth_place != "" and town_birth_place != "Undefined" and town_birth_place in text_normal.split("<a href=")[3 + i]:
+                    #     #         print("popo " , town_birth_place,text_normal.split("<a href=")[3 + i])
+                    #     #         try:
+                    #     #             town_birth_place_href = text_normal.split("<a href=")[3 + i].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
+                    #     #         except:
+                    #     #             town_birth_place_href = ""
+                    #     #         break
 
+                    
                     if skip_the_rest:
                         pass
                     elif town_birth_place.isdigit() and " " not in town_birth_place:
+                        
                         town_birth_place = text_normal.split("<a href=")[4].split(" title=")[1].split(">")[0].replace('"',"")
                         try:
                             town_birth_place_href = text_normal.split("<a href=")[4].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
@@ -566,7 +621,6 @@ class WikiPeopleData():
                             town_birth_place_href = ""
                     
                     elif town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place:
-                        
                         town_birth_place = text_normal.split("<a href=")[4].split(" title=")[1].split(">")[0].replace('"',"")
                         try:
                             town_birth_place_href = text_normal.split("<a href=")[4].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
@@ -574,6 +628,7 @@ class WikiPeopleData():
                             town_birth_place_href = ""
             
                     elif town_birth_place.split(" ")[1].lower() in LIST_OF_MONTH:
+                        
                         town_birth_place = text_normal.split("<a href=")[4].split(" title=")[1].split(">")[0].replace('"',"")
                         try:
                             town_birth_place_href = text_normal.split("<a href=")[4].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
@@ -581,18 +636,17 @@ class WikiPeopleData():
                             town_birth_place_href = ""
 
                     elif town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH:
+                        
                         town_birth_place = text_normal.split("<a href=")[4].split(" title=")[1].split(">")[0].replace('"',"")
                         try:
                             town_birth_place_href = text_normal.split("<a href=")[4].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
                         except:
                             town_birth_place_href = ""
-                    
-                    
+                    print(town_birth_place)
                     
                     
                     if town_birth_place[0:4].isdigit() and " " in town_birth_place and town_birth_place.count(" ") > 1:
                         town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
-                        
                         for i in range(5,len(text_normal.split("<a href="))):
                             if "%C" not in text_normal.split("<a href=")[i] and "class=" not in text_normal.split("<a href=")[i]:
                                 town_birth_place = text_normal.split("<a href=")[i]
@@ -628,7 +682,7 @@ class WikiPeopleData():
                     except:
                         pass
                     
-                    
+                
                 except:
                     
                     try:
@@ -666,12 +720,17 @@ class WikiPeopleData():
                 
                 #
                 
+                
                 #print(text_normal.split("<a href=")[11])
                 if "%C" in town_birth_place or "class=" in town_birth_place:
                     town_birth_place = "Undefined"
-                if town_birth_place != "town_birth_place":
-                    country_birth_place = self.get_country_of_a_town(town_birth_place)
                 
+                if town_birth_place != "town_birth_place":
+                    if town_birth_place_href != "" or town_birth_place_href != "Undefined":
+                        country_birth_place = self.get_country_of_a_town(town_birth_place_href)
+                    else:
+                        country_birth_place = self.get_country_of_a_town(town_birth_place)
+                    
                 
 
                 try:
@@ -905,10 +964,22 @@ class WikiPeopleData():
                     town_death_place_ =  town_death_place
                     country_death_place_ = country_death_place
                     
+                    if page_name == "Molière":
+                        try:
+                            if page_text_small_text.split(death_date.split("-")[0])[1].split(")")[1].strip().count(",") <= 2:
+                                potential_place = page_text_small_text.split(death_date.split("-")[0])[1].split(")")[1].strip().split(",")[1].strip()
+                                town_death_place = potential_place
+                                country_death_place = self.get_country_of_a_town(town_death_place,"")
+
+                        except:
+                            town_death_place =  ""
+                            country_death_place = ""
+                
                     try:
                         town_death_place_href = text_normal.split("Décès")[1].split(')')[1].split("<td><a ")[1].split("href=")[1].split(" ")[0].replace('"',"")
                     except:
                         town_death_place_href = ""
+                    
                     
                     if town_death_place == "" or "<" in town_death_place or ">" in town_death_place or "%C" in town_death_place:
 
@@ -1375,6 +1446,10 @@ class WikiPeopleData():
             death_month = "Undefined"
             death_day = "Undefined"
             
+            if is_alive:
+                death_month = "alive"
+                death_day = "alive"
+                
             #print(birth_date)
             #NUMBER_TO_MONTH_DICT
             try:
@@ -1425,8 +1500,33 @@ class WikiPeopleData():
                 birth_date = "Undefined"
             first_name = ""
 
+            region_of_birth = self.country_to_region_of_the_world(country_birth_place)
+            region_of_death = self.country_to_region_of_the_world(country_death_place)
+            
+            born_and_died_in_the_same_town = "alive"
+            born_and_died_in_the_same_country = "alive"
+            born_and_died_in_the_same_continent = "alive"
+            born_and_died_in_the_same_region = "alive"
+            
+            if is_alive is False:
+                born_and_died_in_the_same_town = False
+                born_and_died_in_the_same_country = False
+                born_and_died_in_the_same_continent = False
+                born_and_died_in_the_same_region = False
+                if town_birth_place == town_death_place and town_birth_place != "Undefined" and len(town_birth_place) != 0:
+                    born_and_died_in_the_same_town = True
+                if country_birth_place == country_death_place and country_birth_place != "Undefined" and len(country_birth_place) != 0:
+                    born_and_died_in_the_same_continent = True
+                if continent_of_birth == continent_of_death and continent_of_birth != "Undefined" and len(continent_of_birth) != 0:
+                    born_and_died_in_the_same_continent = True
+                if region_of_birth == region_of_death and region_of_birth != "Undefined" and len(region_of_birth) != 0:
+                    born_and_died_in_the_same_region = True
+                
+            
             if " " in page_name:
                 first_name = page_name.split(" ")[0]
+
+            
             if print_data:
                 print(f"Page name: {page_name}")
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name}")
@@ -1438,13 +1538,23 @@ class WikiPeopleData():
                 if continent_of_birth != "Undefined" and len(continent_of_birth) != 0:
                     print(f"Continent of birth: {continent_of_birth}")
                 
-                
+                print(f"Region of birth: {region_of_birth}")
                 if is_alive is False:
                     print(f"Town death place: {town_death_place}")
                     print(f"Death Town localisation: {death_town_localisation}")
                     print(f"Country death place: {country_death_place}")
+                    
+                
                 if continent_of_death != "Undefined" and len(continent_of_death) != 0:
                     print(f"Continent of death: {continent_of_death}")
+                
+                print(f"Region of death {region_of_death}")
+                if is_alive is False:
+                    print(f"born_and_died_in_the_same_town: {born_and_died_in_the_same_town}")
+                    print(f"born_and_died_in_the_same_country: {born_and_died_in_the_same_continent}")
+                    print(f"born_and_died_in_the_same_continent: {born_and_died_in_the_same_continent}")
+                    print(f"born_and_died_in_the_same_region: {born_and_died_in_the_same_region}")
+                    
                 
                 print(f"Birth date: {birth_date}")
                 print(f"Birth year: {birth_year}")
@@ -1512,6 +1622,7 @@ class WikiPeopleData():
                 "country_birth_place":country_birth_place,
                 "time_period_of_birth":time_period_of_birth,
                 "continent_of_birth":continent_of_birth,
+                "region_of_birth":region_of_birth,
                 "birth_date":birth_date,
                 "birth_year":birth_year,
                 "birth_month":birth_month,
@@ -1519,6 +1630,11 @@ class WikiPeopleData():
                 "birth_death_localisation":death_town_localisation,
                 "country_death_place":country_death_place,
                 "continent_of_death":continent_of_death,
+                "region_of_death":region_of_death,
+                "born_and_died_in_the_same_town":born_and_died_in_the_same_town,
+                "born_and_died_in_the_same_country":born_and_died_in_the_same_country,
+                "born_and_died_in_the_same_continent":born_and_died_in_the_same_continent,
+                "born_and_died_in_the_same_region":born_and_died_in_the_same_region,
                 "death_date":death_date,
                 "death_year":death_year,
                 "death_month":birth_month,
@@ -1624,4 +1740,4 @@ if do_time_test:
 # Abdelhalim_Abdelouahab
 # Abdel_Gadir_Salim
 
-toto.get_user_information("Alexandre_le_Grand",True)
+toto.get_user_information("Ray Charles",True)

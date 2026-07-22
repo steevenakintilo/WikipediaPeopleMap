@@ -17,6 +17,22 @@ MONTH_TO_NUMBER_DICT: dict[str, str] = {
     "decembre": "12",
     "décembre": "12"
 }
+
+NUMBER_TO_MONTH_DICT: dict[str, str] = {
+    "01": "janvier",
+    "02": "février",
+    "03": "mars",
+    "04": "avril",
+    "05": "mai",
+    "06": "juin",
+    "07": "juillet",
+    "08": "août",
+    "09": "septembre",
+    "10": "octobre",
+    "11": "novembre",
+    "12": "décembre",
+}
+
 LIST_OF_MONTH: list[str] = [
     "janvier",
     "février",
@@ -32,9 +48,9 @@ LIST_OF_MONTH: list[str] = [
     "décembre",
 ]
 
-ABSOLUTE_DATE_VALUE = 1000000
+ABSOLUTE_DATE_VALUE: int = 1000000
 
-AFRICA = [
+AFRICA: list[str] = [
     "africa du sud",
     "algérie",
     "angola",
@@ -91,7 +107,7 @@ AFRICA = [
     "zimbabwe"
 ]
 
-AMERICA = [
+AMERICA: list[str] = [
     "antigua-et-barbuda",
     "argentine",
     "bahamas",
@@ -129,7 +145,7 @@ AMERICA = [
     "venezuela"
 ]
 
-ASIA = [
+ASIA: list[str] = [
     "abkhazie",
     "afghanistan",
     "arabie saoudite",
@@ -185,10 +201,11 @@ ASIA = [
     "yémen"
 ]
 
-EUROPE = [
+EUROPE: list[str] = [
     "albanie",
     "allemagne",
     "andorre",
+    "angleterre",
     "autriche",
     "belgique",
     "biélorussie",
@@ -196,6 +213,7 @@ EUROPE = [
     "bulgarie",
     "croatie",
     "danemark",
+    "écosse",
     "espagne",
     "estonie",
     "finlande",
@@ -203,6 +221,7 @@ EUROPE = [
     "grèce",
     "hongrie",
     "irlande",
+    "irlande du nord",
     "islande",
     "italie",
     "kosovo",
@@ -210,6 +229,7 @@ EUROPE = [
     "liechtenstein",
     "lituanie",
     "luxembourg",
+    "macédoine",
     "macédoine du nord",
     "malte",
     "moldavie",
@@ -217,6 +237,7 @@ EUROPE = [
     "monténégro",
     "norvège",
     "pays-bas",
+    "pays de galles",
     "pologne",
     "portugal",
     "roumanie",
@@ -232,7 +253,7 @@ EUROPE = [
     "vatican"
 ]
 
-OCEANIA = [
+OCEANIA: list[str] = [
     "australie",
     "fidji",
     "îles cook",
@@ -251,9 +272,34 @@ OCEANIA = [
     "vanuatu"
 ]
 
-LIST_OF_CONTINENTS = [AFRICA,AMERICA,ASIA,EUROPE,OCEANIA]
+LIST_OF_REGIONS_NAME = [
+    "Europe du Nord",
+    "Europe de l'Ouest",
+    "Europe du Sud",
+    "Europe de l'Est",
+    "Afrique du Nord",
+    "Afrique de l'Ouest",
+    "Afrique centrale",
+    "Afrique de l'Est",
+    "Afrique australe",
+    "Moyen-Orient",
+    "Asie centrale",
+    "Asie de l'Est",
+    "Asie du Sud",
+    "Asie du Sud-Est",
+    "Caucase",
+    "Amérique anglo-saxonne",
+    "Amérique centrale",
+    "Caraïbes",
+    "Amérique du Sud",
+    "Australasie",
+    "Mélanésie",
+    "Micronésie",
+    "Polynésie",
+]
+LIST_OF_CONTINENTS: list[str] = [AFRICA,AMERICA,ASIA,EUROPE,OCEANIA]
 
-JOBS = [
+JOBS: list[str] = [
     "Écrivain",
     "Auteur",
     "Romancier",
@@ -623,10 +669,266 @@ JOBS = [
     "Scientifique",
     "Programmeur",
     "Développeur",
-    "Ingénieur"
+    "Ingénieur",
+    "Autrice",
+    "Romancière",
+    "Poétesse",
+    "Essayiste",  # épicène
+    "Musicienne",
+    "Journaliste",  # épicène
+    "Réalisatrice",
+    "Productrice musicale",
+    "Compositrice",
+    "Parolière",
+    "Peintre",  # épicène
+    "Sculptrice",
+    "Photographe",  # épicène
+    "Architecte",  # épicène
+    "Designeuse",
+    "Illustratrice",
+    "Dessinatrice",
+    "Humoriste",  # épicène
+    "Comédienne",
+    "Présentatrice de télévision",
+    "Animatrice de radio",
+    "Animatrice de télévision",
+    "Danseuse",
+    "Chorégraphe",  # épicène
+    "Actrice de théâtre",
+    "Metteuse en scène",
+    "Historienne",
+    "Philosophe",  # épicène
+    "Sociologue",  # épicène
+    "Anthropologue",  # épicène
+    "Linguiste",  # épicène
+    "Chercheuse",
+    "Scientifique",  # épicène
+    "Physicienne",
+    "Chimiste",
+    "Mathématicienne",
+    "Biologiste",
+    "Médecin",  # épicène
+    "Psychiatre",  # épicène
+    "Inventrice",
+    "Ingénieure",
+    "Informaticienne",
+    "Développeuse",
+    "Entrepreneuse",
+    "Industrielle",
+    "Banquière",
+    "Économiste",  # épicène
+    "Juriste",  # épicène
+    "Avocate",
+    "Magistrate",
+    "Diplomate",  # épicène
+    "Militaire",  # épicène
+    "Officière",
+    "Exploratrice",
+    "Aventurière",
+    "Athlète",  # épicène
+    "Footballeuse",
+    "Basketteuse",
+    "Joueuse de tennis",
+    "Pilote automobile",  # épicène
+    "Pilote d'avion",  # épicène
+    "Sportive",
+    "Entraîneuse sportive",
+    "Joueuse d'échecs",
+    "Cheffe cuisinière",
+    "Cuisinière",
+    "Religieuse",
+    "Théologienne",
+    "Prêtresse",
+    "Moniale",
+    "Activiste",  # épicène
+    "Militante",
+    "Députée",
+    "Présidente",
+    "Première ministre",
+    "Princesse",
+    "Professeure",
+    "Enseignante",
+    "Universitaire",  # épicène
+    "Critique littéraire",  # épicène
+    "Critique d'art",  # épicène
+    "Éditrice",
+    "Souveraine",
+    "Claveciniste",  # épicène
+    "Autrice de jeux de société",
+    "Conteuse",
+    "Pianiste",  # épicène
+    "Personnalité politique",  # épicène
+    "Infirmière",
+    "Saxophoniste",  # épicène
+    "Cadie",
+    "Charpentière",
+    "Rabbine",
+    "Astronome",  # épicène
+    "Botaniste",  # épicène
+    "Violoncelliste",  # épicène
+    "Commissaire aux comptes",  # épicène
+    "Artiste lyrique",  # épicène
+    "Défenseuse des droits de l'homme",
+    "Arbitre",
+    "Potière",
+    "Autrice-compositrice",
+    "Syndicaliste",  # épicène
+    "Guitariste",  # épicène
+    "Mangaka",  # épicène
+    "Psychologue",  # épicène
+    "Altiste",  # épicène
+    "Illusionniste",  # épicène
+    "Institutrice",
+    "Productrice de télévision",
+    "Directrice de la photographie",
+    "Financière",
+    "Urgentiste",  # épicène
+    "Graphiste",  # épicène
+    "Disc-jockey",
+    "Cheffe d'orchestre",
+    "Consultante",
+    "Caricaturiste",  # épicène
+    "Peintre de cour",  # épicène
+    "Corsaire",  # épicène
+    "Créatrice de caractères",
+    "Influenceuse web",
+    "Marchande d'art",
+    "Vitrailliste",  # épicène
+    "Administratrice coloniale",
+    "Policière",
+    "Entomologiste",  # épicène
+    "Marchande",
+    "Musicienne électronique",
+    "Plasticienne",
+    "Capitaine de navire",  # épicène
+    "Réalisatrice de télévision",
+    "Chroniqueuse",
+    "Publicitaire",
+    "Sexologue",  # épicène
+    "Trompettiste",  # épicène
+    "Ingénieure du son",
+    "Critique de cinéma",  # épicène
+    "Patineuse artistique",
+    "Actrice de doublage",
+    "Cascadeuse",
+    "Journaliste sportive",
+    "Fleuriste",  # épicène
+    "Archiviste",  # épicène
+    "Bassiste",  # épicène
+    "Chercheuse universitaire",
+    "Restauratrice d'art",
+    "Dessinatrice humoristique",
+    "Librettiste",  # épicène
+    "Directrice générale",
+    "Dialoguiste",  # épicène
+    "Cryptographe",  # épicène
+    "Musicologue",  # épicène
+    "Parasitologue",  # épicène
+    "Reporteuse",
+    "Chirurgienne",
+    "Agricultrice",
+    "Vigneronne",
+    "Directrice de casting",
+    "Naturaliste",  # épicène
+    "Cow-girl",
+    "Sommelière",
+    "Monteuse son",
+    "Luthière",
+    "Éleveuse équine",
+    "Pharmacienne",
+    "Pâtissière",
+    "Parfumeuse",
+    "Jardinière",
+    "Guide de haute montagne",  # épicène
+    "Narratrice",
+    "Horlogère",
+    "Navigatrice",
+    "Juge",  # épicène
+    "Conservatrice de musée",
+    "Conservatrice du patrimoine",
+    "Relieuse",
+    "Orfèvre",  # Orfévesse est très rare
+    "Notaire",  # épicène
+    "Directrice des ressources humaines",
+    "Commissaire d'exposition",  # épicène
+    "Bassoniste",  # épicène
+    "Tromboniste",  # épicène
+    "Tailleuse de pierre",
+    "Viticultrice",
+    "Écuyère",
+    "Libraire",  # épicène
+    "Zoologiste",  # épicène
+    "Photographe plasticienne",
+    "Agente de renseignement",
+    "Maquilleuse",
+    "Conductrice de train",
+    "Vachère",
+    "Instrumentiste",  # épicène
+    "Ingénieure logiciel",
+    "Espionne",
+    "Affichiste",  # épicène
+    "Éditrice",
+    "Armatrice",
+    "Corniste",  # épicène
+    "Microbiologiste",  # épicène
+    "Factrice de pianos",
+    "Statisticienne",
+    "Monteuse",
+    "Coiffeuse",
+    "Skipeuse",
+    "Professeure documentaliste",
+    "Investisseuse",
+    "Docteure en médecine",
+    "Vidéaste web",  # épicène
+    "Boulangère",
+    "Écrivaine voyageuse",
+    "Dessinatrice de bande dessinée",
+    "Scénariste de bande dessinée",  # épicène
+    "Présidente-directrice générale",
+    "Scribe",  # épicène
+    "Youtubeuse virtuelle",
+    "Directrice littéraire",
+    "Cheffe militaire",
+    "Illustratrice botanique",
+    "Lexicographe",  # épicène
+    "Directrice artistique",
+    "Correspondante locale de presse",
+    "Tatoueuse",
+    "Pathologiste",  # épicène
+    "Écrivaine publique",
+    "Critique de vin",  # épicène
+    "Promotrice immobilière",
+    "Dirigeante",
+    "Lissière",
+    "Assistante réalisatrice",
+    "Typographe",  # épicène
+    "Griotte",
+    "Photographe de mode",  # épicène
+    "Superviseuse des effets visuels",
+    "Productrice de jeux vidéo",
+    "Cheffe de chœur",
+    "Correspondante de guerre",
+    "Cheffe opératrice",
+    "Directrice de théâtre",
+    "Marinière",
+    "Conseillère d'État",
+    "Trésorière",
+    "Agente de change",
+    "Forgeronne",
+    "Fondeuse",
+    "Ingénieure militaire",
+    "Ingénieure agronome",
+    "Urbaniste",  # épicène
+    "Cheffe de produit",
+    "Trésorière (comptabilité)",
+    "Directrice",
+    "Cheffe d'entreprise",
+    "Restauratrice",
+    "Banquière d'affaires",
+    "Programmeuse"
 ]
 
-CITIES = [
+CITIES: list[str] = [
     "Houston",
     "Marseille",
     "Alger",
@@ -1737,4 +2039,325 @@ CITIES = [
     "Litomyšl"
 ]
 
-MINIMAL_PRECISSENES_SCORE = 650
+NORTHERN_EUROPE = [
+    "Angleterre",
+    "Danemark",
+    "Estonie",
+    "Écosse",
+    "Finlande",
+    "Irlande",
+    "Irlande du Nord",
+    "Islande",
+    "Irlande",
+    "Lettonie",
+    "Lituanie",
+    "Norvège",
+    "Pays de Galles",
+    "Royaume-Uni",
+    "Suède",
+]
+
+WESTERN_EUROPE = [
+    "Allemagne",
+    "Andorre",
+    "Autriche",
+    "Belgique",
+    "France",
+    "Liechtenstein",
+    "Luxembourg",
+    "Monaco",
+    "Pays-Bas",
+    "Suisse",
+]
+
+SOUTHERN_EUROPE = [
+    "Albanie",
+    "Bosnie-Herzégovine",
+    "Chypre",
+    "Chypre du Nord",
+    "Croatie",
+    "Espagne",
+    "Grèce",
+    "Italie",
+    "Kosovo",
+    "Macédoine",
+    "Macédoine du Nord",
+    "Malte",
+    "Monténégro",
+    "Portugal",
+    "Saint-Marin",
+    "Serbie",
+    "Slovénie",
+    "Vatican",
+]
+
+EASTERN_EUROPE = [
+    "Biélorussie",
+    "Moldavie",
+    "Pologne",
+    "République tchèque",
+    "Roumanie",
+    "Slovaquie",
+    "Ukraine",
+    "Russie",
+]
+
+NORTH_AFRICA = [
+    "Algérie",
+    "Égypte",
+    "Libye",
+    "Maroc",
+    "Soudan",
+    "Tunisie",
+]
+
+WEST_AFRICA = [
+    "Bénin",
+    "Burkina Faso",
+    "Cap-Vert",
+    "Côte d'Ivoire",
+    "Gambie",
+    "Ghana",
+    "Guinée",
+    "Guinée-Bissau",
+    "Liberia",
+    "Mali",
+    "Mauritanie",
+    "Niger",
+    "Nigeria",
+    "Sénégal",
+    "Sierra Leone",
+    "Togo",
+]
+
+CENTRAL_AFRICA = [
+    "Angola",
+    "Burundi",
+    "Cameroun",
+    "République centrafricaine",
+    "République du Congo",
+    "République démocratique du Congo",
+    "Gabon",
+    "Guinée équatoriale",
+    "Rwanda",
+    "São Tomé-et-Principe",
+    "Tchad",
+]
+
+EAST_AFRICA = [
+    "Comores",
+    "Djibouti",
+    "Érythrée",
+    "Éthiopie",
+    "Kenya",
+    "Madagascar",
+    "Malawi",
+    "Maurice",
+    "Mozambique",
+    "Ouganda",
+    "Seychelles",
+    "Somalie",
+    "Soudan du Sud",
+    "Tanzanie",
+    "Zambie",
+    "Zimbabwe",
+]
+
+SOUTHERN_AFRICA = [
+    "Afrique du Sud",
+    "Botswana",
+    "Eswatini",
+    "Lesotho",
+    "Namibie",
+]
+
+MIDDLE_EAST = [
+    "Arabie saoudite",
+    "Bahreïn",
+    "Émirats arabes unis",
+    "Irak",
+    "Iran",
+    "Israël",
+    "Jordanie",
+    "Koweït",
+    "Liban",
+    "Oman",
+    "Palestine",
+    "Qatar",
+    "Syrie",
+    "Turquie",
+    "Yémen",
+]
+
+CENTRAL_ASIA = [
+    "Afghanistan",
+    "Kazakhstan",
+    "Kirghizistan",
+    "Ouzbékistan",
+    "Tadjikistan",
+    "Turkménistan",
+]
+
+EAST_ASIA = [
+    "Chine",
+    "Corée du Nord",
+    "Corée du Sud",
+    "Japon",
+    "Mongolie",
+    "Taïwan",
+]
+
+SOUTH_ASIA = [
+    "Bangladesh",
+    "Bhoutan",
+    "Inde",
+    "Maldives",
+    "Népal",
+    "Pakistan",
+    "Sri Lanka",
+]
+
+SOUTHEAST_ASIA = [
+    "Birmanie",
+    "Brunei",
+    "Cambodge",
+    "Indonésie",
+    "Laos",
+    "Malaisie",
+    "Philippines",
+    "Singapour",
+    "Thaïlande",
+    "Timor oriental",
+    "Viêt Nam",
+]
+
+CAUCASUS = [
+    "Abkhazie",
+    "Arménie",
+    "Azerbaïdjan",
+    "Géorgie",
+    "Ossétie du Sud-Alanie",
+]
+
+ANGLO_AMERICA = [
+    "Canada",
+    "États-Unis",
+]
+
+CENTRAL_AMERICA = [
+    "Belize",
+    "Costa Rica",
+    "Guatemala",
+    "Honduras",
+    "Mexique",
+    "Nicaragua",
+    "Panama",
+    "Salvador",
+]
+
+CARIBBEAN = [
+    "Antigua-et-Barbuda",
+    "Bahamas",
+    "Barbade",
+    "Cuba",
+    "Dominique",
+    "Grenade",
+    "Haïti",
+    "Jamaïque",
+    "République dominicaine",
+    "Saint-Christophe-et-Niévès",
+    "Sainte-Lucie",
+    "Saint-Vincent-et-les Grenadines",
+    "Trinité-et-Tobago",
+]
+
+SOUTH_AMERICA = [
+    "Argentine",
+    "Bolivie",
+    "Brésil",
+    "Chili",
+    "Colombie",
+    "Équateur",
+    "Guyana",
+    "Paraguay",
+    "Pérou",
+    "Suriname",
+    "Uruguay",
+    "Venezuela",
+]
+
+AUSTRALASIA = [
+    "Australie",
+    "Nouvelle-Zélande",
+]
+
+MELANESIA = [
+    "Fidji",
+    "Papouasie-Nouvelle-Guinée",
+    "Îles Salomon",
+    "Vanuatu",
+]
+
+MICRONESIA = [
+    "Kiribati",
+    "Îles Marshall",
+    "Micronésie",
+    "Nauru",
+    "Palaos",
+]
+
+POLYNESIA = [
+    "Îles Cook",
+    "Niue",
+    "Samoa",
+    "Tonga",
+    "Tuvalu",
+]
+
+LIST_OF_REGIONS = [
+    NORTHERN_EUROPE,
+    WESTERN_EUROPE,
+    SOUTHERN_EUROPE,
+    EASTERN_EUROPE,
+    NORTH_AFRICA,
+    WEST_AFRICA,
+    CENTRAL_AFRICA,
+    EAST_AFRICA,
+    SOUTHERN_AFRICA,
+    MIDDLE_EAST,
+    CENTRAL_ASIA,
+    EAST_ASIA,
+    SOUTH_ASIA,
+    SOUTHEAST_ASIA,
+    CAUCASUS,
+    ANGLO_AMERICA,
+    CENTRAL_AMERICA,
+    CARIBBEAN,
+    SOUTH_AMERICA,
+    AUSTRALASIA,
+    MELANESIA,
+    MICRONESIA,
+    POLYNESIA,
+]
+
+
+MINIMAL_PRECISSENES_SCORE: int = 650
+LIST_OF_REAL_PEOPLE_FILEPATH: str = "list_of_wikipedia_page_of_real_people.txt"
+
+HISTORICAL_PERIODS = [
+    "Prehistory",
+    "Antiquity",
+    "Middle Ages",
+    "Renaissance",
+    "Contemporary Period",
+    "Today Time"
+]
+
+HISTORICAL_PERIODS_TIME = [
+    "-99999"
+    "-3300",
+    "476",
+    "1492",
+    "1789",
+    "2000"
+]
