@@ -10,3 +10,10 @@ A FAIRE:
 - Une map qui affiche toutes les personnes wikipedia par rapport à leur popularite sur wikipedia
 - Stat qui affiche l'age moyens des gens sur wikipedia (vivants/morts)
 - Stat qui affiche l'age moyens de deces sur wikipedia (vivants/morts)
+
+A FIX:
+
+- Les villes "connues" qui n'ont pas de localisation
+- Les villes qui ont le meme prenom essayer d'avoir la regions ex: Springfield
+- Essayer de recuperer les sous job des gens
+- Les noms de villes/metiers qui ne sont ni des noms de villes/métiers
