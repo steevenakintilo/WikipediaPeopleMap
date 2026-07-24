@@ -16,6 +16,8 @@ A FAIRE:
 - Stat qui affiche les pays les plus populaire sur wikipedia
 - Stat qui affiche la date la plus populaire (pour naissance et déces)
 - La meme pour les villes/continents/regions du monde/métier/prénoms
+- Pouvoir telecharger les cartes
+
 A FIX:
 
 - Les villes "connues" qui n'ont pas de localisation
