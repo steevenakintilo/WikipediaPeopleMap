@@ -1,4 +1,5 @@
 """A file that handle all the information"""
+import ast
 import json
 import re
 import sys
@@ -6,13 +7,15 @@ import traceback
 import time
 import unicodedata
 
+from collections import Counter
 from datetime import datetime
-from urllib.parse import unquote
+from urllib.parse import unquote,quote
 from dateutil import relativedelta
 from unidecode import unidecode
 
 from bs4 import BeautifulSoup
 from libzim.reader import Archive
+
 
 from global_variable import *
 from utility_function import *
@@ -38,11 +41,14 @@ class WikiPeopleData():
         self.list_of_country : list[str] = print_file_content("list_of_country.txt").split("\n")
         self.list_of_wikipedia_page_of_real_people : list[str] = print_file_content("list_of_wikipedia_page_of_real_people.txt").split("\n")
         self.list_of_wikipedia_page_of_non_real_people : list[str] = print_file_content("list_of_wikipedia_page_of_non_real_people.txt").split("\n")
+        #self.all_user_data_file : list[str] = print_file_content("user_info_dict.txt").split("\n")
         self.all_real_people_set = set(self.list_of_wikipedia_page_of_real_people)
 
-        with open("people_dict_power_ranking.json", "r", encoding="utf-8") as file:
+        with open("data_files/people_dict_power_ranking.json", "r", encoding="utf-8") as file:
             self.power_ranking_json = json.load(file)
-
+        with open("data_files/list_of_link_of_all_users_sorted.json", "r", encoding="utf-8") as file:
+            self.list_of_link_of_user = json.load(file)
+                
     def clean_title(self,title:str) -> str:
         """A function that clean a wikipedia title"""
         title = title.strip()
@@ -85,7 +91,7 @@ class WikiPeopleData():
         intro_text = str(html)
         #split_link = intro_text.split("<a href=")
         titles = re.findall(r'<a\s[^>]*title="([^"]+)"', html)
-
+        
         #print(titles)
         
         for title in titles:
@@ -105,7 +111,6 @@ class WikiPeopleData():
     def get_country_of_a_town(self,town:str,potential_birth_country:str="") -> str:
         """A function that get the country of a town"""
         try:
-
             if len(town) == 0:
                 return "Undefined"
             if town == "Undefined":
@@ -122,11 +127,8 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.replace("\n"*i,"\n")
 
 
-            # reset_file("loto.txt")
-            # write_into_file("loto.txt",portion_of_wikipedia_page_text)
             return text_normal.split('title="Liste des pays du monde">Pays</a>')[1].split("data-sort-value=")[1].split(">")[0].replace('"',"")
         except:
-
             try:
                 if potential_birth_country in portion_of_wikipedia_page_text and len(potential_birth_country) > 1:
                     return potential_birth_country
@@ -180,6 +182,9 @@ class WikiPeopleData():
             soup = BeautifulSoup(text_normal, "html.parser")
 
             page_text = soup.get_text(" ", strip=True)
+
+            # reset_file("town_text.txt")
+            # write_into_file("town_text.txt",html+"\n")
 
             #localisation_direction = ""
             localisation_sud = f'{page_text.split("Coordonnées")[1].split('sud')[0]}'
@@ -244,63 +249,90 @@ class WikiPeopleData():
         #     boy_score+=1
         if "né" in page_split and "née" in page_split:
             if page_split.index("né") < page_split.index("née"):
-                boy_score+=1
+                boy_score+=5
         elif "né" in page_split:
             #print(page_split.index("né"),page_split.index("né"),page_split.index("né"))
             boy_score+=1
 
         if "est un" in page_text[:page_chars_checker] and "est une" not in page_text[:page_chars_checker]:
-            boy_score+=1
+            boy_score+=2
 
         if "est un" in page_text[:page_chars_checker] and "est une" in page_text[:page_chars_checker]:
-            split_text = page_text.split("est un")
-            if "est une" not in split_text[0]:
-                boy_score+=1
-
+            if len(page_text.split("est un")[1]) > len(page_text.split("est une")[1]):
+                boy_score+=5
+                        
 
         if "était un" in page_text[:page_chars_checker] and "était une" not in page_text[:page_chars_checker] and is_alive is False:
             boy_score+=1
 
         if "était un" in page_text[:page_chars_checker] and "était une" in page_text[:page_chars_checker] and is_alive is False:
-            split_text = page_text.split("était un")
-            if "était une" not in split_text[0]:
-                boy_score+=1
+            if len(page_text.split("était un")[1]) > len(page_text.split("était une")[1]):
+                boy_score+=5
+            
+                        
+        if "est mort" in page_text[:page_chars_checker] and "est morte" in page_text[:page_chars_checker] and is_alive is False:
+            if len(page_text.split("est morte")[1]) > len(page_text.split("est mort")[1]):
+                boy_score+=5
+        
 
+        if "et mort" in page_text[:page_chars_checker] and "et morte" in page_text[:page_chars_checker] and is_alive is False:
+            if len(page_text.split("et morte")[1]) > len(page_text.split("et mort")[1]):
+                boy_score+=5
+        
         if "baptisé" in page_text[:page_chars_checker]:
             boy_score+=1
         if "est mort" in page_text and "est morte" not in page_text:
             boy_score+=1
-
+        if "et mort" in page_text and "et morte" not in page_text:
+            boy_score+=1
+        
         # CHECK FOR GIRL
 
         if "né" in page_split and "née" in page_split:
             if page_split.index("née") < page_split.index("né"):
-                girl_score+=1
+                girl_score+=5
         elif "née" in page_split:
             girl_score+=1
 
         if "est une" in page_text[:page_chars_checker] and "est un" not in page_text[:page_chars_checker]:
-            girl_score+=1
+            girl_score+=2
 
         if "est un" in page_text[:page_chars_checker] and "est une" in page_text[:page_chars_checker]:
-            split_text = page_text.split("est une")
-            if "est un" not in split_text[0]:
-                girl_score+=1
-
+            if len(page_text.split("est une")[1]) < len(page_text.split("est un")[1]):
+                girl_score+=5
+                        
         if "était une" in page_text[:page_chars_checker] and "était un" not in page_text[:page_chars_checker] and is_alive is False:
             girl_score+=1
 
         if "était un" in page_text[:page_chars_checker] and "était une" in page_text[:page_chars_checker] and is_alive is False:
-            split_text = page_text.split("est une")
-            if "était un" not in split_text[0]:
-                girl_score+=1
-
+            if len(page_text.split("était une")[1]) < len(page_text.split("était un")[1]):
+                girl_score+=5
+            
+                        
         if "baptisée" in page_text[:page_chars_checker]:
             girl_score+=1
 
+
+        if "est mort" in page_text[:page_chars_checker] and "est morte" in page_text[:page_chars_checker] and is_alive is False:
+            if len(page_text.split("est morte")[1]) < len(page_text.split("est mort")[1]):
+                girl_score+=5
+            
+
+        if "et mort" in page_text[:page_chars_checker] and "et morte" in page_text[:page_chars_checker] and is_alive is False:
+            if len(page_text.split("et morte")[1]) < len(page_text.split("et mort")[1]):
+                girl_score+=5
+                        
+    
         if "est morte" in page_text:
             girl_score+=1
+        if "et morte" in page_text:
+            girl_score+=1
 
+        if page_text.lower().split(" ").count("elle") > page_text.lower().split(" ").count("il"):
+            girl_score+=5
+        elif page_text.lower().split(" ").count("elle") < page_text.lower().split(" ").count("il"):
+            boy_score+=5
+                
         if boy_score == girl_score:
             return "Unclear"
         elif boy_score > girl_score:
@@ -333,7 +365,13 @@ class WikiPeopleData():
                     return region_name
         return "Undefined"
 
-    def get_user_information(self, page_name:str,force_print_data:bool=False,page_nb:int=0) -> bool:
+    def is_element_in_line(self,line:str):
+        """A function that check if an element is in a line"""
+        for job in JOBS:
+            if f'"{job.lower()}' in line.lower() and line.lower().count(f'"{job.lower()}') > 1:
+                return job
+        return None
+    def get_user_information(self, page_name:str,force_print_data:bool=False,page_nb:int=-999) -> bool:
         """A function that get user information (age,date of birth,death,place of birth,death...)"""
         try:
 
@@ -353,11 +391,31 @@ class WikiPeopleData():
             except:
                 write_into_file("list_of_wikipedia_page_of_non_real_people.txt",page_name+"\n")
                 return False
+
+            
             html = entry.get_item().content.tobytes().decode("utf-8", errors="replace")
             portion_of_wikipedia_page_text = html[:100000]
+
+
+
+            try:
+            # Find the first image
+                soup = BeautifulSoup(html, "html.parser")
+                img = soup.find("img")
+                img_path = img["src"].lstrip("./")
+                filename = img_path.split("/")[-1]
+                
+                picture_url = f"https://commons.wikimedia.org/wiki/Special:FilePath/{quote(filename)}"
+
+                if picture_url == "https://commons.wikimedia.org/wiki/Special:FilePath/langfr-250px-Defaut_2.svg.png" or ".svg." in picture_url:
+                    picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+            except:
+                picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+                                
             sub_job = []
-            # reset_file("toto.txt")
-            # write_into_file("toto.txt",portion_of_wikipedia_page_text)
+            if page_nb == -999:
+                reset_file("user_text_info.txt")
+                write_into_file("user_text_info.txt",portion_of_wikipedia_page_text)
             text_normal = ""
             if '<table class="infobox_v2 infobox infobox--frwiki noarchive">' in portion_of_wikipedia_page_text:
                 text_normal = portion_of_wikipedia_page_text.split('<table class="infobox_v2 infobox infobox--frwiki noarchive">')[1].split("</tbody></table>")[0]
@@ -367,17 +425,16 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.split("Informations générales")[1]
             elif len(text_normal) < 20 and "infobox--frwiki noarchive" in portion_of_wikipedia_page_text:
                 text_normal = portion_of_wikipedia_page_text.split("infobox--frwiki noarchive")[1]
-            if len(text_normal) < 20:
+            if len(text_normal) < 5000:
                 text_normal = portion_of_wikipedia_page_text
 
             for i in range (1,100):
                 text_normal = text_normal.replace("\n"*i,"\n")
 
-
-
-
-            # reset_file("coto.txt")
-            # write_into_file("coto.txt",text_normal)
+            if page_nb == -999:
+                reset_file("user_text_info2.txt")
+                write_into_file("user_text_info2.txt",text_normal)
+                
             
             today_date_str = str(self.today_date)
 
@@ -385,8 +442,15 @@ class WikiPeopleData():
                 if "Activités</th>" not in text_normal:
 
                     if "Activité</th>" in text_normal:
-                        job = text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")
-
+                        job = text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")       
+                        
+                        # try:
+                        #     job = text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")       
+                        #     if job.lower() in text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[1]:
+                        #         job = text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[1].replace('"',"").split("<")[0]
+                        # except:
+                        #     job = text_normal.split("Activité</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")       
+                                                
                     elif "Profession</th>" in text_normal:
                         job = text_normal.split("Profession</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")
 
@@ -394,22 +458,30 @@ class WikiPeopleData():
                         if "Activité principale</th>" not in text_normal:
                             job = text_normal.split("</a></th></tr>")[0].split(">")[-1]
                             job_index = 0
+                            
                             if len(text_normal.split("</a></th></tr>")[0].split(">")[job_index -1].split("<")[0]) != 0:
-
+                                
                                 for index , line in enumerate(text_normal.split("</a></th></tr>")[0].split(">")):
-                                    if  "et <a href=" in line:
+                                    is_job_in_line = self.is_element_in_line(line)
+                                    if is_job_in_line != None:
+                                        job = is_job_in_line
+                                        job_index = 9999
+                                        break
+                                    if "et <a href=" in line:
                                         job_index = index
                                         break
-                                if job_index != 0:
+                                if job_index != 0 and job_index != 9999:
                                     job = text_normal.split("</a></th></tr>")[0].split(">")[job_index -1].split("<")[0]
                             if job == "":
                                 job = text_normal.split("Activité principale")[1].split("</a>")[0].split(">")[-1]
+                                    
                         else:
                             job = text_normal.split("Activité principale</th>")[1].split(" title=")[1].split(">")[0].replace('"',"")
                             if text_normal.split("Activité principale</th>")[1].split("</div></td>")[0].split("<div>")[1].strip() in JOBS:
                                 job = text_normal.split("Activité principale</th>")[1].split("</div></td>")[0].split("<div>")[1].strip()
                         # if '<' in job or '=' in job:
                         #     job = "jobo"
+                        
                 else:
                     try:
                         job = text_normal.split("Activités</th>")[1].split("<a href=")[1].split(" title=")[1].split("<")[0].split(">")[1].strip()
@@ -420,7 +492,7 @@ class WikiPeopleData():
             except:
                 pass
 
-
+            
             try:
                 job = job.replace("_"," ")
             except:
@@ -448,6 +520,9 @@ class WikiPeopleData():
             soup = BeautifulSoup(html[:100000], "html.parser")
             page_text_plain_text = soup.get_text(" ", strip=True)
 
+            if page_nb == -999:
+                reset_file("blabla.txt")
+                write_into_file("blabla.txt",page_text_plain_text.replace(",","\n"))
             soup = BeautifulSoup(text_normal, "html.parser")
             page_text_small_text = soup.get_text(" ", strip=True)
 
@@ -495,8 +570,7 @@ class WikiPeopleData():
                         #print(text_normal.split("Lieu de naissance")[1].split("Date de décès")[0].split('title=')[-1].split(">")[1]).split("<")[0]
                     except:
                         potential_birth_country = "x"
-
-                    country_birth_place = self.get_country_of_a_town(town_birth_place,potential_birth_country)
+                    country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"),potential_birth_country.replace(" ","_"))
 
                 #return
                 try:
@@ -568,6 +642,7 @@ class WikiPeopleData():
 
                 #print(birth_date)
             else:
+
                 try:
                     if town_birth_place == "" or "%C" in town_birth_place:
                         town_birth_place = text_normal.split("<a href=")[3].split(" title=")[1].split(">")[0].replace('"',"")
@@ -579,13 +654,19 @@ class WikiPeopleData():
 
                     skip_the_rest = False
 
+                                        
                     try:
                         town_birth_place_year = text_normal.split("Naissance")[1].split("datetime=")[1].split("-")[0].replace('"',"").strip()
                         town_birth_place = page_text_small_text.split(town_birth_place_year)[1].split(" ")[1]
+                    
+                        if "(" in text_normal.split(town_birth_place)[1] and ")" in text_normal.split(town_birth_place)[1]:
+                            town_birth_place_href = town_birth_place+text_normal.split(town_birth_place)[1].split('"')[0]
+
 
                         if town_birth_place == "(":
                             potential_place = page_text_small_text.split(town_birth_place_year)[1].split(")")[1].strip().split(",")
                             town_birth_place = potential_place[0].strip()
+
                             if page_text_small_text.split(town_birth_place_year)[1].split(")")[1].strip().count(",") >= 2:
                                 town_birth_place = potential_place[1].strip()
                         for i in range(3):
@@ -601,6 +682,10 @@ class WikiPeopleData():
                     except:
                         town_birth_place_year = ""
                         town_birth_place = ""
+
+
+                    
+                                     
                     try:
                         if (town_birth_place.isdigit() and " " not in town_birth_place) or (town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place) or (town_birth_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH):
                             try:
@@ -757,11 +842,12 @@ class WikiPeopleData():
                     town_birth_place = "Undefined"
 
                 if town_birth_place != "town_birth_place":
-                    if town_birth_place_href != "" or town_birth_place_href != "Undefined":
-                        country_birth_place = self.get_country_of_a_town(town_birth_place_href)
+                    if town_birth_place_href != "" and town_birth_place_href != "Undefined":
+                        country_birth_place = self.get_country_of_a_town(town_birth_place_href.replace(" ","_"))
                     else:
-                        country_birth_place = self.get_country_of_a_town(town_birth_place)
-
+                        country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
+                    
+                                        
 
 
                 try:
@@ -877,11 +963,10 @@ class WikiPeopleData():
                         death_date = death_date[1:]
             except:
                 pass
-
+            
             # print(birth_date)
             if "décès" not in text_normal.lower():
                 #print(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}")
-
                 try:
                     start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
                     end_date = datetime.strptime(f"{today_date_str.split("-")[0]}-{str(int(today_date_str.split("-")[1]))}-{str(int(today_date_str.split("-")[2]))}", "%Y-%m-%d")
@@ -919,6 +1004,7 @@ class WikiPeopleData():
                         age = self.get_age_between_two_date(year_start,month_start,day_start,year_end,month_end,day_end)
                     except:
                         try:
+                            
                             year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
                             year_death_date_ = birth_date[0:len(death_date.split("-")[0])]
 
@@ -956,6 +1042,7 @@ class WikiPeopleData():
                         # Get the relativedelta between two dates
                         delta = relativedelta.relativedelta(end_date, start_date)
                         age = delta.years
+                                                    
                     except:
                         try:
                             year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
@@ -986,13 +1073,13 @@ class WikiPeopleData():
                     except:
                         town_death_place_href = ""
 
-                    country_death_place = self.get_country_of_a_town(town_death_place,"")
+                    country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"),"")
                 except:
                     pass
             elif "décès" in text_normal.lower():
                 try:
                     town_death_place = text_normal.split("Décès")[1].split(')')[1].split(' title=')[1].split(">")[0].replace('"',"")
-                    country_death_place = self.get_country_of_a_town(town_death_place,"")
+                    country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"),"")
                     town_death_place_ =  town_death_place
                     country_death_place_ = country_death_place
 
@@ -1001,7 +1088,7 @@ class WikiPeopleData():
                             if page_text_small_text.split(death_date.split("-")[0])[1].split(")")[1].strip().count(",") <= 2:
                                 potential_place = page_text_small_text.split(death_date.split("-")[0])[1].split(")")[1].strip().split(",")[1].strip()
                                 town_death_place = potential_place
-                                country_death_place = self.get_country_of_a_town(town_death_place,"")
+                                country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"),"")
 
                         except:
                             town_death_place =  ""
@@ -1019,7 +1106,7 @@ class WikiPeopleData():
                             if page_text_small_text.split(death_date.split("-")[0])[1].split(")")[1].strip().count(",") <= 2:
                                 potential_place = page_text_small_text.split(death_date.split("-")[0])[1].split(")")[1].strip().split(",")[1].strip()
                                 town_death_place = potential_place
-                                country_death_place = self.get_country_of_a_town(town_death_place,"")
+                                country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"),"")
 
                         except:
                             town_death_place =  town_death_place_
@@ -1043,9 +1130,9 @@ class WikiPeopleData():
                                     town_death_place_href = unquote(line.split(" title=")[0].replace('"',""))
                                     break
                             if len(town_death_place_href) != 0:
-                                country_death_place = self.get_country_of_a_town(town_death_place_href,"")
+                                country_death_place = self.get_country_of_a_town(town_death_place_href.replace(" ","_"),"")
                             else:
-                                country_death_place = self.get_country_of_a_town(town_death_place,"")
+                                country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"),"")
 
                     except:
                         pass
@@ -1064,12 +1151,14 @@ class WikiPeopleData():
                 age = -999
             gender = self.get_gender_of_a_person(html[:1000000],is_alive)
 
-            job_player = "joueuse"
+            
+            job_player_list = ["joueuse","groupe"]
+
             determiner = "une"
             if gender == "Man":
                 determiner = "un"
-                job_player = "joueur"
-
+                job_player_list = ["joueur","groupe"]
+                            
             try:
                 if "id=" in job:
                     job = ""
@@ -1081,8 +1170,11 @@ class WikiPeopleData():
                     job = ""
             except:
                 job = ""
+
+            if job.isdigit():
+                job = ""          
             try:
-                if is_alive and len(job.strip()) <= 1:
+                if is_alive and len(job.strip()) <= 1 or job in LIST_OF_INCOMPLETE_JOB:
                     if "est un" in page_text_plain_text:
                         list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
                         for index,element in enumerate(list_of_element_after_sentence):
@@ -1092,7 +1184,7 @@ class WikiPeopleData():
                                 break
 
                         job_ = job
-                        if job == job_player or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
+                        if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
@@ -1119,7 +1211,7 @@ class WikiPeopleData():
                                 break
 
                         job_ = job
-                        if job == job_player or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
+                        if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
@@ -1146,7 +1238,7 @@ class WikiPeopleData():
                                 break
 
                         job_ = job
-                        if job == job_player or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
+                        if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
@@ -1167,7 +1259,38 @@ class WikiPeopleData():
             except:
                 pass
 
+            
+            if job.lower() == "homme" and "homme politique" in page_text_plain_text.lower():
+                preciseness_level -= 4
+                job = "Homme politique"
+                list_of_unpreciseness_data.append("User may have a bigger role than homme polituqe")
 
+            if job.lower() == "femme" and "femme politique" in page_text_plain_text.lower():
+                preciseness_level -= 4
+                list_of_unpreciseness_data.append("User may have a bigger role than femme polituqe")
+                job = "femme politique"
+
+            # if job in LIST_OF_INCOMPLETE_JOB:
+            #     for little_job in JOBS:
+            #         print(little_job)
+            #         if little_job.lower() in page_text_plain_text.lower():
+            #             print("yeaaah " , little_job)  
+            #             job = little_job
+            #             break
+            
+            list_of_little_job = []
+            if job in LIST_OF_INCOMPLETE_JOB:
+                for little_job in JOBS:
+                    for word in page_text_plain_text.lower().split(" "):
+                        if little_job.lower().strip() == word.lower().strip():
+                            job = little_job
+                            list_of_little_job.append(job)
+                            break
+
+                job = "Undefined"
+                if len(list_of_little_job) != 0:
+                    job = list_of_little_job[0]
+                
             try:
                 potential_new_job = print_file_content("potential_new_job.txt").split("\n")
                 if job == town_birth_place and len(job) != 0 and job not in potential_new_job and job not in JOBS and job not in self.list_of_country and job not in CITIES:
@@ -1177,13 +1300,13 @@ class WikiPeopleData():
 
             except:
                 pass
-
+            
             if job == town_birth_place:
 
                 if town_birth_place in CITIES:
                     town_birth_place = job
-                    country_birth_place = self.get_country_of_a_town(town_birth_place,"")
-                    continent_of_birth = self.country_to_continent(country_birth_place)
+                    country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"),"")
+                    continent_of_birth = self.country_to_continent(country_birth_place.replace(" ","_"))
                 else:
                     try:
                         town_birth_place = text_normal.split("<a href=")[2].split(" title=")[0].replace('"',"")
@@ -1205,11 +1328,54 @@ class WikiPeopleData():
             town_birth_place = town_birth_place.replace("_"," ")
             town_death_place = town_death_place.replace("_"," ")
             job = unquote(job)
+            
+            ### CHECK JOB
+            if ":" in job or "//" in job:
+                job = "Undefined"
+            if job.isdigit():
+                job = "Undefined"
+            ###
+            for prefix in JOBS_PREFIX:
+                if f"{prefix.lower().replace("armées","armée").strip()} {job.lower().replace("armées","armée").strip()}" in page_text_plain_text.lower().replace("armées","armée").strip():
+                    job = f"{prefix.strip()} {job.strip()}"
+
+            job_ = job
+            try:
+                job = job[0].upper() + job[1:]
+            except:
+                job = job_
+
+
+            if age <= 5:
+                if "Notes_et_références" in text_normal:
+                    if "datetime" not in text_normal.split("Notes_et_références")[0]:
+                        birth_date = "Undefined"
+                        birth_year = "Undefined"
+                        birth_month = "Undefined"
+                        birth_day = "Undefined"
+
+                        if is_alive is False:
+                            death_date = "Undefined"
+                            death_year = "Undefined"
+                            death_month = "Undefined"
+                            death_day = "Undefined"
+                if '<h2 id="Références">' in text_normal:
+                    if "datetime" not in text_normal.split('<h2 id="Références">')[0]:
+                        birth_date = "Undefined"
+                        birth_year = "Undefined"
+                        birth_month = "Undefined"
+                        birth_day = "Undefined"
+
+                        if is_alive is False:
+                            death_date = "Undefined"
+                            death_year = "Undefined"
+                            death_month = "Undefined"
+                            death_day = "Undefined"                   
+
             town_birth_place = unquote(town_birth_place)
             country_birth_place = unquote(country_birth_place)
             town_death_place = unquote(town_death_place)
             country_death_place = unquote(country_death_place)
-            first_name = unquote(first_name)
             try:
                 if is_alive is False:
                     if "Naissance Date inconnu" in page_text_plain_text:
@@ -1231,6 +1397,13 @@ class WikiPeopleData():
                         continent_of_death = ""
             except:
                 pass
+
+            if town_birth_place in JOBS:
+                town_birth_place = "Undefined"
+
+            if town_death_place in JOBS and is_alive is False:
+                town_death_place = "Undefined"
+        
             try:
                 if "(" in town_birth_place and ")" in town_birth_place:
                     town_birth_place = town_birth_place.split("(")[0]
@@ -1244,16 +1417,71 @@ class WikiPeopleData():
                 death_date = ""
                 age = -999
 
+            try:
+                if (town_birth_place.isdigit() and " " not in town_birth_place) or (town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place) or (town_birth_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH) or (len(town_birth_place.strip()) == 1 and town_birth_place.strip().isalpha() is False):
+                    town_birth_place = "Undefined"
+                    if town_birth_place in NON_TOWN_ELEMENT_LIST or "</" in town_birth_place or "www." in town_birth_place or "http" in town_birth_place or ".jp" in town_birth_place or ".png" in town_birth_place or ".wb" in town_birth_place:
+                        town_birth_place = "Undefined"
+                    for html in HTML_ELEMENT_LIST:
+                        if html.lower() in  town_birth_place:
+                            town_birth_place = "Undefined"
+                            break
+                    
+                        
+            except:
+                pass
+
+            try:
+                if (town_death_place.isdigit() and " " not in town_death_place) or (town_death_place.split(" ")[0].isdigit() and " " in town_death_place) or (town_death_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_death_place.split(" ")[0].lower() in LIST_OF_MONTH) and is_alive is False or (len(town_death_place.strip()) == 1 and town_death_place.strip().isalpha() is False):        
+                    town_death_place = "Undefined"
+                    if town_death_place in NON_TOWN_ELEMENT_LIST or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place:
+                        town_death_place = "Undefined"
+                    for html in HTML_ELEMENT_LIST:
+                        if html.lower() in  town_death_place:
+                            town_death_place = "Undefined"
+                            break
+                    
+                                        
+            except:
+                pass
+
+
+
+            
+            if town_birth_place in NON_TOWN_ELEMENT_LIST or "</" in town_birth_place or "www." in town_birth_place or "http" in town_birth_place or ".jp" in town_birth_place or ".png" in town_birth_place or ".wb" in town_birth_place:
+                town_birth_place = "Undefined"
+                town_birth_place_href = "Undefined"
+            if town_death_place in NON_TOWN_ELEMENT_LIST or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place and is_alive is False:
+                town_death_place = "Undefined"
+                town_death_place_href = "Undefined"
+
+            for html in HTML_ELEMENT_LIST:
+                if html.lower() in  town_birth_place:
+                    town_birth_place = "Undefined"
+                    break
+            
+            for html in HTML_ELEMENT_LIST:
+                if html.lower() in  town_death_place and is_alive is False:
+                    town_death_place = "Undefined"
+                    break
+        
+            job = unquote(job)
             if town_birth_place != "Undefined" and len(town_birth_place) != 0:
+                town_birth_place = unquote(town_birth_place)
+                town_birth_place_href = unquote(town_birth_place_href)
                 birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
                 if birth_town_localisation == "Undefined" or len(birth_town_localisation) == "" and town_birth_place_href != "":
                     birth_town_localisation = self.get_localisation_of_a_town(town_birth_place_href)
             if is_alive is False:
                 if town_death_place != "Undefined" and len(town_death_place) != 0:
+                    town_death_place = unquote(town_death_place)
+                    town_death_place_href = unquote(town_death_place_href)
                     death_town_localisation = self.get_localisation_of_a_town(town_death_place)
                     if death_town_localisation == "Undefined" or len(death_town_localisation) == "" and town_death_place_href != "":
                         death_town_localisation = self.get_localisation_of_a_town(town_death_place_href)
 
+
+                   
             if town_birth_place == town_death_place and len(birth_town_localisation) != 0 and len(town_birth_place) != 0:
                 death_town_localisation = birth_town_localisation
 
@@ -1267,19 +1495,25 @@ class WikiPeopleData():
                 if len(country_death_place) != 0 and len(country_birth_place) == 0:
                     country_death_place = country_birth_place
 
+            if birth_town_localisation == "Undefined":
+                country_birth_place = "Undefined"
+
+            if death_town_localisation == "Undefined" and is_alive is False:
+                death_town_localisation = "Undefined"
+                            
             if country_birth_place != "Undefined" and len(country_birth_place) != 0:
                 continent_of_birth = self.country_to_continent(country_birth_place)
 
             if country_death_place != "Undefined" and len(country_death_place) != 0:
                 continent_of_death = self.country_to_continent(country_death_place)
-
-
-            if job == "":
+                            
+            if job == "" or job == "Undefined":
                 job = "Undefined"
                 preciseness_level -= 20
                 list_of_unpreciseness_data.append("job is unknown")
 
 
+            
             if birth_date == "<!DOCTYPE":
                 return
             if town_birth_place == "" or town_birth_place == "Undefined":
@@ -1287,7 +1521,7 @@ class WikiPeopleData():
                 #print("town_birth_place is bad")
                 list_of_unpreciseness_data.append("town_birth_place is unknown")
 
-            if birth_town_localisation == "":
+            if birth_town_localisation == "" or birth_town_localisation == "Undefined":
                 preciseness_level -= 10
                 list_of_unpreciseness_data.append("birth town localisation is unknown")
 
@@ -1306,15 +1540,15 @@ class WikiPeopleData():
                 list_of_unpreciseness_data.append("death year is real but month and day are not")
 
             if is_alive is False:
-                if town_death_place == "":
+                if town_death_place == "" or town_death_place == "Undefined":
                     preciseness_level -= 20
                     #print("town_death_place is bad")
                     list_of_unpreciseness_data.append("town_death_place is unknown")
 
-                if country_death_place == "":
+                if country_death_place == "" or country_death_place == "Undefined":
                     preciseness_level -= 20
                     list_of_unpreciseness_data.append("country_death_place is unknown")
-                if death_town_localisation == "":
+                if death_town_localisation == "" or death_town_localisation == "Undefined":
                     preciseness_level -= 10
                     list_of_unpreciseness_data.append("death town localisation is unknown")
 
@@ -1356,7 +1590,7 @@ class WikiPeopleData():
             try:
                 birth_year = int(birth_date.split("-")[0])
 
-                if birth_year < 1900 or "-" in birth_year:
+                if birth_year < 1900 or "-" in str(birth_year):
                     preciseness_level -= 10
                     list_of_unpreciseness_data.append("birth_date is before the year 1900")
                     #print("birth_date is imprecise")
@@ -1366,6 +1600,10 @@ class WikiPeopleData():
             if age == -999:
                 preciseness_level -= 10
                 list_of_unpreciseness_data.append("age is unknown")
+
+            if age <= 5 and is_alive is False:
+                preciseness_level -= 10
+                list_of_unpreciseness_data.append("age is unknown and birth_date/death_date may be unknown too")
 
             try:
                 birth_year = int(birth_date.split("-")[0])
@@ -1463,26 +1701,30 @@ class WikiPeopleData():
 
                 if str(round((position * 100) / last_position,4))[0] == "0":
                     position_pourcentage = round((position * 100) / last_position,5)
+                position_pourcentage_20 = round(20 - round(((position * 100) / last_position) / 5 , 2),2)
             except:
                 power_ranking = 0
                 position = -999
                 last_position = len(list(self.power_ranking_json.keys()))
                 position_pourcentage = -999
+                position_pourcentage_20 = -999
 
-
-            power_ranking = 0
-            position = 0
-            position_pourcentage = 0
+            # power_ranking = 0
+            # position = 0
+            # position_pourcentage = 0
 
             time_period_of_birth = "Undefined"
             birth_month = "Undefined"
             birth_day = "Undefined"
             death_month = "Undefined"
             death_day = "Undefined"
-
+            death_year = "Undefined"
+                        
             if is_alive:
                 death_month = "alive"
                 death_day = "alive"
+                death_year = "alive"
+
 
             #print(birth_date)
             #NUMBER_TO_MONTH_DICT
@@ -1498,7 +1740,7 @@ class WikiPeopleData():
                     birth_day = birth_date.split("-")[2]
 
                 if birth_year_is_real_but_month_and_day_are_not:
-                    birth_month = "FLuriel"
+                    birth_month = "Fluriel"
                     birth_day = "99"
             except:
                 birth_year = "Undefined"
@@ -1520,8 +1762,11 @@ class WikiPeopleData():
                     death_day = death_date.split("-")[2]
                     death_day = "99"
             except:
-                death_year = "Undefined"
-
+                if is_alive:
+                    death_year = "alive"
+                else:
+                    death_year = "Undefined"
+                                
             if birth_year != "Undefined" and len(str(birth_year)) != 0:
                 time_period_of_birth = self.birth_year_to_time_period(birth_year)
 
@@ -1560,18 +1805,37 @@ class WikiPeopleData():
 
             if gender == "":
                 gender = "Undefined"
+
+            if "<" in town_death_place or ">" in town_death_place:
+                town_death_place = "Undefined"
+            if "<" in town_birth_place or ">" in town_birth_place:
+                town_death_place = "Undefined"
+                        
+
             first_name = "Undefined"
             first_name_standard = "Undefined"
             if " " in page_name:
                 first_name = page_name.split(" ")[0]
 
+            first_name = unquote(first_name)
             region_of_birth = self.country_to_region_of_the_world(country_birth_place)
-            region_of_death = self.country_to_region_of_the_world(country_death_place)
+            region_of_death = "alive"
+            if is_alive == False:
+                region_of_death = self.country_to_region_of_the_world(country_death_place)
 
             born_and_died_in_the_same_town = "alive"
             born_and_died_in_the_same_country = "alive"
             born_and_died_in_the_same_continent = "alive"
             born_and_died_in_the_same_region = "alive"
+            if town_birth_place_href == "" or town_birth_place_href == "Undefined":
+                town_birth_place_href = town_birth_place
+
+            if is_alive is False:
+                if town_death_place_href == "" or town_death_place_href == "Undefined":
+                    town_death_place_href = town_death_place
+                            
+            if is_alive:
+                town_death_place_href = "alive"
 
             if is_alive is False:
                 born_and_died_in_the_same_town = False
@@ -1588,19 +1852,28 @@ class WikiPeopleData():
                     born_and_died_in_the_same_region = True
 
 
-            all_links_of_a_page = self.get_all_links_of_a_page(page_name)
+            #all_links_of_a_page = self.get_all_links_of_a_page(page_name)
+            all_links_of_a_page = self.list_of_link_of_user[page_name]
             number_of_links = len(all_links_of_a_page)
             if " " in page_name:
                 first_name = page_name.split(" ")[0]
 
+            #print(print_data,print_data,print_data)  
+            #print_data = False
+            if town_birth_place_href != "Undefined" and len(town_birth_place_href) != 0 and len(town_birth_place) < len(town_birth_place_href) and town_birth_place in town_birth_place_href:
+                town_birth_place = town_birth_place_href.replace("_"," ")
 
-            print_data = False
+            if town_death_place_href != "Undefined" and len(town_death_place_href) != 0 and len(town_death_place) < len(town_death_place_href) and town_death_place in town_death_place_href:
+                town_death_place = town_death_place_href.replace("_"," ")
+                        
             if print_data:
                 print(f"Page name: {page_name}")
-                print(f"Page url: https://fr.wikipedia.org/wiki/{page_name}")
+                print(f"Page url: https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
+                print(f"Picture url: {picture_url}")
                 print(f"First name: {first_name}")
                 print(f"Job: {job}")
                 print(f"Town birth place: {town_birth_place}")
+                print(f"Town birth place href: {town_birth_place_href}")
                 print(f"Birth Town localisation: {birth_town_localisation}")
                 print(f"Country birth place: {country_birth_place}")
                 print(f"Birth year time period: {time_period_of_birth}")
@@ -1610,6 +1883,7 @@ class WikiPeopleData():
                 print(f"Region of birth: {region_of_birth}")
                 if is_alive is False:
                     print(f"Town death place: {town_death_place}")
+                    print(f"Town death place href: {town_death_place_href}")
                     print(f"Death Town localisation: {death_town_localisation}")
                     print(f"Country death place: {country_death_place}")
 
@@ -1645,6 +1919,7 @@ class WikiPeopleData():
                 print(f"Power ranking: {power_ranking}")
                 print(f"Positition: {position}/{last_position}")
                 print(f"Position %: {position_pourcentage}")
+                print(f"Grade: {position_pourcentage_20}/20")
                 print(f"Number of wikipedia page: {last_position}")
                 print(f"First char of the page {page_name[0].lower()}")
                 print(f"Wikipedia page lenght: {len(whole_page_text_plain_text)}")
@@ -1682,16 +1957,17 @@ class WikiPeopleData():
             # print(f"Positition: {position}/{last_position}")
             # print(f"Position %: {position_pourcentage}")
             # print(f"Number of wikipedia page: {last_position}")
-
             list_of_page_linked_to = []
             number_of_page_linked_to = 0
             user_info_dict = {
                 "page_name":page_name,
                 "page_url":f"https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}",
+                "picture_url":picture_url,
                 "first_name":first_name.lower(),
                 "first_name_standard":unidecode(first_name.lower()),
                 "job":job,
                 "town_birth_place":town_birth_place,
+                "town_birth_place_href":town_birth_place_href,
                 "birth_town_localisation":birth_town_localisation,
                 "country_birth_place":country_birth_place,
                 "time_period_of_birth":time_period_of_birth,
@@ -1700,7 +1976,9 @@ class WikiPeopleData():
                 "birth_date":birth_date,
                 "birth_year":birth_year,
                 "birth_month":birth_month,
-                "birth_day":birth_day,                
+                "birth_day":birth_day,      
+                "town_death_place":town_death_place,
+                "town_death_place_href":town_death_place_href,       
                 "town_death_localisation":death_town_localisation,
                 "country_death_place":country_death_place,
                 "continent_of_death":continent_of_death,
@@ -1724,7 +2002,8 @@ class WikiPeopleData():
                 "power_ranking":power_ranking,
                 "position":position,
                 "position_percentage":position_pourcentage,
-                "first_char_of_the_page":page_name[0].lower(),
+                "grade_over_20":position_pourcentage_20,
+                "first_char_of_the_page":unquote(page_name[0].lower()),
                 "wikipedia_page_lenght":len(whole_page_text_plain_text),
                 "all_links_of_a_page":all_links_of_a_page,
                 "list_of_page_linked_to":list_of_page_linked_to,
@@ -1734,18 +2013,21 @@ class WikiPeopleData():
                 "list_of_unpreciseness_data":list_of_unpreciseness_data
 
             }
-            if print_data is False:
+            print_data = False
+            if print_data:
                 if int(preciseness_level/2) < MINIMAL_PRECISSENES_SCORE and force_print_data:
                     print(user_info_dict)
                     print("-------"*120)
             #print('Years, Months, Days between two dates is')
             #print(delta.years, 'Years,', delta.months, 'months,', delta.days, 'days')
-            write_into_file(f"user_info_dict{page_nb}.txt",str(user_info_dict)+"\n")
+            if page_nb != -999:
+                write_into_file(f"user_info_dict{page_nb}.txt",str(user_info_dict)+"\n")
             return True
         except:
             traceback.print_exc()
             print("PAGE NAME:" , page_name)
-            write_into_file(f"flop_info_dict{page_nb}.txt",f"{page_name}"+"\n")
+            if page_nb != -999:
+                write_into_file(f"flop_info_dict{page_nb}.txt",f"{page_name}"+"\n")
             # if page_name not in self.list_of_wikipedia_page_of_real_people:
             #     write_into_file("list_of_wikipedia_page_of_real_people.txt",page_name+"\n")
 
@@ -1756,6 +2038,314 @@ class WikiPeopleData():
 
             # print(f"https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
             #return False
+
+    def remove_page_name_from_link(self,page_name,list_of_link):
+        """A function that remove page name from link"""
+        new_list_of_link = []
+
+        if page_name not in list_of_link:
+            return list_of_link
+
+        for link in list_of_link:
+            if page_name != link and page_name in self.all_real_people_set:
+                new_list_of_link.append(link)
+
+        return new_list_of_link
+
+    def calc_stat(self):
+        """A function that calc stats of all wikipedia page"""
+        list_of_dict_link = print_file_content("user_info_dict.txt").split("\n")
+        nb_total = 0
+        nb_total_with_link = 0
+        nb_of_people_withouth_link = 0
+        nb_of_people_with_link = 0
+        list_of_link_nb = []
+        list_of_link_name = []
+
+        list_of_link_name2 = []
+        list_of_link_name_ = []
+
+        dict_of_number_of_link_per_page_sorted = {}
+        dict_of_people_who_are_the_most_linked_sorted = {}
+        dict_of_wikipedia_page_lenght_sorted = {}
+        list_of_link_name_occurence = []
+        for i , link in enumerate(list_of_dict_link):
+            if i % 93000 == 0:
+                #print(link , int(i/93000) * 10)
+                print(int(i/93000) * 10)
+
+            try:
+                current_dict = ast.literal_eval(link)
+                name = current_dict["page_name"]
+
+                # print(type(current_dict["list_of_name"]))
+                # print(current_dict["list_of_name"])
+
+                list_of_link = self.remove_page_name_from_link(current_dict["page_name"],current_dict["all_links_of_a_page"])
+                nb_total+=len(list_of_link)
+                list_of_link_nb.append(len(list_of_link))
+                list_of_link_name.append(name)
+                list_of_link_name_.append(name)
+                for elem in list_of_link:
+                    list_of_link_name2.append(elem.strip())
+
+                if len(list_of_link) == 0:
+                    nb_of_people_withouth_link+=1
+                else:
+                    nb_of_people_with_link+=1
+                    nb_total_with_link+=len(list_of_link)
+
+
+            except:
+                list_of_link_nb.append(0)
+                list_of_link_name.append(name)
+
+        # for name in list_of_link_name:
+        #     list_of_link_name_occurence.append(list_of_link_name2.count(name))
+
+        print("Occurrences in list_of_link_name2:",
+          sum(x == "Ray Charles" for x in list_of_link_name2))
+        counts = Counter(list_of_link_name2)
+
+        print(counts["Ray Charles"])
+
+        idx = list_of_link_name.index("Ray Charles")
+        list_of_link_name_occurence = [
+            counts.get(name.strip(), 0)
+            for name in list_of_link_name
+        ]
+        len_all_wikipedia_fr_page =  4583129
+        print(f"Number of people on the whole wikipedia fr {len(list_of_dict_link)}")
+        print(f"Number of total link of the whole wikipedia fr {nb_total}")
+        print(f"Average number of link per person on the whole wikipedia fr {round(len(list_of_dict_link)/nb_total,2)}")
+        print(f"Number of people withouth a link on the whole wikipedia fr {nb_of_people_withouth_link}")
+        print(f"% of people withouth a link on the whole wikipedia fr {int((nb_of_people_withouth_link/len(list_of_dict_link)) * 100)}")
+        print(f"Number of people with a link on the whole wikipedia fr {len(list_of_dict_link) - nb_of_people_withouth_link}")
+        print(f"% of people with a link on the whole wikipedia fr {100 - int((nb_of_people_withouth_link/len(list_of_dict_link)) * 100)}")
+        print(f"Average number of link per person who have atleast 1 link on the whole wikipedia fr {round((nb_of_people_with_link - nb_of_people_withouth_link)/nb_total_with_link,2)}")
+        print(f"Average wikipedia page per user 5306")
+        paired = list(zip(list_of_link_name, list_of_link_nb))
+        paired.sort(key=lambda x: x[1], reverse=True)
+
+        nb_link_by_user = 0
+        nb_link_by_page = 0
+        try:
+            list_of_element, occurence_of_element_list = zip(*paired)
+        except:
+            return [] , []
+        list_of_element = list(list_of_element)
+        occurence_of_element_list = list(occurence_of_element_list)
+
+        for i in range(10):
+            print("Most Link on this page: " ,list_of_element[i],occurence_of_element_list[i])
+
+        for i in range(len(list_of_element)):
+            dict_of_number_of_link_per_page_sorted[list_of_element[i]] = occurence_of_element_list[i]
+        nbz = 500
+        nb_link_by_page = sum(occurence_of_element_list[0:nbz])
+        paired = list(zip(list_of_link_name_, list_of_link_name_occurence))
+        paired.sort(key=lambda x: x[1], reverse=True)
+        try:
+            list_of_element, occurence_of_element_list = zip(*paired)
+        except:
+            return [] , []
+        list_of_element = list(list_of_element)
+        occurence_of_element_list = list(occurence_of_element_list)
+        print("\n\n\n\n")
+
+        for i in range(len(list_of_element)):
+            dict_of_people_who_are_the_most_linked_sorted[list_of_element[i]] = occurence_of_element_list[i]
+
+        for i in range(10):
+            print("Most Linked user: " , list_of_element[i],occurence_of_element_list[i])
+
+        nb_link_by_user = sum(occurence_of_element_list[0:nbz])
+        page_size_of_the_top_500_user = 76198514
+        nb_link_by_page_size = int(page_size_of_the_top_500_user / nb_link_by_page)
+        print(nb_link_by_page_size)
+        nb_link_by_page_size = 310
+        merged_data_name = []
+        merged_data_value = []
+        merged_data_dict = {}
+
+        print(nb_link_by_page)
+        print(nb_link_by_user)
+        print(nb_link_by_user/nb_link_by_page)
+
+        #  100 5.49
+        #  250 4.30
+        #  500 3.67
+        #  1000 3.13
+        #  10000 1.86
+
+        # 152397
+
+        with open("list_of_wikipedia_page_lenght.json", "r", encoding="utf-8") as file:
+            pages_lenght = json.load(file)
+
+
+        list_of_page_name = []
+        list_of_page_size = []
+        for name , lenght in pages_lenght.items():
+            list_of_page_name.append(name)
+            list_of_page_size.append(lenght)
+
+        paired = list(zip(list_of_page_name, list_of_page_size))
+
+        paired.sort(key=lambda x: x[1], reverse=True)
+        try:
+            list_of_element, list_of_size_of_element = zip(*paired)
+        except:
+            return [] , []
+        list_of_element = list(list_of_element)
+        list_of_size_of_element = list(list_of_size_of_element)
+        print("\n\n\n\n")
+
+        for i in range(len(list_of_element)):
+            dict_of_wikipedia_page_lenght_sorted[list_of_element[i]] = list_of_size_of_element[i]
+
+        for i in range(10):
+            print("Biggest Wikipedia Page by user: " , list_of_element[i],list_of_size_of_element[i])
+
+        index = 0
+        for user , data  in dict_of_number_of_link_per_page_sorted.items():
+            #print(user,self.all_user_data_file.index(user))
+            #print(user,self.list_of_wikipedia_page_of_real_people.index(user))
+            page_len = pages_lenght[user]
+            merged_data_name.append(user)
+            merged_data_value.append((data * 3.67) + counts[user] + (page_len / nb_link_by_page_size))
+            if index % 80000 == 0 or user == "Ray Charles" or user == "François Hollande":
+                print(
+                    f"User={user} | "
+                    f"Data={data * 3.67:.2f} | "
+                    f"Links={counts[user]} | "
+                    f"Page={page_len / nb_link_by_page_size:.2f} | "
+                    f"Total={(data * 3.67) + dict_of_people_who_are_the_most_linked_sorted[user] + (page_len / nb_link_by_page_size):.2f}"
+                )
+
+            index+=1
+
+        paired = list(zip(merged_data_name, merged_data_value))
+
+        paired.sort(key=lambda x: x[1], reverse=True)
+
+        try:
+            list_of_element, occurence_of_element_list = zip(*paired)
+        except:
+            return [] , []
+        list_of_element = list(list_of_element)
+        occurence_of_element_list = list(occurence_of_element_list)
+
+        for i in range(len(list_of_element)):
+            merged_data_dict[list_of_element[i]] = occurence_of_element_list[i]
+
+        with open("data_files/list_of_the_longest_page.json", "w",encoding="utf-8") as f:
+            json.dump(dict_of_wikipedia_page_lenght_sorted, f,ensure_ascii=False,indent=4)
+  
+        with open("data_files/list_of_page_with_the_most_link.json", "w",encoding="utf-8") as f:
+            json.dump(dict_of_number_of_link_per_page_sorted, f,ensure_ascii=False,indent=4)
+
+        with open("data_files/list_of_most_linked_user.json", "w",encoding="utf-8") as f:
+            json.dump(dict_of_people_who_are_the_most_linked_sorted, f,ensure_ascii=False,indent=4)
+
+        with open("data_files/people_dict_power_ranking.json", "w",encoding="utf-8") as f:
+            json.dump(merged_data_dict, f,ensure_ascii=False,indent=4)
+
+    def get_all_users_data(self):
+        """A function that get all users data"""
+        start = time.time()
+        nbz = 20
+        list_of_all_people = print_file_content(LIST_OF_REAL_PEOPLE_FILEPATH).split("\n")
+        small_list_of_people = split_list(list_of_all_people,int(len(list_of_all_people)/nbz))
+        list_of_all_people = small_list_of_people[int(sys.argv[1])]
+        #list_of_all_people = list(set(list_of_all_people))
+        # erreurs = [
+        #     "Art and Language",
+        #     "Saïan Supa Crew",
+        #     "G-Unit",
+        #     "D-Block Europe",
+        #     "Vitor Hublot",
+        #     "5.5 designers",
+        #     "Le Klub des 7",
+        #     "Chocolate Genius Inc.",
+        #     "83 (collectif)",
+        #     "Spoke Orkestra",
+        #     "Maison d'édition"
+        #      ""
+        # ]
+
+        for idx , people in enumerate(list_of_all_people):
+            if people.isdigit():
+                continue
+            if people in BAD_WIKI_PAGE:
+                continue
+            if idx % int(10000/nbz) == 0 and int(sys.argv[1]) == 1:
+                print(idx , people)
+                reset_file("counting.txt")
+                write_into_file("counting.txt",idx)
+            if len(people) >= 4:
+                if people[0:4].isdigit() and " " in people and ("aux" in people or "dans" in people):
+                    continue
+
+            toto.get_user_information(people.replace('"',""),False,int(sys.argv[1])+1)
+            # if user_info is False:
+            #     ok+=1
+            #     print(idx,ok)
+            #     quit()
+
+        if int(sys.argv[1]) == 1:
+            end = time.time()
+            print(f"Execution time: {end - start:.6f} seconds")
+    def sorted_list_of_linked_of_user(self):
+        """A function that generate a sorted list of link of all user"""
+        with open("data_files/list_of_link_of_all_user.json", "r", encoding="utf-8") as file:
+            people_links = json.load(file)
+        with open("data_files/list_of_merged_data.json", "r", encoding="utf-8") as file:
+            people_top = json.load(file)
+
+        reset_file("user_info_dict.txt")
+        index = 0
+        list_of_occurence = []
+        list_of_user = []
+        dict_link_sorted = {}
+        skip = False
+        for user,user_links in people_links.items():
+            skip = False
+            list_of_occurence = []
+            list_of_user = []
+            for u in user_links:
+                try:
+                    list_of_user.append(u)
+                    list_of_occurence.append(people_top[u.replace("_"," ")])
+                    # else:
+                    #     print("not in set " , u)
+                except:
+                    skip = True
+            if skip:
+                dict_link_sorted[user] = user_links
+                continue
+            if len(list_of_user) != 0:
+                #print(list_of_user, list_of_occurence)
+                paired = list(zip(list_of_user, list_of_occurence))
+
+                paired.sort(key=lambda x: x[1], reverse=True)
+
+                list_of_element, occurence_of_element_list = zip(*paired)
+                list_of_element = list(list_of_element)
+                occurence_of_element_list = list(occurence_of_element_list)
+                dict_link_sorted[user] = list_of_element
+                if index % 90000 == 0:
+                    print(user,user_links)
+                    print(list_of_element,occurence_of_element_list)
+                    print("\n\n\n\n")
+            else:
+                dict_link_sorted[user] = user_links
+            if index % 90000 == 0:
+                pass
+            index+=1
+
+        with open("data_files/list_of_link_of_all_users_sorted.json", "w",encoding="utf-8") as f:
+            json.dump(dict_link_sorted, f,ensure_ascii=False,indent=4)
     def start(self):
         """blabla"""
 
@@ -1773,38 +2363,36 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
-do_time_test = True
-if do_time_test:
+do_user_data = False
+do_stat = False
+do_sorted_file = True
+if do_user_data:
+    try:
+        toto.get_all_users_data()
+    except:
+        print("You must put args number (int)")
+    quit()
+elif do_stat:
+    print("Doing something else")
+    #toto.calc_stat()
+    toto.sorted_list_of_linked_of_user()
+elif do_sorted_file:
+    reset_file("user_info_dict_sorted_by_power.txt")
+    all_user_sorted = print_file_content(r"data_files/list_of_user_sorted_by_power.txt").split("\n")
+    all_user_dict_file = print_file_content(r"user_info_dict.txt").split("\n")
+    
+    for i , user in enumerate(all_user_sorted):
+        if i % 25000 == 0:
+            print(i,user)
+        try:
+            write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[toto.list_of_wikipedia_page_of_real_people.index(user)]+"\n")
+        except:
+            print("ERREUR!!! " , user)
+    
 
-    start = time.time()
-    list_of_all_people = print_file_content(LIST_OF_REAL_PEOPLE_FILEPATH).split("\n")
-    small_list_of_people = split_list(list_of_all_people,int(len(list_of_all_people)/100))
-    list_of_all_people = small_list_of_people[int(sys.argv[1])]
-    #list_of_all_people = list(set(list_of_all_people))
-    ok = 0
-    for idx , people in enumerate(list_of_all_people):
-        if people.isdigit():
-            continue
-
-        if idx % int(10000/101) == 0 and int(sys.argv[1]) == 1:
-            print(idx , people)
-            reset_file("counting.txt")
-            write_into_file("counting.txt",idx)
-        if len(people) >= 4:
-            if people[0:4].isdigit() and " " in people and ("aux" in people or "dans" in people):
-                continue
-
-        user_info = toto.get_user_information(people.replace('"',""),False,int(sys.argv[1])+1)
-        # if user_info is False:
-        #     ok+=1
-        #     print(idx,ok)
-        #     quit()
-
-    if int(sys.argv[1]) == 1:
-        end = time.time()
-        print(f"Execution time: {end - start:.6f} seconds")
-
-# MEH USER
+#         good_line = ast.literal_eval(line)
+# list_of_user_sorted_by_power.txt
+# # MEH USER
 
 # BAD USER
 # toto.get_user_information("Emmanuel_Macron")
@@ -1819,8 +2407,11 @@ if do_time_test:
 # CHARLEMAGNE
 
 # A TEST
-# Abdelhalim_Abdelouahab
-# Abdel_Gadir_Salim
 
-#toto.get_user_information("Ray Charles",True)
-#print("end " , sys.argv[1])
+
+# 'Ray Clough'
+
+try:
+    toto.get_user_information(sys.argv[1],True)
+except:
+    toto.get_user_information("Ray Brown")
