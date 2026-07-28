@@ -1,0 +1,38 @@
+# Normalize line endings
+* text=auto
+# Explicit text files
+*.py text
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+*.html text
+*.css text
+*.scss text
+*.json text
+*.yaml text
+*.yml text
+*.md text
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+# Ignore generated files in diffs
+*.min.js linguist-generated=true
+*.min.css linguist-generated=true
+# Better diffs
+*.md diff=markdown
+# Prevent GitHub from counting generated files as source
+node_modules/** linguist-vendored
+dist/** linguist-generated
+build/** linguist-generated
+src/data_files/ filter=lfs diff=lfs merge=lfs -text
+src/user_info_dict.txt filter=lfs diff=lfs merge=lfs -text
+src/list_of_wikipedia_page_of_non_real_people.txt filter=lfs diff=lfs merge=lfs -text
+src/list_of_wikipedia_page_of_real_people.txt filter=lfs diff=lfs merge=lfs -text
