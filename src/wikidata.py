@@ -185,7 +185,6 @@ class WikiPeopleData():
 
             # reset_file("town_text.txt")
             # write_into_file("town_text.txt",html+"\n")
-
             #localisation_direction = ""
             localisation_sud = f'{page_text.split("Coordonnées")[1].split('sud')[0]}'
             localisation_est = f'{page_text.split("Coordonnées")[1].split('est')[0]}'
@@ -229,7 +228,10 @@ class WikiPeopleData():
 
             return localisation.strip()
         except:
-            return "Undefined"
+            try:
+                return TOWN_TO_LOCALISATION_DICT[town.lower().strip().replace("_"," ")]
+            except:
+                return "Undefined"
 
     def get_gender_of_a_person(self,page_text:str,is_alive:bool) ->  str:
         """A function that get the gender of a person"""
@@ -371,6 +373,15 @@ class WikiPeopleData():
             if f'"{job.lower()}' in line.lower() and line.lower().count(f'"{job.lower()}') > 1:
                 return job
         return None
+
+    def remove_bad_link_of_an_user(self,list_of_link:list[str]):
+        """A function that remove all the bad link of an user"""
+        new_list_of_link = []
+        for link in list_of_link:
+            if link not in BAD_WIKI_PAGE:
+                new_list_of_link.append(link)
+
+        return new_list_of_link
     def get_user_information(self, page_name:str,force_print_data:bool=False,page_nb:int=-999) -> bool:
         """A function that get user information (age,date of birth,death,place of birth,death...)"""
         try:
@@ -406,7 +417,6 @@ class WikiPeopleData():
                 filename = img_path.split("/")[-1]
                 
                 picture_url = f"https://commons.wikimedia.org/wiki/Special:FilePath/{quote(filename)}"
-
                 if picture_url == "https://commons.wikimedia.org/wiki/Special:FilePath/langfr-250px-Defaut_2.svg.png" or ".svg." in picture_url:
                     picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
             except:
@@ -1263,12 +1273,23 @@ class WikiPeopleData():
             if job.lower() == "homme" and "homme politique" in page_text_plain_text.lower():
                 preciseness_level -= 4
                 job = "Homme politique"
-                list_of_unpreciseness_data.append("User may have a bigger role than homme polituqe")
+                list_of_unpreciseness_data.append("User may have a bigger role than homme politique")
 
             if job.lower() == "femme" and "femme politique" in page_text_plain_text.lower():
                 preciseness_level -= 4
-                list_of_unpreciseness_data.append("User may have a bigger role than femme polituqe")
+                list_of_unpreciseness_data.append("User may have a bigger role than femme politique")
                 job = "femme politique"
+
+            if job.lower() == "homme" and "homme d'État" in page_text_plain_text.lower():
+                preciseness_level -= 4
+                job = "Homme d'État"
+                list_of_unpreciseness_data.append("User may have a bigger role than homme d'État")
+
+            if job.lower() == "femme" and "femme d'État" in page_text_plain_text.lower():
+                preciseness_level -= 4
+                list_of_unpreciseness_data.append("User may have a bigger role than femme d'État")
+                job = "femme politique"
+            
 
             # if job in LIST_OF_INCOMPLETE_JOB:
             #     for little_job in JOBS:
@@ -1454,24 +1475,38 @@ class WikiPeopleData():
             if town_death_place in NON_TOWN_ELEMENT_LIST or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place and is_alive is False:
                 town_death_place = "Undefined"
                 town_death_place_href = "Undefined"
-
-            for html in HTML_ELEMENT_LIST:
-                if html.lower() in  town_birth_place:
-                    town_birth_place = "Undefined"
-                    break
-            
-            for html in HTML_ELEMENT_LIST:
-                if html.lower() in  town_death_place and is_alive is False:
-                    town_death_place = "Undefined"
-                    break
         
             job = unquote(job)
+            if town_birth_place in self.list_of_country:
+                country_birth_place = town_birth_place
+                town_birth_place = "Undefined"
+                town_birth_place_href = "Undefined"
+
+            if town_death_place in self.list_of_country and is_alive is False:
+                country_birth_place = town_death_place
+                town_death_place = "Undefined"
+                town_death_place_href = "Undefined"
+
+
+            if len(town_birth_place) > 1:
+                if town_birth_place[-1] == ",":
+                    town_birth_place = town_birth_place[0:-1]
+
+            if len(town_death_place) > 1:
+                if town_death_place[-1] == ",":
+                    town_death_place = town_death_place[0:-1]
+            
             if town_birth_place != "Undefined" and len(town_birth_place) != 0:
                 town_birth_place = unquote(town_birth_place)
                 town_birth_place_href = unquote(town_birth_place_href)
                 birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
                 if birth_town_localisation == "Undefined" or len(birth_town_localisation) == "" and town_birth_place_href != "":
                     birth_town_localisation = self.get_localisation_of_a_town(town_birth_place_href)
+                if "à" in birth_town_localisation and town_birth_place_href != "Undefined" and len(town_birth_place_href) != 0:
+                    birth_town_localisation = self.get_localisation_of_a_town(town_birth_place_href)
+                if "à" in birth_town_localisation:
+                    birth_town_localisation = "Undefined"                
+
             if is_alive is False:
                 if town_death_place != "Undefined" and len(town_death_place) != 0:
                     town_death_place = unquote(town_death_place)
@@ -1479,9 +1514,31 @@ class WikiPeopleData():
                     death_town_localisation = self.get_localisation_of_a_town(town_death_place)
                     if death_town_localisation == "Undefined" or len(death_town_localisation) == "" and town_death_place_href != "":
                         death_town_localisation = self.get_localisation_of_a_town(town_death_place_href)
+                    if "à" in death_town_localisation and town_death_place_href != "Undefined" and len(town_death_place_href) != 0:
+                        death_town_localisation = self.get_localisation_of_a_town(town_death_place_href)
+                    if "à" in death_town_localisation:
+                        death_town_localisation = "Undefined"      
+                    
 
 
-                   
+            for html in HTML_ELEMENT_LIST:
+                if html.lower() in town_birth_place.lower().replace("\n"," ").strip():
+                    town_birth_place = "Undefined"
+                    break
+            for html in HTML_ELEMENT_LIST:
+                if html.lower() in town_death_place.lower().replace("\n"," ").strip() and is_alive is False:
+                    town_death_place = "Undefined"
+                    break
+
+            for html in HTML_ELEMENT_LIST:
+                if html.lower() in town_birth_place_href.lower().replace("\n"," ").strip():
+                    town_birth_place_href = "Undefined"
+                    break
+            for html in HTML_ELEMENT_LIST:
+                if html.lower() in town_death_place_href.lower().replace("\n"," ").strip() and is_alive is False:
+                    town_death_place_href = "Undefined"
+                    break
+
             if town_birth_place == town_death_place and len(birth_town_localisation) != 0 and len(town_birth_place) != 0:
                 death_town_localisation = birth_town_localisation
 
@@ -1506,7 +1563,7 @@ class WikiPeopleData():
 
             if country_death_place != "Undefined" and len(country_death_place) != 0:
                 continent_of_death = self.country_to_continent(country_death_place)
-                            
+            
             if job == "" or job == "Undefined":
                 job = "Undefined"
                 preciseness_level -= 20
@@ -1679,20 +1736,20 @@ class WikiPeopleData():
                 print_data = True
             else:
                 print_data = False
-            if town_birth_place == "":
-                country_birth_place = ""
-                birth_town_localisation = ""
-                continent_of_birth = ""
+            if town_birth_place == "" or town_birth_place == "Undefined":
+                country_birth_place = "Undefined"
+                birth_town_localisation = "Undefined"
+                continent_of_birth = "Undefined"
 
-            if town_death_place == "":
-                country_death_place = ""
-                death_town_localisation = ""
-                continent_of_death = ""
+            if (town_death_place == "" or town_birth_place == "Undefined") and is_alive is False:
+                country_death_place = "Undefined"
+                death_town_localisation = "Undefined"
+                continent_of_death = "Undefined"
 
 
 
             try:
-                power_ranking = self.power_ranking_json[page_name.replace("_","")]
+                power_ranking = int(self.power_ranking_json[page_name.replace("_","")])
                 position = list(self.power_ranking_json.keys()).index(page_name.replace("_","")) + 1
                 last_position = len(list(self.power_ranking_json.keys()))
                 if position == 1:
@@ -1854,6 +1911,7 @@ class WikiPeopleData():
 
             #all_links_of_a_page = self.get_all_links_of_a_page(page_name)
             all_links_of_a_page = self.list_of_link_of_user[page_name]
+            all_links_of_a_page = self.remove_bad_link_of_an_user(all_links_of_a_page)
             number_of_links = len(all_links_of_a_page)
             if " " in page_name:
                 first_name = page_name.split(" ")[0]
@@ -1865,7 +1923,7 @@ class WikiPeopleData():
 
             if town_death_place_href != "Undefined" and len(town_death_place_href) != 0 and len(town_death_place) < len(town_death_place_href) and town_death_place in town_death_place_href:
                 town_death_place = town_death_place_href.replace("_"," ")
-                        
+              
             if print_data:
                 print(f"Page name: {page_name}")
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
@@ -2274,6 +2332,7 @@ class WikiPeopleData():
         #      ""
         # ]
 
+        reset_file(f"user_info_dict{sys.argv[1]}.txt")
         for idx , people in enumerate(list_of_all_people):
             if people.isdigit():
                 continue
@@ -2365,7 +2424,7 @@ toto = WikiPeopleData()
 
 do_user_data = False
 do_stat = False
-do_sorted_file = True
+do_sorted_file = False
 if do_user_data:
     try:
         toto.get_all_users_data()

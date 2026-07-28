@@ -413,6 +413,8 @@ JOBS: list[str] = [
     "Militant",
     "Homme politique",
     "Femme politique",
+    "Homme d'État"
+    "Femme d'État"
     "Député",
     "Président",
     "Premier ministre",
@@ -2619,6 +2621,16 @@ JOBS_PREFIX = [
     "Dirigeant de facto des",
     "Dirigeant de facto du",
     "Dirigeant de facto d'",
+    "Dirigeant du",
+    "Dirigeant de",
+    "Dirigeant des",
+    "Dirigeant d'",
+    "Dirigeante du",
+    "Dirigeante de",
+    "Dirigeante des",
+    "Dirigeante d'",
+    
+            
     "Roi d'Angleterre et d'"
     "Reine d'",
     "Reine des",
@@ -3086,15 +3098,26 @@ JOBS_PREFIX = [
     "chercheuse en",  
     "rédactrice à",
     "rédactrice chez",
-    "chef d'état major des forces"
+    "chef d'état major des forces",
+    "Président délégué du",
+    "Président délégué des",
+    "Président délégué de",
+    "Président délégué d'",
+    "Présidente délégué du",
+    "Présidente délégué des",
+    "Présidente délégué de",
+    "Présidente délégué d'",
+        
     
 ]
 
 
 LIST_OF_INCOMPLETE_JOB = [
     "Y'en a marre (mouvement)",
+    "Université Paris-VIII-Vincennes-Saint-Denis",
     "Parti progressiste-conservateur du Canada",
     "Résistance (politique)",
+    "Généralité de Catalogne",
     "Prix du Maroc du livre",
     "Liste des présidents du Raja Club Athletic",
     "Préfecture de Casablanca",
@@ -3108,6 +3131,7 @@ LIST_OF_INCOMPLETE_JOB = [
     "Front de libération nationale (Algérie)",
     "Armée de la république islamique d'Iran",
     "Y'en a marre (mouvement)",
+    "West Haven (Connecticut)",
     "Union économique et monétaire ouest-africaine",
     "Parlement de la région de Bruxelles-Capitale",
     "Organisation nationale des Malais unis",
@@ -3158,6 +3182,7 @@ LIST_OF_INCOMPLETE_JOB = [
     "Guillaume de Nassau-Dillenbourg",
     "Emmanuel Richard Priso Ngom Priso",
     "De Nouvelle-Aquitaine",
+    "Conseil constitutionnel",
     "D'agglomération Amiens Métropole",
     "de la Jeunesse d'Allemagne",
     "La Danseuse nue (film, 1952)",
@@ -3308,7 +3333,21 @@ HTML_ELEMENT_LIST = [
     "<span data-sort-value=",
     "<abbr class=",
     "<time class=",
-
+    # Non html elem
+    " Décès ",
+    "Décès ",
+    "Liste des",
+    "années 1",
+    "années 2",
+    "années 3",
+    "années 4",
+    "années 5",
+    "années 6",
+    "années 7",
+    "années 8",
+    "années 9",
+            
+        
 
 ]
 NON_TOWN_ELEMENT_LIST = [
@@ -3339,6 +3378,7 @@ NON_TOWN_ELEMENT_LIST = [
     "dans",
     "[",
     "]",
+    "Données",
     # Catégories / métadonnées Wikipédia
     "Biographie",
     "Décès",
@@ -3364,7 +3404,7 @@ NON_TOWN_ELEMENT_LIST = [
     "Sépulture",
     "Autre titre",
     "Autres titres",
-        "Hôtel de la reine Hortense",
+    "Hôtel de la reine Hortense",
     "Symphonie",
     "Ville libre d'Empire",
     "Vindex",
@@ -4308,6 +4348,15 @@ NON_TOWN_ELEMENT_LIST = [
     "Agdjibedi,",
     "Hollingworth",
     "Famille Sanudo",
+    "palmarès",
+    "taille (anthropométrie)",
+    "nom",
+    "française",
+    "taille",
+    "alive",
+    "taille 1",
+    "(consulté"
+
 ]
 
 BAD_WIKI_PAGE = [
@@ -4322,4 +4371,69 @@ BAD_WIKI_PAGE = [
     "83 (collectif)",
     "Spoke Orkestra",
     "Maison d'édition",
+    "Histoire de la médecine dentaire",
+    "Histoire de ma vie (Casanova)",
+    "Histoire de vie",
+    "Histoire des fonctions trigonométriques",
+    "L'Histoire est une littérature contemporaine",
+    "L'Incroyable Histoire du facteur Cheval",
+    "Société africaine de plantations d'hévéas",
+    "Société d'accélération du transfert de technologies",
+    "Société d'études de l'histoire régionale du pays de l'Ems",
+    "Société patriotique du Luxembourg",
+    "Prix Alfred-Kordelin",
+    "Prix Costa",
+    "Prix Watson Davis et Helen Miles Davis",
+    "Prix d'histoire André-Castelot",
+    "québec",
+    "canadienne",
+    "américaine",
+    "doctorat",
+    "nationalités",
+    "formation",
+    "club",
+    "press",
+    "parlement d'angleterre",
+    "royaume-uni de grande-bretagne et d'irlande",
+    "arts visuels",
+    "arabe",
+    "natation sportive",
+    "préfecture",
+    "ontario",
+    "britannique",
+    "empire ottoman",
+    "hong",
+    "il",
+    "elle",
+    "hong kong (colonie)",
+    "corée du sud",
+    "parcours",
+    "prpoids de formeess",
+    "surrey (comté)",
+    "pseudonyme",
+    "or",
+    "militantisme",
+    "les",
+    "catégorie",
+    "histoire de l'art",
+    "surnom",
+    ":",
+    "yorkshire",
+    "essaie",
+    "carrière"
 ]
+
+TOWN_TO_LOCALISATION_DICT = {
+    "berlin":"52° 31′ N, 13° 23′ E",
+    "bruxelles":"50° 51′ 01″ N, 4° 21′ 00″ E",
+    "hambourg ":"53° 33′ N, 10° 00′ E",
+    "königsberg ":"54° 44′ N, 20° 29′ E",
+    "edo (ville)":"35° 41′ 22″ N, 139° 41′ 30″ E",
+    "Chicoutimi":"48° 25′ 00″ N, 71° 04′ 00″ W",
+    "santa ":"43° 09′ 57.30″ N, 4° 02′ 49.41″ W",
+    "berlin-est":"52° 31′ N, 13° 23′ E",
+    "berlin-ouest":"52° 31′ N, 13° 23′ E",
+    "valence":"39° 28′ 13″ N, 0° 22′ 36″ W",
+    "washington":"38° 53′ 42″ N, 77° 02′ 12″ W",
+    "vienne":"48° 12′ 30″ N, 16° 22′ 21″ E"
+}
