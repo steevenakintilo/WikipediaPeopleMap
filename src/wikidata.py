@@ -1337,6 +1337,7 @@ class WikiPeopleData():
             #             break
             
             list_of_little_job = []
+            print(job)
             if job in LIST_OF_INCOMPLETE_JOB:
                 for little_job in JOBS:
                     for word in page_text_plain_text.lower().split(" "):
@@ -1345,6 +1346,7 @@ class WikiPeopleData():
                             list_of_little_job.append(job)
                             break
 
+                print(list_of_little_job)
                 job = "Undefined"
                 if len(list_of_little_job) != 0:
                     job = list_of_little_job[0]
@@ -1560,9 +1562,13 @@ class WikiPeopleData():
             except:
                 job = job_
 
-            if job[-1] == "." or job[-1] == ",":
-                job = job[0:-1]
-                 
+            
+            try:
+                if job[-1] == "." or job[-1] == ",":
+                    job = job[0:-1]
+            except:
+                job = "Undefined"
+            
                         
             if is_alive is False:
                 if town_death_place != "Undefined" and len(town_death_place) != 0:
@@ -2153,7 +2159,7 @@ class WikiPeopleData():
                 "list_of_unpreciseness_data":list_of_unpreciseness_data
 
             }
-            print_data = False
+            #print_data = False
             if print_data:
                 if int(preciseness_level/2) < MINIMAL_PRECISSENES_SCORE and force_print_data:
                     print(user_info_dict)
@@ -2465,7 +2471,7 @@ class WikiPeopleData():
         with open("data_files/list_of_merged_data.json", "r", encoding="utf-8") as file:
             people_top = json.load(file)
 
-        reset_file("user_info_dict.txt")
+        #reset_file("user_info_dict.txt")
         index = 0
         list_of_occurence = []
         list_of_user = []
@@ -2525,7 +2531,7 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
-do_user_data =  True
+do_user_data =  False
 do_stat = False
 do_sorted_file = False
 if do_user_data:

@@ -435,6 +435,9 @@ JOBS: list[str] = [
     "Ayatollah",
     "Conteur",
     "Pianiste",
+    "violoniste et compositeur",
+    "pianiste et compositeur",
+    "guitariste et compositeur"
     "Personnalité politique",
     "Infirmier",
     "Saxophoniste",
@@ -3140,6 +3143,7 @@ LIST_OF_INCOMPLETE_JOB = [
     "Union constitutionnelle",
     "Résistance (politique)",
     "Circonscription de Tozeur",
+    "Vienne (Autriche)"
     "Assemblée nationale constituante",
     "Front de libération nationale (Algérie)",
     "Armée de la république islamique d'Iran",
@@ -3250,7 +3254,12 @@ LIST_OF_INCOMPLETE_JOB = [
     "Descendant",
     "Théâtre",
     "Galilée",
-    "des"
+    "des",
+    " Vienne (Autriche)",
+    "Vienne (Autriche)",
+    "as",
+    "As",
+    "Assemblée nationale"
 
 ]
 
@@ -3381,6 +3390,32 @@ NON_TOWN_ELEMENT_LIST = [
     "à",
     "ou",
     "et",
+    "ordination",
+    "poids de forme",
+    "surrey (comté)",
+    "el",
+    "empire byzantin",
+    "kent",
+    "nouveau-brunswick",
+    "pennsylvanie",
+    "bristol",
+    "essai",
+    "delhi",
+    "état de new york",
+    "jean",
+    "palais",
+    "lewisham",
+    "raïon",
+    "irlande",
+    "west",
+    "données",
+    "fort",
+    "afrique du sud",
+    "essex",
+    "south",
+    "bad",
+    "latin",
+    "hull (québec)",
     "mais",
     "contre",
     "près",
@@ -4628,6 +4663,7 @@ TOWN_TO_LOCALISATION_DICT = {
     "valence":"39° 28′ 13″ N, 0° 22′ 36″ W",
     "washington":"38° 53′ 42″ N, 77° 02′ 12″ W",
     "vienne":"48° 12′ 30″ N, 16° 22′ 21″ E",
+    "vienne (autriche)":"48° 12′ 30″ N, 16° 22′ 21″ E",
     "saint-denis":"48° 56′ 08″ N, 2° 21′ 14″ E",
     "surabaya":"7°15′40.71″S 112°44′59.13″E"
 }
