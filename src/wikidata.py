@@ -1162,13 +1162,13 @@ class WikiPeopleData():
             gender = self.get_gender_of_a_person(html[:1000000],is_alive)
 
             
-            job_player_list = ["joueuse","groupe"]
+            job_player_list = ["joueuse","groupe","ancienne"]
 
             determiner = "une"
             job_player_ = "joueuse"
             if gender == "Man":
                 determiner = "un"
-                job_player_list = ["joueur","groupe"]
+                job_player_list = ["joueur","groupe","ancien"]
                 job_player_ = "joueur"
                       
             try:
@@ -1189,17 +1189,20 @@ class WikiPeopleData():
                 if is_alive and len(job.strip()) <= 1 or job in LIST_OF_INCOMPLETE_JOB:
                     if "est un" in page_text_plain_text:
                         list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
+                        
                         for index,element in enumerate(list_of_element_after_sentence):
                             if len(element) > 1:
                                 job = element
                                 job_index = index
                                 break
-
-                        job_ = job
+                        
                         if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
+                                if job in ["ancien","ancienne"] and len(element) != 0 and element not in ["ancien","ancienne"]:
+                                    job_index = index
+                                    break
                                 if element.startswith("d'"):
                                     job_index = index
                                     particle = "d'"
@@ -1208,10 +1211,19 @@ class WikiPeopleData():
                                 if element == "de":
                                     job_index = index + 1
                                     break
-                            job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
-                            if particle != "de":
-                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
 
+
+                            if job in ["ancien","ancienne"]:
+                                job_name = "ancien"
+                                if gender == "Woman":
+                                    job_name = "ancienne"
+                                job = f"{determiner} {job_name} {list_of_element_after_sentence[job_index]}"
+                            elif job not in ["ancien","ancienne"]:
+                                job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
+                            if particle != "de" and job not in ["ancien","ancienne"]:
+                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
+                            job_ = job
+                            
                 elif is_alive is False and job.strip() == "":
                     if "était un" in page_text_plain_text:
                         list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
@@ -1222,11 +1234,14 @@ class WikiPeopleData():
                                 job_index = index
                                 break
 
-                        job_ = job
+                        
                         if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
+                                if job in ["ancien","ancienne"] and len(element) != 0 and element not in ["ancien","ancienne"]:
+                                    job_index = index
+                                    break
                                 if element.startswith("d'"):
                                     job_index = index
                                     particle = "d'"
@@ -1235,10 +1250,19 @@ class WikiPeopleData():
                                 if element == "de":
                                     job_index = index + 1
                                     break
-                            job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
-                            if particle != "de":
-                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
 
+
+                            if job in ["ancien","ancienne"]:
+                                job_name = "ancien"
+                                if gender == "Woman":
+                                    job_name = "ancienne"
+                                job = f"{determiner} {job_name} {list_of_element_after_sentence[job_index]}"
+                            elif job not in ["ancien","ancienne"]:
+                                job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
+                            if particle != "de" and job not in ["ancien","ancienne"]:
+                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
+                            job_ = job
+                            
                     elif "est un" in page_text_plain_text:
                         list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
                         job_index = 0
@@ -1249,11 +1273,13 @@ class WikiPeopleData():
                                 job_index = index
                                 break
 
-                        job_ = job
                         if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
+                                if job in ["ancien","ancienne"] and len(element) != 0 and element not in ["ancien","ancienne"]:
+                                    job_index = index
+                                    break
                                 if element.startswith("d'"):
                                     job_index = index
                                     particle = "d'"
@@ -1262,10 +1288,19 @@ class WikiPeopleData():
                                 if element == "de":
                                     job_index = index + 1
                                     break
-                            job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
-                            if particle != "de":
-                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
 
+
+                            if job in ["ancien","ancienne"]:
+                                job_name = "ancien"
+                                if gender == "Woman":
+                                    job_name = "ancienne"
+                                job = f"{determiner} {job_name} {list_of_element_after_sentence[job_index]}"
+                            elif job not in ["ancien","ancienne"]:
+                                job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
+                            if particle != "de" and job not in ["ancien","ancienne"]:
+                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
+                            job_ = job
+                        
 
 
             except:
@@ -1516,6 +1551,19 @@ class WikiPeopleData():
                 if "à" in birth_town_localisation:
                     birth_town_localisation = "Undefined"                
 
+            job_ = job
+            try:
+                job = WIKIJOB_TO_JOB_DICT_MAN[job.lower()]
+                if gender == "Woman":
+                    job = WIKIJOB_TO_JOB_DICT_WOMAN[job.lower()]
+
+            except:
+                job = job_
+
+            if job[-1] == "." or job[-1] == ",":
+                job = job[0:-1]
+                 
+                        
             if is_alive is False:
                 if town_death_place != "Undefined" and len(town_death_place) != 0:
                     town_death_place = unquote(town_death_place)
@@ -2477,7 +2525,7 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
-do_user_data =  False
+do_user_data =  True
 do_stat = False
 do_sorted_file = False
 if do_user_data:
