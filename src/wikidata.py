@@ -1165,10 +1165,12 @@ class WikiPeopleData():
             job_player_list = ["joueuse","groupe"]
 
             determiner = "une"
+            job_player_ = "joueuse"
             if gender == "Man":
                 determiner = "un"
                 job_player_list = ["joueur","groupe"]
-                            
+                job_player_ = "joueur"
+                      
             try:
                 if "id=" in job:
                     job = ""
@@ -1206,9 +1208,9 @@ class WikiPeopleData():
                                 if element == "de":
                                     job_index = index + 1
                                     break
-                            job = f"{determiner} de {list_of_element_after_sentence[job_index]}"
+                            job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
                             if particle != "de":
-                                job = f"{job_} {list_of_element_after_sentence[job_index]}"
+                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
 
                 elif is_alive is False and job.strip() == "":
                     if "était un" in page_text_plain_text:
@@ -1233,9 +1235,9 @@ class WikiPeopleData():
                                 if element == "de":
                                     job_index = index + 1
                                     break
-                            job = f"{determiner} de {list_of_element_after_sentence[job_index]}"
+                            job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
                             if particle != "de":
-                                job = f"{job_} {list_of_element_after_sentence[job_index]}"
+                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
 
                     elif "est un" in page_text_plain_text:
                         list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
@@ -1260,9 +1262,9 @@ class WikiPeopleData():
                                 if element == "de":
                                     job_index = index + 1
                                     break
-                            job = f"{determiner} de {list_of_element_after_sentence[job_index]}"
+                            job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
                             if particle != "de":
-                                job = f"{job_} {list_of_element_after_sentence[job_index]}"
+                                job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
 
 
 
@@ -1439,9 +1441,9 @@ class WikiPeopleData():
                 age = -999
 
             try:
-                if (town_birth_place.isdigit() and " " not in town_birth_place) or (town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place) or (town_birth_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH) or (len(town_birth_place.strip()) == 1 and town_birth_place.strip().isalpha() is False):
+                if (town_birth_place.isdigit() and " " not in town_birth_place) or (town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place) or (town_birth_place.lower().split(" ")[1].lower() in LIST_OF_MONTH) or (town_birth_place.lower().split(" ")[0].lower() in LIST_OF_MONTH) or (len(town_birth_place.strip()) == 1 and town_birth_place.strip().isalpha() is False):
                     town_birth_place = "Undefined"
-                    if town_birth_place in NON_TOWN_ELEMENT_LIST or "</" in town_birth_place or "www." in town_birth_place or "http" in town_birth_place or ".jp" in town_birth_place or ".png" in town_birth_place or ".wb" in town_birth_place:
+                    if town_birth_place.lower() in NON_TOWN_ELEMENT_LIST or "</" in town_birth_place.lower() or "www." in town_birth_place.lower() or "http" in town_birth_place.lower() or ".jp" in town_birth_place.lower() or ".png" in town_birth_place.lower() or ".wb" in town_birth_place.lower():
                         town_birth_place = "Undefined"
                     for html in HTML_ELEMENT_LIST:
                         if html.lower() in  town_birth_place:
@@ -1455,7 +1457,7 @@ class WikiPeopleData():
             try:
                 if (town_death_place.isdigit() and " " not in town_death_place) or (town_death_place.split(" ")[0].isdigit() and " " in town_death_place) or (town_death_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_death_place.split(" ")[0].lower() in LIST_OF_MONTH) and is_alive is False or (len(town_death_place.strip()) == 1 and town_death_place.strip().isalpha() is False):        
                     town_death_place = "Undefined"
-                    if town_death_place in NON_TOWN_ELEMENT_LIST or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place:
+                    if town_death_place.lower() in NON_TOWN_ELEMENT_LIST or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place:
                         town_death_place = "Undefined"
                     for html in HTML_ELEMENT_LIST:
                         if html.lower() in  town_death_place:
@@ -1469,10 +1471,10 @@ class WikiPeopleData():
 
 
             
-            if town_birth_place in NON_TOWN_ELEMENT_LIST or "</" in town_birth_place or "www." in town_birth_place or "http" in town_birth_place or ".jp" in town_birth_place or ".png" in town_birth_place or ".wb" in town_birth_place:
+            if town_birth_place.lower() in NON_TOWN_ELEMENT_LIST or "</" in town_birth_place.lower() or "www." in town_birth_place.lower() or "http" in town_birth_place.lower() or ".jp" in town_birth_place.lower() or ".png" in town_birth_place.lower() or ".wb" in town_birth_place.lower():
                 town_birth_place = "Undefined"
                 town_birth_place_href = "Undefined"
-            if town_death_place in NON_TOWN_ELEMENT_LIST or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place and is_alive is False:
+            if town_death_place.lower() in NON_TOWN_ELEMENT_LIST or "</" in town_death_place.lower() or "www." in town_death_place.lower() or "http" in town_death_place.lower() or ".jp" in town_death_place.lower() or ".png" in town_death_place.lower() or ".wb" in town_death_place.lower() and is_alive is False:
                 town_death_place = "Undefined"
                 town_death_place_href = "Undefined"
         
@@ -1499,6 +1501,13 @@ class WikiPeopleData():
             if town_birth_place != "Undefined" and len(town_birth_place) != 0:
                 town_birth_place = unquote(town_birth_place)
                 town_birth_place_href = unquote(town_birth_place_href)
+
+                if "(" in town_birth_place and ")" not in town_birth_place:
+                    town_birth_place = town_birth_place + ")"
+
+                if "(" in town_birth_place_href and ")" not in town_birth_place_href:
+                    town_birth_place_href = town_birth_place_href + ")"
+                
                 birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
                 if birth_town_localisation == "Undefined" or len(birth_town_localisation) == "" and town_birth_place_href != "":
                     birth_town_localisation = self.get_localisation_of_a_town(town_birth_place_href)
@@ -1511,6 +1520,12 @@ class WikiPeopleData():
                 if town_death_place != "Undefined" and len(town_death_place) != 0:
                     town_death_place = unquote(town_death_place)
                     town_death_place_href = unquote(town_death_place_href)
+                    if "(" in town_death_place and ")" not in town_death_place:
+                        town_death_place = town_death_place + ")"
+
+                    if "(" in town_death_place_href and ")" not in town_death_place_href:
+                        town_death_place_href = town_death_place_href + ")"
+                    
                     death_town_localisation = self.get_localisation_of_a_town(town_death_place)
                     if death_town_localisation == "Undefined" or len(death_town_localisation) == "" and town_death_place_href != "":
                         death_town_localisation = self.get_localisation_of_a_town(town_death_place_href)
@@ -1748,6 +1763,8 @@ class WikiPeopleData():
 
 
 
+            # do_after = True
+            # if do_after:
             try:
                 power_ranking = int(self.power_ranking_json[page_name.replace("_","")])
                 position = list(self.power_ranking_json.keys()).index(page_name.replace("_","")) + 1
@@ -1765,6 +1782,13 @@ class WikiPeopleData():
                 last_position = len(list(self.power_ranking_json.keys()))
                 position_pourcentage = -999
                 position_pourcentage_20 = -999
+
+        
+            # power_ranking = 0
+            # position = -999
+            # last_position = len(list(self.power_ranking_json.keys()))
+            # position_pourcentage = -999
+            # position_pourcentage_20 = -999
 
             # power_ranking = 0
             # position = 0
@@ -1870,11 +1894,18 @@ class WikiPeopleData():
                         
 
             first_name = "Undefined"
+            last_name = "Undefined"
             first_name_standard = "Undefined"
+            last_name_standard = "Undefined"
+            
             if " " in page_name:
-                first_name = page_name.split(" ")[0]
-
+                first_name = page_name.split(" ")[0].strip()
+                last_name = page_name.split(" ", 1)[1].strip()
+                if "(" in page_name.split(" ", 1) and len(page_name.split(" ", 1)) > 1:
+                    last_name = page_name.split(" ", 1).split("(")[0].strip()
+                
             first_name = unquote(first_name)
+            last_name = unquote(last_name)
             region_of_birth = self.country_to_region_of_the_world(country_birth_place)
             region_of_death = "alive"
             if is_alive == False:
@@ -1929,6 +1960,7 @@ class WikiPeopleData():
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
                 print(f"Picture url: {picture_url}")
                 print(f"First name: {first_name}")
+                print(f"Last name: {last_name}")
                 print(f"Job: {job}")
                 print(f"Town birth place: {town_birth_place}")
                 print(f"Town birth place href: {town_birth_place_href}")
@@ -2023,6 +2055,8 @@ class WikiPeopleData():
                 "picture_url":picture_url,
                 "first_name":first_name.lower(),
                 "first_name_standard":unidecode(first_name.lower()),
+                "last_name":last_name.lower(),
+                "last_name_standard":unidecode(last_name.lower()),                
                 "job":job,
                 "town_birth_place":town_birth_place,
                 "town_birth_place_href":town_birth_place_href,
@@ -2168,6 +2202,8 @@ class WikiPeopleData():
         print(counts["Ray Charles"])
 
         idx = list_of_link_name.index("Ray Charles")
+        print(list_of_link_name.index("Ray Charles"))
+        
         list_of_link_name_occurence = [
             counts.get(name.strip(), 0)
             for name in list_of_link_name
@@ -2297,6 +2333,7 @@ class WikiPeopleData():
         for i in range(len(list_of_element)):
             merged_data_dict[list_of_element[i]] = occurence_of_element_list[i]
 
+
         with open("data_files/list_of_the_longest_page.json", "w",encoding="utf-8") as f:
             json.dump(dict_of_wikipedia_page_lenght_sorted, f,ensure_ascii=False,indent=4)
   
@@ -2332,9 +2369,27 @@ class WikiPeopleData():
         #      ""
         # ]
 
+        skip_those_user = [
+            "Ḥassān ibn T̠ābit",
+            "Ṣafī al-Dīn al-Urmawī",
+            "Ọranyan",
+            "‘Abd al-Karīm b. Ibrāhīm al-Jīlī",
+            "‘Abd al-Wahhab ibn Ahmad al-Sha‘rānī",
+            "‘Alī b. Muhammad al-Jurjāni",
+            "‘Etuate Lavulavu",
+            "‘Ubada ibn al-Samit",
+            "‘Âbd al-‘Âziz Ibn Mussâ Ibn Nussâyr",
+            "’Anbasa ibn Suhaym al-Kalbi",
+            "₩uNo",
+            "Anne Frank",
+            "Jésus de Nazareth"
+        ]
         reset_file(f"user_info_dict{sys.argv[1]}.txt")
         for idx , people in enumerate(list_of_all_people):
+            if int(sys.argv[1]) + 1 == 21 and people in skip_those_user:
+                continue
             if people.isdigit():
+                write_into_file("list_of_wikipedia_page_of_non_real_people.txt",people+"\n")
                 continue
             if people in BAD_WIKI_PAGE:
                 continue
@@ -2344,8 +2399,8 @@ class WikiPeopleData():
                 write_into_file("counting.txt",idx)
             if len(people) >= 4:
                 if people[0:4].isdigit() and " " in people and ("aux" in people or "dans" in people):
+                    write_into_file("list_of_wikipedia_page_of_non_real_people.txt",people+"\n")
                     continue
-
             toto.get_user_information(people.replace('"',""),False,int(sys.argv[1])+1)
             # if user_info is False:
             #     ok+=1
@@ -2422,7 +2477,7 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
-do_user_data = False
+do_user_data =  False
 do_stat = False
 do_sorted_file = False
 if do_user_data:
@@ -2433,22 +2488,68 @@ if do_user_data:
     quit()
 elif do_stat:
     print("Doing something else")
-    #toto.calc_stat()
+    toto.calc_stat()
     toto.sorted_list_of_linked_of_user()
 elif do_sorted_file:
+    # reset_file("user_info_dict_sorted_by_power.txt")
+    # all_user_sorted = print_file_content(r"data_files/list_of_user_sorted_by_power.txt").split("\n")
+    # all_user_dict_file = print_file_content(r"user_info_dict.txt").split("\n")
+    # print(len(all_user_dict_file))
+    # print(len(all_user_sorted))
+    # print(len(toto.list_of_wikipedia_page_of_real_people))
+    # for i , user in enumerate(all_user_sorted):
+
+    #     if i % 25000 == 0:
+    #         print(i,user)
+    #     try:
+    #         # ANNE FRANK
+    #         if i == 1780:
+    #             write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[-3]+"\n")          
+    #         # JESUS DE NAZARETH
+    #         if i == 337:
+    #             write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[-2]+"\n")       
+                        
+    #         write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[toto.list_of_wikipedia_page_of_real_people.index(user)]+"\n")
+    #     except:
+    #         print("ERREUR!!! " , user)
+    
+    
+    
+    
     reset_file("user_info_dict_sorted_by_power.txt")
     all_user_sorted = print_file_content(r"data_files/list_of_user_sorted_by_power.txt").split("\n")
     all_user_dict_file = print_file_content(r"user_info_dict.txt").split("\n")
     
-    for i , user in enumerate(all_user_sorted):
-        if i % 25000 == 0:
-            print(i,user)
-        try:
-            write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[toto.list_of_wikipedia_page_of_real_people.index(user)]+"\n")
-        except:
-            print("ERREUR!!! " , user)
-    
+    print("user_info_dict.txt " , len(all_user_dict_file))
+    print("data_files/list_of_user_sorted_by_power.txt " , len(all_user_sorted))
+    print("list_of_wikipedia_page_of_real_people.txt " , len(toto.list_of_wikipedia_page_of_real_people))
+        
+    # O(1) lookup instead of O(n) list.index() in a loop
+    # (if there are duplicate names, this keeps the LAST index for each,
+    #  matching list.index() behavior would need the FIRST occurrence instead —
+    #  see note below)
+    user_to_index = {name: idx for idx, name in enumerate(toto.list_of_wikipedia_page_of_real_people)}
 
+    output_lines = []
+
+    for i, user in enumerate(all_user_sorted):
+        # if i % 25000 == 0:
+        #     print(i, user)
+        try:
+            # # ANNE FRANK
+            # if i == 1780:
+            #     output_lines.append(all_user_dict_file[-3] + "\n")
+            # # JESUS DE NAZARETH
+            # if i == 337:
+            #     output_lines.append(all_user_dict_file[-2] + "\n")
+
+            idx = user_to_index[user]  # KeyError instead of ValueError if missing
+            output_lines.append(all_user_dict_file[idx] + "\n")
+        except:
+            print("ERREUR!!! ", user)
+            
+    # Single write instead of one write() call per line
+    write_into_file("user_info_dict_sorted_by_power.txt", "".join(output_lines))
 #         good_line = ast.literal_eval(line)
 # list_of_user_sorted_by_power.txt
 # # MEH USER
@@ -2474,3 +2575,9 @@ try:
     toto.get_user_information(sys.argv[1],True)
 except:
     toto.get_user_information("Ray Brown")
+
+
+# Lancer 1 fois
+# Relancer le script pour les stats
+# Relancer le script pour data_files/list_of_user_sorted_by_power.txt
+# ReRelancer le script principal
