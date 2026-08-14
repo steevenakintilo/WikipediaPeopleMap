@@ -15,6 +15,7 @@ def merge_files():
 def merge_filess():
     """A function that will merge all user_info_dict.txt files into one"""
     seen = set()
+    reset_file("user_info_dict.txt")
     with open("user_info_dict.txt", "w", encoding="utf-8") as out:
         for i in range(101):
             with open(f"user_info_dict{i + 1}.txt", encoding="utf-8") as f:
