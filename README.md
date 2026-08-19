@@ -24,3 +24,5 @@ A FIX:
 - Les villes qui ont le meme prenom essayer d'avoir la regions ex: Springfield
 - Essayer de recuperer les sous job des gens
 - Les noms de villes/metiers qui ne sont ni des noms de villes/métiers
+
+Charbre 8 jours de la semaine

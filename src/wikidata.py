@@ -2288,8 +2288,8 @@ class WikiPeopleData():
                 "born_and_died_in_the_same_region":born_and_died_in_the_same_region,
                 "death_date":death_date,
                 "death_year":death_year,
-                "death_month":birth_month,
-                "death_day":birth_day,
+                "death_month":death_month,
+                "death_day":death_day,
                 "death_month_day":death_month_day,
                 "born_before_christ":born_before_chirst,
                 "died_before_christ":died_before_christ,
@@ -2304,14 +2304,13 @@ class WikiPeopleData():
                 "position_percentage":position_pourcentage,
                 "grade_over_20":position_pourcentage_20,
                 "first_char_of_the_page":unquote(page_name[0].lower()),
-                "wikipedia_page_lenght":len(whole_page_text_plain_text),
+                "wikipedia_page_length":len(whole_page_text_plain_text),
                 "all_links_of_a_page":all_links_of_a_page,
                 "number_of_links":number_of_links,
                 "preciseness_level":int(preciseness_level/2),
                 "list_of_unpreciseness_data":list_of_unpreciseness_data,
                 "country_birth_place_emoji":country_birth_place_emoji,
                 "country_death_place_emoji":country_death_place_emoji
-
             }
 
             # # A faire apres
@@ -2373,7 +2372,7 @@ class WikiPeopleData():
 
         dict_of_number_of_link_per_page_sorted = {}
         dict_of_people_who_are_the_most_linked_sorted = {}
-        dict_of_wikipedia_page_lenght_sorted = {}
+        dict_of_wikipedia_page_length_sorted = {}
         list_of_link_name_occurence = []
         for i , link in enumerate(list_of_dict_link):
             if i % 93000 == 0:
@@ -2488,7 +2487,7 @@ class WikiPeopleData():
 
         # 152397
 
-        with open("list_of_wikipedia_page_lenght.json", "r", encoding="utf-8") as file:
+        with open("list_of_wikipedia_page_length.json", "r", encoding="utf-8") as file:
             pages_lenght = json.load(file)
 
 
@@ -2510,7 +2509,7 @@ class WikiPeopleData():
         print("\n\n\n\n")
 
         for i in range(len(list_of_element)):
-            dict_of_wikipedia_page_lenght_sorted[list_of_element[i]] = list_of_size_of_element[i]
+            dict_of_wikipedia_page_length_sorted[list_of_element[i]] = list_of_size_of_element[i]
 
         for i in range(10):
             print("Biggest Wikipedia Page by user: " , list_of_element[i],list_of_size_of_element[i])
@@ -2549,7 +2548,7 @@ class WikiPeopleData():
 
 
         with open("data_files/list_of_the_longest_page.json", "w",encoding="utf-8") as f:
-            json.dump(dict_of_wikipedia_page_lenght_sorted, f,ensure_ascii=False,indent=4)
+            json.dump(dict_of_wikipedia_page_length_sorted, f,ensure_ascii=False,indent=4)
   
         with open("data_files/list_of_page_with_the_most_link.json", "w",encoding="utf-8") as f:
             json.dump(dict_of_number_of_link_per_page_sorted, f,ensure_ascii=False,indent=4)
@@ -2691,9 +2690,9 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
-do_user_data =  False
+do_user_data =  True
 do_stat = False
-do_sorted_file = False
+do_sorted_file = True
 
 if do_user_data:
     try:
