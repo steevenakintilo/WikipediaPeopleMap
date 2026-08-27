@@ -77,6 +77,13 @@ class WikiPeopleData():
             age-=1
         return age
 
+    def clean_localisation(self,s):
+        """A function that clean localisation and remove useless char"""
+        s = unicodedata.normalize("NFKC", s)
+        s = s.lower()
+        s = s.replace("″", "′′")
+        s = " ".join(s.split())
+        return s
 
 
     def get_all_links_of_a_page(self,page_name):
@@ -112,6 +119,8 @@ class WikiPeopleData():
     def get_country_of_a_town(self,town:str,potential_birth_country:str="") -> str:
         """A function that get the country of a town"""
         try:
+            if potential_birth_country.lower().replace("-"," ") not in self.list_of_country_lower:
+                potential_birth_country = ""
             if len(town) == 0:
                 return "Undefined"
             if town == "Undefined":
@@ -128,6 +137,7 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.replace("\n"*i,"\n")
 
 
+
             return text_normal.split('title="Liste des pays du monde">Pays</a>')[1].split("data-sort-value=")[1].split(">")[0].replace('"',"")
         except:
             try:
@@ -142,6 +152,10 @@ class WikiPeopleData():
                             list_of_found_country.append(country)
                             list_of_found_index.append(index)
                             #return country
+                
+                
+
+                                    
                 if len(list_of_found_country) != 0:
                     return list_of_found_country[list_of_found_index.index(min(list_of_found_index))]
                 return "Undefined"
@@ -161,6 +175,8 @@ class WikiPeopleData():
             time_period = "Contemporary Period"
         if birth_year >= 2000:
             time_period = "Today Time"
+        if birth_year == 123456789:
+            time_period = "Undefined"
         return time_period
 
     def get_localisation_of_a_town(self,town:str) -> str:
@@ -1163,13 +1179,13 @@ class WikiPeopleData():
             gender = self.get_gender_of_a_person(html[:1000000],is_alive)
 
             
-            job_player_list = ["joueuse","groupe","ancienne"]
+            job_player_list = ["joueuse","groupe","ancienne","femme d'","femme de"]
 
             determiner = "une"
             job_player_ = "joueuse"
             if gender == "Man":
                 determiner = "un"
-                job_player_list = ["joueur","groupe","ancien"]
+                job_player_list = ["joueur","groupe","ancien","homme d'","homme de"]
                 job_player_ = "joueur"
                       
             try:
@@ -1183,9 +1199,10 @@ class WikiPeopleData():
                     job = ""
             except:
                 job = ""
-
+            
             if job.isdigit():
                 job = ""          
+            
             try:
                 if is_alive and len(job.strip()) <= 1 or job in LIST_OF_INCOMPLETE_JOB:
                     if "est un" in page_text_plain_text:
@@ -1329,17 +1346,17 @@ class WikiPeopleData():
             if job.lower() == "femme" and "femme politique" in page_text_plain_text.lower():
                 preciseness_level -= 4
                 list_of_unpreciseness_data.append("User may have a bigger role than femme politique")
-                job = "femme politique"
+                job = "Femme politique"
 
-            if job.lower() == "homme" and "homme d'État" in page_text_plain_text.lower():
+            if job.lower() == "homme" and "homme d'état" in page_text_plain_text.lower():
                 preciseness_level -= 4
-                job = "Homme d'État"
-                list_of_unpreciseness_data.append("User may have a bigger role than homme d'État")
+                job = "Homme d'état"
+                list_of_unpreciseness_data.append("User may have a bigger role than homme d'état")
 
-            if job.lower() == "femme" and "femme d'État" in page_text_plain_text.lower():
+            if job.lower() == "femme" and "femme d'état" in page_text_plain_text.lower():
                 preciseness_level -= 4
-                list_of_unpreciseness_data.append("User may have a bigger role than femme d'État")
-                job = "femme d'État"
+                list_of_unpreciseness_data.append("User may have a bigger role than femme d'état")
+                job = "Femme d'état"
             
 
             # if job in LIST_OF_INCOMPLETE_JOB:
@@ -1394,6 +1411,7 @@ class WikiPeopleData():
                     town_birth_place = ""
             if len(job) <= 1:
                 job = ""
+
             town_birth_place = town_birth_place.replace("en:","").replace("fr:","")
             town_death_place = town_death_place.replace("en:","").replace("fr:","")
 
@@ -1416,8 +1434,10 @@ class WikiPeopleData():
                 job = job[0].upper() + job[1:]
             except:
                 job = job_
-
-
+            
+            if job.lower() in LIST_OF_WEIRD_JOB:
+                job = WEIRD_JOB_REPLACEMENTS[job.lower()]
+            
             if age <= 15:
                 try:
                     if born_before_chirst is False:
@@ -1435,28 +1455,56 @@ class WikiPeopleData():
                 if "Notes_et_références" in text_normal:
                     if "datetime" not in text_normal.split("Notes_et_références")[0]:
                         birth_date = "Undefined"
-                        birth_year = "Undefined"
+                        birth_year = 123456789
                         birth_month = "Undefined"
                         birth_day = "Undefined"
 
                         if is_alive is False:
                             death_date = "Undefined"
-                            death_year = "Undefined"
+                            death_year = 123456789
                             death_month = "Undefined"
                             death_day = "Undefined"
                 if '<h2 id="Références">' in text_normal:
                     if "datetime" not in text_normal.split('<h2 id="Références">')[0]:
                         birth_date = "Undefined"
-                        birth_year = "Undefined"
+                        birth_year = 123456789
                         birth_month = "Undefined"
                         birth_day = "Undefined"
 
                         if is_alive is False:
                             death_date = "Undefined"
-                            death_year = "Undefined"
+                            death_year = 123456789
                             death_month = "Undefined"
-                            death_day = "Undefined"                   
+                            death_day = "Undefined"   
 
+            if age >= 125:
+                birth_date = "Undefined"
+                birth_year = 123456789
+                birth_month = "Undefined"
+                birth_day = "Undefined"
+
+                if is_alive is False:
+                    death_date = "Undefined"
+                    death_year = 123456789
+                    death_month = "Undefined"
+                    death_day = "Undefined"
+                age = -999
+
+
+
+            try:
+                if type(birth_year) != int:
+                    birth_year = 123456789
+            except:
+                birth_year = 123456789
+
+            if is_alive is False:
+                try:
+                    if type(death_year) != int:
+                        death_year = 123456789
+                except:
+                    death_year = 123456789
+    
             town_birth_place = unquote(town_birth_place)
             country_birth_place = unquote(country_birth_place)
             town_death_place = unquote(town_death_place)
@@ -1568,6 +1616,17 @@ class WikiPeopleData():
                 if "à" in birth_town_localisation:
                     birth_town_localisation = "Undefined"                
 
+
+            try:
+                if self.clean_localisation(birth_town_localisation.lower()) in LIST_OF_GOOD_LOCALISATION:
+                    country_birth_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(birth_town_localisation.lower())]
+            except:
+                pass
+            try:
+                if self.clean_localisation(death_town_localisation.lower()) in LIST_OF_GOOD_LOCALISATION and is_alive is False:
+                    country_death_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(death_town_localisation.lower())]
+            except:
+                pass                
             job_ = job
             try:
                 job = WIKIJOB_TO_JOB_DICT_MAN[job.lower()]
@@ -1725,7 +1784,7 @@ class WikiPeopleData():
                         birth_date = "unedefined"
                         birth_day = "unedefined"
                         birth_month = "unedefined"
-                        birth_year = "unedefined"
+                        birth_year = 123456789
             except:
                 pass
             try:
@@ -1734,7 +1793,7 @@ class WikiPeopleData():
                     death_date = "unedefined"
                     death_day = "unedefined"
                     death_month = "unedefined"
-                    death_year = "unedefined"
+                    death_year = 123456789
             except:
                 pass    
             if town_birth_place == "" or town_birth_place == "Undefined":
@@ -1773,10 +1832,16 @@ class WikiPeopleData():
                     preciseness_level -= 10
                     list_of_unpreciseness_data.append("death town localisation is unknown")
 
-                if birth_date == death_date:
+                if birth_date == death_date and birth_year != 123456789:
                     preciseness_level -= 40
                     list_of_unpreciseness_data.append("birth_date and death_date may be the same")
                     #print("birth_date == death_date")
+                
+                if birth_date == death_date and birth_year == 123456789:
+                    preciseness_level -= 50
+                    list_of_unpreciseness_data.append("birth_date and death_date are wrong")
+                    #print("birth_date == death_date")
+                
 
             try:
                 if len(birth_date) < 2:
@@ -1946,12 +2011,12 @@ class WikiPeopleData():
             birth_day = "Undefined"
             death_month = "Undefined"
             death_day = "Undefined"
-            death_year = "Undefined"
+            death_year = 123456789
                         
             if is_alive:
                 death_month = "alive"
                 death_day = "alive"
-                death_year = "alive"
+                death_year = 123456789
 
 
             #print(birth_date)
@@ -1971,7 +2036,7 @@ class WikiPeopleData():
                     birth_month = "Fluriel"
                     birth_day = "99"
             except:
-                birth_year = "Undefined"
+                birth_year = 123456789
 
             try:
                 if died_before_christ:
@@ -1993,7 +2058,7 @@ class WikiPeopleData():
                 if is_alive:
                     death_year = "alive"
                 else:
-                    death_year = "Undefined"
+                    death_year = 123456789
                                 
             if birth_year != "Undefined" and len(str(birth_year)) != 0:
                 time_period_of_birth = self.birth_year_to_time_period(birth_year)
@@ -2690,9 +2755,9 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
-do_user_data =  True
+do_user_data =  False
 do_stat = False
-do_sorted_file = True
+do_sorted_file = False
 
 if do_user_data:
     try:
@@ -2737,7 +2802,7 @@ elif do_sorted_file:
     print("user_info_dict.txt " , len(all_user_dict_file))
     print("data_files/list_of_user_sorted_by_power.txt " , len(all_user_sorted))
     print("list_of_wikipedia_page_of_real_people.txt " , len(toto.list_of_wikipedia_page_of_real_people))
-        
+
     # O(1) lookup instead of O(n) list.index() in a loop
     # (if there are duplicate names, this keeps the LAST index for each,
     #  matching list.index() behavior would need the FIRST occurrence instead —
@@ -2747,8 +2812,9 @@ elif do_sorted_file:
     output_lines = []
 
     for i, user in enumerate(all_user_sorted):
-        if i % 25000 == 0:
+        if i % 25000 == 0 or i < 25:
             print(i, user)
+
         try:
             # # ANNE FRANK
             # if i == 1780:
@@ -2761,11 +2827,20 @@ elif do_sorted_file:
             # try:            
             #     output_lines.append(all_user_dict_file[idx - 1] + "\n")
             # except:
-            output_lines.append(all_user_dict_file[idx] + "\n")
+            
+            try:
+                if user != ast.literal_eval(all_user_dict_file[idx])["page_name"]:
+                    output_lines.append(all_user_dict_file[idx - 1] + "\n")
+                                
+                else:
+                    output_lines.append(all_user_dict_file[idx] + "\n")
+                                
+            except:
+                pass
                         
         except:
             print("ERREUR!!! ", user)
-            
+        
     # Single write instead of one write() call per line
     for line in output_lines:
         write_into_file("user_info_dict_sorted_by_power.txt",line)    

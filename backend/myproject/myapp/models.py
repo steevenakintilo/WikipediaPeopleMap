@@ -71,10 +71,9 @@ class WikipediaUser(models.Model):
         null=True
     )
 
-    birth_year = models.CharField(
+    birth_year = models.IntegerField(
         blank=True,
         null=True,
-        max_length=100,
     )
 
     birth_month = models.CharField(
@@ -144,7 +143,6 @@ class WikipediaUser(models.Model):
     death_year = models.CharField(
         blank=True,
         null=True,
-        max_length=100,
     )
 
     death_month = models.CharField(

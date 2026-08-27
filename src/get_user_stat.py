@@ -448,7 +448,7 @@ def get_all_generic_function(variable_to_search):
             f.write(f"{var}     -------     {count}\n")
 
 
-def get_all_generic_function2(variable_to_search,variable_to_search2):
+def get_all_generic_function2(variable_to_search,variable_to_search2,skip=False):
     with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
@@ -494,7 +494,10 @@ def get_all_generic_function2(variable_to_search,variable_to_search2):
     # One single write
     with open(rf"stat_files/all_{variable_to_search}_and_{variable_to_search2}.txt", "w", encoding="utf-8") as f:
         for var, count in variavble_name_sorted:
-            f.write(f"{var}     -------     {count}\n")
+            if skip:
+                f.write(f"{var}\n")
+            else:
+                f.write(f"{var}     -------     {count}\n")
 
 
 def get_top_1000_user():
@@ -506,6 +509,9 @@ def get_top_1000_user():
 
 # #ranked_user()
 # #idk_how_to_name_it()
+print("get birth_town_localisation & death_town_localisation")
+get_all_generic_function2("birth_town_localisation","death_town_localisation",True)
+quit()
 
 print("get_all_undefined_town")
 get_all_undefined_town()
@@ -572,3 +578,6 @@ get_all_generic_function2("birth_date","death_date")
 
 print("get birth_month & death_month")
 get_all_generic_function2("birth_month","death_month")
+
+print("get birth_town_localisation & death_town_localisation")
+get_all_generic_function2("birth_town_localisation","death_town_localisation")
