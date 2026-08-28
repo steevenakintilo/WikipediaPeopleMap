@@ -12,4 +12,62 @@ HISTORICAL_PERIODS = [
     "Today Time"
 ]
 
+HISTORICAL_PERIODS_DICT_TO_FRENCH = {
+    "Prehistory": "Préhistoire",
+    "Antiquity": "Antiquité",
+    "Middle Ages": "Moyen Âge",
+    "Renaissance": "Renaissance",
+    "Contemporary Period": "Époque contemporaine",
+    "Today Time": "Époque actuelle",
+    "Undefined":"Indéfinie"
+}
+
+HISTORICAL_PERIODS_DICT = {
+    "Préhistoire -99999999-3301":"Prehistory",
+    "Antiquité -3300-475":"Antiquity",
+    "Moyen Âge 476-1491":"Middle Ages",
+    "Renaissance 1492-1788":"Renaissance",
+    "Époque contemporaine 1789-1999":"Contemporary Period",
+    "Époque actuelle 2000-?????":"Today Time"
+    
+}
+
+HISTORICAL_PERIODS_WITH_DATE = [
+    "Préhistoire -99999999-3301",
+    "Antiquité -3300-475",
+    "Moyen Âge 476-1491",
+    "Renaissance 1492-1788",
+    "Époque contemporaine 1789-1999",
+    "Époque actuelle 2000-?????"
+    
+]
+
+LIST_OF_CONTINENT_NAME = ["Afrique","Amerique","Asie","Europe","Océanie"]
+
 NUMBER_OF_USERS_TO_SEARCH = 500
+
+
+UNPRECISENESS_DATA_FR = {
+    "town_birth_place is unknown": "La ville de naissance est inconnue",
+    "birth town localisation is unknown": "La localisation de la ville de naissance est inconnue",
+    "country_birth_place is unknown": "Le pays de naissance est inconnu",
+    "birthdate is between two date": "La date de naissance est comprise entre deux dates",
+    "birth year is real but month and day are not": "L'année de naissance est connue, mais pas le mois ni le jour",
+    "death year is real but month and day are not": "L'année de décès est connue, mais pas le mois ni le jour",
+    "town_death_place is unknown": "La ville de décès est inconnue",
+    "country_death_place is unknown": "Le pays de décès est inconnu",
+    "death town localisation is unknown": "La localisation de la ville de décès est inconnue",
+    "birth_date and death_date may be the same": "La date de naissance et la date de décès pourraient être identiques",
+    "birth_date and death_date are wrong": "Les dates de naissance et de décès semblent incorrectes",
+    "birth_date is bad": "La date de naissance semble incorrecte",
+    "gender is unclear": "Le genre est incertain",
+    "death_date is bad": "La date de décès semble incorrecte",
+    "continent of birth is unknown": "Le continent de naissance est inconnu",
+    "continent of death is unknown": "Le continent de décès est inconnu",
+    "birth_date is before the year 1900": "La date de naissance est antérieure à 1900",
+    "age is unknown": "L'âge est inconnu",
+    "age is unknown/younger than 16 and birth_date/death_date may be unknown too": "L'âge est inconnu ou inférieur à 16 ans, et les dates de naissance et de décès peuvent également être inconnues",
+    "birth_date is after death_date": "La date de naissance est postérieure à la date de décès",
+    "birth_date year is the same as death_date year so one of the date is wrong": "L'année de naissance est identique à l'année de décès : l'une des deux dates est probablement incorrecte",
+    "User is born before christ": "La personne est née avant Jésus-Christ",
+}

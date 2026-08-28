@@ -189,6 +189,24 @@ def display_user_info(request,username):
         page_name = user_obj.page_name
     except:
         return HttpResponse(f"{username} doesn't exist", status=404)
+
+    list_of_unpreciseness_data = []
+    if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
+        birth_place_emoji = "🏳️"
+    else:
+        birth_place_emoji = user_obj.country_birth_place_emoji
+
+    if user_obj.town_death_localisation == "" or user_obj.town_death_localisation.lower() == "undefined":
+        death_place_emoji = "🏳️"
+    else:
+        death_place_emoji = user_obj.country_death_place_emoji
+
+    for page_error in user_obj.list_of_unpreciseness_data:
+        try:
+            list_of_unpreciseness_data.append(UNPRECISENESS_DATA_FR[page_error]+",")
+        except:
+            list_of_unpreciseness_data.append(page_error+",")
+
     
     user_info_dict = {
         "page_name": page_name,
@@ -203,7 +221,7 @@ def display_user_info(request,username):
         "town_birth_place_href": user_obj.town_birth_place_href,
         "birth_town_localisation": user_obj.birth_town_localisation,
         "country_birth_place": user_obj.country_birth_place,
-        "time_period_of_birth": user_obj.time_period_of_birth,
+        "time_period_of_birth": HISTORICAL_PERIODS_DICT_TO_FRENCH[user_obj.time_period_of_birth],
         "continent_of_birth": user_obj.continent_of_birth,
         "region_of_birth": user_obj.region_of_birth,
         "birth_date": user_obj.birth_date,
@@ -243,11 +261,14 @@ def display_user_info(request,username):
         "all_links_of_a_page": user_obj.all_links_of_a_page,
         "number_of_links": user_obj.number_of_links,
         "preciseness_level": user_obj.preciseness_level,
-        "list_of_unpreciseness_data": user_obj.list_of_unpreciseness_data,
-        "country_birth_place_emoji": user_obj.country_birth_place_emoji,
-        "country_death_place_emoji": user_obj.country_death_place_emoji,
+        "list_of_unpreciseness_data": list_of_unpreciseness_data,
+        "number_of_unpreciseness_date":len(list_of_unpreciseness_data),
+        "country_birth_place_emoji": birth_place_emoji,
+        "country_death_place_emoji": death_place_emoji,
     }
-
+    for key , value in user_info_dict.items():
+        if value == "Undefined":
+            user_info_dict[key] = "Indéfini"
     return JsonResponse(user_info_dict,status=200)
 
 
@@ -281,7 +302,8 @@ def display_chunck_of_user_info(request,chunk_nb=0):
                 "is_alive":str(user_obj.is_alive),
                 "picture_url": user_obj.picture_url,
                 #"birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),
-                "birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),              
+                "birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),   
+                "birth_country_name":user_obj.country_birth_place,           
                 "town_death_localisation": dms_to_decimal(user_obj.town_death_localisation),
                 "country_birth_place_emoji":user_obj.country_birth_place_emoji
             }
@@ -335,10 +357,15 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
 
     basic_search = True
     try:
-        if recieved_data["country_of_birth"] != "" and recieved_data["country_of_birth"] != "Pays de naissance":
-            filters = {
-                "country_birth_place__icontains": recieved_data["country_of_birth"][0:-3].replace("-"," ")
-            }
+        if recieved_data["country_of_birth"] != "" and recieved_data["country_of_birth"] != "Pays de naissance" and "Tous les pays" not in recieved_data["country_of_birth"]:
+            if recieved_data["country_of_birth"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
+                filters = {
+                    "continent_of_birth__icontains": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
+                }
+            else:
+                filters = {
+                    "country_birth_place__icontains": recieved_data["country_of_birth"][0:-3].replace("-"," ")
+                }
         else:
             filters = {}
     except KeyError:
@@ -360,9 +387,52 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         if int(recieved_data["preciseness_level"]) >= 100:
             recieved_data["preciseness_level"] = 100
         filters["preciseness_level__gte"] = recieved_data["preciseness_level"]
+
+    if "birth_year" in recieved_data:
+        if "time_period_of_birth" in recieved_data:
+            if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
+               pass 
+            else:
+                filters["birth_year"] = int(recieved_data["birth_year"])
+        else:
+            filters["birth_year"] = int(recieved_data["birth_year"])
+
     if "job" in recieved_data:
         filters["job__icontains"] = recieved_data["job"]
 
+    if "time_period_of_birth" in recieved_data:
+        if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
+            filters["time_period_of_birth"] = HISTORICAL_PERIODS_DICT[recieved_data["time_period_of_birth"]]
+
+
+    if "first_name" in recieved_data:
+        if len(recieved_data["first_name"]) != 0:
+            if "+" in recieved_data["first_name"]:
+                filters["first_name__icontains"] = recieved_data["first_name"].replace("+","")
+            else:
+                filters["first_name"] = recieved_data["first_name"]
+
+    if "last_name" in recieved_data:
+        if len(recieved_data["last_name"]) != 0:
+            if "+" in recieved_data["last_name"]:
+                filters["last_name__icontains"] = recieved_data["last_name"].replace("+","")
+            else:
+                filters["last_name"] = recieved_data["last_name"]
+
+    number_of_people_to_display = NUMBER_OF_USERS_TO_SEARCH
+    if "number_of_people_to_display" in recieved_data:
+        if type(recieved_data["number_of_people_to_display"]) == str:
+            if int(recieved_data["number_of_people_to_display"]) <= 0:
+                number_of_people_to_display = 1
+            elif int(recieved_data["number_of_people_to_display"]) >= 500:
+                number_of_people_to_display = 500
+            else:
+                number_of_people_to_display = int(recieved_data["number_of_people_to_display"])
+
+    if "birth_month_day" in recieved_data:
+        if len(recieved_data["birth_month_day"]) != "0":
+            filters["birth_month_day"] = recieved_data["birth_month_day"]
+                
     if filters != {}:
         basic_search = False
 
@@ -379,7 +449,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         try:
             if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined" and basic_search is False:
                 continue
-            if len(list_of_all_user_data) >= NUMBER_OF_USERS_TO_SEARCH:
+            if len(list_of_all_user_data) >= number_of_people_to_display:
                 break
             # if dms_to_decimal(user_obj.birth_town_localisation) in list_of_localisation:
             #     continue
@@ -391,7 +461,6 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                 birth_place_emoji = "🏳️"
             else:
                 birth_place_emoji = user_obj.country_birth_place_emoji
-
             user_info_dict = {
                 "page_name": user_obj.page_name,
                 "page_url": user_obj.page_url,
@@ -399,7 +468,8 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                 "is_alive":str(user_obj.is_alive),
                 "picture_url": user_obj.picture_url,
                 #"birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),
-                "birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),              
+                "birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),   
+                "birth_country_name":user_obj.country_birth_place,                      
                 #"town_death_localisation": dms_to_decimal(user_obj.town_death_localisation),
                 "country_birth_place_emoji":birth_place_emoji
             }
@@ -481,10 +551,13 @@ def display_chunck_of_user_info2(request,chunk_nb=0):
     nb = 100000
     index_start = chunk_nb * nb
     index_end = (chunk_nb + 1) * nb
+    list_of_unpreciseness_data = []
     for user_obj in all_user_obj[index_start:index_end]:
         try:
             if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
                 continue
+
+
             user_info_dict = {
                 "page_name": user_obj.page_name,
                 "page_url": user_obj.page_url,
@@ -538,7 +611,8 @@ def display_chunck_of_user_info2(request,chunk_nb=0):
                 "all_links_of_a_page": user_obj.all_links_of_a_page,
                 "number_of_links": user_obj.number_of_links,
                 "preciseness_level": user_obj.preciseness_level,
-                "list_of_unpreciseness_data": user_obj.list_of_unpreciseness_data,
+                "list_of_unpreciseness_data": list_of_unpreciseness_data,
+                "number_of_unpreciseness_date":len(list_of_unpreciseness_data),
                 "country_birth_place_emoji": user_obj.country_birth_place_emoji,
                 "country_death_place_emoji": user_obj.country_death_place_emoji,
             }

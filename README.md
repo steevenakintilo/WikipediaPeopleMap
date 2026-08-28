@@ -3,6 +3,8 @@ A map that shows where all people who have a Wikipedia article were born and die
 
 A FAIRE:
 
+
+- rajouter les gens mort et né le meme jours
 - Une map qui affiche toutes les personnes wikipedia du monde
 - Une map qui affiche toutes les personnes wikipedia par continents/pays/villes
 - Une map qui affiche toutes les personnes wikipedia par genre/ages/anné

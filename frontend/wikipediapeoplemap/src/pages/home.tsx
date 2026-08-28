@@ -12,16 +12,18 @@ import {
   useMap
 } from "react-leaflet";
 
-import {gender_to_color ,list_of_countries , list_of_country_flag} from "./global_variable.tsx"
+import {gender_to_color ,list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "./global_variable.tsx"
+import { Tooltip } from "bootstrap";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 
 import { useEffect, useState } from 'react';
 import { data, useNavigate } from 'react-router';
 
 import "leaflet/dist/leaflet.css";
-import "./home.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import "./home.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 polyfillCountryFlagEmojis();
@@ -49,8 +51,18 @@ const HomePage = () => {
     const [zoom,setzoom] = useState(6)
     const [searched_name,setsearched_name] : any = useState("")
     const [current_chunck_index,setchunck] = useState(0)
-
+    const [complete_profile_user,setcomplete_profile_user] = useState("")
+    const [launch_profil_root,setlaunch_profile_root] = useState(false)
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
+    const [user_data_info,set_user_data_info] : any = useState({});
+    
+    const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]'
+      );
+
+      tooltipTriggerList.forEach((tooltipTriggerEl) => {
+        new Tooltip(tooltipTriggerEl);
+      });
     const navigate = useNavigate();
     async function get_list_of_user(chunk:number) {
       let blob = {"test":"tljikoest"}
@@ -82,6 +94,27 @@ const HomePage = () => {
       ////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
+    }
+
+    async function get_user_info(user:string) {
+      console.log(`http://127.0.0.1:8000/display_user_info/${user}`)
+      const response = await fetch(`http://127.0.0.1:8000/display_user_info/${user}`, {
+          method: 'GET',
+          //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
+          headers: {"Content-Type" : "application/json"},
+      
+      })
+      
+      const data_fetch = await response.json()
+      ////console.log("blbabla " , data_fetch[0])
+      return data_fetch
+
+    }
+    
+    
+    function handle_complete_profile_user(user:string) {
+      setcomplete_profile_user(user)
+      setlaunch_profile_root(true)
     }
 
     function handle_chunck() {
@@ -137,10 +170,10 @@ const HomePage = () => {
     default: "https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png",
   };
   function display_user_profile() {
-    var toto: any = []
+    var user_info_data: any = []
     {Object.values(list_of_user_data).map((user,index) =>
       user.page_name.toLowerCase().includes(searched_name.toLowerCase()) != "" && (
-      toto.push(
+      user_info_data.push(
           <li className="list-group-item">
             {user.page_name} {index + 1}/{Object.keys(list_of_user_data).length}
             <br></br>
@@ -148,8 +181,17 @@ const HomePage = () => {
               <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} alt="" width="50" height="50" className="me-2"/>
                 <img src={dict_localisation_pin_picture[user.birth_town_localisation[0]]  ?? dict_localisation_pin_picture.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="35" height="35" className="me-2"/>
               <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxw6xy-R6L-ethznPligpikS1nTohfbsiKoVEX6WlL3Q&s=10"} style={{ cursor: "pointer" }} onClick={() => window.open(user.page_url, "_blank")} alt="" width="35" height="35" className="me-2"/>
-              {user.country_birth_place_emoji}
-              👤
+
+              <span
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                data-bs-title={user.birth_country_name}
+              >
+                {user.country_birth_place_emoji}
+              </span>
+              <button type="button" className="btn btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => handle_complete_profile_user(user.page_name)}>+ d'info</button>
+
+              
               
             </h1>
             
@@ -158,15 +200,256 @@ const HomePage = () => {
       )
     )}
     return (
-      toto
+      user_info_data
     )
   }
 
+  function user_info_modal() {
+    if (complete_profile_user != "" && launch_profil_root === true) {
+      get_user_info(complete_profile_user).then((result) => {set_user_data_info(result)})
+      setlaunch_profile_root(false)
+    }
+    
+    const gender_to_french_dict : any = {
+      "Man":"Homme",
+      "Woman":"Femme",
+      "Unclear":"Ne sais pas"
+    }
+    console.log("user_data_info " , user_data_info)
+    return (
+    <div>
+      <div
+        className="modal fade"
+        id="exampleModal2"
+        aria-labelledby="exampleModalLabel2"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel2">
+                Profil complet de {complete_profile_user} ⚠️MON SITE PEUT SE TROMPER!⚠️
+              </h1>
+
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <div className="modal-body">
+              
+              {/* Identité */}
+              <div className="text-center">
+                <h1 className="wikifont">
+                  <strong>{user_data_info.page_name}</strong>
+                </h1>
+
+                <img
+                  src={decodeURIComponent(
+                    decodeURIComponent(user_data_info.picture_url)
+                  )}
+                  style={{ cursor: "pointer" }}
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title="Voir la page Wikipedia"
+                  onClick={() =>
+                    window.open(user_data_info.page_url, "_blank")
+                  }
+                  alt=""
+                  width="250"
+                  height="250"
+                  className="me-2"
+                />
+              </div>
+
+              <hr />
+
+              {/* Informations générales */}
+              <h2 className="wikifont">
+                <strong>Informations générales</strong>
+              </h2>
+
+              <p className="wikifont">
+                <strong>Profession :</strong>{" "}
+                {user_data_info.job}
+              </p>
+
+              <p className="wikifont">
+                <strong>Genre :</strong>{" "}
+                {gender_to_french_dict[user_data_info.gender]}
+              </p>
+
+              <p className="wikifont">
+                <strong>Statut :</strong>{" "}
+                {user_data_info.is_alive ? "Vivant" : "Décédé"}
+              </p>
+
+              {user_data_info.age && (
+                <p className="wikifont">
+                  <strong>Âge :</strong>{" "}
+                  {user_data_info.age} ans
+                </p>
+              )}
+
+              <hr />
+
+              {/* Naissance */}
+              <h2 className="wikifont">
+                <strong>Naissance</strong>
+              </h2>
+
+              <p className="wikifont">
+                <strong>Date :</strong>{" "}
+                {user_data_info.birth_date}
+              </p>
+
+              <p className="body_flag">
+                <strong>Lieu :</strong>{" "}
+                {user_data_info.country_birth_place_emoji}{" "}
+                {user_data_info.town_birth_place},{" "}
+                {user_data_info.country_birth_place}
+              </p>
+
+              <p className="wikifont">
+                <strong>Région :</strong>{" "}
+                {user_data_info.region_of_birth}
+              </p>
+
+              <p className="wikifont">
+                <strong>Continent :</strong>{" "}
+                {user_data_info.continent_of_birth}
+              </p>
+
+              <p className="wikifont">
+                <strong>Période historique :</strong>{" "}
+                {user_data_info.time_period_of_birth}
+              </p>
+
+              <hr />
+
+              {/* Décès */}
+              {!user_data_info.is_alive && (
+                <>
+                  <h2 className="wikifont">
+                    <strong>Décès</strong>
+                  </h2>
+
+                  <p className="wikifont">
+                    <strong>Date :</strong>{" "}
+                    {user_data_info.death_date}
+                  </p>
+
+                  <p className="body_flag">
+                    <strong>Lieu :</strong>{" "}
+                    {user_data_info.country_death_place_emoji}{" "}
+                    {user_data_info.town_death_place},{" "}
+                    {user_data_info.country_death_place}
+                  </p>
+
+                  <p className="wikifont">
+                    <strong>Région :</strong>{" "}
+                    {user_data_info.region_of_death}
+                  </p>
+
+                  <p className="wikifont">
+                    <strong>Continent :</strong>{" "}
+                    {user_data_info.continent_of_death}
+                  </p>
+
+                  <hr />
+                </>
+              )}
+
+
+              {/* Wikipedia */}
+              <h2 className="wikifont">
+                <strong>Wikipedia</strong>
+              </h2>
+
+              {/* <p className="wikifont">
+                <strong>Longueur de la page :</strong>{" "}
+                {user_data_info.wikipedia_page_lenght}
+              </p> */}
+
+              <p className="wikifont">
+                <strong>Nombre de liens :</strong>{" "}
+                {user_data_info.number_of_links}
+              </p>
+              
+              <hr />
+
+              {/* Wikipedia */}
+              <h2 className="wikifont">
+                <strong>Statistique</strong>
+              </h2>
+
+              <p className="wikifont">
+                <strong>Classement :</strong>{" "}
+                {user_data_info.position + 1}/{NUMBER_OF_USER}
+              </p>
+              
+              <p className="wikifont">
+                <strong>Score :</strong>{" "}
+                {user_data_info.power_ranking}
+              </p>
+              
+              <p className="wikifont">
+                <strong>Note sur 20 :</strong>{" "}
+                {user_data_info.grade_over_20}/{20}
+              </p>
+              
+              <p className="wikifont">
+                <strong>Position en % :</strong>{" "}
+                {user_data_info.position_percentage}% des meilleur pages
+              </p>
+              
+              <hr />
+              
+              <h2 className="wikifont">
+                <strong>Précisions/Erreurs</strong>
+              </h2>
+
+              <p className="wikifont">
+                <strong>Niveau de précision :</strong>{" "}
+                {user_data_info.preciseness_level}
+              </p>
+
+              <p className="wikifont">
+                <strong>Nombre d'erreurs sur la pages :</strong>{" "}
+                {user_data_info.number_of_unpreciseness_date}
+              </p>
+              
+              <p className="wikifont">
+                <strong>Listes des erreurs sur la pages :</strong>{" "}
+                {user_data_info.list_of_unpreciseness_data}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    )
+      
+    
+  }
 
   function advanced_search_modal() {
-    var status_death_string_list : any = ["Mort","Vivant","Les 2"]
-    var gender_string_list : any = ["Homme","Femme","Les 2"]
-    
+    const status_death_string_list : any = ["Mort","Vivant","Les 2"]
+    const gender_string_list : any = ["Homme","Femme","Les 2"]
+    const historical_period: any = [
+    "Préhistoire -99999999-3301",
+    "Antiquité -3300-475",
+    "Moyen Âge 476-1491",
+    "Renaissance 1492-1788",
+    "Époque contemporaine 1789-1999",
+    "Époque actuelle 2000-?????"
+    ]
+
     return(
 
       <div>
@@ -186,10 +469,15 @@ const HomePage = () => {
                  */}
                   <input className="form-control w-75" type="text" placeholder={"Métier"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                   <br></br>
+                  <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
+                  <br></br>
+                  <input className="form-control w-75" type="text" placeholder={"Prénom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"first_name")}></input>
+                  
+                  <br></br>
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"country_of_birth")}
 >
-                    <option selected>Pays de naissance</option>
+                    <option selected>Pays/Continent de naissance</option>
                     
                     {list_of_countries
                         .map((country, i) => (
@@ -253,6 +541,40 @@ const HomePage = () => {
                     
                   </select>
                   <br></br>
+                  <input className="form-control w-75" 
+                    placeholder={"Année de naisannce"} 
+                    type="number"
+                    step={1}
+                    onChange={(event) => handle_dict_of_advance_search(event,"birth_year")}>
+                  </input>
+                  
+                  <br></br>
+                  <input className="form-control w-75" type="text" placeholder={"Date de naissance (JJ-MOIS ex: 01-janvier)"} onChange={(event) => handle_dict_of_advance_search(event,"birth_month_day")}></input>
+                  <br></br>
+                  
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                    onChange={(event) => handle_dict_of_advance_search(event,"time_period_of_birth")}
+>
+                    <option selected>Periode historique?</option>
+                    
+                    {historical_period
+                        .map((history:any, i:number) => (
+                          
+                        
+                        <option
+                          key={i}
+                          className="list-group-item list-group-item-action body_flag"
+                          data-bs-dismiss="modal"
+                        >
+
+                          {history}
+                        </option>
+                      ))}
+                    
+                    
+                  </select>
+                  <br></br>
+                  
                   
                   <input className="form-control w-75" 
                     placeholder={"Niveau de précision de la page (0-100%)"} 
@@ -262,6 +584,16 @@ const HomePage = () => {
                     step={1}
                     onChange={(event) => handle_dict_of_advance_search(event,"preciseness_level")}>
                   </input>
+                  <br></br>
+                  <input className="form-control w-75" 
+                    placeholder={"Nombre de personnes affichées (1-500)"} 
+                    type="number"
+                    min={0}
+                    max={500}
+                    step={1}
+                    onChange={(event) => handle_dict_of_advance_search(event,"number_of_people_to_display")}>
+                  </input>
+                  
 
               </div>
               
@@ -341,10 +673,10 @@ const HomePage = () => {
               >                
                   <Popup>
                       {user.page_name}
-                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
+                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>
-                      <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
+                      <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
                   </Popup>
                   
               </CircleMarker>
@@ -373,6 +705,8 @@ const HomePage = () => {
                 </button>
                  */}
                 {advanced_search_modal()}
+                {user_info_modal()}
+                
                 
                 
 
