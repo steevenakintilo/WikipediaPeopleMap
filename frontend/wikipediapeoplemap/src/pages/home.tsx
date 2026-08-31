@@ -370,10 +370,11 @@ const HomePage = () => {
                 <strong>Wikipedia</strong>
               </h2>
 
-              {/* <p className="wikifont">
+              <p className="wikifont">
                 <strong>Longueur de la page :</strong>{" "}
-                {user_data_info.wikipedia_page_lenght}
-              </p> */}
+                {user_data_info.wikipedia_page_length}
+              </p>
+              
 
               <p className="wikifont">
                 <strong>Nombre de liens :</strong>{" "}
@@ -477,7 +478,7 @@ const HomePage = () => {
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"country_of_birth")}
 >
-                    <option selected>Pays/Continent de naissance</option>
+                    <option selected>Continent/Région/Pays de naissance</option>
                     
                     {list_of_countries
                         .map((country, i) => (
@@ -541,13 +542,17 @@ const HomePage = () => {
                     
                   </select>
                   <br></br>
-                  <input className="form-control w-75" 
-                    placeholder={"Année de naisannce"} 
-                    type="number"
-                    step={1}
+                  <input className="form-control w-100" 
+                    placeholder={"Année de naissance (+ pour inclure les années suivantes)"} 
+                    type="text"
                     onChange={(event) => handle_dict_of_advance_search(event,"birth_year")}>
                   </input>
                   
+
+                  <br></br>
+                  
+                  <input className="form-control w-75" type="text" placeholder={"Ville de naisannce"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
+
                   <br></br>
                   <input className="form-control w-75" type="text" placeholder={"Date de naissance (JJ-MOIS ex: 01-janvier)"} onChange={(event) => handle_dict_of_advance_search(event,"birth_month_day")}></input>
                   <br></br>
@@ -659,7 +664,7 @@ const HomePage = () => {
             subdomains={["mt0", "mt1", "mt2", "mt3"]}
           />
           {/* Boutons + / - */}
-          {Object.values(list_of_user_data).map((user) =>
+          {Object.values(list_of_user_data).map((user:any) =>
               
               user.birth_town_localisation?.[0] !== 999999999999999 &&
               user.birth_town_localisation?.[1] !== 999999999999999 && (
@@ -676,7 +681,7 @@ const HomePage = () => {
                       <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>
-                      <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
+                      <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
                   </Popup>
                   
               </CircleMarker>

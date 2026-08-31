@@ -121,6 +121,10 @@ class WikiPeopleData():
         try:
             if potential_birth_country.lower().replace("-"," ") not in self.list_of_country_lower:
                 potential_birth_country = ""
+            
+
+            if town.isdigit():
+                return "Undefined"
             if len(town) == 0:
                 return "Undefined"
             if town == "Undefined":
@@ -137,7 +141,9 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.replace("\n"*i,"\n")
 
 
-
+            if str(town) == "1861":
+                reset_file("get_country_of_a_town.txt")
+                write_into_file("get_country_of_a_town.txt",text_normal)
             return text_normal.split('title="Liste des pays du monde">Pays</a>')[1].split("data-sort-value=")[1].split(">")[0].replace('"',"")
         except:
             try:
@@ -155,7 +161,8 @@ class WikiPeopleData():
                 
                 
 
-                                    
+
+                         
                 if len(list_of_found_country) != 0:
                     return list_of_found_country[list_of_found_index.index(min(list_of_found_index))]
                 return "Undefined"
@@ -434,6 +441,7 @@ class WikiPeopleData():
                 filename = img_path.split("/")[-1]
                 
                 picture_url = f"https://commons.wikimedia.org/wiki/Special:FilePath/{quote(filename)}"
+                
                 if picture_url == "https://commons.wikimedia.org/wiki/Special:FilePath/langfr-250px-Defaut_2.svg.png" or ".svg." in picture_url:
                     picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
             except:
@@ -452,11 +460,17 @@ class WikiPeopleData():
                 text_normal = portion_of_wikipedia_page_text.split("Informations générales")[1]
             elif len(text_normal) < 20 and "infobox--frwiki noarchive" in portion_of_wikipedia_page_text:
                 text_normal = portion_of_wikipedia_page_text.split("infobox--frwiki noarchive")[1]
-            if len(text_normal) < 5000:
-                text_normal = portion_of_wikipedia_page_text
-
+            if len(text_normal) < 7500:
+                soup = BeautifulSoup(html, "html.parser")
+                whole_page_text_plain_text = soup.get_text(" ", strip=True)
+                if len(whole_page_text_plain_text) > 75000:                           
+                    text_normal = portion_of_wikipedia_page_text
+                else:
+                    text_normal = html
+                                    
             for i in range (1,100):
                 text_normal = text_normal.replace("\n"*i,"\n")
+
 
             if page_nb == -999:
                 reset_file("user_text_info2.txt")
@@ -556,6 +570,30 @@ class WikiPeopleData():
             soup = BeautifulSoup(html, "html.parser")
             whole_page_text_plain_text = soup.get_text(" ", strip=True)
 
+
+            is_alive_check = False
+            try:
+                if "décès" in text_normal.lower():
+                    naissance_pos = 0
+                    deces_pos =  0
+                    if "naissance" in text_normal:
+                        for i , word in enumerate(text_normal.replace("\n"," ").split(" ")):
+                            if "naissance" in word and naissance_pos == 0:
+                                naissance_pos = i
+                            if "décès" in word.lower() and deces_pos == 0:
+                                deces_pos = i
+                                                        
+                        if deces_pos <= naissance_pos and naissance_pos - deces_pos > 200:
+                            is_alive_check = True
+                        if deces_pos >= naissance_pos and deces_pos - naissance_pos > 200:
+                            is_alive_check = True
+
+
+                                                
+            except:
+                pass
+
+
             if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
                 try:
                     if "<td>Inconnu" in text_normal:
@@ -627,7 +665,8 @@ class WikiPeopleData():
                 # print(birth_date)
                 # return
 
-                if "décès" in text_normal.lower():
+
+                if "décès" in text_normal.lower() and is_alive_check == False:
                     is_alive = False
                     try:
                         death_date = text_normal.split("Date de décès")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
@@ -659,7 +698,7 @@ class WikiPeopleData():
                 try:
                     if "U-" in death_date:
                         whole_death_date = text_normal.split("Date de décès")[1].split("<td>")[1].split("<")[0].split(" ")
-                        if "décès" in text_normal.lower():
+                        if "décès" in text_normal.lower() and is_alive_check == False:
                             death_date = f"{self.convert_before_christ_to_date(death_date)}-{MONTH_TO_NUMBER_DICT[whole_death_date[1]]}-{whole_death_date[0]}"
                             died_before_christ = True
                 except:
@@ -903,12 +942,17 @@ class WikiPeopleData():
                     birth_date+="-01-01"
                     birth_year_is_real_but_month_and_day_are_not =  True
 
-                if "décès" in text_normal.lower():
+
+
+
+                if "décès" in text_normal.lower() and is_alive_check is False:        
+                    is_alive = False
+                    if "Date Naissance" in text_normal:
+                        pass          
                     try:
                         death_date = text_normal.split("datetime=")[birth_index].split(" ")[0].replace('"',"")
                     except:
                         pass
-                    is_alive = False
                 if "U-" in birth_date:
                     try:
                         whole_birth_date = text_normal.split("Date de naissance")[1].split("<td>")[1].split("<")[0].split(" ")
@@ -928,7 +972,7 @@ class WikiPeopleData():
                         whole_death_date = text_normal.split("Date de décès")[1].split("<td>")[1].split("<")[0].split(" ")
                     except:
                         pass
-                    if "décès" in text_normal.lower():
+                    if "décès" in text_normal.lower() and is_alive_check == False:
                         try:
                             death_date = f"{self.convert_before_christ_to_date(death_date)}-{MONTH_TO_NUMBER_DICT[whole_death_date[1]]}-{whole_death_date[0]}"
                         except:
@@ -992,7 +1036,7 @@ class WikiPeopleData():
                 pass
             
             # print(birth_date)
-            if "décès" not in text_normal.lower():
+            if "décès" not in text_normal.lower() or is_alive_check:
                 #print(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}")
                 try:
                     start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
@@ -1033,7 +1077,7 @@ class WikiPeopleData():
                         try:
                             
                             year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
-                            year_death_date_ = birth_date[0:len(death_date.split("-")[0])]
+                            year_death_date_ = death_date[0:len(death_date.split("-")[0])]
 
                             # print(year_birth_date_)
                             # print(death_date)
@@ -1073,7 +1117,7 @@ class WikiPeopleData():
                     except:
                         try:
                             year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
-                            year_death_date_ = birth_date[0:len(death_date.split("-")[0])]
+                            year_death_date_ = death_date[0:len(death_date.split("-")[0])]
 
                             # print(year_birth_date_)
                             # print(death_date)
@@ -1103,7 +1147,7 @@ class WikiPeopleData():
                     country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"),"")
                 except:
                     pass
-            elif "décès" in text_normal.lower():
+            elif "décès" in text_normal.lower() and is_alive_check == False:
                 try:
                     town_death_place = text_normal.split("Décès")[1].split(')')[1].split(' title=')[1].split(">")[0].replace('"',"")
                     country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"),"")
@@ -1167,7 +1211,7 @@ class WikiPeopleData():
 
             try:
                 if len(str(birth_date)) > 4 and "-" not in str(birth_date[0]):
-                    if death_date == birth_date and int(birth_date.split("-")[0]) >= 1900:
+                    if death_date == birth_date and int(birth_date.split("-")[0]) >= 1900 and is_alive_check:
                         is_alive = True
             except:
                 pass
@@ -1437,7 +1481,148 @@ class WikiPeopleData():
             
             if job.lower() in LIST_OF_WEIRD_JOB:
                 job = WEIRD_JOB_REPLACEMENTS[job.lower()]
+
+
+
+            # CAS AVEC DES IMAGES A DATES EX ERIC CLAPTON OU LE PAPE FRANCOIS
             
+            try:
+                if "Date de naissance" in text_normal:
+                    if birth_date in text_normal:
+                        split_birth_text = text_normal.split(birth_date)
+                        if "Date de naissance" not in split_birth_text[0]:
+                            birth_date  = split_birth_text[2].split("Date de naissance")[1].split("datetime=")[1].split(" d")[0].replace('"',"").strip()
+                            if is_alive:
+                                try:
+                                    start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                                    end_date = datetime.strptime(f"{today_date_str.split("-")[0]}-{str(int(today_date_str.split("-")[1]))}-{str(int(today_date_str.split("-")[2]))}", "%Y-%m-%d")
+                
+                                    # Get the relativedelta between two dates
+                                    delta = relativedelta.relativedelta(end_date, start_date)
+                                    age = delta.years
+                                except:
+                                    age = -999
+                            else:
+                                try:
+                                    start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                                    end_date = datetime.strptime(f"{death_date.split("-")[0]}-{str(int(death_date.split("-")[1]))}-{str(int(death_date.split("-")[2]))}", "%Y-%m-%d")
+            
+                                    # Get the relativedelta between two dates
+                                    delta = relativedelta.relativedelta(end_date, start_date)
+                                    age = delta.years
+                                                                
+                                except:
+                                    try:
+                                        year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
+                                        year_death_date_ = death_date[0:len(death_date.split("-")[0])]
+            
+                                        # print(year_birth_date_)
+                                        # print(death_date)
+            
+                                        if int(year_birth_date_) + ABSOLUTE_DATE_VALUE <= int(year_death_date_) + ABSOLUTE_DATE_VALUE:
+                                            age = (int(year_death_date_) + ABSOLUTE_DATE_VALUE) - (int(year_birth_date_) + ABSOLUTE_DATE_VALUE)
+                                        else:
+                                            age = (int(year_birth_date_) + ABSOLUTE_DATE_VALUE) - (int(year_death_date_) + ABSOLUTE_DATE_VALUE)
+                                    except:
+                                        age = -999    
+
+
+                elif "Naissance" in text_normal:
+                    if birth_date in text_normal:
+                        split_birth_text = text_normal.split(birth_date)
+                        if "Naissance" not in split_birth_text[0]:
+                            birth_date = split_birth_text[2].split("Naissance")[1].split("datetime=")[1].split(" d")[0].replace('"',"").strip()
+                            if birth_date[0] == "0" and birth_date[1] != "-":
+                                birth_date = birth_date[1:]
+                            
+                            if is_alive:
+                                try:
+                                    start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                                    end_date = datetime.strptime(f"{today_date_str.split("-")[0]}-{str(int(today_date_str.split("-")[1]))}-{str(int(today_date_str.split("-")[2]))}", "%Y-%m-%d")
+                
+                                    # Get the relativedelta between two dates
+                                    delta = relativedelta.relativedelta(end_date, start_date)
+                                    age = delta.years
+                                except:
+                                    age = -999
+                            else:
+                                try:
+                                    start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                                    end_date = datetime.strptime(f"{death_date.split("-")[0]}-{str(int(death_date.split("-")[1]))}-{str(int(death_date.split("-")[2]))}", "%Y-%m-%d")
+            
+                                    # Get the relativedelta between two dates
+                                    delta = relativedelta.relativedelta(end_date, start_date)
+                                    age = delta.years
+                                                        
+                                except:
+                                    try:
+                                        year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
+                                        year_death_date_ = death_date[0:len(death_date.split("-")[0])]
+                                                            
+                                        
+                                        # print(death_date)
+            
+                                        if int(year_birth_date_) + ABSOLUTE_DATE_VALUE <= int(year_death_date_) + ABSOLUTE_DATE_VALUE:
+                                            age = (int(year_death_date_) + ABSOLUTE_DATE_VALUE) - (int(year_birth_date_) + ABSOLUTE_DATE_VALUE)
+                                        else:
+                                            age = (int(year_birth_date_) + ABSOLUTE_DATE_VALUE) - (int(year_death_date_) + ABSOLUTE_DATE_VALUE)
+                                    except:
+                                        age = -999    
+            except:
+                pass                            
+
+            #return
+
+            
+            #birth_date  = split_birth_text[2].split("Naissance")[1].split("datetime=")[1].split(" d")[0].replace('"',"").strip()
+            #birth_date  = split_birth_text[2].split("Date de naissance")[1].split("datetime=")[1].split(" d")[0].replace('"',"").strip()
+            #birth_date = text_normal.split("Date de naissance")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
+
+            # CAS OU LA DATE DE NAISSANCE/MORT ETAIT FAUSSE EX LOUIS AMSTRONG
+
+            if page_name == "Mouammar Kadhafi":
+                birth_date = "1942-01-01"
+                birth_year_is_real_but_month_and_day_are_not = True
+                age = 69
+
+
+            try:
+                if birth_date == death_date and is_alive == False:
+                    if "Naissance" in text_normal:
+                        birth_date = text_normal.split("Naissance")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
+                    if "Date de naissance" in text_normal:
+                        birth_date = text_normal.split("Date de naissance")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
+
+                    try:
+                        death_date = text_normal.split("Date de décès")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
+                    except:
+                        death_date = text_normal.split("Décès")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
+
+                    if birth_date != death_date:
+                        try:
+                            start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                            end_date = datetime.strptime(f"{death_date.split("-")[0]}-{str(int(death_date.split("-")[1]))}-{str(int(death_date.split("-")[2]))}", "%Y-%m-%d")
+
+                            # Get the relativedelta between two dates
+                            delta = relativedelta.relativedelta(end_date, start_date)
+                            age = delta.years
+                                                
+                        except:
+                            try:
+                                year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
+                                year_death_date_ = death_date[0:len(death_date.split("-")[0])]
+                                                    
+                                
+                                # print(death_date)
+
+                                if int(year_birth_date_) + ABSOLUTE_DATE_VALUE <= int(year_death_date_) + ABSOLUTE_DATE_VALUE:
+                                    age = (int(year_death_date_) + ABSOLUTE_DATE_VALUE) - (int(year_birth_date_) + ABSOLUTE_DATE_VALUE)
+                                else:
+                                    age = (int(year_birth_date_) + ABSOLUTE_DATE_VALUE) - (int(year_death_date_) + ABSOLUTE_DATE_VALUE)
+                            except:
+                                age = -999
+            except:
+                pass              
             if age <= 15:
                 try:
                     if born_before_chirst is False:
@@ -1504,11 +1689,13 @@ class WikiPeopleData():
                         death_year = 123456789
                 except:
                     death_year = 123456789
-    
+
             town_birth_place = unquote(town_birth_place)
             country_birth_place = unquote(country_birth_place)
             town_death_place = unquote(town_death_place)
             country_death_place = unquote(country_death_place)
+
+
             try:
                 if is_alive is False:
                     if "Naissance Date inconnu" in page_text_plain_text:
@@ -1795,7 +1982,7 @@ class WikiPeopleData():
                     death_month = "unedefined"
                     death_year = 123456789
             except:
-                pass    
+                pass
             if town_birth_place == "" or town_birth_place == "Undefined":
                 preciseness_level -= 20
                 #print("town_birth_place is bad")
@@ -2114,7 +2301,7 @@ class WikiPeopleData():
                 pass
 
             try:
-                if death_day != "Undefined" and death_month != "Undefined" and is_alive:
+                if death_day != "Undefined" and death_month != "Undefined" and is_alive is False:
                     death_month_day = f"{death_day}-{death_month}"
             except:
                 pass                
@@ -2220,7 +2407,35 @@ class WikiPeopleData():
                 #print("town_birth_place is bad")
                 list_of_unpreciseness_data.append("town_birth_place is unknown")
 
-    
+
+            born_and_died_on_the_same_day = False
+            try:
+                if is_alive is False:
+                    if "fluriel" not in f"{birth_month_day.lower()}{death_month_day.lower()}" and birth_month_day == death_month_day:
+                        born_and_died_on_the_same_day = True
+            except:
+                pass
+
+            try:
+                if len(town_birth_place) != 0:
+                    if "(" in town_birth_place and ")" in town_birth_place:
+                        for country in self.list_of_country:
+                            if f"({country.lower()})" in town_birth_place.lower():
+                                country_birth_place = country
+
+            except:
+                pass
+
+            try:
+                if len(town_death_place) != 0 and is_alive is False:
+                    if "(" in town_death_place and ")" in town_death_place:
+                        for country in self.list_of_country:
+                            if f"({country.lower()})" in town_death_place.lower():
+                                country_death_place = country
+
+            except:
+                pass
+            
             if print_data:
                 print(f"Page name: {page_name}")
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
@@ -2255,7 +2470,7 @@ class WikiPeopleData():
                     print(f"born_and_died_in_the_same_country: {born_and_died_in_the_same_continent}")
                     print(f"born_and_died_in_the_same_continent: {born_and_died_in_the_same_continent}")
                     print(f"born_and_died_in_the_same_region: {born_and_died_in_the_same_region}")
-
+                    print(f"born_and_died_on_the_same_day: {born_and_died_on_the_same_day}")
 
                 print(f"Birth date: {birth_date}")
                 print(f"Birth year: {birth_year}")
@@ -2351,6 +2566,7 @@ class WikiPeopleData():
                 "born_and_died_in_the_same_country":born_and_died_in_the_same_country,
                 "born_and_died_in_the_same_continent":born_and_died_in_the_same_continent,
                 "born_and_died_in_the_same_region":born_and_died_in_the_same_region,
+                "born_and_died_on_the_same_day":born_and_died_on_the_same_day,
                 "death_date":death_date,
                 "death_year":death_year,
                 "death_month":death_month,

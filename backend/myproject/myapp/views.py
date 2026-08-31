@@ -45,7 +45,7 @@ def add_a_wikipedia_user_to_the_database(request):
             if line.get("age") == -999:
                 is_alive = False
             else:
-                is_alive = line.get("is_alive",True)          
+                is_alive = line.get("is_alive",True)     
             wiki_user = WikipediaUser(
                 page_name=line["page_name"],
                 page_url=line["page_url"],
@@ -63,7 +63,7 @@ def add_a_wikipedia_user_to_the_database(request):
                 town_birth_place=line.get("town_birth_place"),
                 town_birth_place_href=line.get("town_birth_place_href"),
                 birth_town_localisation=line.get("birth_town_localisation"),
-                country_birth_place=line.get("country_birth_place"),
+                country_birth_place=line.get("country_birth_place").lower(),
                 time_period_of_birth=line.get("time_period_of_birth"),
                 continent_of_birth=line.get("continent_of_birth"),
                 region_of_birth=line.get("region_of_birth"),
@@ -78,7 +78,7 @@ def add_a_wikipedia_user_to_the_database(request):
                 town_death_place=line.get("town_death_place"),
                 town_death_place_href=line.get("town_death_place_href"),
                 town_death_localisation=line.get("town_death_localisation"),
-                country_death_place=line.get("country_death_place"),
+                country_death_place=line.get("country_death_place").lower(),
                 continent_of_death=line.get("continent_of_death"),
                 region_of_death=line.get("region_of_death"),
 
@@ -120,10 +120,13 @@ def add_a_wikipedia_user_to_the_database(request):
                     line.get("born_and_died_after_christ", "False")
                 ),
 
+                born_and_died_in_the_same_day=str(
+                    line.get("born_and_died_on_the_same_day", "False")
+                ),
                 born_before_christ_and_died_after_christ=str(
                     line.get("born_before_christ_and_died_after_christ", "False")
                 ),
-                age=is_alive,
+                age=line.get("age"),
                 is_alive=line.get("is_alive", True),
 
                 # Personal information
@@ -140,7 +143,7 @@ def add_a_wikipedia_user_to_the_database(request):
                     "first_char_of_the_page"
                 ),
                 wikipedia_page_lenght=line.get(
-                    "wikipedia_page_lenght", 0
+                    "wikipedia_page_length", 0
                 ),
                 all_links_of_a_page=line.get(
                     "all_links_of_a_page", []
@@ -207,7 +210,8 @@ def display_user_info(request,username):
         except:
             list_of_unpreciseness_data.append(page_error+",")
 
-    
+
+    print(user_obj.age)
     user_info_dict = {
         "page_name": page_name,
         "page_url": user_obj.page_url,
@@ -357,14 +361,38 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
 
     basic_search = True
     try:
+
+        list_of_key_to_remove = []
+        for key,value in recieved_data.items():
+            if value == '':
+                list_of_key_to_remove.append(key)
+
+        for key in list_of_key_to_remove:
+            recieved_data.pop(key)
+    except:
+        pass
+    try:
         if recieved_data["country_of_birth"] != "" and recieved_data["country_of_birth"] != "Pays de naissance" and "Tous les pays" not in recieved_data["country_of_birth"]:
+
+            searched_region = ""
+            for region in LIST_OF_REGIONS_NAME:
+                if region in recieved_data["country_of_birth"][0:-2]:
+                    searched_region = region
+                    break
+
+            print(searched_region)
             if recieved_data["country_of_birth"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
                 filters = {
-                    "continent_of_birth__icontains": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
+                    "continent_of_birth": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
                 }
+            elif searched_region in LIST_OF_REGIONS_NAME:
+                filters = {
+                    "region_of_birth": searched_region
+                }
+                
             else:
                 filters = {
-                    "country_birth_place__icontains": recieved_data["country_of_birth"][0:-3].replace("-"," ")
+                    "country_birth_place": recieved_data["country_of_birth"][0:-3].replace("-"," ").lower()
                 }
         else:
             filters = {}
@@ -393,9 +421,25 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
                pass 
             else:
-                filters["birth_year"] = int(recieved_data["birth_year"])
+                try:
+                    if "+" in recieved_data["birth_year"]:
+                        filters["birth_year__gte"] = int(recieved_data["birth_year"].replace("+",""))
+                        filters["birth_year__lte"] = 2022
+                        filters["age__gte"] = 0
+                                                                        
+                                                
+                    else:
+                        filters["birth_year"] = int(recieved_data["birth_year"])
+                except:
+                    pass
         else:
-            filters["birth_year"] = int(recieved_data["birth_year"])
+            if "+" in recieved_data["birth_year"]:
+                filters["birth_year__gte"] = int(recieved_data["birth_year"].replace("+",""))
+                filters["birth_year__lte"] = 2022
+                filters["age__gte"] = 0
+                                                        
+            else:
+                filters["birth_year"] = int(recieved_data["birth_year"])
 
     if "job" in recieved_data:
         filters["job__icontains"] = recieved_data["job"]
@@ -418,6 +462,11 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                 filters["last_name__icontains"] = recieved_data["last_name"].replace("+","")
             else:
                 filters["last_name"] = recieved_data["last_name"]
+
+    print(recieved_data)
+    if "town_birth_place" in recieved_data:
+        print("opop")
+        filters["town_birth_place__icontains"] = recieved_data["town_birth_place"]
 
     number_of_people_to_display = NUMBER_OF_USERS_TO_SEARCH
     if "number_of_people_to_display" in recieved_data:
@@ -447,10 +496,13 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     list_of_localisation = []
     for user_obj in all_user_obj[index_start:index_end]:
         try:
+            
             if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined" and basic_search is False:
                 continue
             if len(list_of_all_user_data) >= number_of_people_to_display:
                 break
+            if "time_period_of_birth" in recieved_data and user_obj.age == -999:
+                continue
             # if dms_to_decimal(user_obj.birth_town_localisation) in list_of_localisation:
             #     continue
             

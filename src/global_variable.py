@@ -51,6 +51,22 @@ LIST_OF_MONTH: list[str] = [
     "fluriel"
 ]
 
+LIST_OF_MONTH_CORRECT: list[str] = [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre",
+    "fluriel"
+]
+
 ABSOLUTE_DATE_VALUE: int = 1000000
 
 AFRICA: list[str] = [
@@ -301,6 +317,7 @@ LIST_OF_REGIONS_NAME = [
     "Micronésie",
     "Polynésie",
 ]
+
 LIST_OF_CONTINENTS: list[str] = [AFRICA,AMERICA,ASIA,EUROPE,OCEANIA]
 
 JOBS: list[str] = [
@@ -1091,6 +1108,7 @@ CITIES: list[str] = [
     "Dakar",
     "Bamberg",
     "Vérone",
+    "Norrköping",
     "Orléans",
     "Netzschkau",
     "Nagercoil",
@@ -4904,7 +4922,8 @@ WIKIJOB_TO_JOB_DICT_MAN = {
     "plongeon": "Plongeur",
     "snowboard": "Snowboardeur",
     "alpinisme": "Alpiniste",
-    "roman (littérature)":"Romancier"
+    "roman (littérature)":"Romancier",
+    "Roman (littérature)":"Romancière"
 }
 
 WIKIJOB_TO_JOB_DICT_WOMAN = {

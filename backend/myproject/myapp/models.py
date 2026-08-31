@@ -182,6 +182,11 @@ class WikipediaUser(models.Model):
         default="False"
     )
 
+    born_and_died_in_the_same_day = models.CharField(
+            max_length=20,
+            default="False"
+    )
+        
     born_and_died_in_the_same_region = models.CharField(
         max_length=20,
         default="False"

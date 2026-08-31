@@ -109,3 +109,5 @@ deployment_keys.tar
 .github/.release
 release-artifacts-*
 fetch_match_dataTop5Leagues/
+backend/myproject/myapp/migrations/0001_initial.py
+backend/myproject/myapp/tests.py
