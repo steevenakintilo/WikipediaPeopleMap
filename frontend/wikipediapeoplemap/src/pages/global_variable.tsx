@@ -3,8 +3,18 @@ export const gender_to_color : any = {
     "ManTrue":"#66B2FF",
     "WomanFalse":"#660000",
     "WomanTrue":"#FF6666",
-    "UnclearFalse":"#4e4e4e",
-    "UnclearTrue":"#bfbbbb",
+    "UnknownFalse":"#4e4e4e",
+    "UnknownTrue":"#bfbbbb",
+    
+}
+
+export const gender_to_color2 : any = {
+    "ManFalse":"#000066",
+    "ManTrue":"#66B2FF",
+    "WomanFalse":"#660000",
+    "WomanTrue":"#FF6666",
+    "UnknownFalse":"#4e4e4e",
+    "UnknownTrue":"#bfbbbb",
     
 }
 

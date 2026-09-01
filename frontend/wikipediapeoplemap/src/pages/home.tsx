@@ -12,7 +12,7 @@ import {
   useMap
 } from "react-leaflet";
 
-import {gender_to_color ,list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "./global_variable.tsx"
+import {gender_to_color , gender_to_color2 , list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "./global_variable.tsx"
 import { Tooltip } from "bootstrap";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 
@@ -200,6 +200,12 @@ const HomePage = () => {
     999999999999999: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1787351654/image_mobyht.png",
     default: "https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png",
   };
+
+  const dict_localisation_pin_picture2 : any= {
+    999999999999999: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1787351654/image_mobyht.png",
+    default: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1788295917/pin_death_khphfd.png",
+  };
+  
   function display_user_profile() {
     var user_info_data: any = []
     {Object.values(list_of_user_data).map((user:any,index) =>
@@ -211,8 +217,16 @@ const HomePage = () => {
             <h1 className="body_flag">
               <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} alt="" width="50" height="50" className="me-2"/>
                 <img src={dict_localisation_pin_picture[user.birth_town_localisation[0]]  ?? dict_localisation_pin_picture.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="35" height="35" className="me-2"/>
+              
+              {user.display_death_localisation == true &&(
+                  <img src={dict_localisation_pin_picture2[user.town_death_localisation[0]]  ?? dict_localisation_pin_picture2.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.town_death_localisation[0],user.town_death_localisation[1])} alt="" width="35" height="35" className="me-2"/>
+              )}
+
               <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxw6xy-R6L-ethznPligpikS1nTohfbsiKoVEX6WlL3Q&s=10"} style={{ cursor: "pointer" }} onClick={() => window.open(user.page_url, "_blank")} alt="" width="35" height="35" className="me-2"/>
 
+              
+              {/* user.display_death_localisation == true
+               */}
               <span
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
@@ -326,6 +340,13 @@ const HomePage = () => {
                 </p>
               )}
 
+              {user_data_info.age && user_data_info.age >= 100 && user_data_info.is_alive == true &&(
+                <p className="wikifont">
+                  <strong>Attention :</strong>{" "}
+                  L'utilisateur est probalement mort le site est mauvais pour les âges vraiment élevés ⚠️ 
+                </p>
+              )}
+              
               <hr />
 
               {/* Naissance */}
@@ -527,7 +548,30 @@ const HomePage = () => {
                     
                     
                   </select>
+                  
+                  <br></br>
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                    onChange={(event) => handle_dict_of_advance_search(event,"country_death_place")}
+>
+                    <option selected>Continent/Région/Pays de mort</option>
+                    
+                    {list_of_countries
+                        .map((country, i) => (
+                          
+                        
+                        <option
+                          key={i}
+                          className="list-group-item list-group-item-action body_flag"
+                          data-bs-dismiss="modal"
+                        >
 
+                          {country} {list_of_country_flag[i]}
+                        </option>
+                      ))}
+                    
+                    
+                  </select>
+                  
                   <br></br>
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"alive_status")}
@@ -578,6 +622,22 @@ const HomePage = () => {
                     type="text"
                     onChange={(event) => handle_dict_of_advance_search(event,"birth_year")}>
                   </input>
+                  <br></br>
+                  <input className="form-control w-100" 
+                    placeholder={"Année de mort (+ pour inclure les années précédentes)"} 
+                    type="text"
+                    onChange={(event) => handle_dict_of_advance_search(event,"death_year")}>
+                  </input>
+                  <br></br>
+                  <input className="form-control w-75" 
+                    placeholder={"Age minimum"} 
+                    type="number"
+                    min={1}
+                    max={125}
+                    step={1}
+                    onChange={(event) => handle_dict_of_advance_search(event,"age")}>
+                  </input>
+                  
                   
 
                   <br></br>
@@ -585,7 +645,14 @@ const HomePage = () => {
                   <input className="form-control w-75" type="text" placeholder={"Ville de naisannce"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
 
                   <br></br>
+
+                  <input className="form-control w-75" type="text" placeholder={"Ville de mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_death_place")}></input>
+
+                  <br></br>
+                  
                   <input className="form-control w-75" type="text" placeholder={"Date de naissance (JJ-MOIS ex: 01-janvier)"} onChange={(event) => handle_dict_of_advance_search(event,"birth_month_day")}></input>
+                  <br></br>
+                  <input className="form-control w-75" type="text" placeholder={"Date de mort (JJ-MOIS ex: 13-mars)"} onChange={(event) => handle_dict_of_advance_search(event,"death_month_day")}></input>
                   <br></br>
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
@@ -633,6 +700,32 @@ const HomePage = () => {
                     
                     
                   </select>
+                  
+                  <br></br>
+                  
+                  
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                    onChange={(event) => handle_dict_of_advance_search(event,"display_only_death_localisation")}
+>
+                    <option selected>Afficher seulement les lieux de mort?</option>
+                    
+                    {["oui","non"]
+                        .map((choice:any, i:number) => (
+                          
+                        
+                        <option
+                          key={i}
+                          className="list-group-item list-group-item-action body_flag"
+                          data-bs-dismiss="modal"
+                        >
+
+                          {choice}
+                        </option>
+                      ))}
+                    
+                    
+                  </select>
+                  
                   <br></br>
 
                   <input className="form-control w-75" 
@@ -731,7 +824,33 @@ const HomePage = () => {
 
               >                
                   <Popup>
-                      {user.genedr}
+                      {user.page_name}
+                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
+
+                      <br></br>
+                      <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
+                  </Popup>
+                  
+              </CircleMarker>
+              )
+              
+          )}
+          
+         
+          {Object.values(list_of_user_data).map((user:any) =>
+              
+              user.town_death_localisation?.[0] !== 999999999999999 &&
+              user.town_death_localisation?.[1] !== 999999999999999 && user.display_death_localisation == true && (
+
+              <CircleMarker 
+              center={((user.town_death_localisation))}
+              radius={10}
+              fillColor={gender_to_color2[user.gender+user.is_alive]}
+              color={gender_to_color2[user.gender+user.is_alive]}
+
+              >                
+                  <Popup>
+                      {user.page_name}
                       <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>

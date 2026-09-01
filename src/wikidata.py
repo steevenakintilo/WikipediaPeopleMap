@@ -1662,7 +1662,7 @@ class WikiPeopleData():
                             death_month = "Undefined"
                             death_day = "Undefined"   
 
-            if age >= 125:
+            if age >= 123:
                 birth_date = "Undefined"
                 birth_year = 123456789
                 birth_month = "Undefined"

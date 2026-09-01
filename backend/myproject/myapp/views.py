@@ -437,7 +437,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     except:
         pass
     try:
-        if recieved_data["country_of_birth"] != "" and recieved_data["country_of_birth"] != "Pays de naissance" and "Tous les pays" not in recieved_data["country_of_birth"]:
+        if recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
 
             searched_region = ""
             for region in LIST_OF_REGIONS_NAME:
@@ -464,9 +464,34 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     except KeyError:
         filters = {}    
 
+    display_death_localisation = False
+
+    if "country_death_place" in recieved_data:
+        if recieved_data["country_death_place"] != "" and "/" not in recieved_data["country_death_place"] and "Tous les pays" not in recieved_data["country_death_place"]:
+            searched_region = ""
+            recieved_data["alive_status"] = "Mort"
+            display_death_localisation = True
+            for region in LIST_OF_REGIONS_NAME:
+                if region in recieved_data["country_death_place"][0:-2]:
+                    searched_region = region
+                    break
+
+            print(searched_region)
+            if recieved_data["country_death_place"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
+                filters["continent_of_death"] = recieved_data["country_death_place"][0:-2].replace("-"," ").replace("Amérique","Amerique")
+                
+            elif searched_region in LIST_OF_REGIONS_NAME:
+                filters["region_of_death"] = searched_region
+                
+                
+            else:
+                filters["country_death_place"] = recieved_data["country_death_place"][0:-3].replace("-"," ").lower()
+            
+        
     if "alive_status" in recieved_data:
         if recieved_data["alive_status"] == "Mort":
             filters["is_alive"] = False
+            display_death_localisation = True
         if recieved_data["alive_status"] == "Vivant":
             filters["is_alive"] = True
     if "gender" in recieved_data:
@@ -481,6 +506,13 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             recieved_data["preciseness_level"] = 100
         filters["preciseness_level__gte"] = recieved_data["preciseness_level"]
 
+    if "age" in recieved_data:
+        if int(recieved_data["age"]) <= 0:
+            age = 0
+        else:
+            age = recieved_data["age"]
+        filters["age__gte"] = age
+    
     if "birth_year" in recieved_data:
         if "time_period_of_birth" in recieved_data:
             if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
@@ -506,6 +538,37 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             else:
                 filters["birth_year"] = int(recieved_data["birth_year"])
 
+
+    if "death_year" in recieved_data:
+        if "time_period_of_birth" in recieved_data:
+            if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
+                pass 
+            else:
+                try:
+                    if "+" in recieved_data["death_year"]:
+                        filters["death_year__lte"] = int(recieved_data["death_year"].replace("-",""))
+                        filters["age__gte"] = 0
+                        display_death_localisation = True
+
+                                                
+                    else:
+                        filters["death_year"] = int(recieved_data["death_year"])
+                        display_death_localisation = True
+                                                
+                except:
+                    pass
+        else:
+            if "+" in recieved_data["death_year"]:
+                filters["death_year__lte"] = int(recieved_data["death_year"].replace("-",""))
+                filters["age__gte"] = 0
+                display_death_localisation = True
+                                        
+                                                        
+            else:
+                filters["death_year"] = int(recieved_data["death_year"])
+                display_death_localisation = True
+                                        
+    
     if "job" in recieved_data:
         filters["job__icontains"] = unidecode(recieved_data["job"])
 
@@ -530,8 +593,11 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
 
     print(recieved_data)
     if "town_birth_place" in recieved_data:
-        print("opop")
         filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"])
+
+    if "town_death_place" in recieved_data:
+        filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"])
+        display_death_localisation = True
 
     number_of_people_to_display = NUMBER_OF_USERS_TO_SEARCH
     if "number_of_people_to_display" in recieved_data:
@@ -547,14 +613,32 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         if len(recieved_data["birth_month_day"]) != "0":
             filters["birth_month_day"] = recieved_data["birth_month_day"]
 
-
+    if "death_month_day" in recieved_data:
+        if len(recieved_data["death_month_day"]) != "0":
+            filters["death_month_day"] = recieved_data["death_month_day"]
+            display_only_death_localisation = True
+            display_death_localisation = True
+    
     display_people_with_no_localisation = False
     if "display_people_with_no_localisation" in recieved_data:
         if recieved_data["display_people_with_no_localisation"] == "oui":
-            display_people_with_no_localisation = True 
+            display_people_with_no_localisation = True
+
+    display_only_death_localisation = False
+
+    if "display_only_death_localisation" in recieved_data:
+        if recieved_data["display_only_death_localisation"] == "oui":
+            display_only_death_localisation = True
+    
+    if "country_death_place" in recieved_data:
+        if "Tous les pays" in recieved_data["country_death_place"]:
+            display_death_localisation = True
     if filters != {}:
         basic_search = False
 
+    if display_death_localisation:
+        filters["is_alive"] = False
+    
     print(recieved_data)
     print(filters)
     all_user_obj = WikipediaUser.objects.filter(**filters)
@@ -563,13 +647,17 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     nb = NUMBER_OF_USERS_TO_SEARCH * 2
     index_start = chunk_nb * nb
     index_end = (chunk_nb + 1) * nb
+
+    
     list_of_localisation = []
+    print(nb,display_death_localisation,display_only_death_localisation)
+    
     for user_obj in all_user_obj[index_start:index_end]:
         try:
             
             if (user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined") and display_people_with_no_localisation  is False:
                 continue
-
+            
             if len(list_of_all_user_data) >= number_of_people_to_display:
                 break
             if "time_period_of_birth" in recieved_data and user_obj.age == -999:
@@ -591,11 +679,21 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                 "is_alive":str(user_obj.is_alive),
                 "picture_url": user_obj.picture_url,
                 #"birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),
-                "birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),   
                 "birth_country_name":user_obj.country_birth_place,                      
                 #"town_death_localisation": dms_to_decimal(user_obj.town_death_localisation),
-                "country_birth_place_emoji":birth_place_emoji
+                "country_birth_place_emoji":birth_place_emoji,
+                "display_death_localisation":display_death_localisation
             }
+            # print(display_death_localisation)
+
+            if display_only_death_localisation is False:
+                user_info_dict["birth_town_localisation"] = dms_to_decimal(user_obj.birth_town_localisation)  
+            else:
+                user_info_dict["birth_town_localisation"] = dms_to_decimal("blablobla") 
+                         
+            if display_death_localisation or display_only_death_localisation:
+                user_info_dict["town_death_localisation"] = dms_to_decimal(user_obj.town_death_localisation)
+            #print(user_info_dict)
             list_of_all_user_data.append(user_info_dict)
         except:
             pass
