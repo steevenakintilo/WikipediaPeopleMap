@@ -1,0 +1,32 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-wrapper {
+  width: 100%;
+  height: 100vh;
+}
+
+.world-map {
+  width: 100%;
+  height: 100%;
+}
+
+.body_flag {
+  font-family: "Twemoji Country Flags", "Helvetica", "Comic Sans", serif;
+}
+
+.modal-content {
+    font-family: var(--bs-body-font-family);
+    font-weight: 400;
+    color: #212529;
+}
+
+.wikifont {
+  font-family: "Noto Sans", Arial, sans-serif;
+}

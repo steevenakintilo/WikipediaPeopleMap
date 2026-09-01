@@ -1,3 +1,4 @@
+from unidecode import unidecode
 from django.shortcuts import render
 
 # Create your views here.
@@ -57,10 +58,10 @@ def add_a_wikipedia_user_to_the_database(request):
                 last_name=line.get("last_name"),
                 last_name_standard=line.get("last_name_standard"),
 
-                job=line.get("job"),
+                job=unidecode(line.get("job")),
 
                 # Birth information
-                town_birth_place=line.get("town_birth_place"),
+                town_birth_place=unidecode(line.get("town_birth_place")),
                 town_birth_place_href=line.get("town_birth_place_href"),
                 birth_town_localisation=line.get("birth_town_localisation"),
                 country_birth_place=line.get("country_birth_place").lower(),
@@ -75,7 +76,7 @@ def add_a_wikipedia_user_to_the_database(request):
                 birth_month_day=str(line.get("birth_month_day")),
 
                 # Death information
-                town_death_place=line.get("town_death_place"),
+                town_death_place=unidecode(line.get("town_death_place")),
                 town_death_place_href=line.get("town_death_place_href"),
                 town_death_localisation=line.get("town_death_localisation"),
                 country_death_place=line.get("country_death_place").lower(),
@@ -187,95 +188,159 @@ def display_user_info(request,username):
     if request.method != "GET":
         return HttpResponse(f"Error! with this {username} info", status=404)
 
-    try:
-        user_obj = WikipediaUser.objects.filter(page_name=username).first()
-        page_name = user_obj.page_name
-    except:
-        return HttpResponse(f"{username} doesn't exist", status=404)
 
-    list_of_unpreciseness_data = []
-    if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
-        birth_place_emoji = "🏳️"
-    else:
-        birth_place_emoji = user_obj.country_birth_place_emoji
-
-    if user_obj.town_death_localisation == "" or user_obj.town_death_localisation.lower() == "undefined":
-        death_place_emoji = "🏳️"
-    else:
-        death_place_emoji = user_obj.country_death_place_emoji
-
-    for page_error in user_obj.list_of_unpreciseness_data:
+    if username != "Personne":
         try:
-            list_of_unpreciseness_data.append(UNPRECISENESS_DATA_FR[page_error]+",")
+            user_obj = WikipediaUser.objects.filter(page_name=username).first()
+            page_name = user_obj.page_name
         except:
-            list_of_unpreciseness_data.append(page_error+",")
+            return HttpResponse(f"{username} doesn't exist", status=404)
 
+        list_of_unpreciseness_data = []
+        if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
+            birth_place_emoji = "🏳️"
+        else:
+            birth_place_emoji = user_obj.country_birth_place_emoji
 
-    print(user_obj.age)
-    user_info_dict = {
-        "page_name": page_name,
-        "page_url": user_obj.page_url,
-        "picture_url": user_obj.picture_url,
-        "first_name": user_obj.first_name,
-        "first_name_standard": user_obj.first_name_standard,
-        "last_name": user_obj.last_name,
-        "last_name_standard": user_obj.last_name_standard,
-        "job": user_obj.job,
-        "town_birth_place": user_obj.town_birth_place,
-        "town_birth_place_href": user_obj.town_birth_place_href,
-        "birth_town_localisation": user_obj.birth_town_localisation,
-        "country_birth_place": user_obj.country_birth_place,
-        "time_period_of_birth": HISTORICAL_PERIODS_DICT_TO_FRENCH[user_obj.time_period_of_birth],
-        "continent_of_birth": user_obj.continent_of_birth,
-        "region_of_birth": user_obj.region_of_birth,
-        "birth_date": user_obj.birth_date,
-        "birth_year": user_obj.birth_year,
-        "birth_month": user_obj.birth_month,
-        "birth_day": user_obj.birth_day,
-        "birth_month_day": user_obj.birth_month_day,
-        "town_death_place": user_obj.town_death_place,
-        "town_death_place_href": user_obj.town_death_place_href,
-        "town_death_localisation": user_obj.town_death_localisation,
-        "country_death_place": user_obj.country_death_place,
-        "continent_of_death": user_obj.continent_of_death,
-        "region_of_death": user_obj.region_of_death,
-        "born_and_died_in_the_same_town": user_obj.born_and_died_in_the_same_town,
-        "born_and_died_in_the_same_country": user_obj.born_and_died_in_the_same_country,
-        "born_and_died_in_the_same_continent": user_obj.born_and_died_in_the_same_continent,
-        "born_and_died_in_the_same_region": user_obj.born_and_died_in_the_same_region,
-        "death_date": user_obj.death_date,
-        "death_year": user_obj.death_year,
-        "death_month": user_obj.death_month,
-        "death_day": user_obj.death_day,
-        "death_month_day": user_obj.death_month_day,
-        "born_before_christ": user_obj.born_before_christ,
-        "died_before_christ": user_obj.died_before_christ,
-        "born_and_died_before_christ": user_obj.born_and_died_before_christ,
-        "born_and_died_after_christ": user_obj.born_and_died_after_christ,
-        "born_before_christ_and_died_after_christ": user_obj.born_before_christ_and_died_after_christ,
-        "age": user_obj.age,
-        "is_alive": user_obj.is_alive,
-        "gender": user_obj.gender,
-        "power_ranking": user_obj.power_ranking,
-        "position": user_obj.position,
-        "position_percentage": user_obj.position_percentage,
-        "grade_over_20": user_obj.grade_over_20,
-        "first_char_of_the_page": user_obj.first_char_of_the_page,
-        "wikipedia_page_length": user_obj.wikipedia_page_lenght,
-        "all_links_of_a_page": user_obj.all_links_of_a_page,
-        "number_of_links": user_obj.number_of_links,
-        "preciseness_level": user_obj.preciseness_level,
-        "list_of_unpreciseness_data": list_of_unpreciseness_data,
-        "number_of_unpreciseness_date":len(list_of_unpreciseness_data),
-        "country_birth_place_emoji": birth_place_emoji,
-        "country_death_place_emoji": death_place_emoji,
-    }
-    for key , value in user_info_dict.items():
-        if value == "Undefined":
-            user_info_dict[key] = "Indéfini"
-    return JsonResponse(user_info_dict,status=200)
+        if user_obj.town_death_localisation == "" or user_obj.town_death_localisation.lower() == "undefined":
+            death_place_emoji = "🏳️"
+        else:
+            death_place_emoji = user_obj.country_death_place_emoji
 
+        for page_error in user_obj.list_of_unpreciseness_data:
+            try:
+                list_of_unpreciseness_data.append(UNPRECISENESS_DATA_FR[page_error]+",")
+            except:
+                list_of_unpreciseness_data.append(page_error+",")
 
+        user_info_dict = {
+            "page_name": page_name,
+            "page_url": user_obj.page_url,
+            "picture_url": user_obj.picture_url,
+            "first_name": user_obj.first_name,
+            "first_name_standard": user_obj.first_name_standard,
+            "last_name": user_obj.last_name,
+            "last_name_standard": user_obj.last_name_standard,
+            "job": user_obj.job,
+            "town_birth_place": user_obj.town_birth_place,
+            "town_birth_place_href": user_obj.town_birth_place_href,
+            "birth_town_localisation": user_obj.birth_town_localisation,
+            "country_birth_place": user_obj.country_birth_place,
+            "time_period_of_birth": HISTORICAL_PERIODS_DICT_TO_FRENCH[user_obj.time_period_of_birth],
+            "continent_of_birth": user_obj.continent_of_birth,
+            "region_of_birth": user_obj.region_of_birth,
+            "birth_date": user_obj.birth_date,
+            "birth_year": user_obj.birth_year,
+            "birth_month": user_obj.birth_month,
+            "birth_day": user_obj.birth_day,
+            "birth_month_day": user_obj.birth_month_day,
+            "town_death_place": user_obj.town_death_place,
+            "town_death_place_href": user_obj.town_death_place_href,
+            "town_death_localisation": user_obj.town_death_localisation,
+            "country_death_place": user_obj.country_death_place,
+            "continent_of_death": user_obj.continent_of_death,
+            "region_of_death": user_obj.region_of_death,
+            "born_and_died_in_the_same_town": user_obj.born_and_died_in_the_same_town,
+            "born_and_died_in_the_same_country": user_obj.born_and_died_in_the_same_country,
+            "born_and_died_in_the_same_continent": user_obj.born_and_died_in_the_same_continent,
+            "born_and_died_in_the_same_region": user_obj.born_and_died_in_the_same_region,
+            "death_date": user_obj.death_date,
+            "death_year": user_obj.death_year,
+            "death_month": user_obj.death_month,
+            "death_day": user_obj.death_day,
+            "death_month_day": user_obj.death_month_day,
+            "born_before_christ": user_obj.born_before_christ,
+            "died_before_christ": user_obj.died_before_christ,
+            "born_and_died_before_christ": user_obj.born_and_died_before_christ,
+            "born_and_died_after_christ": user_obj.born_and_died_after_christ,
+            "born_before_christ_and_died_after_christ": user_obj.born_before_christ_and_died_after_christ,
+            "age": user_obj.age,
+            "is_alive": user_obj.is_alive,
+            "gender": user_obj.gender,
+            "power_ranking": user_obj.power_ranking,
+            "position": user_obj.position,
+            "position_percentage": user_obj.position_percentage,
+            "grade_over_20": user_obj.grade_over_20,
+            "first_char_of_the_page": user_obj.first_char_of_the_page,
+            "wikipedia_page_length": user_obj.wikipedia_page_lenght,
+            "all_links_of_a_page": user_obj.all_links_of_a_page,
+            "number_of_links": user_obj.number_of_links,
+            "preciseness_level": user_obj.preciseness_level,
+            "list_of_unpreciseness_data": list_of_unpreciseness_data,
+            "number_of_unpreciseness_date":len(list_of_unpreciseness_data),
+            "country_birth_place_emoji": birth_place_emoji,
+            "country_death_place_emoji": death_place_emoji,
+        }
+        for key , value in user_info_dict.items():
+            if value == "Undefined":
+                user_info_dict[key] = "Indéfini"
+        return JsonResponse(user_info_dict,status=200)
+    
+        
+
+    if username == "Personne":
+        
+        user_info_dict = {
+            "page_name": "personne",
+            "page_url": "https://fr.wikipedia.org/wiki/Personne",
+            "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/960px-Question_mark_%28black%29.svg.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "first_name": "personne",
+            "first_name_standard": "personne",
+            "last_name": "personne",
+            "last_name_standard": "personne",
+            "job": "personne",
+            "town_birth_place": "personne",
+            "town_birth_place_href": "personne",
+            "birth_town_localisation": dms_to_decimal("blabla"),
+            "country_birth_place": "personne",
+            "time_period_of_birth": "personne",
+            "continent_of_birth": "personne",
+            "region_of_birth": "personne",
+            "birth_date": "personne",
+            "birth_year": "personne",
+            "birth_month": "personne",
+            "birth_day": "personne",
+            "birth_month_day": "personne",
+            "town_death_place": "personne",
+            "town_death_place_href": "personne",
+            "town_death_localisation": "personne",
+            "country_death_place": "personne",
+            "continent_of_death": "personne",
+            "region_of_death": "personne",
+            "born_and_died_in_the_same_town": "personne",
+            "born_and_died_in_the_same_country": "personne",
+            "born_and_died_in_the_same_continent": "personne",
+            "born_and_died_in_the_same_region": "personne",
+            "death_date": "personne",
+            "death_year": "personne",
+            "death_month": "personne",
+            "death_day": "personne",
+            "death_month_day": "personne",
+            "born_before_christ": "personne",
+            "died_before_christ": "personne",
+            "born_and_died_before_christ": "personne",
+            "born_and_died_after_christ": "personne",
+            "born_before_christ_and_died_after_christ": "personne",
+            "age": "personne",
+            "is_alive": True,
+            "gender": "personne",
+            "power_ranking": "personne",
+            "position": "personne",
+            "position_percentage": "personne",
+            "grade_over_20": "personne",
+            "first_char_of_the_page": "personne",
+            "wikipedia_page_length": "personne",
+            "all_links_of_a_page": "personne",
+            "number_of_links": "personne",
+            "preciseness_level": "personne",
+            "list_of_unpreciseness_data": "personne",
+            "number_of_unpreciseness_date": "personne",
+            "country_birth_place_emoji": "🏴‍☠️",
+            "country_death_place_emoji": "🏴‍☠️",
+        }
+        return JsonResponse(user_info_dict,status=200)
+ 
+    
 
 def display_chunck_of_user_info(request,chunk_nb=0):
     """Display chunck (10000 users) of user info"""
@@ -442,7 +507,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                 filters["birth_year"] = int(recieved_data["birth_year"])
 
     if "job" in recieved_data:
-        filters["job__icontains"] = recieved_data["job"]
+        filters["job__icontains"] = unidecode(recieved_data["job"])
 
     if "time_period_of_birth" in recieved_data:
         if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
@@ -466,7 +531,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     print(recieved_data)
     if "town_birth_place" in recieved_data:
         print("opop")
-        filters["town_birth_place__icontains"] = recieved_data["town_birth_place"]
+        filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"])
 
     number_of_people_to_display = NUMBER_OF_USERS_TO_SEARCH
     if "number_of_people_to_display" in recieved_data:
@@ -481,7 +546,12 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     if "birth_month_day" in recieved_data:
         if len(recieved_data["birth_month_day"]) != "0":
             filters["birth_month_day"] = recieved_data["birth_month_day"]
-                
+
+
+    display_people_with_no_localisation = False
+    if "display_people_with_no_localisation" in recieved_data:
+        if recieved_data["display_people_with_no_localisation"] == "oui":
+            display_people_with_no_localisation = True 
     if filters != {}:
         basic_search = False
 
@@ -497,8 +567,9 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     for user_obj in all_user_obj[index_start:index_end]:
         try:
             
-            if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined" and basic_search is False:
+            if (user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined") and display_people_with_no_localisation  is False:
                 continue
+
             if len(list_of_all_user_data) >= number_of_people_to_display:
                 break
             if "time_period_of_birth" in recieved_data and user_obj.age == -999:

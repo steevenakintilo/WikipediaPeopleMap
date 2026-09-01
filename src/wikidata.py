@@ -2416,22 +2416,29 @@ class WikiPeopleData():
             except:
                 pass
 
+
+
             try:
                 if len(town_birth_place) != 0:
-                    if "(" in town_birth_place and ")" in town_birth_place:
+                    if "(" in town_birth_place and ")" in town_birth_place and country_birth_place.lower() != "états unis":
                         for country in self.list_of_country:
                             if f"({country.lower()})" in town_birth_place.lower():
                                 country_birth_place = country
+                                country_birth_place_emoji = country_to_flag_dict[country_birth_place.lower().replace("-"," ").strip()]
+                                
 
             except:
                 pass
 
             try:
-                if len(town_death_place) != 0 and is_alive is False:
+                if len(town_death_place) != 0 and is_alive is False and country_death_place.lower() != "états unis":
                     if "(" in town_death_place and ")" in town_death_place:
                         for country in self.list_of_country:
                             if f"({country.lower()})" in town_death_place.lower():
+
                                 country_death_place = country
+                                country_death_place_emoji = country_to_flag_dict[country_death_place.lower().replace("-"," ").strip()]
+                                
 
             except:
                 pass

@@ -65,7 +65,8 @@ const HomePage = () => {
       });
     const navigate = useNavigate();
     async function get_list_of_user(chunk:number) {
-      let blob = {"test":"tljikoest"}
+      //setchunck(0)
+
       const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info/${chunk}`, {
           method: 'GET',
           //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
@@ -80,8 +81,13 @@ const HomePage = () => {
     }
 
 
-    async function get_list_of_user_advanced_search(chunk:number) {
+    async function get_list_of_user_advanced_search(chunk:number,reset_chunck:boolean=false) {
       change_latitude_and_longitude(5,20)
+      dict_of_advance_search["page_nb"] = current_chunck_index
+      if (reset_chunck == true) {
+        setchunck(0)
+      }
+      //setchunck(0)
       const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search/${chunk}/`, {
           method: 'POST',
           //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
@@ -117,8 +123,33 @@ const HomePage = () => {
       setlaunch_profile_root(true)
     }
 
-    function handle_chunck() {
-      setchunck(current_chunck_index + 1)
+    function handle_chunck(event:any,value:number) {
+      if (value == 1) {
+        setchunck(current_chunck_index + 1)
+
+      } else if (current_chunck_index > 0) {
+        setchunck(current_chunck_index - 1)
+      }
+      
+      var index : number = current_chunck_index
+      if (value == 1) {
+        index = current_chunck_index + 1
+      } else if (current_chunck_index > 0) {
+        index = current_chunck_index - 1
+      
+      }
+      if (Object.keys(dict_of_advance_search).length === 0) {
+        console.log("papa est vide " , current_chunck_index , value , index)
+        get_list_of_user(index).then((result) => {
+            set_list_of_user_data(result.all_user_data)
+        })
+        
+      } else {
+        console.log("papa est remplie " , current_chunck_index, value , index)
+        
+        get_list_of_user_advanced_search(index).then((result) => {set_list_of_user_data(result.all_user_data)})        
+      }
+      console.log("kogrgpkpoer  " , dict_of_advance_search)
     }
   
   const MapController = ({
@@ -171,7 +202,7 @@ const HomePage = () => {
   };
   function display_user_profile() {
     var user_info_data: any = []
-    {Object.values(list_of_user_data).map((user,index) =>
+    {Object.values(list_of_user_data).map((user:any,index) =>
       user.page_name.toLowerCase().includes(searched_name.toLowerCase()) != "" && (
       user_info_data.push(
           <li className="list-group-item">
@@ -288,7 +319,7 @@ const HomePage = () => {
                 {user_data_info.is_alive ? "Vivant" : "Décédé"}
               </p>
 
-              {user_data_info.age && (
+              {user_data_info.age && user_data_info.age > 0 &&(
                 <p className="wikifont">
                   <strong>Âge :</strong>{" "}
                   {user_data_info.age} ans
@@ -405,7 +436,7 @@ const HomePage = () => {
               
               <p className="wikifont">
                 <strong>Position en % :</strong>{" "}
-                {user_data_info.position_percentage}% des meilleur pages
+                top {user_data_info.position_percentage}% des meilleur pages
               </p>
               
               <hr />
@@ -581,6 +612,29 @@ const HomePage = () => {
                   <br></br>
                   
                   
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                    onChange={(event) => handle_dict_of_advance_search(event,"display_people_with_no_localisation")}
+>
+                    <option selected>Afficher les gens qui n'ont pas de localisation?</option>
+                    
+                    {["oui","non"]
+                        .map((choice:any, i:number) => (
+                          
+                        
+                        <option
+                          key={i}
+                          className="list-group-item list-group-item-action body_flag"
+                          data-bs-dismiss="modal"
+                        >
+
+                          {choice}
+                        </option>
+                      ))}
+                    
+                    
+                  </select>
+                  <br></br>
+
                   <input className="form-control w-75" 
                     placeholder={"Niveau de précision de la page (0-100%)"} 
                     type="number"
@@ -606,7 +660,7 @@ const HomePage = () => {
                 
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => window.location.reload()}>Reset</button>
-                <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search(0).then((result) => {set_list_of_user_data(result.all_user_data)})}>Rechercher 🔎</button>
+                <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search(current_chunck_index,true).then((result) => {set_list_of_user_data(result.all_user_data)})}>Rechercher 🔎</button>
               </div>
             </div>
           </div>
@@ -631,7 +685,7 @@ const HomePage = () => {
    */}
 
 
-      <div className="map-wrapper p-20 col-10 border-end border-end border-2 border-secondary"
+      <div className="map-wrapper border-end border-end border-2 border-secondary"
         style={{
           position: "sticky",
           top: 0,
@@ -677,7 +731,7 @@ const HomePage = () => {
 
               >                
                   <Popup>
-                      {user.page_name}
+                      {user.genedr}
                       <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>
@@ -691,7 +745,7 @@ const HomePage = () => {
         </MapContainer>
         
       </div>
-      <div className="" style={{flexShrink: 0 }}>
+      <div className="" style={{flexShrink:0 }}>
           <div className="card">
             <ul className="list-group list-group-flush">
               <div>
@@ -700,7 +754,14 @@ const HomePage = () => {
                   <input className="form-control w-75" type="text" placeholder={"Nom de la page"} onChange={(event) => handle_searched_name(event)}></input>
                   <br></br>
                   <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{margin :"auto"}}>Recherches avancées 🔎</button>
-
+                  <br></br>
+                  <br></br>
+                  
+                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,-1)}>Page Précédente</button>
+                  <button type="button" className="btn btn-secondary ms-4" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,+1)}>Page Suivante</button>
+                  <br></br>
+                  <br></br>
+                  <button type="button" className="btn btn-light">Page {current_chunck_index + 1}</button>
                   
                 </li>
 
