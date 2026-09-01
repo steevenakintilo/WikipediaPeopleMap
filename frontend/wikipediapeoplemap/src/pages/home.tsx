@@ -138,17 +138,27 @@ const HomePage = () => {
         index = current_chunck_index - 1
       
       }
-      if (Object.keys(dict_of_advance_search).length === 0) {
-        console.log("papa est vide " , current_chunck_index , value , index)
-        get_list_of_user(index).then((result) => {
+
+      if (value != 0 ) {
+          if (Object.keys(dict_of_advance_search).length === 0) {
+            console.log("papa est vide " , current_chunck_index , value , index)
+            get_list_of_user(index).then((result) => {
+                set_list_of_user_data(result.all_user_data)
+            })
+            
+          } else {
+            console.log("papa est remplie " , current_chunck_index, value , index)
+            
+            get_list_of_user_advanced_search(index).then((result) => {set_list_of_user_data(result.all_user_data)})        
+          }
+          
+      } else  {
+        get_list_of_user(999999999).then((result) => {
             set_list_of_user_data(result.all_user_data)
         })
         
-      } else {
-        console.log("papa est remplie " , current_chunck_index, value , index)
-        
-        get_list_of_user_advanced_search(index).then((result) => {set_list_of_user_data(result.all_user_data)})        
       }
+      
       console.log("kogrgpkpoer  " , dict_of_advance_search)
     }
   
@@ -873,6 +883,11 @@ const HomePage = () => {
                   <input className="form-control w-75" type="text" placeholder={"Nom de la page"} onChange={(event) => handle_searched_name(event)}></input>
                   <br></br>
                   <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{margin :"auto"}}>Recherches avancées 🔎</button>
+                  <br></br>
+                  <br></br>
+                  
+                  <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,0)}>Page Aléatoire</button>
+                  
                   <br></br>
                   <br></br>
                   

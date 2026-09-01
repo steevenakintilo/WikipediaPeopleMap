@@ -10,6 +10,7 @@ from django.db.models import Q
 from myapp.models import WikipediaUser
 
 from random import randint
+from random import sample
 
 from .global_variable import *
 from .utility_function  import *
@@ -347,13 +348,19 @@ def display_chunck_of_user_info(request,chunk_nb=0):
     if request.method != "GET":
         return HttpResponse(f"Error!", status=404)
 
-
     all_user_obj = WikipediaUser.objects.all()
+
+    random_number_list = []
+    if chunk_nb == 999999999:
+        random_number = randint(0,NUMBER_OF_USER-501)
+        all_user_obj = WikipediaUser.objects.filter(position__gte=random_number-500,position__lte=random_number)
+        chunk_nb = 0
     list_of_all_user_data =  []
     nb = NUMBER_OF_USERS_TO_SEARCH
     index_start = chunk_nb * nb
     index_end = (chunk_nb + 1) * nb
     list_of_localisation = []
+    print(random_number_list)
     for user_obj in all_user_obj[index_start:index_end]:
         try:
             # if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
