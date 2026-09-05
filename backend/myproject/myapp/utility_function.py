@@ -33,6 +33,9 @@ def split_list(lst:list[str], chunk_size:int):
 
 def dms_to_decimal(dms,name=""):
     try:
+        if name == "blablobla":
+            return 999999999999999 ,999999999999999
+                       
         parts = dms.split(",")
         def convert(coordinate):
             coordinate = coordinate.strip()
@@ -82,9 +85,6 @@ def dms_to_decimal(dms,name=""):
         longitude = convert(parts[1]) + randint(1000000000000000000,90000000000000000000) / 10000000000000000000000
         return latitude, longitude
     except:
-        if name == "Antoinette Nana Djimou":
-            import traceback
-            traceback.print_exc()
         return 999999999999999 ,999999999999999
         return -32.8471,-47.3926
                 

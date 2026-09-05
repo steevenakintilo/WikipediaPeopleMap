@@ -122,8 +122,10 @@ const HomePage = () => {
       setcomplete_profile_user(user)
       setlaunch_profile_root(true)
     }
+    
 
     function handle_chunck(event:any,value:number) {
+      
       if (value == 1) {
         setchunck(current_chunck_index + 1)
 
@@ -155,6 +157,7 @@ const HomePage = () => {
       } else  {
         get_list_of_user(999999999).then((result) => {
             set_list_of_user_data(result.all_user_data)
+            setchunck(999999)
         })
         
       }
@@ -216,13 +219,27 @@ const HomePage = () => {
     default: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1788295917/pin_death_khphfd.png",
   };
   
+  // // {user.page_name} {index + 1}/{Object.keys(list_of_user_data).length}
+
   function display_user_profile() {
     var user_info_data: any = []
+    var start_index = current_chunck_index * Object.keys(list_of_user_data).length
+    if (Object.keys(list_of_user_data).length != 500) {
+      start_index = (((current_chunck_index)) * 500 + Object.keys(list_of_user_data).length) - Object.keys(list_of_user_data).length
+    }
+
+    if (current_chunck_index == 999999) {
+      start_index = 0
+    }
     {Object.values(list_of_user_data).map((user:any,index) =>
       user.page_name.toLowerCase().includes(searched_name.toLowerCase()) != "" && (
       user_info_data.push(
           <li className="list-group-item">
-            {user.page_name} {index + 1}/{Object.keys(list_of_user_data).length}
+            
+            
+        
+            {user.page_name} {(start_index) + index + 1}/{list_of_user_data[Object.keys(list_of_user_data).length - 1].number_of_element}
+            
             <br></br>
             <h1 className="body_flag">
               <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} alt="" width="50" height="50" className="me-2"/>
@@ -269,6 +286,15 @@ const HomePage = () => {
       "Man":"Homme",
       "Woman":"Femme",
       "Unclear":"Ne sais pas"
+    }
+    
+    var number_of_user_to_show : number = 5
+    
+    if (user_data_info.all_links_of_a_page != undefined) {
+        if (user_data_info.all_links_of_a_page.length < 5) {
+        number_of_user_to_show = user_data_info.all_links_of_a_page.length
+      }
+      
     }
     console.log("user_data_info " , user_data_info)
     return (
@@ -349,8 +375,8 @@ const HomePage = () => {
                   {user_data_info.age} ans
                 </p>
               )}
-
-              {user_data_info.age && user_data_info.age >= 100 && user_data_info.is_alive == true &&(
+              
+              {user_data_info.age && user_data_info.age >= 110 && user_data_info.is_alive == true &&(
                 <p className="wikifont">
                   <strong>Attention :</strong>{" "}
                   L'utilisateur est probalement mort le site est mauvais pour les âges vraiment élevés ⚠️ 
@@ -441,6 +467,25 @@ const HomePage = () => {
               <p className="wikifont">
                 <strong>Nombre de liens :</strong>{" "}
                 {user_data_info.number_of_links}
+                <br></br>
+                <br></br>
+                
+
+                {number_of_user_to_show > 0 && (
+                  <p>
+                    <strong>Le top {number_of_user_to_show}:</strong>{" "}
+                    <br></br>
+                  </p>
+                  
+                )}
+                
+                
+                {user_data_info.all_links_of_a_page != undefined && (
+                  user_data_info.all_links_of_a_page.map((link: any, i: number) => (
+                    <div key={i}>- {link}</div>
+                  ))
+                )}
+                
               </p>
               
               <hr />
@@ -478,7 +523,7 @@ const HomePage = () => {
 
               <p className="wikifont">
                 <strong>Niveau de précision :</strong>{" "}
-                {user_data_info.preciseness_level}
+                {user_data_info.preciseness_level}/100
               </p>
 
               <p className="wikifont">
@@ -510,7 +555,8 @@ const HomePage = () => {
     "Moyen Âge 476-1491",
     "Renaissance 1492-1788",
     "Époque contemporaine 1789-1999",
-    "Époque actuelle 2000-?????"
+    "Époque actuelle 2000-?????",
+    "Toutes"
     ]
 
     return(
@@ -530,7 +576,7 @@ const HomePage = () => {
                     placeholder="Pays de naissance"
                 />
                  */}
-                  <input className="form-control w-75" type="text" placeholder={"Métier"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
+                  <input className="form-control w-100" type="text" placeholder={"Métier ex:acteur ou chanteuse-peintre-médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                   <br></br>
                   <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                   <br></br>
@@ -634,7 +680,7 @@ const HomePage = () => {
                   </input>
                   <br></br>
                   <input className="form-control w-100" 
-                    placeholder={"Année de mort (+ pour inclure les années précédentes)"} 
+                    placeholder={"Année de mort (- pour inclure les années précédentes)"} 
                     type="text"
                     onChange={(event) => handle_dict_of_advance_search(event,"death_year")}>
                   </input>
@@ -737,6 +783,54 @@ const HomePage = () => {
                   </select>
                   
                   <br></br>
+                  
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                    onChange={(event) => handle_dict_of_advance_search(event,"display_only_people_born_and_dead_the_same_day")}
+  >
+                    <option selected>Afficher seulement les gens nés et morts le même jour ?</option>
+                    
+                    {["oui","non"]
+                        .map((choice:any, i:number) => (
+                          
+                        
+                        <option
+                          key={i}
+                          className="list-group-item list-group-item-action body_flag"
+                          data-bs-dismiss="modal"
+                        >
+
+                          {choice}
+                        </option>
+                      ))}
+                    
+                    
+                  </select>
+
+                  <br></br>
+                  
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                    onChange={(event) => handle_dict_of_advance_search(event,"display_only_people_born_and_dead_in_the_same_town")}
+  >
+                    <option selected>Afficher seulement les gens nés/morts dans la même ville</option>
+                    
+                    {["oui","non"]
+                        .map((choice:any, i:number) => (
+                          
+                        
+                        <option
+                          key={i}
+                          className="list-group-item list-group-item-action body_flag"
+                          data-bs-dismiss="modal"
+                        >
+
+                          {choice}
+                        </option>
+                      ))}
+                    
+                    
+                  </select>
+
+                  <br></br>
 
                   <input className="form-control w-75" 
                     placeholder={"Niveau de précision de la page (0-100%)"} 
@@ -746,6 +840,7 @@ const HomePage = () => {
                     step={1}
                     onChange={(event) => handle_dict_of_advance_search(event,"preciseness_level")}>
                   </input>
+
                   <br></br>
                   <input className="form-control w-75" 
                     placeholder={"Nombre de personnes affichées (1-500)"} 
@@ -755,7 +850,7 @@ const HomePage = () => {
                     step={1}
                     onChange={(event) => handle_dict_of_advance_search(event,"number_of_people_to_display")}>
                   </input>
-                  
+                                    
 
               </div>
               
