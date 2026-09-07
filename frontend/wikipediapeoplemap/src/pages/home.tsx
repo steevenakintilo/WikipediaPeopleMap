@@ -25,6 +25,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./home.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Legend from "./map_legend.tsx"
 
 polyfillCountryFlagEmojis();
 
@@ -83,6 +84,8 @@ const HomePage = () => {
 
     async function get_list_of_user_advanced_search(chunk:number,reset_chunck:boolean=false) {
       change_latitude_and_longitude(5,20)
+
+      
       dict_of_advance_search["page_nb"] = current_chunck_index
       if (reset_chunck == true) {
         setchunck(0)
@@ -176,6 +179,7 @@ const HomePage = () => {
   }) => {
     const map = useMap();
 
+    
     useEffect(() => {
       map.setView([latitude, longitude], zoom);
     }, [latitude, longitude, zoom, map]);
@@ -226,8 +230,13 @@ const HomePage = () => {
     var start_index = current_chunck_index * Object.keys(list_of_user_data).length
     if (Object.keys(list_of_user_data).length != 500) {
       start_index = (((current_chunck_index)) * 500 + Object.keys(list_of_user_data).length) - Object.keys(list_of_user_data).length
+      if ("number_of_people_to_display" in dict_of_advance_search) {
+        start_index = (((current_chunck_index)) * dict_of_advance_search["number_of_people_to_display"] + Object.keys(list_of_user_data).length) - Object.keys(list_of_user_data).length
+        
+      }
     }
 
+    console.log(dict_of_advance_search)
     if (current_chunck_index == 999999) {
       start_index = 0
     }
@@ -366,7 +375,7 @@ const HomePage = () => {
 
               <p className="wikifont">
                 <strong>Statut :</strong>{" "}
-                {user_data_info.is_alive ? "Vivant" : "Décédé"}
+                {user_data_info.is_alive ? "Vivant(e)" : "Décédé(e)"}
               </p>
 
               {user_data_info.age && user_data_info.age > 0 &&(
@@ -486,6 +495,11 @@ const HomePage = () => {
                   ))
                 )}
                 
+                <br></br>
+                <strong>Nombre de personnes qui le mentionnent sur leur page Wikipédia :</strong>{" "}
+                {user_data_info.number_of_user_who_have_linked_this_user}
+                <br></br>
+                
               </p>
               
               <hr />
@@ -576,7 +590,7 @@ const HomePage = () => {
                     placeholder="Pays de naissance"
                 />
                  */}
-                  <input className="form-control w-100" type="text" placeholder={"Métier ex:acteur ou chanteuse-peintre-médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
+                  <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse-peintre-médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                   <br></br>
                   <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                   <br></br>
@@ -738,7 +752,7 @@ const HomePage = () => {
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_people_with_no_localisation")}
 >
-                    <option selected>Afficher les gens qui n'ont pas de localisation?</option>
+                    <option selected>Afficher les gens qui n'ont pas de localisation de naissance?</option>
                     
                     {["oui","non"]
                         .map((choice:any, i:number) => (
@@ -759,6 +773,53 @@ const HomePage = () => {
                   
                   <br></br>
                   
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                    onChange={(event) => handle_dict_of_advance_search(event,"sort_user_by")}
+>
+                    <option selected>Trier les utilisateurs par?</option>
+                    
+                    {["Nombre de lien","Taille de la page wipedia","Nombre de personnes qui les lient","Âge","Par défaut"]
+                        .map((choice:any, i:number) => (
+                          
+                        
+                        <option
+                          key={i}
+                          className="list-group-item list-group-item-action body_flag"
+                          data-bs-dismiss="modal"
+                        >
+
+                          {choice}
+                        </option>
+                      ))}
+                    
+                    
+                  </select>
+                  
+                  <br></br>
+                  
+                  <select className="form-select body_flag" aria-label="Default select example"                       
+                  onChange={(event) => handle_dict_of_advance_search(event,"born_before_christ")}
+>
+                  <option selected>Né avant Jésus-Christ?</option>
+                  
+                  {["oui","non","Les 2"]
+                      .map((choice:any, i:number) => (
+                        
+                      
+                      <option
+                        key={i}
+                        className="list-group-item list-group-item-action body_flag"
+                        data-bs-dismiss="modal"
+                      >
+
+                        {choice}
+                      </option>
+                    ))}
+                  
+                  
+                </select>
+                
+                  <br></br>
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_only_death_localisation")}
@@ -831,7 +892,10 @@ const HomePage = () => {
                   </select>
 
                   <br></br>
-
+                  
+                  <input className="form-control w-75" type="number" min="1" max="670204" placeholder={"Position maximale de la personne à afficher"} onChange={(event) => handle_dict_of_advance_search(event,"latest_position_of_user_to_display")}></input>
+                  <br></br>
+                  
                   <input className="form-control w-75" 
                     placeholder={"Niveau de précision de la page (0-100%)"} 
                     type="number"
@@ -924,9 +988,11 @@ const HomePage = () => {
               <CircleMarker 
               center={((user.birth_town_localisation))}
               radius={10}
-              fillColor={gender_to_color[user.gender+user.is_alive]}
-              color={gender_to_color[user.gender+user.is_alive]}
-
+              pathOptions={{
+                fillColor: gender_to_color[`${user.gender}${user.is_alive}`],
+                color: gender_to_color[`${user.gender}${user.is_alive}`],
+                fillOpacity: 0.3
+              }}
               >                
                   <Popup>
                       {user.page_name}
@@ -950,9 +1016,11 @@ const HomePage = () => {
               <CircleMarker 
               center={((user.town_death_localisation))}
               radius={10}
-              fillColor={gender_to_color2[user.gender+user.is_alive]}
-              color={gender_to_color2[user.gender+user.is_alive]}
-
+              pathOptions={{
+                fillColor: gender_to_color2[`${user.gender}${user.is_alive}`],
+                color: gender_to_color2[`${user.gender}${user.is_alive}`],
+                fillOpacity: 0.3
+              }}
               >                
                   <Popup>
                       {user.page_name}
@@ -966,6 +1034,8 @@ const HomePage = () => {
               )
               
           )}
+          <Legend />
+          
         </MapContainer>
         
       </div>

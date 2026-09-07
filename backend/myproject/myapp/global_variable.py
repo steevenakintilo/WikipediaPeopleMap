@@ -3,6 +3,8 @@ import os
 USER_DICT_FILE_PATH = rf"{os.getcwd().split(r"\backend\myproject")[0]}\src\user_info_dict_sorted_by_power.txt"
 NUMBER_OF_USER = 670204
 
+MAXIMUM_AGE_TO_DISPLAY = 131
+
 HISTORICAL_PERIODS = [
     "Prehistory",
     "Antiquity",
@@ -70,6 +72,8 @@ UNPRECISENESS_DATA_FR = {
     "birth_date is after death_date": "La date de naissance est postérieure à la date de décès",
     "birth_date year is the same as death_date year so one of the date is wrong": "L'année de naissance est identique à l'année de décès : l'une des deux dates est probablement incorrecte",
     "User is born before christ": "La personne est née avant Jésus-Christ",
+    "age is unknown and birth_date/death_date may be unknown too": "L'âge est inconnu, et les dates de naissance et de décès peuvent également être inconnues"
+
 }
 
 LIST_OF_REGIONS_NAME = [

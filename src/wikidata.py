@@ -49,6 +49,8 @@ class WikiPeopleData():
             self.power_ranking_json = json.load(file)
         with open("data_files/list_of_link_of_all_users_sorted.json", "r", encoding="utf-8") as file:
             self.list_of_link_of_user = json.load(file)
+        with open("data_files/list_of_most_linked_user.json", "r", encoding="utf-8") as file:
+            self.number_of_user_who_have_linked_an_user = json.load(file)
                 
     def clean_title(self,title:str) -> str:
         """A function that clean a wikipedia title"""
@@ -242,13 +244,19 @@ class WikiPeopleData():
             # print("nord " , len(localisation_nord))
             localisation = f'{page_text.split("Coordonnées")[1].split(list_of_element[1])[0]}{list_of_element[1][0].upper()}'.replace("nord","N").replace("ouest","O").replace("sud","S").replace("est","E")
             localisation = localisation.replace("O","W")
-
             # print(localisation_direction,list_of_element[1])
             # print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 
-
-            if len(localisation.strip()) > 50:
+            if "foncti" in localisation.lower():
+                return localisation.strip().split("foncti")[0]
+            if "supe" in localisation.lower():
+                return localisation.strip().split("supe")[0]
+            if "Démographie" in localisation:
+                return localisation.strip().split("Démographie")[0]
+                        
+            if len(localisation.strip()) > 50 and "Démographie" not in localisation:
                 return localisation.strip()[0:28]
+             
 
             return localisation.strip()
         except:
@@ -693,6 +701,7 @@ class WikiPeopleData():
                         whole_birth_date = text_normal.split("Date de naissance")[1].split("<td>")[1].split("<")[0].split(" ")
                         birth_date = f"{self.convert_before_christ_to_date(birth_date)}-{MONTH_TO_NUMBER_DICT[whole_birth_date[1]]}-{whole_birth_date[0]}"
                         born_before_chirst = True
+                        
                 except:
                     pass
                 try:
@@ -1585,6 +1594,15 @@ class WikiPeopleData():
                 birth_year_is_real_but_month_and_day_are_not = True
                 age = 69
 
+            if page_name == "Ludwig van Beethoven":
+                birth_date = "1770-12-15"
+                birth_date = "1827-03-26"
+                is_alive = False
+                age = 57
+                town_birth_place = "Bonn"
+                town_death_place = "Vienne (Autriche)"
+
+
 
             try:
                 if birth_date == death_date and is_alive == False:
@@ -1662,20 +1680,72 @@ class WikiPeopleData():
                             death_month = "Undefined"
                             death_day = "Undefined"   
 
-            if age >= 123:
-                birth_date = "Undefined"
-                birth_year = 123456789
-                birth_month = "Undefined"
-                birth_day = "Undefined"
-
-                if is_alive is False:
-                    death_date = "Undefined"
-                    death_year = 123456789
-                    death_month = "Undefined"
-                    death_day = "Undefined"
-                age = -999
 
 
+            if age >= 100:
+                try:
+                    if age >= 120:
+                        is_alive = False
+                    if "Date de décès" in text_normal:
+                        death_date = text_normal.split("Date de décès")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
+                        is_alive = False
+
+                    if "Décès" in text_normal:
+                        death_date = text_normal.split("Décès")[1].split("datetime=")[1].split(" ")[0].replace('"',"")
+                        is_alive = False
+                                                
+                    try:
+                        start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                        end_date = datetime.strptime(f"{death_date.split("-")[0]}-{str(int(death_date.split("-")[1]))}-{str(int(death_date.split("-")[2]))}", "%Y-%m-%d")
+
+                        # Get the relativedelta between two dates
+                        delta = relativedelta.relativedelta(end_date, start_date)
+                        age = delta.years
+                                                    
+                    except:
+                        try:
+                            year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
+                            year_death_date_ = death_date[0:len(death_date.split("-")[0])]
+
+                            # print(year_birth_date_)
+                            # print(death_date)
+
+                            if int(year_birth_date_) + ABSOLUTE_DATE_VALUE <= int(year_death_date_) + ABSOLUTE_DATE_VALUE:
+                                age = (int(year_death_date_) + ABSOLUTE_DATE_VALUE) - (int(year_birth_date_) + ABSOLUTE_DATE_VALUE)
+                            else:
+                                age = (int(year_birth_date_) + ABSOLUTE_DATE_VALUE) - (int(year_death_date_) + ABSOLUTE_DATE_VALUE)
+                        except:
+                            age = -999    
+
+                    if birth_date == "Undefined":
+                        birth_date = "Undefined"
+                        birth_year = 123456789
+                        birth_month = "Undefined"
+                        birth_day = "Undefined"
+                        age = -999
+                        
+                    if is_alive is False and death_date == "Undefined":
+                        death_date = "Undefined"
+                        death_year = 123456789
+                        death_month = "Undefined"
+                        death_day = "Undefined"
+                        age = -999
+
+                except:
+                    birth_date = "Undefined"
+                    birth_year = 123456789
+                    birth_month = "Undefined"
+                    birth_day = "Undefined"
+                    if age >= 120:
+                        is_alive = False
+                    
+                    if is_alive is False:
+                        death_date = "Undefined"
+                        death_year = 123456789
+                        death_month = "Undefined"
+                        death_day = "Undefined"
+                    age = -999
+    
 
             try:
                 if type(birth_year) != int:
@@ -1966,12 +2036,42 @@ class WikiPeopleData():
 
 
 
+
+
+            
+            if "U-" in str(birth_date):
+                try:
+                    whole_birth_date = birth_date.replace("U-0","").split("-")
+                except:
+                    whole_birth_date = ""
+
+                try:                               
+                    birth_date = f"{(int(whole_birth_date[0]) + 1) * -1}-{whole_birth_date[1]}-{whole_birth_date[2]}"
+                except:
+                    pass
+                    
+                born_before_chirst = True
+                is_alive = False
+            if "U-" in str(death_date):
+                try:
+                    whole_death_date = death_date.replace("U-0","").split("-")
+                except:
+                    pass
+                try:
+                    death_date = f"{(int(whole_death_date[0]) + 1) * -1}-{whole_death_date[1]}-{whole_death_date[2]}"
+                except:
+                    pass
+
+                is_alive = False
+                died_before_christ = True
+
+                        
             try:
-                    if "u" in birth_date:
-                        birth_date = "unedefined"
-                        birth_day = "unedefined"
-                        birth_month = "unedefined"
-                        birth_year = 123456789
+                if "u" in birth_date:
+                    birth_date = "unedefined"
+                    birth_day = "unedefined"
+                    birth_month = "unedefined"
+                    birth_year = 123456789
             except:
                 pass
             try:
@@ -2005,6 +2105,7 @@ class WikiPeopleData():
             if death_year_is_real_but_month_and_day_are_not:
                 preciseness_level -= 10
                 list_of_unpreciseness_data.append("death year is real but month and day are not")
+
 
             if is_alive is False:
                 if town_death_place == "" or town_death_place == "Undefined":
@@ -2223,7 +2324,10 @@ class WikiPeopleData():
                     birth_month = "Fluriel"
                     birth_day = "99"
             except:
-                birth_year = 123456789
+                try:
+                    birth_year = int(birth_date.split("-")[0])
+                except:
+                    birth_year = 123456789
 
             try:
                 if died_before_christ:
@@ -2242,13 +2346,53 @@ class WikiPeopleData():
                     death_day = death_date.split("-")[2]
                     death_day = "99"
             except:
+                
                 if is_alive:
                     death_year = "alive"
                 else:
-                    death_year = 123456789
+                    try:
+                        death_year = int(death_date.split("-")[0])
+                    except:
+                        death_year = 123456789
                                 
             if birth_year != "Undefined" and len(str(birth_year)) != 0:
                 time_period_of_birth = self.birth_year_to_time_period(birth_year)
+
+
+
+            try:
+                if time_period_of_birth == "Undefined" and birth_date != "Undefined" and len(str(birth_date)) > 1 and str(birth_date).count("-") > 1:
+                    if "-" in birth_date:
+                        time_period_of_birth = self.birth_year_to_time_period(int(birth_date.split("-")[0]))
+                    else:
+                        time_period_of_birth = self.birth_year_to_time_period(int(birth_date))
+            except:
+                pass                        
+ 
+
+            try:
+                if time_period_of_birth == "Undefined" and death_date != "Undefined" and is_alive is False and len(str(death_date)) > 1 and str(death_date).count("-") > 1:
+                    if "-" in death_date:
+                        time_period_of_birth = self.birth_year_to_time_period(int(death_date.split("-")[0]))
+                    else:
+                        time_period_of_birth = self.birth_year_to_time_period(int(death_date))
+            except:
+                pass    
+
+
+            if (len(str(birth_date)) <= 1 or str(birth_date).count("-") <= 1) and age == -999:
+                time_period_of_birth = "Undefined"
+                #CODER QQCH
+                # Alexandre Cabanel
+                # James Cook
+                # Yvonne de Gaulle
+                # Prosper-Olivier Lissagaray
+                # Dominique Sordet
+                # Léopold d'Albany
+
+                # Chronologie de la vie d'Hector Berlioz 
+
+            
 
             # try:
             #     power_ranking = self.power_ranking_json[page_name.replace("_","")]
@@ -2360,6 +2504,11 @@ class WikiPeopleData():
 
             #all_links_of_a_page = self.get_all_links_of_a_page(page_name)
             all_links_of_a_page = self.list_of_link_of_user[page_name]
+            number_of_user_who_have_linked_this_user = 0
+            try:
+                number_of_user_who_have_linked_this_user = self.number_of_user_who_have_linked_an_user[page_name]
+            except:
+                number_of_user_who_have_linked_this_user = 0
             all_links_of_a_page = self.remove_bad_link_of_an_user(all_links_of_a_page)
             number_of_links = len(all_links_of_a_page)
             if " " in page_name:
@@ -2413,6 +2562,21 @@ class WikiPeopleData():
                 if is_alive is False:
                     if "fluriel" not in f"{birth_month_day.lower()}{death_month_day.lower()}" and birth_month_day == death_month_day:
                         born_and_died_on_the_same_day = True
+
+
+                    list_of_error = [
+                        "age is unknown / younger than 16 and birth_date/death_date may be unknown too",
+                        "death year is real but month and day are not",
+                        "birth_date and death_date may be the same",
+                        "birth_date and death_date are wrong",
+                        "birth_date is bad",
+                        "death_date is bad",
+                        "birth_date is after death_date",
+                    ]
+                    for element in list_of_error:
+                        if element in list_of_unpreciseness_data:
+                            born_and_died_on_the_same_day = False
+                            break
             except:
                 pass
 
@@ -2508,6 +2672,7 @@ class WikiPeopleData():
                 print(f"Wikipedia page lenght: {len(whole_page_text_plain_text)}")
                 print(f"All links of the page: {all_links_of_a_page}")
                 print(f"Number of links: {number_of_links}")
+                print(f"Number of user who_have linked this_user: {number_of_user_who_have_linked_this_user}")
                 print(f"Preciseness Level {int(preciseness_level/2)}")
                 print(f"List of unpreciseness data {list_of_unpreciseness_data}")
                 print(f"Today date: {today_date_str}")
@@ -2595,6 +2760,7 @@ class WikiPeopleData():
                 "wikipedia_page_length":len(whole_page_text_plain_text),
                 "all_links_of_a_page":all_links_of_a_page,
                 "number_of_links":number_of_links,
+                "number_of_user_who_have_linked_this_user":number_of_user_who_have_linked_this_user,
                 "preciseness_level":int(preciseness_level/2),
                 "list_of_unpreciseness_data":list_of_unpreciseness_data,
                 "country_birth_place_emoji":country_birth_place_emoji,
@@ -2980,7 +3146,7 @@ toto = WikiPeopleData()
 
 do_user_data =  False
 do_stat = False
-do_sorted_file = False
+do_sorted_file = True
 
 if do_user_data:
     try:

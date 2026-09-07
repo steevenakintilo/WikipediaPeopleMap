@@ -30,3 +30,55 @@ body,
 .wikifont {
   font-family: "Noto Sans", Arial, sans-serif;
 }
+
+.info.legend {
+  background: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  line-height: 24px;
+}
+
+.info.legend h4 {
+  margin: 0 0 5px;
+}
+
+.legend-circle {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.legend-birth-man-dead {
+  background-color: #000066;
+}
+
+.legend-birth-man-alive {
+  background-color: #66B2FF;
+}
+
+.legend-birth-woman-dead {
+  background-color: #660000;
+}
+
+.legend-birth-woman-alive {
+  background-color: #FF6666;
+}
+
+.legend-birth-unknown-dead {
+  background-color: #4e4e4e;
+}
+
+.legend-birth-unknown-alive {
+  background-color: #bfbbbb;
+}
+
+.legend-death-man-place {
+  background-color: #4b4bd6;
+}
+
+.legend-death-woman-place {
+  background-color: #917a7a;
+}

@@ -283,6 +283,8 @@ class WikipediaUser(models.Model):
         default=0
     )
 
+    number_of_user_who_have_linked_this_user = models.IntegerField(default=0)
+    
     preciseness_level = models.IntegerField(
         blank=True,
         null=True
@@ -605,7 +607,6 @@ class WikipediaDetailedStat(models.Model):
     number_of_links = models.IntegerField(
         default=0
     )
-
     preciseness_level = models.IntegerField(
         blank=True,
         null=True
