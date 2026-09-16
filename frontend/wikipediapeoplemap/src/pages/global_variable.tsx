@@ -504,4 +504,4 @@ export const list_of_country_flag = [
   "🇿🇼", // Zimbabwe
 ];
 
-export const NUMBER_OF_USER : number = 670204
+export const NUMBER_OF_USER : number = 706280

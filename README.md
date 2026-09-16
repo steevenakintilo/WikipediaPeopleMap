@@ -31,4 +31,6 @@ FAIT:
 - Les noms de villes/metiers qui ne sont ni des noms de villes/métiers
 
 
+Piseur de code dans le fichier qui contient la liste des users
 Charbre 8 jours de la semaine
+Regarder à partir de Tyler Wright (hockey sur glace) vers A pour la listes des users "douteux"

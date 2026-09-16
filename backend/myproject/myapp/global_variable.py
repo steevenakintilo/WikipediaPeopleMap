@@ -1,9 +1,10 @@
 import os
 
-USER_DICT_FILE_PATH = rf"{os.getcwd().split(r"\backend\myproject")[0]}\src\user_info_dict_sorted_by_power.txt"
-NUMBER_OF_USER = 670204
+USER_DICT_FILE_PATH = rf"{os.getcwd().split(r"\backend\myproject")[0]}\src\user_info_dict.txt"
+NUMBER_OF_USER = 706208
+NUMBER_OF_USER = 706280
 
-MAXIMUM_AGE_TO_DISPLAY = 131
+MAXIMUM_AGE_TO_DISPLAY = 122
 
 HISTORICAL_PERIODS = [
     "Prehistory",

@@ -8,6 +8,7 @@ import time
 import unicodedata
 
 from collections import Counter
+from collections import defaultdict
 from datetime import datetime
 from urllib.parse import unquote,quote
 from dateutil import relativedelta
@@ -49,9 +50,16 @@ class WikiPeopleData():
             self.power_ranking_json = json.load(file)
         with open("data_files/list_of_link_of_all_users_sorted.json", "r", encoding="utf-8") as file:
             self.list_of_link_of_user = json.load(file)
+
+        with open("data_files/list_of_page_name_linked_sorted.json", "r", encoding="utf-8") as file:
+            self.list_of_page_name_linked_sorted = json.load(file)
+
+        with open("data_files/list_of_page_with_the_most_friends_sorted.json", "r", encoding="utf-8") as file:
+            self.list_of_friend_of_user = json.load(file)
+                    
         with open("data_files/list_of_most_linked_user.json", "r", encoding="utf-8") as file:
             self.number_of_user_who_have_linked_an_user = json.load(file)
-                
+        
     def clean_title(self,title:str) -> str:
         """A function that clean a wikipedia title"""
         title = title.strip()
@@ -106,7 +114,8 @@ class WikiPeopleData():
         
         for title in titles:
             if title in self.all_real_people_set and title not in list_of_link:
-                list_of_link.append(title)
+                if title != page_name:
+                    list_of_link.append(title)
         # for link in split_link:
         #     if "title=" in link:
         #         split_link_ = link.split("title=")[1].split(">")
@@ -2035,10 +2044,24 @@ class WikiPeopleData():
                 pass
 
 
-
-
-
             
+            potential_bad_page = False
+            potential_bad_page2 = False
+                        
+            try:
+                if birth_date == "Undefined":
+                    potential_bad_page = True
+            except:
+                potential_bad_page = True
+            
+
+            try:
+                if birth_town_localisation == "Undefined" or birth_town_localisation == "":
+                    potential_bad_page2 = True
+            except:
+                potential_bad_page2 = True
+
+            potential_bad_bad_page = False
             if "U-" in str(birth_date):
                 try:
                     whole_birth_date = birth_date.replace("U-0","").split("-")
@@ -2091,6 +2114,7 @@ class WikiPeopleData():
             if birth_town_localisation == "" or birth_town_localisation == "Undefined":
                 preciseness_level -= 10
                 list_of_unpreciseness_data.append("birth town localisation is unknown")
+                potential_bad_page2 = True
 
             if country_birth_place == "" or country_birth_place == "Undefined":
                 preciseness_level -= 20
@@ -2173,6 +2197,7 @@ class WikiPeopleData():
             if age == -999:
                 preciseness_level -= 10
                 list_of_unpreciseness_data.append("age is unknown")
+                potential_bad_page = True
 
             
             if age <= 15 and is_alive is False:
@@ -2502,8 +2527,26 @@ class WikiPeopleData():
                     born_and_died_in_the_same_region = True
 
 
-            #all_links_of_a_page = self.get_all_links_of_a_page(page_name)
-            all_links_of_a_page = self.list_of_link_of_user[page_name]
+            
+            
+
+            # try:
+            #     all_links_of_a_page = self.list_of_link_of_user[page_name]
+            # except:
+            #     all_links_of_a_page = self.get_all_links_of_a_page(page_name)
+            
+            all_links_of_a_page = self.get_all_links_of_a_page(page_name)
+            
+            try:
+                list_of_friend_of_user = self.list_of_friend_of_user[page_name]
+            except:
+                list_of_friend_of_user = []
+
+            try:
+                list_of_page_name_linked_sorted = self.list_of_page_name_linked_sorted[page_name]
+            except:
+                list_of_page_name_linked_sorted = []
+               
             number_of_user_who_have_linked_this_user = 0
             try:
                 number_of_user_who_have_linked_this_user = self.number_of_user_who_have_linked_an_user[page_name]
@@ -2606,9 +2649,14 @@ class WikiPeopleData():
 
             except:
                 pass
+
+            if potential_bad_page and potential_bad_page2:
+                potential_bad_bad_page = True
+            
             
             if print_data:
                 print(f"Page name: {page_name}")
+                print(f"Page name lenght: {len(page_name)}")
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
                 print(f"Picture url: {picture_url}")
                 print(f"First name: {first_name}")
@@ -2672,9 +2720,16 @@ class WikiPeopleData():
                 print(f"Wikipedia page lenght: {len(whole_page_text_plain_text)}")
                 print(f"All links of the page: {all_links_of_a_page}")
                 print(f"Number of links: {number_of_links}")
+                print(f"List of page linked: {list_of_page_name_linked_sorted}")
                 print(f"Number of user who_have linked this_user: {number_of_user_who_have_linked_this_user}")
+                print(f"List of friends: {list_of_friend_of_user}")
+                print(f"Number of friends: {len(list_of_friend_of_user)}")
                 print(f"Preciseness Level {int(preciseness_level/2)}")
                 print(f"List of unpreciseness data {list_of_unpreciseness_data}")
+                print(f"Potential bad page (age): {potential_bad_page}")
+                print(f"Potential bad page (town_localisation): {potential_bad_page2}")
+                print(f"Potential bad page (age + town_localisation) not present: {potential_bad_bad_page}")
+                                
                 print(f"Today date: {today_date_str}")
                 print("\n"*5)
 
@@ -2709,6 +2764,7 @@ class WikiPeopleData():
             number_of_page_linked_to = 0
             user_info_dict = {
                 "page_name":page_name,
+                "page_name_lenght":len(page_name),
                 "page_url":f"https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}",
                 "picture_url":picture_url,
                 "first_name":first_name.lower(),
@@ -2761,7 +2817,13 @@ class WikiPeopleData():
                 "all_links_of_a_page":all_links_of_a_page,
                 "number_of_links":number_of_links,
                 "number_of_user_who_have_linked_this_user":number_of_user_who_have_linked_this_user,
+                "list_of_page_name_linked_sorted":list_of_page_name_linked_sorted,
+                "list_of_friend_of_user":list_of_friend_of_user,
+                "number_of_friends":len(list_of_friend_of_user),
                 "preciseness_level":int(preciseness_level/2),
+                "potential_bad_page":potential_bad_page,
+                "potential_bad_page2":potential_bad_page2,
+                "potential_bad_bad_page":potential_bad_bad_page,                            
                 "list_of_unpreciseness_data":list_of_unpreciseness_data,
                 "country_birth_place_emoji":country_birth_place_emoji,
                 "country_death_place_emoji":country_death_place_emoji
@@ -2828,6 +2890,10 @@ class WikiPeopleData():
         dict_of_people_who_are_the_most_linked_sorted = {}
         dict_of_wikipedia_page_length_sorted = {}
         list_of_link_name_occurence = []
+
+        with open("data_files/list_of_link_of_all_user.json", "r", encoding="utf-8") as file:
+            people_links = json.load(file)
+                
         for i , link in enumerate(list_of_dict_link):
             if i % 93000 == 0:
                 #print(link , int(i/93000) * 10)
@@ -2862,8 +2928,8 @@ class WikiPeopleData():
         # for name in list_of_link_name:
         #     list_of_link_name_occurence.append(list_of_link_name2.count(name))
 
-        print("Occurrences in list_of_link_name2:",
-          sum(x == "Ray Charles" for x in list_of_link_name2))
+        print("Occurrences in list_of_link_name2: Ray Charles",
+        sum(x == "Ray Charles" for x in list_of_link_name2))
         counts = Counter(list_of_link_name2)
 
         print(counts["Ray Charles"])
@@ -2875,6 +2941,82 @@ class WikiPeopleData():
             counts.get(name.strip(), 0)
             for name in list_of_link_name
         ]
+
+
+        user_name_list = []
+        dict_of_list_of_page_name_linked_name = {}
+        # Get list of people name who linked an user
+        users = []
+
+        for link in list_of_dict_link:
+            try:
+                users.append(ast.literal_eval(link))
+                user_name_list.append(ast.literal_eval(link)["page_name"])
+            except (ValueError, SyntaxError):
+                continue
+
+        # 2. Build an index:
+        #    page_name -> list of people whose pages link to it
+        linked_by_name = defaultdict(list)
+
+        for user in users:
+            name = user["page_name"]
+
+            for linked_page in user.get("all_links_of_a_page", []):
+                linked_by_name[linked_page].append(name)
+
+        dict_of_list_of_page_name_linked_name = {}
+
+        for user in users:
+            name = user["page_name"]
+            dict_of_list_of_page_name_linked_name[name] = linked_by_name.get(name, [])        
+
+
+
+        dict_of_list_of_page_friends = {}
+        dict_of_list_of_friends_nb = {}
+        number_of_friends_list = []
+        number_of_friends_nb = []
+                
+        for user in user_name_list:
+            try:
+                if len(dict_of_list_of_page_name_linked_name[user]) != 0 and len(people_links[user]) != 0:
+                    dict_of_list_of_page_friends[user] = list(set(dict_of_list_of_page_name_linked_name[user]).intersection(people_links[user]))
+                    number_of_friends_list.append(list(set(dict_of_list_of_page_name_linked_name[user]).intersection(people_links[user])))
+                    number_of_friends_nb.append(len(list(set(dict_of_list_of_page_name_linked_name[user]).intersection(people_links[user]))))
+                else:
+                    dict_of_list_of_page_friends[user] = []
+                    number_of_friends_list.append(0)
+                    number_of_friends_nb.append(0)
+            except:
+                dict_of_list_of_page_friends[user] = []
+                number_of_friends_list.append(0)
+                number_of_friends_nb.append(0)
+
+
+        paired = list(zip(user_name_list, number_of_friends_nb))
+        paired.sort(key=lambda x: x[1], reverse=True)
+                                
+        try:
+            list_of_element, occurence_of_element_list = zip(*paired)
+        except:
+            return [] , []
+        list_of_element = list(list_of_element)
+        occurence_of_element_list = list(occurence_of_element_list)
+
+        for i in range(10):
+            print("Most Friends on this page: " ,list_of_element[i],occurence_of_element_list[i])
+
+
+        for i in range(len(list_of_element)):
+            dict_of_list_of_friends_nb[list_of_element[i]] = occurence_of_element_list[i]
+
+        # dict_of_list_of_page_name_linked_name
+        # dict_of_list_of_page_name_linked_name
+        
+        # print(list_of_link_name[0:15])
+        # print(list_of_link_name_occurence[0:15])
+    
         len_all_wikipedia_fr_page =  4583129
         print(f"Number of people on the whole wikipedia fr {len(list_of_dict_link)}")
         print(f"Number of total link of the whole wikipedia fr {nb_total}")
@@ -2941,7 +3083,7 @@ class WikiPeopleData():
 
         # 152397
 
-        with open("list_of_wikipedia_page_length.json", "r", encoding="utf-8") as file:
+        with open("data_files/list_of_wikipedia_page_lenght.json", "r", encoding="utf-8") as file:
             pages_lenght = json.load(file)
 
 
@@ -3000,7 +3142,18 @@ class WikiPeopleData():
         for i in range(len(list_of_element)):
             merged_data_dict[list_of_element[i]] = occurence_of_element_list[i]
 
+        with open("data_files/list_of_link_of_user_friend.json", "w",encoding="utf-8") as f:
+            json.dump(dict_of_list_of_page_friends, f,ensure_ascii=False,indent=4)
 
+        with open("data_files/list_of_page_with_the_most_friends.json", "w",encoding="utf-8") as f:
+            json.dump(dict_of_list_of_friends_nb, f,ensure_ascii=False,indent=4)
+
+
+
+        
+        with open("data_files/list_of_page_name_linked.json", "w",encoding="utf-8") as f:
+            json.dump(dict_of_list_of_page_name_linked_name, f,ensure_ascii=False,indent=4)
+        
         with open("data_files/list_of_the_longest_page.json", "w",encoding="utf-8") as f:
             json.dump(dict_of_wikipedia_page_length_sorted, f,ensure_ascii=False,indent=4)
   
@@ -3020,7 +3173,12 @@ class WikiPeopleData():
         list_of_all_people = print_file_content(LIST_OF_REAL_PEOPLE_FILEPATH).split("\n")
         small_list_of_people = split_list(list_of_all_people,int(len(list_of_all_people)/nbz))
         list_of_all_people = small_list_of_people[int(sys.argv[1])]
-        #list_of_all_people = list(set(list_of_all_people))
+        # list_of_all_people.reverse()
+        # list_of_all_people = list_of_all_people[0:3]
+    
+        if int(sys.argv[1]) == 19:
+            print(list_of_all_people[-1])
+        
         # erreurs = [
         #     "Art and Language",
         #     "Saïan Supa Crew",
@@ -3051,9 +3209,46 @@ class WikiPeopleData():
             "Anne Frank",
             "Jésus de Nazareth"
         ]
-        reset_file(f"user_info_dict{sys.argv[1]}.txt")
+        
+        list_of_forgotten_user_for_batch_20 = [
+            "Terry Porter",
+            "Terry Rocavert",
+            "Terry Rozier",
+            "Terry Ruskowski",
+            "Terry Ryan (hockey sur glace)",
+            "Terry Simpson",
+            "Terry Smith (basket-ball)",
+            "Terry Stotts",
+            "Terry Szopinski",
+            "Terry Tarpey",
+        ]
+        
+
+        # list_of_forgotten_user_for_batch_20 = [
+        #     "Terry Szopinski",
+        #     "Terry Tarpey"
+        # ]
+
+
+        if int(sys.argv[1]) == 19:
+            for forgotten_user in list_of_forgotten_user_for_batch_20:
+                if forgotten_user not in list_of_all_people:
+                    list_of_all_people.append(forgotten_user)
         for idx , people in enumerate(list_of_all_people):
-            if int(sys.argv[1]) + 1 == 21 and people in skip_those_user:
+            
+            # if int(sys.argv[1]) == 19:
+            #     print(idx,people,int(sys.argv[1]))
+            # if int(sys.argv[1]) + 1 == 21 and people in skip_those_user:
+            #     continue
+            # try:
+            #     if people == list_of_all_people[-1] and int(sys.argv[1]) == 19:
+            #         print(people)
+            # except:
+            #     pass
+            # continue
+            if people in print_file_content("list_of_wikipedia_page_of_non_real_people.txt").split("\n"):
+                continue
+            if len(people) == 0 or people == "":
                 continue
             if people.isdigit():
                 write_into_file("list_of_wikipedia_page_of_non_real_people.txt",people+"\n")
@@ -3062,12 +3257,14 @@ class WikiPeopleData():
                 continue
             if idx % int(10000/nbz) == 0 and int(sys.argv[1]) == 1:
                 print(idx , people)
-                reset_file("counting.txt")
-                write_into_file("counting.txt",idx)
+                #reset_file("counting.txt")
+                #write_into_file("counting.txt",idx)
             if len(people) >= 4:
                 if people[0:4].isdigit() and " " in people and ("aux" in people or "dans" in people):
                     write_into_file("list_of_wikipedia_page_of_non_real_people.txt",people+"\n")
                     continue
+
+
             toto.get_user_information(people.replace('"',""),False,int(sys.argv[1])+1)
             # if user_info is False:
             #     ok+=1
@@ -3077,9 +3274,9 @@ class WikiPeopleData():
         if int(sys.argv[1]) == 1:
             end = time.time()
             print(f"Execution time: {end - start:.6f} seconds")
-    def sorted_list_of_linked_of_user(self):
+    def sorted_list_of_linked_of_user(self,input_file,output_file):
         """A function that generate a sorted list of link of all user"""
-        with open("data_files/list_of_link_of_all_user.json", "r", encoding="utf-8") as file:
+        with open(f"data_files/{input_file}", "r", encoding="utf-8") as file:
             people_links = json.load(file)
         with open("data_files/list_of_merged_data.json", "r", encoding="utf-8") as file:
             people_top = json.load(file)
@@ -3091,41 +3288,59 @@ class WikiPeopleData():
         dict_link_sorted = {}
         skip = False
         for user,user_links in people_links.items():
+
             skip = False
             list_of_occurence = []
             list_of_user = []
             for u in user_links:
                 try:
-                    list_of_user.append(u)
-                    list_of_occurence.append(people_top[u.replace("_"," ")])
+                    try:
+                        list_of_user.append(u)
+                        list_of_occurence.append(people_top[u.replace("_"," ")])
+                    except:
+                        pass
                     # else:
                     #     print("not in set " , u)
                 except:
-                    skip = True
+                    skip = True    
             if skip:
                 dict_link_sorted[user] = user_links
                 continue
             if len(list_of_user) != 0:
                 #print(list_of_user, list_of_occurence)
+
+                
                 paired = list(zip(list_of_user, list_of_occurence))
 
                 paired.sort(key=lambda x: x[1], reverse=True)
 
-                list_of_element, occurence_of_element_list = zip(*paired)
-                list_of_element = list(list_of_element)
-                occurence_of_element_list = list(occurence_of_element_list)
-                dict_link_sorted[user] = list_of_element
-                if index % 90000 == 0:
-                    print(user,user_links)
-                    print(list_of_element,occurence_of_element_list)
+                try:
+                    list_of_element, occurence_of_element_list = zip(*paired)
+                    list_of_element = list(list_of_element)
+                    occurence_of_element_list = list(occurence_of_element_list)
+                    dict_link_sorted[user] = list_of_element
+                except:
+                    list_of_element = []
+                    occurence_of_element_list = []
+                    dict_link_sorted[user] = user_links
+                                
+                
+                if index % 90000 == 0 or "emmanuel macron" in user.lower():
+                    if "emmanuel macron" in user.lower():
+                        print(user)
+                        print(list_of_element[0:10],occurence_of_element_list[0:10])
+                    else:
+                        print(user,user_links)
+                        print(list_of_element,occurence_of_element_list)
+                                        
                     print("\n\n\n\n")
             else:
-                dict_link_sorted[user] = user_links
+                dict_link_sorted[user] = list(set(user_links))
             if index % 90000 == 0:
                 pass
             index+=1
 
-        with open("data_files/list_of_link_of_all_users_sorted.json", "w",encoding="utf-8") as f:
+        with open(f"data_files/{output_file}", "w",encoding="utf-8") as f:
             json.dump(dict_link_sorted, f,ensure_ascii=False,indent=4)
     def start(self):
         """blabla"""
@@ -3144,8 +3359,14 @@ toto = WikiPeopleData()
 # toto.get_user_information("Moliere")
 
 
+# Remmettre la fonction des liens
+
 do_user_data =  False
 do_stat = False
+
+
+# Plus besoin du do sorted file car la db sort automatiquement les users par leur positions
+ 
 do_sorted_file = True
 
 if do_user_data:
@@ -3155,31 +3376,35 @@ if do_user_data:
         print("You must put args number (int)")
     quit()
 elif do_stat:
+        
     print("Doing something else")
     toto.calc_stat()
-    toto.sorted_list_of_linked_of_user()
+    toto.sorted_list_of_linked_of_user("list_of_link_of_all_user.json","list_of_link_of_all_users_sorted.json")
+    toto.sorted_list_of_linked_of_user("list_of_page_name_linked.json","list_of_page_name_linked_sorted.json")
+    toto.sorted_list_of_linked_of_user("list_of_link_of_user_friend.json","list_of_page_with_the_most_friends_sorted.json")
+        
 elif do_sorted_file:
-    # reset_file("user_info_dict_sorted_by_power.txt")
-    # all_user_sorted = print_file_content(r"data_files/list_of_user_sorted_by_power.txt").split("\n")
-    # all_user_dict_file = print_file_content(r"user_info_dict.txt").split("\n")
-    # print(len(all_user_dict_file))
-    # print(len(all_user_sorted))
-    # print(len(toto.list_of_wikipedia_page_of_real_people))
-    # for i , user in enumerate(all_user_sorted):
+    reset_file("user_info_dict_sorted_by_power.txt")
+    all_user_sorted = print_file_content(r"data_files/list_of_user_sorted_by_power.txt").split("\n")
+    all_user_dict_file = print_file_content(r"user_info_dict.txt").split("\n")
+    print(len(all_user_dict_file))
+    print(len(all_user_sorted))
+    print(len(toto.list_of_wikipedia_page_of_real_people))
+    for i , user in enumerate(all_user_sorted):
 
-    #     if i % 25000 == 0:
-    #         print(i,user)
-    #     try:
-    #         # ANNE FRANK
-    #         if i == 1780:
-    #             write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[-3]+"\n")          
-    #         # JESUS DE NAZARETH
-    #         if i == 337:
-    #             write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[-2]+"\n")       
+        if i % 25000 == 0:
+            print(i,user)
+        try:
+            # ANNE FRANK
+            if i == 1780:
+                write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[-3]+"\n")          
+            # JESUS DE NAZARETH
+            if i == 337:
+                write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[-2]+"\n")       
                         
-    #         write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[toto.list_of_wikipedia_page_of_real_people.index(user)]+"\n")
-    #     except:
-    #         print("ERREUR!!! " , user)
+            write_into_file("user_info_dict_sorted_by_power.txt",all_user_dict_file[toto.list_of_wikipedia_page_of_real_people.index(user)]+"\n")
+        except:
+            print("ERREUR!!! " , user)
     
     
     
@@ -3187,16 +3412,18 @@ elif do_sorted_file:
     reset_file("user_info_dict_sorted_by_power.txt")
     all_user_sorted = print_file_content(r"data_files/list_of_user_sorted_by_power.txt").split("\n")
     all_user_dict_file = print_file_content(r"user_info_dict.txt").split("\n")
-    
+
+
+    good_user_list = []
+    for user in toto.list_of_wikipedia_page_of_real_people:
+        if user not in toto.list_of_wikipedia_page_of_non_real_people:
+            good_user_list.append(user)
+        
     print("user_info_dict.txt " , len(all_user_dict_file))
     print("data_files/list_of_user_sorted_by_power.txt " , len(all_user_sorted))
-    print("list_of_wikipedia_page_of_real_people.txt " , len(toto.list_of_wikipedia_page_of_real_people))
-
-    # O(1) lookup instead of O(n) list.index() in a loop
-    # (if there are duplicate names, this keeps the LAST index for each,
-    #  matching list.index() behavior would need the FIRST occurrence instead —
-    #  see note below)
-    user_to_index = {name: idx for idx, name in enumerate(toto.list_of_wikipedia_page_of_real_people)}
+    print("list_of_wikipedia_page_of_real_people.txt " , len(toto.list_of_wikipedia_page_of_real_people),len(good_user_list))
+    
+    user_to_index = {name: idx for idx, name in enumerate(good_user_list)}
 
     output_lines = []
 
@@ -3229,7 +3456,7 @@ elif do_sorted_file:
                         
         except:
             print("ERREUR!!! ", user)
-        
+            
     # Single write instead of one write() call per line
     for line in output_lines:
         write_into_file("user_info_dict_sorted_by_power.txt",line)    

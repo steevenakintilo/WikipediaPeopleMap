@@ -17,7 +17,7 @@ def merge_filess():
     seen = set()
     reset_file("user_info_dict.txt")
     with open("user_info_dict.txt", "w", encoding="utf-8") as out:
-        for i in range(101):
+        for i in range(21):
             with open(f"user_info_dict{i + 1}.txt", encoding="utf-8") as f:
                 for line in f:
                     line = line.rstrip("\n")

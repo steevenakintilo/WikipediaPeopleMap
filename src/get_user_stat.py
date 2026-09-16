@@ -5,8 +5,10 @@ from global_variable import *
 from urllib.parse import unquote
 from collections import Counter
 
+FILEPATH = "user_info_dict.txt"
+
 def get_all_job_name():
-    all_data = print_file_content("user_info_dict_sorted_by_power.txt").split("\n")
+    all_data = print_file_content(FILEPATH).split("\n")
 
     reset_file(r"stat_files/all_job.txt")
     reset_file(r"stat_files/all_job_page.txt")
@@ -34,7 +36,7 @@ def get_all_job_name():
 
 
 def get_all_small_age():
-    all_data = print_file_content("user_info_dict_sorted_by_power.txt").split("\n")
+    all_data = print_file_content(FILEPATH).split("\n")
 
     reset_file(r"stat_files/all_age.txt")
     reset_file(r"stat_files/all_age2.txt")
@@ -59,7 +61,7 @@ def get_all_small_age():
             pass
 
 def get_all_unclear_people_age():
-    all_data = print_file_content("user_info_dict_sorted_by_power.txt").split("\n")
+    all_data = print_file_content(FILEPATH).split("\n")
 
     reset_file(r"stat_files/all_gender.txt")
     reset_file(r"stat_files/all_gender2.txt")
@@ -82,7 +84,7 @@ def get_all_unclear_people_age():
             pass
 
 def get_all_undefined_town():
-    all_data = print_file_content("user_info_dict_sorted_by_power.txt").split("\n")
+    all_data = print_file_content(FILEPATH).split("\n")
     print(len(all_data))
     reset_file(r"stat_files/all_town.txt")
     reset_file(r"stat_files/all_town2.txt")
@@ -114,7 +116,7 @@ def get_all_undefined_town():
         except:
             pass
 def get_all_undefined_town2():
-    all_data = print_file_content("user_info_dict_sorted_by_power.txt").split("\n")
+    all_data = print_file_content(FILEPATH).split("\n")
     print(len(all_data))
     reset_file(r"stat_files/all_town3.txt")
     
@@ -161,7 +163,7 @@ def get_all_undefined_town2():
         write_into_file(r"stat_files/all_town3.txt",f"{elem}     -------     {occurence}\n")
 
 def get_all_job_name2():
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -196,7 +198,7 @@ def get_all_job_name2():
             f.write(f"{job}     -------     {count}\n")
 
 def get_all_country_name():
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -232,7 +234,7 @@ def get_all_country_name():
             f.write(f"{country}     -------     {count}\n")
 
 def get_all_first_name():
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -267,8 +269,77 @@ def get_all_first_name():
             f.write(f"{first_name}     -------     {count}\n")
 
 
+
+def get_all_page_lenght_of_user():
+    with open("user_info_dict.txt", "r", encoding="utf-8") as f:
+        all_data = f.readlines()
+    dict_of_wikipedia_page_length = {}
+    for i , data in enumerate(all_data):
+        if i % 100000 == 0:
+            print("i " , i)
+
+        try:
+            line = ast.literal_eval(data)
+            page_lenght = line.get("wikipedia_page_length")
+            dict_of_wikipedia_page_length[line.get("page_name")] = page_lenght
+
+        except:
+            pass
+    with open(r"data_files/list_of_wikipedia_page_lenght.json", "w",encoding="utf-8") as f:
+        json.dump(dict_of_wikipedia_page_length, f,ensure_ascii=False,indent=4)
+
+def get_all_potential_bad_page():
+
+
+    with open("user_info_dict.txt", "r", encoding="utf-8") as f:
+        all_data = f.readlines()
+
+
+    try:
+        reset_file("potential_bad_page.txt")
+        reset_file("potential_bad_page2.txt")
+        reset_file("potential_bad_bad_page.txt")
+    except:
+        pass            
+    for i , data in enumerate(all_data):
+        if i % 100000 == 0:
+            print("i " , i)
+
+        try:
+            line = ast.literal_eval(data)
+            if line.get("potential_bad_page"):
+                write_into_file("potential_bad_page.txt",line.get("page_name")+"\n")
+            if line.get("potential_bad_page2"):
+                write_into_file("potential_bad_page2.txt",line.get("page_name")+"\n")
+                        
+            if line.get("potential_bad_bad_page"):
+                write_into_file("potential_bad_bad_page.txt",line.get("page_name")+"\n")
+                                            
+
+        except:
+            pass
+    
+def get_all_link_of_user():
+    with open("user_info_dict.txt", "r", encoding="utf-8") as f:
+        all_data = f.readlines()
+    dict_of_wikipedia_page_length = {}
+    for i , data in enumerate(all_data):
+        if i % 100000 == 0:
+            print("i " , i)
+
+        try:
+            line = ast.literal_eval(data)
+            page_lenght = line.get("all_links_of_a_page")
+            dict_of_wikipedia_page_length[line.get("page_name")] = page_lenght
+
+        except:
+            pass
+    with open("data_files/list_of_link_of_all_user.json", "w",encoding="utf-8") as f:
+        json.dump(dict_of_wikipedia_page_length, f,ensure_ascii=False,indent=4)
+
+
 def get_all_last_name():
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -303,7 +374,7 @@ def get_all_last_name():
             f.write(f"{last_name}     -------     {count}\n")
 
 def get_all_gender():
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -339,7 +410,7 @@ def get_all_gender():
 
 
 def get_all_birth_month_day():
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -374,7 +445,7 @@ def get_all_birth_month_day():
             f.write(f"{birth_month_day}     -------     {count}\n")
 
 def get_all_continent_of_birth():
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -409,7 +480,7 @@ def get_all_continent_of_birth():
             f.write(f"{continent}     -------     {count}\n")
 
 def get_all_generic_function(variable_to_search):
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -449,7 +520,7 @@ def get_all_generic_function(variable_to_search):
 
 
 def get_all_generic_function2(variable_to_search,variable_to_search2,skip=False):
-    with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
+    with open(FILEPATH, "r", encoding="utf-8") as f:
         all_data = f.readlines()
 
     print(len(all_data))
@@ -501,32 +572,74 @@ def get_all_generic_function2(variable_to_search,variable_to_search2,skip=False)
 
 
 def get_top_1000_user():
-    all_data = print_file_content("user_info_dict_sorted_by_power.txt").split("\n")[0:1000]
+    all_data = print_file_content(FILEPATH).split("\n")[0:1000]
     reset_file(r"stat_files/top_1000_user_info_dict_sorted_by_power.txt")
     for line in all_data:
         write_into_file(r"stat_files/top_1000_user_info_dict_sorted_by_power.txt",line+"\n")
     
 
+def get_all_sorted_user_by_power():
+    with open("data_files/people_dict_power_ranking.json", "r", encoding="utf-8") as file:
+        power_ranking_json = json.load(file)
+
+    reset_file("data_files/list_of_user_sorted_by_power.txt")
+    for user in power_ranking_json.keys():
+        write_into_file("data_files/list_of_user_sorted_by_power.txt",user+"\n")
+
+
+
+def get_all_user_name():
+    all_data = print_file_content("user_info_dict.txt").split("\n")
+    for i , data in enumerate(all_data):
+        if i % 100000 == 0:
+            print("i", i)
+
+        try:
+            line = ast.literal_eval(data)["page_name"]
+            write_into_file("list_of_wikipedia_page_of_real_people.txt",line+"\n")
+        except:
+            print("coca")
+
+
+
+
+
+# A faire a chaque nouvelle liste d'user
+
+# D'abord merge les files
+# Recuperer d'abords les tailles et link des users
+# Run le Script des stats
+# Recuper les user sorted
+
+
+#get_all_user_name()
+
+# get_all_sorted_user_by_power()
+# get_all_page_lenght_of_user()
+# get_all_link_of_user()
+# quit()
+
 # #ranked_user()
 # #idk_how_to_name_it()
-print("get birth_town_localisation & death_town_localisation")
-get_all_generic_function2("birth_town_localisation","death_town_localisation",True)
-quit()
 
-print("get_all_undefined_town")
-get_all_undefined_town()
+do_debug_function = False
 
-print("get_all_small_age")
-get_all_small_age()
+
+if do_debug_function:
+    print("get_all_undefined_town")
+    get_all_undefined_town()
+
+    print("get_all_small_age")
+    get_all_small_age()
+
+    print("get_all_unclear_people_age")
+    get_all_unclear_people_age()
+
+    print("get_all_undefined_town2")
+    get_all_undefined_town2()
 
 print("get_all_job_name")
 get_all_job_name()
-
-print("get_all_unclear_people_age")
-get_all_unclear_people_age()
-
-print("get_all_undefined_town2")
-get_all_undefined_town2()
 
 print("get_all_job_name2")
 get_all_job_name2()

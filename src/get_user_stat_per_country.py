@@ -255,6 +255,9 @@ class StatFunctionCountry():
             for birth_month_day, count in birth_month_days_sorted:
                 f.write(f"{birth_month_day}     -------     {count}\n")
 
+
+    
+            
     def get_all_continent_of_birth(self):
         with open("user_info_dict_sorted_by_power.txt", "r", encoding="utf-8") as f:
             all_data = f.readlines()

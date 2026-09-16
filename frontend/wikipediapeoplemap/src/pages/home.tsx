@@ -105,6 +105,28 @@ const HomePage = () => {
 
     }
 
+    async function get_list_of_user_advanced_search_qjis(chunk:number,reset_chunck:boolean=false) {
+      change_latitude_and_longitude(5,20)
+
+      
+      dict_of_advance_search["page_nb"] = current_chunck_index
+      if (reset_chunck == true) {
+        setchunck(0)
+      }
+      //setchunck(0)
+      const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search_qjis/${chunk}/`, {
+          method: 'POST',
+          //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
+          headers: {"Content-Type" : "application/json"},
+          body:JSON.stringify(dict_of_advance_search)
+
+      })
+      
+      const data_fetch = await response.json()
+      ////console.log("blbabla " , data_fetch[0])
+      return data_fetch
+
+    }
     async function get_user_info(user:string) {
       console.log(`http://127.0.0.1:8000/display_user_info/${user}`)
       const response = await fetch(`http://127.0.0.1:8000/display_user_info/${user}`, {
@@ -298,6 +320,9 @@ const HomePage = () => {
     }
     
     var number_of_user_to_show : number = 5
+    var number_of_linked_user_to_show : number = 5
+    var number_of_friend_to_show : number = 5
+    
     
     if (user_data_info.all_links_of_a_page != undefined) {
         if (user_data_info.all_links_of_a_page.length < 5) {
@@ -305,6 +330,21 @@ const HomePage = () => {
       }
       
     }
+
+    if (user_data_info.list_of_page_name_linked_sorted != undefined) {
+        if (user_data_info.list_of_page_name_linked_sorted.length < 5) {
+        number_of_linked_user_to_show = user_data_info.list_of_page_name_linked_sorted.length
+      }
+      
+    }
+    
+    if (user_data_info.list_of_friend_of_user != undefined) {
+        if (user_data_info.list_of_friend_of_user.length < 5) {
+        number_of_friend_to_show = user_data_info.list_of_friend_of_user.length
+      }
+      
+    }
+    
     console.log("user_data_info " , user_data_info)
     return (
     <div>
@@ -412,7 +452,7 @@ const HomePage = () => {
               </p>
 
               <p className="wikifont">
-                <strong>Région :</strong>{" "}
+                <strong>Région du monde:</strong>{" "}
                 {user_data_info.region_of_birth}
               </p>
 
@@ -448,7 +488,7 @@ const HomePage = () => {
                   </p>
 
                   <p className="wikifont">
-                    <strong>Région :</strong>{" "}
+                    <strong>Région du monde:</strong>{" "}
                     {user_data_info.region_of_death}
                   </p>
 
@@ -469,7 +509,7 @@ const HomePage = () => {
 
               <p className="wikifont">
                 <strong>Longueur de la page :</strong>{" "}
-                {user_data_info.wikipedia_page_length}
+                {user_data_info.wikipedia_page_length} {" caractères"}
               </p>
               
 
@@ -499,6 +539,45 @@ const HomePage = () => {
                 <strong>Nombre de personnes qui le mentionnent sur leur page Wikipédia :</strong>{" "}
                 {user_data_info.number_of_user_who_have_linked_this_user}
                 <br></br>
+                <br></br>
+                
+
+                {number_of_linked_user_to_show > 0 && (
+                  <p>
+                    <strong>Le top {number_of_linked_user_to_show}:</strong>{" "}
+                    <br></br>
+                  </p>
+                  
+                )}
+                
+                
+                {user_data_info.list_of_page_name_linked_sorted != undefined && (
+                  user_data_info.list_of_page_name_linked_sorted.map((link: any, i: number) => (
+                    <div key={i}>- {link}</div>
+                  ))
+                )}
+                
+                <br></br>
+                <strong>Nombre d’ami(s) qu’il a (personne(s) qu’il mentionne sur sa page Wikipédia et qui le mentionne(nt) sur leur propre page) :</strong>{" "}
+                {user_data_info.number_of_friends}
+                <br></br>
+                <br></br>
+                
+
+                {number_of_friend_to_show > 0 && (
+                  <p>
+                    <strong>Le top {number_of_friend_to_show}:</strong>{" "}
+                    <br></br>
+                  </p>
+                  
+                )}
+                
+                
+                {user_data_info.list_of_friend_of_user != undefined && (
+                  user_data_info.list_of_friend_of_user.map((link: any, i: number) => (
+                    <div key={i}>- {link}</div>
+                  ))
+                )}
                 
               </p>
               
@@ -778,7 +857,7 @@ const HomePage = () => {
 >
                     <option selected>Trier les utilisateurs par?</option>
                     
-                    {["Nombre de lien","Taille de la page wipedia","Nombre de personnes qui les lient","Âge","Par défaut"]
+                    {["Nombre de lien","Taille de la page wipedia","Nombre de personnes qui les lient","Âge","Nombre d'ami(e)","Par défaut"]
                         .map((choice:any, i:number) => (
                           
                         
@@ -893,7 +972,7 @@ const HomePage = () => {
 
                   <br></br>
                   
-                  <input className="form-control w-75" type="number" min="1" max="670204" placeholder={"Position maximale de la personne à afficher"} onChange={(event) => handle_dict_of_advance_search(event,"latest_position_of_user_to_display")}></input>
+                  <input className="form-control w-75" type="number" min="1" max="706280" placeholder={"Position maximale de la personne à afficher"} onChange={(event) => handle_dict_of_advance_search(event,"latest_position_of_user_to_display")}></input>
                   <br></br>
                   
                   <input className="form-control w-75" 
@@ -923,6 +1002,7 @@ const HomePage = () => {
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => window.location.reload()}>Reset</button>
                 <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search(current_chunck_index,true).then((result) => {set_list_of_user_data(result.all_user_data)})}>Rechercher 🔎</button>
+                <button type="button" className="btn btn-info" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search_qjis(current_chunck_index,true)}>QJIS</button>
               </div>
             </div>
           </div>
@@ -935,6 +1015,9 @@ const HomePage = () => {
 
   var user_profile = display_user_profile()
   return (
+    <div>
+
+    
     <div className="d-flex align-items-stretch min-vh-100">
       {/* <div className="card" style={{width: "5rem;"}}>
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Ammons_and_Johnson.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled" className="card-img-top" alt="..."/>
@@ -945,7 +1028,6 @@ const HomePage = () => {
         </div>
       </div>
    */}
-
 
       <div className="map-wrapper border-end border-end border-2 border-secondary"
         style={{
@@ -1088,6 +1170,8 @@ const HomePage = () => {
       
 
     </div>
+    </div>
+    
   );
 };
 

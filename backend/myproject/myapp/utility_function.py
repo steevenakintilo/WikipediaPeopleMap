@@ -32,6 +32,7 @@ def split_list(lst:list[str], chunk_size:int):
     return [lst[i:i + chunk_size] for i in range(0, len(lst), chunk_size)]
 
 def dms_to_decimal(dms,name=""):
+    "A function that convert Wikipedia Localisation to standart localisation"
     try:
         if name == "blablobla":
             return 999999999999999 ,999999999999999
@@ -81,10 +82,18 @@ def dms_to_decimal(dms,name=""):
                 decimal = -decimal
 
             return decimal
-        latitude = convert(parts[0]) + randint(1000000000000000000,90000000000000000000) / 10000000000000000000000
-        longitude = convert(parts[1]) + randint(1000000000000000000,90000000000000000000) / 10000000000000000000000
+
+        if name != "__qjis__":
+            latitude = convert(parts[0]) + randint(1000000000000000000,90000000000000000000) / 10000000000000000000000
+            longitude = convert(parts[1]) + randint(1000000000000000000,90000000000000000000) / 10000000000000000000000
+        else:
+            latitude = convert(parts[0])
+            longitude = convert(parts[1])
+
+        # latitude = convert(parts[0])
+        # longitude = convert(parts[1])
+
         return latitude, longitude
     except:
         return 999999999999999 ,999999999999999
         return -32.8471,-47.3926
-                

@@ -283,7 +283,25 @@ class WikipediaUser(models.Model):
         default=0
     )
 
+    
+    all_links_of_a_page = models.JSONField(
+        default=list,
+        blank=True
+    )
+
     number_of_user_who_have_linked_this_user = models.IntegerField(default=0)
+    
+    list_of_page_name_linked_sorted = models.JSONField(
+        default=list,
+        blank=True
+    )
+        
+    number_of_friends = models.IntegerField(default=0)
+        
+    list_of_friend_of_user = models.JSONField(
+        default=list,
+        blank=True
+    )
     
     preciseness_level = models.IntegerField(
         blank=True,
@@ -322,7 +340,14 @@ class WikipediaUser(models.Model):
     number_of_update = models.IntegerField(
         default=0
     )
-        
+
+    page_lenght = models.IntegerField(
+        default=0
+    )
+
+    number_of_word_in_page_name = models.IntegerField(
+        default=0
+    )
     # created_at = models.DateTimeField(
     #     auto_now_add=True
     # )
