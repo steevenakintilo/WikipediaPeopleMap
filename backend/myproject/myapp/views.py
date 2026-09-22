@@ -1,3 +1,4 @@
+from collections import Counter
 from unidecode import unidecode
 from django.shortcuts import render
 
@@ -8,10 +9,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 
-from myapp.models import WikipediaUser
+from myapp.models import WikipediaUser , WikipediaUserUniqueTown
 
 from random import randint
 from random import sample
+from django.db.models import OuterRef, Subquery
 
 from .global_variable import *
 from .utility_function  import *
@@ -27,7 +29,7 @@ def hi():
 
 @csrf_exempt
 def add_a_wikipedia_user_to_the_database(request):
-    """Add Wikipedia users from the file to the database."""
+    """Add Wikipedia users to the database."""
 
     if request.method != "POST":
         return HttpResponse("Error!", status=404)
@@ -41,6 +43,8 @@ def add_a_wikipedia_user_to_the_database(request):
                 print(i,line["page_name"])
             birth_year = line.get("birth_year")
             death_year = line.get("death_year")
+            if line["page_name"] in USERS_TO_SKIP:
+                continue
             if type(birth_year) != int:
                 birth_year = 123456789
             if type(death_year) != int:
@@ -48,12 +52,29 @@ def add_a_wikipedia_user_to_the_database(request):
             if line.get("age") == -999:
                 is_alive = False
             else:
-                is_alive = line.get("is_alive",True)     
+                is_alive = line.get("is_alive",True)
+
+            if line.get("position") == -999:
+                continue
+
+            is_cause_of_death_known_= False
+            if line.get("cause_of_death") != "Unspecified" and line.get("cause_of_death") != "alive":
+                is_cause_of_death_known_ = True
+
+            try:
+                age_group_nb = int(line.get("age_group")[0])
+            except:
+                age_group_nb = -99
+
             wiki_user = WikipediaUser(
                 page_name=line["page_name"],
                 page_url=line["page_url"],
+                age_group_nb=age_group_nb,
+                century_of_birth=line.get("century_of_birth"),
+                century_of_death=line.get("century_of_death"),
+                number_of_word_in_page_name=len(line["page_name"].split(" ")),
                 picture_url=line.get("picture_url"),
-
+                page_lenght = len(line["page_name"]),
                 first_name=line.get("first_name"),
                 first_name_standard=line.get("first_name_standard"),
 
@@ -90,7 +111,18 @@ def add_a_wikipedia_user_to_the_database(request):
                 death_month=str(line.get("death_month")),
                 death_day=str(line.get("death_day")),
                 death_month_day=str(line.get("death_month_day")),
+                cause_of_death = line.get("cause_of_death"),
+                is_cause_of_death_known = is_cause_of_death_known_,        
+                    # cause_of_death = models.CharField(
+                    #     max_length=500,
+                    #     blank=True,
+                    #     null=True
+                    # )
 
+                    # is_cause_of_death_known = models.BooleanField(
+                    #     default=True
+                    # )
+                
                 # Birth / death comparisons
                 born_and_died_in_the_same_town=str(
                     line.get("born_and_died_in_the_same_town", "False")
@@ -130,8 +162,13 @@ def add_a_wikipedia_user_to_the_database(request):
                     line.get("born_before_christ_and_died_after_christ", "False")
                 ),
                 age=line.get("age"),
+                age_group = line.get("age_group"),
                 is_alive=line.get("is_alive", True),
 
+                week_day_of_birth = line.get("week_day_of_birth"),
+            
+                week_day_of_death = line.get("week_day_of_death"),
+                
                 # Personal information
                 gender=line.get("gender"),
 
@@ -155,6 +192,16 @@ def add_a_wikipedia_user_to_the_database(request):
                     "number_of_links", 0
                 ),
                 number_of_user_who_have_linked_this_user=line.get("number_of_user_who_have_linked_this_user",0),
+
+                list_of_friend_of_user=line.get(
+                    "list_of_friend_of_user", []
+                ),
+                number_of_friends=line.get(
+                    "number_of_friends", 0
+                ),
+                list_of_page_name_linked_sorted=line.get(
+                    "list_of_page_name_linked_sorted", []
+                ),
                 preciseness_level=line.get(
                     "preciseness_level"
                 ),
@@ -169,7 +216,7 @@ def add_a_wikipedia_user_to_the_database(request):
                 country_death_place_emoji=line.get(
                     "country_death_place_emoji"
                 ),
-
+                
                 # Metadata
                 # is_updated=line.get("is_updated", False),
                 # number_of_update=line.get("number_of_update", 0),
@@ -179,10 +226,206 @@ def add_a_wikipedia_user_to_the_database(request):
 
         except Exception as error:
             print(f"Error while adding user: {error}")
-            import traceback
-            traceback.print_exc()
-            continue
+            # import traceback
+            # traceback.print_exc()
+            # continue
+            
+    return HttpResponse(
+        "Users added to the database",
+        status=200
+    )
 
+@csrf_exempt
+def add_a_wikipedia_user_to_the_database_unique_town(request):
+    """Add Wikipedia users from unique town the database."""
+
+    if request.method != "POST":
+        return HttpResponse("Error!", status=404)
+
+    user_data_dict = print_file_content(USER_DICT_FILE_PATH).split("\n")
+    list_of_localisation_birth = []
+    list_of_localisation_death = []
+    WikipediaUserUniqueTown.objects.all().delete()
+    all_user_obj = WikipediaUser.objects.all().order_by("position").filter(position__gte=0)
+
+    skip = False
+    for i , user in enumerate(all_user_obj):
+        try:
+            #line = ast.literal_eval(user)
+            if i % 10000 == 0:
+                print(i,user.page_name)
+            birth_year = user.birth_year
+            death_year = user.death_year
+            if type(birth_year) != int:
+                birth_year = 123456789
+            if type(death_year) != int:
+                death_year_year = 123456789
+            if user.age == -999:
+                is_alive = False
+            else:
+                is_alive = user.is_alive
+
+
+            if user.town_birth_place in list_of_localisation_birth:
+                continue
+            else:
+                list_of_localisation_birth.append(user.town_birth_place)
+            
+            if user.is_alive is False:
+                if user.town_death_place in list_of_localisation_death:
+                    continue
+                else:
+                    list_of_localisation_death.append(user.town_death_place)
+
+            is_cause_of_death_known_= False
+            if user.cause_of_death != "Unspecified" and user.cause_of_death != "alive":
+                is_cause_of_death_known_ = True
+
+
+            try:
+                age_group_nb = int(user.age_group[0])
+            except:
+                age_group_nb = -99
+
+            wiki_user = WikipediaUser(
+                page_name=user.page_name,
+                page_url=user.page_url,
+                age_group_nb=age_group_nb,
+                century_of_birth=user.century_of_birth,
+                century_of_death=user.century_of_death,
+                number_of_word_in_page_name=len(user.page_name.split(" ")),
+                picture_url=user.picture_url,
+                page_lenght=len(user.page_name),
+                first_name=user.first_name,
+                first_name_standard=user.first_name_standard,
+
+                last_name=user.last_name,
+                last_name_standard=user.last_name_standard,
+
+                job=unidecode(user.job),
+
+                # Birth information
+                town_birth_place=unidecode(user.town_birth_place),
+                town_birth_place_href=user.town_birth_place_href,
+                birth_town_localisation=user.birth_town_localisation,
+                country_birth_place=user.country_birth_place.lower(),
+                time_period_of_birth=user.time_period_of_birth,
+                continent_of_birth=user.continent_of_birth,
+                region_of_birth=user.region_of_birth,
+
+                birth_date=str(user.birth_date),
+                birth_year=birth_year,
+                birth_month=str(user.birth_month),
+                birth_day=str(user.birth_day),
+                birth_month_day=str(user.birth_month_day),
+
+                # Death information
+                town_death_place=unidecode(user.town_death_place),
+                town_death_place_href=user.town_death_place_href,
+                town_death_localisation=user.town_death_localisation,
+                country_death_place=user.country_death_place.lower(),
+                continent_of_death=user.continent_of_death,
+                region_of_death=user.region_of_death,
+
+                death_date=str(user.death_date),
+                death_year=death_year,
+                death_month=str(user.death_month),
+                death_day=str(user.death_day),
+                death_month_day=str(user.death_month_day),
+                cause_of_death = user.cause_of_death,
+                is_cause_of_death_known = is_cause_of_death_known_,        
+                
+
+                # Birth / death comparisons
+                born_and_died_in_the_same_town=str(
+                    user.born_and_died_in_the_same_town
+                ),
+
+                born_and_died_in_the_same_country=str(
+                    user.born_and_died_in_the_same_country
+                ),
+
+                born_and_died_in_the_same_continent=str(
+                    user.born_and_died_in_the_same_continent
+                ),
+
+                born_and_died_in_the_same_region=str(
+                    user.born_and_died_in_the_same_region
+                ),
+
+                born_before_christ=user.born_before_christ,
+
+                died_before_christ=str(
+                    user.died_before_christ
+                ),
+
+                born_and_died_before_christ=str(
+                    user.born_and_died_before_christ
+                ),
+
+                born_and_died_after_christ=str(
+                    user.born_and_died_after_christ
+                ),
+
+                born_and_died_in_the_same_day=str(
+                    user.born_and_died_in_the_same_day
+                ),
+
+                born_before_christ_and_died_after_christ=str(
+                    user.born_before_christ_and_died_after_christ
+                ),
+
+                age=user.age,
+                age_group = user.age,
+                is_alive=user.is_alive,
+                
+                week_day_of_birth = user.week_day_of_birth,
+            
+                week_day_of_death = user.week_day_of_death,
+                
+                # Personal information
+                gender=user.gender,
+
+                # Ranking
+                power_ranking=user.power_ranking,
+                position=user.position,
+                position_percentage=user.position_percentage,
+                grade_over_20=user.grade_over_20,
+
+                # Wikipedia page analysis
+                first_char_of_the_page=user.first_char_of_the_page,
+                wikipedia_page_lenght=user.wikipedia_page_lenght,
+                all_links_of_a_page=user.all_links_of_a_page,
+                number_of_links=user.number_of_links,
+                number_of_user_who_have_linked_this_user=(
+                    user.number_of_user_who_have_linked_this_user
+                ),
+
+                list_of_friend_of_user=user.list_of_friend_of_user,
+                number_of_friends=user.number_of_friends,
+
+                list_of_page_name_linked_sorted=user.list_of_page_name_linked_sorted,
+
+                preciseness_level=user.preciseness_level,
+
+                list_of_unpreciseness_data=user.list_of_unpreciseness_data,
+
+                # Country emojis
+                country_birth_place_emoji=user.country_birth_place_emoji,
+                country_death_place_emoji=user.country_death_place_emoji,
+
+                # Metadata
+                # is_updated=user.is_updated,
+                # number_of_update=user.number_of_update,
+            )
+            wiki_user.save()
+
+        except Exception as error:
+            print(f"Error while adding user: {error}")
+            # import traceback
+            # traceback.print_exc()
+            # # continue
+            
     return HttpResponse(
         "Users added to the database",
         status=200
@@ -196,7 +439,7 @@ def display_user_info(request,username):
 
     if username != "Personne":
         try:
-            user_obj = WikipediaUser.objects.filter(page_name=username).first()
+            user_obj = WikipediaUser.objects.filter(page_name=username.strip()).first()
             page_name = user_obj.page_name
         except:
             return HttpResponse(f"{username} doesn't exist", status=404)
@@ -221,29 +464,32 @@ def display_user_info(request,username):
         ranking_adjust = 0
         if username != "Gaston Cougny":
             ranking_adjust = 1
-        if username == "Jésus de Nazareth":
-            user_obj.power_ranking = 1197
-            user_obj.position = 338
-            user_obj.position_percentage = 0.05043
-            user_obj.grade_over_20 = 19.99
+        # if username == "Jésus de Nazareth":
+        #     user_obj.power_ranking = 1197
+        #     user_obj.position = 338
+        #     user_obj.position_percentage = 0.05043
+        #     user_obj.grade_over_20 = 19.99
 
-        if username == "Anne Frank":
-            user_obj.power_ranking = 636
-            user_obj.position = 1780
-            user_obj.position_percentage = 0.26559
-            user_obj.grade_over_20 = 19.95
+        # if username == "Anne Frank":
+        #     user_obj.power_ranking = 636
+        #     user_obj.position = 1780
+        #     user_obj.position_percentage = 0.26559
+        #     user_obj.grade_over_20 = 19.95
 
-        if username == "’Anbasa ibn Suhaym al-Kalbi": 
-            user_obj.power_ranking = 34 
-            user_obj.position = 241885 
-            user_obj.position_percentage = 36.09 
-            user_obj.grade_over_20 = 12.78 
+        # if username == "’Anbasa ibn Suhaym al-Kalbi": 
+        #     user_obj.power_ranking = 34 
+        #     user_obj.position = 241885 
+        #     user_obj.position_percentage = 36.09 
+        #     user_obj.grade_over_20 = 12.78 
         
-        if username == "₩uNo": 
-            user_obj.power_ranking = 60 
-            user_obj.position = 127250 
-            user_obj.position_percentage = 18.99 
-            user_obj.grade_over_20 = 16.2
+        # if username == "₩uNo": 
+        #     user_obj.power_ranking = 60 
+        #     user_obj.position = 127250 
+        #     user_obj.position_percentage = 18.99 
+        #     user_obj.grade_over_20 = 16.2
+
+
+        
         user_info_dict = {
             "page_name": page_name,
             "page_url": user_obj.page_url,
@@ -280,12 +526,16 @@ def display_user_info(request,username):
             "death_month": user_obj.death_month,
             "death_day": user_obj.death_day,
             "death_month_day": user_obj.death_month_day,
+            "cause_of_death":user_obj.cause_of_death,
+            "is_cause_of_death_known":user_obj.is_cause_of_death_known,
             "born_before_christ": user_obj.born_before_christ,
             "died_before_christ": user_obj.died_before_christ,
             "born_and_died_before_christ": user_obj.born_and_died_before_christ,
             "born_and_died_after_christ": user_obj.born_and_died_after_christ,
             "born_before_christ_and_died_after_christ": user_obj.born_before_christ_and_died_after_christ,
             "age": user_obj.age,
+            "week_day_of_birth":user_obj.week_day_of_birth,
+            "week_day_of_death":user_obj.week_day_of_death,
             "is_alive": user_obj.is_alive,
             "gender": user_obj.gender,
             "power_ranking": user_obj.power_ranking,
@@ -298,14 +548,25 @@ def display_user_info(request,username):
             "number_of_links": user_obj.number_of_links,
             "preciseness_level": user_obj.preciseness_level,
             "number_of_user_who_have_linked_this_user":user_obj.number_of_user_who_have_linked_this_user,
+            "list_of_page_name_linked_sorted":user_obj.list_of_page_name_linked_sorted[0:5],
+            "list_of_friend_of_user":user_obj.list_of_friend_of_user[0:5],
+            "number_of_friends":user_obj.number_of_friends,
             "list_of_unpreciseness_data": list_of_unpreciseness_data,
             "number_of_unpreciseness_date":len(list_of_unpreciseness_data),
+            "number_of_views":user_obj.number_of_views,
             "country_birth_place_emoji": birth_place_emoji,
             "country_death_place_emoji": death_place_emoji,
+            "century_of_birth":user_obj.century_of_birth,
+            "century_of_death":user_obj.century_of_death,
+                        
         }
+        print(user_obj.number_of_views)
+        user_obj.number_of_views += 1
+        user_obj.save()
         for key , value in user_info_dict.items():
             if value == "Undefined":
                 user_info_dict[key] = "Indéfini"
+        
         return JsonResponse(user_info_dict,status=200)
     
         
@@ -375,7 +636,7 @@ def display_user_info(request,username):
  
     
 
-@ratelimit(key='ip', rate='1000/m')
+@ratelimit(key='ip', rate='10/m')
 def display_chunck_of_user_info(request,chunk_nb=0):
     
     """Display chunck (10000 users) of user info"""
@@ -383,9 +644,13 @@ def display_chunck_of_user_info(request,chunk_nb=0):
     if request.method != "GET":
         return HttpResponse(f"Error!", status=404)
 
-    all_user_obj = WikipediaUser.objects.all()
-    length = all_user_obj.count()
+    all_user_obj = WikipediaUser.objects.all().order_by("position").filter(position__gte=0)
 
+    #all_user_obj = WikipediaUser.objects.filter(number_of_user_who_have_linked_this_user=0,position__gte=0,position__lte=35000).order_by("position")
+    
+    
+    length = all_user_obj.count()
+    
     random_number_list = []
     if chunk_nb == 999999999:
         random_number = randint(0,NUMBER_OF_USER-501)
@@ -394,8 +659,11 @@ def display_chunck_of_user_info(request,chunk_nb=0):
     #print(random_number)
     list_of_all_user_data =  []
     nb = NUMBER_OF_USERS_TO_SEARCH
-    index_start = chunk_nb * nb
+    index_start = (chunk_nb * nb)
+    
     index_end = (chunk_nb + 1) * nb
+
+    
     list_of_localisation = []
     for user_obj in all_user_obj[index_start:index_end]:
         try:
@@ -405,10 +673,15 @@ def display_chunck_of_user_info(request,chunk_nb=0):
             # if dms_to_decimal(user_obj.birth_town_localisation) in list_of_localisation:
             #     continue
             
-            
             list_of_localisation.append(dms_to_decimal(user_obj.birth_town_localisation,user_obj.page_name))
+            if len(user_obj.page_name) > 35:
+                page_name_shorter = user_obj.page_name[0:35]+"..."
+            else:
+                page_name_shorter = user_obj.page_name
+
             user_info_dict = {
                 "page_name": user_obj.page_name,
+                "page_name_shorter":page_name_shorter,
                 "page_url": user_obj.page_url,
                 "gender":user_obj.gender,
                 "is_alive":str(user_obj.is_alive),
@@ -430,46 +703,15 @@ def display_chunck_of_user_info(request,chunk_nb=0):
 
 
 @csrf_exempt
-def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
-    """Display chunck (10000 users) of user info"""
+@ratelimit(key='ip', rate='10/m')
+def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
+    """Display chunck (10000 users) of user birth town localisation"""
     if request.method != "POST":
         return HttpResponse(f"Error!", status=404)
-
-
 
     recieved_data = json.loads(request.body)
         
 
-    #all_user_obj = WikipediaUser.objects.all()
-
-    # all_user_obj = WikipediaUser.objects.filter(
-    #     gender__icontains="Woman"
-    # )
-
-    # all_user_obj = WikipediaUser.objects.filter(
-    #     country_birth_place__icontains="palestine",
-    #     country_death_place__icontains="palestine"
-    # )
-
-    # all_user_obj = WikipediaUser.objects.filter(
-    #     Q(country_birth_place__icontains="palestine") |
-    #     Q(country_death_place__icontains="palestine")
-    # )
-
-
-
-    # if recieved_data["country_of_birth"] != "" and recieved_data["country_of_birth"] != "Pays de naissance":
-    #     filters = {
-    #         "country_birth_place__icontains": recieved_data["country_of_birth"][0:-3]
-    #     }
-
-    #     all_user_obj = WikipediaUser.objects.filter(
-    #         country_birth_place__icontains=recieved_data["country_of_birth"][0:-3]
-    #     )
-    # else:
-    #     all_user_obj = WikipediaUser.objects.all()[:1000]
-
-    basic_search = True
     accept_multiple_element = False
 
     try:
@@ -622,6 +864,8 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                                         
 
     query = Q()
+
+    
     if "job" in recieved_data:
         if "-" in recieved_data["job"]:
             accept_multiple_element = True
@@ -694,11 +938,6 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             display_only_death_localisation = True
             display_death_localisation = True
     
-    display_people_with_no_localisation = False
-    if "display_people_with_no_localisation" in recieved_data:
-        if recieved_data["display_people_with_no_localisation"] == "oui":
-            display_people_with_no_localisation = True
-            
 
     display_only_death_localisation = False
 
@@ -738,70 +977,42 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             filters["position__lte"] = int(recieved_data["latest_position_of_user_to_display"])
         filters["position__gte"] = -1
 
-    sort_user_by = "None"
-    if "sort_user_by" in recieved_data:
-        if recieved_data["sort_user_by"] != "Par défaut":
-            if recieved_data["sort_user_by"] == "Nombre de lien":
-                sort_user_by = "number_of_links"
-                
-            if recieved_data["sort_user_by"] == "Taille de la page wipedia":
-                sort_user_by = "wikipedia_page_lenght"
-            if recieved_data["sort_user_by"] == "Âge":
-                sort_user_by = "age"
-                filters["age__lte"] = MAXIMUM_AGE_TO_DISPLAY
-            if recieved_data["sort_user_by"] == "Nombre de personnes qui les lient":
-                sort_user_by = "number_of_user_who_have_linked_this_user"
-                           
             #sort_user_by = recieved_data["sort_user_by"]
-        if "display_people_with_no_localisation" not in recieved_data:
-            display_people_with_no_localisation = True
         
                 
-    if display_people_with_no_localisation is False:
-        filters["birth_town_localisation__icontains"] = " "
-
+    filters["birth_town_localisation__icontains"] = " "
+    filters["position__gte"] = 0
     if "born_before_christ" in recieved_data:
         if recieved_data["born_before_christ"] == "oui":
             filters["born_before_christ"] = True
         if recieved_data["born_before_christ"] == "non":
             filters["born_before_christ"] = False
+    
 
+
+     
     #filters["age__lte"] = 123
             
     print(recieved_data)
     print(filters)
 
-    if sort_user_by != "None":
-        if accept_multiple_element:
-            all_user_obj = WikipediaUser.objects.filter(query,**filters).order_by(f"-{sort_user_by}")
-        else:
-            all_user_obj = WikipediaUser.objects.filter(**filters).order_by(f"-{sort_user_by}")
+        
+    if accept_multiple_element:
+        all_user_obj = WikipediaUser.objects.filter(query,**filters)
     else:
-        if accept_multiple_element:
-            all_user_obj = WikipediaUser.objects.filter(query,**filters)
-        else:
-            all_user_obj = WikipediaUser.objects.filter(**filters)
-    
+        all_user_obj = WikipediaUser.objects.filter(**filters)
+
     # if accept_multiple_element:
     #     all_user_obj = WikipediaUser.objects.filter(query,**filters).order_by("-wikipedia_page_lenght")
     # else:
     #     all_user_obj = WikipediaUser.objects.filter(**filters).order_by("-wikipedia_page_lenght")
 
-    length = all_user_obj.count()
     list_of_all_user_data =  []
-    nb = NUMBER_OF_USERS_TO_SEARCH * 2
-
-    nb = NUMBER_OF_USERS_TO_SEARCH
-    if number_of_people_to_display != 500:
-        nb = number_of_people_to_display
-    index_start = chunk_nb * nb
-    index_end = (chunk_nb + 1) * nb
-
     
     list_of_localisation = []
-    #print(nb,display_death_localisation,display_only_death_localisation)
-    nb_of_bad_user = 0
-    for user_obj in all_user_obj[index_start:index_end]:
+    user_info_dict = {}
+    number_of_people_to_display = 5000000000
+    for user_obj in all_user_obj[0:NUMBER_OF_USER + 1]:
         try:
             
             # if (user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined") and display_people_with_no_localisation  is False:
@@ -810,94 +1021,20 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             
             if len(list_of_all_user_data) >= number_of_people_to_display:
                 break
-            # if dms_to_decimal(user_obj.birth_town_localisation) in list_of_localisation:
-            #     continue
-            
             
             list_of_localisation.append(dms_to_decimal(user_obj.birth_town_localisation,user_obj.page_name))
 
-            # if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
-            #     birth_place_emoji = "🏳️"
-            # else:
-            #     birth_place_emoji = user_obj.country_birth_place_emoji
-
-            birth_place_emoji = user_obj.country_birth_place_emoji
-            if len(user_obj.page_name) > 35:
-                page_name = user_obj.page_name[0:35]+"..."
-            else:
-                page_name = user_obj.page_name
-            user_info_dict = {
-                "page_name": page_name,
-                "page_url": user_obj.page_url,
-                "gender":user_obj.gender,
-                "is_alive":str(user_obj.is_alive),
-                "picture_url": user_obj.picture_url,
-                #"birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),
-                "birth_country_name":user_obj.country_birth_place,                      
-                #"town_death_localisation": dms_to_decimal(user_obj.town_death_localisation),
-                "country_birth_place_emoji":birth_place_emoji,
-                "display_death_localisation":display_death_localisation,
-                "page_nb":chunk_nb,
-                "number_of_element":length
-    
-            }
-
+            
             # print(display_death_localisation)
             if display_only_death_localisation is False:
-                user_info_dict["birth_town_localisation"] = dms_to_decimal(user_obj.birth_town_localisation)  
+                list_of_all_user_data.append(dms_to_decimal(user_obj.birth_town_localisation,"__qjis__"))
             else:
-                user_info_dict["birth_town_localisation"] = dms_to_decimal("blablobla") 
+                list_of_all_user_data.append(dms_to_decimal("blablobla"))
                          
             if display_death_localisation or display_only_death_localisation:
-                user_info_dict["town_death_localisation"] = dms_to_decimal(user_obj.town_death_localisation)
+                list_of_all_user_data.append(dms_to_decimal(user_obj.town_death_localisation,"__qjis__"))
             #print(user_info_dict)
             list_of_all_user_data.append(user_info_dict)
-        except:
-            pass
-    if len(list_of_all_user_data) == 0:
-        user_info_dict = {
-            "page_name": "Personne",
-            "page_url": "https://fr.wikipedia.org/wiki/Personne",
-            "gender":"Unknown",
-            "is_alive":True,
-            "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/960px-Question_mark_%28black%29.svg.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
-            #"birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),
-            "birth_town_localisation": dms_to_decimal("blabla"),              
-            "country_birth_place_emoji":"🏴‍☠️",
-            "page_nb":1,
-            "number_of_element":1
-
-        }
-        list_of_all_user_data.append(user_info_dict)
-    return JsonResponse({"all_user_data":list_of_all_user_data},status=200)
-
-
-def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
-    """Display chunck (10000 users) of user birth town localisation"""
-    if request.method != "GET":
-        return HttpResponse(f"Error!", status=404)
-
-    all_user_obj = WikipediaUser.objects.all()
-
-    # all_user_obj = WikipediaUser.objects.filter(
-    #     first_name_standard="aurelia"
-    # )
-
-    # all_user_obj = WikipediaUser.objects.filter(
-    #     continent_of_birth="Afrique"
-    # )
-      
-    list_of_all_user_data =  []
-    nb = NUMBER_OF_USER + 1
-    index_start = chunk_nb * nb
-    index_end = (chunk_nb + 1) * nb
-    for user_obj in all_user_obj[0:nb]:
-        try:
-            if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
-                continue
-            list_of_all_user_data.append(dms_to_decimal(user_obj.birth_town_localisation))
-            if dms_to_decimal(user_obj.town_death_localisation) != (-999, -999):
-                list_of_all_user_data.append(dms_to_decimal(user_obj.town_death_localisation))
         except:
             pass
 
@@ -912,7 +1049,6 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
     data = [
         ['latitude', 'longitude']
     ]
-
     for x in list_of_loc:
         data.append(x)
 
@@ -922,3 +1058,16 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
         writer.writerows(data)
     return HttpResponse("OK!",status=200)
 
+
+# @csrf_exempt
+# @ratelimit(key='ip', rate='10/m')
+# def edit_a_profile(request,username=0):
+#     if request.method == "PUT":
+#         user_obj = WikipediaUser.objects.filter(page_name=username).first()
+#         page_name = user_obj.page_name
+#         user_obj.page_name = "Dicaprio"
+#         user_obj.position = 2962
+#         user_obj.save()
+#         return HttpResponse("Change Done",status=200)
+#     else:
+#         return HttpResponse("Request error",status=404)

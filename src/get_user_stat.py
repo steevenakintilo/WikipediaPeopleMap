@@ -614,10 +614,10 @@ def get_all_user_name():
 
 #get_all_user_name()
 
-# get_all_sorted_user_by_power()
+get_all_sorted_user_by_power()
 # get_all_page_lenght_of_user()
 # get_all_link_of_user()
-# quit()
+quit()
 
 # #ranked_user()
 # #idk_how_to_name_it()
@@ -640,7 +640,7 @@ if do_debug_function:
 
 print("get_all_job_name")
 get_all_job_name()
-
+quit()
 print("get_all_job_name2")
 get_all_job_name2()
 

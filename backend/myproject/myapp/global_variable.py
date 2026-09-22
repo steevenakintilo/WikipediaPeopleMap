@@ -2,7 +2,7 @@ import os
 
 USER_DICT_FILE_PATH = rf"{os.getcwd().split(r"\backend\myproject")[0]}\src\user_info_dict.txt"
 NUMBER_OF_USER = 706208
-NUMBER_OF_USER = 706280
+NUMBER_OF_USER = 712471
 
 MAXIMUM_AGE_TO_DISPLAY = 122
 
@@ -25,6 +25,16 @@ HISTORICAL_PERIODS_DICT_TO_FRENCH = {
     "Undefined":"Indéfinie"
 }
 
+HISTORICAL_PERIODS_DICT_TO_FRENCH_WITH_DATE = {
+    "Prehistory": "Préhistoire (-99999999-3301)",
+    "Antiquity": "Antiquité (-3300-475)",
+    "Middle Ages": "Moyen Âge (476-1491)",
+    "Renaissance": "Renaissance (1492-1788)",
+    "Contemporary Period": "Époque contemporaine (1789-1999)",
+    "Today Time": "Époque actuelle (2000-????)",
+    "Undefined":"Indéfinie"
+}
+
 HISTORICAL_PERIODS_DICT = {
     "Préhistoire -99999999-3301":"Prehistory",
     "Antiquité -3300-475":"Antiquity",
@@ -44,6 +54,12 @@ HISTORICAL_PERIODS_WITH_DATE = [
     "Époque actuelle 2000-?????"
     
 ]
+
+GENDER_TO_FRENCH_DICT = {
+    "Man":"Homme",
+    "Woman":"Femme",
+    "Unclear":"Indéfinie",
+}
 
 LIST_OF_CONTINENT_NAME = ["Afrique","Amerique","Asie","Europe","Océanie"]
 
@@ -101,4 +117,9 @@ LIST_OF_REGIONS_NAME = [
     "Mélanésie",
     "Micronésie",
     "Polynésie",
+]
+
+
+USERS_TO_SKIP = [
+    "Het Gulden Cabinet"
 ]

@@ -163,6 +163,16 @@ class WikipediaUser(models.Model):
         null=True
     )
 
+    cause_of_death = models.CharField(
+        max_length=500,
+        blank=True,
+        null=True
+    )
+
+    is_cause_of_death_known = models.BooleanField(
+        default=True
+    )
+    
     # ─────────────────────────────────────────────
     # Birth / death comparisons
     # ─────────────────────────────────────────────
@@ -183,8 +193,8 @@ class WikipediaUser(models.Model):
     )
 
     born_and_died_in_the_same_day = models.CharField(
-            max_length=20,
-            default="False"
+        max_length=20,
+        default="False"
     )
         
     born_and_died_in_the_same_region = models.CharField(
@@ -217,11 +227,42 @@ class WikipediaUser(models.Model):
         default="False"
     )
 
+    week_day_of_birth = models.CharField(
+        max_length=20,
+        default="False"
+    )
+
+    week_day_of_death = models.CharField(
+        max_length=20,
+        default="False"
+    )
+    
     age = models.IntegerField(
         blank=True,
         null=True
     )
 
+    age_group = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    age_group_nb = models.IntegerField(
+        blank=True,
+        null=True
+    )
+
+    century_of_birth = models.IntegerField(
+        blank=True,
+        null=True
+    )
+
+    century_of_death = models.IntegerField(
+        blank=True,
+        null=True
+    )
+    
     is_alive = models.BooleanField(
         default=True
     )
@@ -348,6 +389,12 @@ class WikipediaUser(models.Model):
     number_of_word_in_page_name = models.IntegerField(
         default=0
     )
+
+    number_of_views = models.IntegerField(
+        default=0
+    )
+
+    
     # created_at = models.DateTimeField(
     #     auto_now_add=True
     # )
@@ -356,7 +403,7 @@ class WikipediaUser(models.Model):
     #     auto_now=True
     # )
 
-class WikipediaDetailedStat(models.Model):
+class WikipediaUserUniqueTown(models.Model):
     """Model representing a person/personality from Wikipedia."""
 
     # ─────────────────────────────────────────────
@@ -364,6 +411,7 @@ class WikipediaDetailedStat(models.Model):
     # ─────────────────────────────────────────────
 
     page_name = models.CharField(max_length=300, unique=True)
+    page_url = models.URLField(max_length=500)
     picture_url = models.URLField(max_length=500, blank=True, null=True)
 
     first_name = models.CharField(max_length=100, blank=True, null=True)
@@ -576,6 +624,17 @@ class WikipediaDetailedStat(models.Model):
         default=True
     )
 
+    week_day_of_birth = models.CharField(
+        max_length=20,
+        default="False"
+    )
+
+    week_day_of_death = models.CharField(
+        max_length=20,
+        default="False"
+    )
+    
+
     # ─────────────────────────────────────────────
     # Personal information
     # ─────────────────────────────────────────────
@@ -632,6 +691,27 @@ class WikipediaDetailedStat(models.Model):
     number_of_links = models.IntegerField(
         default=0
     )
+
+    
+    all_links_of_a_page = models.JSONField(
+        default=list,
+        blank=True
+    )
+
+    number_of_user_who_have_linked_this_user = models.IntegerField(default=0)
+    
+    list_of_page_name_linked_sorted = models.JSONField(
+        default=list,
+        blank=True
+    )
+        
+    number_of_friends = models.IntegerField(default=0)
+        
+    list_of_friend_of_user = models.JSONField(
+        default=list,
+        blank=True
+    )
+    
     preciseness_level = models.IntegerField(
         blank=True,
         null=True
@@ -652,6 +732,39 @@ class WikipediaDetailedStat(models.Model):
         null=True
     )
 
+
+    cause_of_death = models.CharField(
+        max_length=500,
+        blank=True,
+        null=True
+    )
+
+    is_cause_of_death_known = models.BooleanField(
+        default=True
+    )
+    
+    
+    age_group = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+    
+    age_group_nb = models.IntegerField(
+        blank=True,
+        null=True
+    )
+
+    century_of_birth = models.IntegerField(
+        blank=True,
+        null=True
+    )
+
+    century_of_death = models.IntegerField(
+        blank=True,
+        null=True
+    )
+    
     country_death_place_emoji = models.CharField(
         max_length=20,
         blank=True,
@@ -667,6 +780,18 @@ class WikipediaDetailedStat(models.Model):
     )
 
     number_of_update = models.IntegerField(
+        default=0
+    )
+
+    page_lenght = models.IntegerField(
+        default=0
+    )
+
+    number_of_word_in_page_name = models.IntegerField(
+        default=0
+    )
+
+    number_of_views = models.IntegerField(
         default=0
     )
         

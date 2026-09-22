@@ -5,16 +5,12 @@ A FAIRE:
 
 - Stat qui affiche l'age moyens des gens sur wikipedia (vivants/morts)
 - Stat qui affiche l'age moyens de deces sur wikipedia (vivants/morts)
-- Stat qui affiche une courbe des déces par tranche d'age
-- Stat qui affiche les pays les plus populaire sur wikipedia
-- Stat qui affiche la date la plus populaire (pour naissance et déces)
-- La meme pour les villes/continents/regions du monde/métier/prénoms
 - Pouvoir telecharger les cartes
 
 A FIX:
 
-- Essayer de recuperer les sous job des gens
-- Fix les bugs de naissance/date de naissances pour les gens né avant JC
+- Essayer de recuperer les sous job des gens (Oublie)
+
 
 FAIT:
 
@@ -29,8 +25,12 @@ FAIT:
 - Les villes "connues" qui n'ont pas de localisation
 - Les villes qui ont le meme prenom essayer d'avoir la regions ex: Springfield
 - Les noms de villes/metiers qui ne sont ni des noms de villes/métiers
+- Stat qui affiche une courbe des déces par tranche d'age
+- Stat qui affiche les pays les plus populaire sur wikipedia
+- Stat qui affiche la date la plus populaire (pour naissance et déces)
+- La meme pour les villes/continents/regions du monde/métier/prénoms
+- Fix les bugs de naissance/date de naissances pour les gens né avant JC
 
 
-Piseur de code dans le fichier qui contient la liste des users
 Charbre 8 jours de la semaine
-Regarder à partir de Tyler Wright (hockey sur glace) vers A pour la listes des users "douteux"
+Regarder à partir de "Para-Commando's" pour la listes des users "douteux"

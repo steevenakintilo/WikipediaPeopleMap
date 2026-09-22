@@ -6,6 +6,7 @@
 # No exception type specified
 # pylint: disable=W0702
 
+from collections import Counter
 from random import randint
 
 def write_into_file(path:str, data:str) -> None:
@@ -30,6 +31,22 @@ def print_file_content(path:str) -> str:
 def split_list(lst:list[str], chunk_size:int):
     """A function that split a list"""
     return [lst[i:i + chunk_size] for i in range(0, len(lst), chunk_size)]
+
+
+def sort_a_counter(counter:Counter,type=0) -> Counter:
+    """A function that sort a counter"""
+    if type == 0:
+        counter_sorted = sorted(
+            counter.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+    else:
+        counter_sorted = sorted(
+            counter.items(),
+            key=lambda x: x[0]
+        )
+    return counter_sorted
 
 def dms_to_decimal(dms,name=""):
     "A function that convert Wikipedia Localisation to standart localisation"

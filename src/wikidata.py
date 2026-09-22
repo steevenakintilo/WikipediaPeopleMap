@@ -45,6 +45,7 @@ class WikiPeopleData():
         self.list_of_wikipedia_page_of_non_real_people : list[str] = print_file_content("list_of_wikipedia_page_of_non_real_people.txt").split("\n")
         #self.all_user_data_file : list[str] = print_file_content("user_info_dict.txt").split("\n")
         self.all_real_people_set = set(self.list_of_wikipedia_page_of_real_people)
+        self.list_of_top_2000_town : list[str] = print_file_content("list_of_top_2000_town.txt").split("\n")
 
         with open("data_files/people_dict_power_ranking.json", "r", encoding="utf-8") as file:
             self.power_ranking_json = json.load(file)
@@ -256,16 +257,26 @@ class WikiPeopleData():
             # print(localisation_direction,list_of_element[1])
             # print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 
+            for word in localisation.lower():
+                if "foncti" in word:
+                    return localisation.strip().split("foncti")[0]
+                if "supe" in word:
+                    return localisation.strip().split("supe")[0]
+                if "démo" in word:
+                    return localisation.strip().split("Démo")[0]
+
+
+            if "démo" in localisation.lower():
+                return localisation.strip().split("Démo")[0]                                                
             if "foncti" in localisation.lower():
                 return localisation.strip().split("foncti")[0]
             if "supe" in localisation.lower():
-                return localisation.strip().split("supe")[0]
-            if "Démographie" in localisation:
-                return localisation.strip().split("Démographie")[0]
-                        
+                return localisation.strip().split("supe")[0]                                   
             if len(localisation.strip()) > 50 and "Démographie" not in localisation:
                 return localisation.strip()[0:28]
-             
+            
+                
+                 
 
             return localisation.strip()
         except:
@@ -1429,6 +1440,7 @@ class WikiPeopleData():
             #             job = little_job
             #             break
             
+
             list_of_little_job = []
             if job in LIST_OF_INCOMPLETE_JOB:
                 for little_job in JOBS:
@@ -1500,8 +1512,14 @@ class WikiPeopleData():
             if job.lower() in LIST_OF_WEIRD_JOB:
                 job = WEIRD_JOB_REPLACEMENTS[job.lower()]
 
+            
+            if job.lower() == "actrice" and "actrice pornographique" in text_normal.lower():
+                job = "actrice pornographique"
 
 
+            if job.lower() == "acteur" and "acteur pornographique" in text_normal.lower() and gender != "Woman":
+                job = "acteur pornographique"
+                                
             # CAS AVEC DES IMAGES A DATES EX ERIC CLAPTON OU LE PAPE FRANCOIS
             
             try:
@@ -1605,11 +1623,16 @@ class WikiPeopleData():
 
             if page_name == "Ludwig van Beethoven":
                 birth_date = "1770-12-15"
-                birth_date = "1827-03-26"
+                death_date = "1827-03-26"
                 is_alive = False
                 age = 57
                 town_birth_place = "Bonn"
                 town_death_place = "Vienne (Autriche)"
+
+            if page_name == "François (pape)":
+                death_date = "2025-04-21"
+                is_alive = False
+                age = 88
 
 
 
@@ -1816,10 +1839,14 @@ class WikiPeopleData():
                 death_date = ""
                 age = -999
 
+            NON_TOWN_ELEMENT_LIST_LOWER = []
+            for elem in NON_TOWN_ELEMENT_LIST:
+                NON_TOWN_ELEMENT_LIST_LOWER.append(elem.lower())
+
             try:
                 if (town_birth_place.isdigit() and " " not in town_birth_place) or (town_birth_place.split(" ")[0].isdigit() and " " in town_birth_place) or (town_birth_place.lower().split(" ")[1].lower() in LIST_OF_MONTH) or (town_birth_place.lower().split(" ")[0].lower() in LIST_OF_MONTH) or (len(town_birth_place.strip()) == 1 and town_birth_place.strip().isalpha() is False):
                     town_birth_place = "Undefined"
-                    if town_birth_place.lower() in NON_TOWN_ELEMENT_LIST or "</" in town_birth_place.lower() or "www." in town_birth_place.lower() or "http" in town_birth_place.lower() or ".jp" in town_birth_place.lower() or ".png" in town_birth_place.lower() or ".wb" in town_birth_place.lower():
+                    if town_birth_place.lower() in NON_TOWN_ELEMENT_LIST_LOWER or "</" in town_birth_place.lower() or "www." in town_birth_place.lower() or "http" in town_birth_place.lower() or ".jp" in town_birth_place.lower() or ".png" in town_birth_place.lower() or ".wb" in town_birth_place.lower():
                         town_birth_place = "Undefined"
                     for html in HTML_ELEMENT_LIST:
                         if html.lower() in  town_birth_place:
@@ -1833,7 +1860,7 @@ class WikiPeopleData():
             try:
                 if (town_death_place.isdigit() and " " not in town_death_place) or (town_death_place.split(" ")[0].isdigit() and " " in town_death_place) or (town_death_place.split(" ")[1].lower() in LIST_OF_MONTH) or (town_death_place.split(" ")[0].lower() in LIST_OF_MONTH) and is_alive is False or (len(town_death_place.strip()) == 1 and town_death_place.strip().isalpha() is False):        
                     town_death_place = "Undefined"
-                    if town_death_place.lower() in NON_TOWN_ELEMENT_LIST or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place:
+                    if town_death_place.lower() in NON_TOWN_ELEMENT_LIST_LOWER or "</" in town_death_place or "www." in town_death_place or "http" in town_death_place or ".jp" in town_death_place or ".png" in town_death_place or ".wb" in town_death_place:
                         town_death_place = "Undefined"
                     for html in HTML_ELEMENT_LIST:
                         if html.lower() in  town_death_place:
@@ -1845,6 +1872,10 @@ class WikiPeopleData():
                 pass
 
             job = unquote(job)
+
+
+
+
             if town_birth_place in self.list_of_country:
                 country_birth_place = town_birth_place
                 town_birth_place = "Undefined"
@@ -1911,7 +1942,15 @@ class WikiPeopleData():
             
 
             if birth_date == "Undefined":
-                age = -999       
+                age = -999    
+
+
+            try:
+                age_group = age
+                if len(str(age)) > 1:
+                    age_group = AGE_GROUP_DICT[str(age)[:-1]]
+            except:
+                age_group = age
             if is_alive is False:
                 if town_death_place != "Undefined" and len(town_death_place) != 0:
                     town_death_place = unquote(town_death_place)
@@ -1950,6 +1989,334 @@ class WikiPeopleData():
                     town_death_place_href = "Undefined"
                     break
 
+
+            if town_death_place.lower().startswith("d:q"):
+                town_death_place = "Undefined"
+
+            if town_birth_place.lower().strip() in self.list_of_country_lower:
+                town_birth_place = "Undefined"
+            
+            if town_death_place.lower().strip() in self.list_of_country_lower:
+                town_death_place = "Undefined"
+
+            if "&amp" in town_birth_place.lower():
+                town_birth_place = "Undefined"
+            if "&amp" in town_death_place.lower():
+                town_death_place = "Undefined"                        
+
+            # ESSAYER DE RECUP LA VILLE DE NAISSANCE/MORT QUAND CA NE MARCHE PAS
+
+            # print(town_birth_place)
+            # return
+
+            for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+                if town_birth_place.lower() == bad_element:
+                    town_birth_place = "Undefined"
+                    break
+
+                # if town_birth_place.lower() in bad_element and len(bad_element) < 9 and "," not in bad_element:
+                #     town_birth_place = "Undefined"
+                #     break
+                # if town_birth_place.lower() == bad_element and (len(bad_element) >= 9 or "," in bad_element):
+                #     town_birth_place = "Undefined"
+                #     break
+                
+
+            for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+                if town_death_place.lower() == bad_element:
+                    town_death_place = "Undefined"
+                    break
+
+                # if town_death_place.lower() in bad_element and is_alive is False and len(bad_element) < 9 and "," not in bad_element:
+                #     town_death_place = "Undefined"
+                #     break
+                # if town_death_place.lower() == bad_element and is_alive is False and (len(bad_element) >= 9 or "," in bad_element):
+                #     town_death_place = "Undefined"
+                #     break
+            
+                
+            
+            #town_birth_place = ""
+            try:
+                if town_birth_place == "Undefined" or len(town_birth_place) == 0:
+                    if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
+                        if "Date de naissance" in text_normal:
+                            town_birth_place = text_normal.split("Lieu de naissance")[1].split("title=")[1].split(">")[0].replace('"',"")
+                        else:
+                            try:
+                                town_birth_place = text_normal.split("Lieu de naissance")[1].split("<time ")[1].split("<br><")[1].split("title=")[1].split(">")[0].replace('"',"").replace('"',"")
+                            except:
+                                town_birth_place = text_normal.split("Naissance")[1].split("<time ")[1].split("<br><")[1].split("title=")[1].split(">")[0].replace('"',"").replace('"',"")
+                    if "Naissance" in text_normal and "<td>Inconnu" not in text_normal:
+                        if "Date de naissance" in text_normal:
+                            town_birth_place = text_normal.split("Naissance")[1].split("title=")[1].split(">")[0].replace('"',"")
+                        else:
+                            town_birth_place = text_normal.split("Naissance")[1].split("<time ")[1].split("<br><")[1].split("title=")[1].split(">")[0].replace('"',"").replace('"',"")
+                                                
+                    try:
+                        birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
+                        country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
+
+                    except:
+                        birth_town_localisation = ""
+                        country_birth_place = ""
+            except:
+                                    
+                try:
+                    town_birth_place = "Undefined"
+                    start_checking = False
+                    for line in text_normal.split("\n"):
+                        if '<th scope="row">Naissance' in line or '<th scope="row">Lieu de naissance' in line:
+                            start_checking = True
+                        if start_checking:
+                            for town in self.list_of_top_2000_town:
+                                html_town_code = f'<a href="{town}" title="{town}">{town}</a>'
+                                if html_town_code.lower() in line.lower() and town_birth_place == "Undefined":
+                                    town_birth_place = town[0].upper()+town[1:].strip()
+                                    try:
+                                        birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
+                                        country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
+                
+                                    except:
+                                        birth_town_localisation = ""
+                                        country_birth_place = ""
+                                    break
+
+                        if "Décès" in line:
+                            break
+                except:
+                    pass
+
+
+
+            try:            
+                if town_death_place == "Undefined" or len(town_death_place) == 0:
+                    if "Décès" in text_normal and "<td>Inconnu" not in text_normal:
+                        if "Date de décès" in text_normal:
+                            town_death_place = text_normal.split("Date de décès")[1].split("title=")[1].split(">")[0].replace('"',"")
+                        else:
+                            town_death_place = text_normal.split("Décès")[1].split("<time ")[1].split("<br><")[1].split("title=")[1].split(">")[0].replace('"',"").replace('"',"")
+                            
+                    try:
+                        death_town_localisation = self.get_localisation_of_a_town(town_death_place)
+                        country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"))
+
+                    except:
+                        death_town_localisation = ""
+                        country_death_place = ""
+            except:   
+                pass            
+
+
+
+            if town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH:
+                town_birth_place = ""
+
+            if town_death_place.split(" ")[0].lower() in LIST_OF_MONTH:
+                town_death_place = ""
+
+
+
+
+                        
+            # ESSAYER DE RECUP LA VILLE DE NAISSANCE/MORT QUAND CA NE MARCHE PAS ET QU'IL N'Y A PAS DE LIEN SUR LA VILLE
+            for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+                if town_birth_place.lower() == bad_element:
+                    town_birth_place = "Undefined"
+                    break
+
+            for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+                if town_death_place.lower() == bad_element:
+                    town_death_place = "Undefined"
+                    break
+
+            # for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+            #     if town_birth_place.lower() in bad_element and len(bad_element) < 9 and "," not in bad_element:
+            #         town_birth_place = "Undefined"
+            #         break
+            #     if town_birth_place.lower() == bad_element and (len(bad_element) >= 9 or "," in bad_element):
+            #         town_birth_place = "Undefined"
+            #         break
+                
+                        
+            # for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+            #     if town_death_place.lower() in bad_element and is_alive is False and len(bad_element) < 9 and "," not in bad_element:
+            #         town_death_place = "Undefined"
+            #         break
+            #     if town_death_place.lower() == bad_element and is_alive is False and (len(bad_element) >= 9 or "," in bad_element):
+            #         town_death_place = "Undefined"
+            #         break
+            
+            
+                        
+            #town_birth_place = ""
+
+
+            try:
+                
+                if town_birth_place == "Undefined" or len(town_birth_place) == 0:
+                    if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
+                        #if text_normal.split("Lieu de naissance")[1].split("<td>")[1].split("\n")[0].lower() in self.list_of_top_2000_town:
+                        town_birth_place = text_normal.split("Lieu de naissance")[1].split("<td>")[1].split("\n")[0]
+                    if "Naissance" in text_normal and "<td>Inconnu" not in text_normal:
+                        #if text_normal.split("Naissance")[1].split("<td>")[1].split("\n")[0].lower() in self.list_of_top_2000_town:
+                        town_birth_place = text_normal.split("Naissance")[1].split("<td>")[1].split("\n")[0]
+                    
+                    try:
+                        birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
+                        country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
+
+                    except:
+                        birth_town_localisation = ""
+                        country_birth_place = ""
+            except:                
+                pass            
+
+
+            try:            
+                if town_death_place == "Undefined" or len(town_death_place) == 0:
+                    if "Décès" in text_normal and "<td>Inconnu" not in text_normal:
+                        if "Date de décès" in text_normal:
+                            #if text_normal.split("Date de décès")[1].split("<td>")[1].split("\n")[0].lower() in self.list_of_top_2000_town:
+                            town_death_place = text_normal.split("Date de décès")[1].split("<td>")[1].split("\n")[0]
+                            if town_death_place == "":
+                                for line in text_normal.split("Date de décès")[1].split("<td>")[1].split("\n"):
+                                    if "<br>" in line and "</td>" in line:
+                                        town_death_place = line.split("<br>")[1].replace("</td>","")
+                        
+                        else:
+                            #if text_normal.split("Décès")[1].split("<td>")[1].split("\n")[0].lower() in self.list_of_top_2000_town:
+                            town_death_place = text_normal.split("Décès")[1].split("<td>")[1].split("\n")[0]
+                            if town_death_place == "":
+                                for line in text_normal.split("Décès")[1].split("<td>")[1].split("\n"):
+                                    if "<br>" in line and "</td>" in line:
+                                        town_death_place = line.split("<br>")[1].replace("</td>","")
+                            #print(text_normal.split("Décès")[1].split("<td>")[1].split("\n"))
+                    try:
+                        death_town_localisation = self.get_localisation_of_a_town(town_death_place)
+                        country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"))
+
+                    except:
+                        death_town_localisation = ""
+                        country_death_place = ""
+            except:  
+                pass            
+
+
+
+
+            # ESSAYER ENCORE SI NI LE LIEN NI LE NON LIEN MARCHE TENTER AVEC LE HREF
+
+            #self.list_of_top_2000_town
+            skip_town_birth_place_href_checking = False
+
+            if town_birth_place == "Undefined" or len(town_birth_place) == 0:
+                for town in self.list_of_top_2000_town:
+                    if (town_birth_place_href.replace("_"," ").lower() == town.replace("_"," ").lower()):
+                        town_birth_place = town
+                        skip_town_birth_place_href_checking = True
+                        try:
+                            birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
+                            country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
+    
+                        except:
+                            birth_town_localisation = ""
+                            country_birth_place = ""
+                        break
+                    if "(" in town_birth_place_href and ")" in town_birth_place_href:
+                        if (town_birth_place_href.replace("_"," ").lower().split("(")[1].replace(")","") == town.replace("_"," ").lower()):
+                            town_birth_place = town
+                            skip_town_birth_place_href_checking = True
+                            try:
+                                birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
+                                country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
+        
+                            except:
+                                birth_town_localisation = ""
+                                country_birth_place = ""
+                            break
+
+            skip_town_death_place_href_checking = False
+                    
+            if town_death_place == "Undefined" or len(town_death_place) == 0:
+                for town in self.list_of_top_2000_town:
+                    if (town_death_place_href.replace("_"," ").lower() == town.replace("_"," ").lower()):
+                        town_death_place = town
+                        skip_town_birth_place_href_checking = False
+                        try:
+                            death_town_localisation = self.get_localisation_of_a_town(town_death_place)
+                            country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"))
+    
+                        except:
+                            death_town_localisation = ""
+                            country_death_place = ""
+                        break
+                    if "(" in town_death_place_href and ")" in town_death_place_href:
+                        if (town_death_place_href.replace("_"," ").lower().split("(")[1].replace(")","") == town.replace("_"," ").lower()):
+                            town_death_place = town
+                            skip_town_birth_place_href_checking = False
+                            try:
+                                birth_town_localisation = self.get_localisation_of_a_town(town_death_place)
+                                country_birth_place = self.get_country_of_a_town(town_death_place.replace(" ","_"))
+        
+                            except:
+                                death_town_localisation = ""
+                                country_death_place = ""
+                            break
+
+
+
+            if town_birth_place in CITIES and (birth_town_localisation == "" or birth_town_localisation == "Undefined"):
+
+                try:
+                    if town_birth_place.lower() in TOWN_TO_LOCALISATION_DICT:
+                        birth_town_localisation = TOWN_TO_LOCALISATION_DICT[town_birth_place.lower()]
+                except:
+                    pass
+
+            if town_death_place in CITIES and (death_town_localisation == "" or death_town_localisation == "Undefined") and is_alive is False:
+            
+                try:
+                    if town_death_place.lower() in TOWN_TO_LOCALISATION_DICT:
+                        death_town_localisation = TOWN_TO_LOCALISATION_DICT[town_death_place.lower()]
+                except:
+                    pass
+            
+            #if town_death_place == "Undefined" or len(town_death_place) == 0:
+                                            
+            # print(town_birth_place_href)
+            # print(town_birth_place)
+            # return
+                          
+                # print(text_normal.split("Naissance")[1].split("title="))
+                # return
+                # print("town_birth_place " , town_birth_place)
+                # return
+
+
+
+
+            cause_of_death = "Unspecified"
+            if is_alive:
+                cause_of_death = "alive"
+
+            if "Nature du décès" in text_normal:
+                try:
+                    cause_of_death  = text_normal.split("Nature du décès")[1].split("title=")[1].split('"')[1].strip()
+                    if "Assassinat de" in cause_of_death or "Assassinat d'" in cause_of_death:
+                        cause_of_death = "Assasinat"
+                    if cause_of_death == "Maladie à coronavirus 2019":
+                        cause_of_death = "Coronavirus"
+
+                    if cause_of_death in NON_CAUSE_OF_DEATH:
+                        cause_of_death = text_normal.split("Nature du décès")[1].split("<td>")[1].split("\n")[0]
+                    
+                    
+
+                except:
+                    cause_of_death = "Unspecified"
+            
+            
             if town_birth_place == town_death_place and len(birth_town_localisation) != 0 and len(town_birth_place) != 0:
                 death_town_localisation = birth_town_localisation
 
@@ -2106,7 +2473,7 @@ class WikiPeopleData():
                     death_year = 123456789
             except:
                 pass
-            if town_birth_place == "" or town_birth_place == "Undefined":
+            if town_birth_place == "" or town_birth_place == "Undefined" and birth_town_localisation == "Undefined":
                 preciseness_level -= 20
                 #print("town_birth_place is bad")
                 list_of_unpreciseness_data.append("town_birth_place is unknown")
@@ -2132,7 +2499,7 @@ class WikiPeopleData():
 
 
             if is_alive is False:
-                if town_death_place == "" or town_death_place == "Undefined":
+                if town_death_place == "" or town_death_place == "Undefined" and death_town_localisation == "Undefined":
                     preciseness_level -= 20
                     #print("town_death_place is bad")
                     list_of_unpreciseness_data.append("town_death_place is unknown")
@@ -2346,7 +2713,7 @@ class WikiPeopleData():
                     birth_day = birth_date.split("-")[2]
 
                 if birth_year_is_real_but_month_and_day_are_not:
-                    birth_month = "Fluriel"
+                    birth_month = "fluriel"
                     birth_day = "99"
             except:
                 try:
@@ -2366,7 +2733,7 @@ class WikiPeopleData():
                     death_day = death_date.split("-")[2]
 
                 if death_year_is_real_but_month_and_day_are_not:
-                    death_month = "Fluriel"
+                    death_month = "fluriel"
                     death_month = NUMBER_TO_MONTH_DICT[death_date.split("-")[1]]
                     death_day = death_date.split("-")[2]
                     death_day = "99"
@@ -2424,6 +2791,33 @@ class WikiPeopleData():
             # except:
             #     power_ranking = 0
 
+            century_of_birth = -999
+            try:
+                if birth_year == 123456789:
+                    century_of_birth = -999
+                elif len(str(birth_year)) <= 2 and birth_year + 1 >= 1:
+                    century_of_birth = 1
+                elif len(str(birth_year)) <= 2 and birth_year + 1 < 1:
+                    century_of_birth = -1
+                else:
+                    century_of_birth = str(birth_year + 1)[0:2]
+            except:
+                century_of_birth = -999
+
+
+            century_of_death = -999
+            try:
+                if death_year == 123456789:
+                    century_of_death = -999
+                elif len(str(death_year)) <= 2 and death_year + 1 >= 1:
+                    century_of_death = 1
+                elif len(str(death_year)) <= 2 and death_year + 1 < 1:
+                    century_of_death = -1
+                else:
+                    century_of_death = str(death_year + 1)[0:2]
+            except:
+                century_of_death = -999
+            
             if country_birth_place == "":
                 country_birth_place = "Undefined"
             if birth_date == "":
@@ -2489,7 +2883,9 @@ class WikiPeopleData():
                 last_name = page_name_copy.split(" ", 1)[1].strip()
                 if "(" in last_name:
                     last_name = last_name.split("(")[0].strip()
-
+            else:
+                first_name = page_name
+                                
             
             first_name = unquote(first_name)
             last_name = unquote(last_name)
@@ -2528,7 +2924,12 @@ class WikiPeopleData():
 
 
             
-            
+
+            week_day_of_birth = get_weekday_from_a_date(birth_date)
+            week_day_of_death = "alive"
+            if is_alive is False:
+                week_day_of_death = get_weekday_from_a_date(death_date)
+                        
 
             # try:
             #     all_links_of_a_page = self.list_of_link_of_user[page_name]
@@ -2559,10 +2960,10 @@ class WikiPeopleData():
 
             #print(print_data,print_data,print_data)  
             #print_data = False
-            if town_birth_place_href != "Undefined" and len(town_birth_place_href) != 0 and len(town_birth_place) < len(town_birth_place_href) and town_birth_place in town_birth_place_href:
+            if skip_town_birth_place_href_checking is False and town_birth_place_href != "Undefined" and len(town_birth_place_href) != 0 and len(town_birth_place) < len(town_birth_place_href) and town_birth_place in town_birth_place_href:
                 town_birth_place = town_birth_place_href.replace("_"," ")
 
-            if town_death_place_href != "Undefined" and len(town_death_place_href) != 0 and len(town_death_place) < len(town_death_place_href) and town_death_place in town_death_place_href:
+            if skip_town_death_place_href_checking is False and town_death_place_href != "Undefined" and len(town_death_place_href) != 0 and len(town_death_place) < len(town_death_place_href) and town_death_place in town_death_place_href:
                 town_death_place = town_death_place_href.replace("_"," ")
 
             if country_birth_place.lower() in NON_COUNTRY_ELEMENTS:
@@ -2632,8 +3033,6 @@ class WikiPeopleData():
                             if f"({country.lower()})" in town_birth_place.lower():
                                 country_birth_place = country
                                 country_birth_place_emoji = country_to_flag_dict[country_birth_place.lower().replace("-"," ").strip()]
-                                
-
             except:
                 pass
 
@@ -2645,11 +3044,32 @@ class WikiPeopleData():
 
                                 country_death_place = country
                                 country_death_place_emoji = country_to_flag_dict[country_death_place.lower().replace("-"," ").strip()]
-                                
-
             except:
                 pass
 
+
+
+
+            #arrondisement = ""
+            # CHECK FOR TOWN WITH ARRONDISEMENT SUCH AS PARIS
+        
+            try:
+                for arrondisement in ARRONDISEMENT_LIST_STRING:
+                    if arrondisement in town_birth_place:
+                        town_birth_place = town_birth_place.split(arrondisement)[1].strip()
+                        break
+            except:
+                pass
+            
+            try:
+                for arrondisement in ARRONDISEMENT_LIST_STRING:
+                    if arrondisement in town_death_place:
+                        town_death_place = town_death_place.split(arrondisement)[1].strip()
+                        break
+            except:
+                pass
+
+            
             if potential_bad_page and potential_bad_page2:
                 potential_bad_bad_page = True
             
@@ -2696,6 +3116,8 @@ class WikiPeopleData():
                 print(f"Birth month: {birth_month}")
                 print(f"Birth day: {birth_day}")
                 print(f"Birth day withouth year: {birth_month_day}")
+                print(f"Century of birth: {century_of_birth}")
+                print(f"Week day of birth: {week_day_of_birth}")
 
                 if is_alive is False:
                     print(f"Death date: {death_date}")
@@ -2703,12 +3125,15 @@ class WikiPeopleData():
                     print(f"Death month: {death_month}")
                     print(f"Death day: {death_day}")
                     print(f"Death day withouth year: {death_month_day}")
-                
+                    print(f"Century of death: {century_of_death}")
+                    print(f"Week day of death: {week_day_of_death}")
+                    print(f"Cause of death: {cause_of_death}")
                 print(f"Born before Christ: {born_before_chirst}")
 
                 if is_alive is False:
                     print(f"Dead before Christ: {died_before_christ}")
                 print(f"Age: {age}")
+                print(f"Age group: {age_group}")
                 print(f"Is Alive: {is_alive}")
                 print(f"Gender: {gender}")
                 print(f"Power ranking: {power_ranking}")
@@ -2746,7 +3171,7 @@ class WikiPeopleData():
 
             if born_before_chirst and died_before_christ:
                 born_and_died_before_christ = True
-                born_and_died_after_christ = False
+                born_and_died_after_christ = True
             if born_before_chirst and died_before_christ is False:
                 born_before_christ_and_died_after_christ = True
 
@@ -2806,6 +3231,7 @@ class WikiPeopleData():
                 "born_and_died_after_christ":born_and_died_after_christ,
                 "born_before_christ_and_died_after_christ":born_before_christ_and_died_after_christ,
                 "age":age,
+                "cause_of_death":cause_of_death,
                 "is_alive":is_alive,
                 "gender":gender,
                 "power_ranking":power_ranking,
@@ -2823,7 +3249,10 @@ class WikiPeopleData():
                 "preciseness_level":int(preciseness_level/2),
                 "potential_bad_page":potential_bad_page,
                 "potential_bad_page2":potential_bad_page2,
-                "potential_bad_bad_page":potential_bad_bad_page,                            
+                "potential_bad_bad_page":potential_bad_bad_page,
+                "week_day_of_birth":week_day_of_birth,
+                "week_day_of_death":week_day_of_death,              
+                "age_group":age_group,      
                 "list_of_unpreciseness_data":list_of_unpreciseness_data,
                 "country_birth_place_emoji":country_birth_place_emoji,
                 "country_death_place_emoji":country_death_place_emoji
@@ -3367,7 +3796,7 @@ do_stat = False
 
 # Plus besoin du do sorted file car la db sort automatiquement les users par leur positions
  
-do_sorted_file = True
+do_sorted_file = False
 
 if do_user_data:
     try:

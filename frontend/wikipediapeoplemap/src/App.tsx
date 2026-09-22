@@ -1,13 +1,18 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import WorldMap from './pages/worldmap';
 import HomePage from './pages/home';
+import Statistics from "./pages/statistics";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route index element={<HomePage />}/> 
+        <Route path="/WorldMap" element={<WorldMap />} />
         <Route path="/Home" element={<HomePage />} />
+        <Route path="/Statistics" element={<Statistics />} />
+        
         {/* <Route path="/Search/:search_query" element={<Search />} /> */}
         
         
@@ -19,3 +24,4 @@ function App() {
 }
 
 export default App;
+

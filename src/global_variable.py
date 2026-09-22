@@ -1,5 +1,34 @@
 """A file that contain all global variable"""
 
+
+AGE_GROUP_DICT: dict[str, str] = {
+    "-99": "-999 ans",
+    "0": "0 à 9 ans",
+    "1": "10 à 19 ans",
+    "2": "20 à 29 ans",
+    "3": "30 à 39 ans",
+    "4": "40 à 49 ans",
+    "5": "50 à 59 ans",
+    "6": "60 à 69 ans",
+    "7": "70 à 79 ans",
+    "8": "80 à 89 ans",
+    "9": "90 à 99 ans",
+    "10": "100 à 109 ans",
+    "11": "110 à 119 ans",
+    "12": "120 à 129 ans",
+}
+
+ARRONDISEMENT_LIST_STRING : str = [
+    "arrondissement de",
+    "Arrondissement de",
+    "arrondissements de",
+    "Arrondissements de",
+    "arrondissement d'",
+    "Arrondissement d'",
+    "arrondissements d'",
+    "Arrondissements d'",                
+]        
+
 MONTH_TO_NUMBER_DICT: dict[str, str] = {
     "janvier": "01",
     "fevrier": "02",
@@ -3338,11 +3367,17 @@ LIST_OF_INCOMPLETE_JOB = [
 HTML_ELEMENT_LIST = [
     "<a href=",
     "</a>",
+    "d:q",
     "</div>",
     "<div class=",
     "</td>",
     "<td>",
     "</th>",
+    "[",
+    "]",
+    "{",
+    "}",
+    ",",
     "<th>",
     "<tr>",
     "</tr>",
@@ -3451,11 +3486,9 @@ NON_TOWN_ELEMENT_LIST = [
     "–",
     "...",
     "p.",
+    "en:Late Roman Republic",
     "pp.",
-    "m",
-    "le",
-    "la",
-    "de",
+    "College d'Eton",
     "des",
     "10ᵉ",
     "antoine",
@@ -3464,6 +3497,7 @@ NON_TOWN_ELEMENT_LIST = [
     "manoir",
     "neufchâteau",
     "20e",
+    "Position (hockey sur glace)",
     "joseph",
     "jules",
     "philippe",
@@ -3527,6 +3561,12 @@ NON_TOWN_ELEMENT_LIST = [
     "hôtel",
     "fribourg",
     "îles cook",
+    "academie americaine des arts et des sciences",
+    "monarchie constitutionnelle francaise (1791-1792)",
+    "ordre national du quebec",
+    "guerre d'independance des etats-unis",
+    "premiere guerre mondiale",
+    "ordre de saint-michel et saint-georges",
     "baronnet",
     "dernière",
     "victoria (état)",
@@ -3542,7 +3582,6 @@ NON_TOWN_ELEMENT_LIST = [
     "pennsylvanie",
     "bristol",
     "essai",
-    "delhi",
     "état de new york",
     "jean",
     "palais",
@@ -3564,6 +3603,18 @@ NON_TOWN_ELEMENT_LIST = [
     "au",
     "dans",
     "[",
+    "langue : anglais",
+    "langue : allemand",
+    "langue : français",
+    "langue : espagnol",
+    "langue : italien",
+    "langue : portugais",
+    "langue : néerlandais",
+    "langue : russe",
+    "langue : chinois",
+    "langue : japonais",
+    "langue : coréen",
+    "langue : arabe",
     "]",
     "surrey (comté)",
     "irlande",
@@ -3691,7 +3742,6 @@ NON_TOWN_ELEMENT_LIST = [
     "Sépulture",
     "Autre titre",
     "Autres titres",
-    "Hôtel de la reine Hortense",
     "Symphonie",
     "Ville libre d'Empire",
     "Vindex",
@@ -3837,7 +3887,6 @@ NON_TOWN_ELEMENT_LIST = [
     "Élimée",
     "[ 1 ]",
     "Justinien II",
-    "Buda (ville)",
     "Selichtchi",
     "Anne Ange",
     "Guerre des Deux-Roses",
@@ -3922,7 +3971,6 @@ NON_TOWN_ELEMENT_LIST = [
     "Lead",
     "Maurice",
     "Arrondissement de Man'gyŏngdae",
-    "Rome antique",
     "Hong Kong (colonie)",
     "Stone",
     "Huire,",
@@ -3994,6 +4042,8 @@ NON_TOWN_ELEMENT_LIST = [
     "Fuente",
     "Clifton",
     "Québec)",
+    "Canadiens de Montreal",
+    "Union des republiques socialistes sovietiques",
     "Valens",
     "Marlborough",
     "juin",
@@ -4454,8 +4504,275 @@ NON_TOWN_ELEMENT_LIST = [
     "Liste des souverains de Provence",
     "Boson de Provence",
     "Thessalie",
+    "Maple Leafs de Toronto",
     "Latin",
     "Kirkwood",
+    "Rangers de New York",
+    "Blackhawks de Chicago",
+    "Bruins de Boston",
+    "Liban",
+    "Ordre national de la Legion d'honneur",
+    "Scenariste",
+    "page",
+    "Nigeria",
+    "Bresil",
+    "Ethiopie",
+    "Senegal",
+    "Flyers de Philadelphie",
+    "Mexique",
+    "Jamaique",
+    "Penguins de Pittsburgh",
+    "Argentine",
+    "Red Wings de Detroit",
+    "Kings de Los Angeles",
+    "Nouvelle-Zelande",
+    "Universite Paris-I-Pantheon-Sorbonne",
+    "Canucks de Vancouver",
+    "Sabres de Buffalo",
+    "Islanders de New York",
+    "Chine",
+    "Oilers d'Edmonton",
+    "Ghana",
+    "Iran",
+    "Roumanie",
+    "Devils du New Jersey",
+    "Blues de Saint-Louis",
+    "pages",
+    "Harrow School",
+    "Theologie",
+    "Trinity College (Cambridge)",
+    "Ouganda",
+    "Haiti",
+    "d:Q10710237",
+    "Flames de Calgary",
+    "Saison 2018 de la NFL",
+    "Saison 2017 de la NFL",
+    "Saison 2016 de la NFL",
+    "Universite de Californie a Berkeley",
+    "Universite Harvard",
+    "Fief",
+    "Cuba",
+    "Saison 2015 de la NFL",
+    "Islande",
+    "Universite Columbia",
+    "Ordre de l'Empire britannique",
+    "Autriche",
+    "d:Q6106068",
+    "Sharks de San Jose",
+    "Chili",
+    "Universite de Cambridge",
+    "en:China (region)",
+    "Panthers de la Floride",
+    "King's College (Cambridge)",
+    "Capitals de Washington",
+    "en:Hedvig Eleonora Parish",
+    "Avalanche du Colorado",
+    "Madagascar",
+    "Saison 2014 de la NFL",
+    "Thailande",
+    "Universite d'Oxford",
+    "Institut d'etudes politiques de Paris",
+    "Taiwan",
+    "Catholicos",
+    "Grece",
+    "Americans de Rochester",
+    "Arabie saoudite",
+    "Universite de Chicago",
+    "Nordiques de Quebec",
+    "Ecole normale superieure (Paris)",
+    "Universite Paris-Sorbonne",
+    "HK CSKA Moscou",
+    "Sri Lanka",
+    "Senateurs d'Ottawa",
+    "Saison 2020 de la NFL",
+    "Saison 2013 de la NFL",
+    "Saison 2019 de la NFL",
+    "Maurice (pays)",
+    "Realisateur",
+    "Pretre catholique",
+    "Bears de Hershey",
+    "Finlande",
+    "Seconde Guerre mondiale",
+    "Benin",
+    "Rwanda",
+    "Ordre national du Merite (France)",
+    "Lokomotiv Iaroslavl",
+    "Hampshire (Angleterre)",
+    "Irak",
+    "d:Q10546040",
+    "Luxembourg",
+    "Venezuela",
+    "Hurricanes de la Caroline",
+    "Ordre de Saint-Michel",
+    "Universite Yale",
+    "Barbade",
+    "Lightning de Tampa Bay",
+    "Universite de Princeton",
+    "2010",
+    "Pakistan",
+    "Philippines",
+    "Universite Laval",
+    "2011",
+    "Ducks d'Anaheim",
+    "Ecole des hautes etudes en sciences sociales",
+    "Ligue americaine de hockey",
+    "Wolves de Chicago",
+    "Christ Church (Oxford)",
+    "d:Q39297398",
+    "Ukraine",
+    "d:Q10570835",
+    "Predators de Nashville",
+    "HK Dinamo Moscou",
+    "Blue Jackets de Columbus",
+    "Admirals de Milwaukee",
+    "St John's College (Cambridge)",
+    "Saison 2021 de la NFL",
+    "Producteur de cinema",
+    "Soudan",
+    "Mali",
+    "Universite Stanford",
+    "Lituanie",
+    "Ordre du Canada",
+    "Middlesex (Angleterre)",
+    "Languedoc",
+    "Guinee",
+    "Stars de Dallas",
+    "en:Engelbrekt Parish",
+    "Republique du Congo",
+    "Universite de Londres",
+    "Bulgarie",
+    "Guerre de Succession d'Espagne",
+    "d:Q54006791",
+    "Bulldogs de Hamilton",
+    "Saison 2009 de la NFL",
+    "SKA Saint-Petersbourg",
+    "Perou",
+    "Entraineur (handball)",
+    "Westminster School",
+    "Crunch de Syracuse",
+    "North Stars du Minnesota",
+    "Universite Paris-Nanterre",
+    "Tchad",
+    "Shropshire",
+    "Koweit",
+    "HIFK",
+    "Ville de Bruxelles",
+    "Tchequie",
+    "Saison 2022 de la NFL",
+    "Congo belge",
+    "en:Hedvig Eleonora and Oscar Parish",
+    "Afghanistan",
+    "Jets de Winnipeg (1972-1996)",
+    "Saison 2012 de la NFL",
+    "Saison 2005 de la NFL",
+    "Mississippi (Etat)",
+    "Wolf Pack de Hartford",
+    "d:Q3433770",
+    "Ordre des Palmes academiques",
+    "Mer",
+    "Thrashers d'Atlanta",
+    "Saison 2011 de la NFL",
+    "Genes",
+    "Japonais class=lang-ja lang=ja",
+    "Zimbabwe",
+    "Kloten Flyers",
+    "Saison 2006 de la NFL",
+    "Universite de Montreal",
+    "Bruins de Providence",
+    "d:Q10550317",
+    "Falcons de Springfield",
+    "Universite de Pennsylvanie",
+    "Sound Tigers de Bridgeport",
+    "Krylia Sovetov",
+    "Hockey Club Fribourg-Gotteron",
+    "Brynas IF",
+    "Ile de Wight",
+    "Queensland",
+    "Club des patineurs de Berne",
+    "Whalers de Hartford",
+    "Griffins de Grand Rapids",
+    "Chanteur",
+    "Guerre de Sept Ans",
+    "d:Q210787",
+    "Nouvelle-Ecosse",
+    "Staffordshire",
+    "Georgie (pays)",
+    "Frolunda HC",
+    "Colombie",
+    "2009",
+    "Universite d'Edimbourg",
+    "Pirates de Portland",
+    "Penguins de Wilkes-Barre/Scranton",
+    "Saison 2010 de la NFL",
+    "Guerre de la Ligue d'Augsbourg",
+    "Wild du Minnesota",
+    "en:Gentofte",
+    "Togo",
+    "Hockey Club Davos",
+    "Adler Mannheim",
+    "Traktor Tcheliabinsk",
+    "Francais",
+    "Universite Johns-Hopkins",
+    "Burkina Faso",
+    "Universite du Michigan",
+    "Universite Cornell",
+    "Avangard Omsk",
+    "Tibetain",
+    "Prete a",
+    "Lada Togliatti",
+    "Charterhouse School",
+    "Ecole pratique des hautes etudes",
+    "Universite Paris-VIII-Vincennes-Saint-Denis",
+    "Rouen hockey elite 76",
+    "Universite de New York",
+    "Liaoning",
+    "Empire chinois",
+    "Uruguay",
+    "Saison 2008 de la NFL",
+    "Hockey Club Bienne",
+    "Ecosse",
+    "Libye",
+    "Admirals de Norfolk (LAH)",
+    "Republique romaine",
+    "Peinture (art)",
+    "d:Q43549106",
+    "Bolivie",
+    "Coyotes de Phoenix",
+    "Herefordshire",
+    "Paroisse de Clarendon",
+    "Senators de Binghamton",
+    "Schlittschuh Club Langnau Tigers",
+    "River Rats d'Albany",
+    "Kerala",
+    "Tanganyika (territoire)",
+    "Monarchs de Manchester (LAH)",
+    "Baroque",
+    "Croix de guerre 1914-1918 (France)",
+    "Maroons de Montreal",
+    "Washington (district de Columbia)",
+    "Society of Antiquaries of London",
+    "Biarritz olympique Pays basque",
+    "Djurgarden Hockey",
+    "Saison 2023 de la NFL",
+    "MODO Hockey",
+    "Personnalite politique",
+    "Palestine (region)",
+    "Moose du Manitoba",
+    "East Lothian",
+    "Graveur",
+    "Indonesie",
+    "Manly (Sydney)",
+    "College royal militaire de Sandhurst",
+    "Sillery (Quebec)",
+    "Universite de Californie a Los Angeles",
+    "Zambie",
+    "Batavia (Indes neerlandaises)",
+    "Marlies de Toronto",
+    "Birmanie",
+    "Leksands IF",
+    "Emirats arabes unis",
+    "Paraguay",
+    "Skelleftea AIK",
     "Guillaume V de Juliers",
     "hypothèse",
     "Kona Nord",
@@ -4791,7 +5108,6 @@ NON_TOWN_ELEMENT_LIST = [
     "poste",
     "san",
     "paroisse",
-    "rome antique",
     "los",
     "biographie",
     "saint",
@@ -4903,10 +5219,98 @@ TOWN_TO_LOCALISATION_DICT = {
     "valence":"39° 28′ 13″ N, 0° 22′ 36″ W",
     "washington":"38° 53′ 42″ N, 77° 02′ 12″ W",
     "vienne":"48° 12′ 30″ N, 16° 22′ 21″ E",
+    "buda (ville)":"47° 28′ N, 19° 03′ E",
+    "new york":"40° 42′ 46″ N, 74° 00′ 22″ W",
+    "saint-petersbourg":"59° 57′ N, 30° 19′ E",
+    "paris":"48° 51′ 24″ N, 2° 21′ 07″ E",
+    "woodland hills":"34° 10′ 06″ N, 118° 36′ 18″ O",
+    "château de versailles":"48° 48′ 17,26″ N, 2° 07′ 13,34″ E",
+    "lichtental":"48° 44′ 38″ N, 8° 15′ 39″ E",
+    "aix-la-chapelle":"50° 46′ 00″ N, 6° 06′ 00″ E",
+    "tyburn (village)":"51° 30′ 46,3″ N, 0° 09′ 50,4″ W",
+    "rome":"41° 53′ 19″ N, 12° 29′ 12″ E",
+    "rome antique":"41° 53′ 19″ N, 12° 29′ 12″ E",
+    "san francisco (californie)":"48° 12′ 30″ N, 16° 22′ 21″ E",
     "vienne (autriche)":"48° 12′ 30″ N, 16° 22′ 21″ E",
+    "hôtel de la reine hortense":"48° 51′ 24″ N, 2° 21′ 07″ E",
+    "pella (cité antique)":"40° 45′ 36″ N, 22° 31′ 32″ E",
     "saint-denis":"48° 56′ 08″ N, 2° 21′ 14″ E",
     "surabaya":"7°15′40.71″S 112°44′59.13″E",
-    "saint-léger-de-foucheret":"47° 01′ 20″ N, 3° 53′ 55″ E"
+    "saint-léger-de-foucheret":"47° 01′ 20″ N, 3° 53′ 55″ E",
+    "chateau de versailles":"48° 48′ 17,26″ N, 2° 07′ 13,34″ E",
+    "los angeles":"34° 03′ 08″ N, 118° 14′ 37″ W",
+    "varsovie":"52° 13′ 47″ N, 21° 00′ 44″ E",
+    "madrid":"40° 26′ 00″ N, 3° 41′ 00″ W",
+    "montreal":"45° 30′ 32″ N, 73° 33′ 42″ W",
+    "constantinople":"41° 00′ 30″ N, 28° 58′ 42″ E",
+    "lyon":"45° 45′ 50″ N, 4° 50′ 09″ E",
+    "anvers":"51° 13′ 00″ N, 4° 24′ 00″ E",
+    "milan":"45° 28′ 00″ N, 9° 10′ 00″ E",
+    "prague":"50° 05′ 16″ N, 14° 25′ 14″ E",
+    "oslo":"59° 54′ 50″ N, 10° 45′ 08″ E",
+    "venise":"45° 26′ 23″ N, 12° 19′ 55″ E",
+    "naples":"40° 50′ 00″ N, 14° 15′ 00″ E",
+    "dublin":"53° 20′ 36″ N, 6° 16′ 03″ W",
+    "florence":"43° 46′ 11″ N, 11° 15′ 21″ E",
+    "le caire":"30° 02′ 40″ N, 31° 14′ 09″ E",
+    "tokyo":"35° 41′ 22″ N, 139° 41′ 30″ E",
+    "munich":"48° 08′ 15″ N, 11° 34′ 32″ E",
+    "chicago":"41° 53′ 01″ N, 87° 37′ 44″ W",
+    "nice":"43° 42′ 03″ N, 7° 16′ 06″ E",
+    "avignon":"43° 56′ 57″ N, 4° 48′ 20″ E",
+    "buda (hongrie)":"47° 29′ 52″ N, 19° 02′ 25″ E",
+    "alger":"36° 45′ 14″ N, 3° 03′ 32″ E",
+    "athenes":"37° 59′ 02″ N, 23° 43′ 39″ E",
+    "verdun (montreal)":"45° 27′ 30″ N, 73° 34′ 07″ W",
+    "kiev":"50° 27′ 00″ N, 30° 31′ 24″ E",
+    "buenos aires":"34° 36′ 13″ S, 58° 22′ 54″ W",
+    "cologne":"50° 56′ 15″ N, 6° 57′ 37″ E",
+    "amsterdam":"52° 22′ 03″ N, 4° 54′ 15″ E",
+    "turin":"45° 04′ 13″ N, 7° 41′ 13″ E",
+    "liege":"50° 37′ 57″ N, 5° 34′ 47″ E",
+    "nantes":"47° 13′ 06″ N, 1° 33′ 13″ W",
+    "cracovie":"50° 03′ 53″ N, 19° 56′ 42″ E",
+    "goa":"15° 17′ 57″ N, 74° 07′ 26″ E",
+    "lisbonne":"38° 43′ 20″ N, 9° 08′ 21″ W",
+    "tbilissi":"41° 42′ 54″ N, 44° 49′ 38″ E",
+    "zurich":"47° 22′ 37″ N, 8° 32′ 30″ E",
+    "chang'an":"34° 20′ 30″ N, 108° 56′ 23″ E",
+    "beauport":"46° 51′ 29″ N, 71° 11′ 42″ W",
+    "toronto":"43° 39′ 12″ N, 79° 23′ 00″ W",
+    "bologne":"44° 29′ 42″ N, 11° 20′ 33″ E",
+    "marseille":"43° 17′ 47″ N, 5° 22′ 11″ E",
+    "bagdad":"33° 18′ 55″ N, 44° 21′ 58″ E",
+    "rouen":"49° 26′ 36″ N, 1° 05′ 57″ E",
+    "jerusalem":"31° 46′ 06″ N, 35° 12′ 49″ E",
+    "tours":"47° 23′ 39″ N, 0° 41′ 05″ E",
+    "pekin":"39° 54′ 15″ N, 116° 24′ 27″ E",
+    "geneve":"46° 12′ 16″ N, 6° 08′ 36″ E",
+    "mexico":"19° 25′ 57″ N, 99° 08′ 00″ W",
+    "stockholm":"59° 19′ 45″ N, 18° 04′ 07″ E",
+    "gand":"51° 03′ 15″ N, 3° 43′ 03″ E",
+    "edimbourg":"55° 57′ 12″ N, 3° 11′ 18″ W",
+    "lausanne":"46° 31′ 11″ N, 6° 37′ 56″ E",
+    "tunis":"36° 48′ 23″ N, 10° 10′ 53″ E",
+    "kinshasa":"4° 26′ 31″ S, 15° 15′ 59″ E",
+    "leyde":"52° 09′ 36″ N, 4° 29′ 49″ E",
+    "barcelone":"41° 23′ 15″ N, 2° 10′ 07″ E",
+    "versailles":"48° 48′ 05″ N, 2° 07′ 48″ E",
+    "istanbul":"41° 00′ 30″ N, 28° 58′ 42″ E",
+    "bordeaux":"44° 50′ 16″ N, 0° 34′ 45″ W",
+    "strasbourg":"48° 34′ 24″ N, 7° 45′ 08″ E",
+    "toulouse":"43° 36′ 17″ N, 1° 26′ 39″ E",
+    "aoste":"45° 44′ 13″ N, 7° 19′ 12″ E",
+    "copenhague":"55° 40′ 34″ N, 12° 34′ 06″ E",
+    "suva":"18° 07′ 29″ S, 178° 27′ 00″ E",
+    "ottawa":"45° 25′ 17″ N, 75° 41′ 50″ W",
+    "riga":"56° 56′ 59″ N, 24° 06′ 19″ E",
+    "bruges":"51° 12′ 33″ N, 3° 13′ 29″ E",
+    "nancy":"48° 41′ 32″ N, 6° 11′ 04″ E",
+    "rio de janeiro":"22° 54′ 24″ S, 43° 10′ 22″ W",
+    "teheran":"35° 41′ 21″ N, 51° 23′ 20″ E",
+    "oxford":"51° 45′ 07″ N, 1° 15′ 28″ W",
+    "quebec (ville)":"46° 48′ 50″ N, 71° 12′ 29″ W",
+    "palais de placentia":"51° 28′ 56″ N, 0° 00′ 24″ O"
 }
 
 WIKIJOB_TO_JOB_DICT_MAN = {
@@ -4922,6 +5326,7 @@ WIKIJOB_TO_JOB_DICT_MAN = {
     "ski alpin":"Skieur alpin",
     "fief":"Feudataire",
     "ski de fond":"	Skieur de fond",
+    "femmes et salons litteraires en france":"Salonnière",
     "gravure":"Graveur",
     "pop":"chanteur",
     "banque": "Banquier",
@@ -5314,6 +5719,7 @@ DICT_OF_LOCALISATION_TO_COUNTRY = {
  '48° 12′ 30′′ n, 16° 22′ 21′′ e': 'Autriche',
  '55° 45′ 09′′ n, 37° 37′ 23,11′′ e': 'Russie',
  '43° 17′ 47′′ n, 5° 22′ 12′′ e': 'France',
+ '50° 38′ 14′′ n, 3° 03′ 48′′ e': 'France',
  '50° 51′ 01′′ n, 4° 21′ 00′′ e': 'Belgique',
  '41° 52′ 55′′ n, 87° 37′ 40′′ w': 'États-Unis',
  '34° 03′ n, 118° 15′ w': 'États-Unis',
@@ -5339,13 +5745,13 @@ DICT_OF_LOCALISATION_TO_COUNTRY = {
  '52° 13′ 56′′ n, 21° 00′ 30′′ e': 'Pologne',
  '50° 05′ 16′′ n, 14° 25′ 14′′ e': 'République tchèque',
  '48° 09′ 00′′ n, 11° 34′ 30′′ e': 'Allemagne',
+ "40° 45′ 36′′ N, 22° 31′ 32′′ E": 'Grèce',
  '55° 41′ 24′′ n, 12° 35′ 09,6′′ e': 'Danemark',
  '43° 40′ 13′′ n, 79° 23′ 12′′ w': 'Canada',
  '53° 20′ 36′′ n, 6° 16′ 03′′ w': 'Irlande',
  '36° 47′ 51′′ n, 10° 09′ 57′′ e': 'Tunisie',
  '50° 38′ 23′′ n, 5° 34′ 14′′ e': 'Belgique',
  '36° 46′ 34′′ n, 3° 03′ 36′′ e': 'Algérie',
- '50° 38′ 14′′ n, 3° 03′ 48′′ e': 'Belgique',
  '42° 21′ 37′′ n, 71° 03′ 28′′ w': 'États-Unis',
  '53° 33′ n, 10° 00′ e': 'Allemagne',
  '48° 53′ 17′′ n, 2° 16′ 07′′ e': 'France',
@@ -6807,3 +7213,686 @@ LIST_OF_GOOD_LOCALISATION = """48° 51′ 24′′ n, 2° 21′ 07′′ e
 44° 33′ 29′′ n, 4° 45′ 03′′ e
 48° 54′ 08′′ n, 2° 28′ 58′′ e
 51° 32′ 38′′ n, 0° 06′ 10′′ w""".split("\n")
+
+NON_CAUSE_OF_DEATH = """France
+Espagne
+Argentine
+Nationalité française
+Allemagne
+États-Unis
+République démocratique du Congo
+Brésil
+Italie
+Suisse
+Royaume-Uni de Grande-Bretagne et d'Irlande
+Canada
+Algérie
+Royaume-Uni
+Abbaye d'Egmond
+Achab (roi)
+Belgique
+Samarie (ville ancienne)
+Afghanistan
+Malawi
+Christianisme
+République du Congo
+Mexique
+Côte d'Ivoire
+Jérusalem
+Julius Avitus
+Huguenot
+Perdiccas II de Macédoine
+Kenya
+Hâroun ar-Rachîd
+Bataille d'Hastings
+Corée pendant la colonisation japonaise
+Nigeria
+Tchécoslovaquie
+Archélaos Ier de Macédoine
+Royaume d'Angleterre
+Berbères
+Maroc
+Cimetière de Cameroun
+Cimetière de la Recoleta
+Grec ancien
+Portugal
+Dioclétien
+Tirtza (ville)
+Cameroun
+Camp de concentration
+Grandes Purges
+Blitz
+Schutzstaffel
+Marches de la mort (Shoah)
+Qunu
+Cuba
+Chapelle Saint-Georges de Windsor
+Marcus Valerius Messalla Barbatus
+Cimetière du Montparnasse
+Cimetière anglais de Rome
+Qom
+Philippe (satrape)
+Tombe de Philippe II de Macédoine
+Tombeau de David
+République de Genève
+Église Notre-Dame-de-Bonsecours de Nancy
+Balle (projectile)
+Israël antique
+Église de Riddarholmen
+Questeur (Rome antique)
+Coup d'État de 1987 au Burkina Faso
+Fédération nationale catholique
+Affan ibn Abi al-'As
+Flèche (arme)
+Sigebert III
+Savannakhet
+Sigurd Syr
+Cimetière de Recoleta
+Yougoslavie
+Séleucie de Piérie
+Vaudémont
+Église de Waltham Abbey
+FE de las JONS
+Alphonse III de Portugal
+Pakistan
+Église Saint-Pantaléon de Cologne
+Loeches
+Mausolée de Kwame Nkrumah
+Irak
+Cathédrale Saint-Guy de Prague
+Baudouin V de Hainaut
+Assassinat d'Ismaël Haniyeh
+Chapelles des Médicis
+Monastère Donskoï
+NSDAP
+Colombie
+Bataille d'Azincourt
+Ferdinand II d'Aragon
+Antipater (général)
+Middelbourg
+Marrakech
+Capitole de l'État de Louisiane
+Abbaye de Varnhem
+Abbaye de Rijnsburg
+Robert le Fort
+Sisygambis
+Crypte des Capucins
+Repton
+en:Zorah
+Aldoin
+Ptolémée Ier
+Fièvre
+Æthelred (roi du Wessex)
+Albanie
+Pons de Tripoli
+Cimetière de la Chacarita
+Prieuré d'Inchmahome
+Empire coréen
+Léovigild
+Citadelle La Ferrière
+Soissons
+Nuit des Longs Couteaux
+Royaume d'Espagne
+Soumaâ du Khroub
+Darius Ier
+Cimetière de Mingorrubio
+Pozuelo de Alarcón
+Mahendra Bir Bikram Shah
+Oahu
+République populaire de Chine
+Louis Becquey
+Liste des comtes du Poher
+Blythburgh
+Séleucos Ier
+Slovaquie
+Démarate de Corinthe
+Ithobaal Ier
+en:Belevi Mausoleum
+Yeoju
+Hunéric
+2
+Syagrius
+Théodoric le Grand
+Marc Aurèle
+Léon III d'Arménie
+Abbaye de Vreta
+Cathédrale Saint-Étienne de Vienne
+Valentinien Ier
+Mausolée d'Hadrien
+Raoul Ier de Coucy
+Reine Pédauque
+Clovis Ier
+Université de Salamanque
+Journaliste
+Tourbet El Bey
+Sargon II
+RPG-2
+Al-Muʿtas̩im (Abbasside)
+Jean VI Cantacuzène
+Wulfrun
+Cathédrale de la Almudena
+Clovis II
+Bataille de Stamford Bridge
+826
+Robert III de La Marck
+Bordeaux
+Université de Buenos Aires
+Gibet de Montfaucon
+Sri Lanka
+Palestine (État)
+Australie
+Sabins
+Fosse commune
+Namibie
+Dagobert Ier
+Strasbourg
+Hussein ben Ali (chérif de La Mecque)
+Thành Thái
+Nicolas Ducos
+Mithridate VI
+Kenchela
+Église des Saints-Apôtres (Constantinople)
+Pampliega
+Colegio Nacional de Buenos Aires
+Tombeaux saadiens
+Basilique San Pietro in Ciel d'Oro
+Hiempsal II
+Pharnace Ier
+Rædwald
+Salta
+Achaz
+Elbeuf
+Rhémétalcès Ier
+Venceslas de Saxe
+Javelot
+Militaire
+Gamla Uppsala
+Wittiza
+Goswinthe
+Harald le Vieux
+Ville de David
+Jézabel
+José Gabriel Condorcanqui
+Personnalité politique
+Louis Paul Sevaistre
+Liuva Ier
+Église de Jésus-Christ des saints des derniers jours
+Abijam
+Antiochos II
+Parti radical-démocratique
+Thiudimir
+Parti ouvrier unifié polonais
+Démétrios II Nicator
+Iran
+Pont-à-Mousson
+Belfast
+Église Saint-Louis-en-l'Île
+Joram (Juda)
+Alexandre le Grand
+Cathédrale d'Uppsala
+Valence (Drôme)
+Cité de David
+Occultation (islam)
+en:Willesden Jewish Cemetery
+Cimetière du Djellaz
+Stettin
+Chindaswinthe
+Agni (roi)
+Guatemala
+Vranov (district de Brno-Campagne)
+Assassinats de George Moscone et d'Harvey Milk
+Comores (Pays)
+Bataille de Messines (1917)
+Engaku-ji (bouddhisme)
+Ragnar Lodbrok
+Incident du 15 mai
+Eurydice (épouse d'Amyntas III)
+Constance II
+en:Ügyek
+Royaume d'Imerina
+Bangladesh
+Al-Mahdi (Abbasside)
+Maréchal de camp
+Thothorsès
+Teutberge d'Arles
+Dácil
+Epitácio Pessoa
+Parti socialiste ouvrier espagnol
+Oswiu
+Tamoul
+Empire allemand
+Bikfaya
+Allemand
+Ézéchias
+Caius Bruttius Praesens Laberius Maximus
+Radbod Ier de Frise
+Antiochos III
+Ismaïl Ier de Grenade
+Villette (Yvelines)
+Persée (roi)
+Inde
+Mauritanie
+Eysteinn
+138 av. J.-C.
+Henri II d'Orléans-Longueville
+Parti républicain (États-Unis)
+Perdiccas III de Macédoine
+Aldea del Cano
+Josias
+Francs
+Coup d'État de mai (Serbie)
+Ghana
+Pszczyna
+Maurice (pays)
+Amyntas III
+Parti de l'Ordre
+Cimetière du Centre
+Djibouti
+Antiochos X
+Felipe Pardo y Aliaga
+Tamatoa IV
+Lhassa
+Espagnols
+pt:Valaravano
+Adils
+en:Hervor
+Blót
+premier
+Tir national
+Russes
+Cassandre (roi)
+Rwanda
+Louis XIV
+Dyggve
+Brandonnet
+Autriche
+Yngvi et Alf
+Islam
+Bom Conselho
+Premier avocat général
+Amyntas II (roi de Macédoine)
+Étienne-Thomas de Bosnie
+Togo
+Haïti
+Empire romain
+Vice-royauté du Río de la Plata
+Madrid
+Autigny-la-Tour
+Ptolémée IX
+Bohémond IV d'Antioche
+Biélorussie
+Drones
+Joas (Israël)
+Saxons de Transylvanie
+Nicomède Ier
+Aligern
+Andromaque (fils d'Alexandre)
+La Roche-sur-Yon
+Gento
+Abbaye d'Abingdon
+Tulga
+Tolède
+Bulgarie
+Rhescuporis Ier
+Joachaz (Israël)
+Démétrios II (roi séleucide)
+Jéroboam II
+Pierre runique
+Roumain
+Vanlandi
+Premier ministre d'Haïti
+Somalie
+Ben Aknoun
+Nongoma
+Hébron
+Mvog-Ada
+Sarde
+Conakry
+Cimetière marin de Saint-Tropez
+Derby (Royaume-Uni)
+Lomé
+Université Chulalongkorn
+Séleucos II
+Fidji
+Angola
+Arabie saoudite
+Séleucos IV
+Birmanie
+Guinée
+Zambie
+Khmers rouges
+Bosniaques
+El Calafate
+3
+Amyntas III de Macédoine
+Nivelon Ier de Pierrefonds
+Lestko
+Lisbonne
+Liste des principaux accidents ferroviaires
+Industrie
+Jéhu
+Gondioc
+Union des républiques socialistes soviétiques
+Boris Godounov
+Philippines
+Hilaliens
+Tchad
+République centrafricaine
+Aéropos II de Macédoine
+Martin de Córdova et Velasco
+RKP (b)
+Birendra Bir Bikram Shah Dev
+Cimetière
+Niger
+Tibétains
+Bhoutan
+Jéroboam Ier
+École impériale du Service de santé militaire de Strasbourg
+Ostrogoths
+Union républicaine et démocratique
+Nyírbátor
+Olinda
+Cathédrale Notre-Dame-de-l'Assomption de Mata Utu
+Le Vigan (Gard)
+Kirghizistan
+Liste des rois d'Est-Anglie
+Britanniques
+Culhuacan
+Parti républicain-démocrate
+Hébreu
+Sans étiquette
+Menahem (Roi d'Israël)
+Persépolis
+Ptolémée (roi d'Épire)
+Cote d'ivoire
+Grèce
+Iloilo (ville)
+Kalâa des Beni Abbès
+Jean II de Courtejoye
+en:Nabû-mukin-apli
+Mali
+Le Cannet
+es:Rollaug
+Religion grecque antique
+Vienne (Isère)
+Kribi
+Tang Zhaozong
+Uruguay
+Aho Houegbadja
+Crotone
+Nikki (commune)
+en:Pirathon
+Tribu de Zabulon
+Gotique
+Takalédougou
+Saint-Gervais-d'Auvergne
+Aeropos II de Macédoine
+Pandémie de Covid-19 en Papouasie-Nouvelle-Guinée
+Rassemblement du peuple français
+Guangdong
+Saint-Laurent-en-Royans
+La Réole
+Alexandre Ier de Macédoine
+Hangeul
+Portomarín
+Finlande
+Action démocratique (Venezuela)
+Yaoundé
+Thoros Ier d'Arménie
+Guanches
+Revolutionäre Zellen
+Neuilly-sur-Seine
+Cimetière de Montmartre
+Al-Mutawakkil (Abbasside)
+Manassé (Juda)
+Noble
+Colmar""".split("\n")
+
+GOOD_CAUSE_OF_DEATH = """
+Assassinat
+Infarctus du myocarde
+Cancer
+Tué à l'ennemi
+Crise cardiaque
+Suicide
+Accident vasculaire cérébral
+Cancer du poumon
+Pneumonie
+Exécution par arme à feu
+Accident de la route
+Pneumonie aiguë
+Pendaison
+Maladie à coronavirus 2019
+Hémorragie cérébrale
+Maladie
+Insuffisance cardiaque chez l'humain
+Accident aérien
+Apoplexie
+Arrêt cardiorespiratoire
+Leucémie
+Cancer de la prostate
+Décapitation
+Covid-19
+wikt:guillotiné
+Guillotine
+Cancer du pancréas
+Tumeur du cerveau
+Maladie de Parkinson
+Arrêt cardiaque
+Cancer de l'estomac
+Tuberculose
+Choléra
+Insuffisance cardiaque
+Peine de mort
+Accident d'avion
+Maladie d'Alzheimer
+Embolie pulmonaire
+Infarctus
+Cancer du côlon
+Cancer de l'œsophage
+Typhus
+Insuffisance rénale
+Noyade
+Exécution sommaire
+Blessure par balle
+Cancer du cerveau
+Cancer du foie
+Accident de l'avion présidentiel polonais à Smolensk
+Cancer du rein
+Accident
+Cancer colorectal
+Hémorragie
+Fibrose pulmonaire
+Maladie cardiovasculaire
+Anévrisme
+Naturelle
+Angine de poitrine
+Peste
+Homicide
+Empoisonnement
+Strangulation
+Dysenterie
+Maladie de Waldenström
+Chute (traumatologie)
+Mort subite (médecine)
+Déportation
+Hémorragie intracérébrale
+Thrombose
+Lèpre
+Goutte (maladie)
+Assassinat politique
+Attentat
+Mort pour la France
+COVID-19
+Cancer du sein
+Accident de voiture
+Grippe de 1918
+Cancer de la gorge
+Coronavirus
+Grippe
+Bombardement
+Gangrène
+Anévrisme de l'aorte abdominale
+Sepsis
+Insuffisance rénale aiguë
+Variole
+Fibrillation ventriculaire
+Cancer des voies aérodigestives supérieures
+Insuffisance respiratoire
+Mort naturelle
+Nécropole royale de la basilique de Saint-Denis
+Paludisme
+Septicémie
+Cirrhose
+Poumon
+Cimetière de Passy
+Asphyxie
+Cimetière du Père-Lachaise
+Pierre II de Courtenay
+Pybba
+Mort au combat
+Empire russe
+Israëlite
+Amylose (maladie)
+wikt:Guillotiné
+Malaise cardiaque
+Accident de l'hélicoptère d'Ebrahim Raïssi
+Cancer de la vessie
+Cancer de la bouche
+Cyriacus Buyruk Khan
+Cancer de la thyroïde
+Royaume de France
+Varsovie
+Russe
+Abbaye d'Alvastra
+Étienne-Ostoïa
+Néphropathie
+Magnicide
+Sclérose latérale amyotrophique
+Emphysème pulmonaire
+Cimetière monumental de Rouen
+Cancer du colon
+Œdème aigu du poumon
+Grippe espagnole
+Cancer du col utérin
+Abcès
+Épiglottite
+Pleurésie
+Transposition des gros vaisseaux
+Glioblastome multiforme
+Assassinat de Sadi Carnot
+Assassinat de Patrice Lumumba
+Intoxication médicamenteuse
+Guillotiné
+Congestion (médecine)
+Œdème
+Thrombose coronaire
+Insuffisance rénale chronique (humain)
+Cancer (maladie)
+Mélanome
+Fièvre typhoïde
+Cathédrale Saint-Pierre d'Angoulême
+Meurtre
+Décapitation dans l'islam
+Diarrhée du voyageur
+Assassinat de Jean-Jacques Dessalines
+Hépatite
+Neuropathie
+Athérosclérose
+Syphilis
+Choc septique
+Cancer de la langue
+Assassinat de Jovenel Moïse
+Assassinat d'Yitzhak Rabin
+Assassinat de Laurent-Désiré Kabila
+Assassinat de Mohamed Boudiaf
+Assassinat d'Alexandre Ier de Yougoslavie
+Bronchopneumopathie chronique obstructive
+Asthme
+Exécution extrajudiciaire
+Cancer du larynx
+Naufrage
+Hanged, drawn and quartered
+Arrêt cardio-circulatoire
+Assassinat d'Olof Palme
+Infarctus cérébral
+Hémorragie digestive
+Staphylococcus
+Pancréatite
+Assassinat de Luis Carrero Blanco
+Leucémie aiguë myéloblastique
+Euthanasie volontaire
+Assassinat de Talaat Pacha
+Syndrome de défaillance multiviscérale
+wikt:mort naturelle
+Aide au suicide
+Tumeur au cerveau
+Anémie
+Rage (maladie)
+Maladie cardio-vasculaire
+Légionellose
+Cholangiocarcinome
+Pandémie de Covid-19
+Diabète sucré
+Appendicite
+Carcinome hépatocellulaire
+Rupture d’anévrisme
+Liposarcome
+Actinomycose
+Parti catholique
+Septimanie
+Fibrose pulmonaire idiopathique
+Traumatisme contondant
+Covid 19
+Alcoolisme
+Maladie à corps de Lewy
+Vieillesse
+Peste noire
+Exécution
+Urémie
+Cancer de la peau
+Diabète
+Brûlure
+Malaria
+Cancer bronchique à petites cellules
+Intoxication
+Suicide par pendaison
+Assassiné
+Embolie
+Glioblastome
+Cancer des poumons
+Injection létale
+Crise d'épilepsie
+Péritonite
+Cancer des os
+Crash aérien
+Peste bubonique
+Grève de la faim
+Carcinome à cellules de Merkel
+Longue maladie
+Insuffisance rénale chronique
+Attaque d'apoplexie
+Rhumatisme articulaire aigu
+Accident ferroviaire
+Opération chirurgicale
+Lymphome
+Accident de circulation
+Maladie de Charcot
+Pancréatite chronique
+Condamnation à mort
+Épuisement
+Infection bactérienne
+Myélome multiple
+Fusillade
+Apnée
+Lynchage
+Agression
+Accident d'un Tupolev Tu-154 russe en 2016
+Chambre à gaz
+Ulcère gastroduodénal
+Néphrite (médecine)
+Leucémie aiguë
+Explosion
+Aktion T4
+Torture
+""".split("\n")

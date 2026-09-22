@@ -82,3 +82,10 @@ body,
 .legend-death-woman-place {
   background-color: #917a7a;
 }
+
+.btn-xl {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    width:40%;
+}
