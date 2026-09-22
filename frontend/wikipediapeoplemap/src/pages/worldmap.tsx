@@ -1103,9 +1103,6 @@ const WorldMap = () => {
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => window.location.reload()}>Reset</button>
                 <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search(current_chunck_index,true).then((result) => {set_list_of_user_data(result.all_user_data)})}>Rechercher 🔎</button>
-                <button type="button" className="btn btn-info" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search_qjis(1,true)}>STAT</button>
-                <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search_qjis(2,true)}>QJIS</button>
-                
               </div>
             </div>
           </div>

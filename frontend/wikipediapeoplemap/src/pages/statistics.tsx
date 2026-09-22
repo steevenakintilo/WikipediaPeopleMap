@@ -27,15 +27,15 @@ import {NUMBER_OF_USER} from './global_variable'
 import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION} from "./global_variable.tsx"
 import { generate_list_of_dict , make_a_graphic} from "./utility_function.tsx";
 
-// // import {
-// //   Table,
-// //   TableBody,
-// //   TableCell,
-// //   TableContainer,
-// //   TableHead,
-// //   TableRow,
-// //   Paper
-// // } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from "@mui/material";
 
 polyfillCountryFlagEmojis();
 
@@ -55,7 +55,9 @@ const Statistics = () => {
  
 
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
-    const [user_data_info,set_user_data_info] : any = useState({});
+    const [dict_info,set_dict_info] : any = useState({});
+    const [text_input, settext_input] = useState("");
+
 
     async function get_list_of_user_advanced_search() {
       
@@ -78,6 +80,13 @@ const Statistics = () => {
       return data_fetch
 
     }
+
+
+    function handle_text_input (event:any) {
+      // console.log("tototo");
+      settext_input(event.target.value)
+    }
+
 
     
 
@@ -109,17 +118,17 @@ const Statistics = () => {
             if (list_of_user_data[keys[i]].length > 1) {
 
 
-                if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght") {
+                if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level") {
                     generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],15)
                     generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
                     list_of_graph.push(generic_chart)
-                    list_of_dict.push(generic_dict)
+                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
                     
                 } else {
                     generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10000000)
                     generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
                     list_of_graph.push(generic_chart)
-                    list_of_dict.push(generic_dict)
+                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
                     
                 }
                 
@@ -428,29 +437,6 @@ const Statistics = () => {
                        
                      </select>
                      
-                     <br></br>
-                     
-                     <select className="form-select body_flag" aria-label="Default select example"                       
-                       onChange={(event) => handle_dict_of_advance_search(event,"sort_user_by")}
-   >
-                       <option selected>Trier les utilisateurs par?</option>
-                       
-                       {["Nombre de lien","Taille de la page wipedia","Nombre de personnes qui les lient","Âge","Nombre d'ami(e)","Taille du nom de la page","Nombre de vue(s)","Par défaut"]
-                           .map((choice:any, i:number) => (
-                             
-                           
-                           <option
-                             key={i}
-                             className="list-group-item list-group-item-action body_flag"
-                             data-bs-dismiss="modal"
-                           >
-   
-                             {choice}
-                           </option>
-                         ))}
-                       
-                       
-                     </select>
                      
                      <br></br>
                      
@@ -474,33 +460,10 @@ const Statistics = () => {
                        ))}
                      
                      
-                   </select>
+                    </select>
                    
                      <br></br>
                      
-                     <select className="form-select body_flag" aria-label="Default select example"                       
-                       onChange={(event) => handle_dict_of_advance_search(event,"display_only_death_localisation")}
-   >
-                       <option selected>Afficher seulement les lieux de mort?</option>
-                       
-                       {["oui","non"]
-                           .map((choice:any, i:number) => (
-                             
-                           
-                           <option
-                             key={i}
-                             className="list-group-item list-group-item-action body_flag"
-                             data-bs-dismiss="modal"
-                           >
-   
-                             {choice}
-                           </option>
-                         ))}
-                       
-                       
-                     </select>
-                     
-                     <br></br>
                      
                      <select className="form-select body_flag" aria-label="Default select example"                       
                        onChange={(event) => handle_dict_of_advance_search(event,"display_only_people_born_and_dead_the_same_day")}
@@ -590,9 +553,18 @@ const Statistics = () => {
     }
 
 
-    function detailed_stat_modal() {
-        return(
-   
+    function detailed_stat_modal(data_dict:any) {
+      
+      if (result_found == false) {
+        data_dict = {}
+      }
+
+      var total_number : any = 0
+      {Object.values(data_dict).map((data:any,index:number) => (
+        total_number+=data.data_number
+      ))}
+      console.log(data_dict.length)
+      return(
          <div>
            <div className="modal fade" id="exampleModal2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
              <div className="modal-dialog">
@@ -601,13 +573,43 @@ const Statistics = () => {
                    <h1 className="modal-title fs-5" id="exampleModalLabel2">Statistiques détaillées</h1>
                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
+                  
                  <div className="modal-body">
-                   {/* <input
-                       className="form-control w-50"
-                       type="text"
-                       placeholder="Pays de naissance"
-                   />
-                    */}
+                    {/* <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/> */}
+                    
+                    <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/>
+                    <TableContainer component={Paper}>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>{"Element"}</TableCell>
+                          <TableCell>{"Nombre de fois qu'il est présent"}</TableCell>
+                          <TableCell>{"Son%"}</TableCell>
+                          <TableCell>{"Nombre total d'élements"}</TableCell>
+                          
+                        </TableRow>
+                      </TableHead>
+
+                      <TableBody>
+                        {Object.values(data_dict).map((data:any,index:number) => (
+
+                          data.data_name.toLowerCase().includes(text_input.toLowerCase()) != "" && (
+                            <TableRow key={index}>
+                              <TableCell>{data.data_name}</TableCell>
+                              <TableCell>{data.data_number}</TableCell>
+                              <TableCell>{Math.round((data.data_number/total_number * 100) * 10)/10}</TableCell>
+                              <TableCell>{total_number}</TableCell>
+                              
+                              
+                              
+                            </TableRow>
+                          )
+                        ))}
+                      </TableBody>
+                    
+                    </Table>
+                  </TableContainer>
+                    <br></br>
                     
                  </div>
                  
@@ -727,7 +729,7 @@ const Statistics = () => {
                             <br></br>
 
                             <div className="d-grid gap-2">
-                                <button className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => ""}>
+                                <button className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => (set_dict_info(list_of_dict[index]))}>
                                     {"Toutes les statistiques 📊"}
                                 </button>
                             </div>
@@ -742,7 +744,7 @@ const Statistics = () => {
 
         )}
         {advanced_search_modal()}
-        {detailed_stat_modal()}
+        {detailed_stat_modal(dict_info)}
 
         {/* <br></br>
         <br></br>
