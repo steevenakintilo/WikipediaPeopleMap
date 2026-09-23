@@ -542,7 +542,7 @@ export const VAR_TO_DESCRIPTION : any = {
     "death_day": "Liste des jours de décès les plus représentés",
     "death_month_day": "Liste des jours et mois de décès les plus représentés",
     "week_day_of_death": "Liste des jours de la semaine de décès les plus représentés",
-    "cause_of_death_known_counter": "Nombre de personnes dont la cause de décès est connue",
+    "cause_of_death_known_counter": "Nombre de personnes dont la cause de décès est connue?",
     "cause_of_death": "Liste des causes de décès les plus représentées",
     "born_and_died_in_the_same_town": "Personnes nées et décédées dans la même ville?",
     "born_and_died_in_the_same_country": "Personnes nées et décédées dans le même pays?",
@@ -569,7 +569,23 @@ export const VAR_TO_DESCRIPTION : any = {
     "number_of_user_found": "Nombre de personnes trouvées",
     "no_country_counter":"Personnes ayant un pays de naissance connue?",
     "no_town_counter":"Personnes ayant une ville de naissance connue?",
+    "dict_of_error":"Liste des erreurs/élements non trouve par mon code les plus représentés",
+    "number_of_error_per_page":"Nombre d'erreurs par page"
     
+}
+
+export const STAT_TO_DESCRIPTION : any = {
+    "first_name": "Noms et prénoms",
+    "gender": "Informations personnelles",
+    "town_birth_place": "Lieux de naissance ou mort",
+    "country_birth_place": "Pays de naissance ou mort",
+    "continent_of_birth": "Continents de naissance ou mort",
+    "region_of_birth": "Régions de naissance ou mort",
+    "birth_date": "Dates de naissance ou mort",
+    "born_and_died_in_the_same_town": "Comparaisons naissance décès",
+    "born_before_christ": "Chronologie historique",
+    "first_char_of_the_page": "Analyse des pages",
+    "no_country_counter": "Erreurs et données manquantes"
 }
 
 export const NUMBER_OF_USER : number = 712471

@@ -57,7 +57,7 @@ const WorldMap = () => {
     const [launch_profil_root,setlaunch_profile_root] = useState(false)
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [user_data_info,set_user_data_info] : any = useState({});
-    
+    const [hide_searchbar,set_hide_searchbar] : any = useState(false)
     const tooltipTriggerList = document.querySelectorAll(
         '[data-bs-toggle="tooltip"]'
       );
@@ -77,7 +77,7 @@ const WorldMap = () => {
       })
       
       const data_fetch = await response.json()
-      ////console.log("blbabla " , data_fetch[0])
+      //////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
     }
@@ -101,7 +101,7 @@ const WorldMap = () => {
       })
       
       const data_fetch = await response.json()
-      ////console.log("blbabla " , data_fetch[0])
+      //////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
     }
@@ -148,7 +148,7 @@ const WorldMap = () => {
     }
 
     async function get_user_info(user:string) {
-      console.log(`http://127.0.0.1:8000/display_user_info/${user}`)
+      //console.log(`http://127.0.0.1:8000/display_user_info/${user}`)
       const response = await fetch(`http://127.0.0.1:8000/display_user_info/${user}`, {
           method: 'GET',
           //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
@@ -157,7 +157,7 @@ const WorldMap = () => {
       })
       
       const data_fetch = await response.json()
-      ////console.log("blbabla " , data_fetch[0])
+      //////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
     }
@@ -188,13 +188,13 @@ const WorldMap = () => {
 
       if (value != 0 ) {
           if (Object.keys(dict_of_advance_search).length === 0) {
-            console.log("papa est vide " , current_chunck_index , value , index)
+            //console.log("papa est vide " , current_chunck_index , value , index)
             get_list_of_user(index).then((result) => {
                 set_list_of_user_data(result.all_user_data)
             })
             
           } else {
-            console.log("papa est remplie " , current_chunck_index, value , index)
+            //console.log("papa est remplie " , current_chunck_index, value , index)
             
             get_list_of_user_advanced_search(index).then((result) => {set_list_of_user_data(result.all_user_data)})        
           }
@@ -207,7 +207,7 @@ const WorldMap = () => {
         
       }
       
-      console.log("kogrgpkpoer  " , dict_of_advance_search)
+      //console.log("kogrgpkpoer  " , dict_of_advance_search)
     }
   
   const MapController = ({
@@ -229,6 +229,7 @@ const WorldMap = () => {
     return null;
   };
   function change_latitude_and_longitude(pos_x:number,pos_y:number) {
+    console.log("Yolo ", pos_x , pos_y)
     if (pos_x != 999999999999999 && pos_y != 999999999999999) {
       setlatitude(pos_x)
       setlongitude(pos_y)
@@ -278,7 +279,7 @@ const WorldMap = () => {
       }
     }
 
-    console.log(dict_of_advance_search)
+    //console.log(dict_of_advance_search)
     if (current_chunck_index == 999999) {
       start_index = 0
     }
@@ -365,7 +366,7 @@ const WorldMap = () => {
       
     }
     
-    console.log("user_data_info " , user_data_info)
+    //console.log("user_data_info " , user_data_info)
     return (
     <div>
       <div
@@ -563,10 +564,10 @@ const WorldMap = () => {
                 
 
                 {number_of_user_to_show > 0 && (
-                  <p>
+                  <text>
                     <strong>Le top {number_of_user_to_show}:</strong>{" "}
                     <br></br>
-                  </p>
+                  </text>
                   
                 )}
                 
@@ -585,10 +586,10 @@ const WorldMap = () => {
                 
 
                 {number_of_linked_user_to_show > 0 && (
-                  <p>
+                  <text>
                     <strong>Le top {number_of_linked_user_to_show}:</strong>{" "}
                     <br></br>
-                  </p>
+                  </text>
                   
                 )}
                 
@@ -607,10 +608,10 @@ const WorldMap = () => {
                 
 
                 {number_of_friend_to_show > 0 && (
-                  <p>
+                  <text>
                     <strong>Le top {number_of_friend_to_show}:</strong>{" "}
                     <br></br>
-                  </p>
+                  </text>
                   
                 )}
                 
@@ -1139,6 +1140,15 @@ const WorldMap = () => {
       </div>
    */}
 
+      {/* <div className="map-wrapper border-end border-end border-2 border-secondary"
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+        }}
+      >
+       */}
+
       <div className="map-wrapper border-end border-end border-2 border-secondary"
         style={{
           position: "sticky",
@@ -1146,6 +1156,8 @@ const WorldMap = () => {
           height: "100vh",
         }}
       >
+
+        
         <MapContainer
           minZoom={2}
           maxZoom={18}
@@ -1153,7 +1165,7 @@ const WorldMap = () => {
           scrollWheelZoom={true}
           className="world-map"
         >
-
+        
         <MapController
           latitude={latitude}
           longitude={longitude}
@@ -1191,7 +1203,10 @@ const WorldMap = () => {
                       <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>
-                      <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
+                      {/* <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/> */}
+                      <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-title="Voir le profil" onClick={() => handle_complete_profile_user(user.page_name)} alt="" width="250" height="250" className="me-2"/>
+                  
+                      
                   </Popup>
                   
               </CircleMarker>
@@ -1226,63 +1241,87 @@ const WorldMap = () => {
               )
               
           )}
-          <Legend />
+
           
+          <Legend />
+  
         </MapContainer>
-        
       </div>
-      <div className="" style={{flexShrink:0 }}>
-          <div className="card">
-            <ul className="list-group list-group-flush">
-              <div>
-                <li className="list-group-item">
-                  <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Menu</a>
-                  <br></br>
-                  <br></br>
-                  
-                  <input className="form-control w-75" type="text" placeholder={"Nom de la page"} onChange={(event) => handle_searched_name(event)}></input>
-                  <br></br>
-                  <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{margin :"auto"}}>Recherches avancées 🔎</button>
-                  <br></br>
-                  <br></br>
-                  
-                  <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,0)}>Page Aléatoire</button>
-                  
-                  <br></br>
-                  <br></br>
-                  
-                  <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,-1)}>Page Précédente</button>
-                  <button type="button" className="btn btn-secondary ms-4" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,+1)}>Page Suivante</button>
-                  <br></br>
-                  <br></br>
-                  <button type="button" className="btn btn-light">Page {current_chunck_index + 1}</button>
-                  
-                </li>
 
-                
-                {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Launch demo modal
-                </button>
-                 */}
-                {advanced_search_modal()}
-                {user_info_modal()}
-                
-                
-                
+      {/* <div>
+          <button type="button" className="btn btn-danger  btn-sm">.</button>
+      </div>
+       */}
 
-                {user_profile}
-                {/* <li className="list-group-item">
-                  <h1>fefefe</h1>
-                </li>
-                 */}
-                
-              </div>
-            </ul>
-          </div>
-      </div>            
-      
+      {hide_searchbar == false && (
+        <div className="" style={{flexShrink:0 }}>
 
-    </div>
+
+              
+            <div className="card">
+              <ul className="list-group list-group-flush">
+                <div>
+                  <li className="list-group-item">
+                    <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Menu</a>
+                    
+                    <a type="button" className="btn btn-light ms-5" style={{margin :"auto"}} onClick={() => set_hide_searchbar(true)}>Masquer la recherche 🙈</a>
+                    
+                    <br></br>
+                    <br></br>
+                    
+                    <input className="form-control w-75" type="text" placeholder={"Nom de la page"} onChange={(event) => handle_searched_name(event)}></input>
+                    <br></br>
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{margin :"auto"}}>Recherches avancées 🔎</button>
+                    <br></br>
+                    <br></br>
+                    
+                    <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,0)}>Page Aléatoire</button>
+                    
+                    <br></br>
+                    <br></br>
+                    
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,-1)}>Page Précédente</button>
+                    <button type="button" className="btn btn-secondary ms-4" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,+1)}>Page Suivante</button>
+                    <br></br>
+                    <br></br>
+                    <button type="button" className="btn btn-light">Page {current_chunck_index + 1}</button>
+                    
+                  </li>
+
+                  
+                  {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                  </button>
+                  */}
+                  {advanced_search_modal()}
+                  {user_info_modal()}
+                  
+                  
+                  
+
+                  {user_profile}
+                  {/* <li className="list-group-item">
+                    <h1>fefefe</h1>
+                  </li>
+                  */}
+                  
+                </div>
+              </ul>
+            </div>
+        </div>            
+        
+
+      )}
+
+      {hide_searchbar == true && (
+        <div className="" style={{flexShrink:0 }}>
+          <button type="button" className="btn btn-light btn-sm" style={{margin :"auto"}} onClick={() => set_hide_searchbar(false)}>🙈</button>
+        </div>            
+        
+
+      )}
+
+      </div>
     </div>
     
   );

@@ -8,6 +8,8 @@ import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 import { useEffect, useState } from 'react';
 import { data, useNavigate } from 'react-router';
 
+//import Custom_navbar from "./navbar.tsx";
+
 import { AgCharts } from "ag-charts-react";
 import {
     ModuleRegistry,
@@ -24,7 +26,7 @@ import "./home.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import {NUMBER_OF_USER} from './global_variable'
-import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION} from "./global_variable.tsx"
+import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION} from "./global_variable.tsx"
 import { generate_list_of_dict , make_a_graphic} from "./utility_function.tsx";
 
 import {
@@ -36,6 +38,7 @@ import {
   TableRow,
   Paper
 } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 polyfillCountryFlagEmojis();
 
@@ -56,9 +59,17 @@ const Statistics = () => {
 
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [dict_info,set_dict_info] : any = useState({});
+    const [keys_info,set_keys_info] : any = useState({});
     const [text_input, settext_input] = useState("");
 
 
+
+
+
+    function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
+      set_dict_info(dict_info)
+      set_keys_info(keys_info)
+    }
     async function get_list_of_user_advanced_search() {
       
       
@@ -106,20 +117,31 @@ const Statistics = () => {
 
     var list_of_graph : any = []
     var list_of_dict : any = []
-    
+    var list_of_keys_name : any = []
     if (result_found == true) {
         
         const keys = Object.keys(list_of_user_data);
         
-        console.log(keys)
         //console.log(list_of_user_data["age"] , " meade lux lewis")
         for (var i = 0; i < keys.length - 1; i++) {    
             
             if (list_of_user_data[keys[i]].length > 1) {
-
-
-                if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level") {
-                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],15)
+                //console.log("caq ", keys[i])
+                list_of_keys_name.push(keys[i])
+                if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level" && keys[i] != "dict_of_error" && keys[i] != "number_of_error_per_page") {
+                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10)
+                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
+                    list_of_graph.push(generic_chart)
+                    if (keys[i] != "town_birth_and_death_place" && keys[i] != "town_birth_place" && keys[i] != "town_death_place" && keys[i] != "dict_of_error_counter") {
+                      list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],2000))
+                    } 
+                      else {
+                      list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
+                    
+                    }
+                    
+                } else if (keys[i] == "dict_of_error") {
+                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],3)
                     generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
                     list_of_graph.push(generic_chart)
                     list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
@@ -166,6 +188,38 @@ const Statistics = () => {
     // }
 
     
+
+  function Custom_navbar(variable:any = "") {
+    
+    return (
+          <nav className="navbar navbar-expand-lg  navbarBGcolor fixed-top navbar_color">
+          <div className="container-fluid">
+              
+              <div className="d-grid gap-2">
+                  <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+              </div>
+              
+              {/* <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+               */}
+          </div>
+
+
+          
+          {/* <select className="form-select w-25 mx-auto" style={{backgroundColor:"#cad3db"}} aria-label="Multiple select example">
+              <option>Somaire</option>
+              <option>TEST1</option>
+              <option>TEST2</option>
+              <option>TEST3</option>
+          </select>
+           */}
+          </nav>
+      )  
+}
+
     function handle_dict_of_advance_search(event:any,key:any) {
         set_dict_of_advance_search((prev: any) => ({
         ...prev,
@@ -560,17 +614,22 @@ const Statistics = () => {
       }
 
       var total_number : any = 0
+      var text_to_display = "Son%"
       {Object.values(data_dict).map((data:any,index:number) => (
         total_number+=data.data_number
       ))}
-      console.log(data_dict.length)
+      if (keys_info == "dict_of_error") {
+        total_number = list_of_user_data.number_of_user_found
+        text_to_display = "% de personnes avec cette erreur"
+      }
+      console.log(list_of_user_data.number_of_user_found)
       return(
          <div>
            <div className="modal fade" id="exampleModal2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-             <div className="modal-dialog">
+             <div className="modal-dialog modal-lg">
                <div className="modal-content">
                  <div className="modal-header">
-                   <h1 className="modal-title fs-5" id="exampleModalLabel2">Statistiques détaillées</h1>
+                   <h1 className="modal-title fs-5" id="exampleModalLabel2">Statistiques détaillées: {VAR_TO_DESCRIPTION[keys_info]}</h1>
                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
                   
@@ -582,9 +641,10 @@ const Statistics = () => {
                     <Table>
                       <TableHead>
                         <TableRow>
+                          <TableCell>{"."}</TableCell>
                           <TableCell>{"Element"}</TableCell>
                           <TableCell>{"Nombre de fois qu'il est présent"}</TableCell>
-                          <TableCell>{"Son%"}</TableCell>
+                          <TableCell>{text_to_display}</TableCell>
                           <TableCell>{"Nombre total d'élements"}</TableCell>
                           
                         </TableRow>
@@ -593,11 +653,12 @@ const Statistics = () => {
                       <TableBody>
                         {Object.values(data_dict).map((data:any,index:number) => (
 
-                          data.data_name.toLowerCase().includes(text_input.toLowerCase()) != "" && (
+                          data.data_name.toString().toLowerCase().includes(text_input.toLowerCase()) != "" && (
                             <TableRow key={index}>
+                              <TableCell>{index + 1}</TableCell>
                               <TableCell>{data.data_name}</TableCell>
                               <TableCell>{data.data_number}</TableCell>
-                              <TableCell>{Math.round((data.data_number/total_number * 100) * 10)/10}</TableCell>
+                              <TableCell>{Math.round((data.data_number/total_number * 100) * 100)/100}</TableCell>
                               <TableCell>{total_number}</TableCell>
                               
                               
@@ -636,9 +697,6 @@ const Statistics = () => {
                 
                 
                 <br></br>
-                <div className="d-grid gap-2">
-                    <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                </div>
                 
                 <br></br>
                 <h1 className="wikifont">
@@ -658,10 +716,17 @@ const Statistics = () => {
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ""}>Filtres avancées 🔎</button>
                 </div>
 
+                <br></br>
+                <br></br>
+
+                <div className="d-grid gap-2">
+                  <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+                </div>
+              
                 {loading == true &&(
                 <div>
-                    <h2>
-                        ça charge (max 2 minutes)...:
+                    <h2 className="wikifont">
+                        ça charge (maximum 5 minutes)...:
                     </h2>
                     
                     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="2 min Countdown"></img>
@@ -692,11 +757,15 @@ const Statistics = () => {
 
                     {loading != true &&(
                     <div>
-                    
+                    {Custom_navbar("")}
+
                     <br></br>
-                    <div className="d-grid gap-2">
+
+                    
+                    {/* <div className="d-grid gap-2">
                         <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
                     </div>
+                     */}
                     <br></br>
                     <br></br>
 
@@ -706,11 +775,12 @@ const Statistics = () => {
                     
                     <br></br>
 
-                    <h1>
+                    <h1 className="wikifont">
                         Statistiques détaillées des {list_of_user_data.number_of_user_found} pages Wikipédia:
                     </h1>
 
                     <br></br>
+                    
                     {/* <div>
                         <AgCharts options={test_chart} />  
                     </div>
@@ -721,15 +791,28 @@ const Statistics = () => {
                     </div>
                     */}
 
+                    
                     {list_of_graph
                         .map((graph:any, index:number) => (
                         <div>
+                            {["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"].includes(list_of_keys_name[index]) &&(
+                              <div>
+                              <br></br>
+                              <br></br>
+                              <br></br>
+                              <br></br>
+                              
+                                <h1 className="wikifont"><mark>- {STAT_TO_DESCRIPTION[list_of_keys_name[index]]}</mark></h1>
+                              </div>
+
+                            )}
+                            
                             <AgCharts options={graph} />  
                             <br></br>
                             <br></br>
-
+                            
                             <div className="d-grid gap-2">
-                                <button className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => (set_dict_info(list_of_dict[index]))}>
+                                <button className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => (handle_dict_and_keys_info(list_of_dict[index],list_of_keys_name[index]))}>
                                     {"Toutes les statistiques 📊"}
                                 </button>
                             </div>

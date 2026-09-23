@@ -33,21 +33,27 @@ def split_list(lst:list[str], chunk_size:int):
     return [lst[i:i + chunk_size] for i in range(0, len(lst), chunk_size)]
 
 
-def sort_a_counter(counter:Counter,type=0) -> Counter:
+def sort_a_counter(counter:Counter,type=0,key="") -> Counter:
     """A function that sort a counter"""
-    if type == 0:
-        counter_sorted = sorted(
-            counter.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
-    else:
-        counter_sorted = sorted(
-            counter.items(),
-            key=lambda x: x[0]
-        )
-    return counter_sorted
 
+    try:
+        if key in ["preciseness_level","age","grade_over_20","wikipedia_page_lenght","number_of_user_found","number_of_error_per_page"]:
+            return counter
+        if type == 0:
+            counter_sorted = sorted(
+                counter.items(),
+                key=lambda x: x[1],
+                reverse=True
+            )
+        else:
+            counter_sorted = sorted(
+                counter.items(),
+                key=lambda x: x[0]
+            )
+        return counter_sorted
+    except:
+        print(counter)
+        return counter
 def dms_to_decimal(dms,name=""):
     "A function that convert Wikipedia Localisation to standart localisation"
     try:

@@ -14,9 +14,9 @@ export function generate_list_of_dict(list_:any,big_index:number) {
         if (index < big_index) {
             
             if (data[0].toString().toLowerCase() == "true") {
-                list_of_dict.push({ data_name: "Oui", data_number: data[1] });
+                list_of_dict.push({ data_name: data[1], data_number: data[1] });
             } else if (data[0].toString().toLowerCase() == "false") {
-                list_of_dict.push({ data_name: "Non", data_number: data[1] });
+                list_of_dict.push({ data_name: data[1], data_number: data[1] });
             } else {
                 list_of_dict.push({ data_name: data[0], data_number: data[1] });
             }
