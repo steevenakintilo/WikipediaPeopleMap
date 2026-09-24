@@ -3,9 +3,8 @@ A map that shows where all people who have a Wikipedia article were born and die
 
 A FAIRE:
 
-- Stat qui affiche l'age moyens des gens sur wikipedia (vivants/morts)
-- Stat qui affiche l'age moyens de deces sur wikipedia (vivants/morts)
-- Pouvoir telecharger les cartes
+- Faire une partie responsible mobile pour la carte
+- Faire une v2 avec un meilleur code cote front/back + faire des test unitaires
 
 A FIX:
 
@@ -30,7 +29,10 @@ FAIT:
 - Stat qui affiche la date la plus populaire (pour naissance et déces)
 - La meme pour les villes/continents/regions du monde/métier/prénoms
 - Fix les bugs de naissance/date de naissances pour les gens né avant JC
+- Stat qui affiche l'age moyen des gens sur wikipedia (vivants/morts)
+- Stat qui affiche l'age moyen de deces sur wikipedia (vivants/morts)
+- Stat qui affiche moyenne de note/erreur/nombre de lien/nombre de personne lie à l'user/nombre d'amis
 
 
-Charbre 8 jours de la semaine
+
 Regarder à partir de "Para-Commando's" pour la listes des users "douteux"

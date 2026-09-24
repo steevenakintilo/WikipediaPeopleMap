@@ -3083,7 +3083,16 @@ class WikiPeopleData():
             
             if potential_bad_page and potential_bad_page2:
                 potential_bad_bad_page = True
-            
+
+
+            user_birth_outside_france = True
+            user_death_outside_france = True
+                        
+            if country_birth_place.lower() == "france":
+                user_birth_outside_france = False
+
+            if country_death_place.lower() == "france":
+                user_death_outside_france = False
             
             if print_data:
                 print(f"Page name: {page_name}")
@@ -3099,6 +3108,8 @@ class WikiPeopleData():
                 print(f"Country birth place: {country_birth_place}")
                 print(f"Country birth place emojie: {country_birth_place_emoji}")
                 print(f"Birth year time period: {time_period_of_birth}")
+                print(f"Birth country outside france?: {user_birth_outside_france}")                
+                                    
                 if continent_of_birth != "Undefined" and len(continent_of_birth) != 0:
                     print(f"Continent of birth: {continent_of_birth}")
 
@@ -3109,8 +3120,8 @@ class WikiPeopleData():
                     print(f"Death Town localisation: {death_town_localisation}")
                     print(f"Country death place: {country_death_place}")
                     print(f"Country death place emojie: {country_death_place_emoji}")
-                                    
-
+                    print(f"Death country outside france?: {user_death_outside_france}")                
+                    
                 if continent_of_death != "Undefined" and len(continent_of_death) != 0 and is_alive is False:
                     print(f"Continent of death: {continent_of_death}")
 
@@ -3196,8 +3207,6 @@ class WikiPeopleData():
             # print(f"Positition: {position}/{last_position}")
             # print(f"Position %: {position_pourcentage}")
             # print(f"Number of wikipedia page: {last_position}")
-            list_of_page_linked_to = []
-            number_of_page_linked_to = 0
             user_info_dict = {
                 "page_name":page_name,
                 "page_name_lenght":len(page_name),
@@ -3266,6 +3275,8 @@ class WikiPeopleData():
                 "week_day_of_birth":week_day_of_birth,
                 "week_day_of_death":week_day_of_death,              
                 "age_group":age_group,      
+                "user_birth_outside_france":user_birth_outside_france,
+                "user_death_outside_france":user_death_outside_france,
                 "list_of_unpreciseness_data":list_of_unpreciseness_data,
                 "country_birth_place_emoji":country_birth_place_emoji,
                 "country_death_place_emoji":country_death_place_emoji

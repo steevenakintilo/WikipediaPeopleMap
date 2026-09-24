@@ -19,6 +19,7 @@ export const gender_to_color2 : any = {
 
 export const list_of_countries = [
   "Tous les pays",
+  "Tous les pays sauf la france",
   "Afrique",
   "Amerique",
   "Asie",
@@ -263,6 +264,7 @@ export const list_of_countries = [
 
 export const list_of_country_flag = [
   "🗺️",
+  "❌🇫🇷",
   "🌍",
   "🌎",
   "🌏",

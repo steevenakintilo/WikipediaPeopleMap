@@ -4,7 +4,7 @@
 
 import { Tooltip } from "bootstrap";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
-
+import { Accordion } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { data, useNavigate } from 'react-router';
 
@@ -26,8 +26,8 @@ import "./home.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import {NUMBER_OF_USER} from './global_variable'
-import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION} from "./global_variable.tsx"
-import { generate_list_of_dict , make_a_graphic , generate_list_of_dict_with_date , YearsChart} from "./utility_function.tsx";
+import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME} from "./global_variable.tsx"
+import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict2} from "./utility_function.tsx";
 
 import {
   Table,
@@ -42,15 +42,18 @@ import { grey } from "@mui/material/colors";
 
 polyfillCountryFlagEmojis();
 
-const Statistics = () => {
-    //const [list_of_user_data,set_list_of_user_data] : any = useState({});
-    const [list_of_user_data,set_list_of_user_data] : any = useState({});
-
+const QjisMap = () => {
+    //const [total_number_of_user_found,set_total_number_of_user_found] : any = useState({});
+    const [total_number_of_user_found,set_total_number_of_user_found] : any = useState(0);
+    const [file_to_download,set_file_to_download] : any = useState();
+    
     const [result_found,set_result_found] : any = useState(false)
     const [loading,set_loading] : any = useState(false)
+    const [server_error_found,set_server_error_found] : any = useState(false)
+    
     useEffect(() => {
         // get_list_of_user_advanced_search().then((result) => {
-        //     set_list_of_user_data(result.all_user_data)
+        //     set_total_number_of_user_found(result.all_user_data)
         //     console.log("typeof: ", typeof(result.all_user_data))
         // })
 
@@ -65,7 +68,7 @@ const Statistics = () => {
 
 
 
-
+    
     function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
       set_dict_info(dict_info)
       set_keys_info(keys_info)
@@ -73,22 +76,45 @@ const Statistics = () => {
     async function get_list_of_user_advanced_search() {
       
       
-      //setchunck(0)
-      set_loading(true)
-      const response = await fetch(`http://127.0.0.1:8000/get_advanced_statistics`, {
-          method: 'POST',
-          //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
-          headers: {"Content-Type" : "application/json"},
-          body:JSON.stringify(dict_of_advance_search)
+    //setchunck(0)
+    set_loading(true)
+    set_server_error_found(false)
 
-      })
-      
-      const data_fetch = await response.json()
+    const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search_qjis`, {
+        method: 'POST',
+        //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
+        headers: {"Content-Type" : "application/json"},
+        body:JSON.stringify(dict_of_advance_search)
 
-      set_result_found(true)
-      set_loading(false)
-      ////console.log("blbabla " , data_fetch[0])
-      return data_fetch
+    })
+    
+    console.log("toto " , response.status,response)
+    
+    if (response.status == 500) {
+        set_server_error_found(true)
+        set_loading(false)
+        set_result_found(false)
+        return {}
+    }
+    const data_fetch = await response
+
+    console.log("ddddd " , data_fetch )
+    
+    const blob = await response.blob();
+
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "qjis_localisation.csv";
+    document.body.appendChild(a);
+    a.click();
+
+    a.remove();
+    window.URL.revokeObjectURL(url);
+    set_result_found(true)
+    set_loading(false)
+    return data_fetch
 
     }
 
@@ -119,68 +145,6 @@ const Statistics = () => {
     var list_of_dict : any = []
     var list_of_keys_name : any = []
     if (result_found == true) {
-        
-        const keys = Object.keys(list_of_user_data);
-        
-        //console.log(list_of_user_data["age"] , " meade lux lewis")
-        for (var i = 0; i < keys.length - 1; i++) {    
-            
-            if (list_of_user_data[keys[i]].length > 1) {
-                //console.log("caq ", keys[i])
-                list_of_keys_name.push(keys[i])
-                if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level" && keys[i] != "dict_of_error" && keys[i] != "number_of_error_per_page" && keys[i] != "age_group"
-                  && keys[i] != "birth_year" && keys[i] != "death_year" && keys[i] != "birth_and_death_year"
-                ) {
-                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10)
-                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
-                    list_of_graph.push(generic_chart)
-                    if (keys[i] != "town_birth_and_death_place" && keys[i] != "town_birth_place" && keys[i] != "town_death_place" && keys[i] != "dict_of_error_counter") {
-                      list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],2000))
-                    } 
-                      else {
-                      list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
-                    
-                    }
-                    
-                } else if (keys[i] == "dict_of_error") {
-                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],3)
-                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
-                    list_of_graph.push(generic_chart)
-                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
-                } else if (
-                    keys[i] == "birth_year" ||
-                    keys[i] == "death_year" ||
-                    keys[i] == "birth_and_death_year"
-                ) {
-                    generic_dict = generate_list_of_dict_with_date(
-                        list_of_user_data[keys[i]],
-                        100000
-                    );
-
-                    list_of_graph.push({
-                        type: "echarts",
-                        data: generic_dict,
-                    });
-
-                    list_of_dict.push(
-                        generate_list_of_dict(
-                            list_of_user_data[keys[i]],
-                            500
-                        )
-                    );
-                }  else {
-                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10000000)
-                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
-                    list_of_graph.push(generic_chart)
-                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
-                    
-                }
-                
-            }
-
-            //console.log("fpoekfgezkpo " , )
-        }
-        //console.log("coca cola " , generic_chart)
         
     }
 
@@ -250,6 +214,8 @@ const Statistics = () => {
     }
 
    function advanced_search_modal() {
+
+      
        const status_death_string_list : any = ["Mort","Vivant","Les 2"]
        const gender_string_list : any = ["Homme","Femme","Les 2"]
        const historical_period: any = [
@@ -261,7 +227,7 @@ const Statistics = () => {
        "Époque actuelle 2000-?????",
        "Toutes"
        ]
-   
+       
        return(
    
          <div>
@@ -375,6 +341,18 @@ const Statistics = () => {
                        
                        
                      </select>
+
+                      <br></br>
+                     
+                     <input className="form-control w-75" 
+                       placeholder={"Niveau de précision de la page (0-100%)"} 
+                       type="number"
+                       min={0}
+                       max={100}
+                       step={1}
+                       onChange={(event) => handle_dict_of_advance_search(event,"preciseness_level")}>
+                     </input>
+   
                      <br></br>
                      <input className="form-control w-100" 
                        placeholder={"Année de naissance (+ pour inclure les années suivantes)"} 
@@ -396,7 +374,19 @@ const Statistics = () => {
                        step={1}
                        onChange={(event) => handle_dict_of_advance_search(event,"age")}>
                      </input>
+                    
+
+
+                    <br></br>
                      
+                     <input className="form-control w-75" 
+                       placeholder={"Age maximum"} 
+                       type="number"
+                       min={1}
+                       max={125}
+                       step={1}
+                       onChange={(event) => handle_dict_of_advance_search(event,"age_max")}>
+                     </input>
                      
    
                      <br></br>
@@ -441,11 +431,10 @@ const Statistics = () => {
                      </select>
                      <br></br>
                      
-                     
                      <select className="form-select body_flag" aria-label="Default select example"                       
-                       onChange={(event) => handle_dict_of_advance_search(event,"display_people_with_no_localisation")}
+                       onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_first_name")}
    >
-                       <option selected>Afficher les gens qui n'ont pas de localisation de naissance?</option>
+                       <option selected>Afficher seulement un utilisateur par prénom?</option>
                        
                        {["oui","non"]
                            .map((choice:any, i:number) => (
@@ -467,9 +456,9 @@ const Statistics = () => {
                      <br></br>
                      
                      <select className="form-select body_flag" aria-label="Default select example"                       
-                       onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_town")}
+                       onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_last_name")}
    >
-                       <option selected>Afficher seulement un utilisateur par ville de naissance?</option>
+                       <option selected>Afficher seulement un utilisateur par nom de famille?</option>
                        
                        {["oui","non"]
                            .map((choice:any, i:number) => (
@@ -488,7 +477,6 @@ const Statistics = () => {
                        
                      </select>
                      
-   
                      <br></br>
                      
                      <select className="form-select body_flag" aria-label="Default select example"                       
@@ -590,26 +578,7 @@ const Statistics = () => {
                      <br></br>
                      
                      <input className="form-control w-75" type="number" min="1" max="706280" placeholder={"Position maximale de la personne à afficher"} onChange={(event) => handle_dict_of_advance_search(event,"latest_position_of_user_to_display")}></input>
-                     <br></br>
-                     
-                     <input className="form-control w-75" 
-                       placeholder={"Niveau de précision de la page (0-100%)"} 
-                       type="number"
-                       min={0}
-                       max={100}
-                       step={1}
-                       onChange={(event) => handle_dict_of_advance_search(event,"preciseness_level")}>
-                     </input>
    
-                     <br></br>
-                     <input className="form-control w-75" 
-                       placeholder={"Nombre de personnes affichées (1-500)"} 
-                       type="number"
-                       min={0}
-                       max={500}
-                       step={1}
-                       onChange={(event) => handle_dict_of_advance_search(event,"number_of_people_to_display")}>
-                     </input>
                                        
    
                  </div>
@@ -618,7 +587,7 @@ const Statistics = () => {
                    
                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => window.location.reload()}>Reset</button>
-                   <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search().then((result) => set_list_of_user_data(result.all_wikipedia_info))}>Rechercher 🔎</button>
+                   <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search().then((result) => set_total_number_of_user_found(result.nb_of_user_found))}>Rechercher 🔎</button>
                    
                  </div>
                </div>
@@ -628,83 +597,7 @@ const Statistics = () => {
        )
     }
 
-
-    function detailed_stat_modal(data_dict:any) {
-      
-      if (result_found == false) {
-        data_dict = {}
-      }
-
-      var total_number : any = 0
-      var text_to_display = "Son%"
-      {Object.values(data_dict).map((data:any,index:number) => (
-        total_number+=data.data_number
-      ))}
-      if (keys_info == "dict_of_error") {
-        total_number = list_of_user_data.number_of_user_found
-        text_to_display = "% de personnes avec cette erreur"
-      }
-      console.log(list_of_user_data.number_of_user_found)
-      return(
-         <div>
-           <div className="modal fade" id="exampleModal2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-             <div className="modal-dialog modal-lg">
-               <div className="modal-content">
-                 <div className="modal-header">
-                   <h1 className="modal-title fs-5" id="exampleModalLabel2">Statistiques détaillées: {VAR_TO_DESCRIPTION[keys_info]}</h1>
-                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                  
-                 <div className="modal-body">
-                    {/* <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/> */}
-                    
-                    <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/>
-                    <TableContainer component={Paper}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>{"."}</TableCell>
-                          <TableCell>{"Element"}</TableCell>
-                          <TableCell>{"Nombre de fois qu'il est présent"}</TableCell>
-                          <TableCell>{text_to_display}</TableCell>
-                          <TableCell>{"Nombre total d'élements"}</TableCell>
-                          
-                        </TableRow>
-                      </TableHead>
-
-                      <TableBody>
-                        {Object.values(data_dict).map((data:any,index:number) => (
-
-                          data.data_name.toString().toLowerCase().includes(text_input.toLowerCase()) != "" && (
-                            <TableRow key={index}>
-                              <TableCell>{index + 1}</TableCell>
-                              <TableCell>{data.data_name}</TableCell>
-                              <TableCell>{data.data_number}</TableCell>
-                              <TableCell>{Math.round((data.data_number/total_number * 100) * 100)/100}</TableCell>
-                              <TableCell>{total_number}</TableCell>
-                              
-                              
-                              
-                            </TableRow>
-                          )
-                        ))}
-                      </TableBody>
-                    
-                    </Table>
-                  </TableContainer>
-                    <br></br>
-                    
-                 </div>
-                 
-                 <div className="modal-footer">
-                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div> 
-       )
-    }
+   console.log("opkoprekgoper " , total_number_of_user_found)
    return (
 
     <div className="container">
@@ -722,13 +615,13 @@ const Statistics = () => {
                 
                 <br></br>
                 <h1 className="wikifont">
-                    Consultez les statistiques détaillées des pages Wikipédia et affinez vos recherches grâce aux filtres avancés.
+                    Generez un fichier de position utilisable sur qjis avec la recherches et les filtres avancés.
                 </h1>
                 <br></br>
 
 
                 <div className="d-grid gap-2">
-                    <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_search().then((result) => set_list_of_user_data(result.all_wikipedia_info))}>Rechercher 🔎</button>
+                    <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_search().then((result) => set_total_number_of_user_found(result.all_wikipedia_info))}>Generez le fichier 📁</button>
                 </div>
 
                 <br></br>
@@ -744,14 +637,23 @@ const Statistics = () => {
                 <div className="d-grid gap-2">
                   <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
                 </div>
-              
+                <br></br>
+                <br></br>
+
+                {server_error_found === true &&(
+                  <h2 className="wikifont">
+                    Erreur serveur, veuillez patienter quelques minutes.
+                  </h2>
+                  
+
+                )}
                 {loading == true &&(
                 <div>
                     <h2 className="wikifont">
-                        ça charge (maximum 5 minutes)...:
+                        Ça charge veuillez patienter quelques minutes
                     </h2>
                     
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="2 min Countdown"></img>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" width="250" height="250" alt="2 min Countdown"></img>
                 </div>
                 )}
             </div>
@@ -769,91 +671,49 @@ const Statistics = () => {
                             <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
                         </div>
                         <br></br>    
-                        <h2>
-                            ça charge...
+                        <h2 className="wikifont">
+                            ça charge (maximum 15 minutes)...
                         </h2>
                         
-                        <div className="tenor-gif-embed" data-postid="17234189" data-share-method="host" data-aspect-ratio="1.19403" data-width="100%"><a href="https://tenor.com/view/homer-simpson-the-simpsons-spinning-walking-floor-gif-17234189">Homer Simpson The Simpsons GIF</a>from <a href="https://tenor.com/search/homer+simpson-gifs">Homer Simpson GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+                        <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif"></img>
+                        {/* <div className="tenor-gif-embed" data-postid="17234189" data-share-method="host" data-aspect-ratio="1.19403" data-width="100%"><a href="https://tenor.com/view/homer-simpson-the-simpsons-spinning-walking-floor-gif-17234189">Homer Simpson The Simpsons GIF</a>from <a href="https://tenor.com/search/homer+simpson-gifs">Homer Simpson GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+                     */}
+                    
                     </div>
                     )}
 
                     {loading != true &&(
                     <div>
-                    {Custom_navbar("")}
+                        {Custom_navbar("")}
 
-                    <br></br>
+                        <br></br>
 
-                    
-                    {/* <div className="d-grid gap-2">
-                        <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                    </div>
-                     */}
-                    <br></br>
-                    <br></br>
-
-                    <div className="d-grid gap-2">
-                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ""}>Filtres avancées 🔎</button>
-                    </div>
-                    
-                    <br></br>
-
-                    <h1 className="wikifont">
-                        Statistiques détaillées des {list_of_user_data.number_of_user_found} pages Wikipédia:
-                    </h1>
-
-                    <br></br>
-                    
-                    {/* <div>
-                        <AgCharts options={test_chart} />  
-                    </div>
-                                        */}
-
-                    {/* <div>
-                        <AgCharts options={generic_chart} />  
-                    </div>
-                    */}
-
-                    
-                    {list_of_graph
-                        .map((graph:any, index:number) => (
-                        <div>
-                            {["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"].includes(list_of_keys_name[index]) &&(
-                              <div>
-                              <br></br>
-                              <br></br>
-                              <br></br>
-                              <br></br>
-                              
-                                <h1 className="wikifont"><mark>- {STAT_TO_DESCRIPTION[list_of_keys_name[index]]}</mark></h1>
-                              </div>
-
-                            )}
-                            
-                            {graph.type === "echarts" ? (
-                                <YearsChart data={graph.data} />
-                            ) : (
-                                <AgCharts options={graph} />
-                            )}
-                            <br></br>
-                            <br></br>
-                            
-                            <div className="d-grid gap-2">
-                                <button className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => (handle_dict_and_keys_info(list_of_dict[index],list_of_keys_name[index]))}>
-                                    {"Toutes les statistiques 📊"}
-                                </button>
-                            </div>
                         
+                        {/* <div className="d-grid gap-2">
+                            <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
                         </div>
+                        */}
+                        <br></br>
+                        <br></br>
 
-                    ))}
+                        <div className="d-grid gap-2">
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ""}>Filtres avancées 🔎</button>
+                        </div>
+                        
+                        <br></br>
 
-                </div>
-                )}
+                        <h1 className="wikifont">
+                            Les pages wikipédia ont éte trouvé ton fichier va être télécharger automatiquement!:
+                        </h1>
+
+                        <br></br>
+                    </div>
+                    )}
             </div>
 
         )}
+
         {advanced_search_modal()}
-        {detailed_stat_modal(dict_info)}
 
         {/* <br></br>
         <br></br>
@@ -870,4 +730,4 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
+export default QjisMap;

@@ -236,6 +236,9 @@ const Home = () => {
             
             <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistique</a>
             <br></br>
+
+            <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Qjis">Carte pour qjis</a>
+            <br></br>
             
             {/* <button type="button" className="btn btn-dark btn-lg" style={{margin :"auto"}}>Informations</button>
             <br></br>
