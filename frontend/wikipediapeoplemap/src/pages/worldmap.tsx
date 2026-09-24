@@ -58,6 +58,7 @@ const WorldMap = () => {
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [user_data_info,set_user_data_info] : any = useState({});
     const [hide_searchbar,set_hide_searchbar] : any = useState(false)
+    const [no_move,set_no_move] : any = useState(false)
     const tooltipTriggerList = document.querySelectorAll(
         '[data-bs-toggle="tooltip"]'
       );
@@ -66,6 +67,11 @@ const WorldMap = () => {
         new Tooltip(tooltipTriggerEl);
       });
     const navigate = useNavigate();
+
+    function handle_search_bar(){
+      set_hide_searchbar(!hide_searchbar)
+      set_no_move(false)
+    }
     async function get_list_of_user(chunk:number) {
       //setchunck(0)
 
@@ -228,9 +234,10 @@ const WorldMap = () => {
 
     return null;
   };
-  function change_latitude_and_longitude(pos_x:number,pos_y:number) {
-    console.log("Yolo ", pos_x , pos_y)
-    if (pos_x != 999999999999999 && pos_y != 999999999999999) {
+  function change_latitude_and_longitude(pos_x:number,pos_y:number,move:boolean=false) {
+    console.log("move de connard " , move)
+    set_no_move(move)
+    if (pos_x != 999999999999999 && pos_y != 999999999999999 && no_move == false) {
       setlatitude(pos_x)
       setlongitude(pos_y)
       if (pos_x === 5 && pos_y === 20) {
@@ -295,10 +302,10 @@ const WorldMap = () => {
             <br></br>
             <h1 className="body_flag">
               <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} alt="" width="50" height="50" className="me-2"/>
-                <img src={dict_localisation_pin_picture[user.birth_town_localisation[0]]  ?? dict_localisation_pin_picture.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="35" height="35" className="me-2"/>
+                <img src={dict_localisation_pin_picture[user.birth_town_localisation[0]]  ?? dict_localisation_pin_picture.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="35" height="35" className="me-2"/>
               
               {user.display_death_localisation == true &&(
-                  <img src={dict_localisation_pin_picture2[user.town_death_localisation[0]]  ?? dict_localisation_pin_picture2.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.town_death_localisation[0],user.town_death_localisation[1])} alt="" width="35" height="35" className="me-2"/>
+                  <img src={dict_localisation_pin_picture2[user.town_death_localisation[0]]  ?? dict_localisation_pin_picture2.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.town_death_localisation[0],user.town_death_localisation[1],true)} alt="" width="35" height="35" className="me-2"/>
               )}
 
               <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxw6xy-R6L-ethznPligpikS1nTohfbsiKoVEX6WlL3Q&s=10"} style={{ cursor: "pointer" }} onClick={() => window.open(user.page_url, "_blank")} alt="" width="35" height="35" className="me-2"/>
@@ -815,6 +822,17 @@ const WorldMap = () => {
                     
                   </select>
                   <br></br>
+                  
+                  <input className="form-control w-75" 
+                    placeholder={"Niveau de précision de la page (0-100%)"} 
+                    type="number"
+                    min={0}
+                    max={100}
+                    step={1}
+                    onChange={(event) => handle_dict_of_advance_search(event,"preciseness_level")}>
+                  </input>
+                  <br></br>
+
                   <input className="form-control w-100" 
                     placeholder={"Année de naissance (+ pour inclure les années suivantes)"} 
                     type="text"
@@ -835,8 +853,17 @@ const WorldMap = () => {
                     step={1}
                     onChange={(event) => handle_dict_of_advance_search(event,"age")}>
                   </input>
-                  
-                  
+                    
+                  <br></br>   
+                  <input className="form-control w-75" 
+                    placeholder={"Age maximum"} 
+                    type="number"
+                    min={1}
+                    max={125}
+                    step={1}
+                    onChange={(event) => handle_dict_of_advance_search(event,"age_max")}>
+                  </input>
+
 
                   <br></br>
                   
@@ -860,7 +887,7 @@ const WorldMap = () => {
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"time_period_of_birth")}
 >
-                    <option selected>Periode historique?</option>
+                    <option selected>Période historique?</option>
                     
                     {historical_period
                         .map((history:any, i:number) => (
@@ -880,6 +907,25 @@ const WorldMap = () => {
                   </select>
                   <br></br>
                   
+                  <input className="form-control w-75" 
+                    placeholder={"Siécle de naissance"} 
+                    type="number"
+                    min={1}
+                    max={125}
+                    step={1}
+                    onChange={(event) => handle_dict_of_advance_search(event,"century_of_birth")}>
+                  </input>
+                  <br></br>
+                  
+                  <input className="form-control w-75" 
+                    placeholder={"Siécle de mort"} 
+                    type="number"
+                    min={1}
+                    max={125}
+                    step={1}
+                    onChange={(event) => handle_dict_of_advance_search(event,"century_of_death")}>
+                  </input>
+                  <br></br>
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_people_with_no_localisation")}
@@ -1075,17 +1121,7 @@ const WorldMap = () => {
                   <br></br>
                   
                   <input className="form-control w-75" type="number" min="1" max="706280" placeholder={"Position maximale de la personne à afficher"} onChange={(event) => handle_dict_of_advance_search(event,"latest_position_of_user_to_display")}></input>
-                  <br></br>
                   
-                  <input className="form-control w-75" 
-                    placeholder={"Niveau de précision de la page (0-100%)"} 
-                    type="number"
-                    min={0}
-                    max={100}
-                    step={1}
-                    onChange={(event) => handle_dict_of_advance_search(event,"preciseness_level")}>
-                  </input>
-
                   <br></br>
                   <input className="form-control w-75" 
                     placeholder={"Nombre de personnes affichées (1-500)"} 
@@ -1200,7 +1236,7 @@ const WorldMap = () => {
               >                
                   <Popup>
                       {user.page_name}
-                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
+                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>
                       {/* <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/> */}
@@ -1231,7 +1267,7 @@ const WorldMap = () => {
               >                
                   <Popup>
                       {user.page_name}
-                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])} alt="" width="15" height="15" className="me-2"/>
+                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>
                       <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
@@ -1264,7 +1300,7 @@ const WorldMap = () => {
                   <li className="list-group-item">
                     <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Menu</a>
                     
-                    <a type="button" className="btn btn-light ms-5" style={{margin :"auto"}} onClick={() => set_hide_searchbar(true)}>Masquer la recherche 🙈</a>
+                    <a type="button" className="btn btn-light ms-5" style={{margin :"auto"}} onClick={() => handle_search_bar()}>Masquer la recherche 🙈</a>
                     
                     <br></br>
                     <br></br>
@@ -1315,7 +1351,7 @@ const WorldMap = () => {
 
       {hide_searchbar == true && (
         <div className="" style={{flexShrink:0 }}>
-          <button type="button" className="btn btn-light btn-sm" style={{margin :"auto"}} onClick={() => set_hide_searchbar(false)}>🙈</button>
+          <button type="button" className="btn btn-light btn-sm" style={{margin :"auto"}} onClick={() => handle_search_bar()}>🙈</button>
         </div>            
         
 

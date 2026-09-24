@@ -128,7 +128,6 @@ const Home = () => {
   //       }
 
   // }
-  console.log("blabla " , list_of_random_position)
   return (
 
     <div>   

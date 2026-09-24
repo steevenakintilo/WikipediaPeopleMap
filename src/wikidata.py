@@ -2310,12 +2310,14 @@ class WikiPeopleData():
 
                     if cause_of_death in NON_CAUSE_OF_DEATH:
                         cause_of_death = text_normal.split("Nature du décès")[1].split("<td>")[1].split("\n")[0]
-                    
+                    if "href=" in cause_of_death:
+                        cause_of_death = BeautifulSoup(cause_of_death, "html.parser").get_text(" ", strip=True)
+                                        
+                    #cause_of_death = cause_of_death.lower()
                     
 
                 except:
                     cause_of_death = "Unspecified"
-            
             
             if town_birth_place == town_death_place and len(birth_town_localisation) != 0 and len(town_birth_place) != 0:
                 death_town_localisation = birth_town_localisation
@@ -2520,7 +2522,8 @@ class WikiPeopleData():
                     preciseness_level -= 50
                     list_of_unpreciseness_data.append("birth_date and death_date are wrong")
                     #print("birth_date == death_date")
-                
+            
+
 
             try:
                 if len(birth_date) < 2:
@@ -2960,6 +2963,11 @@ class WikiPeopleData():
 
             #print(print_data,print_data,print_data)  
             #print_data = False
+            if town_birth_place_href.lower() in NON_TOWN_ELEMENT_LIST_LOWER:
+                town_birth_place_href = "Undefined"
+            if town_death_place_href.lower() in NON_TOWN_ELEMENT_LIST_LOWER:
+                town_birth_place_href = "Undefined"
+            
             if skip_town_birth_place_href_checking is False and town_birth_place_href != "Undefined" and len(town_birth_place_href) != 0 and len(town_birth_place) < len(town_birth_place_href) and town_birth_place in town_birth_place_href:
                 town_birth_place = town_birth_place_href.replace("_"," ")
 
@@ -3000,6 +3008,9 @@ class WikiPeopleData():
                 #print("town_birth_place is bad")
                 list_of_unpreciseness_data.append("town_birth_place is unknown")
 
+            if death_day == "Undefined" and is_alive is False:
+                preciseness_level -= 4
+                list_of_unpreciseness_data.append("death_day is undefined")
 
             born_and_died_on_the_same_day = False
             try:
@@ -3230,6 +3241,8 @@ class WikiPeopleData():
                 "born_and_died_before_christ":born_and_died_before_christ,
                 "born_and_died_after_christ":born_and_died_after_christ,
                 "born_before_christ_and_died_after_christ":born_before_christ_and_died_after_christ,
+                "century_of_birth":century_of_birth,
+                "century_of_death":century_of_death,      
                 "age":age,
                 "cause_of_death":cause_of_death,
                 "is_alive":is_alive,
@@ -3805,7 +3818,6 @@ if do_user_data:
         print("You must put args number (int)")
     quit()
 elif do_stat:
-        
     print("Doing something else")
     toto.calc_stat()
     toto.sorted_list_of_linked_of_user("list_of_link_of_all_user.json","list_of_link_of_all_users_sorted.json")

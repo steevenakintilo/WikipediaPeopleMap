@@ -3497,6 +3497,7 @@ NON_TOWN_ELEMENT_LIST = [
     "manoir",
     "neufchâteau",
     "20e",
+    "Paris",
     "Position (hockey sur glace)",
     "joseph",
     "jules",
@@ -3647,6 +3648,7 @@ NON_TOWN_ELEMENT_LIST = [
     "Roman (litterature)",
     "Avocat (metier)",
     "Composition d'une equipe de rugby a XV",
+    "Metre",
     "Monaco",
     "Metre",
     "Russie",
@@ -4006,6 +4008,20 @@ NON_TOWN_ELEMENT_LIST = [
     "Republique populaire de Chine",
     "Free University of Brussels (1834-1969)",
     "Espagne franquiste",
+    "Ordination episcopale de rite romain",
+    "Renaissance (periode historique)",
+    "Ecole normale superieure (Paris)",
+    "Universite de Louvain (1425-1797)",
+    "Lieutenant (grade militaire)",
+    "Partisan (guerilla)",
+    "Composition d'une equipe de rugby a XV",
+    "Defenseur (football)",
+    "Marie de Bourbon (1428-1448)",
+    "Claude de Lorraine (1578-1657)",
+    "Thomas Holland (2e comte de Kent)",
+    "Jean II de Brienne (mort vers 1296)",
+    "Deutsche",
+    "Academie des beaux-arts de Dusseldorf",
     "Israel",
     "Palestine (Etat)",
     "Patriarche (christianisme)",
@@ -8153,6 +8169,7 @@ LIST_OF_GOOD_LOCALISATION = """48° 51′ 24′′ n, 2° 21′ 07′′ e
 
 NON_CAUSE_OF_DEATH = """France
 Espagne
+pierre ii de courtenay
 Argentine
 Nationalité française
 Allemagne
@@ -8171,6 +8188,7 @@ Belgique
 Samarie (ville ancienne)
 Afghanistan
 Malawi
+israëlite
 Christianisme
 République du Congo
 Mexique

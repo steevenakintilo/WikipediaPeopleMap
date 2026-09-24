@@ -1,5 +1,6 @@
 
 import { useState} from 'react';
+import ReactECharts from "echarts-for-react";
 
 export function generate_random_colour() {
     return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
@@ -14,9 +15,9 @@ export function generate_list_of_dict(list_:any,big_index:number) {
         if (index < big_index) {
             
             if (data[0].toString().toLowerCase() == "true") {
-                list_of_dict.push({ data_name: data[1] + " Vrai", data_number: data[1] });
+                list_of_dict.push({ data_name: data[1], data_number: data[1] });
             } else if (data[0].toString().toLowerCase() == "false") {
-                list_of_dict.push({ data_name: data[1] + " Faux", data_number: data[1] });
+                list_of_dict.push({ data_name: data[1], data_number: data[1] });
             } else {
                 list_of_dict.push({ data_name: data[0], data_number: data[1] });
             }
@@ -36,81 +37,111 @@ export function generate_list_of_dict(list_:any,big_index:number) {
 }
 
 
-export function generate_list_of_dict2(list_:any,big_index:number) {
-    let list_of_dict:any = [];
-    //console.log("Print de debug " , list_)
-
-    if (list_.length <= 500) {
-        try {
-            list_.forEach((data:any, index:number) => {
-                if (index < big_index) {
-                    list_of_dict.push({ data_name: data[0], data_number: data[1] });
-                }
-                
-            });
-
-            } catch (error) {
-            console.error(list_ , error);
-            // Expected output: ReferenceError: nonExistentFunction is not defined
-            // (Note: the exact output may be browser-dependent)
-            }
-
-    } else {
-            try {
-        list_.forEach((data:any, index:number) => {
-            if (index < big_index) {
-                
-                if (data[1]  >= 25) {
-                    list_of_dict.push({ data_name: data[0], data_number: data[1] });
-                }
-            }
-        });
-
-        } catch (error) {
-        console.error(list_ , error);
-        // Expected output: ReferenceError: nonExistentFunction is not defined
-        // (Note: the exact output may be browser-dependent)
-        }
-
-    }
-   
-    return list_of_dict
+interface YearData {
+    data_name: Date;
+    data_number: number;
 }
 
-export function generate_list_of_dict_with_date(list_:any,big_index:number) {
-    let list_of_dict:any = [];
-    //console.log("Print de debug " , list_)
+interface YearsChartProps {
+    data: YearData[];
+}
 
-    try {
-     list_.forEach((data:any, index:number) => {
-        console.log("luffy " , new Date(data[0]) , data[0])
-        if (index < big_index) {
-            
-            list_of_dict.push({ data_name:  new Date(data[0].toString()), data_number: data[1] });            
+export function YearsChart({ data }: YearsChartProps) {
+
+    const chartData = data
+        .filter(({ data_name, data_number }) =>
+            data_name instanceof Date &&
+            !isNaN(data_name.getTime()) &&
+            !isNaN(data_number)
+        )
+        .map(({ data_name, data_number }) => [
+            data_name.getTime(),
+            data_number,
+        ]);
+
+    console.log("ECHART DATA :", chartData);
+
+    const option = {
+        tooltip: {
+            trigger: "axis",
+        },
+
+        xAxis: {
+            type: "time",
+        },
+
+        yAxis: {
+            type: "value",
+        },
+
+        series: [
+            {
+                type: "line",
+                data: chartData,
+                smooth: true,
+            },
+        ],
+
+        dataZoom: [
+            {
+                type: "inside",
+            },
+            {
+                type: "slider",
+            },
+        ],
+    };
+
+    return (
+        <ReactECharts
+            option={option}
+            style={{
+                height: "400px",
+                width: "100%",
+            }}
+            opts={{
+                renderer: "canvas",
+            }}
+        />
+    );
+}
+
+export function generate_list_of_dict_with_date(
+    list_: any[],
+    big_index: number
+) {
+    return list_
+        .slice(0, big_index)
+        .map((data: any) => {
+            const year = Number(data[0]);
+            const number = Number(data[1]);
+
+            const date = new Date(0);
+            date.setFullYear(year, 0, 1);
+
+            return {
+                data_name: date,
+                data_number: number,
+            };
+        })
+        .filter((item) =>
+            !isNaN(item.data_name.getTime()) &&
+            !isNaN(item.data_number)
+        );
+}
+
+
+export function generate_list_of_dict2(list_:any,list2_:any,big_index:number) {
+    let list_of_dict:any = [];
+
+    list_.forEach((data:string, index:number) => {
+        if (index < big_index && list2_[index] > 0) {
+        list_of_dict.push({ data_name:  new Date(data), data_number: list2_[index] });
         }
-        
     });
 
-    } catch (error) {
-    //console.error(list_ , error);
-    // Expected output: ReferenceError: nonExistentFunction is not defined
-    // (Note: the exact output may be browser-dependent)
-    }
-   
     return list_of_dict
 }
-
-// export function generate_list_of_dict2(list_:any,list2_:any,big_index:number) {
-//     let list_of_dict:any = [];
-
-//     list_.forEach((data, index) => {
-//         if (index < big_index && list2_[index] > 0) {
-//         list_of_dict.push({ data_name:  new Date(data), data_number: list2_[index] });
-//         }
-//     });
-
-//     return list_of_dict
-// }
 
 export function generate_list(list_:any) {
     let generated_list:any = [];
@@ -237,4 +268,3 @@ export function make_a_graphic3(type:string,dict_data:string,graph_title:string)
     
     return graph_data
 }
-    
