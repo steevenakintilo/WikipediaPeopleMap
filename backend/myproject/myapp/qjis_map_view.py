@@ -52,7 +52,13 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
     if recieved_data == {'birth_town_localisation__icontains': ' '}:
         recieved_data = {}
     try:
-        if recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
+
+        if "Tous les pays sauf la france".lower() in recieved_data["country_of_birth"].lower():
+            filters = {
+                "born_outside_france":True
+            }
+        
+        elif recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
 
             searched_region = ""
             for region in LIST_OF_REGIONS_NAME:
@@ -82,7 +88,10 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
     display_death_localisation = False
 
     if "country_death_place" in recieved_data:
-        if recieved_data["country_death_place"] != "" and "/" not in recieved_data["country_death_place"] and "Tous les pays" not in recieved_data["country_death_place"]:
+        if "Tous les pays sauf la france" in recieved_data["country_death_place"]:
+            filters["died_outside_france"] = True
+        
+        elif recieved_data["country_death_place"] != "" and "/" not in recieved_data["country_death_place"] and "Tous les pays" not in recieved_data["country_death_place"]:
             searched_region = ""
             recieved_data["alive_status"] = "Mort"
             display_death_localisation = True
@@ -321,6 +330,12 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
                                     
             #sort_user_by = recieved_data["sort_user_by"]
     #filters["town_death_localisation__icontains"] = "Undefined"
+    
+    if "century_of_birth" in recieved_data:
+        filters["century_of_birth"] = int(recieved_data["century_of_birth"])
+
+    if "century_of_death" in recieved_data:
+        filters["century_of_death"] = int(recieved_data["century_of_death"])
     
     if "born_before_christ" in recieved_data:
         if recieved_data["born_before_christ"] == "oui":

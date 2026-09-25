@@ -578,7 +578,10 @@ export const VAR_TO_DESCRIPTION : Record<string, string> = {
     "number_of_error_per_page":"Nombre d'erreurs par page",
     "age_group":"Liste des âges en dizaine ",
     "page_name":"Liste des pages classées par score",
-    "number_of_view":"Liste du nombre de vues par pages"
+    "number_of_view":"Liste du nombre de vues par pages",
+    "century_of_birth":"Liste des siécles de naissances",
+    "century_of_death":"Liste des siécles de décès",
+    
     
     
 }
@@ -617,6 +620,8 @@ export const SUB_THEME_TO_THEME: Record<string, string> = {
   "birth_date": "birth_date",
   "death_date": "birth_date",
   "birth_and_death_date": "birth_date",
+  "century_of_birth":"birth_date",
+  "century_of_death":"birth_date",
   "birth_year": "birth_date",
   "death_year": "birth_date",
   "birth_year_from_1900": "birth_date",

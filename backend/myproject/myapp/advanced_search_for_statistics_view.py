@@ -51,7 +51,14 @@ def get_advanced_statistics(request):
     if recieved_data == {'birth_town_localisation__icontains': ' '}:
         recieved_data = {}
     try:
-        if recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
+
+
+        if "Tous les pays sauf la france".lower() in recieved_data["country_of_birth"].lower():
+            filters = {
+                "born_outside_france":True
+            }
+    
+        elif recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
 
             searched_region = ""
             for region in LIST_OF_REGIONS_NAME:
@@ -81,7 +88,10 @@ def get_advanced_statistics(request):
     display_death_localisation = False
 
     if "country_death_place" in recieved_data:
-        if recieved_data["country_death_place"] != "" and "/" not in recieved_data["country_death_place"] and "Tous les pays" not in recieved_data["country_death_place"]:
+        if "Tous les pays sauf la france" in recieved_data["country_death_place"]:
+            filters["died_outside_france"] = True
+        
+        elif recieved_data["country_death_place"] != "" and "/" not in recieved_data["country_death_place"] and "Tous les pays" not in recieved_data["country_death_place"]:
             searched_region = ""
             recieved_data["alive_status"] = "Mort"
             display_death_localisation = True
@@ -319,6 +329,12 @@ def get_advanced_statistics(request):
             #sort_user_by = recieved_data["sort_user_by"]
     #filters["town_death_localisation__icontains"] = "Undefined"
     
+    if "century_of_birth" in recieved_data:
+        filters["century_of_birth"] = int(recieved_data["century_of_birth"])
+
+    if "century_of_death" in recieved_data:
+        filters["century_of_death"] = int(recieved_data["century_of_death"])
+    
     if "born_before_christ" in recieved_data:
         if recieved_data["born_before_christ"] == "oui":
             filters["born_before_christ"] = True
@@ -517,6 +533,8 @@ def get_advanced_statistics(request):
     age_group_counter = Counter()
     number_of_view_counter = Counter()
 
+    century_of_birth_counter = Counter()
+    century_of_death_counter = Counter()
     page_name_counter = Counter()
 
     dict_of_counter = {}
@@ -554,7 +572,12 @@ def get_advanced_statistics(request):
         if user_obj.last_name_standard and user_obj.last_name_standard.lower().strip() != "undefined":
             last_name_standard_counter[user_obj.last_name_standard] += 1
 
-
+        if user_obj.century_of_birth != -999 and user_obj.age <= MAXIMUM_AGE_TO_DISPLAY and int(user_obj.century_of_birth) <= 21:
+            century_of_birth_counter[int(user_obj.century_of_birth)] += 1
+        
+        if user_obj.century_of_death != -999 and user_obj.age <= MAXIMUM_AGE_TO_DISPLAY and int(user_obj.century_of_death) <= 21:
+            century_of_death_counter[int(user_obj.century_of_death)] += 1
+        
         # ─────────────────────────────────────────────
         # Job
         # ─────────────────────────────────────────────
@@ -1031,6 +1054,9 @@ def get_advanced_statistics(request):
         "death_date": death_date_counter,
         "birth_and_death_date": birth_and_death_date_counter,
 
+        "century_of_birth": century_of_birth_counter,
+        "century_of_death": century_of_death_counter,
+                
         "birth_year": birth_year_counter,
         "death_year": death_year_counter,
         "birth_year_from_1900": birth_year_counter_from_1900,
@@ -1166,7 +1192,11 @@ def get_advanced_statistics(request):
     dict_of_counter["wikipedia_page_lenght"] = sort_a_counter(wikipedia_page_lenght_counter,1)
     dict_of_counter["number_of_user_found"] = length - nb_of_bad_user
     dict_of_counter["age_group"] = sort_a_counter(age_group_counter,1)
-    dict_of_counter["number_of_view"] = sort_a_counter(number_of_view_counter,)
+    dict_of_counter["number_of_view"] = sort_a_counter(number_of_view_counter,1)
+
+    dict_of_counter["century_of_birth"] = sort_a_counter(century_of_birth_counter,1)
+    dict_of_counter["century_of_death"] = sort_a_counter(century_of_death_counter,1)
+    
     block_of_element = ["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"]
     block_of_element_present = []
     # for element in block_of_element:

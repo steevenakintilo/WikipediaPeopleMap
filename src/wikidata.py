@@ -2803,7 +2803,7 @@ class WikiPeopleData():
                 elif len(str(birth_year)) <= 2 and birth_year + 1 < 1:
                     century_of_birth = -1
                 else:
-                    century_of_birth = str(birth_year + 1)[0:2]
+                    century_of_birth = str(birth_year + 1)[0:2] + 1
             except:
                 century_of_birth = -999
 
@@ -2817,7 +2817,7 @@ class WikiPeopleData():
                 elif len(str(death_year)) <= 2 and death_year + 1 < 1:
                     century_of_death = -1
                 else:
-                    century_of_death = str(death_year + 1)[0:2]
+                    century_of_death = str(death_year + 1)[0:2] + 1
             except:
                 century_of_death = -999
             
@@ -3088,10 +3088,10 @@ class WikiPeopleData():
             user_birth_outside_france = True
             user_death_outside_france = True
                         
-            if country_birth_place.lower() == "france":
+            if country_birth_place.lower() == "france" or country_birth_place == "" or country_birth_place == "Undefined":
                 user_birth_outside_france = False
 
-            if country_death_place.lower() == "france":
+            if country_death_place.lower() == "france" or country_death_place == "" or country_death_place == "Undefined":
                 user_death_outside_france = False
             
             if print_data:

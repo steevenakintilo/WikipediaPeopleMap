@@ -430,7 +430,26 @@ const QjisMap = () => {
                        
                      </select>
                      <br></br>
-                     
+                      <input className="form-control w-75" 
+                      placeholder={"Siécle de naissance"} 
+                      type="number"
+                      min={1}
+                      max={125}
+                      step={1}
+                      onChange={(event) => handle_dict_of_advance_search(event,"century_of_birth")}>
+                    </input>
+                    <br></br>
+                    
+                    <input className="form-control w-75" 
+                      placeholder={"Siécle de mort"} 
+                      type="number"
+                      min={1}
+                      max={125}
+                      step={1}
+                      onChange={(event) => handle_dict_of_advance_search(event,"century_of_death")}>
+                    </input>
+                    <br></br>
+                    
                      <select className="form-select body_flag" aria-label="Default select example"                       
                        onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_first_name")}
    >

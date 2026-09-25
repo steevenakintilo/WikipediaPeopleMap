@@ -141,7 +141,7 @@ const Statistics = () => {
                 list_of_keys_name.push(keys[i])
                 if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level" && keys[i] != "dict_of_error" && keys[i] != "number_of_error_per_page" && keys[i] != "age_group"
                   && keys[i] != "birth_year" && keys[i] != "death_year" && keys[i] != "birth_and_death_year" && keys[i] != "birth_year_from_1900" && keys[i] != "death_year_from_1900" && keys[i] != "birth_and_death_year_from_1900"
-                  && keys[i] != "number_of_view"
+                  && keys[i] != "number_of_view" && keys[i] != "century_of_birth" && keys[i] != "century_of_death"
                 ) {
                     generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10)
                     generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
@@ -464,7 +464,26 @@ const Statistics = () => {
                        
                      </select>
                      <br></br>
-                     
+                      <input className="form-control w-75" 
+                      placeholder={"Siécle de naissance"} 
+                      type="number"
+                      min={1}
+                      max={125}
+                      step={1}
+                      onChange={(event) => handle_dict_of_advance_search(event,"century_of_birth")}>
+                    </input>
+                    <br></br>
+                    
+                    <input className="form-control w-75" 
+                      placeholder={"Siécle de mort"} 
+                      type="number"
+                      min={1}
+                      max={125}
+                      step={1}
+                      onChange={(event) => handle_dict_of_advance_search(event,"century_of_death")}>
+                    </input>
+                    <br></br>
+                    
                      <select className="form-select body_flag" aria-label="Default select example"                       
                        onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_town")}>
                        <option selected>Afficher seulement un utilisateur par ville de naissance?</option>
@@ -691,7 +710,7 @@ const Statistics = () => {
           average_step_list+=data_dict[i].data_number           
       }
       if (["age","birth_year","death_year","birth_and_death_year","birth_year_from_1900","death_year_from_1900","birth_and_death_year_from_1900","grade_over_20","wikipedia_page_lenght","page_lenght",
-        "number_of_word_in_page_name","number_of_links","number_of_user_who_have_linked_this_user",
+        "number_of_word_in_page_name","number_of_links","number_of_user_who_have_linked_this_user","century_of_birth","century_of_death",
         "number_of_friends","preciseness_level","number_of_error_per_page","age_group","number_of_view"].includes(keys_info)) {
           {Object.values(data_dict).map((data:any) => (
             avg+= (data.data_name * data.data_number)
@@ -726,9 +745,10 @@ const Statistics = () => {
                           <TableCell>{"Element"}</TableCell>
                           <TableCell>{"Nombre de fois qu'il est présent"}</TableCell>
                           <TableCell>{text_to_display}</TableCell>
+                          <TableCell>{"Nombre d'élements"}</TableCell>
+                          
                           <TableCell>{"Moyenne"}</TableCell>
                           <TableCell>{"Mediane"}</TableCell>
-                          <TableCell>{"Nombre d'élements"}</TableCell>
                             
                         </TableRow>
                       </TableHead>
@@ -742,9 +762,9 @@ const Statistics = () => {
                               <TableCell>{data.data_name}</TableCell>
                               <TableCell>{data.data_number}</TableCell>
                               <TableCell>{Math.round((data.data_number/total_number * 100) * 100)/100}</TableCell>
+                              <TableCell>{total_number}</TableCell>
                               <TableCell>{average}</TableCell>
                               <TableCell>{mediane}</TableCell>
-                              <TableCell>{total_number}</TableCell>
                               
                               
                               

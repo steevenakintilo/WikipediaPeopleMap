@@ -51,7 +51,12 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     if recieved_data == {'birth_town_localisation__icontains': ' '}:
         recieved_data = {}
     try:
-        if recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
+        if "Tous les pays sauf la france".lower() in recieved_data["country_of_birth"].lower():
+            filters = {
+                "born_outside_france":True
+            }
+         
+        elif recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
 
             searched_region = ""
             for region in LIST_OF_REGIONS_NAME:
@@ -81,7 +86,10 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     display_death_localisation = False
 
     if "country_death_place" in recieved_data:
-        if recieved_data["country_death_place"] != "" and "/" not in recieved_data["country_death_place"] and "Tous les pays" not in recieved_data["country_death_place"]:
+        if "Tous les pays sauf la france" in recieved_data["country_death_place"]:
+            filters["died_outside_france"] = True
+        
+        elif recieved_data["country_death_place"] != "" and "/" not in recieved_data["country_death_place"] and "Tous les pays" not in recieved_data["country_death_place"]:
             searched_region = ""
             recieved_data["alive_status"] = "Mort"
             display_death_localisation = True
