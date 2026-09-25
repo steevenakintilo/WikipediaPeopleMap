@@ -1,3 +1,4 @@
+// Imports react
 import {
   MapContainer,
   TileLayer,
@@ -13,11 +14,12 @@ import { useEffect, useState } from 'react';
 import "leaflet/dist/leaflet.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import "./home.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 polyfillCountryFlagEmojis();
+
+// Mes imports
+import "./global.css";
 
 const Home = () => {
   var list_of_random_position : any = []
@@ -139,9 +141,6 @@ const Home = () => {
               <br></br>
               
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistique</a>
-              <br></br>
-
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Qjis">Carte pour qjis</a>
               <br></br>
               </ul>
             </div>
