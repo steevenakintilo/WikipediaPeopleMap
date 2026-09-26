@@ -5,6 +5,7 @@ A FAIRE:
 
 - Faire une partie responsible mobile pour la carte
 - Faire une v2 avec un meilleur code cote front/back + faire des test unitaires
+- Graph "scatter" note/nbr de fois que l'elem est present pour le pays,prenomn,metie commme le graph du bac
 
 A FIX:
 
@@ -33,6 +34,9 @@ FAIT:
 - Stat qui affiche l'age moyen de deces sur wikipedia (vivants/morts)
 - Stat qui affiche moyenne de note/erreur/nombre de lien/nombre de personne lie à l'user/nombre d'amis
 
+IDEE:
+
+- FAIRE UN WIKIGUESSER ON TE DONNE UN TYPE ET TU DOIS ESSAYER DE DEVINER OU IL EST NE
 
 
 Regarder à partir de "Para-Commando's" pour la listes des users "douteux"

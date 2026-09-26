@@ -116,7 +116,7 @@ const Home = () => {
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistique</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistiques détaillées</a>
               <br></br>
 
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Qjis">Carte pour qjis</a>
@@ -140,7 +140,7 @@ const Home = () => {
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistique</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistiques détaillées</a>
               <br></br>
               </ul>
             </div>

@@ -3228,6 +3228,8 @@ JOBS_PREFIX = [
 
 LIST_OF_INCOMPLETE_JOB = [
     "Y'en a marre (mouvement)",
+    "Japonais class=lang-ja lang=ja",
+    "Etats-Unis",
     "joueur d'origine",
     "Université Paris-VIII-Vincennes-Saint-Denis",
     "Parti progressiste-conservateur du Canada",
@@ -3243,7 +3245,12 @@ LIST_OF_INCOMPLETE_JOB = [
     "Résistance (politique)",
     "Circonscription de Tozeur",
     "Vienne (Autriche)",
-    "Figure"
+    "Figure",
+    "Un joueur de",
+    "Un joueur de d'",
+    "Une joueuse de d'",
+    "Un joueur de d'origine",
+    "Une joueuse de d'origine",
     "Assemblée nationale constituante",
     "Front de libération nationale (Algérie)",
     "Armée de la république islamique d'Iran",
@@ -3497,7 +3504,6 @@ NON_TOWN_ELEMENT_LIST = [
     "manoir",
     "neufchâteau",
     "20e",
-    "Paris",
     "Position (hockey sur glace)",
     "joseph",
     "jules",
@@ -4020,6 +4026,8 @@ NON_TOWN_ELEMENT_LIST = [
     "Claude de Lorraine (1578-1657)",
     "Thomas Holland (2e comte de Kent)",
     "Jean II de Brienne (mort vers 1296)",
+    "Conservatoire de musique de Geneve",
+    "Haute ecole d'art et de design Geneve",
     "Deutsche",
     "Academie des beaux-arts de Dusseldorf",
     "Israel",
@@ -8173,6 +8181,16 @@ pierre ii de courtenay
 Argentine
 Nationalité française
 Allemagne
+colmar
+neuilly-sur-seine
+russe
+varsovie
+cyriacus buyruk khan
+cimetière de passy
+vienne
+le cannet
+&nbsp;
+le vigan
 États-Unis
 République démocratique du Congo
 Brésil

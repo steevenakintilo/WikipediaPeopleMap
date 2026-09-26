@@ -569,7 +569,7 @@ export const VAR_TO_DESCRIPTION : Record<string, string> = {
     "number_of_friends": "Liste du nombre d'amis par pages",
     "preciseness_level": "Liste du niveau de précision (0-100) arrondies par pages",
     "page_lenght": "Liste des longueurs des noms de pages ",
-    "number_of_word_in_page_name": "Liste du nombre de mots dans les noms de pages ",
+    "number_of_word_in_page_name": "Liste du nombre de mots par nom de pages ",
     "grade_over_20": "Liste des notes sur 20 ",
     "number_of_user_found": "Nombre de personnes trouvées",
     "no_country_counter":"Personnes ayant un pays de naissance connue?",
@@ -591,6 +591,7 @@ export const SUB_THEME_TO_THEME: Record<string, string> = {
   "first_name_standard": "first_name",
   "last_name": "first_name",
   "last_name_standard": "first_name",
+  "town_with_no_locolisation_counter":"first_name",
 
   "gender": "gender",
   "age": "gender",
@@ -664,10 +665,11 @@ export const SUB_THEME_TO_THEME: Record<string, string> = {
   "number_of_view":"first_char_of_the_page",
   "preciseness_level": "first_char_of_the_page",
 
-  "no_country_counter": "no_country_counter",
-  "no_town_counter": "no_country_counter",
-  "dict_of_error": "no_country_counter",
-  "number_of_error_per_page": "no_country_counter",
+  "dict_of_error": "dict_of_error",
+  "number_of_error_per_page": "dict_of_error",
+  "no_country_counter": "dict_of_error",
+  "no_town_counter": "dict_of_error",
+  
 };
 
 
@@ -682,7 +684,7 @@ export const STAT_TO_DESCRIPTION : any = {
     "born_and_died_in_the_same_town": "Comparaisons naissance décès",
     "born_before_christ": "Chronologie historique",
     "first_char_of_the_page": "Analyse des pages",
-    "no_country_counter": "Erreurs et données manquantes"
+    "dict_of_error": "Erreurs et données manquantes"
 }
 
 export const NUMBER_OF_USER : number = 712471

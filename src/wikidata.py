@@ -34,6 +34,8 @@ from utility_function import *
 # Line is too long
 # pylint: disable=C0301
 
+# pylint : disable=C0200
+
 class WikiPeopleData():
     """A class that define all the birth/death place/date of all real people on wikipedia"""
     def __init__(self):
@@ -1275,7 +1277,8 @@ class WikiPeopleData():
             
             if job.isdigit():
                 job = ""          
-            
+
+
             try:
                 if is_alive and len(job.strip()) <= 1 or job in LIST_OF_INCOMPLETE_JOB:
                     if "est un" in page_text_plain_text:
@@ -1355,6 +1358,7 @@ class WikiPeopleData():
                             job_ = job
                             
                     elif "est un" in page_text_plain_text:
+                        
                         list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
                         job_index = 0
 
@@ -1364,7 +1368,12 @@ class WikiPeopleData():
                                 job_index = index
                                 break
 
+                        
+                        inside_job_player_list = False
                         if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
+
+                            if job in job_player_list:
+                                inside_job_player_list = True
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
@@ -1381,6 +1390,7 @@ class WikiPeopleData():
                                     break
 
 
+                            
                             if job in ["ancien","ancienne"]:
                                 job_name = "ancien"
                                 if gender == "Woman":
@@ -1388,10 +1398,13 @@ class WikiPeopleData():
                                 job = f"{determiner} {job_name} {list_of_element_after_sentence[job_index]}"
                             elif job not in ["ancien","ancienne"]:
                                 job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
-                            if particle != "de" and job not in ["ancien","ancienne"]:
+                            
+                            elif particle != "de" and job not in ["ancien","ancienne"]:
+                                print("ici3")
                                 job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
                             job_ = job
-                        
+                            # print(job)
+                            # return                
 
 
             except:
@@ -1432,6 +1445,18 @@ class WikiPeopleData():
                 job = "Femme d'état"
             
 
+            LIST_OF_INCOMPLETE_JOB_LOWER = []
+            for job in LIST_OF_INCOMPLETE_JOB:
+                LIST_OF_INCOMPLETE_JOB_LOWER.append(job.lower())
+            if job.lower() in LIST_OF_INCOMPLETE_JOB_LOWER:
+                job = "Undefined"
+
+
+            if '<th scope="row">Activité</th>' in text_normal and (job == "" or job == "Undefined"):
+                if "," in text_normal.split('<th scope="row">Activité</th>')[1].split("\n")[1]:
+                    job = text_normal.split('<th scope="row">Activité</th>')[1].split("\n")[1].split(",")[0].strip()
+                else:
+                    job = text_normal.split('<th scope="row">Activité</th>')[1].split("<")[0].strip()
             # if job in LIST_OF_INCOMPLETE_JOB:
             #     for little_job in JOBS:
             #         print(little_job)
@@ -1990,8 +2015,10 @@ class WikiPeopleData():
                     break
 
 
-            if town_death_place.lower().startswith("d:q"):
+            if "d:q" in town_death_place.lower():
                 town_death_place = "Undefined"
+            if "d:q" in town_birth_place.lower():
+                town_birth_place = "Undefined"
 
             if town_birth_place.lower().strip() in self.list_of_country_lower:
                 town_birth_place = "Undefined"
@@ -2010,7 +2037,7 @@ class WikiPeopleData():
             # return
 
             for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
-                if town_birth_place.lower() == bad_element:
+                if unidecode(town_birth_place.lower()) == bad_element:
                     town_birth_place = "Undefined"
                     break
 
@@ -2022,15 +2049,18 @@ class WikiPeopleData():
                 #     break
                 
 
+                
             for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
-                if town_death_place.lower() == bad_element:
+                if unidecode(town_death_place.lower()) == bad_element:
                     town_death_place = "Undefined"
                     break
+
+            
 
                 # if town_death_place.lower() in bad_element and is_alive is False and len(bad_element) < 9 and "," not in bad_element:
                 #     town_death_place = "Undefined"
                 #     break
-                # if town_death_place.lower() == bad_element and is_alive is False and (len(bad_element) >= 9 or "," in bad_element):
+                # if unidecode(town_death_place.lower()) == bad_element and is_alive is False and (len(bad_element) >= 9 or "," in bad_element):
                 #     town_death_place = "Undefined"
                 #     break
             
@@ -2039,6 +2069,7 @@ class WikiPeopleData():
             #town_birth_place = ""
             try:
                 if town_birth_place == "Undefined" or len(town_birth_place) == 0:
+                    
                     if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
                         if "Date de naissance" in text_normal:
                             town_birth_place = text_normal.split("Lieu de naissance")[1].split("title=")[1].split(">")[0].replace('"',"")
@@ -2052,7 +2083,6 @@ class WikiPeopleData():
                             town_birth_place = text_normal.split("Naissance")[1].split("title=")[1].split(">")[0].replace('"',"")
                         else:
                             town_birth_place = text_normal.split("Naissance")[1].split("<time ")[1].split("<br><")[1].split("title=")[1].split(">")[0].replace('"',"").replace('"',"")
-                                                
                     try:
                         birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
                         country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
@@ -2108,50 +2138,26 @@ class WikiPeopleData():
                 pass            
 
 
-
             if town_birth_place.split(" ")[0].lower() in LIST_OF_MONTH:
                 town_birth_place = ""
 
             if town_death_place.split(" ")[0].lower() in LIST_OF_MONTH:
                 town_death_place = ""
-
-
-
-
-                        
-            # ESSAYER DE RECUP LA VILLE DE NAISSANCE/MORT QUAND CA NE MARCHE PAS ET QU'IL N'Y A PAS DE LIEN SUR LA VILLE
+                     
             for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
-                if town_birth_place.lower() == bad_element:
+                if unidecode(town_birth_place.lower()) == bad_element:
                     town_birth_place = "Undefined"
                     break
 
             for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
-                if town_death_place.lower() == bad_element:
+                if unidecode(town_death_place.lower()) == bad_element:
                     town_death_place = "Undefined"
                     break
 
-            # for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
-            #     if town_birth_place.lower() in bad_element and len(bad_element) < 9 and "," not in bad_element:
-            #         town_birth_place = "Undefined"
-            #         break
-            #     if town_birth_place.lower() == bad_element and (len(bad_element) >= 9 or "," in bad_element):
-            #         town_birth_place = "Undefined"
-            #         break
-                
-                        
-            # for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
-            #     if town_death_place.lower() in bad_element and is_alive is False and len(bad_element) < 9 and "," not in bad_element:
-            #         town_death_place = "Undefined"
-            #         break
-            #     if town_death_place.lower() == bad_element and is_alive is False and (len(bad_element) >= 9 or "," in bad_element):
-            #         town_death_place = "Undefined"
-            #         break
-            
-            
-                        
-            #town_birth_place = ""
 
 
+            # ESSAYER DE RECUP LA VILLE DE NAISSANCE/MORT QUAND CA NE MARCHE PAS ET QU'IL N'Y A PAS DE LIEN SUR LA VILLE
+                        
             try:
                 
                 if town_birth_place == "Undefined" or len(town_birth_place) == 0:
@@ -2295,6 +2301,16 @@ class WikiPeopleData():
 
 
 
+            for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+                if unidecode(town_birth_place.lower()) == bad_element:
+                    town_birth_place = "Undefined"
+                    break
+
+            for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
+                if unidecode(town_death_place.lower()) == bad_element:
+                    town_death_place = "Undefined"
+                    break
+
 
             cause_of_death = "Unspecified"
             if is_alive:
@@ -2318,6 +2334,7 @@ class WikiPeopleData():
 
                 except:
                     cause_of_death = "Unspecified"
+
             
             if town_birth_place == town_death_place and len(birth_town_localisation) != 0 and len(town_birth_place) != 0:
                 death_town_localisation = birth_town_localisation
@@ -2803,7 +2820,7 @@ class WikiPeopleData():
                 elif len(str(birth_year)) <= 2 and birth_year + 1 < 1:
                     century_of_birth = -1
                 else:
-                    century_of_birth = str(birth_year + 1)[0:2] + 1
+                    century_of_birth = int(str(birth_year + 1)[0:2]) + 1
             except:
                 century_of_birth = -999
 
@@ -2817,7 +2834,7 @@ class WikiPeopleData():
                 elif len(str(death_year)) <= 2 and death_year + 1 < 1:
                     century_of_death = -1
                 else:
-                    century_of_death = str(death_year + 1)[0:2] + 1
+                    century_of_death = int(str(death_year + 1)[0:2]) + 1
             except:
                 century_of_death = -999
             
@@ -3067,6 +3084,9 @@ class WikiPeopleData():
             try:
                 for arrondisement in ARRONDISEMENT_LIST_STRING:
                     if arrondisement in town_birth_place:
+                        if birth_town_localisation == "" or birth_town_localisation == "Undefined":
+                            birth_town_localisation = self.get_localisation_of_a_town(town_birth_place)
+
                         town_birth_place = town_birth_place.split(arrondisement)[1].strip()
                         break
             except:
@@ -3075,6 +3095,8 @@ class WikiPeopleData():
             try:
                 for arrondisement in ARRONDISEMENT_LIST_STRING:
                     if arrondisement in town_death_place:
+                        if death_town_localisation == "" or death_town_localisation == "Undefined":
+                            death_town_localisation = self.get_localisation_of_a_town(town_death_place)
                         town_death_place = town_death_place.split(arrondisement)[1].strip()
                         break
             except:
@@ -3173,9 +3195,6 @@ class WikiPeopleData():
                 print(f"Number of friends: {len(list_of_friend_of_user)}")
                 print(f"Preciseness Level {int(preciseness_level/2)}")
                 print(f"List of unpreciseness data {list_of_unpreciseness_data}")
-                print(f"Potential bad page (age): {potential_bad_page}")
-                print(f"Potential bad page (town_localisation): {potential_bad_page2}")
-                print(f"Potential bad page (age + town_localisation) not present: {potential_bad_bad_page}")
                                 
                 print(f"Today date: {today_date_str}")
                 print("\n"*5)
@@ -3269,9 +3288,6 @@ class WikiPeopleData():
                 "list_of_friend_of_user":list_of_friend_of_user,
                 "number_of_friends":len(list_of_friend_of_user),
                 "preciseness_level":int(preciseness_level/2),
-                "potential_bad_page":potential_bad_page,
-                "potential_bad_page2":potential_bad_page2,
-                "potential_bad_bad_page":potential_bad_bad_page,
                 "week_day_of_birth":week_day_of_birth,
                 "week_day_of_death":week_day_of_death,              
                 "age_group":age_group,      

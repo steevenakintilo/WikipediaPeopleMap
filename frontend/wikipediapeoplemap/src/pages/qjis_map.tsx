@@ -22,7 +22,7 @@ import "leaflet/dist/leaflet.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./home.css";
+import "./global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import {NUMBER_OF_USER} from './global_variable'
@@ -45,12 +45,11 @@ polyfillCountryFlagEmojis();
 const QjisMap = () => {
     //const [total_number_of_user_found,set_total_number_of_user_found] : any = useState({});
     const [total_number_of_user_found,set_total_number_of_user_found] : any = useState(0);
-    const [file_to_download,set_file_to_download] : any = useState();
     
     const [result_found,set_result_found] : any = useState(false)
     const [loading,set_loading] : any = useState(false)
     const [server_error_found,set_server_error_found] : any = useState(false)
-    
+    const [no_result_found_text,set_no_result_found_text] : any = useState(false)
     useEffect(() => {
         // get_list_of_user_advanced_search().then((result) => {
         //     set_total_number_of_user_found(result.all_user_data)
@@ -61,10 +60,7 @@ const QjisMap = () => {
  
 
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
-    const [dict_info,set_dict_info] : any = useState({});
-    const [keys_info,set_keys_info] : any = useState({});
-    const [text_input, settext_input] = useState("");
-
+    
 
 
 
@@ -88,13 +84,21 @@ const QjisMap = () => {
 
     })
     
-    console.log("toto " , response.status,response)
-    
+
     if (response.status == 500) {
         set_server_error_found(true)
         set_loading(false)
         set_result_found(false)
         return {}
+    }
+
+    if (response.status == 404) {
+        set_server_error_found(false)
+        set_loading(false)
+        set_result_found(false)
+        set_no_result_found_text(true)
+        return {}
+        
     }
     const data_fetch = await response
 
@@ -104,10 +108,10 @@ const QjisMap = () => {
 
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
-
     a.href = url;
     a.download = "qjis_localisation.csv";
     document.body.appendChild(a);
+    console.log(a,url,document.body)
     a.click();
 
     a.remove();
@@ -245,7 +249,7 @@ const QjisMap = () => {
                        placeholder="Pays de naissance"
                    />
                     */}
-                     <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse-peintre-médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
+                     <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse#peintre#médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                      <br></br>
                      <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                      <br></br>
@@ -628,54 +632,86 @@ const QjisMap = () => {
 
         {result_found == false &&(
             <div>
-                
+
+              <div className="mobile-only">
                 
                 <br></br>
                 
-                <br></br>
+                
                 <h1 className="wikifont">
-                    Generez un fichier de position utilisable sur qjis avec la recherches et les filtres avancés.
+                  Cette fonctionnalité nécessite le logiciel QGIS et n’est donc disponible que sur PC.
                 </h1>
+                
                 <br></br>
-
-
+                <br></br>
+                
                 <div className="d-grid gap-2">
-                    <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_search().then((result) => set_total_number_of_user_found(result.all_wikipedia_info))}>Generez le fichier 📁</button>
-                </div>
-
-                <br></br>
-                <br></br>
-
-                <div className="d-grid gap-2">
-                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ""}>Filtres avancées 🔎</button>
-                </div>
-
-                <br></br>
-                <br></br>
-
-                <div className="d-grid gap-2">
-                  <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+                  <a type="button" className="btn btn-secondary btn-xl" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
                 </div>
                 <br></br>
                 <br></br>
-
-                {server_error_found === true &&(
-                  <h2 className="wikifont">
-                    Erreur serveur, veuillez patienter quelques minutes.
-                  </h2>
+                
+                <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790349009/earth_qha8vm.gif" style={{ cursor: "pointer" }} alt="" width="390" height="390" className="me-2"/>
+              
+                
+              </div>
+              <div className="desktop-only">
+                  <br></br>
                   
+                  <br></br>
+                  <h1 className="wikifont">
+                      Generez un fichier csv de position utilisable sur qjis avec la recherche et les filtres avancés.
+                  </h1>
+                  <br></br>
 
-                )}
-                {loading == true &&(
-                <div>
+
+                  <div className="d-grid gap-2">
+                      <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_search().then((result) => set_total_number_of_user_found(result.all_wikipedia_info))}>Generez le fichier 📁</button>
+                  </div>
+
+                  <br></br>
+                  <br></br>
+
+                  <div className="d-grid gap-2">
+                      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => ""}>Filtres avancées 🔎</button>
+                  </div>
+
+                  <br></br>
+                  <br></br>
+
+                  <div className="d-grid gap-2">
+                    <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+                  </div>
+                  <br></br>
+                  <br></br>
+
+                  {server_error_found === true &&(
                     <h2 className="wikifont">
-                        Ça charge veuillez patienter quelques minutes
+                      Erreur serveur, veuillez patienter quelques minutes.
                     </h2>
                     
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" width="250" height="250" alt="2 min Countdown"></img>
-                </div>
-                )}
+
+                  )}
+                  {server_error_found === false && result_found == false && no_result_found_text == true &&(
+                    <h2 className="wikifont">
+                      Aucun résultat n'a été trouvé utilise d'autres filtres
+                    </h2>
+                    
+
+                  )}
+                  
+                  {loading == true &&(
+                  <div>
+                      <h2 className="wikifont">
+                          Ça charge veuillez patienter quelques minutes
+                      </h2>
+                      
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" width="450" height="450"></img>
+                  </div>
+                  )}
+              </div>
             </div>
+            
 
         )}
         
@@ -691,10 +727,10 @@ const QjisMap = () => {
                         </div>
                         <br></br>    
                         <h2 className="wikifont">
-                            ça charge (maximum 15 minutes)...
+                          Ça charge veuillez patienter quelques minutes
                         </h2>
                         
-                        <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif"></img>
+                        <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif" width="700" height="700"></img>
                         {/* <div className="tenor-gif-embed" data-postid="17234189" data-share-method="host" data-aspect-ratio="1.19403" data-width="100%"><a href="https://tenor.com/view/homer-simpson-the-simpsons-spinning-walking-floor-gif-17234189">Homer Simpson The Simpsons GIF</a>from <a href="https://tenor.com/search/homer+simpson-gifs">Homer Simpson GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
                      */}
                     

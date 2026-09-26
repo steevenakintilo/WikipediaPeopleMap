@@ -1,4 +1,4 @@
-// import './home.css'
+// import './global.css'
 // import React, { useRef } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import { useState , useEffect } from 'react';

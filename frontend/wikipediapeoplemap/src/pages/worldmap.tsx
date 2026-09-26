@@ -1,7 +1,4 @@
-// import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-
-// import geoUrl from "../custom.geo.json";
-
+// Imports react
 import {
   MapContainer,
   TileLayer,
@@ -12,23 +9,23 @@ import {
   useMap
 } from "react-leaflet";
 
-import {gender_to_color , gender_to_color2 , list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "./global_variable.tsx"
 import { Tooltip } from "bootstrap";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 
 import { useEffect, useState } from 'react';
-import { data, useNavigate } from 'react-router';
+//import { data, useNavigate } from 'react-router';
 
 import "leaflet/dist/leaflet.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import "./home.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Legend from "./map_legend.tsx"
-import Custom_navbar from "./navbar.tsx";
-
 polyfillCountryFlagEmojis();
+
+// Mes imports
+import {gender_to_color , gender_to_color2 , list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "./global_variable.tsx"
+import "./global.css";
+
 
 const WorldMap = () => {
     const [list_of_user_data,set_list_of_user_data] : any = useState({});
@@ -41,11 +38,6 @@ const WorldMap = () => {
     }, []);
  
 
-    
-    let dict_of_advance_search_empty = {
-      "job":"",
-      "is_alive":false
-    }
     const longitude_position_of_france = 6.6034
     const latitude_position_of_france = 48.8883
     const [longitude,setlongitude] = useState(longitude_position_of_france)
@@ -66,7 +58,7 @@ const WorldMap = () => {
       tooltipTriggerList.forEach((tooltipTriggerEl) => {
         new Tooltip(tooltipTriggerEl);
       });
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     function handle_search_bar(){
       set_hide_searchbar(!hide_searchbar)
@@ -112,58 +104,14 @@ const WorldMap = () => {
 
     }
 
-    async function get_list_of_user_advanced_search_qjis(chunk:number,reset_chunck:boolean=false) {
-      change_latitude_and_longitude(5,20)
-
-      
-      dict_of_advance_search["page_nb"] = current_chunck_index
-      if (reset_chunck == true) {
-        setchunck(0)
-      }
-      //setchunck(0)
-
-
-      if (chunk == 2) {
-          const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search_qjis/${chunk}/`, {
-            method: 'POST',
-            //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
-            headers: {"Content-Type" : "application/json"},
-            body:JSON.stringify(dict_of_advance_search)
-
-        })
-        
-        const data_fetch = await response.json()
-        return data_fetch
-
-      }
-      if (chunk == 1) {
-          const response = await fetch(`http://127.0.0.1:8000/get_advanced_statistics`, {
-            method: 'POST',
-            //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
-            headers: {"Content-Type" : "application/json"},
-            body:JSON.stringify(dict_of_advance_search)
-
-        })
-        
-        const data_fetch = await response.json()
-        return data_fetch
-
-      }
-      
-      return []    
-    }
-
     async function get_user_info(user:string) {
-      //console.log(`http://127.0.0.1:8000/display_user_info/${user}`)
       const response = await fetch(`http://127.0.0.1:8000/display_user_info/${user}`, {
           method: 'GET',
-          //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
           headers: {"Content-Type" : "application/json"},
       
       })
       
       const data_fetch = await response.json()
-      //////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
     }
@@ -194,7 +142,6 @@ const WorldMap = () => {
 
       if (value != 0 ) {
           if (Object.keys(dict_of_advance_search).length === 0) {
-            //console.log("papa est vide " , current_chunck_index , value , index)
             get_list_of_user(index).then((result) => {
                 set_list_of_user_data(result.all_user_data)
             })
@@ -211,9 +158,7 @@ const WorldMap = () => {
             setchunck(999999)
         })
         
-      }
-      
-      //console.log("kogrgpkpoer  " , dict_of_advance_search)
+      }      
     }
   
   const MapController = ({
@@ -273,9 +218,7 @@ const WorldMap = () => {
     default: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1788295917/pin_death_khphfd.png",
   };
   
-  // // {user.page_name} {index + 1}/{Object.keys(list_of_user_data).length}
-
-  function display_user_profile() {
+  function display_user_profile(mobile_display=false) {
     var user_info_data: any = []
     var start_index = current_chunck_index * Object.keys(list_of_user_data).length
     if (Object.keys(list_of_user_data).length != 500) {
@@ -290,46 +233,89 @@ const WorldMap = () => {
     if (current_chunck_index == 999999) {
       start_index = 0
     }
-    {Object.values(list_of_user_data).map((user:any,index) =>
+
+    if (mobile_display == true) {
+      {Object.values(list_of_user_data).map((user:any,index) =>
       user.page_name.toLowerCase().includes(searched_name.toLowerCase()) != "" && (
-      user_info_data.push(
-          <li className="list-group-item">
-            
-            
-        
-            {user.page_name_shorter} {(start_index) + index + 1}/{list_of_user_data[Object.keys(list_of_user_data).length - 1].number_of_element}
-            
-            <br></br>
-            <h1 className="body_flag">
-              <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} alt="" width="50" height="50" className="me-2"/>
-                <img src={dict_localisation_pin_picture[user.birth_town_localisation[0]]  ?? dict_localisation_pin_picture.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="35" height="35" className="me-2"/>
+        user_info_data.push(
+            <li className="list-group-item">
+              {user.page_name_even_shorter_for_mobile} {(start_index) + index + 1}/{list_of_user_data[Object.keys(list_of_user_data).length - 1].number_of_element}
               
-              {user.display_death_localisation == true &&(
-                  <img src={dict_localisation_pin_picture2[user.town_death_localisation[0]]  ?? dict_localisation_pin_picture2.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.town_death_localisation[0],user.town_death_localisation[1],true)} alt="" width="35" height="35" className="me-2"/>
-              )}
+              <br></br>
+              <h1 className="body_flag">
+                <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} alt="" width="70" height="70" className="me-2"/>
+                  <img src={dict_localisation_pin_picture[user.birth_town_localisation[0]]  ?? dict_localisation_pin_picture.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="25" height="25" className="me-2"/>
+                
+                {user.display_death_localisation == true &&(
+                    <img src={dict_localisation_pin_picture2[user.town_death_localisation[0]]  ?? dict_localisation_pin_picture2.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.town_death_localisation[0],user.town_death_localisation[1],true)} alt="" width="25" height="25" className="me-2"/>
+                )}
 
-              <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxw6xy-R6L-ethznPligpikS1nTohfbsiKoVEX6WlL3Q&s=10"} style={{ cursor: "pointer" }} onClick={() => window.open(user.page_url, "_blank")} alt="" width="35" height="35" className="me-2"/>
 
-              
-              {/* user.display_death_localisation == true
-               */}
-              <span
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                data-bs-title={user.birth_country_name}
-              >
-                {user.country_birth_place_emoji}
-              </span>
-              <button type="button" className="btn btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => handle_complete_profile_user(user.page_name)}>+ d'info</button>
+                
+                {/* user.display_death_localisation == true
+                */}
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title={user.birth_country_name}
+                >
+                  {user.country_birth_place_emoji}
+                </span>
+                
+                <button type="button" className="btn btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => handle_complete_profile_user(user.page_name)}>+ d'info</button>
 
+                
+                
+              </h1>
               
-              
-            </h1>
-            
-          </li>
+            </li>
+          )
         )
-      )
-    )}
+      )}
+    
+    } else {
+      {Object.values(list_of_user_data).map((user:any,index) =>
+        user.page_name.toLowerCase().includes(searched_name.toLowerCase()) != "" && (
+        user_info_data.push(
+            <li className="list-group-item">
+              
+              
+          
+              {user.page_name_shorter} {(start_index) + index + 1}/{list_of_user_data[Object.keys(list_of_user_data).length - 1].number_of_element}
+              
+              <br></br>
+              <h1 className="body_flag">
+                <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} alt="" width="50" height="50" className="me-2"/>
+                  <img src={dict_localisation_pin_picture[user.birth_town_localisation[0]]  ?? dict_localisation_pin_picture.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="35" height="35" className="me-2"/>
+                
+                {user.display_death_localisation == true &&(
+                    <img src={dict_localisation_pin_picture2[user.town_death_localisation[0]]  ?? dict_localisation_pin_picture2.default} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.town_death_localisation[0],user.town_death_localisation[1],true)} alt="" width="35" height="35" className="me-2"/>
+                )}
+
+                <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxw6xy-R6L-ethznPligpikS1nTohfbsiKoVEX6WlL3Q&s=10"} style={{ cursor: "pointer" }} onClick={() => window.open(user.page_url, "_blank")} alt="" width="35" height="35" className="me-2"/>
+
+                
+                {/* user.display_death_localisation == true
+                */}
+                <span
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title={user.birth_country_name}
+                >
+                  {user.country_birth_place_emoji}
+                </span>
+                <button type="button" className="btn btn-outline-secondary ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => handle_complete_profile_user(user.page_name)}>+ d'info</button>
+
+                
+                
+              </h1>
+              
+            </li>
+          )
+        )
+      )}
+    
+    }
     return (
       user_info_data
     )
@@ -725,7 +711,7 @@ const WorldMap = () => {
                     placeholder="Pays de naissance"
                 />
                  */}
-                  <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse-peintre-médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
+                  <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse#peintre#médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                   <br></br>
                   <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                   <br></br>
@@ -757,7 +743,7 @@ const WorldMap = () => {
                   <br></br>
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"country_death_place")}
->
+                  >
                     <option selected>Continent/Région/Pays de mort</option>
                     
                     {list_of_countries
@@ -780,7 +766,7 @@ const WorldMap = () => {
                   <br></br>
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"alive_status")}
->
+                  >
                     <option selected>Mort ou Vivant?</option>
                     
                     {status_death_string_list
@@ -802,7 +788,7 @@ const WorldMap = () => {
                   <br></br>
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"gender")}
->
+                  >
                     <option selected>Genre?</option>
                     
                     {gender_string_list
@@ -886,7 +872,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"time_period_of_birth")}
->
+                  >
                     <option selected>Période historique?</option>
                     
                     {historical_period
@@ -929,7 +915,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_people_with_no_localisation")}
->
+                  >
                     <option selected>Afficher les gens qui n'ont pas de localisation de naissance?</option>
                     
                     {["oui","non"]
@@ -953,7 +939,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_town")}
->
+                  >
                     <option selected>Afficher seulement un utilisateur par ville de naissance?</option>
                     
                     {["oui","non"]
@@ -978,7 +964,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"is_cause_of_death_known")}
->
+                  >
                     <option selected>Afficher seulement les utilisateurs avec une cause de mort connue?</option>
                     
                     {["oui","non"]
@@ -1002,7 +988,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"sort_user_by")}
->
+                  >
                     <option selected>Trier les utilisateurs par?</option>
                     
                     {["Nombre de lien","Taille de la page wipedia","Nombre de personnes qui les lient","Âge","Nombre d'ami(e)","Taille du nom de la page","Nombre de vue(s)","Par défaut"]
@@ -1026,7 +1012,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                   onChange={(event) => handle_dict_of_advance_search(event,"born_before_christ")}
->
+                  >
                   <option selected>Né avant Jésus-Christ?</option>
                   
                   {["oui","non","Les 2"]
@@ -1050,7 +1036,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_only_death_localisation")}
->
+                  >
                     <option selected>Afficher seulement les lieux de mort?</option>
                     
                     {["oui","non"]
@@ -1074,7 +1060,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_only_people_born_and_dead_the_same_day")}
-  >
+                  >
                     <option selected>Afficher seulement les gens nés et morts le même jour ?</option>
                     
                     {["oui","non"]
@@ -1098,7 +1084,7 @@ const WorldMap = () => {
                   
                   <select className="form-select body_flag" aria-label="Default select example"                       
                     onChange={(event) => handle_dict_of_advance_search(event,"display_only_people_born_and_dead_in_the_same_town")}
-  >
+                  >
                     <option selected>Afficher seulement les gens nés/morts dans la même ville</option>
                     
                     {["oui","non"]
@@ -1150,41 +1136,14 @@ const WorldMap = () => {
     
   }
 
-  
-
   var user_profile = display_user_profile()
+  var user_profile_mobile = display_user_profile(true)
+  
   return (
 
     <div>   
-    {/* <div>
-      {Custom_navbar(0)}
-      
-      <br></br>
-      <br></br>
-      <br></br>
-      
-    </div> */}
-    <div className="d-flex align-items-stretch min-vh-100">
-      
-      {/* <div className="card" style={{width: "5rem;"}}>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Ammons_and_Johnson.jpg?utm_source=fr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled" className="card-img-top" alt="..."/>
-        <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <a href="#" className="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-   */}
 
-      {/* <div className="map-wrapper border-end border-end border-2 border-secondary"
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-        }}
-      >
-       */}
-
+    <div className="d-flex align-items-stretch">  
       <div className="map-wrapper border-end border-end border-2 border-secondary"
         style={{
           position: "sticky",
@@ -1291,17 +1250,14 @@ const WorldMap = () => {
 
       {hide_searchbar == false && (
         <div className="" style={{flexShrink:0 }}>
-
-
-              
             <div className="card">
               <ul className="list-group list-group-flush">
                 <div>
-                  <li className="list-group-item">
+
+
+                  <li className="list-group-item desktop-only">
                     <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Menu</a>
-                    
-                    <a type="button" className="btn btn-light ms-5" style={{margin :"auto"}} onClick={() => handle_search_bar()}>Masquer la recherche 🙈</a>
-                    
+                                        
                     <br></br>
                     <br></br>
                     
@@ -1324,18 +1280,45 @@ const WorldMap = () => {
                     
                   </li>
 
+                  <li className="list-group-item mobile-only">
+                    <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Menu</a>
+                    
+                    <br></br>
+                    <br></br>
+                    
+                    <a type="button" className="btn btn-warning btn-sm mobile-only" onClick={() => handle_search_bar()}>Masquer la recherche 🙈</a>
+
+                    <br></br>
+                    
+                    <input className="form-control w-75" type="text" placeholder={"Nom de la page"} onChange={(event) => handle_searched_name(event)}></input>
+                    <br></br>
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{margin :"auto"}}>Recherches avancées 🔎</button>
+                    <br></br>
+                    <br></br>
+
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,-1)}>{"Page -"}</button>
+                    <button type="button" className="btn btn-secondary ms-4" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,+1)}>{"Page +"}</button>
+                    <br></br>
+                    <br></br>
+                    <button type="button" className="btn btn-light">Page {current_chunck_index + 1}</button>
+                    
+                  </li>
+
                   
-                  {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
-                  </button>
-                  */}
+                  
                   {advanced_search_modal()}
                   {user_info_modal()}
                   
                   
                   
-
-                  {user_profile}
+                  <div className="desktop-only">
+                    {user_profile}
+                  </div>
+                  
+                  <div className="mobile-only">
+                    {user_profile_mobile}
+                  </div>
+                  
                   {/* <li className="list-group-item">
                     <h1>fefefe</h1>
                   </li>
@@ -1350,11 +1333,10 @@ const WorldMap = () => {
       )}
 
       {hide_searchbar == true && (
-        <div className="" style={{flexShrink:0 }}>
+        <div className="mobile-only">
           <button type="button" className="btn btn-light btn-sm" style={{margin :"auto"}} onClick={() => handle_search_bar()}>🙈</button>
-        </div>            
-        
-
+        </div>
+                
       )}
 
       </div>

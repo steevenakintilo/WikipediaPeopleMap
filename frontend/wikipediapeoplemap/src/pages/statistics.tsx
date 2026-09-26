@@ -8,8 +8,6 @@ import { Accordion } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { data, useNavigate } from 'react-router';
 
-//import Custom_navbar from "./navbar.tsx";
-
 import { AgCharts } from "ag-charts-react";
 import {
     ModuleRegistry,
@@ -22,7 +20,7 @@ import "leaflet/dist/leaflet.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./home.css";
+import "./global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import {NUMBER_OF_USER} from './global_variable'
@@ -98,6 +96,7 @@ const Statistics = () => {
 
       set_result_found(true)
       set_loading(false)
+
       ////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
@@ -136,7 +135,7 @@ const Statistics = () => {
         //console.log(list_of_user_data["age"] , " meade lux lewis")
         for (var i = 0; i < keys.length - 1; i++) {    
             
-            if (list_of_user_data[keys[i]].length > 1) {
+            if (list_of_user_data[keys[i]].length > 0) {
                 //console.log("caq ", keys[i])
                 list_of_keys_name.push(keys[i])
                 if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level" && keys[i] != "dict_of_error" && keys[i] != "number_of_error_per_page" && keys[i] != "age_group"
@@ -209,33 +208,16 @@ const Statistics = () => {
 
     
 
-  function Custom_navbar(variable:any = "") {
+  function navbar() {
     
     return (
           <nav className="navbar navbar-expand-lg  navbarBGcolor fixed-top navbar_color">
-          <div className="container-fluid">
-              
-              <div className="d-grid gap-2">
-                  <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              </div>
-              
-              {/* <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-               */}
-          </div>
-
-
-          
-          {/* <select className="form-select w-25 mx-auto" style={{backgroundColor:"#cad3db"}} aria-label="Multiple select example">
-              <option>Somaire</option>
-              <option>TEST1</option>
-              <option>TEST2</option>
-              <option>TEST3</option>
-          </select>
-           */}
+            <div className="container-fluid">
+                
+                <div className="d-grid gap-2">
+                    <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+                </div>
+            </div>
           </nav>
       )  
 }
@@ -279,7 +261,7 @@ const Statistics = () => {
                        placeholder="Pays de naissance"
                    />
                     */}
-                     <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse-peintre-médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
+                     <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse#peintre#médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                      <br></br>
                      <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                      <br></br>
@@ -681,7 +663,7 @@ const Statistics = () => {
 
       var total_number : any = 0
       var text_to_display = "Son%"
-      //var display_average = false
+      var display_average = false
       var avg : any = 0
       var average : any = 0
       var mediane : any = 0
@@ -694,15 +676,10 @@ const Statistics = () => {
         total_number = list_of_user_data.number_of_user_found
         text_to_display = "% de personnes avec cette erreur"
       }
-
-
-      
       if (data_dict.length > 2) {
           mediane = data_dict[Math.round(data_dict.length/2)].data_name
-        }
+      }
         
-      
-
       for (var i = 0; i < data_dict.length; i++) {
           if (total_number/2 >= average_step_list) {
             mediane=data_dict[i].data_name
@@ -716,12 +693,16 @@ const Statistics = () => {
             avg+= (data.data_name * data.data_number)
           ))}
 
-
+        display_average = true
         average=(Math.round(avg/total_number * 10) * 10)/100
       }
       
-      if (average == 0) {
+      if (average == 0 && display_average == true) {
         mediane=0
+      }
+      if (display_average == false) {
+        average="."
+        mediane="."
       }
       return(
          <div>
@@ -860,12 +841,17 @@ const Statistics = () => {
                         <div className="d-grid gap-2">
                             <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
                         </div>
-                        <br></br>    
+                        <br></br>
+                        
+
+                        
                         <h2>
-                            ça charge...
+                          Ça charge veuillez patienter quelques minutes
                         </h2>
                         
-                        <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif"></img>
+                        <img className="mobile-only" src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif" width="300" height="300"></img>
+                        <img className="desktop-only" src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif" width="700" height="700"></img>
+                        
                         {/* <div className="tenor-gif-embed" data-postid="17234189" data-share-method="host" data-aspect-ratio="1.19403" data-width="100%"><a href="https://tenor.com/view/homer-simpson-the-simpsons-spinning-walking-floor-gif-17234189">Homer Simpson The Simpsons GIF</a>from <a href="https://tenor.com/search/homer+simpson-gifs">Homer Simpson GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
                      */}
                     
@@ -874,7 +860,7 @@ const Statistics = () => {
 
                     {loading != true &&(
                     <div>
-                    {Custom_navbar("")}
+                    {navbar()}
 
                     <br></br>
 
@@ -896,6 +882,9 @@ const Statistics = () => {
                         Statistiques détaillées des {list_of_user_data.number_of_user_found} pages Wikipédia:
                     </h1>
 
+
+                    
+
                     <br></br>
                     
                     {/* <div>
@@ -914,14 +903,14 @@ const Statistics = () => {
 
                     {list_of_keys_name.map((_: any, index: number) => (
                     <div key={list_of_keys_name[index]}>
-                      {["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"].includes(list_of_keys_name[index]) && (
+                      {["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","dict_of_error"].includes(list_of_keys_name[index]) && (
                         <div>
                           <br /><br /><br /><br />
 
                           <Accordion>
                             <Accordion.Item eventKey={list_of_keys_name[index]}>
                               <Accordion.Header>
-                              <strong style={{fontSize : "30px"}}>{["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"].indexOf(list_of_keys_name[index]) + 1}- {STAT_TO_DESCRIPTION[list_of_keys_name[index]]}</strong>
+                              <strong style={{fontSize : "30px"}}>{["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","dict_of_error"].indexOf(list_of_keys_name[index]) + 1}- {STAT_TO_DESCRIPTION[list_of_keys_name[index]]}</strong>
                               </Accordion.Header>
                               <Accordion.Body>
                                 {list_of_graph.map((graph: any, index2: number) => (
@@ -930,7 +919,7 @@ const Statistics = () => {
                                       <div>
                                         <AgCharts options={graph} />
                                         <br /><br />
-
+                                        
                                         <div className="d-grid gap-2">
                                           <button
                                             className="btn btn-secondary"
