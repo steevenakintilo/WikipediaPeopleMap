@@ -384,18 +384,25 @@ def get_advanced_statistics(request):
 
 
 
-    list_of_first_name = []
+    set_of_first_name = set()
     display_only_one_person_per_first_name = False
     if "display_only_one_person_per_first_name" in recieved_data:
         if recieved_data["display_only_one_person_per_first_name"] == "oui":
             display_only_one_person_per_first_name = True
 
-    list_of_last_name = []
+    set_of_last_name = set()
     display_only_one_person_per_last_name = False
     if "display_only_one_person_per_last_name" in recieved_data:
-        print("caca coco popo lili")
         if recieved_data["display_only_one_person_per_last_name"] == "oui":
             display_only_one_person_per_last_name = True
+
+
+
+    set_of_job = set()
+    display_only_one_person_per_job = False
+    if "display_only_one_person_per_job" in recieved_data:
+        if recieved_data["display_only_one_person_per_job"] == "oui":
+            display_only_one_person_per_job = True
     
     if "display_only_one_person_per_town" in recieved_data:
         if recieved_data["display_only_one_person_per_town"] == "oui":
@@ -540,18 +547,24 @@ def get_advanced_statistics(request):
     print("start")
     for user_obj in all_user_obj:
 
-        if display_only_one_person_per_first_name and user_obj.first_name_standard not in list_of_first_name:
-            list_of_first_name.append(user_obj.first_name_standard)
+        if display_only_one_person_per_first_name and user_obj.first_name_standard not in set_of_first_name:
+            set_of_first_name.add(user_obj.first_name_standard)
         elif display_only_one_person_per_first_name:
             nb_of_bad_user+=1
             continue
 
-        if display_only_one_person_per_last_name and user_obj.last_name_standard not in list_of_last_name:
-            list_of_last_name.append(user_obj.last_name_standard)
+        if display_only_one_person_per_last_name and user_obj.last_name_standard not in set_of_last_name:
+            set_of_last_name.add(user_obj.last_name_standard)
         elif display_only_one_person_per_last_name:
             nb_of_bad_user+=1
             continue
 
+        if display_only_one_person_per_job and user_obj.job not in set_of_job:
+            set_of_job.add(user_obj.job)
+        elif display_only_one_person_per_job:
+            nb_of_bad_user+=1
+            continue
+        
         # ─────────────────────────────────────────────
         # Names
         # ─────────────────────────────────────────────
@@ -977,7 +990,6 @@ def get_advanced_statistics(request):
 
         number_of_view_counter[user_obj.number_of_views] += 1                     
     #write_into_file("test_stat.txt",str(dict_of_name))
-
 
     dict_of_counter = {
         # ─────────────────────────────────────────────

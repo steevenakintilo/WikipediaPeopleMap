@@ -1277,8 +1277,7 @@ class WikiPeopleData():
             
             if job.isdigit():
                 job = ""          
-
-
+            
             try:
                 if is_alive and len(job.strip()) <= 1 or job in LIST_OF_INCOMPLETE_JOB:
                     if "est un" in page_text_plain_text:
@@ -1358,7 +1357,6 @@ class WikiPeopleData():
                             job_ = job
                             
                     elif "est un" in page_text_plain_text:
-                        
                         list_of_element_after_sentence = page_text_plain_text.split(f"est {determiner}")[1].split(" ")[0:10]
                         job_index = 0
 
@@ -1368,12 +1366,7 @@ class WikiPeopleData():
                                 job_index = index
                                 break
 
-                        
-                        inside_job_player_list = False
                         if job in job_player_list or list_of_element_after_sentence[job_index+1].startswith("d'") or list_of_element_after_sentence[job_index+1].starthwith("de"):
-
-                            if job in job_player_list:
-                                inside_job_player_list = True
                             job_index = 0
                             particle = "de"
                             for index , element in enumerate(list_of_element_after_sentence):
@@ -1390,7 +1383,6 @@ class WikiPeopleData():
                                     break
 
 
-                            
                             if job in ["ancien","ancienne"]:
                                 job_name = "ancien"
                                 if gender == "Woman":
@@ -1398,13 +1390,10 @@ class WikiPeopleData():
                                 job = f"{determiner} {job_name} {list_of_element_after_sentence[job_index]}"
                             elif job not in ["ancien","ancienne"]:
                                 job = f"{determiner} {job_player_} de {list_of_element_after_sentence[job_index]}"
-                            
-                            elif particle != "de" and job not in ["ancien","ancienne"]:
-                                print("ici3")
+                            if particle != "de" and job not in ["ancien","ancienne"]:
                                 job = f"{job_} {job_player_} {list_of_element_after_sentence[job_index]}"
                             job_ = job
-                            # print(job)
-                            # return                
+                        
 
 
             except:
@@ -1445,18 +1434,6 @@ class WikiPeopleData():
                 job = "Femme d'état"
             
 
-            LIST_OF_INCOMPLETE_JOB_LOWER = []
-            for job in LIST_OF_INCOMPLETE_JOB:
-                LIST_OF_INCOMPLETE_JOB_LOWER.append(job.lower())
-            if job.lower() in LIST_OF_INCOMPLETE_JOB_LOWER:
-                job = "Undefined"
-
-
-            if '<th scope="row">Activité</th>' in text_normal and (job == "" or job == "Undefined"):
-                if "," in text_normal.split('<th scope="row">Activité</th>')[1].split("\n")[1]:
-                    job = text_normal.split('<th scope="row">Activité</th>')[1].split("\n")[1].split(",")[0].strip()
-                else:
-                    job = text_normal.split('<th scope="row">Activité</th>')[1].split("<")[0].strip()
             # if job in LIST_OF_INCOMPLETE_JOB:
             #     for little_job in JOBS:
             #         print(little_job)
@@ -1465,6 +1442,19 @@ class WikiPeopleData():
             #             job = little_job
             #             break
             
+
+            if "d:q" in job.lower():
+                job = "Undefined"
+            for job_ in LIST_OF_INCOMPLETE_JOB:
+                if job.lower() == job_.lower():
+                    job = "Undefined"
+                    break
+
+            if '<th scope="row">Activité</th>' in text_normal and (job == "" or job.lower() == "undefined"):
+                if "," in text_normal.split('<th scope="row">Activité</th>')[1].split("\n")[1]:
+                    job = text_normal.split('<th scope="row">Activité</th>')[1].split("\n")[1].split(",")[0].strip()
+                else:
+                    job = text_normal.split('<th scope="row">Activité</th>')[1].split("<")[0].strip()
 
             list_of_little_job = []
             if job in LIST_OF_INCOMPLETE_JOB:
@@ -1964,8 +1954,15 @@ class WikiPeopleData():
                     job = job[0:-1]
             except:
                 job = "Undefined"
-            
 
+
+            #'<a href="Musicien" title="Musicien">Musicien</a>'
+            
+            try:
+                if "<a href=" in job.lower():
+                    job = job.split("=")[1].split('"')[1].replace('"',"")
+            except:
+                pass
             if birth_date == "Undefined":
                 age = -999    
 
@@ -2015,11 +2012,7 @@ class WikiPeopleData():
                     break
 
 
-            if "d:q" in town_death_place.lower():
-                town_death_place = "Undefined"
-            if "d:q" in town_birth_place.lower():
-                town_birth_place = "Undefined"
-
+            
             if town_birth_place.lower().strip() in self.list_of_country_lower:
                 town_birth_place = "Undefined"
             
@@ -2335,6 +2328,13 @@ class WikiPeopleData():
                 except:
                     cause_of_death = "Unspecified"
 
+
+
+            if "d:q" in town_death_place.lower():
+                town_death_place = "Undefined"
+            if "d:q" in town_birth_place.lower():
+                town_birth_place = "Undefined"
+            
             
             if town_birth_place == town_death_place and len(birth_town_localisation) != 0 and len(town_birth_place) != 0:
                 death_town_localisation = birth_town_localisation
@@ -2928,21 +2928,6 @@ class WikiPeopleData():
             if is_alive:
                 town_death_place_href = "alive"
 
-            if is_alive is False:
-                born_and_died_in_the_same_town = False
-                born_and_died_in_the_same_country = False
-                born_and_died_in_the_same_continent = False
-                born_and_died_in_the_same_region = False
-                if town_birth_place == town_death_place and town_birth_place != "Undefined" and len(town_birth_place) != 0:
-                    born_and_died_in_the_same_town = True
-                if country_birth_place == country_death_place and country_birth_place != "Undefined" and len(country_birth_place) != 0:
-                    born_and_died_in_the_same_continent = True
-                if continent_of_birth == continent_of_death and continent_of_birth != "Undefined" and len(continent_of_birth) != 0:
-                    born_and_died_in_the_same_continent = True
-                if region_of_birth == region_of_death and region_of_birth != "Undefined" and len(region_of_birth) != 0:
-                    born_and_died_in_the_same_region = True
-
-
             
 
             week_day_of_birth = get_weekday_from_a_date(birth_date)
@@ -3003,6 +2988,24 @@ class WikiPeopleData():
                 town_death_place = "Undefined"
                 town_death_place_href = "Undefined"
 
+
+
+            if is_alive is False:
+                born_and_died_in_the_same_town = False
+                born_and_died_in_the_same_country = False
+                born_and_died_in_the_same_continent = False
+                born_and_died_in_the_same_region = False
+                if town_birth_place == town_death_place and town_birth_place != "Undefined" and len(town_birth_place) != 0:
+                    born_and_died_in_the_same_town = True
+                if country_birth_place == country_death_place and country_birth_place != "Undefined" and len(country_birth_place) != 0:
+                    born_and_died_in_the_same_continent = True
+                if continent_of_birth == continent_of_death and continent_of_birth != "Undefined" and len(continent_of_birth) != 0:
+                    born_and_died_in_the_same_continent = True
+                if region_of_birth == region_of_death and region_of_birth != "Undefined" and len(region_of_birth) != 0:
+                    born_and_died_in_the_same_region = True
+                if country_birth_place == country_death_place and country_birth_place != "Undefined" and len(country_birth_place) != 0 and is_alive is False:
+                    born_and_died_in_the_same_country = True
+            
             NON_TOWN_ELEMENT_LIST_LOWER = []
             for elem in NON_TOWN_ELEMENT_LIST:
                 NON_TOWN_ELEMENT_LIST_LOWER.append(elem.lower())
@@ -3150,7 +3153,7 @@ class WikiPeopleData():
                 print(f"Region of death {region_of_death}")
                 if is_alive is False:
                     print(f"born_and_died_in_the_same_town: {born_and_died_in_the_same_town}")
-                    print(f"born_and_died_in_the_same_country: {born_and_died_in_the_same_continent}")
+                    print(f"born_and_died_in_the_same_country: {born_and_died_in_the_same_country}")
                     print(f"born_and_died_in_the_same_continent: {born_and_died_in_the_same_continent}")
                     print(f"born_and_died_in_the_same_region: {born_and_died_in_the_same_region}")
                     print(f"born_and_died_on_the_same_day: {born_and_died_on_the_same_day}")

@@ -1,5 +1,10 @@
 import os
+import datetime
 
+x = datetime.datetime.now()
+
+
+CURRENT_YEAR = int(x.year)
 USER_DICT_FILE_PATH = rf"{os.getcwd().split(r"\backend\myproject")[0]}\src\user_info_dict.txt"
 NUMBER_OF_USER = 706208
 NUMBER_OF_USER = 712471
@@ -89,8 +94,28 @@ UNPRECISENESS_DATA_FR = {
     "birth_date is after death_date": "La date de naissance est postérieure à la date de décès",
     "birth_date year is the same as death_date year so one of the date is wrong": "L'année de naissance est identique à l'année de décès : l'une des deux dates est probablement incorrecte",
     "User is born before christ": "La personne est née avant Jésus-Christ",
-    "age is unknown and birth_date/death_date may be unknown too": "L'âge est inconnu, et les dates de naissance et de décès peuvent également être inconnues"
+    "age is unknown and birth_date/death_date may be unknown too": "L'âge est inconnu, et les dates de naissance et de décès peuvent également être inconnues",
+    "job is unknown":"La profession est inconnu",
+    "User may have a bigger role than homme politique":"Le metier de l'utilisateur est probablement plus précis que l'homme politique.",
+    "User may have a bigger role than femme politique":"Le metier de l'utilisateur est probablement plus précis que femme politique.",
+    "death_day is undefined":"Le jour de décès est inconnu"
+}
 
+AGE_GROUP_DICT: dict[str, str] = {
+    "-99": "-999 ans",
+    "0": "0 à 9 ans",
+    "1": "10 à 19 ans",
+    "2": "20 à 29 ans",
+    "3": "30 à 39 ans",
+    "4": "40 à 49 ans",
+    "5": "50 à 59 ans",
+    "6": "60 à 69 ans",
+    "7": "70 à 79 ans",
+    "8": "80 à 89 ans",
+    "9": "90 à 99 ans",
+    "10": "100 à 109 ans",
+    "11": "110 à 119 ans",
+    "12": "120 à 129 ans",
 }
 
 LIST_OF_REGIONS_NAME = [

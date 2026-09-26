@@ -319,7 +319,7 @@ const Statistics = () => {
 
                       <br></br>
                      
-                     <input className="form-control w-75" 
+                     <input className="form-control w-100" 
                        placeholder={"Niveau de précision de la page (0-100%)"} 
                        type="number"
                        min={0}
@@ -497,6 +497,31 @@ const Statistics = () => {
                      
                      <br></br>
                      
+
+                     <select className="form-select body_flag" aria-label="Default select example"                       
+                       onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_job")}
+   >
+                       <option selected>Afficher seulement un utilisateur par métier?</option>
+                       
+                       {["oui","non"]
+                           .map((choice:any, i:number) => (
+                             
+                           
+                           <option
+                             key={i}
+                             className="list-group-item list-group-item-action body_flag"
+                             data-bs-dismiss="modal"
+                           >
+   
+                             {choice}
+                           </option>
+                         ))}
+                       
+                       
+                     </select>
+                     
+                     <br></br>
+                     
                      <select className="form-select body_flag" aria-label="Default select example"                       
                        onChange={(event) => handle_dict_of_advance_search(event,"is_cause_of_death_known")}
    >
@@ -595,7 +620,7 @@ const Statistics = () => {
    
                      <br></br>
                      
-                     <input className="form-control w-75" type="number" min="1" max="706280" placeholder={"Position maximale de la personne à afficher"} onChange={(event) => handle_dict_of_advance_search(event,"latest_position_of_user_to_display")}></input>                  
+                     <input className="form-control w-100" type="number" min="1" max="706280" placeholder={"Position maximale de la personne à afficher"} onChange={(event) => handle_dict_of_advance_search(event,"latest_position_of_user_to_display")}></input>                  
    
                  </div>
                  

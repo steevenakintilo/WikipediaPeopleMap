@@ -267,6 +267,15 @@ class WikipediaUser(models.Model):
         default=True
     )
 
+    born_outside_france = models.BooleanField(
+        default=False
+    )
+    
+    died_outside_france = models.BooleanField(
+        default=False
+    )
+    
+
     # ─────────────────────────────────────────────
     # Personal information
     # ─────────────────────────────────────────────
@@ -492,6 +501,14 @@ class WikipediaUserUniqueTown(models.Model):
         null=True
     )
 
+    born_outside_france = models.BooleanField(
+        default=False
+    )
+    
+    died_outside_france = models.BooleanField(
+        default=False
+    )
+        
     # ─────────────────────────────────────────────
     # Death information
     # ─────────────────────────────────────────────
@@ -581,8 +598,9 @@ class WikipediaUserUniqueTown(models.Model):
     )
 
     born_and_died_in_the_same_day = models.CharField(
-            max_length=20,
-            default="False"
+        max_length=20,
+        default="False"
+
     )
         
     born_and_died_in_the_same_region = models.CharField(

@@ -39,7 +39,7 @@ def sort_a_counter(counter:Counter,type=0,key="") -> Counter:
     try:
         if key in ["preciseness_level","age","grade_over_20","wikipedia_page_lenght","number_of_user_found","number_of_error_per_page",
                    "birth_year","death_year","birth_and_death_year","birth_year_from_1900","death_year_from_1900","birth_and_death_year_from_1900"
-                   "number_of_view"]:
+                   "number_of_view","century_of_birth","century_of_death"]:
             return counter
         if type == 0:
             counter_sorted = sorted(
@@ -55,6 +55,7 @@ def sort_a_counter(counter:Counter,type=0,key="") -> Counter:
         return counter_sorted
     except:
         return counter
+
 def dms_to_decimal(dms,name=""):
     "A function that convert Wikipedia Localisation to standart localisation"
     try:
