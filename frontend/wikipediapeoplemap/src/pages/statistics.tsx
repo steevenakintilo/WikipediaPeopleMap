@@ -1,12 +1,6 @@
-// import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-
-// import geoUrl from "../custom.geo.json";
-
-import { Tooltip } from "bootstrap";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 import { Accordion } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
-import { data, useNavigate } from 'react-router';
+import {useState,useEffect } from 'react';
 
 import { AgCharts } from "ag-charts-react";
 import {
@@ -16,15 +10,13 @@ import {
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-import "leaflet/dist/leaflet.css";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {NUMBER_OF_USER} from './global_variable'
-import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME} from "./global_variable.tsx"
+import {LIST_OF_THEME} from './global_variable'
+import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME,LIST_OF_VARIABLE_THAT_NEED_COMPUTING} from "./global_variable.tsx"
 import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict2} from "./utility_function.tsx";
 
 import {
@@ -36,50 +28,35 @@ import {
   TableRow,
   Paper
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
 
 polyfillCountryFlagEmojis();
 
 const Statistics = () => {
-    //const [list_of_user_data,set_list_of_user_data] : any = useState({});
+
     const [list_of_user_data,set_list_of_user_data] : any = useState({});
 
+
+    const [all_variables_set,set_all_variables_set] : any = useState(false)
     const [result_found,set_result_found] : any = useState(false)
     const [loading,set_loading] : any = useState(false)
     const [server_error_found,set_server_error_found] : any = useState(false)
     
-    useEffect(() => {
-        // get_list_of_user_advanced_search().then((result) => {
-        //     set_list_of_user_data(result.all_user_data)
-        //     console.log("typeof: ", typeof(result.all_user_data))
-        // })
-
-    }, []);
- 
-
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [dict_info,set_dict_info] : any = useState({});
     const [keys_info,set_keys_info] : any = useState({});
     const [text_input, settext_input] = useState("");
 
-
-
-
-
     function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
       set_dict_info(dict_info)
       set_keys_info(keys_info)
     }
-    async function get_list_of_user_advanced_search() {
-      
-      
-      //setchunck(0)
+
+    async function get_list_of_user_advanced_search() {      
       set_loading(true)
       set_server_error_found(false)
 
       const response = await fetch(`http://127.0.0.1:8000/get_advanced_statistics`, {
           method: 'POST',
-          //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
           headers: {"Content-Type" : "application/json"},
           body:JSON.stringify(dict_of_advance_search)
 
@@ -96,30 +73,13 @@ const Statistics = () => {
 
       set_result_found(true)
       set_loading(false)
-
-      ////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
     }
 
 
     function handle_text_input (event:any) {
-      // console.log("tototo");
       settext_input(event.target.value)
-    }
-
-
-    
-
-//   for (var i = 0; i <= 100;i++) {
-//     list_of_random_position.push([getRandomArbitrary(-89,89),getRandomArbitrary(-179,179)])
-//   }
-
-    
-    
-    let dict_of_advance_search_empty = {
-      "job":"",
-      "is_alive":false
     }
 
     var generic_chart : any = ""
@@ -128,10 +88,14 @@ const Statistics = () => {
     var list_of_graph : any = []
     var list_of_dict : any = []
     var list_of_keys_name : any = []
-    if (result_found == true) {
+    var list_of_graph_local : any = []
+    var list_of_dict_local : any = []
+    var list_of_keys_name_local : any = []
+
+    if (result_found == true && all_variables_set == false) {
         
         const keys = Object.keys(list_of_user_data);
-        
+        console.log("boogie")
         //console.log(list_of_user_data["age"] , " meade lux lewis")
         for (var i = 0; i < keys.length - 1; i++) {    
             
@@ -142,9 +106,13 @@ const Statistics = () => {
                   && keys[i] != "birth_year" && keys[i] != "death_year" && keys[i] != "birth_and_death_year" && keys[i] != "birth_year_from_1900" && keys[i] != "death_year_from_1900" && keys[i] != "birth_and_death_year_from_1900"
                   && keys[i] != "number_of_view" && keys[i] != "century_of_birth" && keys[i] != "century_of_death"
                 ) {
+
+                    //console.log("kamehameha " , keys[i])
+
                     generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10)
                     generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
                     list_of_graph.push(generic_chart)
+                    
                     if (keys[i] != "town_birth_and_death_place" && keys[i] != "town_birth_place" && keys[i] != "town_death_place" && keys[i] != "dict_of_error_counter") {
                       list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],2000))
                     } 
@@ -165,48 +133,39 @@ const Statistics = () => {
                     list_of_graph.push(generic_chart)
                     list_of_dict.push(generate_list_of_dict2(list_of_user_data[keys[i]],50000000))
                   } else {
-
+                    
                     generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10000000)
                     generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
                     list_of_graph.push(generic_chart)
-                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],50000000))
-                    
+                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],50000000))  
                 }
                 
             }
-
-            //console.log("fpoekfgezkpo " , )
         }
-        //console.log("coca cola " , generic_chart)
         
+        localStorage.removeItem("list_of_graph_local");
+        localStorage.removeItem("list_of_dict_local");
+        localStorage.removeItem("list_of_keys_local");
+        localStorage.setItem("list_of_dict_local",JSON.stringify(list_of_dict))
+        localStorage.setItem("list_of_graph_local",JSON.stringify(list_of_graph))
+        localStorage.setItem("list_of_keys_local",JSON.stringify(list_of_keys_name))
+        set_all_variables_set(true)
     }
 
+  
 
 
 
-    
-    
-    const tooltipTriggerList = document.querySelectorAll(
-        '[data-bs-toggle="tooltip"]'
-      );
+  var list_of_graph_local : any = JSON.parse(localStorage.getItem("list_of_graph_local") ?? "[]");
+  var list_of_dict_local : any = JSON.parse(localStorage.getItem("list_of_dict_local") ?? "[]");
+  var list_of_keys_name_local : any = JSON.parse(localStorage.getItem("list_of_keys_local") ?? "[]");
 
-      tooltipTriggerList.forEach((tooltipTriggerEl) => {
-        new Tooltip(tooltipTriggerEl);
-      });
-    
-
-
-
-    // function add_space(number: number) {
-    //     const br_list:any = []
-    //     for (let i = 0 ; i < number ; i++) {
-    //         br_list.push(<br></br>)  
-    //     }
-
-    //     return br_list
-    // }
-
-    
+  // console.log("list_of_keys_local " , typeof(""))
+  // console.log("++++++")
+  // console.log("list_of_keys " , list_of_keys_name)
+  
+  //console.log(localStorage.getItem("list_of_keys_local"))
+  //console.log(localStorage.getItem("list_of_keys_local")?.length)
 
   function navbar() {
     
@@ -219,8 +178,8 @@ const Statistics = () => {
                 </div>
             </div>
           </nav>
-      )  
-}
+    )  
+  }
 
     function handle_dict_of_advance_search(event:any,key:any) {
         set_dict_of_advance_search((prev: any) => ({
@@ -686,9 +645,7 @@ const Statistics = () => {
           }
           average_step_list+=data_dict[i].data_number           
       }
-      if (["age","birth_year","death_year","birth_and_death_year","birth_year_from_1900","death_year_from_1900","birth_and_death_year_from_1900","grade_over_20","wikipedia_page_lenght","page_lenght",
-        "number_of_word_in_page_name","number_of_links","number_of_user_who_have_linked_this_user","century_of_birth","century_of_death",
-        "number_of_friends","preciseness_level","number_of_error_per_page","age_group","number_of_view"].includes(keys_info)) {
+      if (LIST_OF_VARIABLE_THAT_NEED_COMPUTING.includes(keys_info)) {
           {Object.values(data_dict).map((data:any) => (
             avg+= (data.data_name * data.data_number)
           ))}
@@ -900,22 +857,22 @@ const Statistics = () => {
 
                     
 
-
-                    {list_of_keys_name.map((_: any, index: number) => (
-                    <div key={list_of_keys_name[index]}>
-                      {["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","dict_of_error"].includes(list_of_keys_name[index]) && (
+                    
+                    {list_of_keys_name_local.map((_: any, index: number) => (
+                    <div key={list_of_keys_name_local[index]}>
+                      {LIST_OF_THEME.includes(list_of_keys_name_local[index]) && (
                         <div>
                           <br /><br /><br /><br />
 
                           <Accordion>
-                            <Accordion.Item eventKey={list_of_keys_name[index]}>
+                            <Accordion.Item eventKey={list_of_keys_name_local[index]}>
                               <Accordion.Header>
-                              <strong style={{fontSize : "30px"}}>{["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","dict_of_error"].indexOf(list_of_keys_name[index]) + 1}- {STAT_TO_DESCRIPTION[list_of_keys_name[index]]}</strong>
+                              <strong style={{fontSize : "30px"}}>{LIST_OF_THEME.indexOf(list_of_keys_name_local[index]) + 1}- {STAT_TO_DESCRIPTION[list_of_keys_name_local[index]]}</strong>
                               </Accordion.Header>
                               <Accordion.Body>
-                                {list_of_graph.map((graph: any, index2: number) => (
+                                {list_of_graph_local.map((graph: any, index2: number) => (
                                   <div key={index2}>
-                                    {[list_of_keys_name[index]].includes(SUB_THEME_TO_THEME[list_of_keys_name[index2]]) && (
+                                    {[list_of_keys_name_local[index]].includes(SUB_THEME_TO_THEME[list_of_keys_name_local[index2]]) && (
                                       <div>
                                         <AgCharts options={graph} />
                                         <br /><br />
@@ -925,7 +882,7 @@ const Statistics = () => {
                                             className="btn btn-secondary"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2"
-                                            onClick={() => handle_dict_and_keys_info(list_of_dict[index2], list_of_keys_name[index2])}
+                                            onClick={() => handle_dict_and_keys_info(list_of_dict_local[index2], list_of_keys_name_local[index2])}
                                           >
                                             {"Toutes les statistiques 📊"}
                                           </button>

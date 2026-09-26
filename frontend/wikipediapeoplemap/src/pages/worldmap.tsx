@@ -36,7 +36,17 @@ const WorldMap = () => {
         })
 
     }, []);
- 
+    
+
+    const width  = window.innerWidth || document.documentElement.clientWidth || 
+    document.body.clientWidth;
+    const height = window.innerHeight|| document.documentElement.clientHeight|| 
+    document.body.clientHeight;
+    var display_mobile_version : boolean = true
+    if (width > 768) {
+      display_mobile_version = false
+    }
+
 
     const longitude_position_of_france = 6.6034
     const latitude_position_of_france = 48.8883
@@ -49,8 +59,10 @@ const WorldMap = () => {
     const [launch_profil_root,setlaunch_profile_root] = useState(false)
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [user_data_info,set_user_data_info] : any = useState({});
-    const [hide_searchbar,set_hide_searchbar] : any = useState(false)
+    const [hide_searchbar,set_hide_searchbar] : any = useState(display_mobile_version)
     const [no_move,set_no_move] : any = useState(false)
+
+  
     const tooltipTriggerList = document.querySelectorAll(
         '[data-bs-toggle="tooltip"]'
       );

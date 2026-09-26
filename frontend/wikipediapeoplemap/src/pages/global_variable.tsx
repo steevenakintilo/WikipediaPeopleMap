@@ -672,7 +672,12 @@ export const SUB_THEME_TO_THEME: Record<string, string> = {
   
 };
 
+export const LIST_OF_THEME = ["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","dict_of_error"]
 
+export const LIST_OF_VARIABLE_THAT_NEED_COMPUTING = ["age","birth_year","death_year","birth_and_death_year","birth_year_from_1900","death_year_from_1900","birth_and_death_year_from_1900","grade_over_20","wikipedia_page_lenght","page_lenght",
+        "number_of_word_in_page_name","number_of_links","number_of_user_who_have_linked_this_user","century_of_birth","century_of_death",
+        "number_of_friends","preciseness_level","number_of_error_per_page","age_group","number_of_view"]
+        
 export const STAT_TO_DESCRIPTION : any = {
     "first_name": "Noms et prénoms",
     "gender": "Informations personnelles",

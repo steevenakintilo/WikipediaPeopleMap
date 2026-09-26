@@ -1,46 +1,10 @@
-// import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-
-// import geoUrl from "../custom.geo.json";
-
-import { Tooltip } from "bootstrap";
-import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
-import { Accordion } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
-import { data, useNavigate } from 'react-router';
-
-//import Custom_navbar from "./navbar.tsx";
-
-import { AgCharts } from "ag-charts-react";
-import {
-    ModuleRegistry,
-    AllCommunityModule
-} from "ag-charts-community";
-
-ModuleRegistry.registerModules([AllCommunityModule]);
-
-import "leaflet/dist/leaflet.css";
-
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {NUMBER_OF_USER} from './global_variable'
-import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME} from "./global_variable.tsx"
-import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict2} from "./utility_function.tsx";
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper
-} from "@mui/material";
-import { grey } from "@mui/material/colors";
-
-polyfillCountryFlagEmojis();
+import {list_of_countries , list_of_country_flag} from "./global_variable.tsx"
 
 const QjisMap = () => {
     //const [total_number_of_user_found,set_total_number_of_user_found] : any = useState({});
@@ -50,165 +14,75 @@ const QjisMap = () => {
     const [loading,set_loading] : any = useState(false)
     const [server_error_found,set_server_error_found] : any = useState(false)
     const [no_result_found_text,set_no_result_found_text] : any = useState(false)
-    useEffect(() => {
-        // get_list_of_user_advanced_search().then((result) => {
-        //     set_total_number_of_user_found(result.all_user_data)
-        //     console.log("typeof: ", typeof(result.all_user_data))
-        // })
-
-    }, []);
- 
+    
 
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     
-
-
-
-    
-    function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
-      set_dict_info(dict_info)
-      set_keys_info(keys_info)
-    }
     async function get_list_of_user_advanced_search() {
       
       
-    //setchunck(0)
-    set_loading(true)
-    set_server_error_found(false)
+      set_loading(true)
+      set_server_error_found(false)
 
-    const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search_qjis`, {
-        method: 'POST',
-        //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
-        headers: {"Content-Type" : "application/json"},
-        body:JSON.stringify(dict_of_advance_search)
+      const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search_qjis`, {
+          method: 'POST',
+          headers: {"Content-Type" : "application/json"},
+          body:JSON.stringify(dict_of_advance_search)
 
-    })
-    
+      })
+      
 
-    if (response.status == 500) {
-        set_server_error_found(true)
-        set_loading(false)
-        set_result_found(false)
-        return {}
-    }
+      if (response.status == 500) {
+          set_server_error_found(true)
+          set_loading(false)
+          set_result_found(false)
+          return {}
+      }
 
-    if (response.status == 404) {
-        set_server_error_found(false)
-        set_loading(false)
-        set_result_found(false)
-        set_no_result_found_text(true)
-        return {}
-        
-    }
-    const data_fetch = await response
-
-    console.log("ddddd " , data_fetch )
-    
-    const blob = await response.blob();
-
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "qjis_localisation.csv";
-    document.body.appendChild(a);
-    console.log(a,url,document.body)
-    a.click();
-
-    a.remove();
-    window.URL.revokeObjectURL(url);
-    set_result_found(true)
-    set_loading(false)
-    return data_fetch
-
-    }
-
-
-    function handle_text_input (event:any) {
-      // console.log("tototo");
-      settext_input(event.target.value)
-    }
-
-
-    
-
-//   for (var i = 0; i <= 100;i++) {
-//     list_of_random_position.push([getRandomArbitrary(-89,89),getRandomArbitrary(-179,179)])
-//   }
-
-    
-    
-    let dict_of_advance_search_empty = {
-      "job":"",
-      "is_alive":false
-    }
-
-    var generic_chart : any = ""
-    var generic_dict = ""
-
-    var list_of_graph : any = []
-    var list_of_dict : any = []
-    var list_of_keys_name : any = []
-    if (result_found == true) {
-        
-    }
-
-
-
-
-    
-    
-    const tooltipTriggerList = document.querySelectorAll(
-        '[data-bs-toggle="tooltip"]'
-      );
-
-      tooltipTriggerList.forEach((tooltipTriggerEl) => {
-        new Tooltip(tooltipTriggerEl);
-      });
-    
-
-
-
-    // function add_space(number: number) {
-    //     const br_list:any = []
-    //     for (let i = 0 ; i < number ; i++) {
-    //         br_list.push(<br></br>)  
-    //     }
-
-    //     return br_list
-    // }
-
-    
-
-  function Custom_navbar(variable:any = "") {
-    
-    return (
-          <nav className="navbar navbar-expand-lg  navbarBGcolor fixed-top navbar_color">
-          <div className="container-fluid">
-              
-              <div className="d-grid gap-2">
-                  <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              </div>
-              
-              {/* <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-              <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-               */}
-          </div>
-
-
+      if (response.status == 404) {
+          set_server_error_found(false)
+          set_loading(false)
+          set_result_found(false)
+          set_no_result_found_text(true)
+          return {}
           
-          {/* <select className="form-select w-25 mx-auto" style={{backgroundColor:"#cad3db"}} aria-label="Multiple select example">
-              <option>Somaire</option>
-              <option>TEST1</option>
-              <option>TEST2</option>
-              <option>TEST3</option>
-          </select>
-           */}
-          </nav>
+      }
+      const data_fetch = await response
+
+      console.log("ddddd " , data_fetch )
+      
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "qjis_localisation.csv";
+      document.body.appendChild(a);
+      console.log(a,url,document.body)
+      a.click();
+
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      set_result_found(true)
+      set_loading(false)
+      return data_fetch
+
+    }
+  
+  function navbar() {
+      
+      return (
+            <nav className="navbar navbar-expand-lg  navbarBGcolor fixed-top navbar_color">
+              <div className="container-fluid">
+                  
+                  <div className="d-grid gap-2">
+                      <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
+                  </div>
+              </div>
+            </nav>
       )  
-}
+    }
+
 
     function handle_dict_of_advance_search(event:any,key:any) {
         set_dict_of_advance_search((prev: any) => ({
@@ -634,10 +508,7 @@ const QjisMap = () => {
             <div>
 
               <div className="mobile-only">
-                
                 <br></br>
-                
-                
                 <h1 className="wikifont">
                   Cette fonctionnalité nécessite le logiciel QGIS et n’est donc disponible que sur PC.
                 </h1>
@@ -657,14 +528,11 @@ const QjisMap = () => {
               </div>
               <div className="desktop-only">
                   <br></br>
-                  
                   <br></br>
                   <h1 className="wikifont">
                       Generez un fichier csv de position utilisable sur qjis avec la recherche et les filtres avancés.
                   </h1>
                   <br></br>
-
-
                   <div className="d-grid gap-2">
                       <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_search().then((result) => set_total_number_of_user_found(result.all_wikipedia_info))}>Generez le fichier 📁</button>
                   </div>
@@ -739,15 +607,8 @@ const QjisMap = () => {
 
                     {loading != true &&(
                     <div>
-                        {Custom_navbar("")}
-
+                        {navbar()}
                         <br></br>
-
-                        
-                        {/* <div className="d-grid gap-2">
-                            <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                        </div>
-                        */}
                         <br></br>
                         <br></br>
 
@@ -767,18 +628,7 @@ const QjisMap = () => {
             </div>
 
         )}
-
         {advanced_search_modal()}
-
-        {/* <br></br>
-        <br></br>
-        
-        <h2>
-            ça charge...:
-        </h2>
-        
-        <img src="https://i.makeagif.com/media/8-30-2014/64qNV9.gif" alt="2 min Countdown"></img>
-         */}
         </div>
     </div>
     
