@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./global.css";
@@ -328,6 +329,29 @@ const QjisMap = () => {
                     </input>
                     <br></br>
                     
+                    
+                     <select className="form-select body_flag" aria-label="Default select example"                       
+                       onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_town")}>
+                       <option selected>Afficher seulement un utilisateur par ville de naissance?</option>
+                       
+                       {["oui","non"]
+                           .map((choice:any, i:number) => (
+                             
+                           
+                           <option
+                             key={i}
+                             className="list-group-item list-group-item-action body_flag"
+                             data-bs-dismiss="modal"
+                           >
+   
+                             {choice}
+                           </option>
+                         ))}
+                       
+                       
+                     </select>
+                      <br></br>
+                    
                      <select className="form-select body_flag" aria-label="Default select example"                       
                        onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_first_name")}
    >
@@ -372,7 +396,32 @@ const QjisMap = () => {
                          ))}
                        
                        
+                    
                      </select>
+                      <br></br>
+
+                      <select className="form-select body_flag" aria-label="Default select example"                       
+                       onChange={(event) => handle_dict_of_advance_search(event,"display_only_one_person_per_job")}
+   >
+                       <option selected>Afficher seulement un utilisateur par métier?</option>
+                       
+                       {["oui","non"]
+                           .map((choice:any, i:number) => (
+                             
+                           
+                           <option
+                             key={i}
+                             className="list-group-item list-group-item-action body_flag"
+                             data-bs-dismiss="modal"
+                           >
+   
+                             {choice}
+                           </option>
+                         ))}
+                       
+                       
+                     </select>
+                     
                      
                      <br></br>
                      

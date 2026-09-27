@@ -62,7 +62,6 @@ const Statistics = () => {
 
       })
       
-      console.log("toto " , response.status)
       if (response.status == 500) {
           set_server_error_found(true)
           set_loading(false)
@@ -95,19 +94,15 @@ const Statistics = () => {
     if (result_found == true && all_variables_set == false) {
         
         const keys = Object.keys(list_of_user_data);
-        console.log("boogie")
-        //console.log(list_of_user_data["age"] , " meade lux lewis")
         for (var i = 0; i < keys.length - 1; i++) {    
             
             if (list_of_user_data[keys[i]].length > 0) {
-                //console.log("caq ", keys[i])
                 list_of_keys_name.push(keys[i])
                 if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level" && keys[i] != "dict_of_error" && keys[i] != "number_of_error_per_page" && keys[i] != "age_group"
                   && keys[i] != "birth_year" && keys[i] != "death_year" && keys[i] != "birth_and_death_year" && keys[i] != "birth_year_from_1900" && keys[i] != "death_year_from_1900" && keys[i] != "birth_and_death_year_from_1900"
                   && keys[i] != "number_of_view" && keys[i] != "century_of_birth" && keys[i] != "century_of_death"
                 ) {
 
-                    //console.log("kamehameha " , keys[i])
 
                     generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10)
                     generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
@@ -159,13 +154,6 @@ const Statistics = () => {
   var list_of_graph_local : any = JSON.parse(localStorage.getItem("list_of_graph_local") ?? "[]");
   var list_of_dict_local : any = JSON.parse(localStorage.getItem("list_of_dict_local") ?? "[]");
   var list_of_keys_name_local : any = JSON.parse(localStorage.getItem("list_of_keys_local") ?? "[]");
-
-  // console.log("list_of_keys_local " , typeof(""))
-  // console.log("++++++")
-  // console.log("list_of_keys " , list_of_keys_name)
-  
-  //console.log(localStorage.getItem("list_of_keys_local"))
-  //console.log(localStorage.getItem("list_of_keys_local")?.length)
 
   function navbar() {
     

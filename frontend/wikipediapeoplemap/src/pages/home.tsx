@@ -83,10 +83,11 @@ const Home = () => {
               subdomains={["mt0", "mt1", "mt2", "mt3"]}
             />
             
-            {list_of_random_position.slice(0, 100).map((position:any) =>
+            {list_of_random_position.slice(0, 100).map((position:any,index:number) =>
                 
               (
                 <CircleMarker 
+                  key={index}
                   center={((position))}
                   radius={10}
                   pathOptions={{
@@ -116,12 +117,14 @@ const Home = () => {
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistiques détaillées</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
               <br></br>
 
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Qjis">Carte pour qjis</a>
               <br></br>
               
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/About">À propos</a>
+              <br></br>
               
               </ul>
             </div>
@@ -140,8 +143,12 @@ const Home = () => {
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/statistics">Statistiques détaillées</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
               <br></br>
+
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/About">À propos</a>
+              <br></br>
+              
               </ul>
             </div>
         </div>            

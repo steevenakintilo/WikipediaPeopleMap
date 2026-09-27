@@ -9,6 +9,8 @@ import {
   useMap
 } from "react-leaflet";
 
+
+
 import { Tooltip } from "bootstrap";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 
@@ -60,7 +62,7 @@ const WorldMap = () => {
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [user_data_info,set_user_data_info] : any = useState({});
     const [hide_searchbar,set_hide_searchbar] : any = useState(display_mobile_version)
-    const [no_move,set_no_move] : any = useState(false)
+    const [no_move,set_no_move] : any = useState(true)
 
   
     const tooltipTriggerList = document.querySelectorAll(
@@ -87,7 +89,6 @@ const WorldMap = () => {
       })
       
       const data_fetch = await response.json()
-      //////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
     }
@@ -111,7 +112,6 @@ const WorldMap = () => {
       })
       
       const data_fetch = await response.json()
-      //////console.log("blbabla " , data_fetch[0])
       return data_fetch
 
     }
@@ -130,6 +130,7 @@ const WorldMap = () => {
     
     
     function handle_complete_profile_user(user:string) {
+      set_no_move(false)
       setcomplete_profile_user(user)
       setlaunch_profile_root(true)
     }
@@ -159,7 +160,6 @@ const WorldMap = () => {
             })
             
           } else {
-            //console.log("papa est remplie " , current_chunck_index, value , index)
             
             get_list_of_user_advanced_search(index).then((result) => {set_list_of_user_data(result.all_user_data)})        
           }
@@ -184,17 +184,18 @@ const WorldMap = () => {
   }) => {
     const map = useMap();
 
-    
     useEffect(() => {
-      map.setView([latitude, longitude], zoom);
+      if (no_move == true) {
+        map.setView([latitude, longitude], zoom);
+      }
+      
     }, [latitude, longitude, zoom, map]);
 
     return null;
   };
   function change_latitude_and_longitude(pos_x:number,pos_y:number,move:boolean=false) {
-    console.log("move de connard " , move)
-    set_no_move(move)
-    if (pos_x != 999999999999999 && pos_y != 999999999999999 && no_move == false) {
+    set_no_move(true)
+    if (pos_x != 999999999999999 && pos_y != 999999999999999) {
       setlatitude(pos_x)
       setlongitude(pos_y)
       if (pos_x === 5 && pos_y === 20) {
@@ -241,7 +242,6 @@ const WorldMap = () => {
       }
     }
 
-    //console.log(dict_of_advance_search)
     if (current_chunck_index == 999999) {
       start_index = 0
     }
@@ -250,7 +250,7 @@ const WorldMap = () => {
       {Object.values(list_of_user_data).map((user:any,index) =>
       user.page_name.toLowerCase().includes(searched_name.toLowerCase()) != "" && (
         user_info_data.push(
-            <li className="list-group-item">
+            <li key={index} className="list-group-item">
               {user.page_name_even_shorter_for_mobile} {(start_index) + index + 1}/{list_of_user_data[Object.keys(list_of_user_data).length - 1].number_of_element}
               
               <br></br>
@@ -289,10 +289,8 @@ const WorldMap = () => {
       {Object.values(list_of_user_data).map((user:any,index) =>
         user.page_name.toLowerCase().includes(searched_name.toLowerCase()) != "" && (
         user_info_data.push(
-            <li className="list-group-item">
-              
-              
-          
+            <li key={index} className="list-group-item">
+                        
               {user.page_name_shorter} {(start_index) + index + 1}/{list_of_user_data[Object.keys(list_of_user_data).length - 1].number_of_element}
               
               <br></br>
@@ -371,14 +369,12 @@ const WorldMap = () => {
       
     }
     
-    //console.log("user_data_info " , user_data_info)
     return (
     <div>
       <div
         className="modal fade"
         id="exampleModal2"
         aria-labelledby="exampleModalLabel2"
-        aria-hidden="true"
       >
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
@@ -474,11 +470,14 @@ const WorldMap = () => {
                 <strong>Date :</strong>{" "}
                 {user_data_info.birth_date} 
               </p>
+              
 
-              <p className="wikifont">
-                <strong>Date complete:</strong>{" "}
-                {user_data_info.week_day_of_birth} {user_data_info.birth_day} {user_data_info.birth_month} {user_data_info.birth_year} 
-              </p>
+              {user_data_info.week_day_of_birth != "Indéfini" && user_data_info.birth_day != "Indéfini" && user_data_info.week_day_of_birth != "Indéfini" && user_data_info.birth_year != 123456789 &&(
+                <p className="wikifont">
+                  <strong>Date complete:</strong>{" "}
+                  {user_data_info.week_day_of_birth} {user_data_info.birth_day} {user_data_info.birth_month} {user_data_info.birth_year} 
+                </p>
+              )}
                             
               <p className="body_flag">
                 <strong>Lieu :</strong>{" "}
@@ -522,12 +521,18 @@ const WorldMap = () => {
                     <strong>Date :</strong>{" "}
                     {user_data_info.death_date}
                   </p>
+                  
 
-                  <p className="wikifont">
-                    <strong>Date complete:</strong>{" "}
-                    {user_data_info.week_day_of_death} {user_data_info.death_day} {user_data_info.death_month} {user_data_info.death_year} 
-                  </p>
 
+                  {user_data_info.week_day_of_death != "Indéfini" && user_data_info.death_day != "Indéfini" && user_data_info.week_day_of_death != "Indéfini" && user_data_info.death_year != 123456789 &&(
+                    <p className="wikifont">
+                      <strong>Date complete:</strong>{" "}
+                      {user_data_info.week_day_of_death} {user_data_info.death_day} {user_data_info.death_month} {user_data_info.death_year} 
+                    </p>
+
+                  )}
+                    
+                  
                   <p className="body_flag">
                     <strong>Lieu :</strong>{" "}
                     {user_data_info.country_death_place_emoji}{" "}
@@ -579,7 +584,7 @@ const WorldMap = () => {
                 
                 {user_data_info.all_links_of_a_page != undefined && (
                   user_data_info.all_links_of_a_page.map((link: any, i: number) => (
-                    <div key={i}>- {link}</div>
+                    <span key={i}>- {link}</span>
                   ))
                 )}
                 
@@ -601,7 +606,7 @@ const WorldMap = () => {
                 
                 {user_data_info.list_of_page_name_linked_sorted != undefined && (
                   user_data_info.list_of_page_name_linked_sorted.map((link: any, i: number) => (
-                    <div key={i}>- {link}</div>
+                    <span key={i}>- {link}</span>
                   ))
                 )}
                 
@@ -623,7 +628,7 @@ const WorldMap = () => {
                 
                 {user_data_info.list_of_friend_of_user != undefined && (
                   user_data_info.list_of_friend_of_user.map((link: any, i: number) => (
-                    <div key={i}>- {link}</div>
+                    <span key={i}>- {link}</span>
                   ))
                 )}
                 
@@ -677,7 +682,7 @@ const WorldMap = () => {
 
                 {user_data_info.list_of_unpreciseness_data != undefined && (
                   user_data_info.list_of_unpreciseness_data.map((error: any, i: number) => (
-                    <div key={i}>- {error}</div>
+                    <span key={i}>- {error}</span>
                   ))
                 )}
                 
@@ -709,7 +714,7 @@ const WorldMap = () => {
     return(
 
       <div>
-        <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
@@ -1191,12 +1196,13 @@ const WorldMap = () => {
             subdomains={["mt0", "mt1", "mt2", "mt3"]}
           />
           {/* Boutons + / - */}
-          {Object.values(list_of_user_data).map((user:any) =>
+          {Object.values(list_of_user_data).map((user:any,index:number) =>
               
               user.birth_town_localisation?.[0] !== 999999999999999 &&
               user.birth_town_localisation?.[1] !== 999999999999999 && (
 
               <CircleMarker 
+              key={index}
               center={((user.birth_town_localisation))}
               radius={10}
               pathOptions={{
@@ -1207,8 +1213,8 @@ const WorldMap = () => {
               >                
                   <Popup>
                       {user.page_name}
-                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="15" height="15" className="me-2"/>
-
+                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="25" height="25" className="me-2"/>
+                      <br></br>
                       <br></br>
                       {/* <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/> */}
                       <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-title="Voir le profil" onClick={() => handle_complete_profile_user(user.page_name)} alt="" width="250" height="250" className="me-2"/>
@@ -1222,12 +1228,13 @@ const WorldMap = () => {
           )}
           
          
-          {Object.values(list_of_user_data).map((user:any) =>
+          {Object.values(list_of_user_data).map((user:any , index:number) =>
               
               user.town_death_localisation?.[0] !== 999999999999999 &&
               user.town_death_localisation?.[1] !== 999999999999999 && user.display_death_localisation == true && (
 
               <CircleMarker 
+              key={index}
               center={((user.town_death_localisation))}
               radius={10}
               pathOptions={{
@@ -1238,7 +1245,7 @@ const WorldMap = () => {
               >                
                   <Popup>
                       {user.page_name}
-                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Localiser l'utilisateur" style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="15" height="15" className="me-2"/>
+                      <img src={"https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"} style={{ cursor: "pointer" }} onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1],true)} alt="" width="15" height="15" className="me-2"/>
 
                       <br></br>
                       <img src={decodeURIComponent(decodeURIComponent(user.picture_url))} style={{ cursor: "pointer" }} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Voir la page Wikipedia" onClick={() => window.open(user.page_url, "_blank")} alt="" width="250" height="250" className="me-2"/>
