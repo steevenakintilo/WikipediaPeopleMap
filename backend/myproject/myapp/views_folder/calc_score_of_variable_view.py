@@ -65,6 +65,23 @@ def calc_score_of_all_variable(request):
 
     first_char_of_the_page_dict_grade = {}
     first_char_of_the_page_dict_occurence = {}
+
+
+    boy_name_dict_grade = {}
+    boy_name_dict_occurence = {}
+
+    girl_name_dict_grade = {}
+    girl_name_dict_occurence = {}
+
+    french_boy_name_dict_grade = {}
+    french_boy_name_dict_occurence = {}
+    
+    french_girl_name_dict_occurence = {}
+    french_girl_name_dict_grade = {}
+
+    french_last_name_dict_grade = {}
+    french_last_name_dict_occurence = {}
+    
     list_of_name  = []
     all_user_obj = WikipediaUser.objects.all().order_by("position").filter(position__gte=0)
     list_of_dict_score = []
@@ -92,6 +109,79 @@ def calc_score_of_all_variable(request):
 
 
 
+            if user_obj.first_name.lower() != "undefined" and user_obj.gender == "Woman":
+                if user_obj.first_name not in girl_name_dict_grade:
+                    girl_name_dict_grade[user_obj.first_name] = 0
+                    girl_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                else:
+                    girl_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                            
+                if user_obj.first_name in girl_name_dict_occurence:
+                    girl_name_dict_occurence[f"{user_obj.first_name}"] +=1
+                else:
+                    girl_name_dict_occurence[f"{user_obj.first_name}"] = 0
+                    girl_name_dict_occurence[f"{user_obj.first_name}"] +=1
+
+
+            if user_obj.first_name.lower() != "undefined" and user_obj.gender == "Man":
+                if user_obj.first_name not in boy_name_dict_grade:
+                    boy_name_dict_grade[user_obj.first_name] = 0
+                    boy_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                else:
+                    boy_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                            
+                if user_obj.first_name in boy_name_dict_occurence:
+                    boy_name_dict_occurence[f"{user_obj.first_name}"] +=1
+                else:
+                    boy_name_dict_occurence[f"{user_obj.first_name}"] = 0
+                    boy_name_dict_occurence[f"{user_obj.first_name}"] +=1
+            
+
+            if user_obj.first_name.lower() != "undefined" and user_obj.gender == "Woman" and user_obj.country_birth_place.lower() == "france":
+                if user_obj.first_name not in french_girl_name_dict_grade:
+                    french_girl_name_dict_grade[user_obj.first_name] = 0
+                    french_girl_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                else:
+                    french_girl_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                            
+                if user_obj.first_name in french_girl_name_dict_occurence:
+                    french_girl_name_dict_occurence[f"{user_obj.first_name}"] +=1
+                else:
+                    french_girl_name_dict_occurence[f"{user_obj.first_name}"] = 0
+                    french_girl_name_dict_occurence[f"{user_obj.first_name}"] +=1
+
+
+
+
+
+
+            if user_obj.last_name.lower() != "undefined" and user_obj.country_birth_place.lower() == "france":
+                if user_obj.last_name not in french_last_name_dict_grade:
+                    french_last_name_dict_grade[user_obj.last_name] = 0
+                    french_last_name_dict_grade[user_obj.last_name] += user_obj.power_ranking
+                else:
+                    french_last_name_dict_grade[user_obj.last_name] += user_obj.power_ranking
+                            
+                if user_obj.last_name in french_last_name_dict_occurence:
+                    french_last_name_dict_occurence[f"{user_obj.last_name}"] +=1
+                else:
+                    french_last_name_dict_occurence[f"{user_obj.last_name}"] = 0
+                    french_last_name_dict_occurence[f"{user_obj.last_name}"] +=1
+
+
+            if user_obj.first_name.lower() != "undefined" and user_obj.gender == "Man" and user_obj.country_birth_place.lower() == "france":
+                if user_obj.first_name not in french_boy_name_dict_grade:
+                    french_boy_name_dict_grade[user_obj.first_name] = 0
+                    french_boy_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                else:
+                    french_boy_name_dict_grade[user_obj.first_name] += user_obj.power_ranking
+                            
+                if user_obj.first_name in french_boy_name_dict_occurence:
+                    french_boy_name_dict_occurence[f"{user_obj.first_name}"] +=1
+                else:
+                    french_boy_name_dict_occurence[f"{user_obj.first_name}"] = 0
+                    french_boy_name_dict_occurence[f"{user_obj.first_name}"] +=1
+            
             if user_obj.town_birth_place.lower() != "undefined" and user_obj.town_birth_place != "":
                 if user_obj.town_birth_place not in town_dict_grade:
                     town_dict_grade[user_obj.town_birth_place] = 0
@@ -303,7 +393,12 @@ def calc_score_of_all_variable(request):
         birth_year_dict_occurence,
         region_of_birth_dict_occurence,
         page_lenght_dict_occurence,
-        first_char_of_the_page_dict_occurence
+        first_char_of_the_page_dict_occurence,
+        boy_name_dict_occurence,
+        girl_name_dict_occurence,
+        french_boy_name_dict_occurence,
+        french_girl_name_dict_occurence,
+        french_last_name_dict_occurence
     ]
 
     list_of_dict_score = [
@@ -318,10 +413,15 @@ def calc_score_of_all_variable(request):
         birth_year_dict_grade,
         region_of_birth_dict_grade,
         page_lenght_dict_grade,
-        first_char_of_the_page_dict_grade
+        first_char_of_the_page_dict_grade,
+        boy_name_dict_grade,
+        girl_name_dict_grade,
+        french_boy_name_dict_grade,
+        french_girl_name_dict_grade,
+        french_last_name_dict_grade
     ]
 
-    list_of_variable_to_search = ["name","town","job","country","birthday","french_town","last_name","age","birth_year","region_of_birth","page_name_lenght","first_char_of_the_page"]
+    list_of_variable_to_search = ["name","town","job","country","birthday","french_town","last_name","age","birth_year","region_of_birth","page_name_lenght","first_char_of_the_page","boy_name","girl_name","french_boy_name","french_girl_name","french_last_name"]
     
     # print(name_dict_grade)
     # print(name_dict_occurence)
@@ -330,6 +430,7 @@ def calc_score_of_all_variable(request):
 
     for index in range(len(list_of_dict_score)):
         print(f"Currently working on {list_of_variable_to_search[index]} dict")
+
         for key , value  in list_of_dict_score[index].items():
             list_of_dict_score[index][key] = round(value / list_of_dict_occurence[index][key],5)
         list_of_dict_score[index] = dict(sorted(list_of_dict_score[index].items(), key=lambda item: item[1],reverse=True))
@@ -351,3 +452,62 @@ def calc_score_of_all_variable(request):
                     
                 
     return HttpResponse("DONE!",status=200)
+
+
+def calc_gender_ratio_of_all_country(request):
+    """Display chunck (10000 users) of user info"""
+    if request.method != "GET":
+        return HttpResponse(f"Error!", status=404)
+
+    country_occurence = {}
+    country_gender_nb = {}
+    country_gender_ratio = {}
+
+    all_user_obj = WikipediaUser.objects.all().order_by("position").filter(position__gte=0)
+    print("Hello boy")
+    for user_obj in all_user_obj:
+        if user_obj.gender in ["Man","Woman"] and user_obj.country_birth_place.lower() != "undefined" and user_obj.country_birth_place != "":
+            if user_obj.country_birth_place not in country_occurence:
+                country_occurence[user_obj.country_birth_place] = 0
+            else:
+                country_occurence[user_obj.country_birth_place] += 1
+
+
+
+            if f"{user_obj.country_birth_place}_nb_of_{user_obj.gender.lower()}" not in country_gender_nb:
+                country_gender_nb[f"{user_obj.country_birth_place}_nb_of_{user_obj.gender.lower()}"] = 0
+            else:
+                country_gender_nb[f"{user_obj.country_birth_place}_nb_of_{user_obj.gender.lower()}"] += 1
+
+
+
+    print("Hello girl")
+    
+    for key in country_occurence.keys():
+        try:
+            country_gender_ratio[key] = (country_gender_nb[f"{key}_nb_of_woman"] / (country_gender_nb[f"{key}_nb_of_woman"] + country_gender_nb[f"{key}_nb_of_man"])) * 100
+        except:
+            country_gender_ratio[key] = 0
+    
+    country_gender_ratio = dict(sorted(country_gender_ratio.items(), key=lambda item: item[1],reverse=True))
+    size_list = [5,25,100,250,500,1000,2500,5000,10000,25000,50000,100000]
+
+    try:
+        for size in size_list:
+            reset_file(f"ratio_of_man_and_woman/ratio_of_man_and_woman_per_country_of_size{size}.txt")
+    except:
+        pass    
+    for key , _ in country_gender_ratio.keys():
+        #print(country_gender_ratio[key],type(country_gender_ratio[key]),key)
+        
+        for size in size_list:
+            if country_occurence[key] >= size:        
+                #write_into_file(f"ratio_of_man_and_woman/ratio_of_man_and_woman_per_country_of_size{size}.txt",f"{key}    {country_gender_ratio[key]}    {100 - {country_gender_ratio[key]}}\n")
+                try:
+                    ratio_of_man = round(100 - country_gender_ratio[key],3)
+                    write_into_file(f"ratio_of_man_and_woman/ratio_of_man_and_woman_per_country_of_size{size}.txt",f"{key}    {round(country_gender_ratio[key],3)}    {ratio_of_man}    {country_occurence[key]}\n")
+                except:
+                    pass
+
+    return HttpResponse("DONE!",status=200)
+

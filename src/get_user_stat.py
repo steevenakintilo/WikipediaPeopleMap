@@ -600,7 +600,38 @@ def get_all_user_name():
         except:
             print("coca")
 
+def get_a_localisation_to_all_country():
+    all_data = print_file_content("user_info_dict.txt").split("\n")
+    data_dict = {}
+    list_of_country : list[str] = print_file_content("list_of_country.txt").lower().split("\n")
+    number_of_country_found = 0
+    list_of_country_ = []
 
+    # with open(r"data_files/list_of_wikipedia_page_lenght.json", "w",encoding="utf-8") as f:
+    #         json.dump(dict_of_wikipedia_page_length, f,ensure_ascii=False,indent=4)
+    
+    for i , data in enumerate(all_data):
+        if i % 100000 == 0:
+            print("i", i)
+
+        try:
+            line = ast.literal_eval(data)
+                        
+            if line["country_birth_place"].lower() in list_of_country and line["birth_town_localisation"].lower() != "undefined" and line["birth_town_localisation"] != "" and line["country_birth_place"] not in data_dict and line["country_birth_place"] not in list_of_country_:
+                data_dict[line["country_birth_place"].lower()] = dms_to_decimal(line["birth_town_localisation"])
+                number_of_country_found+=1
+                list_of_country_.append(line["country_birth_place"])
+            if number_of_country_found>=len(list_of_country):
+                break
+
+        except:
+            import traceback
+            traceback.print_exc()
+            print("coca")
+
+    with open(r"data_files/a_localisation_of_all_country.json", "w",encoding="utf-8") as f:
+        json.dump(data_dict, f,ensure_ascii=False,indent=4)
+    
 
 
 
@@ -614,9 +645,10 @@ def get_all_user_name():
 
 #get_all_user_name()
 
-get_all_sorted_user_by_power()
+# get_all_sorted_user_by_power()
 # get_all_page_lenght_of_user()
 # get_all_link_of_user()
+get_a_localisation_to_all_country()
 quit()
 
 # #ranked_user()

@@ -13,7 +13,7 @@ from datetime import datetime
 from urllib.parse import unquote,quote
 from dateutil import relativedelta
 from unidecode import unidecode
-
+unidecode
 from bs4 import BeautifulSoup
 from libzim.reader import Archive
 
@@ -2909,6 +2909,14 @@ class WikiPeopleData():
             
             first_name = unquote(first_name)
             last_name = unquote(last_name)
+
+            if first_name == " ":
+                first_name = "Undefined"
+
+
+            if last_name == " ":
+                last_name = "Undefined"
+            
             region_of_birth = self.country_to_region_of_the_world(country_birth_place)
             region_of_death = "alive"
             if is_alive == False:
@@ -3239,10 +3247,10 @@ class WikiPeopleData():
                 "last_name":last_name.lower(),
                 "last_name_standard":unidecode(last_name.lower()),                
                 "job":job,
-                "town_birth_place":town_birth_place.strip().replace("  "," ").replace("   "," ").replace("    "," "),
+                "town_birth_place":town_birth_place.strip().replace("  "," ").replace("   "," ").replace("    "," ").replace("-"," "),
                 "town_birth_place_href":town_birth_place_href,
                 "birth_town_localisation":birth_town_localisation,
-                "country_birth_place":country_birth_place.strip().replace("  "," ").replace("   "," ").replace("    "," "),
+                "country_birth_place":country_birth_place.strip().replace("  "," ").replace("   "," ").replace("    "," ").replace("-"," "),
                 "time_period_of_birth":time_period_of_birth,
                 "continent_of_birth":continent_of_birth,
                 "region_of_birth":region_of_birth,
@@ -3833,7 +3841,7 @@ toto = WikiPeopleData()
 
 # Remmettre la fonction des liens
 
-do_user_data =  False
+do_user_data =  True
 do_stat = False
 
 

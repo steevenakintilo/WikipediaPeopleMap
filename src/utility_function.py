@@ -8,6 +8,7 @@
 
 import calendar
 
+from random import randint
 def write_into_file(path:str, data:str) -> None:
     """A function that write data into a file"""
     with open(path, "ab") as f:
@@ -50,3 +51,71 @@ def get_weekday_from_a_date(date:str):
         return week_day[calendar.weekday(year, month, day)]
     except:
         return "Undefined"
+
+
+def dms_to_decimal(dms,name=""):
+    "A function that convert Wikipedia Localisation to standart localisation"
+    try:
+        if name == "blablobla":
+            return 999999999999999 ,999999999999999
+                       
+        parts = dms.split(",")
+        def convert(coordinate):
+            coordinate = coordinate.strip()
+            parts = coordinate.split()
+
+            degrees = float(
+                parts[0]
+                .replace("°", "")
+                .replace("′", "")
+                .replace("″", "")
+                .replace('"', "")
+                .replace("'", "")
+            )
+
+            minutes = float(
+                parts[1]
+                .replace("′", "")
+                .replace("'", "")
+                .replace("′′", "")
+                .replace("°", "")
+                .replace('"', "")
+                .replace("″", "")
+            )
+
+            if len(parts) >= 4:
+                seconds = float(
+                    parts[2]
+                    .replace("″", "")
+                    .replace('"', "")
+                    .replace("′′", "")
+                    .replace("°", "")
+                    .replace("′", "")
+                    .replace("'", "")
+                )
+                direction = parts[3].upper()
+            else:
+                seconds = 0
+                direction = parts[2].upper()
+
+            decimal = degrees + minutes / 60 + seconds / 3600
+
+            if direction in ("S", "W"):
+                decimal = -decimal
+
+            return decimal
+
+        if name != "__qjis__":
+            latitude = convert(parts[0]) + randint(1000000000000000000,90000000000000000000) / 10000000000000000000000
+            longitude = convert(parts[1]) + randint(1000000000000000000,90000000000000000000) / 10000000000000000000000
+        else:
+            latitude = convert(parts[0])
+            longitude = convert(parts[1])
+
+        # latitude = convert(parts[0])
+        # longitude = convert(parts[1])
+
+        return latitude, longitude
+    except:
+        return 999999999999999 ,999999999999999
+        return -32.8471,-47.3926

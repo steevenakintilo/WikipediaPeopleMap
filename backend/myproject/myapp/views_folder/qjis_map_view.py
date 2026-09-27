@@ -130,14 +130,14 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
         filters["preciseness_level__gte"] = recieved_data["preciseness_level"]
 
     if "age" in recieved_data:
-            if int(recieved_data["age"]) <= 0:
-                age = 1
-            else:
-                age = recieved_data["age"]
-            filters["age__gte"] = age
-            if "age_max" not in recieved_data:
-                filters["age__lte"] = MAXIMUM_AGE_TO_DISPLAY
-                
+        if int(recieved_data["age"]) <= 0:
+            age = 1
+        else:
+            age = recieved_data["age"]
+        filters["age__gte"] = age
+        if "age_max" not in recieved_data:
+            filters["age__lte"] = MAXIMUM_AGE_TO_DISPLAY
+            
     if "age_max" in recieved_data:
         if int(recieved_data["age_max"]) <= 0:
             age = 1
@@ -297,9 +297,7 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
     if "country_death_place" in recieved_data:
         if "Tous les pays" in recieved_data["country_death_place"]:
             display_death_localisation = True
-    if filters != {}:
-        basic_search = False
-
+    
     if display_death_localisation:
         filters["is_alive"] = False
 
@@ -311,32 +309,13 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
         filters["position__gte"] = -1
 
     sort_user_by = "None"
-    if "sort_user_by" in recieved_data:
-        if recieved_data["sort_user_by"] != "Par défaut":
-            if recieved_data["sort_user_by"] == "Nombre de lien":
-                sort_user_by = "number_of_links"
-            if recieved_data["sort_user_by"] == "Nombre d'ami(e)":
-                sort_user_by = "number_of_friends"
-                        
-            if recieved_data["sort_user_by"] == "Taille de la page wipedia":
-                sort_user_by = "wikipedia_page_lenght"
-            if recieved_data["sort_user_by"] == "Âge":
-                sort_user_by = "age"
-                filters["age__lte"] = MAXIMUM_AGE_TO_DISPLAY
-            if recieved_data["sort_user_by"] == "Nombre de personnes qui les lient":
-                sort_user_by = "number_of_user_who_have_linked_this_user"
-            if recieved_data["sort_user_by"] == "Taille du nom de la page":
-                sort_user_by = "number_of_word_in_page_name"
-                                    
-            #sort_user_by = recieved_data["sort_user_by"]
-    #filters["town_death_localisation__icontains"] = "Undefined"
-    
+
     if "century_of_birth" in recieved_data:
         filters["century_of_birth"] = int(recieved_data["century_of_birth"])
 
     if "century_of_death" in recieved_data:
         filters["century_of_death"] = int(recieved_data["century_of_death"])
-    
+
     if "born_before_christ" in recieved_data:
         if recieved_data["born_before_christ"] == "oui":
             filters["born_before_christ"] = True
@@ -352,12 +331,7 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
 
     
     filters["position__gte"] = 0
-    #filters["position__lte"] = 101
-
-    #filters["age__lte"] = 123
-    #filters["town_birth_place"] = "Paris"
-            
-    #print(recieved_data)
+    
     print(filters)
 
 
@@ -369,23 +343,22 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
 
     if "is_cause_of_death_known" in recieved_data:
         filters["is_cause_of_death_known"] = True
-    
-    if sort_user_by != "None":
-        if accept_multiple_element:
-            all_user_obj = WikipediaUser.objects.filter(query,**filters).order_by(f"-{sort_user_by}")
-        else:
-            all_user_obj = WikipediaUser.objects.filter(**filters).order_by(f"-{sort_user_by}")
+
+
+
+    sort_user_by = "position"
+    if "display_only_one_person_per_town" in recieved_data:
+        if recieved_data["display_only_one_person_per_town"] == "oui":
+            if accept_multiple_element:
+                all_user_obj = WikipediaUserUniqueTown.objects.filter(query,**filters).order_by(f"{sort_user_by}")
+            else:
+                all_user_obj = WikipediaUserUniqueTown.objects.filter(**filters).order_by(f"{sort_user_by}")
     else:
-        sort_user_by = "position"
         if accept_multiple_element:
             all_user_obj = WikipediaUser.objects.filter(query,**filters).order_by(f"{sort_user_by}")
         else:
             all_user_obj = WikipediaUser.objects.filter(**filters).order_by(f"{sort_user_by}")
-
-
-
-
-
+    
     list_of_first_name = []
     display_only_one_person_per_first_name = False
     if "display_only_one_person_per_first_name" in recieved_data:
@@ -398,6 +371,12 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
         print("caca coco popo lili")
         if recieved_data["display_only_one_person_per_last_name"] == "oui":
             display_only_one_person_per_last_name = True
+
+    list_of_job = []
+    display_only_one_person_per_job = False
+    if "display_only_one_person_per_job" in recieved_data:
+        if recieved_data["display_only_one_person_per_job"] == "oui":
+            display_only_one_person_per_job = True
     
     list_of_all_user_data =  []
     
@@ -405,7 +384,6 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
     user_info_dict = {}
     number_of_people_to_display = 5000000000
     
-    length = all_user_obj.count()
     nb_of_bad_user = 0
     for user_obj in all_user_obj:
         try:
@@ -429,6 +407,13 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
                 continue
             elif display_only_one_person_per_last_name:
                 list_of_last_name.append(user_obj.last_name_standard)
+
+
+            if display_only_one_person_per_job and user_obj.job not in list_of_job:
+                list_of_job.append(user_obj.job)
+            elif display_only_one_person_per_job:
+                nb_of_bad_user+=1
+                continue
             
             # elif display_only_one_person_per_first_name:
             #     continue
@@ -498,8 +483,5 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
     #writer.writerow(['latitude', 'longitude'])
     writer.writerows(data)
 
-    #return HttpResponse("OK!",status=200)
     return response
-    return JsonResponse({"nb_of_user_found":length - nb_of_bad_user,"response_file":response},status=200)
-
 

@@ -6,6 +6,7 @@ A FAIRE:
 - Faire une partie responsible mobile pour la carte
 - Faire une v2 avec un meilleur code cote front/back + faire des test unitaires
 - Graph "scatter" note/nbr de fois que l'elem est present pour le pays,prenomn,metie commme le graph du bac
+- Graph "scatter" ration de fille par rapport au nombre de page dans le pays
 
 A FIX:
 

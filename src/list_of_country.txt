@@ -5,7 +5,7 @@ Algérie
 Allemagne
 Andorre
 Angola
-Antigua-et-Barbuda
+Antigua et Barbuda
 Arabie saoudite
 Argentine
 Arménie
@@ -23,7 +23,7 @@ Bhoutan
 Biélorussie
 Birmanie
 Bolivie
-Bosnie-Herzégovine
+Bosnie Herzégovine
 Botswana
 Brésil
 Brunei
@@ -33,7 +33,7 @@ Burundi
 Cambodge
 Cameroun
 Canada
-Cap-Vert
+Cap Vert
 République centrafricaine
 Chili
 Chine
@@ -61,7 +61,7 @@ Dominique
 Espagne
 Estonie
 Eswatini
-États-Unis
+États Unis
 Éthiopie
 Fidji
 Finlande
@@ -74,7 +74,7 @@ Grèce
 Grenade
 Guatemala
 Guinée
-Guinée-Bissau
+Guinée Bissau
 Guinée équatoriale
 Guyana
 Haïti
@@ -132,35 +132,35 @@ Niger
 Nigeria
 Niue
 Norvège
-Nouvelle-Zélande
+Nouvelle Zélande
 Oman
-Ossétie du Sud-Alanie
+Ossétie du Sud Alanie
 Ouganda
 Ouzbékistan
 Pakistan
 Palaos
 Palestine
 Panama
-Papouasie-Nouvelle-Guinée
+Papouasie Nouvelle Guinée
 Paraguay
-Pays-Bas
+Pays Bas
 Pérou
 Philippines
 Pologne
 Portugal
 Qatar
 Roumanie
-Royaume-Uni
+Royaume Uni
 Russie
 Rwanda
-Saint-Christophe-et-Niévès
-Saint-Marin
-Saint-Vincent-et-les Grenadines
-Sainte-Lucie
+Saint Christophe et Niévès
+Saint Marin
+Saint Vincent et les Grenadines
+Sainte Lucie
 Îles Salomon
 Salvador
 Samoa
-São Tomé-et-Principe
+São Tomé et Principe
 Sénégal
 Serbie
 Seychelles
@@ -185,7 +185,7 @@ Thaïlande
 Timor oriental
 Togo
 Tonga
-Trinité-et-Tobago
+Trinité et Tobago
 Tunisie
 Turkménistan
 Turquie
