@@ -84,6 +84,41 @@ const About = () => {
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>
                             <strong style={{ fontSize: "30px" }}>
+                                - Comment marche le calcule du classement?
+                            </strong>
+                        </Accordion.Header>
+
+                        <Accordion.Body>
+                            <p>
+                                Pour classer un utilisateur, j'utilise 3 métriques :
+                            </p>
+
+                            <p>
+                                <strong>Le nombre de liens sur la page de l'utilisateur :</strong> Selon moi, plus une personne cite de personnes réelles sur sa page, plus elle a de l'importance.
+                            </p>
+
+                            <p>
+                                <strong>Le nombre de personnes qui ont l'utilisateur en lien sur leur page :</strong> De plus, plus une personne est citée, plus elle est importante.
+                            </p>
+
+                            <p>
+                                <strong>La taille de la page Wikipédia de l'utilisateur :</strong> Plus la taille de la page est grande, plus cela veut dire que la personne a des choses à dire sur sa vie.
+                            </p>
+
+                            <p>
+                                Ensuite, pour effectuer le calcul, je prends le résultat des 3 variables que je pondère sur une unité précise pour éviter que la taille de la page soit beaucoup plus grande que le nombre de liens, puis je divise le résultat par 3.
+                                Cela explique pourquoi certaines personnes « inconnues » sont très élevées dans le classement, comme le top 3, car elles sont toutes mentionnées par plus de 8 800 personnes.
+                            </p>
+
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+                
+                <br></br>
+                <Accordion>
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header>
+                            <strong style={{ fontSize: "30px" }}>
                                 - Explication technique
                             </strong>
                         </Accordion.Header>
@@ -109,7 +144,7 @@ const About = () => {
                     </Accordion.Item>
                 </Accordion>
                 
-                                <br></br>
+                <br></br>
                 <Accordion>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>

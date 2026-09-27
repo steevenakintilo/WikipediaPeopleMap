@@ -36,7 +36,10 @@ const Statistics = () => {
     const [list_of_user_data,set_list_of_user_data] : any = useState({});
 
 
-    const [all_variables_set,set_all_variables_set] : any = useState(false)
+
+    const [list_of_graph, set_list_of_graph] = useState<any[]>([]);
+    const [list_of_dict, set_list_of_dict] = useState<any[]>([]);
+    const [list_of_keys_name, set_list_of_keys_name] = useState<string[]>([]);
     const [result_found,set_result_found] : any = useState(false)
     const [loading,set_loading] : any = useState(false)
     const [server_error_found,set_server_error_found] : any = useState(false)
@@ -45,6 +48,160 @@ const Statistics = () => {
     const [dict_info,set_dict_info] : any = useState({});
     const [keys_info,set_keys_info] : any = useState({});
     const [text_input, settext_input] = useState("");
+    
+
+
+
+    useEffect(() => {
+    if (!result_found) {
+        return;
+    }
+
+      const keys = Object.keys(list_of_user_data);
+
+      const new_list_of_graph: any[] = [];
+      const new_list_of_dict: any[] = [];
+      const new_list_of_keys_name: string[] = [];
+
+      for (let i = 0; i < keys.length - 1; i++) {
+
+          const key = keys[i];
+
+          if (list_of_user_data[key].length > 0) {
+
+              new_list_of_keys_name.push(key);
+
+              if (
+                  key !== "age" &&
+                  key !== "grade_over_20" &&
+                  key !== "wikipedia_page_lenght" &&
+                  key !== "preciseness_level" &&
+                  key !== "dict_of_error" &&
+                  key !== "number_of_error_per_page" &&
+                  key !== "age_group" &&
+                  key !== "birth_year" &&
+                  key !== "death_year" &&
+                  key !== "birth_and_death_year" &&
+                  key !== "birth_year_from_1900" &&
+                  key !== "death_year_from_1900" &&
+                  key !== "birth_and_death_year_from_1900" &&
+                  key !== "number_of_view" &&
+                  key !== "century_of_birth" &&
+                  key !== "century_of_death"
+              ) {
+
+                  const generic_dict = generate_list_of_dict(
+                      list_of_user_data[key],
+                      10
+                  );
+
+                  const generic_chart = make_a_graphic(
+                      "bar",
+                      generic_dict,
+                      VAR_TO_DESCRIPTION[key]
+                  );
+
+                  new_list_of_graph.push(generic_chart);
+
+                  if (
+                      key !== "town_birth_and_death_place" &&
+                      key !== "town_birth_place" &&
+                      key !== "town_death_place" &&
+                      key !== "dict_of_error_counter"
+                  ) {
+                      new_list_of_dict.push(
+                          generate_list_of_dict(
+                              list_of_user_data[key],
+                              2000
+                          )
+                      );
+                  } else {
+                      new_list_of_dict.push(
+                          generate_list_of_dict(
+                              list_of_user_data[key],
+                              500
+                          )
+                      );
+                  }
+
+              } else if (key === "dict_of_error") {
+
+                  const generic_dict = generate_list_of_dict(
+                      list_of_user_data[key],
+                      3
+                  );
+
+                  const generic_chart = make_a_graphic(
+                      "bar",
+                      generic_dict,
+                      VAR_TO_DESCRIPTION[key]
+                  );
+
+                  new_list_of_graph.push(generic_chart);
+
+                  new_list_of_dict.push(
+                      generate_list_of_dict(
+                          list_of_user_data[key],
+                          500
+                      )
+                  );
+
+              } else if (
+                  key === "birth_year" ||
+                  key === "death_year" ||
+                  key === "birth_and_death_year"
+              ) {
+
+                  const generic_dict = generate_list_of_dict2(
+                      list_of_user_data[key],
+                      50000000
+                  );
+
+                  const generic_chart = make_a_graphic(
+                      "bar",
+                      generic_dict,
+                      VAR_TO_DESCRIPTION[key]
+                  );
+
+                  new_list_of_graph.push(generic_chart);
+
+                  new_list_of_dict.push(
+                      generate_list_of_dict2(
+                          list_of_user_data[key],
+                          50000000
+                      )
+                  );
+
+              } else {
+
+                  const generic_dict = generate_list_of_dict(
+                      list_of_user_data[key],
+                      10000000
+                  );
+
+                  const generic_chart = make_a_graphic(
+                      "bar",
+                      generic_dict,
+                      VAR_TO_DESCRIPTION[key]
+                  );
+
+                  new_list_of_graph.push(generic_chart);
+
+                  new_list_of_dict.push(
+                      generate_list_of_dict(
+                          list_of_user_data[key],
+                          50000000
+                      )
+                  );
+              }
+          }
+      }
+      
+      set_list_of_graph(new_list_of_graph);
+      set_list_of_dict(new_list_of_dict);
+      set_list_of_keys_name(new_list_of_keys_name);
+
+  }, [list_of_user_data, result_found]);
 
     function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
       set_dict_info(dict_info)
@@ -81,80 +238,6 @@ const Statistics = () => {
       settext_input(event.target.value)
     }
 
-    var generic_chart : any = ""
-    var generic_dict = ""
-
-    var list_of_graph : any = []
-    var list_of_dict : any = []
-    var list_of_keys_name : any = []
-    var list_of_graph_local : any = []
-    var list_of_dict_local : any = []
-    var list_of_keys_name_local : any = []
-
-    if (result_found == true && all_variables_set == false) {
-        
-        const keys = Object.keys(list_of_user_data);
-        for (var i = 0; i < keys.length - 1; i++) {    
-            
-            if (list_of_user_data[keys[i]].length > 0) {
-                list_of_keys_name.push(keys[i])
-                if (keys[i] != "age" && keys[i] != "grade_over_20" && keys[i] != "wikipedia_page_lenght" && keys[i] != "preciseness_level" && keys[i] != "dict_of_error" && keys[i] != "number_of_error_per_page" && keys[i] != "age_group"
-                  && keys[i] != "birth_year" && keys[i] != "death_year" && keys[i] != "birth_and_death_year" && keys[i] != "birth_year_from_1900" && keys[i] != "death_year_from_1900" && keys[i] != "birth_and_death_year_from_1900"
-                  && keys[i] != "number_of_view" && keys[i] != "century_of_birth" && keys[i] != "century_of_death"
-                ) {
-
-
-                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10)
-                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
-                    list_of_graph.push(generic_chart)
-                    
-                    if (keys[i] != "town_birth_and_death_place" && keys[i] != "town_birth_place" && keys[i] != "town_death_place" && keys[i] != "dict_of_error_counter") {
-                      list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],2000))
-                    } 
-                      else {
-                      list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
-                    
-                    }
-                    
-                } else if (keys[i] == "dict_of_error") {
-                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],3)
-                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
-                    list_of_graph.push(generic_chart)
-                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],500))
-                    
-                } else if (keys[i] == "birth_year" || keys[i] == "death_year" || keys[i] == "birth_and_death_year") {
-                    generic_dict = generate_list_of_dict2(list_of_user_data[keys[i]],50000000)
-                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
-                    list_of_graph.push(generic_chart)
-                    list_of_dict.push(generate_list_of_dict2(list_of_user_data[keys[i]],50000000))
-                  } else {
-                    
-                    generic_dict = generate_list_of_dict(list_of_user_data[keys[i]],10000000)
-                    generic_chart = make_a_graphic("bar" , generic_dict,VAR_TO_DESCRIPTION[keys[i]])
-                    list_of_graph.push(generic_chart)
-                    list_of_dict.push(generate_list_of_dict(list_of_user_data[keys[i]],50000000))  
-                }
-                
-            }
-        }
-        
-        localStorage.removeItem("list_of_graph_local");
-        localStorage.removeItem("list_of_dict_local");
-        localStorage.removeItem("list_of_keys_local");
-        localStorage.setItem("list_of_dict_local",JSON.stringify(list_of_dict))
-        localStorage.setItem("list_of_graph_local",JSON.stringify(list_of_graph))
-        localStorage.setItem("list_of_keys_local",JSON.stringify(list_of_keys_name))
-        set_all_variables_set(true)
-    }
-
-  
-
-
-
-  var list_of_graph_local : any = JSON.parse(localStorage.getItem("list_of_graph_local") ?? "[]");
-  var list_of_dict_local : any = JSON.parse(localStorage.getItem("list_of_dict_local") ?? "[]");
-  var list_of_keys_name_local : any = JSON.parse(localStorage.getItem("list_of_keys_local") ?? "[]");
-
   function navbar() {
     
     return (
@@ -178,7 +261,8 @@ const Statistics = () => {
 
    function advanced_search_modal() {
 
-      
+
+       
        const status_death_string_list : any = ["Mort","Vivant","Les 2"]
        const gender_string_list : any = ["Homme","Femme","Les 2"]
        const historical_period: any = [
@@ -763,6 +847,7 @@ const Statistics = () => {
 
                 <div className="d-grid gap-2">
                     <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_search().then((result) => set_list_of_user_data(result.all_wikipedia_info))}>Rechercher 🔎</button>
+                    
                 </div>
 
                 <br></br>
@@ -793,7 +878,6 @@ const Statistics = () => {
                     <h2 className="wikifont">
                         Ça charge veuillez patienter quelques minutes
                     </h2>
-                    
                     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="2 min Countdown"></img>
                 </div>
                 )}
@@ -818,7 +902,6 @@ const Statistics = () => {
                         <h2>
                           Ça charge veuillez patienter quelques minutes
                         </h2>
-                        
                         <img className="mobile-only" src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif" width="300" height="300"></img>
                         <img className="desktop-only" src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif" width="700" height="700"></img>
                         
@@ -871,21 +954,21 @@ const Statistics = () => {
                     
 
                     
-                    {list_of_keys_name_local.map((_: any, index: number) => (
-                    <div key={list_of_keys_name_local[index]}>
-                      {LIST_OF_THEME.includes(list_of_keys_name_local[index]) && (
+                    {list_of_keys_name.map((_: any, index: number) => (
+                    <div key={list_of_keys_name[index]}>
+                      {LIST_OF_THEME.includes(list_of_keys_name[index]) && (
                         <div>
                           <br /><br /><br /><br />
 
                           <Accordion>
-                            <Accordion.Item eventKey={list_of_keys_name_local[index]}>
+                            <Accordion.Item eventKey={list_of_keys_name[index]}>
                               <Accordion.Header>
-                              <strong style={{fontSize : "30px"}}>{LIST_OF_THEME.indexOf(list_of_keys_name_local[index]) + 1}- {STAT_TO_DESCRIPTION[list_of_keys_name_local[index]]}</strong>
+                              <strong style={{fontSize : "30px"}}>{LIST_OF_THEME.indexOf(list_of_keys_name[index]) + 1}- {STAT_TO_DESCRIPTION[list_of_keys_name[index]]}</strong>
                               </Accordion.Header>
                               <Accordion.Body>
-                                {list_of_graph_local.map((graph: any, index2: number) => (
+                                {list_of_graph.map((graph: any, index2: number) => (
                                   <div key={index2}>
-                                    {[list_of_keys_name_local[index]].includes(SUB_THEME_TO_THEME[list_of_keys_name_local[index2]]) && (
+                                    {[list_of_keys_name[index]].includes(SUB_THEME_TO_THEME[list_of_keys_name[index2]]) && (
                                       <div>
                                         <AgCharts options={graph} />
                                         <br /><br />
@@ -895,7 +978,7 @@ const Statistics = () => {
                                             className="btn btn-secondary"
                                             data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2"
-                                            onClick={() => handle_dict_and_keys_info(list_of_dict_local[index2], list_of_keys_name_local[index2])}
+                                            onClick={() => handle_dict_and_keys_info(list_of_dict[index2], list_of_keys_name[index2])}
                                           >
                                             {"Toutes les statistiques 📊"}
                                           </button>

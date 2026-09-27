@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import WorldMap from './pages/worldmap';
 import HomePage from './pages/home';
-import Statistics from "./pages/Statistics";
+import Statistics from "./pages/statistics";
 import QjisMap from './pages/qjis_map';
 import About from './pages/about';
 
