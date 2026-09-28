@@ -1,0 +1,8 @@
+Europe de l'Ouest#####58.75565#####203883
+Amérique anglo-saxonne#####56.45356#####60863
+Afrique du Nord#####46.29858#####12650
+Europe du Sud#####44.68435#####56236
+Europe du Nord#####41.89135#####47987
+Europe de l'Est#####41.8456#####31988
+Asie de l'Est#####33.86197#####19474
+Amérique du Sud#####32.982#####17163

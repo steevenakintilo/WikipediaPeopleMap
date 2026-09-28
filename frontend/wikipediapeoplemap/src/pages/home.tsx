@@ -109,7 +109,7 @@ const Home = () => {
               <ul className="list-group list-group-flush">
               <div>
               
-              <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1789683297/how-to-draw-an-earth-step-6_1_go2k7j.jpg" style={{ cursor: "pointer" }} alt="" width="500" height="500" className="me-2"/>
+              <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1789683297/how-to-draw-an-earth-step-6_1_go2k7j.jpg" style={{ cursor: "pointer" }} alt="" width="500" height="440" className="me-2"/>
               </div>
               <br></br>
               <br></br>
@@ -118,6 +118,9 @@ const Home = () => {
               <br></br>
               
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
+              <br></br>
+
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/OtherStatistics">Autres statistiques</a>
               <br></br>
 
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Qjis">Carte pour qjis</a>
@@ -146,6 +149,9 @@ const Home = () => {
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
               <br></br>
 
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/OtherStatistics">Autres statistiques</a>
+              <br></br>
+              
               <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/About">À propos</a>
               <br></br>
               

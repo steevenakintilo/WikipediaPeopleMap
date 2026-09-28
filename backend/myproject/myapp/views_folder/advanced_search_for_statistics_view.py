@@ -28,7 +28,7 @@ import time
 
 @csrf_exempt
 def get_advanced_statistics(request):
-    """Display chunck (10000 users) of user info"""
+    """Get advanced statistics"""
 
     start = time.perf_counter()
     if request.method != "POST":
@@ -782,7 +782,7 @@ def get_advanced_statistics(request):
 
         if user_obj.gender and user_obj.gender.lower().strip() != "undefined" and user_obj.gender.lower().strip() != "unclear":
             gender_counter[GENDER_TO_FRENCH_DICT[user_obj.gender]] += 1
-        
+
 
         # ─────────────────────────────────────────────
         # Ranking

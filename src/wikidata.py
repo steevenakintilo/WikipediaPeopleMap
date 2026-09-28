@@ -2910,11 +2910,11 @@ class WikiPeopleData():
             first_name = unquote(first_name)
             last_name = unquote(last_name)
 
-            if first_name == " ":
+            if first_name == " " or first_name == "":
                 first_name = "Undefined"
 
 
-            if last_name == " ":
+            if last_name == " " or last_name == "":
                 last_name = "Undefined"
             
             region_of_birth = self.country_to_region_of_the_world(country_birth_place)
@@ -3314,6 +3314,7 @@ class WikiPeopleData():
             # "number_of_page_linked_to":number_of_page_linked_to,
             # #
 
+            
             print_data = False
             if print_data:
                 if int(preciseness_level/2) < MINIMAL_PRECISSENES_SCORE and force_print_data:

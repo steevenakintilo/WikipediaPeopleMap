@@ -26,7 +26,7 @@ import csv
 
 @csrf_exempt
 def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
-    """Display chunck (10000 users) of user info"""
+    """Display chunck of user info with advanced search"""
     if request.method != "POST":
         return HttpResponse(f"Error!", status=404)
 

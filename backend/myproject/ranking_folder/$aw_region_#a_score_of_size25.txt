@@ -1,0 +1,23 @@
+Europe de l'Ouest#####60.23767#####343273
+Amérique anglo-saxonne#####56.50301#####92435
+Asie du Sud#####49.8926#####6229
+Europe du Sud#####48.24043#####85882
+Afrique du Nord#####47.05904#####16074
+Amérique centrale#####44.89062#####7058
+Europe du Nord#####43.62316#####68714
+Moyen-Orient#####42.7466#####14495
+Europe de l'Est#####42.09544#####45172
+Caraïbes#####40.46063#####4305
+Afrique australe#####39.0669#####4589
+Australasie#####38.66663#####9299
+Micronésie#####38.10127#####79
+Asie de l'Est#####37.15504#####26877
+Polynésie#####35.27574#####272
+Amérique du Sud#####33.91623#####22728
+Caucase#####33.24775#####3225
+Asie du Sud-Est#####33.20356#####4554
+Afrique de l'Ouest#####32.16404#####8748
+Afrique centrale#####31.72849#####5171
+Mélanésie#####30.90369#####488
+Afrique de l'Est#####30.87415#####3369
+Asie centrale#####27.76135#####1961

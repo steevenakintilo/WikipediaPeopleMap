@@ -1,0 +1,1236 @@
+Place de la Concorde#####887.0#####10
+Marnes-la-Coquette#####805.4#####5
+Hotel de Soubise#####615.6#####5
+Nohant-Vic#####552.83333#####6
+Chateau de Versailles#####500.53333#####30
+Chateau de Vincennes#####309.8#####5
+Mouries#####297.33333#####6
+Chateau de Fontainebleau#####290.75#####8
+Villerville#####287.375#####8
+Opio#####282.2#####5
+Le Petit-Quevilly#####281.14286#####7
+Saint-Paul-de-Vence#####275.66667#####9
+Orgeval (Yvelines)#####270.0#####5
+Palais du Luxembourg#####265.0#####5
+Vineuil-Saint-Firmin#####260.0#####6
+Lyons-la-Foret#####256.2#####5
+Ramatuelle#####253.5#####8
+Fort de Montrouge#####249.58333#####12
+Sannois#####237.0#####7
+Mably (Loire)#####234.4#####5
+Giverny#####233.71429#####7
+La Roche-Guyon#####230.16667#####6
+Saint-Tropez#####226.21622#####37
+Drancy#####225.54545#####11
+Vezelay#####224.6#####5
+Vernouillet (Eure-et-Loir)#####212.8#####5
+Cricqueboeuf#####208.66667#####9
+Pontault-Combault#####205.6#####5
+Arcachon#####199.40984#####61
+Gassin#####182.47619#####21
+Equemauville#####180.72727#####11
+Aigues-Vives (Gard)#####180.6#####5
+Callian (Var)#####178.88889#####9
+Le Chesnay-Rocquencourt#####178.5#####8
+Le Blanc-Mesnil#####178.16667#####6
+Azincourt#####176.5#####6
+Chateauneuf-Grasse#####173.0#####6
+Jouars-Pontchartrain#####173.0#####5
+Puteaux#####171.5#####46
+Couilly-Pont-aux-Dames#####170.46667#####30
+Crosne (Essonne)#####166.6#####5
+Palais-Royal#####166.28571#####7
+Le Quesnoy#####164.33333#####6
+Sainte-Maxime#####159.64286#####14
+Les Lilas#####159.0#####12
+Bougival#####157.42857#####28
+Saint-Aignan (Loir-et-Cher)#####156.0#####6
+Lassay-les-Chateaux#####155.8#####5
+Fresnes (Val-de-Marne)#####155.13333#####15
+Amilly (Loiret)#####155.0#####7
+Dourdan#####154.45#####20
+Samois-sur-Seine#####154.4#####5
+Roquebrune-Cap-Martin#####153.55556#####18
+Montgeron#####151.83333#####24
+Seillans#####151.2#####5
+Nemours#####150.9#####20
+Saint-Cyr-l'Ecole#####149.57143#####7
+Le Lavandou#####149.375#####8
+Epagny Metz-Tessy#####148.0#####5
+Taverny#####144.3#####10
+Hopital de la Salpetriere#####142.71429#####7
+Saint-Gratien (Val-d'Oise)#####140.0#####7
+Loches#####139.86667#####15
+Chambourcy#####139.66667#####6
+Grosrouvre#####139.66667#####6
+Aubervilliers#####137.95238#####21
+Vigneux-sur-Seine#####136.625#####8
+Le Pecq#####133.85#####20
+Sees#####133.5#####12
+Gorbio#####132.0#####6
+Saint-Cloud#####131.03896#####231
+Allier (departement)#####131.0#####7
+Brie-Comte-Robert#####129.875#####8
+Contamine-sur-Arve#####129.42857#####7
+Chaumont-en-Vexin#####128.4#####5
+Ville-d'Avray#####128.08889#####45
+Evecquemont#####128.08333#####12
+Guise#####128.0#####6
+Chelles#####127.7#####10
+Gif-sur-Yvette#####127.07143#####14
+Rambouillet#####126.73684#####38
+Vittel#####126.5#####14
+Les Mureaux#####126.44444#####9
+Vallauris#####126.09091#####22
+Palais du Louvre#####123.4#####5
+La Celle-Saint-Cloud#####122.83784#####37
+Le Pre-Saint-Gervais#####122.83333#####6
+Bourbon-l'Archambault#####122.5#####8
+Chaville#####122.17647#####17
+Marmande#####121.81818#####11
+Saint-Pierre-les-Nemours#####121.125#####8
+La Garenne-Colombes#####120.42105#####19
+Bourges#####119.68595#####121
+Marquette-lez-Lille#####119.66667#####6
+Ferolles-Attilly#####118.5#####12
+Hopital americain de Paris#####118.0#####7
+Le Pouliguen#####117.5#####10
+Noisy-le-Grand#####117.46154#####13
+Villiers-sur-Marne#####117.14286#####7
+Conde-sur-l'Escaut#####116.8#####5
+Place Gambetta (Bordeaux)#####116.8#####5
+Hopital d'instruction des armees du Val-de-Grace#####116.42105#####19
+Champigny-sur-Marne#####116.375#####24
+Amboise#####116.04762#####21
+Les Andelys#####115.86667#####15
+Pezenas#####115.26667#####15
+Nogent-sur-Marne#####114.61386#####101
+Senlis (Oise)#####114.22222#####36
+Commercy#####113.88889#####9
+Barbizon#####113.66667#####18
+Passy (Seine)#####113.57143#####49
+Forteresse du Mont-Valerien#####113.52857#####70
+Sinnamary#####113.14286#####7
+Centre penitentiaire de Fresnes#####112.875#####8
+Marly-le-Roi#####112.83333#####18
+Gironde (departement)#####112.77778#####9
+Longpont-sur-Orge#####112.375#####8
+Vernouillet (Yvelines)#####112.33333#####6
+Saint-Didier-au-Mont-d'Or#####112.22222#####9
+Villecresnes#####112.2#####5
+Andilly (Val-d'Oise)#####111.83333#####6
+Terrasson-Lavilledieu#####111.66667#####6
+Soreze#####111.4#####5
+Dieulefit#####110.7#####10
+Garches#####110.03846#####104
+Neuilly-sur-Seine#####109.87327#####1302
+Montereau-Fault-Yonne#####109.86667#####15
+Le Port-Marly#####109.85366#####41
+Moret-sur-Loing#####109.53846#####13
+Le Cannet#####109.37838#####37
+Longjumeau#####108.85714#####21
+Die (Drome)#####108.16667#####6
+Bagnols-sur-Ceze#####108.15385#####13
+Deuil-la-Barre#####108.0#####7
+Plan-de-Cuques#####107.6#####5
+Fleury-Merogis#####107.5#####10
+Eze#####107.4#####5
+Biot (Alpes-Maritimes)#####107.0#####5
+Boulogne-Billancourt#####106.41734#####496
+Solesmes (Sarthe)#####106.4#####10
+Vence#####106.15217#####46
+Bobigny#####106.11628#####43
+Suresnes#####105.99617#####261
+Mezy-sur-Seine#####105.8#####5
+Houilles#####105.2#####5
+Andresy#####105.16667#####6
+Rueil-Malmaison#####105.14394#####132
+Maisons-Laffitte#####105.08#####75
+Thiais#####104.9#####20
+Saint-Laurent-du-Var#####104.75862#####29
+Laguna Beach#####104.55172#####29
+Ciboure#####104.53846#####13
+Le Perreux-sur-Marne#####104.45455#####33
+Passy (Haute-Savoie)#####104.4#####15
+Pierrefonds (Oise)#####104.4#####5
+Magny-les-Hameaux#####104.28571#####7
+Meudon#####103.85417#####144
+Le Blanc#####103.57143#####7
+Beaumont-sur-Oise#####103.44444#####9
+Porto-Vecchio#####103.22222#####9
+Saint-Ouen-l'Aumone#####102.33333#####12
+Quincy-sous-Senart#####102.25#####12
+Saint-Arnoult (Calvados)#####102.16667#####6
+Schiltigheim#####102.14286#####14
+Bievres (Essonne)#####102.13333#####15
+Chatenay-Malabry#####101.94#####50
+Pierrefitte-sur-Seine#####101.85714#####7
+Fontenay-les-Briis#####101.72727#####44
+Megeve#####101.5#####6
+Pontoise#####101.24561#####57
+Orsay#####99.93878#####49
+Deauville#####99.69231#####26
+Villeneuve-Loubet#####99.66667#####18
+Creteil#####99.3722#####223
+Saint-Nicolas-de-Port#####99.16667#####6
+Saint-Nom-la-Breteche#####98.8#####5
+Academie des sciences#####98.66667#####6
+Pithiviers#####98.28571#####7
+Beaune#####97.68571#####35
+Montrichard#####97.33333#####6
+Nans-les-Pins#####97.28571#####7
+Ivry-sur-Seine#####96.96855#####159
+Chateau-Thierry#####96.95455#####22
+Clichy#####96.86607#####224
+Poissy#####96.58333#####60
+Beaulieu-sur-Mer#####96.5#####20
+Asnieres-sur-Seine#####96.47368#####133
+Vitry-sur-Seine#####96.42857#####21
+Louveciennes#####96.4058#####69
+Draveil#####96.1129#####62
+Etretat#####96.1#####10
+Vincennes#####96.01613#####62
+Montlhery#####95.875#####8
+Palais des Tuileries#####95.875#####8
+La Garde (Var)#####95.8#####5
+Clamart#####95.53365#####208
+Lectoure#####95.52941#####17
+Guerande#####95.15385#####13
+Bry-sur-Marne#####94.8254#####63
+Bandol#####94.78947#####19
+Epagny (Haute-Savoie)#####94.33333#####6
+Vanves#####94.12245#####49
+Lombez#####93.8#####5
+Chessy (Seine-et-Marne)#####93.8#####5
+Groslay#####93.66667#####9
+Mantes-la-Jolie#####93.39583#####48
+Antony#####93.21839#####87
+Le Palais#####93.16667#####6
+Les Pavillons-sous-Bois#####92.4#####10
+Saint-Jeannet (Alpes-Maritimes)#####92.25#####8
+Quimperle#####92.125#####24
+Chateaubriant#####92.09524#####21
+Cachan#####91.85714#####14
+Bourg-la-Reine#####91.8#####65
+Mamers#####91.8#####10
+Hendaye#####91.45455#####11
+Chevreuse#####91.44444#####9
+Manosque#####91.41379#####29
+Limeil-Brevannes#####91.37736#####53
+Hopital Saint-Antoine#####91.375#####8
+Sevres#####91.30303#####132
+Marine royale (France)#####91.0#####5
+Montfermeil#####90.7381#####42
+Palaiseau#####90.53846#####13
+Aubagne#####90.35714#####28
+Newport Beach#####90.18182#####77
+Nouan-le-Fuzelier#####90.16667#####6
+Saint-Denis (Seine-Saint-Denis)#####90.0#####81
+Montoire-sur-le-Loir#####90.0#####6
+Saint-Chamond#####89.92857#####14
+Dinard#####89.72727#####33
+Pont-l'Abbe#####89.7#####20
+Gouvieux#####89.6#####15
+Saint-Remy-de-Provence#####89.24138#####29
+Melun#####88.89091#####55
+Gennevilliers#####88.45455#####11
+Anet (Eure-et-Loir)#####88.28571#####7
+Craon (Mayenne)#####88.25#####8
+Bar-le-Duc#####87.93103#####29
+Paris#####87.88053#####29915
+Saint-Germain-en-Laye#####87.84255#####235
+Ris-Orangis#####87.61538#####13
+Juvisy-sur-Orge#####87.52174#####23
+L'Isle-Adam#####87.38095#####21
+Cuers#####87.22222#####9
+Canet-en-Roussillon#####87.16667#####6
+Bois-le-Roi (Seine-et-Marne)#####86.84211#####19
+Gourdon (Lot)#####86.73333#####15
+Montrouge#####86.15789#####57
+Saint-Remy-les-Chevreuse#####86.05263#####19
+Baccarat#####85.66667#####6
+Viry-Chatillon#####85.63158#####19
+Ashland (Oregon)#####85.61538#####13
+Cannes#####85.36384#####437
+Lagny-sur-Marne#####85.27027#####37
+Gisors#####85.21053#####19
+Labenne#####85.16667#####6
+Montaigu (Vendee)#####85.16667#####6
+Montfort-l'Amaury#####85.13793#####29
+Sarcelles#####85.0625#####16
+Paris (France)#####85.0#####7
+Saint-Genis-Laval#####84.88889#####18
+Rosny-sous-Bois#####84.85714#####7
+Collonges-au-Mont-d'Or#####84.8#####5
+Courbevoie#####84.66176#####136
+Beaufort-en-Vallee#####84.6#####5
+Tonneins#####84.5#####6
+Trevenans#####84.4#####5
+Cambo-les-Bains#####84.21053#####38
+Plaisir (Yvelines)#####84.18182#####11
+Ecouen#####84.15385#####13
+Thouars#####84.125#####8
+Chantilly#####84.10345#####29
+Bois-Guillaume#####84.02703#####37
+Jouarre#####83.9#####10
+Auray#####83.8#####20
+Domme#####83.8#####5
+Batignolles-Monceau#####83.66667#####9
+Juan-les-Pins#####83.33333#####9
+Septeuil#####83.16667#####6
+Yvelines#####82.88889#####9
+Lamballe#####82.8#####5
+L'Isle-sur-la-Sorgue#####82.8#####5
+Sainte-Marie-aux-Mines#####82.33333#####6
+Cormeilles-en-Parisis#####82.26316#####19
+Forcalquier#####82.0#####10
+Abbaye de Saint-Germain-des-Pres#####81.8#####10
+Bagnolet#####81.59375#####32
+Livry-Gargan#####81.5#####14
+Nanterre#####80.83333#####66
+Veneux-les-Sablons#####80.4#####5
+Obernai#####80.375#####8
+Fontenay-aux-Roses#####80.31667#####60
+Elbeuf#####80.3125#####16
+Luzarches#####80.0#####7
+La Gaude#####80.0#####5
+Saint-Mande#####79.96026#####151
+Le Mesnil-le-Roi#####79.85714#####7
+Quartier d'Auteuil#####79.85714#####7
+Corbeil-Essonnes#####79.81395#####43
+Meylan#####79.625#####8
+Corbie#####79.57143#####7
+Argenteuil (Val-d'Oise)#####79.52857#####70
+Bourron-Marlotte#####79.33333#####12
+Cluny (Saone-et-Loire)#####79.28571#####7
+Creil#####79.06667#####15
+Sisteron#####78.9#####10
+Wasquehal#####78.625#####8
+Epinay-sur-Seine#####78.4#####20
+Vaux-sur-Mer#####78.36364#####11
+Bezons#####78.0#####7
+Saint-Sebastien-de-Morsent#####77.83333#####6
+Vaucresson#####77.79167#####24
+Champcueil#####77.76923#####13
+Compiegne#####77.54839#####62
+Gardanne#####77.375#####8
+Premiere Republique (France)#####77.25#####8
+Charenton-le-Pont#####77.20513#####39
+Le Kremlin-Bicetre#####77.16364#####110
+Avon (Seine-et-Marne)#####77.125#####24
+Hennebont#####77.09091#####11
+Cimetiere du Pere-Lachaise#####76.87234#####47
+Saint-Maurice (Val-de-Marne)#####76.84848#####66
+Chatou#####76.73684#####38
+Chamalieres#####76.66667#####15
+Auvers-sur-Oise#####76.66667#####9
+Indre-et-Loire#####76.6#####5
+Bergerac (Dordogne)#####76.58333#####36
+Grasse#####76.56#####125
+Saint-Benoit-la-Foret#####76.5#####10
+La Verriere#####76.375#####32
+Lisieux#####76.35185#####54
+Trouville-sur-Mer#####76.32#####25
+Chatillon (Hauts-de-Seine)#####76.25806#####31
+Granville#####75.84#####25
+Frejus#####75.82353#####68
+Levallois-Perret#####75.70677#####133
+Cassis (Bouches-du-Rhone)#####75.69231#####13
+Barriere du Trone#####75.4#####5
+Brunoy#####75.35135#####37
+Orange (Vaucluse)#####75.34615#####26
+Saint-Raphael (Var)#####75.18#####50
+Clermont (Oise)#####75.1#####10
+Salon-de-Provence#####74.93548#####31
+Le Chesnay#####74.87736#####106
+Annonay#####74.80952#####21
+Mougins#####74.73469#####49
+Provins#####74.55172#####29
+Blois#####74.47748#####111
+Le Pradet#####74.4#####5
+Ermont#####74.23077#####13
+Banyuls-sur-Mer#####74.2#####15
+Arradon#####74.2#####5
+Loudun#####73.73684#####19
+Herblay-sur-Seine#####73.73333#####15
+Sancerre#####73.71429#####7
+Joigny#####73.6875#####16
+Neuilly-Plaisance#####73.57143#####7
+Quartier de Belleville#####73.5#####6
+Villejuif#####73.36098#####205
+Sevran#####73.33333#####18
+Chatillon-Coligny#####73.33333#####6
+Issy-les-Moulineaux#####73.28767#####146
+Bourganeuf#####73.22222#####9
+Sucy-en-Brie#####73.2#####10
+Greensboro#####73.15385#####13
+Croissy-sur-Seine#####73.05882#####17
+Saint-Jean-Cap-Ferrat#####73.05263#####19
+Le Vesinet#####73.01695#####59
+Saint-Martin-de-Re#####72.9#####10
+Fecamp#####72.52#####25
+Conflans-Sainte-Honorine#####72.44444#####9
+Dreux#####72.38298#####47
+Bois-Colombes#####72.25806#####31
+Toul#####72.0#####31
+Corenc#####72.0#####5
+Montmorency (Val-d'Oise)#####71.80282#####71
+Douarnenez#####71.77143#####35
+Arpajon#####71.57143#####14
+Versailles#####71.53686#####719
+Massy (Essonne)#####71.39286#####28
+Savigny-sur-Orge#####71.30769#####13
+Malzeville#####71.16667#####6
+Lehon#####70.71429#####7
+Ballainvilliers#####70.65385#####26
+Villefranche-de-Lauragais#####70.6#####10
+Villers-sur-Mer#####70.6#####5
+Signes (Var)#####70.16667#####6
+Cagnes-sur-Mer#####70.0#####43
+Royan#####69.96552#####29
+Bron#####69.96296#####54
+Coulommiers (Seine-et-Marne)#####69.89286#####28
+Ploubazlanec#####69.85714#####7
+Guingamp#####69.82353#####17
+Choisy-le-Roi#####69.82353#####17
+Arcueil#####69.82353#####34
+Montbard#####69.8#####15
+Plaisance (Gers)#####69.8#####5
+Tourrettes-sur-Loup#####69.8#####5
+Laon#####69.60417#####48
+Bourbonne-les-Bains#####69.55556#####18
+Biarritz#####69.49533#####107
+La Seyne-sur-Mer#####69.4359#####39
+Aix-les-Bains#####69.375#####48
+Meung-sur-Loire#####69.0#####8
+Ollioules#####68.90909#####11
+Vaugirard (Seine)#####68.75#####8
+Saint-Maur-des-Fosses#####68.72093#####86
+Lunel#####68.66667#####9
+Pontlevoy#####68.66667#####6
+Saint-Barthelemy-d'Anjou#####68.6#####5
+Luneville#####68.54286#####35
+Malesherbes#####68.5#####6
+Aubenas#####68.48485#####33
+Colombes#####68.42169#####83
+Soultz-Haut-Rhin#####68.25#####8
+Laxou#####68.22222#####9
+Evreux#####68.18182#####88
+Epinay-sur-Orge#####68.0#####15
+Saint-Rambert-l'Ile-Barbe#####68.0#####7
+Camp de concentration de Natzweiler-Struthof#####67.875#####16
+Chauny#####67.625#####8
+Guethary#####67.57143#####7
+Saulx-les-Chartreux#####67.55556#####9
+Remiremont#####67.47826#####23
+Mamoudzou#####67.42857#####7
+Le Raincy#####67.21053#####19
+Arnay-le-Duc#####67.0#####5
+Seine-Port#####67.0#####7
+Apt#####66.95455#####22
+Saclay#####66.8#####10
+Vierzon#####66.76923#####13
+Sartrouville#####66.71429#####14
+Auteuil (Seine)#####66.54545#####11
+Sartene#####66.5#####8
+Souvigny#####66.4#####5
+Vichy#####66.35878#####131
+Sonoma (Californie)#####66.16667#####12
+Calais#####66.09091#####33
+Pfastatt#####66.0#####6
+Chatillon-sur-Seine#####66.0#####8
+Mayenne (departement)#####66.0#####9
+Luynes (Indre-et-Loire)#####65.85714#####7
+Fontainebleau#####65.80526#####190
+Montmartre#####65.8#####15
+Boissy-Saint-Leger#####65.8#####5
+Nice#####65.75948#####1081
+Montargis#####65.72222#####18
+Honfleur#####65.70833#####24
+Perros-Guirec#####65.625#####8
+Verrieres-le-Buisson#####65.61905#####21
+Sceaux (Hauts-de-Seine)#####65.54054#####74
+Bures-sur-Yvette#####65.5#####8
+Saint-Cyr-sur-Loire#####65.5#####10
+Villefranche-sur-Mer#####65.47826#####23
+Athis-Mons#####65.44444#####9
+Allauch#####65.44444#####9
+Auxerre#####65.31818#####88
+Souain-Perthes-les-Hurlus#####65.28571#####7
+Montmorillon#####65.18182#####11
+Ceret#####65.10526#####19
+Paray-le-Monial#####65.1#####10
+Saint-Priest-en-Jarez#####65.0#####17
+Faculte de medecine de Paris#####65.0#####5
+Menton (Alpes-Maritimes)#####64.99153#####118
+Hyeres#####64.95455#####132
+Malakoff (Hauts-de-Seine)#####64.92#####25
+Antibes#####64.87709#####179
+Gaillon#####64.8#####5
+Saint-Didier (Vaucluse)#####64.8#####5
+Manche (mer)#####64.68#####25
+Academie royale de peinture et de sculpture#####64.66667#####9
+Bagneux (Hauts-de-Seine)#####64.65#####20
+Pont-l'Eveque (Calvados)#####64.6#####5
+Le Luc#####64.57143#####7
+Eaubonne#####64.56944#####72
+Vernon (Eure)#####64.54348#####46
+Saint-Pierre (Martinique)#####64.3#####10
+Bagneres-de-Luchon#####64.16667#####12
+Avallon#####63.93333#####30
+Hazebrouck#####63.90909#####11
+Montreuil (Seine-Saint-Denis)#####63.88462#####78
+Fontenay-le-Comte#####63.86957#####23
+Chevilly-Larue#####63.62069#####29
+Tournus#####63.6#####5
+Villeneuve-Saint-Georges#####63.58537#####41
+Largentiere#####63.4#####10
+Bessancourt#####63.4#####5
+Haywards Heath#####63.25#####8
+Arles#####63.15306#####98
+Sens (Yonne)#####63.11765#####51
+Evry#####63.05882#####17
+L'Hay-les-Roses#####63.03704#####27
+Fort de Cote-Lorette#####62.83333#####6
+Tours#####62.70234#####299
+Pougues-les-Eaux#####62.66667#####6
+Ille-sur-Tet#####62.57143#####7
+Armee des emigres#####62.42857#####7
+Guebwiller#####62.11111#####9
+Sable-sur-Sarthe#####61.875#####8
+Argentan#####61.81818#####22
+La Baule-Escoublac#####61.77778#####27
+Montelimar#####61.76744#####43
+Avignon#####61.75773#####388
+Talant#####61.64286#####14
+Rouen#####61.6383#####423
+Chalon-sur-Saone#####61.51429#####70
+Ordre du Saint-Esprit#####61.4#####5
+Gagny#####60.91667#####12
+Saint-Saulve#####60.66667#####6
+Chef decorateur#####60.66667#####9
+XXe siecle#####60.57143#####7
+Mont-de-Marsan#####60.55814#####43
+Huahine#####60.5#####6
+Gleize#####60.44444#####9
+Roscoff#####60.4#####5
+La Garde#####60.38462#####13
+Ploermel#####60.375#####8
+Paimpol#####60.33333#####15
+Chalons-sur-Marne#####60.33333#####6
+Dorchester (Dorset)#####60.27273#####11
+Arnouville#####60.2#####5
+Gentilly (Val-de-Marne)#####60.17857#####28
+Sedan#####60.16667#####36
+Villenave-d'Ornon#####60.16667#####12
+Cugand#####60.125#####8
+Maisons-Alfort#####60.0#####15
+La Loupe#####60.0#####5
+Harrow#####59.91667#####12
+Saint-Cyr-sur-Mer#####59.9#####10
+Dax (France)#####59.8#####5
+Brumath#####59.71429#####7
+La Ferte-sous-Jouarre#####59.66667#####9
+Oullins#####59.46667#####15
+Plougastel-Daoulas#####59.42857#####7
+Hesdin#####59.42857#####7
+Saint-Dizier#####59.33333#####18
+Enghien-les-Bains#####59.31034#####29
+Saint-Affrique#####59.14286#####7
+Cusset#####59.11111#####9
+Epernay#####59.04167#####24
+Saint-Maximin-la-Sainte-Baume#####59.0#####5
+Chateau-Gontier#####58.90909#####22
+Laval (Mayenne)#####58.88618#####123
+Bullion#####58.83333#####6
+Dieppe (Seine-Maritime)#####58.81967#####61
+Nerac#####58.75#####12
+Le Coudray#####58.69231#####13
+Berlin-Ouest#####58.65254#####118
+Nancy#####58.62331#####369
+Amiens#####58.61658#####193
+Dammarie-les-Lys#####58.6#####5
+Papeete#####58.57447#####47
+Parame#####58.2#####10
+Pierre-Benite#####58.1#####20
+Saint-Nazaire#####58.04444#####45
+Peronne (Somme)#####58.0#####15
+Chateauroux#####58.0#####41
+Pabu#####58.0#####9
+Aire-sur-l'Adour#####58.0#####7
+La Fleche#####57.96875#####32
+Balaruc-les-Bains#####57.8#####5
+Fort-de-France#####57.78182#####55
+Saint-Egreve#####57.625#####8
+Nimes#####57.54478#####268
+Saint-Florentin (Yonne)#####57.5#####6
+Mouans-Sartoux#####57.5#####8
+Chambery#####57.49624#####133
+Cavaillon#####57.48387#####31
+Crest (Drome)#####57.47059#####17
+Olivet (Loiret)#####57.45455#####11
+Villemomble#####57.44444#####9
+Sainte-Adresse#####57.38462#####13
+Jouy-en-Josas#####57.36364#####11
+Vernaison#####57.33333#####6
+Caen#####57.22901#####262
+Saint-Geniez-d'Olt#####57.16667#####6
+Lezoux#####57.16667#####6
+Gaillac#####57.0#####14
+Gradignan#####56.91667#####12
+Annemasse#####56.90909#####11
+Ajaccio#####56.81481#####81
+Auch#####56.8125#####64
+Saint-Malo#####56.8062#####129
+Andernos-les-Bains#####56.8#####5
+Saint-Herblain#####56.75#####24
+Morlaix#####56.6#####60
+Mandelieu-la-Napoule#####56.54545#####11
+Bibliothecaire#####56.5#####6
+Rang-du-Fliers#####56.5#####6
+Saint-Amand-les-Eaux#####56.33333#####9
+Souillac#####56.33333#####6
+Beausoleil (Alpes-Maritimes)#####56.33333#####6
+Prades (Pyrenees-Orientales)#####56.30769#####13
+Issoudun#####56.30769#####13
+Saint-Die#####56.27273#####11
+Mortagne-au-Perche#####56.1#####10
+Evian-les-Bains#####56.0#####18
+Sanary-sur-Mer#####55.92308#####39
+Saint-Jean-d'Angely#####55.90476#####21
+Romans-sur-Isere#####55.81481#####27
+Joinville-le-Pont#####55.79412#####34
+Clamecy (Nievre)#####55.72727#####11
+Tain-l'Hermitage#####55.6#####5
+Amelie-les-Bains#####55.53333#####15
+Sotteville-les-Rouen#####55.5#####8
+Saint-Gregoire (Ille-et-Vilaine)#####55.5#####6
+Le Mee-sur-Seine#####55.5#####6
+Nantes#####55.40564#####567
+Ganges#####55.4#####10
+Marseille#####55.27335#####1167
+Montpellier#####55.25126#####593
+Saint-Gervais-les-Bains#####55.125#####8
+Chateaudun#####55.09091#####22
+Bagnoles-de-l'Orne#####55.09091#####11
+Vitre (Ille-et-Vilaine)#####54.85714#####14
+Bastia#####54.82353#####68
+Quartier des Batignolles#####54.8#####10
+Montivilliers#####54.75#####12
+Troyes#####54.74359#####117
+Brantome (Dordogne)#####54.66667#####6
+Viroflay#####54.65517#####29
+Noumea#####54.6#####40
+Chateau-Landon#####54.6#####5
+Castelnau-le-Lez#####54.55882#####34
+Belleville (Seine)#####54.52941#####17
+Martigues#####54.52632#####19
+Libourne#####54.5#####26
+Lambersart#####54.5#####10
+Nogent-sur-Seine#####54.5#####6
+Meaux#####54.41818#####55
+Fouesnant#####54.4#####5
+Caluire-et-Cuire#####54.35714#####42
+Nantucket#####54.33333#####6
+Capbreton#####54.30769#####13
+Nogent-le-Rotrou#####54.25806#####31
+Saint-Michel (Charente)#####54.10526#####19
+Thonon-les-Bains#####54.1#####30
+Aressy#####54.0#####7
+Ingwiller#####53.83333#####6
+Charleville (Ardennes)#####53.75#####8
+Saint-Brieuc#####53.74242#####132
+Toulon#####53.73259#####359
+Aix-en-Provence#####53.69501#####341
+Soissons#####53.54717#####53
+Sarzeau#####53.4#####5
+Le Croisic#####53.28571#####7
+Saint-Aubin-les-Elbeuf#####53.25#####8
+Saint-Amand-Montrond#####53.22222#####18
+Pessac#####53.16667#####54
+Pornic#####53.15385#####13
+Arras#####53.1165#####103
+Valenciennes#####52.95122#####82
+Lycee Louis-le-Grand#####52.83333#####6
+Charlottesville#####52.80851#####47
+Guilherand-Granges#####52.6#####5
+Colpo#####52.6#####5
+Le Mans#####52.58416#####202
+Lezignan-Corbieres#####52.5#####10
+Vandoeuvre-les-Nancy#####52.48485#####33
+Nevers#####52.38554#####83
+Rethel#####52.33333#####12
+Saint-Georges-de-Didonne#####52.3#####10
+Bordeaux#####52.15451#####699
+Sainte-Feyre#####52.125#####8
+Yerres#####51.9375#####16
+Ouistreham#####51.71429#####7
+Cholet#####51.6#####20
+Chalabre#####51.6#####5
+Thann#####51.6#####5
+Villeneuve-le-Roi#####51.57143#####7
+Saint-Cheron (Essonne)#####51.55556#####9
+Saint-Quentin#####51.3#####50
+Treguier#####51.26316#####19
+Limoges#####51.23834#####193
+Ecully#####51.2381#####21
+Bourg-Saint-Andeol#####51.2#####10
+Gournay-sur-Marne#####51.14286#####7
+Semur-en-Auxois#####51.1#####10
+Nantua#####51.0#####10
+Desertines (Allier)#####51.0#####6
+Perigueux#####50.97143#####105
+Draguignan#####50.92727#####55
+Poitiers#####50.8995#####199
+Houdan#####50.85714#####7
+Merignac (Gironde)#####50.83333#####12
+Fontenay-sous-Bois#####50.75#####36
+La Tronche#####50.63441#####93
+Le Plessis-Robinson#####50.61765#####34
+Saint-Sever#####50.6087#####23
+Ligue catholique (France)#####50.5#####8
+Begles#####50.5#####6
+Lourdes#####50.38235#####34
+Etampes#####50.33333#####36
+Guerres de Religion (France)#####50.33333#####6
+Mende (Lozere)#####50.27273#####11
+Saumur#####50.2549#####51
+Cosne-Cours-sur-Loire#####50.25#####16
+Le Havre#####50.21951#####123
+Embrun (Hautes-Alpes)#####50.2#####10
+Castelsarrasin#####50.0#####7
+Saint-Clement-de-Riviere#####50.0#####5
+New Rochelle#####49.97143#####35
+Quimper#####49.86822#####129
+Landerneau#####49.83333#####12
+Rochefort (Charente-Maritime)#####49.70423#####71
+Lyon#####49.64774#####1303
+Montbrison (Loire)#####49.625#####16
+Brive-la-Gaillarde#####49.5082#####61
+Aulnay-sous-Bois#####49.5#####10
+La Reole#####49.42857#####7
+La Bernerie-en-Retz#####49.4#####5
+Saint-Valery-en-Caux#####49.375#####8
+Aimargues#####49.33333#####9
+Clermont-Ferrand#####49.26971#####241
+Hericy#####49.2#####5
+Sainte-Genevieve-des-Bois (Essonne)#####49.16667#####12
+Cesson-Sevigne#####49.14286#####7
+Saint-Jean-de-Maurienne#####49.125#####8
+Haguenau#####49.06061#####33
+Les Sables-d'Olonne#####49.03226#####31
+Saint-Die-des-Vosges#####48.96154#####26
+Valence (Drome)#####48.86842#####76
+Chartres#####48.76852#####108
+Agen#####48.7619#####84
+Mutzig#####48.6#####5
+Pau#####48.568#####250
+Toulouse#####48.55018#####827
+Moulins (Allier)#####48.50649#####77
+Limoux#####48.5#####14
+Villiers-le-Bel#####48.33333#####30
+Bayeux#####48.28889#####45
+Montbeliard#####48.25714#####35
+Neuilly-sur-Marne#####48.25641#####39
+Lannion#####48.23404#####47
+Vaison-la-Romaine#####48.23077#####26
+Cambrai#####48.22917#####48
+Vendome#####48.11111#####36
+Saint-Ouen-sur-Seine#####48.04762#####21
+Roanne#####48.0#####44
+Angers#####47.95066#####304
+Le Touquet-Paris-Plage#####47.92857#####14
+Crozon#####47.875#####8
+Gerardmer#####47.875#####8
+Oberhausbergen#####47.83333#####6
+Villeneuve-les-Avignon#####47.82609#####23
+Valreas#####47.66667#####6
+Saint-Mandrier-sur-Mer#####47.66667#####6
+Precy-sur-Oise#####47.6#####5
+Montbeton#####47.55556#####9
+Cahors#####47.53521#####71
+Chamonix-Mont-Blanc#####47.5#####38
+Corte#####47.5#####8
+Moutiers#####47.47059#####17
+Brignoles#####47.45833#####24
+Foix#####47.41176#####17
+Doullens#####47.28571#####7
+Salouel#####47.27273#####11
+Chambray-les-Tours#####47.25#####8
+Bagneres-de-Bigorre#####47.23529#####34
+Carhaix-Plouguer#####47.2#####10
+La Chapelle-sur-Erdre#####47.2#####5
+Dijon#####47.16944#####301
+Bouxwiller (Bas-Rhin)#####47.14286#####7
+Briare#####47.1#####10
+Bernay (Eure)#####47.0#####15
+Cabourg#####47.0#####6
+Digne-les-Bains#####46.97059#####34
+Anglet#####46.75#####16
+Challans#####46.71429#####7
+Bayonne#####46.70968#####186
+Moselle (departement)#####46.66667#####9
+Istres#####46.66667#####6
+Saint-Cyr-au-Mont-d'Or#####46.6#####10
+La Rochelle#####46.58621#####145
+Strasbourg#####46.57697#####773
+Meulan-en-Yvelines#####46.57143#####14
+Trappes#####46.4#####5
+Grenoble#####46.39914#####233
+Castres#####46.39286#####56
+Montlucon#####46.28205#####39
+Annecy#####46.25882#####85
+La Ciotat#####46.15385#####26
+Seine-et-Marne#####46.11111#####18
+Viriat#####46.0#####13
+Saint-Avertin#####45.88#####25
+Eu (Seine-Maritime)#####45.875#####8
+Richelieu (Indre-et-Loire)#####45.83333#####6
+Caudebec-en-Caux#####45.8#####5
+Chatellerault#####45.78947#####38
+Annappes#####45.75#####12
+Albertville#####45.66667#####12
+Seclin#####45.55556#####9
+Rennes#####45.42432#####403
+Pont-a-Mousson#####45.42105#####19
+Chaumont (Haute-Marne)#####45.32258#####31
+Saulieu#####45.125#####8
+Alencon#####45.04082#####49
+Montauban#####45.02586#####116
+Perpignan#####45.00709#####282
+Saint-Martin-d'Heres#####45.0#####12
+Beaugency#####45.0#####7
+Lormes#####45.0#####9
+Crepy-en-Valois#####44.81818#####11
+Lardy#####44.8#####5
+Saint-Saturnin-les-Apt#####44.8#####5
+La Chatre#####44.75#####12
+Vannes#####44.72#####150
+Bondy#####44.66667#####12
+Neuville-aux-Bois (Loiret)#####44.66667#####6
+Saint-Valery-sur-Somme#####44.63636#####11
+La Teste-de-Buch#####44.625#####16
+Cauderan#####44.61538#####13
+Ermenonville#####44.6#####5
+Carqueiranne#####44.6#####5
+Villeneuve-sur-Lot#####44.55814#####43
+Golbey#####44.5#####6
+Quiberon#####44.5#####8
+Cancale#####44.4#####5
+Dordogne (departement)#####44.33333#####6
+Niederbronn-les-Bains#####44.33333#####6
+Carcassonne#####44.15385#####117
+Les Abymes#####44.11111#####18
+Charleville-Mezieres#####44.10526#####38
+Oloron-Sainte-Marie#####44.08333#####12
+Aurillac#####44.0#####46
+Saint-Claude (Jura)#####44.0#####11
+Plombieres-les-Bains#####44.0#####5
+Saint-Mihiel#####43.9#####10
+Oyonnax#####43.85714#####14
+Ares (Gironde)#####43.83333#####12
+Nontron#####43.83333#####6
+Saint-Laurent-sur-Sevre#####43.8#####5
+Amelie-les-Bains-Palalda#####43.8#####5
+Francheville (metropole de Lyon)#####43.77778#####9
+Saint-Leu-la-Foret#####43.7#####10
+Dax#####43.59551#####89
+Saint-Palais (Pyrenees-Atlantiques)#####43.5#####6
+Luxeuil-les-Bains#####43.5#####10
+La Madeleine#####43.5#####6
+Uzes#####43.45455#####22
+Issenheim#####43.4#####5
+Noyal-Pontivy#####43.4#####5
+Beauvais#####43.39062#####64
+Sarreguemines#####43.3#####10
+Falaise (Calvados)#####43.23077#####13
+Saint-Gaudens#####43.21739#####23
+Charolles#####43.2#####10
+Bormes-les-Mimosas#####43.16667#####6
+Ambert#####43.15#####20
+La Valette-du-Var#####43.1#####10
+Albi#####43.0#####97
+Villepinte (Seine-Saint-Denis)#####43.0#####20
+Azay-le-Rideau#####43.0#####6
+Angouleme#####42.92857#####56
+Villefranche-sur-Saone#####42.91667#####12
+Romorantin-Lanthenay#####42.84615#####13
+Bohars#####42.8#####5
+Conseiller d'Etat (France)#####42.8#####5
+Saint-Jean-de-Verges#####42.75#####8
+Carpentras#####42.73585#####53
+Riberac#####42.66667#####6
+Basse-Terre#####42.52941#####17
+Colmar#####42.46667#####105
+Vienne (Isere)#####42.45455#####44
+Noyon#####42.45455#####11
+Ernee#####42.45455#####11
+Academie des beaux-arts (France)#####42.42857#####7
+Boulogne-sur-Mer#####42.20879#####91
+Teignmouth#####42.2#####5
+Villefranche-de-Rouergue#####42.17391#####23
+Loos (Nord)#####42.14286#####7
+Belley#####42.13636#####22
+Tarbes#####42.09859#####71
+Yonne (departement)#####42.09091#####11
+Sainte-Foy-les-Lyon#####42.08#####25
+Narbonne#####42.03846#####78
+XVIe siecle#####42.0#####9
+Vaucluse (departement)#####42.0#####6
+Magistrat (France)#####41.83333#####6
+Mont-Dore (Puy-de-Dome)#####41.83333#####6
+Fort du Vert-Galant#####41.83333#####6
+Decazeville#####41.8#####5
+Gien#####41.63636#####22
+Saint-Yrieix-la-Perche#####41.44444#####9
+Sainte-Foy-la-Grande#####41.44444#####9
+Dieuze#####41.4#####5
+Neris-les-Bains#####41.4#####5
+Orleans#####41.24554#####224
+Ancenis#####41.2#####10
+Carbonne#####41.2#####5
+Gonesse#####41.17647#####17
+Briancon#####41.15385#####13
+Tourcoing#####41.14894#####47
+Vertou#####41.125#####8
+Sete#####41.0#####49
+Saone-et-Loire#####41.0#####9
+Bailleul (Nord)#####41.0#####9
+Bergues#####40.90909#####11
+Langres#####40.88235#####34
+Saint-Lo#####40.87097#####31
+Brest#####40.80508#####236
+Beaupreau#####40.71429#####7
+Battle (Angleterre)#####40.66667#####9
+Pantin#####40.64286#####14
+Saint-Jean-de-Luz#####40.59649#####57
+Lens (Pas-de-Calais)#####40.4#####30
+Cauterets#####40.33333#####9
+Orthez#####40.29412#####17
+Fresnes-sur-Escaut#####40.2#####5
+Jonzac#####40.16667#####12
+Indre (departement)#####40.14286#####7
+Calvi#####40.14286#####7
+Concarneau#####40.10526#####19
+Vallon-Pont-d'Arc#####40.0#####8
+Carnac#####40.0#####9
+Cimetiere Saint-Roch de Grenoble#####40.0#####5
+Alfortville#####40.0#####6
+Muret (Haute-Garonne)#####39.94737#####19
+Chamonix#####39.9#####10
+Solihull#####39.88889#####9
+Riom#####39.85714#####42
+Langon (Gironde)#####39.81818#####11
+Soisy-sous-Montmorency#####39.8#####5
+Bapaume#####39.8#####5
+Mont-Saint-Aignan#####39.7#####20
+Savenay#####39.66667#####6
+Marcq-en-Baroeul#####39.63636#####11
+Cayenne#####39.51282#####39
+Tournan-en-Brie#####39.5#####6
+Saint-Lizier#####39.5#####8
+Pamiers#####39.48#####25
+Ussel (Correze)#####39.44444#####9
+Echirolles#####39.42857#####7
+Avranches#####39.37931#####29
+Trelissac#####39.2#####5
+Rodez#####39.19444#####72
+Salins-les-Bains#####39.06667#####15
+Tarascon (Bouches-du-Rhone)#####39.05556#####18
+Nyons#####39.0#####20
+Saverne#####38.95#####20
+Berck (Pas-de-Calais)#####38.88235#####17
+Metz#####38.86294#####197
+Saint-Etienne#####38.82524#####103
+Blagnac#####38.8#####5
+Lamalou-les-Bains#####38.8#####5
+Urrugne#####38.77778#####9
+York#####38.72308#####65
+Hauteville-Lompnes#####38.71429#####7
+Saint-Omer (Pas-de-Calais)#####38.62857#####35
+Sarlat-la-Caneda#####38.61905#####21
+Abbeville#####38.51923#####52
+Mayenne (commune)#####38.47826#####23
+Saint-Paul (La Reunion)#####38.42857#####14
+Vouvray (Indre-et-Loire)#####38.42857#####7
+Macon#####38.40789#####76
+Tonnerre (Yonne)#####38.36842#####19
+La Roche-sur-Yon#####38.36364#####44
+Sainte-Menehould#####38.3#####10
+Machecoul#####38.27273#####11
+Saint-Vallier (Drome)#####38.25#####8
+Pontarlier#####38.23077#####13
+Saint-Vallier (Saone-et-Loire)#####38.2#####5
+Roman (litterature)#####38.19318#####176
+Saintes#####38.07143#####56
+Jersey#####38.05714#####35
+Autun#####37.91228#####57
+Pierrelatte#####37.88889#####9
+Sezanne#####37.875#####8
+Vire#####37.85714#####14
+Academie des inscriptions et belles-lettres#####37.85714#####7
+Amberieu-en-Bugey#####37.83333#####6
+Castelnaudary#####37.75#####20
+Finistere#####37.71429#####7
+Lille#####37.70522#####441
+Grande Chartreuse#####37.66667#####9
+Lorient#####37.66316#####95
+Tulle#####37.65116#####43
+Chateauneuf-du-Pape#####37.6#####5
+Gordes#####37.5#####10
+Cimetiere du Nord#####37.42857#####7
+Vienne-le-Chateau#####37.42857#####7
+Grand Liban#####37.4#####5
+Le Bouscat#####37.38095#####21
+Millau#####37.375#####16
+Saint-Jean (Haute-Garonne)#####37.375#####8
+Thiers#####37.36364#####11
+Chinon#####37.36364#####11
+Dunkerque#####37.30645#####62
+Villeurbanne#####37.23404#####47
+Agde#####37.23077#####13
+Sallanches#####37.21739#####23
+Royal Society#####37.16#####25
+Tarare (Rhone)#####37.14286#####7
+Montreuil-sur-Mer#####37.1#####10
+Marignane#####37.0#####5
+Chaudes-Aigues#####37.0#####5
+Colonel (France)#####36.88889#####9
+Forbach#####36.85714#####7
+Venissieux#####36.8#####5
+Lannemezan#####36.71429#####7
+Saint-Servan#####36.6#####25
+Meuse (departement)#####36.6#####5
+Verneuil-sur-Avre#####36.53333#####15
+Pertuis (Vaucluse)#####36.5#####8
+Voiron#####36.46667#####15
+Reims#####36.43841#####276
+Ploemeur#####36.41667#####12
+Saint-Vaast-la-Hougue#####36.4#####5
+Rillieux#####36.4#####5
+Mulhouse#####36.38384#####99
+Harfleur#####36.33333#####6
+Saint-Benoit (La Reunion)#####36.33333#####6
+Munster (Haut-Rhin)#####36.33333#####6
+Salies-de-Bearn#####36.28571#####7
+Marvejols#####36.25#####8
+Six-Fours-les-Plages#####36.23077#####13
+Pointe-a-Pitre#####36.0#####24
+Le Vigan#####36.0#####6
+Eauze#####36.0#####6
+Douai#####35.825#####80
+Domont#####35.8#####5
+Epinal#####35.78723#####47
+Neuville-Saint-Vaast#####35.77778#####9
+Dinan#####35.75#####24
+Selestat#####35.43478#####23
+Bressuire#####35.42857#####7
+Louviers#####35.4#####15
+Villeneuve-sur-Yonne#####35.4#####10
+Saint-Laurent-du-Maroni#####35.4#####5
+Cabestany#####35.375#####8
+Lucon (Vendee)#####35.35#####20
+Chalons-en-Champagne#####35.20968#####62
+Craonne#####35.2#####5
+Marennes (Charente-Maritime)#####35.16667#####6
+Revolution francaise#####35.14286#####7
+Ales#####35.12727#####55
+Besancon#####35.07004#####257
+Le Creusot#####35.0#####16
+Vaux-le-Penil#####35.0#####5
+Lege-Cap-Ferret#####35.0#####6
+Dol-de-Bretagne#####35.0#####7
+Cognac (Charente)#####34.96154#####26
+Lavaur (Tarn)#####34.71429#####14
+Savigny-le-Temple#####34.71429#####7
+La Charite-sur-Loire#####34.7#####10
+Talence#####34.66667#####36
+Saint-Denis (La Reunion)#####34.59701#####67
+Le Lamentin#####34.5#####6
+Dole (Jura)#####34.41667#####36
+Beziers#####34.31373#####102
+Gannat#####34.28571#####7
+Saint-Pol-de-Leon#####34.07143#####14
+Charente (departement)#####34.0#####5
+Cenon#####34.0#####5
+Bellac#####34.0#####6
+Beaujeu (Rhone)#####34.0#####5
+Arpajon-sur-Cere#####34.0#####6
+Saint-Flour (Cantal)#####33.71429#####28
+Mezieres (Ardennes)#####33.71429#####7
+Jossigny#####33.66667#####9
+Troisieme Republique (France)#####33.66667#####6
+Moissac#####33.5#####16
+Hanover (New Hampshire)#####33.33333#####27
+Gard#####33.33333#####6
+Blues#####33.33333#####6
+Thionville#####33.04167#####24
+Bischwiller#####33.0#####6
+Coutances#####32.79487#####39
+Ardennes (departement)#####32.71429#####7
+Anzin#####32.6#####5
+Maine-et-Loire#####32.5#####8
+Forces francaises libres#####32.5#####6
+Oise (departement)#####32.46154#####13
+Issoire#####32.4#####10
+Malestroit#####32.33333#####9
+Saint-Girons (Ariege)#####32.33333#####9
+Bourg-en-Bresse#####32.14706#####68
+Jurancon#####32.14286#####7
+Saint-Cere#####32.11111#####9
+Saint-Etienne-de-Baigorry#####32.0#####6
+Cherbourg-en-Cotentin#####31.92857#####14
+Feurs#####31.75#####12
+Neufchateau (Vosges)#####31.71429#####7
+Firminy#####31.625#####8
+Marcigny#####31.5#####6
+Schoelcher#####31.4#####5
+Capitaine de vaisseau (France)#####31.4#####5
+Roubaix#####31.39506#####81
+Roquefort-les-Pins#####31.33333#####6
+Arbois#####31.0#####6
+Flers (Orne)#####31.0#####5
+Pirae#####30.9#####10
+Mende#####30.88235#####17
+Bazas#####30.875#####8
+Tahiti#####30.8#####10
+Saint-Cyprien (Pyrenees-Orientales)#####30.8#####5
+Saint-Junien#####30.75#####8
+Tournon-sur-Rhone#####30.75#####12
+Rabastens#####30.7#####10
+Saint-Julien-en-Genevois#####30.66667#####15
+Provence#####30.66667#####6
+Lesparre-Medoc#####30.6#####5
+Le Puy-en-Velay#####30.44#####50
+Lauris#####30.4#####5
+Mirecourt#####30.25#####12
+Niort#####30.20548#####73
+Loudeac#####30.125#####8
+Medaille de la Resistance francaise#####30.0#####5
+Saint-Marcellin (Isere)#####29.83333#####12
+Morbihan#####29.83333#####6
+Giromagny#####29.8#####5
+Belfort#####29.64#####25
+Trevoux#####29.5#####10
+Lambezellec#####29.5#####6
+Guadeloupe#####29.5#####6
+Haute-Vienne#####29.4#####5
+Bouin (Vendee)#####29.4#####5
+Lons-le-Saunier#####29.3125#####32
+Prix Montyon#####29.2#####5
+Vesoul#####29.09524#####42
+Mirepoix (Ariege)#####29.0#####5
+Chenove#####29.0#####5
+Pontivy#####28.95455#####22
+Wissembourg#####28.58333#####12
+Verdun#####28.47727#####44
+Bethune#####28.44444#####9
+Bollene#####28.2#####5
+La Ville-aux-Bois-les-Pontavert#####28.2#####5
+Pas-de-Calais#####28.08824#####34
+Armentieres#####28.0#####15
+Cher (departement)#####27.875#####8
+Martinique#####27.77778#####9
+Frevent#####27.6#####5
+Rostrenen#####27.6#####5
+Section francaise de l'Internationale ouvriere#####27.42857#####7
+Vernou-sur-Brenne#####27.42857#####7
+Winchester (Massachusetts)#####27.4#####10
+Cherbourg#####27.3125#####16
+Velizy-Villacoublay#####27.30769#####13
+Gap#####27.23404#####47
+Vitry-le-Francois#####27.2#####20
+Cornebarrieu#####27.16667#####12
+Lure#####27.15385#####13
+Somme (departement)#####27.14286#####14
+Saint-Sebastien-sur-Loire#####27.0#####6
+Lodeve#####27.0#####19
+Bas-Rhin#####27.0#####5
+Bourgoin-Jallieu#####26.83333#####6
+Alton (Hampshire)#####26.83333#####6
+Prison des Carmes#####26.66667#####6
+Quintin#####26.5#####6
+Franconville (Val-d'Oise)#####26.42857#####7
+Medailleur#####26.2#####5
+Argeles-sur-Mer#####26.0#####6
+Excideuil#####26.0#####5
+Gray (Haute-Saone)#####25.68#####25
+La Colle-sur-Loup#####25.63636#####11
+Valognes#####25.625#####16
+Lesneven#####25.55556#####9
+Redon#####25.19048#####21
+Tarn (departement)#####25.16667#####6
+Manche (departement)#####25.14286#####7
+Les Riceys#####25.0#####5
+Bonneville (Haute-Savoie)#####25.0#####10
+Cherbourg-Octeville#####24.91429#####35
+Yssingeaux#####24.85714#####7
+Gueret#####24.81481#####27
+Brioude#####24.78261#####23
+Soustons#####24.66667#####6
+Chateau d'Uxelles#####24.66667#####6
+Isere (departement)#####24.625#####8
+Aude (departement)#####24.61538#####13
+Tarnos#####24.4#####5
+Mauriac (Cantal)#####24.2#####10
+Sarrebourg#####24.0#####9
+Uzerche#####24.0#####5
+Albert (Somme)#####24.0#####5
+Cebazat#####23.71429#####7
+Urbana (Illinois)#####23.67857#####28
+La Reunion#####23.66667#####9
+Figeac#####23.44444#####9
+Dechy#####23.33333#####6
+Haute-Marne#####23.2#####5
+Espalion#####23.125#####8
+Saint-Pierre (La Reunion)#####23.07143#####28
+Metz-Tessy#####23.0#####5
+Saint-Pol-sur-Ternoise#####23.0#####5
+Ordre des Chartreux#####23.0#####5
+Guemene-Penfao#####22.83333#####6
+Saint-Avold#####22.66667#####9
+Marne (departement)#####22.64706#####17
+Wattrelos#####22.5#####6
+Bar-sur-Aube#####22.4#####10
+Chateaulin#####22.375#####8
+Condom (Gers)#####22.33333#####12
+Chantepie#####22.33333#####6
+Lowell (Massachusetts)#####22.22222#####9
+Gers (departement)#####22.0#####5
+Fougeres#####21.94118#####17
+Montceau-les-Mines#####21.66667#####6
+Ruffec (Charente)#####21.6#####5
+Ars-Laquenexy#####21.44444#####9
+Meyzieu#####21.33333#####6
+Architecture#####21.33333#####6
+Blaye#####21.25#####8
+Lake Charles#####21.2#####5
+Mauleon-Licharre#####21.2#####5
+Stenay#####21.0#####5
+Ay (Marne)#####21.0#####5
+Carentan#####20.83333#####6
+Parthenay#####20.8#####10
+Montdidier (Somme)#####20.8#####5
+Privas#####20.44444#####9
+Sarthe (departement)#####20.42857#####7
+Lievin#####20.33333#####9
+Yvetot#####20.22222#####9
+Nord (departement francais)#####20.14286#####7
+Calvados (departement)#####20.0#####10
+Menuisier en sieges#####19.8#####5
+Saint-Emilion#####19.8#####5
+Aisne (departement)#####19.75#####8
+Denain#####19.71429#####7
+Haute-Garonne#####19.6#####5
+Haut-Rhin#####19.57143#####7
+Briey (Meurthe-et-Moselle)#####19.4#####5
+Le Tampon#####19.4#####5
+Murat (commune deleguee)#####19.4#####5
+Jujurieux#####19.2#####5
+Lot (departement)#####18.8#####5
+Lorgues#####18.8#####5
+Orne (departement)#####18.16667#####6
+Creuse (departement)#####17.71429#####7
+XVIIIe siecle#####17.0#####5
+Maubeuge#####15.08333#####12
+Croix (Nord)#####14.88889#####9

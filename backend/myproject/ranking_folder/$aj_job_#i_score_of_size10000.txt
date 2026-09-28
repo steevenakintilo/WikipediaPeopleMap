@@ -1,0 +1,9 @@
+Acteur#####108.08659#####34232
+Actrice#####60.44713#####10460
+Ecrivain#####51.77652#####16104
+Journaliste#####50.60999#####11046
+Artiste peintre#####43.98706#####12903
+Homme politique#####38.38805#####17075
+Personnalite politique#####27.22133#####23377
+Coureur#####21.84577#####14070
+Footballeur#####21.40274#####45925

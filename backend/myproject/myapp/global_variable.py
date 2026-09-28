@@ -20,6 +20,49 @@ HISTORICAL_PERIODS = [
     "Today Time"
 ]
 
+VARIABLE_NAME_TO_DICT_FRENCH = {
+
+    "age_": "âges",
+    "birthday_": "dates de naissance",
+    "deathday_": "dates de décès",
+    "birth_year_": "années de naissance",
+
+    "boy_name_": "prénoms masculins",
+    "girl_name_": "prénoms féminins",
+    "french_boy_name_": "prénoms masculins français",
+    "french_girl_name_": "prénoms féminins français",
+
+    "name_": "prénoms",
+    "last_name_": "noms de famille",
+    "french_last_name_": "noms de famille français",
+
+    "job_": "métiers",
+
+    "town_": "villes",
+    "town_birth_": "villes de naissance",
+    "town_death_": "villes de décès",
+    "french_town_": "villes françaises",
+    "french_town_birth_": "villes françaises de naissance",
+    "french_town_death_": "villes françaises de décès",
+
+    "country_": "pays",
+    "country_birth_": "pays de naissance",
+    "country_death_": "pays de décès",
+
+    "continent_": "continents",
+    "region_of_birth_": "régions de naissance",
+    "region_of_death_": "régions de décès",
+    "region_": "régions",
+
+    "first_char_of_the_page_": "premières lettres des pages",
+    "time_period_of_birth_": "périodes historiques",
+
+    "death_month_day_": "dates de décès",
+    "birth_and_death_month_day_": "dates de naissance et de décès",
+
+    "page_name_lenght_": "longueurs des noms de pages",
+}
+
 HISTORICAL_PERIODS_DICT_TO_FRENCH = {
     "Prehistory": "Préhistoire",
     "Antiquity": "Antiquité",
@@ -64,6 +107,39 @@ GENDER_TO_FRENCH_DICT = {
     "Man":"Homme",
     "Woman":"Femme",
     "Unclear":"Indéfinie",
+}
+
+
+VARIABLE_TO_LETTER = {
+    "name": "aa",
+    "boy_name": "ab",
+    "girl_name": "ac",
+    "french_boy_name": "ad",
+    "french_girl_name": "ae",
+    "last_name": "af",
+    "french_last_name": "ag",
+    "age": "ah",
+    "birth_year": "ai",
+    "job": "aj",
+    "town_birth": "ak",
+    "town_death": "al",
+    "town": "am",
+    "french_town_birth": "an",
+    "french_town_death" : "ao",
+    "french_town": "ap",
+    "country_birth": "aq",
+    "country_death": "ar",
+    "country": "as",
+    "continent": "at",
+    "region_of_birth": "au",
+    "region_of_death":"av",
+    "region":"aw",
+    "time_period_of_birth": "ax",
+    "birthday": "ay",
+    "deathday" : "az",
+    "birth_and_death_month_day" : "ba",
+    "page_name_lenght": "bb",
+    "first_char_of_the_page": "bc",
 }
 
 LIST_OF_CONTINENT_NAME = ["Afrique","Amerique","Asie","Europe","Océanie"]

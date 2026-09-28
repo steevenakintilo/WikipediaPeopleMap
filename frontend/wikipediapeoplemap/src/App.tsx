@@ -5,7 +5,7 @@ import HomePage from './pages/home';
 import Statistics from "./pages/statistics";
 import QjisMap from './pages/qjis_map';
 import About from './pages/about';
-
+import OtherStatistics from './pages/other_statistics'
 
 function App() {
   return (
@@ -17,7 +17,8 @@ function App() {
         <Route path="/Statistics" element={<Statistics />} />
         <Route path="/Qjis" element={<QjisMap />} />
         <Route path="/About" element={<About />} />
-        
+        <Route path="/OtherStatistics" element={<OtherStatistics />} />
+         
                 
         {/* <Route path="/Search/:search_query" element={<Search />} /> */}
         

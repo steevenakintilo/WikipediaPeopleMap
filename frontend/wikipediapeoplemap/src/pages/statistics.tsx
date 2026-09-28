@@ -208,7 +208,7 @@ const Statistics = () => {
       set_keys_info(keys_info)
     }
 
-    async function get_list_of_user_advanced_search() {      
+    async function get_list_of_user_advanced_statistics() {      
       set_loading(true)
       set_server_error_found(false)
 
@@ -700,7 +700,7 @@ const Statistics = () => {
                    
                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => window.location.reload()}>Reset</button>
-                   <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search().then((result) => set_list_of_user_data(result.all_wikipedia_info))}>Rechercher 🔎</button>
+                   <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_statistics().then((result) => set_list_of_user_data(result.all_wikipedia_info))}>Rechercher 🔎</button>
                    
                  </div>
                </div>
@@ -846,7 +846,7 @@ const Statistics = () => {
 
 
                 <div className="d-grid gap-2">
-                    <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_search().then((result) => set_list_of_user_data(result.all_wikipedia_info))}>Rechercher 🔎</button>
+                    <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_advanced_statistics().then((result) => set_list_of_user_data(result.all_wikipedia_info))}>Rechercher 🔎</button>
                     
                 </div>
 
@@ -1002,7 +1002,7 @@ const Statistics = () => {
 
         {advanced_search_modal()}
         {detailed_stat_modal(dict_info)}
-
+        
         {/* <br></br>
         <br></br>
         

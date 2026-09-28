@@ -38,8 +38,10 @@ export function generate_list_of_dict(list_:any,big_index:number) {
 
 export function generate_list_of_dict2(list_:any,big_index:number) {
     let list_of_dict:any = [];
-    //console.log("Print de debug " , list_)
-
+    console.log("Print de debug " , list_)
+    if (list_ == undefined) {
+        return
+    }
     if (list_.length <= 500) {
         try {
             list_.forEach((data:any, index:number) => {
@@ -77,13 +79,35 @@ export function generate_list_of_dict2(list_:any,big_index:number) {
     return list_of_dict
 }
 
+
+
+export function generate_list_of_dict3(list_:any,big_index:number) {
+    let list_of_dict:any = [];
+    //console.log("Print de debug " , list_)
+
+    try {
+     list_.forEach((data:any, index:number) => {
+        if (index < big_index) {
+            list_of_dict.push({ data_name: data[0], data_number: data[1] , data_occurence: data[2]});
+        }
+        
+    });
+
+    } catch (error) {
+    console.error(list_ , error);
+    // Expected output: ReferenceError: nonExistentFunction is not defined
+    // (Note: the exact output may be browser-dependent)
+    }
+   
+    return list_of_dict
+}
+
 export function generate_list_of_dict_with_date(list_:any,big_index:number) {
     let list_of_dict:any = [];
     //console.log("Print de debug " , list_)
 
     try {
      list_.forEach((data:any, index:number) => {
-        console.log("luffy " , new Date(data[0]) , data[0])
         if (index < big_index) {
             
             list_of_dict.push({ data_name:  new Date(data[0].toString()), data_number: data[1] });            
@@ -172,6 +196,8 @@ export function make_a_graphic(type:string,dict_data:string,graph_title:string) 
     } else {
         if (type === "bar") {
         series_data = [{ type: 'bar', xKey: 'data_name', yKey: 'data_number' , fill:generate_random_colour()}]
+        } else if(type === "bar-horizontal") {
+        series_data = [{ type: 'bar', direction: "horizontal",xKey: 'data_name', yKey: 'data_number' , fill:generate_random_colour()}]
         } else if (type === "pie") {
             series_data = [{ type: 'pie', legendItemKey: 'data_name', angleKey: 'data_number', fill:generate_random_colour()}]
         } else if (type === "line") {
@@ -194,6 +220,81 @@ export function make_a_graphic(type:string,dict_data:string,graph_title:string) 
 }
 
 
+
+
+
+export function generate_list_of_dict_for_scatter(list_:any,big_index:number) {
+    let list_of_dict:any = [];
+    //console.log("Print de debug " , list_)
+
+    try {
+     list_.forEach((data:any, index:number) => {
+        if (index < big_index) {        
+            list_of_dict.push({ x_value: data[1],y_value: data[2],other_data:data[0]})
+        }
+        
+    });
+
+    } catch (error) {
+    console.error(list_ , error);
+    // Expected output: ReferenceError: nonExistentFunction is not defined
+    // (Note: the exact output may be browser-dependent)
+    }
+   
+    return list_of_dict
+}
+
+
+
+export function make_a_graphic_scatter(dict_data:string,graph_title:string) {
+    
+    let series_data: any = []
+    series_data = [
+    {
+        type: 'bar',
+        xKey: 'other_data',
+        yKey: 'x_value',
+        yName: 'Score',
+
+        tooltip: {
+                renderer: (params: any) => ({
+                    title: params.datum.other_data,
+                    data: [
+                        {
+                            label: 'Score',
+                            value: params.datum.x_value
+                        },
+                        {
+                            label: "Nombre d'occurrences",
+                            value: params.datum.y_value
+                        }
+                    ]
+                })
+            }
+        }
+    ]
+    let graph_data = {
+        data: dict_data,
+        series: series_data,
+        title: { text: graph_title },
+        axes: {
+            x: {
+                type: 'number',
+                title: {
+                    text: 'Score'
+                }
+            },
+            y: {
+                type: 'number',
+                title: {
+                    text: "Nombre d'occurrences"
+                }
+            }
+        }
+    }
+
+    return graph_data
+}
 
 export function make_a_graphic2(type:string,value1:string,var_name1:string,value2:string,var_name2:string,graph_title:string) {
     
