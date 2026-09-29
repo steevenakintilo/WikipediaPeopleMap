@@ -50,7 +50,6 @@ const QjisMap = () => {
       }
       const data_fetch = await response
 
-      console.log("ddddd " , data_fetch )
       
       const blob = await response.blob();
 
@@ -59,7 +58,6 @@ const QjisMap = () => {
       a.href = url;
       a.download = "qjis_localisation.csv";
       document.body.appendChild(a);
-      console.log(a,url,document.body)
       a.click();
 
       a.remove();
@@ -543,7 +541,6 @@ const QjisMap = () => {
        )
     }
 
-   console.log("opkoprekgoper " , total_number_of_user_found)
    return (
 
     <div className="container">

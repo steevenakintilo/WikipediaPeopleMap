@@ -190,10 +190,10 @@ Bergerac#####87.88889#####36
 Chateau-Thierry#####87.88#####25
 Varna (Bulgarie)#####87.82759#####29
 Taganrog#####87.72917#####48
-Saigon#####87.60656#####61
 Sevres#####87.58974#####234
 Saint-Germain-en-Laye#####87.51899#####237
 Shinjuku#####86.47917#####48
+Saigon#####86.30645#####62
 Loches#####86.25455#####55
 Auray#####86.25#####56
 Melilla#####86.15152#####33
@@ -397,7 +397,7 @@ Plainfield (New Jersey)#####72.5625#####32
 Gmunden#####72.54286#####35
 Woodstock#####72.53571#####28
 Orel#####72.52083#####48
-Versailles#####72.46964#####1482
+Versailles#####72.51247#####1483
 Aix-les-Bains#####72.44#####50
 Berchem Sainte Agathe#####72.38095#####42
 Abbaye de Westminster#####72.33333#####33
@@ -993,7 +993,7 @@ Schleswig (ville)#####55.57576#####33
 Montclair (New Jersey)#####55.55263#####38
 Bakersfield#####55.51163#####43
 Cincinnati#####55.47854#####466
-Madrid#####55.47363#####3830
+Madrid#####55.46855#####3831
 Berlin Charlottenbourg#####55.46552#####58
 Oakland#####55.41848#####184
 Nassau (Bahamas)#####55.41667#####48
@@ -1509,7 +1509,6 @@ Buckinghamshire#####47.6#####55
 Lambeth (ville)#####47.58108#####74
 Pise#####47.55714#####350
 Deux Ponts#####47.5#####42
-Hanoi#####47.4951#####204
 Villeneuve sur Lot#####47.49398#####83
 Waterloo#####47.4878#####41
 Trapani#####47.46154#####26
@@ -1520,6 +1519,7 @@ Cordoba#####47.40458#####131
 Slough#####47.38333#####60
 Marrakech#####47.38095#####231
 Beaumont#####47.37838#####37
+Hanoi#####47.37561#####205
 Fougeres#####47.35484#####93
 Sousse#####47.33058#####121
 Meissen#####47.29231#####65
@@ -1687,9 +1687,9 @@ Ganges#####45.30303#####33
 Livingston#####45.29167#####48
 Washington D.C.#####45.28#####25
 Oviedo#####45.27692#####130
-Anvers#####45.27168#####2168
 Avesnes sur Helpe#####45.27027#####37
 Chang'an#####45.2619#####42
+Anvers#####45.26003#####2169
 Vaison-la-Romaine#####45.25#####28
 Oujda#####45.23958#####96
 Schenectady#####45.22951#####61
@@ -2398,11 +2398,11 @@ Dnipro#####36.48864#####88
 Remscheid#####36.48148#####27
 Teheran#####36.46339#####956
 Royal Leamington Spa#####36.42553#####47
-Ho Chi Minh-Ville#####36.42308#####52
 Terni#####36.38#####50
 Manchester#####36.36484#####603
 Wilmington (Delaware)#####36.36364#####55
 Victoriaville#####36.35714#####42
+Ho Chi Minh-Ville#####36.33962#####53
 Berchem (Anvers)#####36.30645#####62
 Paisley#####36.30159#####63
 Osijek#####36.29577#####71
@@ -2542,13 +2542,13 @@ Vientiane#####34.64444#####45
 Rosendael#####34.64286#####28
 Evora#####34.63043#####46
 Bialystok#####34.62222#####90
-Haarlem#####34.62169#####415
 Nouakchott#####34.61538#####26
 Tripoli (ville de Libye)#####34.60465#####43
 West Palm Beach#####34.59677#####62
 Machhad#####34.59524#####42
 Garmisch Partenkirchen#####34.58696#####46
 Gera#####34.57353#####68
+Haarlem#####34.5601#####416
 Murnau am Staffelsee#####34.56#####25
 Pointe-a-Pitre#####34.56#####25
 Aden#####34.55172#####29
@@ -3170,7 +3170,6 @@ San Jose (Costa Rica)#####25.71014#####138
 Manrese#####25.7037#####27
 Pas de Calais#####25.7#####30
 Memramcook#####25.69231#####26
-Correggio#####25.68966#####29
 Bakou#####25.6494#####1004
 Bulach#####25.64#####25
 Altdorf bei Nurnberg#####25.63636#####33
@@ -3215,6 +3214,7 @@ Chigasaki#####24.9375#####32
 Marioupol#####24.92857#####28
 Kladno#####24.92593#####27
 Irlande du Nord#####24.91429#####35
+Correggio#####24.9#####30
 Semarang#####24.88462#####26
 Edmundston#####24.875#####40
 Potchefstroom#####24.86207#####29

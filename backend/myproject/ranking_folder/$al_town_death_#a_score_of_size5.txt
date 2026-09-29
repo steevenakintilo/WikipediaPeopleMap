@@ -1034,9 +1034,9 @@ Septeuil#####71.28571#####7
 Southampton#####71.26667#####45
 Clermont (Floride)#####71.2#####5
 Luneville#####71.18919#####37
+Versailles#####71.16712#####730
 Braine (Aisne)#####71.14286#####7
 Wimbledon (Londres)#####71.11628#####43
-Versailles#####71.07819#####729
 San Bernardino#####71.03571#####28
 Royaume uni des Pays-Bas#####71.0#####5
 Koufa#####71.0#####10
@@ -1478,8 +1478,8 @@ Palais de Blenheim#####60.0#####6
 Calife#####60.0#####5
 Fredensborg#####59.90909#####11
 Coral Gables#####59.89474#####19
-Madrid#####59.88503#####1783
 Kew#####59.88#####25
+Madrid#####59.87164#####1784
 Qom#####59.85714#####14
 Edina (Minnesota)#####59.85714#####7
 Famille de Villars (Lyonnais)#####59.83333#####6
@@ -2299,7 +2299,6 @@ Storrington#####47.8#####5
 Saint-Die-des-Vosges#####47.7931#####29
 Quedlinbourg#####47.78947#####19
 Philadelphie#####47.73289#####453
-Hanoi#####47.72857#####70
 Lezignan-Corbieres#####47.72727#####11
 Torre del Greco#####47.72727#####11
 Quatorzieme#####47.71429#####7
@@ -2336,6 +2335,7 @@ Centre d'extermination de Sobibor#####47.44444#####18
 Heidelberg#####47.4313#####262
 Bagneres-de-Bigorre#####47.41667#####36
 Silivri#####47.4#####5
+Hanoi#####47.38028#####71
 Belem#####47.36364#####11
 Leyde#####47.35025#####197
 Mossoul#####47.34783#####23
@@ -2612,11 +2612,11 @@ Bernay (Eure)#####44.73684#####19
 Le Touquet-Paris-Plage#####44.73333#####15
 Atami#####44.72727#####11
 Stockholm#####44.71799#####695
-Anvers#####44.71662#####674
 Ordre du Service distingue#####44.71429#####7
 Graz#####44.70423#####142
 Chongqing#####44.7#####10
 Silver Spring#####44.69565#####23
+Anvers#####44.68#####675
 Turin#####44.67199#####689
 Brechin#####44.66667#####6
 Asheville#####44.64286#####28
@@ -3511,10 +3511,10 @@ Burnaby#####36.44444#####9
 Iasi#####36.43902#####41
 Carlisle#####36.42857#####7
 Academie royale des sciences de Prusse#####36.42857#####7
-Ho Chi Minh-Ville#####36.42308#####52
 Tahiti#####36.41667#####12
 Kingston upon Hull#####36.4#####10
 Bialystok#####36.36364#####11
+Ho Chi Minh-Ville#####36.33962#####53
 Chambly (Quebec)#####36.33333#####9
 Marcq-en-Baroeul#####36.33333#####12
 Sonneberg#####36.33333#####6
@@ -3647,7 +3647,6 @@ Solihull#####35.36364#####11
 Brescia#####35.35833#####120
 Johannesbourg#####35.34868#####152
 Hue#####35.34783#####23
-Peinture d'art#####35.33333#####6
 Quinzieme#####35.33333#####6
 Basingstoke#####35.33333#####12
 Kalmar#####35.33333#####6
@@ -4140,7 +4139,6 @@ Litchfield (Connecticut)#####31.2#####10
 Medaille militaire#####31.2#####5
 Mejorada del Campo#####31.2#####5
 Niamey#####31.18919#####37
-Haarlem#####31.18898#####127
 Jesus College#####31.18182#####11
 Krefeld#####31.16667#####24
 Montefiascone#####31.16667#####12
@@ -4160,6 +4158,7 @@ Asuncion#####31.09211#####76
 Samedan#####31.09091#####11
 Oslo#####31.06042#####480
 Kaunas#####31.05769#####52
+Haarlem#####31.01562#####128
 Mer Egee#####31.0#####5
 Academie nationale des sciences#####31.0#####9
 Bressuire#####31.0#####8
@@ -4370,7 +4369,6 @@ Meilhan-sur-Garonne#####29.2#####5
 Saints-Apotres (titre cardinalice)#####29.2#####5
 Shaoxing#####29.2#####5
 Horgen#####29.2#####5
-Vietnamien#####29.2#####5
 Centres d'extermination nazis#####29.2#####5
 Vaux-le-Penil#####29.16667#####6
 Cieplice Slaskie-Zdroj#####29.16667#####6
@@ -4775,7 +4773,6 @@ Boussu#####26.0#####5
 Universite de Zurich#####26.0#####5
 Nijni Novgorod#####25.92857#####28
 Independant (politique)#####25.9#####10
-Correggio#####25.85714#####7
 Szeged#####25.84615#####13
 Perouse (Italie)#####25.83333#####12
 Topeka#####25.83333#####6
@@ -5145,6 +5142,7 @@ Ordre de Saint-Vladimir#####22.90909#####11
 Louis-Gabriel Michaud#####22.88889#####9
 Jakarta#####22.888#####125
 Guimaraes#####22.875#####8
+Correggio#####22.875#####8
 Tarnow#####22.875#####8
 Arkhangelsk#####22.875#####8
 Fukuoka#####22.86957#####23
@@ -5927,7 +5925,6 @@ Gueldre (province)#####11.6#####5
 Zwickau#####11.6#####5
 Ligue internationale de hockey (1945-2001)#####11.6#####5
 Pori (Finlande)#####11.57143#####7
-Equipe des Lions britanniques et irlandais de rugby a XV#####11.57143#####7
 Kecskemet#####11.5#####6
 Americans de New York#####11.5#####8
 Esbjerg#####11.28571#####7

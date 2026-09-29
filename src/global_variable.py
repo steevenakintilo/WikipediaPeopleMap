@@ -6720,6 +6720,7 @@ DICT_OF_LOCALISATION_TO_COUNTRY = {
  '40° 42′ 46′′ n, 74° 00′ 22′′ w': 'États-Unis',
  '41° 53′ 19′′ n, 12° 29′ 12′′ e': 'Italie',
  '52° 31′ n, 13° 23′ e': 'Allemagne',
+ '52° 11′ 34′′ N, 1° 42′ 23′′ W': 'Royaume-Uni',
  '45° 30′ 12′′ n, 73° 35′ 13′′ w': 'Canada',
  '48° 12′ 30′′ n, 16° 22′ 21′′ e': 'Autriche',
  '55° 45′ 09′′ n, 37° 37′ 23,11′′ e': 'Russie',

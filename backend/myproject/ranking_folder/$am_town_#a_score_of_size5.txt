@@ -1482,7 +1482,6 @@ Holywood#####87.75#####8
 Taganrog#####87.72917#####48
 Ambala#####87.69231#####13
 Kichinev#####87.66667#####9
-Saigon#####87.60656#####61
 Sevres#####87.58974#####234
 King#####87.58824#####17
 Hoboken#####87.57143#####21
@@ -1542,6 +1541,7 @@ Bray (Berkshire)#####86.42857#####7
 Solesmes (Nord)#####86.375#####8
 Pierrefonds (Oise)#####86.36364#####11
 Espelette#####86.33333#####6
+Saigon#####86.30645#####62
 Saint Savin (Vienne)#####86.28571#####7
 Loches#####86.25455#####55
 Auray#####86.25#####56
@@ -2450,10 +2450,10 @@ Winthrop (Massachusetts)#####72.54545#####11
 Gmunden#####72.54286#####35
 Woodstock#####72.53571#####28
 Orel#####72.52083#####48
+Versailles#####72.51247#####1483
 Herbignac#####72.5#####6
 Jambes#####72.5#####6
 Hawthorne (Californie)#####72.5#####6
-Versailles#####72.46964#####1482
 Aix-les-Bains#####72.44#####50
 Vacaville#####72.42857#####7
 Brie Comte Robert#####72.4#####5
@@ -4622,8 +4622,8 @@ Bcharre#####55.5#####8
 Cottage#####55.5#####6
 Le Houga#####55.5#####6
 Cincinnati#####55.47854#####466
-Madrid#####55.47363#####3830
 Tiverton (Devon)#####55.47059#####17
+Madrid#####55.46855#####3831
 Berlin Charlottenbourg#####55.46552#####58
 Cimetiere Notre-Dame-des-Neiges#####55.46154#####13
 Bargemon#####55.45455#####11
@@ -6351,7 +6351,6 @@ La Vila Joiosa#####47.5#####6
 Contralto#####47.5#####8
 Eton#####47.5#####6
 Sainte Rose (Guadeloupe)#####47.5#####6
-Hanoi#####47.4951#####204
 Villeneuve sur Lot#####47.49398#####83
 Waterloo#####47.4878#####41
 Sant Cugat del Valles#####47.47619#####21
@@ -6384,6 +6383,7 @@ Wagga#####47.38889#####18
 Slough#####47.38333#####60
 Marrakech#####47.38095#####231
 Beaumont#####47.37838#####37
+Hanoi#####47.37561#####205
 Fougeres#####47.35484#####93
 Oamaru#####47.33333#####9
 Ichinoseki#####47.33333#####6
@@ -6946,9 +6946,9 @@ Saint Laurent (Montreal)#####45.28571#####7
 Washington D.C.#####45.28#####25
 Oviedo#####45.27692#####130
 Bathurst (Australie)#####45.27273#####11
-Anvers#####45.27168#####2168
 Avesnes sur Helpe#####45.27027#####37
 Chang'an#####45.2619#####42
+Anvers#####45.26003#####2169
 Vaison-la-Romaine#####45.25#####28
 Langon (Gironde)#####45.25#####24
 Ouistreham#####45.25#####8
@@ -8156,7 +8156,6 @@ Brantford#####41.0#####31
 Warren#####41.0#####30
 Spartanburg (Caroline du Sud)#####41.0#####12
 Elisabethville#####41.0#####10
-Vietnamien#####41.0#####11
 Le Vigan (Gard)#####41.0#####24
 Saint Claude (Guadeloupe)#####41.0#####10
 Morlaas#####41.0#####5
@@ -9751,7 +9750,6 @@ Sant Feliu de Guixols#####36.42857#####7
 Los Altos (Californie)#####36.42857#####7
 Academie royale des sciences de Prusse#####36.42857#####7
 Royal Leamington Spa#####36.42553#####47
-Ho Chi Minh-Ville#####36.42308#####52
 Focsani#####36.42105#####19
 Bad Langensalza#####36.42105#####19
 Kirkby#####36.4#####15
@@ -9779,6 +9777,7 @@ Wilmington (Delaware)#####36.36364#####55
 Cornebarrieu#####36.35714#####14
 Brulon#####36.35714#####14
 Victoriaville#####36.35714#####42
+Ho Chi Minh-Ville#####36.33962#####53
 Marcq-en-Baroeul#####36.33333#####12
 Bad Ragaz#####36.33333#####6
 Cabano#####36.33333#####6
@@ -10161,7 +10160,6 @@ Norwich (Connecticut)#####35.35484#####31
 Turnov#####35.33333#####12
 Pistoie#####35.33333#####27
 Villeneuve la Garenne#####35.33333#####12
-Peinture d'art#####35.33333#####6
 Wahagnies#####35.33333#####6
 Lorain#####35.33333#####6
 Sun#####35.33333#####6
@@ -10429,7 +10427,6 @@ Saint Vith#####34.625#####16
 Nejd#####34.625#####8
 Lidzbark Warminski#####34.625#####8
 Bialystok#####34.62222#####90
-Haarlem#####34.62169#####415
 Nouakchott#####34.61538#####26
 Engelberg#####34.61538#####13
 Leidschendam#####34.61111#####18
@@ -10466,6 +10463,7 @@ Lieutenant general#####34.57143#####7
 Wusterhausen/Dosse#####34.57143#####7
 Aubel#####34.57143#####7
 Butzow#####34.57143#####7
+Haarlem#####34.5601#####416
 Murnau am Staffelsee#####34.56#####25
 Pointe-a-Pitre#####34.56#####25
 Saint-Paul (La Reunion)#####34.55556#####18
@@ -11549,6 +11547,7 @@ Aberdeen#####31.81227#####277
 Cali#####31.80337#####178
 Rocca Canavese#####31.8#####5
 Saint Pascal#####31.8#####10
+Blackwood (pays de Galles)#####31.8#####5
 Berlare#####31.8#####5
 Bafou#####31.8#####10
 Saint Georges (Quebec)#####31.8#####5
@@ -14128,7 +14127,6 @@ Wilaya#####25.7#####10
 Mer des Caraibes#####25.7#####10
 Memramcook#####25.69231#####26
 Brezice#####25.69231#####13
-Correggio#####25.68966#####29
 Clusone#####25.6875#####16
 Scunthorpe#####25.6875#####16
 Feltre#####25.68421#####19
@@ -14501,6 +14499,7 @@ Irlande du Nord#####24.91429#####35
 Joensuu#####24.90909#####11
 Sao Luis (Maranhao)#####24.90909#####11
 Coffeyville#####24.90909#####11
+Correggio#####24.9#####30
 Corvallis (Oregon)#####24.88889#####9
 Polczyn Zdroj#####24.88889#####9
 Paterna#####24.88889#####9
@@ -18885,7 +18884,6 @@ Ligue centrale de hockey#####11.6#####5
 Ruti#####11.6#####5
 Ligue internationale de hockey (1945-2001)#####11.6#####5
 Condors de Bakersfield (ECHL)#####11.58333#####12
-Equipe des Lions britanniques et irlandais de rugby a XV#####11.57143#####7
 kenyane#####11.57143#####7
 HK Nitra#####11.57143#####7
 Tumaco#####11.55556#####18

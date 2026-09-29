@@ -4,10 +4,17 @@ import { useState} from 'react';
 export function generate_random_colour() {
     return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 }
+
+
+export function is_screen_for_mobile() {
+    if (window.screen.width <= 768) {
+        return true
+    }
+    return false
     
+}
 export function generate_list_of_dict(list_:any,big_index:number) {
     let list_of_dict:any = [];
-    //console.log("Print de debug " , list_)
 
     try {
      list_.forEach((data:any, index:number) => {
@@ -38,7 +45,6 @@ export function generate_list_of_dict(list_:any,big_index:number) {
 
 export function generate_list_of_dict2(list_:any,big_index:number) {
     let list_of_dict:any = [];
-    console.log("Print de debug " , list_)
     if (list_ == undefined) {
         return
     }
@@ -83,7 +89,6 @@ export function generate_list_of_dict2(list_:any,big_index:number) {
 
 export function generate_list_of_dict3(list_:any,big_index:number) {
     let list_of_dict:any = [];
-    //console.log("Print de debug " , list_)
 
     try {
      list_.forEach((data:any, index:number) => {
@@ -102,9 +107,28 @@ export function generate_list_of_dict3(list_:any,big_index:number) {
     return list_of_dict
 }
 
+export function generate_list_of_dict4(list_:any,big_index:number) {
+    let list_of_dict:any = [];
+
+    try {
+     list_.forEach((data:any, index:number) => {
+        if (index < big_index) {
+            list_of_dict.push({ data_name: data[0], ratio_girl: data[1] , ratio_boy: data[2],data_occurence : data[3]});
+        }
+        
+    });
+
+    } catch (error) {
+    console.error(list_ , error);
+    // Expected output: ReferenceError: nonExistentFunction is not defined
+    // (Note: the exact output may be browser-dependent)
+    }
+   
+    return list_of_dict
+}
+
 export function generate_list_of_dict_with_date(list_:any,big_index:number) {
     let list_of_dict:any = [];
-    //console.log("Print de debug " , list_)
 
     try {
      list_.forEach((data:any, index:number) => {
@@ -145,19 +169,6 @@ export function generate_list(list_:any) {
     return generated_list
 }
 
-// export function go_to_detailed_stat_page(value_list:any,occurence_list:any,ratio_list:any,len_of_list:any,retrieved_data:any,type_nb:number) {
-//     //navigate('/detailed_stat',{state: [value_list,occurence_list,ratio_list,retrieved_data,len_of_list]});
-//     localStorage.setItem(
-//         "detailed_data_stat",
-//         JSON.stringify([value_list, occurence_list, ratio_list, retrieved_data, len_of_list,type_nb])
-//     );
-    
-//     window.open('/detailed_stat', '_blank');
-//     }
-    
-//     export function generate_random_colour() {
-//     return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-// }
     
 export function make_a_graphic(type:string,dict_data:string,graph_title:string) {
     
@@ -179,17 +190,17 @@ export function make_a_graphic(type:string,dict_data:string,graph_title:string) 
                     position: "left"
                 }
             ],
-            navigator: {
-                enabled: true,
+            // navigator: {
+            //     enabled: true,
 
-                miniChart: {
-                    enabled: true
-                }
-            },
+            //     miniChart: {
+            //         enabled: true
+            //     }
+            // },
 
-            zoom: {
-                enabled: true
-            }            
+            // zoom: {
+            //     enabled: true
+            // }            
         }
         
         return graph_data
@@ -219,13 +230,86 @@ export function make_a_graphic(type:string,dict_data:string,graph_title:string) 
     
 }
 
+export function make_a_stacked_bar_graphic(
+    dict_data: any,
+    graph_title: string
+) {
 
+    let series_data: any = []
+
+    series_data = [
+        {
+            type: 'bar',
+            xKey: 'data_name',
+            yKey: 'ratio_boy',
+            yName: 'Homme',
+            stacked: true,
+            normalizedTo: 100,
+            fill: generate_random_colour()
+        },
+        {
+            type: 'bar',
+            xKey: 'data_name',
+            yKey: 'ratio_girl',
+            yName: 'Femme',
+            stacked: true,
+            normalizedTo: 100,
+            fill: generate_random_colour()
+        }
+    ]
+
+    let graph_data = {
+        data: dict_data,
+
+        series: series_data,
+
+        title: {
+            text: graph_title
+        },
+
+        axes: [
+            {
+                type: "category",
+                position: "bottom",
+                title: {
+                    text: "Variable"
+                }
+            },
+            {
+                type: "number",
+                position: "left",
+                min: 0,
+                max: 100,
+                label: {
+                    formatter: (params: any) => {
+                        return `${params.value}%`
+                    }
+                },
+                title: {
+                    text: "Pourcentage"
+                }
+            }
+        ],
+
+        // // navigator: {
+        //     enabled: true,
+        //     miniChart: {
+        //         enabled: true
+        //     }
+        // },
+
+        // zoom: {
+        //     enabled: true
+        // }
+    }
+
+    return graph_data
+}
 
 
 
 export function generate_list_of_dict_for_scatter(list_:any,big_index:number) {
     let list_of_dict:any = [];
-    //console.log("Print de debug " , list_)
 
     try {
      list_.forEach((data:any, index:number) => {

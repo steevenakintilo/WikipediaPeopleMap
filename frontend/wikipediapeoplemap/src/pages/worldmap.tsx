@@ -584,7 +584,7 @@ const WorldMap = () => {
                 
                 {user_data_info.all_links_of_a_page != undefined && (
                   user_data_info.all_links_of_a_page.map((link: any, i: number) => (
-                    <span key={i}>- {link}</span>
+                    <div key={i}>- {link}</div>
                   ))
                 )}
                 
@@ -606,7 +606,7 @@ const WorldMap = () => {
                 
                 {user_data_info.list_of_page_name_linked_sorted != undefined && (
                   user_data_info.list_of_page_name_linked_sorted.map((link: any, i: number) => (
-                    <span key={i}>- {link}</span>
+                    <div key={i}>- {link}</div>
                   ))
                 )}
                 
@@ -628,7 +628,7 @@ const WorldMap = () => {
                 
                 {user_data_info.list_of_friend_of_user != undefined && (
                   user_data_info.list_of_friend_of_user.map((link: any, i: number) => (
-                    <span key={i}>- {link}</span>
+                    <div key={i}>- {link}</div>
                   ))
                 )}
                 
@@ -682,7 +682,7 @@ const WorldMap = () => {
 
                 {user_data_info.list_of_unpreciseness_data != undefined && (
                   user_data_info.list_of_unpreciseness_data.map((error: any, i: number) => (
-                    <span key={i}>- {error}</span>
+                    <div key={i}>- {error}</div>
                   ))
                 )}
                 

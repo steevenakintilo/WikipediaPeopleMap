@@ -8,6 +8,16 @@ import {
     AllCommunityModule
 } from "ag-charts-community";
 
+// import {
+//     ZoomModule,
+//     NavigatorModule,
+// } from 'ag-charts-enterprise';
+
+// ModuleRegistry.registerModules([
+//     ZoomModule,
+//     NavigatorModule,
+// ]);
+
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,10 +25,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING} from './global_variable'
-import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME,LIST_OF_VARIABLE_THAT_NEED_COMPUTING} from "./global_variable.tsx"
+import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING , LIST_OF_THEME_FOR_GENDER_RATIO , THEME_TO_SUB_THEMES_FOR_GENDER_RATIO} from './global_variable'
 
-import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict3, generate_list_of_dict_for_scatter, make_a_graphic_scatter} from "./utility_function.tsx";
+import {make_a_graphic ,generate_list_of_dict3, generate_list_of_dict4 , make_a_stacked_bar_graphic , is_screen_for_mobile} from "./utility_function.tsx";
 
 import {
   Table,
@@ -35,13 +44,18 @@ polyfillCountryFlagEmojis();
 const OtherStatistics = () => {
 
     const [list_of_ranking_data,set_list_of_ranking_data] : any = useState({});
-    const [list_of_user_data,set_list_of_user_data] : any = useState({});
+    const [list_of_gender_data,set_list_of_gender_data] : any = useState({});
     
 
 
     const [list_of_graph, set_list_of_graph] = useState<any[]>([]);
     const [list_of_dict, set_list_of_dict] = useState<any[]>([]);
     const [list_of_keys_name, set_list_of_keys_name] = useState<string[]>([]);
+
+    const [list_of_graph2, set_list_of_graph2] = useState<any[]>([]);
+    const [list_of_dict2, set_list_of_dict2] = useState<any[]>([]);
+    const [list_of_keys_name2, set_list_of_keys_name2] = useState<string[]>([]);
+    
     const [result_found,set_result_found] : any = useState(false)
     const [loading,set_loading] : any = useState(false)
     const [server_error_found,set_server_error_found] : any = useState(false)
@@ -53,6 +67,8 @@ const OtherStatistics = () => {
 
     function handle_list_of_user_data(data_recieved:any) {
         set_list_of_ranking_data(data_recieved.ranking_list_of_dict)
+        set_list_of_gender_data(data_recieved.gender_ratio_list_of_dict)
+        
     }
 
 
@@ -63,10 +79,19 @@ const OtherStatistics = () => {
     }
       
       const keys = Object.keys(list_of_ranking_data);
-
+      const keys2 = Object.keys(list_of_gender_data);
+      
       const new_list_of_graph: any[] = [];
       const new_list_of_dict: any[] = [];
       const new_list_of_keys_name: string[] = [];
+
+      const new_list_of_graph2: any[] = [];
+      const new_list_of_dict2: any[] = [];
+      const new_list_of_keys_name2: string[] = [];
+      var number_of_bar_to_display = 10;
+      if (is_screen_for_mobile() == true) {
+        number_of_bar_to_display = 3
+      }
 
       for (let i = 0; i < keys.length - 1; i++) {
 
@@ -77,7 +102,7 @@ const OtherStatistics = () => {
 
             const generic_dict = generate_list_of_dict3(
                 list_of_ranking_data[key],
-                10
+                number_of_bar_to_display
             );
 
             const generic_chart = make_a_graphic(
@@ -97,12 +122,47 @@ const OtherStatistics = () => {
                       )
                   );
               }
-          }
+            }
+      
+      for (let i = 0; i < keys2.length - 1; i++) {
+
+          const key = keys2[i];
+          if (list_of_gender_data[key].length >= 1) {
+              
+
+            const generic_dict = generate_list_of_dict4(
+                list_of_gender_data[key],
+                number_of_bar_to_display
+            );
+
+            const generic_chart = make_a_stacked_bar_graphic(
+                generic_dict,
+                key
+            );
+            
+              new_list_of_keys_name2.push(key);
+
+                  new_list_of_graph2.push(generic_chart);
+
+                  new_list_of_dict2.push(
+                      generate_list_of_dict4(
+                          list_of_gender_data[key],
+                          50000000
+                      )
+                  );
+              }
+            }
+      
       
       set_list_of_graph(new_list_of_graph);
       set_list_of_dict(new_list_of_dict);
       set_list_of_keys_name(new_list_of_keys_name);
-    }, [list_of_ranking_data, result_found]);
+
+      set_list_of_graph2(new_list_of_graph2);
+      set_list_of_dict2(new_list_of_dict2);
+      set_list_of_keys_name2(new_list_of_keys_name2);
+      
+    }, [list_of_ranking_data , list_of_gender_data ,result_found]);
 
 
     function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
@@ -142,7 +202,6 @@ const OtherStatistics = () => {
           return {}
       }
       const data_fetch = await response.json()
-      //console.log(data_fetch)
       set_result_found(true)
       set_loading(false)
       return data_fetch
@@ -157,7 +216,7 @@ const OtherStatistics = () => {
   
   
 
-  console.log(list_of_keys_name)
+  
   function navbar() {
     
     return (
@@ -254,6 +313,80 @@ const OtherStatistics = () => {
          </div> 
        )
     }
+
+    function detailed_stat_modal2(data_dict:any) {
+      if (result_found == false || keys_info.length == 0) {
+        data_dict = {}
+      }
+
+      var total_number : any = 0
+      {Object.values(data_dict).map((data:any) => (
+        total_number+=data.data_occurence
+      ))}
+      
+      var graph_name = ""
+      
+      
+      return(
+         <div>
+           <div className="modal fade" id="exampleModal3" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+             <div className="modal-dialog modal-xl">
+               <div className="modal-content">
+                 <div className="modal-header">
+                   <h1 className="modal-title fs-5" id="exampleModalLabel3">Statistiques détaillées: {graph_name}</h1>
+                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                  
+                 <div className="modal-body">
+                    {/* <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/> */}
+                    
+                    <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/>
+                    <TableContainer component={Paper}>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>{"."}</TableCell>
+                          <TableCell>{"Element"}</TableCell>
+                          <TableCell>{"% de femme"}</TableCell>
+                          <TableCell>{"% d'homme"}</TableCell>
+                          <TableCell>{"Nombre de fois qu'il est présent"}</TableCell>
+                          
+                          
+                          
+                        </TableRow>
+                      </TableHead>
+
+                      <TableBody>
+                        {Object.values(data_dict).map((data:any,index:number) => (
+
+                          data.data_name.toString().toLowerCase().includes(text_input.toLowerCase()) != "" && (
+                            <TableRow key={index}>
+                              <TableCell>{(index + 1) + "/" + data_dict.length.toString()}</TableCell>
+                              <TableCell>{data.data_name}</TableCell>
+                              <TableCell>{data.ratio_girl}</TableCell>
+                              <TableCell>{data.ratio_boy}</TableCell>
+                              <TableCell>{total_number}</TableCell>
+                            </TableRow>
+                          )
+                        ))}
+                      </TableBody>
+                    
+                    </Table>
+                  </TableContainer>
+                    <br></br>
+                    
+                 </div>
+                 
+                 <div className="modal-footer">
+                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div> 
+       )
+    }
+    
    return (
 
     <div className="container">
@@ -365,54 +498,135 @@ const OtherStatistics = () => {
                     
                     
 
+                    {/* <AgCharts options={list_of_graph2[69]} /> */}
+                    
 
-                    {list_of_keys_name.map((_: any, index: number) => (
-                    <div key={list_of_keys_name[index]}>
-                      {LIST_OF_THEME_FOR_RANKING.includes(list_of_keys_name[index]) && (
-                        <div>
-                          <br /><br /><br /><br />
+                    <Accordion>
+                        <Accordion.Item eventKey={"Ratio Homme Femme"}>
+                          <Accordion.Header>
+                          {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
+                          
+                          <strong style={{fontSize : "30px"}}>- {"Ratio Homme Femme!"}</strong>
+                          
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            {list_of_keys_name2.map((_: any, index: number) => (
+                              <div key={list_of_keys_name2[index]}>
+                                {LIST_OF_THEME_FOR_GENDER_RATIO.includes(list_of_keys_name2[index]) && (
+                                  <div>
+                                    <br /><br /><br /><br />
 
-                          <Accordion>
-                            <Accordion.Item eventKey={list_of_keys_name[index]}>
-                              <Accordion.Header>
-                              <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong>
-                              
-                              {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]].split("classé(e)s")[0]}</strong> */}
-                              
-                              </Accordion.Header>
-                              <Accordion.Body>
-                                {list_of_graph.map((graph: any, index2: number) => (
-                                  <div key={index2}>
-                                    {[list_of_keys_name[index]].includes(THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index2]]) && (
-                                      <div>
-                                        <AgCharts options={graph} />
-                                        <br /><br />
-                                        <br /><br />
-                                        <br /><br />
+                                    <Accordion>
+                                      <Accordion.Item eventKey={list_of_keys_name2[index]}>
+                                        <Accordion.Header>
+                                        {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
                                         
+                                        <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[list_of_keys_name2[index]].split("classé(e)s")[0]}</strong>
                                         
-                                        <div className="d-grid gap-2">
-                                          <button
-                                            className="btn btn-secondary"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal2"
-                                            onClick={() => handle_dict_and_keys_info(list_of_dict[index2], list_of_keys_name[index2])}
-                                          >
-                                            {"Toutes les statistiques 📊"}
-                                          </button>
-                                        </div>
-                                      </div>
-                                    )}
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                          {list_of_graph2.map((graph: any, index2: number) => (
+                                            <div key={index2}>
+                                              {[list_of_keys_name2[index]].includes(THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[list_of_keys_name2[index2]]) && (
+                                                <div>
+                                                  <AgCharts options={graph} />
+                                                  <br /><br />
+                                                  <br /><br />
+                                                  <br /><br />
+                                                  
+                                                  
+                                                  <div className="d-grid gap-2">
+                                                    <button
+                                                      className="btn btn-secondary"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#exampleModal3"
+                                                      onClick={() => handle_dict_and_keys_info(list_of_dict2[index2], list_of_keys_name2[index2])}
+                                                    >
+                                                      {"Toutes les statistiques 📊"}
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                              )}
+                                            </div>
+                                          ))}
+                                        </Accordion.Body>
+                                      </Accordion.Item>
+                                    </Accordion>
                                   </div>
-                                ))}
-                              </Accordion.Body>
-                            </Accordion.Item>
-                          </Accordion>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-          
+                                )}
+                              </div>
+                            ))}
+                            
+                          </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
+                            
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+                    <Accordion>
+                        <Accordion.Item eventKey={"Classement"}>
+                          <Accordion.Header>
+                          {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
+                          
+                          <strong style={{fontSize : "30px"}}>- {"Classement!"}</strong>
+                          
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            {list_of_keys_name.map((_: any, index: number) => (
+                              <div key={list_of_keys_name[index]}>
+                                {LIST_OF_THEME_FOR_RANKING.includes(list_of_keys_name[index]) && (
+                                  <div>
+                                    <br /><br /><br /><br />
+
+                                    <Accordion>
+                                      <Accordion.Item eventKey={list_of_keys_name[index]}>
+                                        <Accordion.Header>
+                                        {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
+                                        
+                                        <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]].split("classé(e)s")[0]}</strong>
+                                        
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                          {list_of_graph.map((graph: any, index2: number) => (
+                                            <div key={index2}>
+                                              {[list_of_keys_name[index]].includes(THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index2]]) && (
+                                                <div>
+                                                  <AgCharts options={graph} />
+                                                  <br /><br />
+                                                  <br /><br />
+                                                  <br /><br />
+                                                  
+                                                  
+                                                  <div className="d-grid gap-2">
+                                                    <button
+                                                      className="btn btn-secondary"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#exampleModal2"
+                                                      onClick={() => handle_dict_and_keys_info(list_of_dict[index2], list_of_keys_name[index2])}
+                                                    >
+                                                      {"Toutes les statistiques 📊"}
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                              )}
+                                            </div>
+                                          ))}
+                                        </Accordion.Body>
+                                      </Accordion.Item>
+                                    </Accordion>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                            
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                  
+                    
                     {/* {list_of_graph.map((graph: any, index2: number) => (
                         <div key={index2}>
                             <div>
@@ -442,6 +656,7 @@ const OtherStatistics = () => {
         )}
 
         {detailed_stat_modal(dict_info)}
+        {detailed_stat_modal2(dict_info)}
         
         {/* {detailed_stat_modal(dict_info)} */}
 

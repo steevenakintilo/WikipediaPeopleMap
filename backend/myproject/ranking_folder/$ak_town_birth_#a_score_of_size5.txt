@@ -622,7 +622,6 @@ Tozeur#####101.5#####8
 Noisy le Sec#####101.45161#####31
 Kyushu#####101.4#####5
 Inconnu#####101.4#####5
-Saigon#####101.20833#####48
 Poissy#####101.19565#####92
 Saint Pierre Quilbignon#####101.0#####10
 Begles#####100.89655#####29
@@ -656,6 +655,7 @@ Charenton le Pont#####99.53165#####79
 San Candido#####99.35714#####14
 Castellon#####99.35714#####14
 Slatina#####99.30769#####13
+Saigon#####99.28571#####49
 Deschambault Grondines#####99.28571#####7
 Dudley#####99.27778#####18
 Chelles#####99.2#####20
@@ -3784,7 +3784,6 @@ Zwickau#####50.85#####60
 Plaisance (Italie)#####50.83333#####60
 Bridgeport#####50.83333#####30
 Sheridan (Wyoming)#####50.83333#####6
-Vietnamien#####50.83333#####6
 Penne d'Agenais#####50.83333#####6
 Bronxville#####50.81818#####22
 Chenerailles#####50.8#####5

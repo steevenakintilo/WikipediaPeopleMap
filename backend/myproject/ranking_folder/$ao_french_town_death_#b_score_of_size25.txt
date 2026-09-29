@@ -106,7 +106,7 @@ Bois-Colombes#####72.25806#####31
 Toul#####72.0#####31
 Montmorency (Val-d'Oise)#####71.80282#####71
 Douarnenez#####71.77143#####35
-Versailles#####71.53686#####719
+Versailles#####71.62639#####720
 Massy (Essonne)#####71.39286#####28
 Ballainvilliers#####70.65385#####26
 Cagnes-sur-Mer#####70.0#####43

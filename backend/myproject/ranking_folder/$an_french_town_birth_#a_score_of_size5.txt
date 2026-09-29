@@ -1031,7 +1031,6 @@ Penarth#####50.18182#####11
 Sainte Suzanne (La Reunion)#####50.16667#####6
 Vieux Conde#####50.07692#####13
 Solihull#####50.06667#####45
-Guingamp#####50.0#####46
 Guerande#####50.0#####23
 Le Dorat#####50.0#####5
 Montebourg#####50.0#####5
@@ -1081,6 +1080,7 @@ Rocroi#####48.4#####15
 Winchester (Massachusetts)#####48.4#####5
 Bourg Saint Andeol#####48.27273#####11
 La Voulte sur Rhone#####48.25#####12
+Guingamp#####48.24444#####45
 Montelimar#####48.22892#####83
 Jeumont#####48.2#####10
 Rambervillers#####48.18182#####22

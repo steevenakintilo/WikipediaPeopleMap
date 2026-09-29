@@ -373,7 +373,6 @@ Avranches#####50.35714#####56
 Gonesse#####50.22#####50
 Gannat#####50.2#####30
 Solihull#####50.06667#####45
-Guingamp#####50.0#####46
 Cholet#####49.88#####125
 Altkirch#####49.64286#####28
 Figeac#####49.59375#####32
@@ -388,6 +387,7 @@ Les Sables d'Olonne (ancienne commune)#####48.64516#####31
 Sarrebourg#####48.61765#####34
 Salins les Bains#####48.59375#####32
 Paimpol#####48.53125#####32
+Guingamp#####48.24444#####45
 Montelimar#####48.22892#####83
 Chaumont (Haute Marne)#####48.11364#####44
 Saint Nazaire#####48.09756#####123

@@ -3315,6 +3315,7 @@ class WikiPeopleData():
             # #
 
             
+            print(user_info_dict)
             print_data = False
             if print_data:
                 if int(preciseness_level/2) < MINIMAL_PRECISSENES_SCORE and force_print_data:
@@ -3842,7 +3843,7 @@ toto = WikiPeopleData()
 
 # Remmettre la fonction des liens
 
-do_user_data =  True
+do_user_data =  False
 do_stat = False
 
 

@@ -17,7 +17,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import {LIST_OF_THEME} from './global_variable'
 import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME,LIST_OF_VARIABLE_THAT_NEED_COMPUTING} from "./global_variable.tsx"
-import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict2} from "./utility_function.tsx";
+import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict2,is_screen_for_mobile} from "./utility_function.tsx";
 
 import {
   Table,
@@ -63,6 +63,11 @@ const Statistics = () => {
       const new_list_of_dict: any[] = [];
       const new_list_of_keys_name: string[] = [];
 
+      var number_of_bar_to_display = 10;
+      if (is_screen_for_mobile() == true) {
+        number_of_bar_to_display = 3
+      }
+      
       for (let i = 0; i < keys.length - 1; i++) {
 
           const key = keys[i];
@@ -92,7 +97,7 @@ const Statistics = () => {
 
                   const generic_dict = generate_list_of_dict(
                       list_of_user_data[key],
-                      10
+                      number_of_bar_to_display
                   );
 
                   const generic_chart = make_a_graphic(

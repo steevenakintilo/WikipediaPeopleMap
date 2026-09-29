@@ -49,13 +49,23 @@ VARIABLE_NAME_TO_DICT_FRENCH = {
     "country_birth_": "pays de naissance",
     "country_death_": "pays de décès",
 
+
     "continent_": "continents",
+    "continent_birth_": "continents de naissance",
+    "continent_death_": "continents de décès",
+        
     "region_of_birth_": "régions de naissance",
     "region_of_death_": "régions de décès",
+
+    "region_birth_": "régions de naissance",
+    "region_death_": "régions de décès",
+    
     "region_": "régions",
 
     "first_char_of_the_page_": "premières lettres des pages",
     "time_period_of_birth_": "périodes historiques",
+    "time_period_": "périodes historiques",
+        
 
     "death_month_day_": "dates de décès",
     "birth_and_death_month_day_": "dates de naissance et de décès",
@@ -110,7 +120,7 @@ GENDER_TO_FRENCH_DICT = {
 }
 
 
-VARIABLE_TO_LETTER = {
+VARIABLE_TO_LETTER_FOR_RANKING = {
     "name": "aa",
     "boy_name": "ab",
     "girl_name": "ac",
@@ -140,6 +150,28 @@ VARIABLE_TO_LETTER = {
     "birth_and_death_month_day" : "ba",
     "page_name_lenght": "bb",
     "first_char_of_the_page": "bc",
+}
+
+VARIABLE_TO_LETTER_FOR_GENDER_RATIO = {
+    "last_name": "af",
+    "french_last_name": "ag",
+    "age": "ah",
+    "town_birth": "ak",
+    "town_death": "al",
+    "town": "am",
+    "french_town_birth": "an",
+    "french_town_death" : "ao",
+    "french_town": "ap",
+    "country_birth": "aq",
+    "country_death": "ar",
+    "country": "as",
+    "continent_birth": "at",
+    "continent_death": "au",
+    "continent": "av",
+    "region_birth": "aw",
+    "region_death":"ax",
+    "region":"ay",
+    "time_period_of_birth": "az",
 }
 
 LIST_OF_CONTINENT_NAME = ["Afrique","Amerique","Asie","Europe","Océanie"]

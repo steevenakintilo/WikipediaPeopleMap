@@ -1,6 +1,6 @@
-Europe de l'Ouest#####60.23767#####343273
-Amérique anglo-saxonne#####56.50301#####92435
-Europe du Sud#####48.24043#####85882
+Europe de l'Ouest#####60.23758#####343278
+Amérique anglo-saxonne#####56.50267#####92436
+Europe du Sud#####48.23975#####85884
 Afrique du Nord#####47.05904#####16074
 Europe du Nord#####43.62316#####68714
 Moyen-Orient#####42.7466#####14495

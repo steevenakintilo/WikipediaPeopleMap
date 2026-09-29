@@ -750,7 +750,7 @@ Mens#####72.8#####5
 Issy-les-Moulineaux#####72.78912#####147
 Savigny sur Orge#####72.76667#####30
 Colombes#####72.76256#####219
-Versailles#####72.65377#####1473
+Versailles#####72.69674#####1474
 Mougins#####72.64706#####51
 Salon de Provence#####72.63793#####58
 Nancy#####72.60305#####1247
@@ -1384,6 +1384,7 @@ Pierre-Benite#####55.33333#####21
 Troyes#####55.29867#####452
 Sommieres#####55.22222#####18
 Rennes#####55.22169#####1245
+Lancieux#####55.2#####5
 Le Mont-Saint-Michel#####55.2#####5
 Reims#####55.16737#####950
 Soyaux#####55.16667#####12
@@ -1457,7 +1458,6 @@ Gieres#####53.71429#####7
 Pougues-les-Eaux#####53.71429#####7
 La Ferte-sous-Jouarre#####53.7#####10
 Vannes#####53.66097#####351
-Guingamp#####53.64615#####65
 Aulnay sous Bois#####53.625#####24
 Croix#####53.60606#####33
 Illkirch Graffenstaden#####53.57143#####7
@@ -1520,6 +1520,7 @@ Arradon#####52.55556#####9
 Villeurbanne#####52.50781#####128
 Thizy (Rhone)#####52.5#####8
 Menton#####52.5#####14
+Guingamp#####52.46875#####64
 Epernay#####52.45455#####88
 Armentieres#####52.43836#####73
 Veauche#####52.42857#####7
@@ -1581,6 +1582,7 @@ Saint-Die#####51.58333#####12
 Tartas#####51.55556#####18
 Janze#####51.5#####8
 Tremblay en France#####51.5#####8
+Pabu#####51.47826#####23
 Gimont#####51.46667#####15
 Moulins Engilbert#####51.45455#####11
 Mulhouse#####51.42301#####565
@@ -1764,7 +1766,6 @@ Waziers#####48.0#####7
 Bailleul (Nord)#####48.0#####25
 Abbaye de Cluny#####48.0#####6
 Les Eparges#####48.0#####5
-Pabu#####47.95455#####22
 Sancoins#####47.875#####8
 Valentigney#####47.86667#####15
 Aubusson (Creuse)#####47.86364#####22

@@ -376,8 +376,8 @@ Toul#####72.0#####31
 Corenc#####72.0#####5
 Montmorency (Val-d'Oise)#####71.80282#####71
 Douarnenez#####71.77143#####35
+Versailles#####71.62639#####720
 Arpajon#####71.57143#####14
-Versailles#####71.53686#####719
 Massy (Essonne)#####71.39286#####28
 Savigny-sur-Orge#####71.30769#####13
 Malzeville#####71.16667#####6
@@ -460,6 +460,7 @@ Souain-Perthes-les-Hurlus#####65.28571#####7
 Montmorillon#####65.18182#####11
 Ceret#####65.10526#####19
 Paray-le-Monial#####65.1#####10
+Pabu#####65.1#####10
 Saint-Priest-en-Jarez#####65.0#####17
 Faculte de medecine de Paris#####65.0#####5
 Menton (Alpes-Maritimes)#####64.99153#####118
@@ -556,7 +557,6 @@ Pierre-Benite#####58.1#####20
 Saint-Nazaire#####58.04444#####45
 Peronne (Somme)#####58.0#####15
 Chateauroux#####58.0#####41
-Pabu#####58.0#####9
 Aire-sur-l'Adour#####58.0#####7
 La Fleche#####57.96875#####32
 Balaruc-les-Bains#####57.8#####5
