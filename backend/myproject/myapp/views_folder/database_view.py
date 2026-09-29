@@ -310,7 +310,7 @@ def add_a_wikipedia_user_to_the_database_unique_town(request):
                 job=unidecode(user.job),
 
                 # Birth information
-                town_birth_place=unidecode(user.town_birth_place),
+                town_birth_place=unidecode(user.town_birth_place).replace("-"," "),
                 town_birth_place_href=user.town_birth_place_href,
                 birth_town_localisation=user.birth_town_localisation,
                 country_birth_place=user.country_birth_place.lower(),
@@ -325,7 +325,7 @@ def add_a_wikipedia_user_to_the_database_unique_town(request):
                 birth_month_day=str(user.birth_month_day),
 
                 # Death information
-                town_death_place=unidecode(user.town_death_place),
+                town_death_place=unidecode(user.town_death_place).replace("-"," "),
                 town_death_place_href=user.town_death_place_href,
                 town_death_localisation=user.town_death_localisation,
                 country_death_place=user.country_death_place.lower(),
@@ -520,7 +520,7 @@ def update_all_wikipedia_user(request):
             # Birth information
             user_obj.town_birth_place = unidecode(
                 line.get("town_birth_place")
-            )
+            ).replace("-"," ")
             user_obj.town_birth_place_href = line.get(
                 "town_birth_place_href"
             )
@@ -557,7 +557,7 @@ def update_all_wikipedia_user(request):
             # Death information
             user_obj.town_death_place = unidecode(
                 line.get("town_death_place")
-            )
+            ).replace("-"," ")
             user_obj.town_death_place_href = line.get(
                 "town_death_place_href"
             )

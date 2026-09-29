@@ -8,26 +8,16 @@ import {
     AllCommunityModule
 } from "ag-charts-community";
 
-// import {
-//     ZoomModule,
-//     NavigatorModule,
-// } from 'ag-charts-enterprise';
-
-// ModuleRegistry.registerModules([
-//     ZoomModule,
-//     NavigatorModule,
-// ]);
-
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./global.css";
+import "../utils/global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING , LIST_OF_THEME_FOR_GENDER_RATIO , THEME_TO_SUB_THEMES_FOR_GENDER_RATIO} from './global_variable'
+import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING , LIST_OF_THEME_FOR_GENDER_RATIO , THEME_TO_SUB_THEMES_FOR_GENDER_RATIO} from '../utils/global_variable'
 
-import {make_a_graphic ,generate_list_of_dict3, generate_list_of_dict4 , make_a_stacked_bar_graphic , is_screen_for_mobile} from "./utility_function.tsx";
+import {make_a_graphic ,generate_list_of_dict_with_three_params_as_data, generate_list_of_dict_with_four_params_as_data , make_a_stacked_bar_graphic , is_screen_for_mobile , navbar} from "../utils/utility_function.tsx";
 
 import {
   Table,
@@ -100,7 +90,7 @@ const OtherStatistics = () => {
           if (list_of_ranking_data[key].length >= 1) {
               
 
-            const generic_dict = generate_list_of_dict3(
+            const generic_dict = generate_list_of_dict_with_three_params_as_data(
                 list_of_ranking_data[key],
                 number_of_bar_to_display
             );
@@ -116,7 +106,7 @@ const OtherStatistics = () => {
                   new_list_of_graph.push(generic_chart);
 
                   new_list_of_dict.push(
-                      generate_list_of_dict3(
+                      generate_list_of_dict_with_three_params_as_data(
                           list_of_ranking_data[key],
                           50000000
                       )
@@ -130,7 +120,7 @@ const OtherStatistics = () => {
           if (list_of_gender_data[key].length >= 1) {
               
 
-            const generic_dict = generate_list_of_dict4(
+            const generic_dict = generate_list_of_dict_with_four_params_as_data(
                 list_of_gender_data[key],
                 number_of_bar_to_display
             );
@@ -145,7 +135,7 @@ const OtherStatistics = () => {
                   new_list_of_graph2.push(generic_chart);
 
                   new_list_of_dict2.push(
-                      generate_list_of_dict4(
+                      generate_list_of_dict_with_four_params_as_data(
                           list_of_gender_data[key],
                           50000000
                       )
@@ -164,26 +154,14 @@ const OtherStatistics = () => {
       
     }, [list_of_ranking_data , list_of_gender_data ,result_found]);
 
+    // A function that handle dict/keys name information
 
     function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
       set_dict_info(dict_info)
       set_keys_info(keys_info)
     }
 
-
-    // const generic_dict = generate_list_of_dict(
-    //     list_of_ranking_data["boy_name_score_of_size500"],
-    //     10
-    // );
-    
-    // const generic_chart = make_a_graphic(
-    //     "bar-horizontal",
-    //     generic_dict,
-    //     "toto"
-    // );
-
-
-    
+    // A function that get other advanced statistics about wikipedia user
 
     async function get_list_of_user_other_advanced_statistics() {      
       set_loading(true)
@@ -209,49 +187,32 @@ const OtherStatistics = () => {
     }
 
 
+    // A function to handle text input
+    
     function handle_text_input (event:any) {
       settext_input(event.target.value)
     }
   
   
-  
-
-  
-  function navbar() {
-    
-    return (
-          <nav className="navbar navbar-expand-lg  navbarBGcolor fixed-top navbar_color">
-            <div className="container-fluid">
-                
-                <div className="d-grid gap-2">
-                    <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                </div>
-            </div>
-          </nav>
-    )  
-  }
+    // A function that show detailed stat about ranking statistics
 
     function detailed_stat_modal(data_dict:any) {
-      if (result_found == false || keys_info.length == 0) {
+      var graph_name = ""      
+      if (result_found == false) {
         data_dict = {}
+        graph_name = ""
       }
 
       var total_number : any = 0
       var text_to_display = "son score"
-      var average : any = 0
-      var mediane : any = 0
-
-      var average_step_list : any = 0
       {Object.values(data_dict).map((data:any) => (
         total_number+=data.data_occurence
       ))}
       
-      var graph_name = ""
-      
-      // if (keys_info.length != 0) {
-      //   graph_name = keys_info
-      // }
-      
+
+      if (keys_info[0] == "L") {
+        graph_name = keys_info
+      } 
       return(
          <div>
            <div className="modal fade" id="exampleModal2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -314,6 +275,8 @@ const OtherStatistics = () => {
        )
     }
 
+    // A function that show detailed stat about ratio statistics
+    
     function detailed_stat_modal2(data_dict:any) {
       if (result_found == false || keys_info.length == 0) {
         data_dict = {}
@@ -325,6 +288,10 @@ const OtherStatistics = () => {
       ))}
       
       var graph_name = ""
+      
+      if (keys_info[0] == "L") {
+        graph_name = keys_info
+      } 
       
       
       return(
@@ -562,11 +529,11 @@ const OtherStatistics = () => {
                     </Accordion>
                             
 
-                    <br></br>
-                    <br></br>
-                    <br></br>
-
-                    <Accordion>
+                      <br></br>
+                      <br></br>
+                      <br></br>
+                      
+                      <Accordion>
                         <Accordion.Item eventKey={"Classement"}>
                           <Accordion.Header>
                           {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
@@ -625,29 +592,6 @@ const OtherStatistics = () => {
                           </Accordion.Body>
                         </Accordion.Item>
                       </Accordion>
-                  
-                    
-                    {/* {list_of_graph.map((graph: any, index2: number) => (
-                        <div key={index2}>
-                            <div>
-                                <AgCharts options={graph} />
-                                <br /><br />
-                                
-                                <div className="d-grid gap-2">
-                                    <button
-                                    className="btn btn-secondary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal2"
-                                    onClick={() => handle_dict_and_keys_info(list_of_dict[index2], list_of_keys_name[index2])}
-                                    >
-                                    
-                                    {"Toutes les statistiques 📊"}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>                            
-                    ))} */}
-
                   </div>
                 )}
                 
@@ -657,18 +601,6 @@ const OtherStatistics = () => {
 
         {detailed_stat_modal(dict_info)}
         {detailed_stat_modal2(dict_info)}
-        
-        {/* {detailed_stat_modal(dict_info)} */}
-
-        {/* <br></br>
-        <br></br>
-        
-        <h2>
-            ça charge...:
-        </h2>
-        
-        <img src="https://i.makeagif.com/media/8-30-2014/64qNV9.gif" alt="2 min Countdown"></img>
-         */}
         </div>
     </div>
     

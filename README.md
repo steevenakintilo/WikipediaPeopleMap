@@ -3,10 +3,7 @@ A map that shows where all people who have a Wikipedia article were born and die
 
 A FAIRE:
 
-- Faire une partie responsible mobile pour la carte
 - Faire une v2 avec un meilleur code cote front/back + faire des test unitaires
-- Graph "scatter" note/nbr de fois que l'elem est present pour le pays,prenomn,metie commme le graph du bac
-- Graph "scatter" ration de fille par rapport au nombre de page dans le pays
 
 A FIX:
 
@@ -34,6 +31,10 @@ FAIT:
 - Stat qui affiche l'age moyen des gens sur wikipedia (vivants/morts)
 - Stat qui affiche l'age moyen de deces sur wikipedia (vivants/morts)
 - Stat qui affiche moyenne de note/erreur/nombre de lien/nombre de personne lie à l'user/nombre d'amis
+- Graph "scatter" note/nbr de fois que l'elem est present pour le pays,prenomn,metie commme le graph du bac (Les data sont trop proche donc j'ai du faire un graph bar pour plus de lisibilite)
+- Graph "scatter" ration de fille par rapport au nombre de page dans le pays (Les data sont trop proche donc j'ai du faire un graph bar pour plus de lisibilite)
+- Faire une partie responsible mobile pour la carte
+
 
 IDEE:
 

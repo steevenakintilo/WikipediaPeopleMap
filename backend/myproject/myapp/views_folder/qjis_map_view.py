@@ -387,14 +387,6 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
     nb_of_bad_user = 0
     for user_obj in all_user_obj:
         try:
-            
-            # if (user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined"):
-            #     nb_of_bad_user+=1
-            #     continue
-            # if (user_obj.town_death_localisation == "" or user_obj.town_death_localisation.lower() == "undefined") and display_death_localisation:
-            #     nb_of_bad_user+=1
-            #     continue
-            
             if display_only_one_person_per_first_name and user_obj.first_name_standard in list_of_first_name:
                 nb_of_bad_user+=1
                 continue
@@ -429,9 +421,6 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
 
             if display_town_birth_or_death_place is False:
                 list_of_localisation.append(dms_to_decimal(user_obj.birth_town_localisation,user_obj.page_name))
-
-                
-                # print(display_death_localisation)
                 if display_only_death_localisation is False:
                     list_of_all_user_data.append(dms_to_decimal(user_obj.birth_town_localisation,"__qjis__"))
                 else:
@@ -440,12 +429,10 @@ def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
                 if display_death_localisation or display_only_death_localisation:
                     list_of_all_user_data.append(dms_to_decimal(user_obj.town_death_localisation,"__qjis__"))
             else:
-                #print(user_obj.town_birth_place.lower().strip(),user_obj.town_death_place.lower().strip(),recieved_data["town_birth_or_death_place"].lower().strip())
                 if user_obj.town_birth_place.lower().strip() == recieved_data["town_birth_or_death_place"].lower().strip():
                     list_of_localisation.append(dms_to_decimal(user_obj.birth_town_localisation,user_obj.page_name))                                            
                 if user_obj.is_alive is False and user_obj.town_death_place.lower().strip() == recieved_data["town_birth_or_death_place"].lower().strip():
                     list_of_all_user_data.append(dms_to_decimal(user_obj.town_death_localisation,"__qjis__"))
-            #print(user_info_dict)
             list_of_all_user_data.append(user_info_dict)
         except:
             pass

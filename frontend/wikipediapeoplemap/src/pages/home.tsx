@@ -6,7 +6,7 @@ import {
   useMap
 } from "react-leaflet";
 
-import {random_localisation_in_france} from "./global_variable.tsx"
+import {random_localisation_in_france} from "../utils/global_variable.tsx"
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 
 import { useEffect, useState } from 'react';
@@ -19,7 +19,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 polyfillCountryFlagEmojis();
 
 // Mes imports
-import "./global.css";
+import "../utils/global.css"
 
 const Home = () => {
   var list_of_random_position : any = []

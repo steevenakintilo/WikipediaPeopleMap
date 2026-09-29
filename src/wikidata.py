@@ -1930,10 +1930,15 @@ class WikiPeopleData():
 
 
             try:
-                if self.clean_localisation(birth_town_localisation.lower()) in LIST_OF_GOOD_LOCALISATION:
+                if self.clean_localisation(birth_town_localisation.lower()).strip() in LIST_OF_GOOD_LOCALISATION:
                     country_birth_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(birth_town_localisation.lower())]
+                else:
+                    print("papa")
             except:
+                print("popo")
                 pass
+
+
             try:
                 if self.clean_localisation(death_town_localisation.lower()) in LIST_OF_GOOD_LOCALISATION and is_alive is False:
                     country_death_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(death_town_localisation.lower())]
@@ -3315,7 +3320,6 @@ class WikiPeopleData():
             # #
 
             
-            print(user_info_dict)
             print_data = False
             if print_data:
                 if int(preciseness_level/2) < MINIMAL_PRECISSENES_SCORE and force_print_data:

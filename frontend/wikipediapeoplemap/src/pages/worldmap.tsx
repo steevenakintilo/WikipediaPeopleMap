@@ -25,25 +25,37 @@ import Legend from "./map_legend.tsx"
 polyfillCountryFlagEmojis();
 
 // Mes imports
-import {gender_to_color , gender_to_color2 , list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "./global_variable.tsx"
-import "./global.css";
+import {gender_to_color , gender_to_color2 , list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "../utils/global_variable.tsx"
+import "../utils/global.css";
 
 
 const WorldMap = () => {
     const [list_of_user_data,set_list_of_user_data] : any = useState({});
-
+    const [my_geolocation,set_my_geolocalisation] : any = useState([])
+    
     useEffect(() => {
         get_list_of_user(0).then((result) => {
             set_list_of_user_data(result.all_user_data)
         })
 
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                
+                set_my_geolocalisation([latitude,longitude])
+            },
+            (error) => {
+                console.error(error);
+            }
+        );
+        
+
     }, []);
     
-
     const width  = window.innerWidth || document.documentElement.clientWidth || 
     document.body.clientWidth;
-    const height = window.innerHeight|| document.documentElement.clientHeight|| 
-    document.body.clientHeight;
+    //const height = window.innerHeight|| document.documentElement.clientHeight|| 
+    //document.body.clientHeight;
     var display_mobile_version : boolean = true
     if (width > 768) {
       display_mobile_version = false
@@ -698,6 +710,8 @@ const WorldMap = () => {
     
   }
 
+  // A function that open a modal and let user search user trhough filter parameter
+
   function advanced_search_modal() {
     const status_death_string_list : any = ["Mort","Vivant","Les 2"]
     const gender_string_list : any = ["Homme","Femme","Les 2"]
@@ -752,7 +766,7 @@ const WorldMap = () => {
 
                           {country} {list_of_country_flag[i]}
                         </option>
-                      ))}
+                    ))}
                     
                     
                   </select>
@@ -1183,19 +1197,11 @@ const WorldMap = () => {
           longitude={longitude}
           zoom={zoom}
         />
-
-          {/* Fond OpenStreetMap */}
-          {/* <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          /> */}
-
           <TileLayer
             attribution="&copy; Google Maps"
             url="https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
             subdomains={["mt0", "mt1", "mt2", "mt3"]}
           />
-          {/* Boutons + / - */}
           {Object.values(list_of_user_data).map((user:any,index:number) =>
               
               user.birth_town_localisation?.[0] !== 999999999999999 &&
@@ -1261,12 +1267,7 @@ const WorldMap = () => {
   
         </MapContainer>
       </div>
-
-      {/* <div>
-          <button type="button" className="btn btn-danger  btn-sm">.</button>
-      </div>
-       */}
-
+      
       {hide_searchbar == false && (
         <div className="" style={{flexShrink:0 }}>
             <div className="card">
@@ -1286,7 +1287,8 @@ const WorldMap = () => {
                     <br></br>
                     <br></br>
                     
-                    <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,0)}>Page Aléatoire</button>
+                    <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={() => change_latitude_and_longitude(my_geolocation[0],my_geolocation[1],true)} >Me geolocaliser</button>
+                    <button type="button" className="btn btn-warning ms-4" data-bs-dismiss="modal" onClick={(event) => handle_chunck(event,0)}>Page Aléatoire</button>
                     
                     <br></br>
                     <br></br>
@@ -1337,12 +1339,6 @@ const WorldMap = () => {
                   <div className="mobile-only">
                     {user_profile_mobile}
                   </div>
-                  
-                  {/* <li className="list-group-item">
-                    <h1>fefefe</h1>
-                  </li>
-                  */}
-                  
                 </div>
               </ul>
             </div>

@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./global.css";
+import "../utils/global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {list_of_countries , list_of_country_flag} from "./global_variable.tsx"
+import {list_of_countries , list_of_country_flag} from "../utils/global_variable.tsx"
 
 const QjisMap = () => {
     //const [total_number_of_user_found,set_total_number_of_user_found] : any = useState({});
@@ -90,7 +90,9 @@ const QjisMap = () => {
         }));
     }
 
-   function advanced_search_modal() {
+    // A function that open a modal and let user search user trhough filter parameter
+   
+    function advanced_search_modal() {
 
       
        const status_death_string_list : any = ["Mort","Vivant","Les 2"]
@@ -531,7 +533,7 @@ const QjisMap = () => {
                    
                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => window.location.reload()}>Reset</button>
-                   <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search().then((result) => set_total_number_of_user_found(result.nb_of_user_found))}>Rechercher 🔎</button>
+                   <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => get_list_of_user_advanced_search()}>Rechercher 🔎</button>
                    
                  </div>
                </div>
@@ -620,7 +622,7 @@ const QjisMap = () => {
                           Ça charge veuillez patienter quelques minutes
                       </h2>
                       
-                      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" width="450" height="450"></img>
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" width="400" height="400"></img>
                   </div>
                   )}
               </div>

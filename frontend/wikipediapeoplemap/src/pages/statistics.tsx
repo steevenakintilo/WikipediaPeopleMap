@@ -12,12 +12,12 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./global.css";
+import "../utils/global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {LIST_OF_THEME} from './global_variable'
-import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME,LIST_OF_VARIABLE_THAT_NEED_COMPUTING} from "./global_variable.tsx"
-import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict2,is_screen_for_mobile} from "./utility_function.tsx";
+import {LIST_OF_THEME} from '../utils/global_variable'
+import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME,LIST_OF_VARIABLE_THAT_NEED_COMPUTING} from "../utils/global_variable.tsx"
+import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict_with_a_lenght_limit,is_screen_for_mobile,navbar} from "../utils/utility_function.tsx";
 
 import {
   Table,
@@ -157,7 +157,7 @@ const Statistics = () => {
                   key === "birth_and_death_year"
               ) {
 
-                  const generic_dict = generate_list_of_dict2(
+                  const generic_dict = generate_list_of_dict_with_a_lenght_limit(
                       list_of_user_data[key],
                       50000000
                   );
@@ -171,7 +171,7 @@ const Statistics = () => {
                   new_list_of_graph.push(generic_chart);
 
                   new_list_of_dict.push(
-                      generate_list_of_dict2(
+                      generate_list_of_dict_with_a_lenght_limit(
                           list_of_user_data[key],
                           50000000
                       )
@@ -208,11 +208,15 @@ const Statistics = () => {
 
   }, [list_of_user_data, result_found]);
 
+    // A function that handle dict/keys name information
+
     function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
       set_dict_info(dict_info)
       set_keys_info(keys_info)
     }
 
+    // A function that get other advanced statistics about wikipedia user
+    
     async function get_list_of_user_advanced_statistics() {      
       set_loading(true)
       set_server_error_found(false)
@@ -238,24 +242,13 @@ const Statistics = () => {
 
     }
 
+    // A function to handle text input
 
     function handle_text_input (event:any) {
       settext_input(event.target.value)
     }
 
-  function navbar() {
-    
-    return (
-          <nav className="navbar navbar-expand-lg  navbarBGcolor fixed-top navbar_color">
-            <div className="container-fluid">
-                
-                <div className="d-grid gap-2">
-                    <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                </div>
-            </div>
-          </nav>
-    )  
-  }
+    // A function that handle the dict linked to user search filter
 
     function handle_dict_of_advance_search(event:any,key:any) {
         set_dict_of_advance_search((prev: any) => ({
@@ -264,6 +257,7 @@ const Statistics = () => {
         }));
     }
 
+    // A function that open a modal and let user search user trhough filter parameter
    function advanced_search_modal() {
 
 
@@ -715,7 +709,8 @@ const Statistics = () => {
        )
     }
 
-
+    // A function that show detailed stat about choosen statistics
+    
     function detailed_stat_modal(data_dict:any) {
       
       if (result_found == false) {
@@ -1007,16 +1002,6 @@ const Statistics = () => {
 
         {advanced_search_modal()}
         {detailed_stat_modal(dict_info)}
-        
-        {/* <br></br>
-        <br></br>
-        
-        <h2>
-            ça charge...:
-        </h2>
-        
-        <img src="https://i.makeagif.com/media/8-30-2014/64qNV9.gif" alt="2 min Countdown"></img>
-         */}
         </div>
     </div>
     
