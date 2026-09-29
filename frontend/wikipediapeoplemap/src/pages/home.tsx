@@ -114,19 +114,19 @@ const Home = () => {
               <br></br>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="WorldMapPageButton"href="/WorldMap">Explorer la Map</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="StatisticsPageButton" href="/Statistics">Statistiques détaillées</a>
               <br></br>
 
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/OtherStatistics">Autres statistiques</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="OtherStatisticsPageButton" href="/OtherStatistics">Autres statistiques</a>
               <br></br>
 
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Qjis">Carte pour qjis</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="QjisMapPageButton" href="/Qjis">Carte pour qjis</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/About">À propos</a>
+              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="AboutPageButton" href="/About">À propos</a>
               <br></br>
               
               </ul>
@@ -143,16 +143,16 @@ const Home = () => {
               <br></br>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
+              <a type="button" className="btn btn-dark btn-xl" id="WorldMapPageButton" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
+              <a type="button" className="btn btn-dark btn-xl" id="StatisticsPageButton" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
               <br></br>
 
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/OtherStatistics">Autres statistiques</a>
+              <a type="button" className="btn btn-dark btn-xl" id="OtherStatisticsPageButton" style={{margin :"auto"}} href="/OtherStatistics">Autres statistiques</a>
               <br></br>
               
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} href="/About">À propos</a>
+              <a type="button" className="btn btn-dark btn-xl" id="AboutPageButton" style={{margin :"auto"}} href="/About">À propos</a>
               <br></br>
               
               </ul>

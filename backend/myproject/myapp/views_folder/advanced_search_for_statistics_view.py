@@ -297,8 +297,6 @@ def get_advanced_statistics(request):
     if "country_death_place" in recieved_data:
         if "Tous les pays" in recieved_data["country_death_place"]:
             display_death_localisation = True
-    if filters != {}:
-        basic_search = False
 
     if display_death_localisation:
         filters["is_alive"] = False
@@ -544,7 +542,7 @@ def get_advanced_statistics(request):
 
     length = all_user_obj.count()
     nb_of_bad_user = 0
-    print("start")
+    print("start get_advanced_statistics function")
     for user_obj in all_user_obj:
 
         if display_only_one_person_per_first_name and user_obj.first_name_standard not in set_of_first_name:
@@ -968,7 +966,6 @@ def get_advanced_statistics(request):
         if user_obj.week_day_of_death and str(user_obj.week_day_of_death).lower().strip() != "undefined" and str(user_obj.week_day_of_death).lower().strip() != "alive":
             week_day_of_birth_and_death_counter[user_obj.week_day_of_death] += 1
 
-        #page_name_counter[user_obj.page_name] += 1
         if "-" not in str(user_obj.age) and user_obj.age > 0 and user_obj.age != 123456789:
             try:
                 if len(str(user_obj.age)) == 1:
@@ -989,24 +986,13 @@ def get_advanced_statistics(request):
         number_of_error_per_page_counter[len(user_obj.list_of_unpreciseness_data)] +=1
 
         number_of_view_counter[user_obj.number_of_views] += 1                     
-    #write_into_file("test_stat.txt",str(dict_of_name))
 
     dict_of_counter = {
-        # ─────────────────────────────────────────────
-        # Names
-        # ─────────────────────────────────────────────
-
-
         "first_name": first_name_counter,
         "first_name_standard": first_name_standard_counter,
 
         "last_name": last_name_counter,
         "last_name_standard": last_name_standard_counter,
-        
-        # ─────────────────────────────────────────────
-        # Personal information
-        # ─────────────────────────────────────────────
-
         
         "gender": gender_counter,
         "age": age_counter,
@@ -1017,48 +1003,23 @@ def get_advanced_statistics(request):
         "time_period_of_birth": time_period_of_birth_counter,
         "job": job_counter,
         
-        # ─────────────────────────────────────────────
-        # Town
-        # ─────────────────────────────────────────────
-
         "town_birth_place": town_birth_place_counter,
         "town_death_place": death_town_counter,
         "town_birth_and_death_place": town_birth_and_death_place_counter,
         "town_with_no_locolisation_counter":town_with_no_locolisation_counter,
-        
-        # ─────────────────────────────────────────────
-        # Contrie
-        # ─────────────────────────────────────────────
-        
+                
         "country_birth_place": country_birth_place_counter,
         "country_death_place": country_death_place_counter,
         "country_birth_and_death_place": country_birth_and_death_place_counter,
 
-        # ─────────────────────────────────────────────
-        # Continent
-        # ─────────────────────────────────────────────
-        
         "continent_of_birth": continent_of_birth_counter,
         "continent_of_death": continent_of_death_counter,
         "continent_of_birth_and_death": continent_of_birth_and_death_counter,
         
-
-        # ─────────────────────────────────────────────
-        # Region
-        # ─────────────────────────────────────────────
-
         "region_of_birth": region_of_birth_counter,
         "region_of_death": region_of_death_counter,
         "region_of_birth_and_death": region_of_birth_and_death_counter,
         
-        
-        
-
-        
-        # ─────────────────────────────────────────────
-        # Birth/Death dates
-        # ─────────────────────────────────────────────
-
         "birth_date": birth_date_counter,
         "death_date": death_date_counter,
         "birth_and_death_date": birth_and_death_date_counter,
@@ -1072,8 +1033,7 @@ def get_advanced_statistics(request):
         "death_year_from_1900": death_year_counter_from_1900,
                 
         "birth_and_death_year": birth_and_death_year_counter,
-        "birth_and_death_year_from_1900": birth_and_death_year_counter_from_1900,
-                
+        "birth_and_death_year_from_1900": birth_and_death_year_counter_from_1900,    
 
         "birth_month": birth_month_counter,
         "death_month": death_month_counter,
@@ -1091,12 +1051,6 @@ def get_advanced_statistics(request):
         "week_day_of_death": week_day_of_death_counter,
         "week_day_of_birth_and_death": week_day_of_birth_and_death_counter,
 
-
-            
-        # ─────────────────────────────────────────────
-        # Birth / Death comparisons
-        # ─────────────────────────────────────────────
-
         "born_and_died_in_the_same_town":
             born_and_died_in_the_same_town_counter,
 
@@ -1112,11 +1066,6 @@ def get_advanced_statistics(request):
         "born_and_died_in_the_same_region":
             born_and_died_in_the_same_region_counter,
 
-
-        # ─────────────────────────────────────────────
-        # Before / After Christ
-        # ─────────────────────────────────────────────
-
         "born_before_christ":
             born_before_christ_counter,
 
@@ -1131,11 +1080,6 @@ def get_advanced_statistics(request):
 
         "born_before_christ_and_died_after_christ":
             born_before_christ_and_died_after_christ_counter,
-
-        # ─────────────────────────────────────────────
-        # Wikipedia page analysis
-        # ─────────────────────────────────────────────
-
         
         "first_char_of_the_page":
             first_char_of_the_page_counter,
@@ -1159,23 +1103,11 @@ def get_advanced_statistics(request):
         "preciseness_level":preciseness_level_counter,
         
 
-        # TESTING
-
-        #
-        # Error
-        #
-
         
         "no_country_counter":no_country_counter,
         "no_town_counter":no_town_counter,
         "dict_of_error":dict_of_error_counter,
         "number_of_error_per_page":number_of_error_per_page_counter,
-        # ─────────────────────────────────────────────
-        # Metadata
-        # ─────────────────────────────────────────────
-        
-        # dict_of_counter["preciseness_level"] = sort_a_counter(preciseness_level_counter,1)
-        # dict_of_counter["grade_over_20"] = sort_a_counter(grade_over_20_counter,1)
         
         }
 
@@ -1189,11 +1121,8 @@ def get_advanced_statistics(request):
     dict_of_counter["death_year_from_1900"] = sort_a_counter(death_year_counter_from_1900,1)
     dict_of_counter["birth_and_death_year_from_1900"] = sort_a_counter(birth_and_death_year_counter_from_1900,1)
     
-    # print("caca")
-    # print(dict_of_counter["birth_and_death_year"])
-    print("end")
-    # print(sort_a_counter(birth_and_death_year_counter,1))
-    #print(dict_of_counter["birth_year_from_1900"])
+    print("end get_advanced_statistics function")
+    
     dict_of_counter["number_of_error_per_page"] = sort_a_counter(number_of_error_per_page_counter,1)
     dict_of_counter["preciseness_level"] = sort_a_counter(preciseness_level_counter,1)
     dict_of_counter["age"] = sort_a_counter(age_counter,1)
@@ -1206,8 +1135,8 @@ def get_advanced_statistics(request):
     dict_of_counter["century_of_birth"] = sort_a_counter(century_of_birth_counter,1)
     dict_of_counter["century_of_death"] = sort_a_counter(century_of_death_counter,1)
     
-    block_of_element = ["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"]
-    block_of_element_present = []
+    # block_of_element = ["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"]
+    # block_of_element_present = []
     # for element in block_of_element:
     #     if len(dict_of_counter[element]):
     #         block_of_element_present.append(element)
@@ -1218,25 +1147,6 @@ def get_advanced_statistics(request):
         for key, counter in dict_of_counter.items()
     }
 
-    
-
-
-    # for var_name in list(dict_of_counter.keys()):
-    #     with open(f"stat_folder/{var_name}.json", "w",encoding="utf-8") as f:
-    #         json.dump(dict_of_counter[var_name], f,ensure_ascii=False,indent=4)
-    
-    # CALCULER LE % POUR:
-    # GENDER
-    # GENS EN VIE
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
     elapsed = time.perf_counter() - start
     print(f"Request processing time: {elapsed:.3f} seconds")
     return JsonResponse({"all_wikipedia_info":dict_of_counter},status=200)

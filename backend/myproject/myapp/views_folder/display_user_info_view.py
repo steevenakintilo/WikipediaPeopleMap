@@ -26,6 +26,8 @@ import csv
 def hi():
     return HttpResponse("Hi!")
 
+
+@ratelimit(key='ip', rate='30/m')
 def display_user_info(request,username):
     """Display user info"""
     if request.method != "GET":
