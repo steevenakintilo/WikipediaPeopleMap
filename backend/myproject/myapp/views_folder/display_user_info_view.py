@@ -37,6 +37,10 @@ def display_user_info(request,username):
     if username != "Personne":
         try:
             user_obj = WikipediaUser.objects.filter(page_name=username.strip()).first()
+
+            print("USERNAME RECU :", repr(username))
+            print("USER TROUVE :", user_obj)
+
             page_name = user_obj.page_name
         except:
             return HttpResponse(f"{username} doesn't exist", status=404)
