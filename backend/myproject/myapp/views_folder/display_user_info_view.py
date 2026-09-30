@@ -28,7 +28,35 @@ def hi():
 
 
 @ratelimit(key='ip', rate='30/m')
-def display_user_info(request,username):
+def display_user_info(request, username):
+    print("========== DISPLAY USER INFO ==========")
+    print("USERNAME :", repr(username))
+    print("METHOD :", request.method)
+
+    if request.method != "GET":
+        return HttpResponse(f"Error! with this {username} info", status=404)
+
+    try:
+        user_obj = WikipediaUser.objects.filter(page_name=username.strip()).first()
+
+        print("USER OBJ :", user_obj)
+
+        if user_obj is None:
+            print("USER NOT FOUND")
+            return HttpResponse(f"{username} doesn't exist", status=404)
+
+        print("PAGE NAME :", user_obj.page_name)
+
+    except Exception as e:
+        print("========== ERROR ==========")
+        print(type(e).__name__)
+        print(repr(e))
+        print("===========================")
+        raise
+
+    
+@ratelimit(key='ip', rate='30/m')
+def rdisplay_user_info(request,username):
     """Display user info"""
     
     print("USERNAME RECU :", repr(username))
