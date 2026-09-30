@@ -168,7 +168,7 @@ class WikiPeopleData():
                 for country in self.list_of_country:
                     country_html_checker = f'title="{country}">{country}'
                     for index , line in enumerate(text_normal.split("\n")):
-                        if country_html_checker.lower().replace("_"," ") in line.lower().replace("_"," "):
+                        if country_html_checker.lower().replace("_"," ").replace("-"," ") in line.lower().replace("_"," ").replace("-"," "):
                             list_of_found_country.append(country)
                             list_of_found_index.append(index)
                             #return country
@@ -1687,7 +1687,8 @@ class WikiPeopleData():
                             except:
                                 age = -999
             except:
-                pass              
+                pass
+
             if age <= 15:
                 try:
                     if born_before_chirst is False:
@@ -1794,6 +1795,55 @@ class WikiPeopleData():
                     age = -999
     
 
+            if age < 15:
+                try:
+                    if "Naissance" in text_normal and "Date de naissance" not in text_normal:
+                        birth_date = text_normal.split("Naissance")[1].split("datetime=")[1].split(" d")[0].replace('"',"").strip()
+                except:
+                    pass 
+                try:
+                    if ">Décès<" in text_normal and is_alive == False:
+                        death_date = text_normal.split(">Décès<")[1].split("datetime=")[1].split(" d")[0].replace('"',"").strip()
+                except:
+                    pass
+                try:
+                    if ">Décès<" not in text_normal:
+                        is_alive = True
+                except:
+                    pass
+                if is_alive:
+                    try:
+                        start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                        end_date = datetime.strptime(f"{today_date_str.split("-")[0]}-{str(int(today_date_str.split("-")[1]))}-{str(int(today_date_str.split("-")[2]))}", "%Y-%m-%d")
+    
+                        # Get the relativedelta between two dates
+                        delta = relativedelta.relativedelta(end_date, start_date)
+                        age = delta.years
+                    except:
+                        age = -999
+                else:
+                    try:
+                        start_date = datetime.strptime(f"{birth_date.split("-")[0]}-{str(int(birth_date.split("-")[1]))}-{str(int(birth_date.split("-")[2]))}", "%Y-%m-%d")
+                        end_date = datetime.strptime(f"{death_date.split("-")[0]}-{str(int(death_date.split("-")[1]))}-{str(int(death_date.split("-")[2]))}", "%Y-%m-%d")
+
+                        # Get the relativedelta between two dates
+                        delta = relativedelta.relativedelta(end_date, start_date)
+                        age = delta.years
+                                                    
+                    except:
+                        try:
+                            year_birth_date_ = birth_date[0:len(birth_date.split("-")[0])]
+                            year_death_date_ = death_date[0:len(death_date.split("-")[0])]
+
+                            # print(year_birth_date_)
+                            # print(death_date)
+
+                            if int(year_birth_date_) + ABSOLUTE_DATE_VALUE <= int(year_death_date_) + ABSOLUTE_DATE_VALUE:
+                                age = (int(year_death_date_) + ABSOLUTE_DATE_VALUE) - (int(year_birth_date_) + ABSOLUTE_DATE_VALUE)
+                            else:
+                                age = (int(year_birth_date_) + ABSOLUTE_DATE_VALUE) - (int(year_death_date_) + ABSOLUTE_DATE_VALUE)
+                        except:
+                            age = -999
             try:
                 if type(birth_year) != int:
                     birth_year = 123456789
@@ -3420,8 +3470,8 @@ class WikiPeopleData():
 
         print(counts["Ray Charles"])
 
-        idx = list_of_link_name.index("Ray Charles")
-        print(list_of_link_name.index("Ray Charles"))
+        # idx = list_of_link_name.index("Ray Charles")
+        # print(list_of_link_name.index("Ray Charles"))
         
         list_of_link_name_occurence = [
             counts.get(name.strip(), 0)
@@ -3569,6 +3619,8 @@ class WikiPeopleData():
 
         # 152397
 
+        # TOP 500 EN ENVIRON 62 POTES EN MOYENNE
+
         with open("data_files/list_of_wikipedia_page_lenght.json", "r", encoding="utf-8") as file:
             pages_lenght = json.load(file)
 
@@ -3597,6 +3649,8 @@ class WikiPeopleData():
             print("Biggest Wikipedia Page by user: " , list_of_element[i],list_of_size_of_element[i])
 
         index = 0
+        print(len(dict_of_number_of_link_per_page_sorted))
+        
         for user , data  in dict_of_number_of_link_per_page_sorted.items():
             #print(user,self.all_user_data_file.index(user))
             #print(user,self.list_of_wikipedia_page_of_real_people.index(user))
@@ -3617,7 +3671,7 @@ class WikiPeopleData():
         paired = list(zip(merged_data_name, merged_data_value))
 
         paired.sort(key=lambda x: x[1], reverse=True)
-
+        
         try:
             list_of_element, occurence_of_element_list = zip(*paired)
         except:
