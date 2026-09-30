@@ -10,22 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+from dotenv import load_dotenv
+
 from pathlib import Path
 
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v=2!jd1b1+ibbmj4)&c3dlak-$!vim1&cf*8t@jxp=gmin+ab^'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -92,16 +95,8 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
-
-
-# PROD
+# # PROD
 
 DATABASES = {
     "default": {
@@ -118,7 +113,7 @@ DATABASES = {
 }
 
 
-# LOCAL
+# # LOCAL POSTGRESS
 
 # DATABASES = {
 #     "default": {
@@ -131,6 +126,15 @@ DATABASES = {
 #         "OPTIONS": {
 #             "sslmode": "require",
 #         },
+#     }
+# }
+
+# # LOCAL
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
