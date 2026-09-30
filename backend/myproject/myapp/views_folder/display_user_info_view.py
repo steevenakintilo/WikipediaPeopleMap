@@ -51,7 +51,7 @@ def display_user_info(request, username):
         print("========== ERROR ==========")
         print(type(e).__name__)
         print(repr(e))
-        print("===========================")
+        print("============================")
         raise
 
     
