@@ -98,19 +98,33 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # # PROD
 
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ["PGENGINE"],
-        "NAME": os.environ["PGNAME"],
-        "USER": os.environ["PGUSER"],
-        "PASSWORD": os.environ["PGPASSWORD"],
-        "HOST": os.environ["PGHOST"],
-        "PORT": os.environ["PGPORT"],
-        "OPTIONS": {
-            "sslmode": "require",
-        },
+
+RUN_LOCAL_PROD = False
+if RUN_LOCAL_PROD is False:
+    DATABASES = {
+        "default": {
+            "ENGINE": os.environ["PGENGINE"],
+            "NAME": os.environ["PGNAME"],
+            "USER": os.environ["PGUSER"],
+            "PASSWORD": os.environ["PGPASSWORD"],
+            "HOST": os.environ["PGHOST"],
+            "PORT": os.environ["PGPORT"],
+            "OPTIONS": {
+                "sslmode": "require",
+            },
+        }
     }
-}
+
+else:
+
+    # # LOCAL
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # # LOCAL POSTGRESS
@@ -128,16 +142,6 @@ DATABASES = {
 #         },
 #     }
 # }
-
-# # LOCAL
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
