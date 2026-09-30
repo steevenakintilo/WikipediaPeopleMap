@@ -23,6 +23,8 @@ import ast
 import os
 import json
 import csv
+import traceback
+
 def hi():
     return HttpResponse("Hi!")
 
@@ -51,6 +53,7 @@ def display_user_info(request, username):
         print("========== ERROR ==========")
         print(type(e).__name__)
         print(repr(e))
+        traceback.print_exc()
         print("============================")
         raise
 
