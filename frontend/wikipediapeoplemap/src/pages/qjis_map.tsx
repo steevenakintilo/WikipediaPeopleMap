@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../utils/global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {list_of_countries , list_of_country_flag} from "../utils/global_variable.tsx"
+import {list_of_countries , list_of_country_flag,backend_url_local,backend_url_prod} from "../utils/global_variable.tsx"
 
 const QjisMap = () => {
     //const [total_number_of_user_found,set_total_number_of_user_found] : any = useState({});
@@ -25,7 +25,7 @@ const QjisMap = () => {
       set_loading(true)
       set_server_error_found(false)
 
-      const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search_qjis`, {
+      const response = await fetch(`${backend_url_prod}/display_chunck_of_user_info_advanced_search_qjis`, {
           method: 'POST',
           headers: {"Content-Type" : "application/json"},
           body:JSON.stringify(dict_of_advance_search)
@@ -126,9 +126,9 @@ const QjisMap = () => {
                     */}
                      <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse#peintre#médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                      <br></br>
-                     <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
+                     <input className="form-control w-100" type="text" placeholder={"Nom (# pour plusieurs noms ou + pour noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                      <br></br>
-                     <input className="form-control w-75" type="text" placeholder={"Prénom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"first_name")}></input>
+                     <input className="form-control w-100" type="text" placeholder={"Prénom (# pour plusieurs noms ou + pour noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"first_name")}></input>
                      
                      <br></br>
                      <select className="form-select body_flag" aria-label="Default select example"                       
@@ -270,15 +270,15 @@ const QjisMap = () => {
    
                      <br></br>
                      
-                     <input className="form-control w-75" type="text" placeholder={"Ville de naisannce"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
+                     <input className="form-control w-75" type="text" placeholder={"Ville(s) de naissance (# pour plusieurs)"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
    
                      <br></br>
    
-                     <input className="form-control w-75" type="text" placeholder={"Ville de mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_death_place")}></input>
+                     <input className="form-control w-75" type="text" placeholder={"Ville(s) de mort (# pour plusieurs)"} onChange={(event) => handle_dict_of_advance_search(event,"town_death_place")}></input>
    
                      <br></br>
                        
-                     <input className="form-control w-75" type="text" placeholder={"Ville de naisannce ou mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_or_death_place")}></input>
+                     <input className="form-control w-75" type="text" placeholder={"Ville de naissance ou mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_or_death_place")}></input>
    
                      <br></br>
    

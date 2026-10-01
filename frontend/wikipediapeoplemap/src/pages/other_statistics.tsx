@@ -15,7 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../utils/global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING , LIST_OF_THEME_FOR_GENDER_RATIO , THEME_TO_SUB_THEMES_FOR_GENDER_RATIO} from '../utils/global_variable'
+import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING , LIST_OF_THEME_FOR_GENDER_RATIO , THEME_TO_SUB_THEMES_FOR_GENDER_RATIO,backend_url_local,backend_url_prod} from '../utils/global_variable'
 
 import {make_a_graphic ,generate_list_of_dict_with_three_params_as_data, generate_list_of_dict_with_four_params_as_data , make_a_stacked_bar_graphic , is_screen_for_mobile , navbar} from "../utils/utility_function.tsx";
 
@@ -167,7 +167,7 @@ const OtherStatistics = () => {
       set_loading(true)
       set_server_error_found(false)
 
-      const response = await fetch(`http://127.0.0.1:8000/get_other_statistics`, {
+      const response = await fetch(`${backend_url_prod}/get_other_statistics`, {
           method: 'GET',
           headers: {"Content-Type" : "application/json"},
 

@@ -97,8 +97,9 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # # PROD
 
 
-RUN_LOCAL_PROD = False
-if RUN_LOCAL_PROD is False:
+RUN_BACKEND_PROD = True
+
+if RUN_BACKEND_PROD is False:
     DATABASES = {
         "default": {
             "ENGINE": os.environ["PGENGINE"],
@@ -127,20 +128,21 @@ else:
 
 # # LOCAL POSTGRESS
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "railway",
-#         "USER": "postgres",
-#         "PASSWORD": os.environ["PGPASSWORD"],
-#         "HOST": "127.0.0.1",
-#         "PORT": "52116",
-#         "OPTIONS": {
-#             "sslmode": "require",
-#         },
-#     }
-# }
-
+print("icicici")
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": os.environ["PGPASSWORD"],
+        "HOST": "127.0.0.1",
+        "PORT": "54481",
+        "OPTIONS": {
+            "sslmode": "require",
+        },
+    }
+}
+print(DATABASES)
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 

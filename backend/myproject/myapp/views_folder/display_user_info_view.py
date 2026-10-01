@@ -31,10 +31,6 @@ def hi():
 
 @ratelimit(key='ip', rate='30/m')
 def display_user_info(request, username):
-    print("========== DISPLAY USER INFO ==========")
-    print("USERNAME :", repr(username))
-    print("METHOD :", request.method)
-
     if request.method != "GET":
         return HttpResponse(f"Error! with this {username} info", status=404)
 

@@ -25,7 +25,7 @@ import Legend from "./map_legend.tsx"
 polyfillCountryFlagEmojis();
 
 // Mes imports
-import {gender_to_color , gender_to_color2 , list_of_countries , list_of_country_flag, NUMBER_OF_USER} from "../utils/global_variable.tsx"
+import {gender_to_color , gender_to_color2 , list_of_countries , list_of_country_flag, NUMBER_OF_USER,backend_url_local,backend_url_prod} from "../utils/global_variable.tsx"
 import "../utils/global.css";
 
 
@@ -92,8 +92,8 @@ const WorldMap = () => {
     }
     async function get_list_of_user(chunk:number) {
       //setchunck(0)
-
-      const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info/${chunk}`, {
+      
+      const response = await fetch(`${backend_url_prod}/display_chunck_of_user_info/${chunk}`, {
           method: 'GET',
           //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
           headers: {"Content-Type" : "application/json"},
@@ -115,7 +115,7 @@ const WorldMap = () => {
         setchunck(0)
       }
       //setchunck(0)
-      const response = await fetch(`http://127.0.0.1:8000/display_chunck_of_user_info_advanced_search/${chunk}/`, {
+      const response = await fetch(`${backend_url_prod}/display_chunck_of_user_info_advanced_search/${chunk}/`, {
           method: 'POST',
           //headers: {"Content-Type" : "application/json",Authorization: `Bearer ${token}`,},
           headers: {"Content-Type" : "application/json"},
@@ -129,7 +129,7 @@ const WorldMap = () => {
     }
 
     async function get_user_info(user:string) {
-      const response = await fetch(`http://127.0.0.1:8000/display_user_info/${user}`, {
+      const response = await fetch(`${backend_url_prod}/display_user_info/${user}`, {
           method: 'GET',
           headers: {"Content-Type" : "application/json"},
       
@@ -744,9 +744,9 @@ const WorldMap = () => {
                  */}
                   <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse#peintre#médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                   <br></br>
-                  <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
+                  <input className="form-control w-100" type="text" placeholder={"Nom (# pour plusieurs noms ou + pour noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                   <br></br>
-                  <input className="form-control w-75" type="text" placeholder={"Prénom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"first_name")}></input>
+                  <input className="form-control w-100" type="text" placeholder={"Prénom (# pour plusieurs noms ou + pour noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"first_name")}></input>
                   
                   <br></br>
                   <select className="form-select body_flag" aria-label="Default select example"                       
@@ -884,15 +884,15 @@ const WorldMap = () => {
 
                   <br></br>
                   
-                  <input className="form-control w-75" type="text" placeholder={"Ville de naisannce"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
+                  <input className="form-control w-75" type="text" placeholder={"Ville(s) de naissance (# pour plusieurs)"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
 
                   <br></br>
 
-                  <input className="form-control w-75" type="text" placeholder={"Ville de mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_death_place")}></input>
+                  <input className="form-control w-75" type="text" placeholder={"Ville(s) de mort (# pour plusieurs)"} onChange={(event) => handle_dict_of_advance_search(event,"town_death_place")}></input>
 
                   <br></br>
                     
-                  <input className="form-control w-75" type="text" placeholder={"Ville de naisannce ou mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_or_death_place")}></input>
+                  <input className="form-control w-75" type="text" placeholder={"Ville de naissance ou mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_or_death_place")}></input>
 
                   <br></br>
 

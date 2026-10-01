@@ -19,6 +19,5 @@ urlpatterns = [
     path("calc_score_of_all_variable",calc_score_of_variable_view.calc_score_of_all_variable),
     path("update_all_wikipedia_user",database_view.update_all_wikipedia_user),
     path("calc_gender_ratio_of_some_variable",calc_score_of_variable_view.calc_gender_ratio_of_some_variable),
-    path("get_other_statistics",get_other_statistics_view.get_other_statistics)
-        
+    path("get_other_statistics",get_other_statistics_view.get_other_statistics)       
 ]

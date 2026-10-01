@@ -14,7 +14,7 @@ class WikipediaUser(models.Model):
 
     page_name = models.CharField(max_length=300, unique=True)
     page_url = models.URLField(max_length=500)
-    picture_url = models.URLField(max_length=500, blank=True, null=True)
+    picture_url = models.URLField(max_length=2500, blank=True, null=True)
 
     first_name = models.CharField(max_length=100, blank=True, null=True)
     first_name_standard = models.CharField(max_length=100, blank=True, null=True)
@@ -421,7 +421,7 @@ class WikipediaUserUniqueTown(models.Model):
 
     page_name = models.CharField(max_length=300, unique=True)
     page_url = models.URLField(max_length=500)
-    picture_url = models.URLField(max_length=500, blank=True, null=True)
+    picture_url = models.URLField(max_length=2500, blank=True, null=True)
 
     first_name = models.CharField(max_length=100, blank=True, null=True)
     first_name_standard = models.CharField(max_length=100, blank=True, null=True)

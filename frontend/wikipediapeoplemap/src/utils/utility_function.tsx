@@ -125,16 +125,16 @@ export function make_a_graphic(type:string,dict_data:string,graph_title:string) 
             data: dict_data,
             series: series_data,
             title: { text: graph_title },
-            axes: [
-            {
+            axes: {
+                x: {
                     type: "time",
                     position: "bottom"
                 },
-                {
+                y: {
                     type: "number",
                     position: "left"
                 }
-            ],
+            },
         }
         
         return graph_data
@@ -201,15 +201,15 @@ export function make_a_stacked_bar_graphic(
             text: graph_title
         },
 
-        axes: [
-            {
+        axes: {
+            x: {
                 type: "category",
                 position: "bottom",
                 title: {
                     text: "Variable"
                 }
             },
-            {
+            y: {
                 type: "number",
                 position: "left",
                 min: 0,
@@ -223,8 +223,7 @@ export function make_a_stacked_bar_graphic(
                     text: "Pourcentage"
                 }
             }
-        ],
-
+        },
     }
 
     return graph_data

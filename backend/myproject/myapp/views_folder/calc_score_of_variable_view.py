@@ -868,7 +868,6 @@ def calc_gender_ratio_of_some_variable(request):
 
     all_user_obj = WikipediaUser.objects.all().order_by("position").filter(position__gte=0)
 
-    print("Hello boy")
 
     for user_obj in all_user_obj:
 
@@ -1417,7 +1416,5 @@ def calc_gender_ratio_of_some_variable(request):
 
                     except:
                         pass
-
-    print("Bye girl")
 
     return HttpResponse("DONE!", status=200)

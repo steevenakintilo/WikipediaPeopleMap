@@ -34,8 +34,10 @@ def get_advanced_statistics(request):
     if request.method != "POST":
         return HttpResponse(f"Error!", status=404)
 
-    recieved_data = json.loads(request.body)
-        
+    try:
+        recieved_data = json.loads(request.body)
+    except:
+        recieved_data = {}
     accept_multiple_element = False
 
     try:
@@ -235,30 +237,39 @@ def get_advanced_statistics(request):
     if "first_name" in recieved_data:
         if len(recieved_data["first_name"]) != 0:
             if "+" in recieved_data["first_name"]:
-                filters["first_name__icontains"] = recieved_data["first_name"].replace("+","").lower().strip()
+                filters["first_name__icontains"] = recieved_data["first_name"].replace("+","").lower()
+            elif "#" in recieved_data["first_name"]:
+                accept_multiple_element = True
+                for name in recieved_data["first_name"].split("#"):
+                    query |= Q(first_name=name.lower())
             else:
-                filters["first_name"] = recieved_data["first_name"].lower().strip()
+                filters["first_name"] = recieved_data["first_name"].lower()
 
     if "last_name" in recieved_data:
         if len(recieved_data["last_name"]) != 0:
             if "+" in recieved_data["last_name"]:
-                filters["last_name__icontains"] = recieved_data["last_name"].replace("+","").lower().strip()
+                filters["last_name__icontains"] = recieved_data["last_name"].replace("+","").lower()
+            elif "#" in recieved_data["last_name"]:
+                accept_multiple_element = True
+                for name in recieved_data["last_name"].split("#"):
+                    query |= Q(last_name=name.lower())
+            
             else:
-                filters["last_name"] = recieved_data["last_name"].lower().strip()
-
+                filters["last_name"] = recieved_data["last_name"].lower()
+    
     print(recieved_data)
     if "town_birth_place" in recieved_data:
-        if ";" in recieved_data["town_birth_place"]:
+        if "#" in recieved_data["town_birth_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_birth_place"].split(";"):
+            for town in recieved_data["town_birth_place"].split("#"):
                 query |= Q(town_birth_place__icontains=town)
         else:
             filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"])
 
     if "town_death_place" in recieved_data:
-        if ";" in recieved_data["town_death_place"]:
+        if "#" in recieved_data["town_death_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_death_place"].split(";"):
+            for town in recieved_data["town_death_place"].split("#"):
                 query |= Q(town_death_place__icontains=town)
         else:
             filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"])

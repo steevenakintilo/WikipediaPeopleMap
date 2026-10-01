@@ -25,7 +25,6 @@ def get_other_statistics(request):
     if request.method != "GET":
         return HttpResponse(f"Error!", status=404)
 
-    print("hello")
     file_path_for_ranking = rf"{os.getcwd()}\ranking_folder"
     file_path_for_gender_ratio = rf"{os.getcwd()}\ratio_of_man_and_woman"
 

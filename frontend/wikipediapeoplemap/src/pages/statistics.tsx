@@ -15,7 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../utils/global.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import {LIST_OF_THEME} from '../utils/global_variable'
+import {LIST_OF_THEME,backend_url_local,backend_url_prod} from '../utils/global_variable'
 import {list_of_countries , list_of_country_flag,VAR_TO_DESCRIPTION,STAT_TO_DESCRIPTION,SUB_THEME_TO_THEME,LIST_OF_VARIABLE_THAT_NEED_COMPUTING} from "../utils/global_variable.tsx"
 import { generate_list_of_dict , make_a_graphic ,generate_list_of_dict_with_a_lenght_limit,is_screen_for_mobile,navbar} from "../utils/utility_function.tsx";
 
@@ -221,7 +221,7 @@ const Statistics = () => {
       set_loading(true)
       set_server_error_found(false)
 
-      const response = await fetch(`http://127.0.0.1:8000/get_advanced_statistics`, {
+      const response = await fetch(`${backend_url_prod}/get_advanced_statistics`, {
           method: 'POST',
           headers: {"Content-Type" : "application/json"},
           body:JSON.stringify(dict_of_advance_search)
@@ -293,9 +293,9 @@ const Statistics = () => {
                     */}
                      <input className="form-control w-100" type="text" placeholder={"Métier ex: acteur ou chanteuse#peintre#médecin ou foot"} onChange={(event) => handle_dict_of_advance_search(event,"job")}></input>
                      <br></br>
-                     <input className="form-control w-75" type="text" placeholder={"Nom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
+                     <input className="form-control w-100" type="text" placeholder={"Nom (# pour plusieurs noms ou + pour noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"last_name")}></input>
                      <br></br>
-                     <input className="form-control w-75" type="text" placeholder={"Prénom (+ pour inclure les noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"first_name")}></input>
+                     <input className="form-control w-100" type="text" placeholder={"Prénom (# pour plusieurs noms ou + pour noms contenant)"} onChange={(event) => handle_dict_of_advance_search(event,"first_name")}></input>
                      
                      <br></br>
                      <select className="form-select body_flag" aria-label="Default select example"                       
@@ -437,15 +437,15 @@ const Statistics = () => {
    
                      <br></br>
                      
-                     <input className="form-control w-75" type="text" placeholder={"Ville de naisannce"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
+                     <input className="form-control w-75" type="text" placeholder={"Ville(s) de naissance (# pour plusieurs)"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_place")}></input>
    
                      <br></br>
    
-                     <input className="form-control w-75" type="text" placeholder={"Ville de mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_death_place")}></input>
+                     <input className="form-control w-75" type="text" placeholder={"Ville(s) de mort (# pour plusieurs)"} onChange={(event) => handle_dict_of_advance_search(event,"town_death_place")}></input>
    
                      <br></br>
                        
-                     <input className="form-control w-75" type="text" placeholder={"Ville de naisannce ou mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_or_death_place")}></input>
+                     <input className="form-control w-75" type="text" placeholder={"Ville de naissance ou mort"} onChange={(event) => handle_dict_of_advance_search(event,"town_birth_or_death_place")}></input>
    
                      <br></br>
    

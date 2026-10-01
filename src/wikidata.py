@@ -472,7 +472,7 @@ class WikiPeopleData():
                 
                 picture_url = f"https://commons.wikimedia.org/wiki/Special:FilePath/{quote(filename)}"
                 
-                if picture_url == "https://commons.wikimedia.org/wiki/Special:FilePath/langfr-250px-Defaut_2.svg.png" or ".svg." in picture_url:
+                if picture_url == "https://commons.wikimedia.org/wiki/Special:FilePath/langfr-250px-Defaut_2.svg.png" or ".svg." in picture_url or "%D8" in picture_url or "%D7" in picture_url:
                     picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
             except:
                 picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
@@ -1795,6 +1795,7 @@ class WikiPeopleData():
                     age = -999
     
 
+            # RECHER LAGE POUR CEUX QUI BEUG TELS QUE MARILIN MONROE ERIC LEGRAND OU ENCORE RICHARD WAGNER
             if age < 15:
                 try:
                     if "Naissance" in text_normal and "Date de naissance" not in text_normal:
@@ -1982,10 +1983,8 @@ class WikiPeopleData():
             try:
                 if self.clean_localisation(birth_town_localisation.lower()).strip() in LIST_OF_GOOD_LOCALISATION:
                     country_birth_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(birth_town_localisation.lower())]
-                else:
-                    print("papa")
+                
             except:
-                print("popo")
                 pass
 
 
@@ -3275,7 +3274,7 @@ class WikiPeopleData():
             death_town_localisation = unicodedata.normalize("NFKC", death_town_localisation)
             death_town_localisation = " ".join(death_town_localisation.split())
 
-
+            print(born_and_died_after_christ,born_and_died_after_christ,born_before_christ_and_died_after_christ)
             if born_before_chirst and died_before_christ:
                 born_and_died_before_christ = True
                 born_and_died_after_christ = True
