@@ -129,7 +129,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
 
     if "age" in recieved_data:
         if int(recieved_data["age"]) <= 0:
-            age = 1
+            age = 0
         else:
             age = recieved_data["age"]
         filters["age__gte"] = age
@@ -142,7 +142,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         if int(recieved_data["age_max"]) >= MAXIMUM_AGE_TO_DISPLAY:
             age = MAXIMUM_AGE_TO_DISPLAY
         else:
-            age = recieved_data["age"]
+            age = recieved_data["age_max"]
         filters["age__lte"] = age
     
     
@@ -232,6 +232,10 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         if len(recieved_data["first_name"]) != 0:
             if "+" in recieved_data["first_name"]:
                 filters["first_name__icontains"] = recieved_data["first_name"].replace("+","").lower()
+            elif "#" in recieved_data["first_name"]:
+                accept_multiple_element = True
+                for name in recieved_data["first_name"].split("#"):
+                    query |= Q(first_name=name.lower())
             else:
                 filters["first_name"] = recieved_data["first_name"].lower()
 
@@ -239,23 +243,28 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         if len(recieved_data["last_name"]) != 0:
             if "+" in recieved_data["last_name"]:
                 filters["last_name__icontains"] = recieved_data["last_name"].replace("+","").lower()
+            elif "#" in recieved_data["last_name"]:
+                accept_multiple_element = True
+                for name in recieved_data["last_name"].split("#"):
+                    query |= Q(last_name=name.lower())
+            
             else:
                 filters["last_name"] = recieved_data["last_name"].lower()
 
     print(recieved_data)
     if "town_birth_place" in recieved_data:
-        if ";" in recieved_data["town_birth_place"]:
+        if "#" in recieved_data["town_birth_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_birth_place"].split(";"):
-                query |= Q(town_birth_place__icontains=town)
+            for town in recieved_data["town_birth_place"].split("#"):
+                query |= Q(town_birth_place__icontains=unidecode(town))
         else:
             filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"])
 
     if "town_death_place" in recieved_data:
-        if ";" in recieved_data["town_death_place"]:
+        if "#" in recieved_data["town_death_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_death_place"].split(";"):
-                query |= Q(town_death_place__icontains=town)
+            for town in recieved_data["town_death_place"].split("#"):
+                query |= Q(town_death_place__icontains=unidecode(town))
         else:
             filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"])
             filters["is_alive"] = False
@@ -358,7 +367,6 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
 
     # filters["birth_town_localisation__icontains"] = "Undefined"
     # filters["town_birth_place"] = "Undefined"
-    
     # filters["number_of_user_who_have_linked_this_user"] = 0
     
     if "century_of_birth" in recieved_data:
@@ -377,9 +385,20 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     if "town_birth_or_death_place" in recieved_data:
         display_either_birth_or_death_town = True
         accept_multiple_element = True
-        query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"]) | Q(town_death_place__icontains=recieved_data["town_birth_or_death_place"])
         display_death_localisation = True
-    
+        
+        # if "#" in recieved_data["town_birth_or_death_place"]:
+        #     accept_multiple_element = True
+        #     for town in recieved_data["town_birth_or_death_place"].split("#"):
+        #         #query |= Q(town_death_place__icontains=town)
+        #         query |= Q(town_birth_place__icontains=unidecode(town)) | Q(town_death_place__icontains=unidecode(town))
+        # else:
+        
+        query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"]) | Q(town_death_place__icontains=recieved_data["town_birth_or_death_place"])
+        
+
+
+    print(display_death_localisation,display_either_birth_or_death_town,accept_multiple_element)
     filters["position__gte"] = 0
     #filters["age__lte"] = 123
             
@@ -416,7 +435,6 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                     else:
                         all_user_obj = WikipediaUserUniqueTown.objects.filter(**filters).order_by(f"-{sort_user_by}")
             else:
-                print("att")
 
                 sort_user_by = "position"
                 if accept_multiple_element:
@@ -540,7 +558,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             "page_url": "https://fr.wikipedia.org/wiki/Personne",
             "gender":"Unknown",
             "is_alive":True,
-            "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/960px-Question_mark_%28black%29.svg.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "picture_url": "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790973930/1955-futurama-bender_pxvpaj.jpg",
             #"birth_town_localisation": dms_to_decimal(user_obj.birth_town_localisation),
             "birth_town_localisation": dms_to_decimal("blabla"),              
             "country_birth_place_emoji":"🏴‍☠️",

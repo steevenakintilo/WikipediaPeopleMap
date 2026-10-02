@@ -38,12 +38,11 @@ def display_user_info(request, username):
         user_obj = WikipediaUser.objects.filter(page_name=username.strip()).first()
 
         print("USER OBJ :", user_obj)
-
-        if user_obj is None:
+        if user_obj is None and username  != "Personne":
             print("USER NOT FOUND")
             return HttpResponse(f"{username} doesn't exist", status=404)
 
-        print("PAGE NAME :", user_obj.page_name)
+        #print("PAGE NAME :", user_obj.page_name)
 
         if username != "Personne":
             try:
@@ -170,7 +169,8 @@ def display_user_info(request, username):
                 "century_of_death":user_obj.century_of_death,
                             
             }
-            user_obj.number_of_views += 1
+            #user_obj.number_of_views += 1
+            
             user_obj.save()
             for key , value in user_info_dict.items():
                 if type(value) != list and type(value) != int and type(value) != bool and type(value) != float:
@@ -182,7 +182,7 @@ def display_user_info(request, username):
         user_info_dict = {
             "page_name": "personne",
             "page_url": "https://fr.wikipedia.org/wiki/Personne",
-            "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/960px-Question_mark_%28black%29.svg.png?utm_source=fr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "picture_url": "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790973930/1955-futurama-bender_pxvpaj.jpg",
             "first_name": "personne",
             "first_name_standard": "personne",
             "last_name": "personne",
