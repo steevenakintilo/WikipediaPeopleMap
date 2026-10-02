@@ -4093,6 +4093,7 @@ NON_TOWN_ELEMENT_LIST = [
     "Republique populaire de Chine",
     "Free University of Brussels (1834-1969)",
     "Espagne franquiste",
+    "Histoires (Polybe)",
     "sahara occidental",
     "Feminisme",
     "Marie-Therese",
@@ -6182,6 +6183,7 @@ TOWN_TO_LOCALISATION_DICT = {
     "château de versailles":"48° 48′ 17,26″ N, 2° 07′ 13,34″ E",
     "lichtental":"48° 44′ 38″ N, 8° 15′ 39″ E",
     "aix-la-chapelle":"50° 46′ 00″ N, 6° 06′ 00″ E",
+    "aix la chapelle":"50° 46′ 00″ N, 6° 06′ 00″ E",
     "tyburn (village)":"51° 30′ 46,3″ N, 0° 09′ 50,4″ W",
     "rome":"41° 53′ 19″ N, 12° 29′ 12″ E",
     "rome antique":"41° 53′ 19″ N, 12° 29′ 12″ E",
@@ -6189,10 +6191,12 @@ TOWN_TO_LOCALISATION_DICT = {
     "vienne (autriche)":"48° 12′ 30″ N, 16° 22′ 21″ E",
     "hôtel de la reine hortense":"48° 51′ 24″ N, 2° 21′ 07″ E",
     "pella (cité antique)":"40° 45′ 36″ N, 22° 31′ 32″ E",
+    "pella":"40° 45′ 36″ N, 22° 31′ 32″ E",
     "saint-denis":"48° 56′ 08″ N, 2° 21′ 14″ E",
     "surabaya":"7°15′40.71″S 112°44′59.13″E",
     "saint-léger-de-foucheret":"47° 01′ 20″ N, 3° 53′ 55″ E",
     "chateau de versailles":"48° 48′ 17,26″ N, 2° 07′ 13,34″ E",
+    "slovenj":"46° 30′ 40,07″ N, 15° 04′ 49,16″ E",
     "los angeles":"34° 03′ 08″ N, 118° 14′ 37″ W",
     "varsovie":"52° 13′ 47″ N, 21° 00′ 44″ E",
     "madrid":"40° 26′ 00″ N, 3° 41′ 00″ W",
@@ -6800,6 +6804,8 @@ DICT_OF_LOCALISATION_TO_COUNTRY = {
  '41° 53′ 19′′ n, 12° 29′ 12′′ e': 'Italie',
  '52° 31′ n, 13° 23′ e': 'Allemagne',
  '52° 11′ 34′′ n, 1° 42′ 23′′ w': 'Royaume-Uni',
+ '46° 30′ 40,07′′ n, 15° 04′ 49,16′′ e': 'Slovénie',
+ '51° 30′ 16′′ n, 0° 07′ 32′′ w': 'Royaume-Uni',
  '45° 30′ 12′′ n, 73° 35′ 13′′ w': 'Canada',
  '48° 12′ 30′′ n, 16° 22′ 21′′ e': 'Autriche',
  '55° 45′ 09′′ n, 37° 37′ 23,11′′ e': 'Russie',
@@ -7550,11 +7556,13 @@ DICT_OF_LOCALISATION_TO_COUNTRY = {
 
 LIST_OF_GOOD_LOCALISATION = """48° 51′ 24′′ n, 2° 21′ 07′′ e
 51° 30′ 26′′ n, 0° 07′ 39′′ w
+46° 30′ 40,07′′ n, 15° 04′ 49,16′′ e
 40° 42′ 46′′ n, 74° 00′ 22′′ w
 41° 53′ 19′′ n, 12° 29′ 12′′ e
 52° 31′ n, 13° 23′ e
 45° 30′ 12′′ n, 73° 35′ 13′′ w
 48° 12′ 30′′ n, 16° 22′ 21′′ e
+51° 30′ 16′′ n, 0° 07′ 32′′ w
 55° 45′ 09′′ n, 37° 37′ 23,11′′ e
 52° 11′ 34′′ n, 1° 42′ 23′′ w
 43° 17′ 47′′ n, 5° 22′ 12′′ e

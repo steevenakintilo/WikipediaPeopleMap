@@ -176,7 +176,6 @@ class WikiPeopleData():
                 
 
 
-                         
                 if len(list_of_found_country) != 0:
                     return list_of_found_country[list_of_found_index.index(min(list_of_found_index))]
                 return "Undefined"
@@ -221,8 +220,9 @@ class WikiPeopleData():
 
             page_text = soup.get_text(" ", strip=True)
 
-            # reset_file("town_text.txt")
-            # write_into_file("town_text.txt",html+"\n")
+            reset_file("town_text.txt")
+            write_into_file("town_text.txt",html+"\n")
+            
             #localisation_direction = ""
             localisation_sud = f'{page_text.split("Coordonnées")[1].split('sud')[0]}'
             localisation_est = f'{page_text.split("Coordonnées")[1].split('est')[0]}'
@@ -277,7 +277,7 @@ class WikiPeopleData():
             if len(localisation.strip()) > 50 and "Démographie" not in localisation:
                 return localisation.strip()[0:28]
             
-                
+            # CHECK lA GEOPOSITION
                  
 
             return localisation.strip()
@@ -285,8 +285,14 @@ class WikiPeopleData():
             try:
                 return TOWN_TO_LOCALISATION_DICT[town.lower().strip().replace("_"," ")]
             except:
-                return "Undefined"
-
+                try:
+                    if '"geo.position" content=' in text_normal.lower():
+                        x = text_normal.split('"geo.position" content=')[1].split(">")[0].replace('"',"")
+                        return x
+                    return "Undefined"
+                except:
+                    return "Undefined"
+                                    
     def get_gender_of_a_person(self,page_text:str,is_alive:bool) ->  str:
         """A function that get the gender of a person"""
 
@@ -603,7 +609,7 @@ class WikiPeopleData():
 
             is_alive_check = False
             try:
-                if "décès" in text_normal.lower():
+                if "décès" in text_normal.lower() and ">décès<" not in text_normal.lower():
                     naissance_pos = 0
                     deces_pos =  0
                     if "naissance" in text_normal:
@@ -623,6 +629,8 @@ class WikiPeopleData():
             except:
                 pass
 
+
+            
 
             if "Lieu de naissance" in text_normal and "<td>Inconnu" not in text_normal:
                 try:
@@ -1796,6 +1804,7 @@ class WikiPeopleData():
     
 
             # RECHER LAGE POUR CEUX QUI BEUG TELS QUE MARILIN MONROE ERIC LEGRAND OU ENCORE RICHARD WAGNER
+
             if age < 15:
                 try:
                     if "Naissance" in text_normal and "Date de naissance" not in text_normal:
@@ -1845,11 +1854,228 @@ class WikiPeopleData():
                                 age = (int(year_birth_date_) + ABSOLUTE_DATE_VALUE) - (int(year_death_date_) + ABSOLUTE_DATE_VALUE)
                         except:
                             age = -999
+            
+            # Pour ceux qui ont un age de 0 tels que Marc-Antoine Charpentier  Isabelle d'Angoulême ou encore Érasme
+            if age <= 0:
+                birth_year_is_real_but_month_and_day_are_not = False
+                try:
+                    # CAS 1 1643 Marc-Antoine Charpentier
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal:
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "_" in birth_date.split('"')[1]: 
+                                birth_date = birth_date.split('"')[1].split("_")[0]
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"
+                                
+                            else:
+                                birth_date = "Undefined"
+                    except:
+                        birth_date = "Undefined"
+                    
+                    # CAS 2 Incertaine (vers 1210 ?) Saadi
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "Incertaine (vers" in birth_date.split("\n")[1]:
+                                birth_date = birth_date.split("\n")[1].split("href=")[1].split(" ")[0].replace('"',"")
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"
+                    except:
+                        birth_date = "Undefined"
+
+                    # CAS 3 Av. 1152 Aimery II de Lusignan
+                    try:
+                       if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "Av. " in birth_date.split("\n")[1]:
+                                birth_date = birth_date.split("\n")[1].split("href=")[1].split(" ")[0].replace('"',"")
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"
+                    except:
+                        birth_date = "Undefined"
+                        traceback.print_exc()
+                    
+                    # CAS 4 V. 1188 / 1192 Isabelle d'Angoulême
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "V." in birth_date.split("\n")[1]:
+                                birth_date = birth_date.split("\n")[1].split("href=")[1].split(" ")[0].replace('"',"")
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"
+                    except:
+                        birth_date = "Undefined"
+
+
+
+                    # CAS 5 V. 1188 / 1192 Dante Alighieri
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "Entre" in birth_date.split("\n")[1]:
+
+                                birth_date = birth_date.split("\n")[1].split("Entre")[1].split(" ")[1].strip()
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"
+                    except:
+                        birth_date = "Undefined"
+
+                    # CAS 6 Début 1619 Savinien de Cyrano de Bergerac
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "Début" in birth_date.split("\n")[1]:
+                                birth_date = birth_date.split("\n")[1].split("Début")[1].split("<")[0].strip()
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"
+                    except:
+                        birth_date = "Undefined"
+                    
+                    # CAS 7 27/28 octobre 1466 ou 1467 ou 1469 Érasme
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "/" in birth_date.split("\n")[2]: 
+                                for month in LIST_OF_MONTH:
+                                    if month.lower() in birth_date.split("\n")[2].lower():
+                                        birth_date = birth_date.split("\n")[2].split(month.lower())[1]
+                                        birth_date = birth_date.split(" ")[1].strip()
+                                        birth_year_is_real_but_month_and_day_are_not = True
+                                        birth_date+="-01-01"
+                                        break
+                    except:
+                        birth_date = "Undefined"
+                    
+                    # CAS 8 1483 ou 1494 François Rabelais
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            birth_date = birth_date.split('<a href="')[1].split('"')[0].strip()
+                            birth_year_is_real_but_month_and_day_are_not = True
+                            birth_date+="-01-01"
+                    except:
+                        pass    
+
+                    # CAS 9 Années 1640 Homme au masque de fer
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "_" in birth_date.split("title=")[0]: 
+                                birth_date = birth_date.split('title=')[1].split(" ")[1].split('"')[0]
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"
+                                
+                            else:
+                                birth_date = "Undefined"
+                    except:
+                        birth_date = "Undefined"
+
+                    #print(birth_year_is_real_but_month_and_day_are_not,birth_date,len(birth_date))
+                    # CAS 10 1302-1310 Étienne Marcel
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date or len(str(birth_date)) > 10):
+                            birth_date = text_normal.split("Naissance")[1]
+
+                            if "-" in birth_date.split("\n")[1]:                                                      
+                                birth_date = birth_date.split("\n")[1].split("-")[0]
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"    
+                            else:
+                                birth_date = "Undefined"
+                    except:
+                        birth_date = "Undefined"
+
+                            
+                    # CAS 11 vers 200 av. J.-C. Polybe
+                    try:
+                        if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date or len(str(birth_date)) > 10 or birth_date == "Undefined"):
+                            birth_date = text_normal.split("Naissance")[1]
+                            if "vers" in birth_date.split("\n")[2]:                                                      
+                                if birth_date.split("\n")[2].split("vers")[1].split(" ")[2] == "av.":
+                                    birth_date = f"-{birth_date.split("\n")[2].split("vers")[1].split(" ")[1]}"
+                                    try:
+
+                                        birth_year = int(birth_date.split("-")[1]) * -1
+                                    except:
+                                        birth_year = 123456789
+                                else:
+                                    birth_date = birth_date.split("\n")[2].split("vers")[1].split(" ")[1]
+                                                                    
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"    
+                            else:
+                                birth_date = "Undefined"
+                    except:
+                        birth_date = "Undefined"
+                    
+                    # CAS 12 12 ou 13 juillet 100 av. J.-C. Jules César
+                    
+                    try:
+                        if "Date de naissance" in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date or len(str(birth_date)) > 10 or birth_date == "Undefined"):
+                            birth_date = text_normal.split("Date de naissance")[1]
+                            if "(ou" in birth_date.split("\n")[2]:  
+
+                                if "avant Jésus-Christ" in birth_date.split("\n")[2].split("(ou")[1]:
+                                    birth_date = f"-{birth_date.split("\n")[2].split("(ou")[1].split(" ")[3].strip()}"
+                                    try:
+
+                                        birth_year = int(birth_date.split("-")[1]) * -1
+                                    except:
+                                        birth_year = 123456789
+                                else:
+                                    birth_date = birth_date.split("\n")[2].split("(ou")[1].split(" ")[3].strip()
+                                                                    
+                                birth_year_is_real_but_month_and_day_are_not = True
+                                birth_date+="-01-01"    
+                            else:
+                                birth_date = "Undefined"
+                    except:
+                        birth_date = "Undefined"
+
+                    # CAS 1 MORT vers 120 av. J.-C. Polybe
+                    check_date = False
+                    try:
+                        birth_year_ = int(birth_date.split("-")[1])
+                        check_date = True
+                    except:
+                        check_date = False
+
+                    try:
+                        if ">Décès<" in text_normal and check_date:
+                            death_date = text_normal.split("Décès")[1]                                                        
+                            if "vers" in death_date.split("\n")[2]:  
+                                if death_date.split("\n")[2].split("vers")[1].split(" ")[2] == "av.":
+                                    death_date = f"-{death_date.split("\n")[2].split("vers")[1].split(" ")[1]}"
+                                    try:
+                                        death_year = int(death_date.split("-")[1]) * -1
+                                    except:
+                                        death_year = 123456789
+                                    
+                                else:
+                                    death_date = death_date.split("\n")[2].split("vers")[1].split(" ")[1]
+                                                                    
+                                death_year_is_real_but_month_and_day_are_not = True
+                                death_date+="-01-01"    
+                            else:
+                                death_date = "Undefined"
+                    except:
+                        death_date = "Undefined"
+                    
+                    if birth_date == "Undefined":
+                        birth_year_is_real_but_month_and_day_are_not = False
+                    
+                except:
+                    print("proutprout")
+                    traceback.print_exc()
+                    pass
+            
             try:
                 if type(birth_year) != int:
                     birth_year = 123456789
             except:
                 birth_year = 123456789
+
 
             if is_alive is False:
                 try:
@@ -1980,6 +2206,7 @@ class WikiPeopleData():
                     birth_town_localisation = "Undefined"                
 
 
+
             try:
                 if self.clean_localisation(birth_town_localisation.lower()).strip() in LIST_OF_GOOD_LOCALISATION:
                     country_birth_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(birth_town_localisation.lower())]
@@ -1992,7 +2219,7 @@ class WikiPeopleData():
                 if self.clean_localisation(death_town_localisation.lower()) in LIST_OF_GOOD_LOCALISATION and is_alive is False:
                     country_death_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(death_town_localisation.lower())]
             except:
-                pass                
+                pass
             job_ = job
             try:
                 job = WIKIJOB_TO_JOB_DICT_MAN[job.lower()]
@@ -2317,9 +2544,28 @@ class WikiPeopleData():
                                 country_death_place = ""
                             break
 
+            try:
+                if self.clean_localisation(birth_town_localisation.lower()).strip() in LIST_OF_GOOD_LOCALISATION:
+                    country_birth_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(birth_town_localisation.lower())]
+                
+            except:
+                pass
 
 
-            if town_birth_place in CITIES and (birth_town_localisation == "" or birth_town_localisation == "Undefined"):
+            try:
+                if self.clean_localisation(death_town_localisation.lower()) in LIST_OF_GOOD_LOCALISATION and is_alive is False:
+                    country_death_place = DICT_OF_LOCALISATION_TO_COUNTRY[self.clean_localisation(death_town_localisation.lower())]
+            except:
+                pass
+            
+            if (country_birth_place == "" or  country_birth_place.lower() == "undefined") and town_birth_place != "" and town_birth_place.lower() != "undefined":
+                country_birth_place = self.get_country_of_a_town(town_birth_place.replace(" ","_"))
+            
+            if (country_death_place == "" or  country_death_place.lower() == "undefined") and town_death_place != "" and town_death_place.lower() != "undefined" and is_alive == False:
+                country_death_place = self.get_country_of_a_town(town_death_place.replace(" ","_"))
+
+            
+            if (town_birth_place in CITIES or town_birth_place.lower() in TOWN_TO_LOCALISATION_DICT) and (birth_town_localisation == "" or birth_town_localisation == "Undefined"):
 
                 try:
                     if town_birth_place.lower() in TOWN_TO_LOCALISATION_DICT:
@@ -2327,7 +2573,7 @@ class WikiPeopleData():
                 except:
                     pass
 
-            if town_death_place in CITIES and (death_town_localisation == "" or death_town_localisation == "Undefined") and is_alive is False:
+            if (town_death_place in CITIES or town_death_place.lower() in TOWN_TO_LOCALISATION_DICT) and (death_town_localisation == "" or death_town_localisation == "Undefined") and is_alive is False:
             
                 try:
                     if town_death_place.lower() in TOWN_TO_LOCALISATION_DICT:
@@ -2345,9 +2591,7 @@ class WikiPeopleData():
                 # return
                 # print("town_birth_place " , town_birth_place)
                 # return
-
-
-
+            
             for bad_element in NON_TOWN_ELEMENT_LIST_LOWER:
                 if unidecode(town_birth_place.lower()) == bad_element:
                     town_birth_place = "Undefined"
@@ -2403,11 +2647,16 @@ class WikiPeopleData():
                 if len(country_death_place) != 0 and len(country_birth_place) == 0:
                     country_death_place = country_birth_place
 
-            if birth_town_localisation == "Undefined":
-                country_birth_place = "Undefined"
+            
+            # A VOIR SUR LA PROOCHAINE RUN
 
-            if death_town_localisation == "Undefined" and is_alive is False:
-                death_town_localisation = "Undefined"
+            
+            # if birth_town_localisation == "Undefined":
+            #     country_birth_place = "Undefined"
+
+            # if death_town_localisation == "Undefined" and is_alive is False:
+            #     death_town_localisation = "Undefined"
+        
 
             if "_" in country_birth_place:
                 country_birth_place = country_birth_place.replace("_","  ")
@@ -2528,7 +2777,6 @@ class WikiPeopleData():
                 is_alive = False
                 died_before_christ = True
 
-                        
             try:
                 if "u" in birth_date:
                     birth_date = "unedefined"
@@ -2624,7 +2872,9 @@ class WikiPeopleData():
             if (continent_of_death == "" or continent_of_death == "Undefined") and is_alive is False:
                 preciseness_level -= 10
                 list_of_unpreciseness_data.append("continent of death is unknown")
+            
 
+            
             try:
                 birth_year = int(birth_date.split("-")[0])
 
@@ -2775,6 +3025,8 @@ class WikiPeopleData():
 
             #print(birth_date)
             #NUMBER_TO_MONTH_DICT
+            check_date_again = False
+
             try:
                 if born_before_chirst:
                     birth_year = int(birth_date.split("-")[1]) * -1
@@ -2791,10 +3043,24 @@ class WikiPeopleData():
                     birth_day = "99"
             except:
                 try:
-                    birth_year = int(birth_date.split("-")[0])
+                    if birth_date[0] == "-":
+                        birth_year_ = int(birth_date.split("-")[1]) * -1
+                        _birth_month = birth_month
+                        birth_year = int(birth_date.split("-")[1]) * -1
+                        birth_month = NUMBER_TO_MONTH_DICT[(birth_date.split("-")[2])]
+                        print(check_date_again,_birth_month,birth_month)
+                        if _birth_month != birth_month:
+                            check_date_again = True
+                        birth_day = int(birth_date.split("-")[3])
+
+
+                    else:
+                        birth_year = int(birth_date.split("-")[0])
                 except:
                     birth_year = 123456789
 
+            
+            
             try:
                 if died_before_christ:
                     death_year = int(death_date.split("-")[1]) * -1
@@ -2817,10 +3083,17 @@ class WikiPeopleData():
                     death_year = "alive"
                 else:
                     try:
-                        death_year = int(death_date.split("-")[0])
+                        if death_date[0] == "-":
+                            death_year = int(death_date.split("-")[1]) * -1
+                            death_month = NUMBER_TO_MONTH_DICT[(death_date.split("-")[2])]
+                            death_day = int(death_date.split("-")[3])
+                            
+                        else:
+                            death_year = int(death_date.split("-")[0])
                     except:
                         death_year = 123456789
-                                
+            
+                              
             if birth_year != "Undefined" and len(str(birth_year)) != 0:
                 time_period_of_birth = self.birth_year_to_time_period(birth_year)
 
@@ -2845,6 +3118,15 @@ class WikiPeopleData():
             except:
                 pass    
 
+            if check_date_again:
+                if str(birth_year)[0] == "-" and str(death_year)[0] == "-":
+                    age = (birth_year * -1) - (death_year * -1)
+
+                if str(birth_year)[0] == "-" and str(death_year)[0] != "-":
+                    age = (death_year + ABSOLUTE_DATE_VALUE) - (ABSOLUTE_DATE_VALUE - abs(birth_year))
+                
+                if str(birth_year)[0] != "-" and str(death_year)[0] != "-":
+                    age = death_year - birth_year
 
             if (len(str(birth_date)) <= 1 or str(birth_date).count("-") <= 1) and age == -999:
                 time_period_of_birth = "Undefined"
@@ -3267,6 +3549,21 @@ class WikiPeopleData():
             born_and_died_before_christ = False
             born_and_died_after_christ = False
             born_before_christ_and_died_after_christ = False
+
+            try:
+                if str(birth_year)[0] == "-":
+                    born_and_died_before_christ = True
+                if str(death_year)[0] == "-" and born_and_died_before_christ:
+                    born_and_died_after_christ = True
+                if str(birth_year)[0] == "-" and born_before_christ_and_died_after_christ is False:
+                    born_and_died_before_christ = True
+            except:
+                pass
+
+            #print(born_and_died_before_christ,born_and_died_after_christ,born_before_christ_and_died_after_christ)   
+            # born_and_died_before_christ = False
+            # born_and_died_after_christ = False
+            # born_before_christ_and_died_after_christ = False
 
             birth_town_localisation = unicodedata.normalize("NFKC", birth_town_localisation)
             birth_town_localisation = " ".join(birth_town_localisation.split())
