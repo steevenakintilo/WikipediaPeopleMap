@@ -310,7 +310,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
 
     if "display_only_people_born_and_dead_the_same_day" in recieved_data:
         if recieved_data["display_only_people_born_and_dead_the_same_day"] == "oui":
-            filters["age__gte"] = 3
+            filters["age__gte"] = 0
             filters["is_alive"] = False
             filters["born_and_died_in_the_same_day"] = True
             display_death_localisation = True
@@ -555,6 +555,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     if len(list_of_all_user_data) == 0:
         user_info_dict = {
             "page_name": "Personne",
+            "page_name_shorter": "Aucun résultat trouver",
             "page_url": "https://fr.wikipedia.org/wiki/Personne",
             "gender":"Unknown",
             "is_alive":True,
@@ -566,5 +567,6 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             "number_of_element":1
 
         }
+        
         list_of_all_user_data.append(user_info_dict)
     return JsonResponse({"all_user_data":list_of_all_user_data},status=200)

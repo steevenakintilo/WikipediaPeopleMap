@@ -7,6 +7,8 @@ from .views_folder import basic_user_view
 from .views_folder import database_view
 from .views_folder import display_user_info_view
 from .views_folder import get_other_statistics_view
+from .views_folder import update_user
+#from .views_folder import rb
 
 urlpatterns = [
     path("add_a_wikipedia_user_to_the_database",database_view.add_a_wikipedia_user_to_the_database),
@@ -19,5 +21,10 @@ urlpatterns = [
     path("calc_score_of_all_variable",calc_score_of_variable_view.calc_score_of_all_variable),
     path("update_all_wikipedia_user",database_view.update_all_wikipedia_user),
     path("calc_gender_ratio_of_some_variable",calc_score_of_variable_view.calc_gender_ratio_of_some_variable),
-    path("get_other_statistics",get_other_statistics_view.get_other_statistics)       
+    path("get_other_statistics",get_other_statistics_view.get_other_statistics),
+    path("update_user_info_status",update_user.update_user_info_status),
+    path("update_user_info",update_user.update_user_info),
+    #path("rbnb",rb.rbnb)
+
+            
 ]

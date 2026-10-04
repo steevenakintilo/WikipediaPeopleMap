@@ -5,6 +5,24 @@ from django.db import models
 from django.db import models
 
 
+
+class WikiopediaUserToUpdate(models.Model):
+    """Model representing that update a person/personality from Wikipedia."""
+    page_name = models.CharField(max_length=300, unique=True)   
+    data_to_update  = models.JSONField(
+        default=list,
+        blank=True
+    )
+    update_level = models.IntegerField(
+        default=1
+    )
+
+    # 1 MORT ET VERIFIER
+    # 2 VIVANT ET VERIFIER
+    # 3 NON VERIFIER
+    # 4 EN COUR DE VERIF
+    
+
 class WikipediaUser(models.Model):
     """Model representing a person/personality from Wikipedia."""
 

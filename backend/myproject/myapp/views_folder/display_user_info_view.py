@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 
-from myapp.models import WikipediaUser , WikipediaUserUniqueTown
+from myapp.models import WikipediaUser , WikipediaUserUniqueTown , WikiopediaUserToUpdate
 
 from random import randint
 from random import sample
@@ -98,7 +98,21 @@ def display_user_info(request, username):
             #     user_obj.grade_over_20 = 16.2
 
 
-            
+            user_obj_update_obj = WikiopediaUserToUpdate.objects.filter(page_name=username.strip()).first()
+            print("cvacacgkoprkgokpoger")
+            print(user_obj_update_obj)
+            print(user_obj_update_obj)
+            print(user_obj_update_obj)
+            print(user_obj_update_obj)
+            if user_obj_update_obj is None:
+                update_level = 3
+            else:
+                update_level = user_obj_update_obj.update_level
+
+            print(update_level,update_level,update_level)   
+            print("toto") 
+            print("korgpoerkgpoerkgpoer00")
+            print(page_name)
             user_info_dict = {
                 "page_name": page_name,
                 "page_url": user_obj.page_url,
@@ -167,6 +181,7 @@ def display_user_info(request, username):
                 "country_death_place_emoji": death_place_emoji,
                 "century_of_birth":user_obj.century_of_birth,
                 "century_of_death":user_obj.century_of_death,
+                "update_level":update_level,
                             
             }
             #user_obj.number_of_views += 1
@@ -464,3 +479,4 @@ def display_user_info(request, username):
 #         return JsonResponse(user_info_dict,status=200)
 
  
+

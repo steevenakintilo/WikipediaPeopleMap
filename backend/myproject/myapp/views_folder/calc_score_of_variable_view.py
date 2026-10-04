@@ -418,7 +418,7 @@ def calc_score_of_all_variable(request):
                     last_name_dict_occurence[f"{user_obj.last_name}"] = 0
                     last_name_dict_occurence[f"{user_obj.last_name}"] += 1
 
-            if 16 <= user_obj.age <= 122:
+            if 1 <= user_obj.age <= 122:
                 if user_obj.age not in age_dict_grade:
                     age_dict_grade[user_obj.age] = 0
                     age_dict_grade[user_obj.age] += user_obj.power_ranking

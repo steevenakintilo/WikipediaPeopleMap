@@ -36,7 +36,14 @@ ALLOWED_HOSTS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    # Page admin locale (frontend/admin)
+    "http://127.0.0.1:5174",
+    "http://localhost:5174",
 ]
+
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = (*default_headers, "x-admin-api-key")
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
@@ -99,7 +106,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 RUN_BACKEND_PROD = False
 
-if RUN_BACKEND_PROD is False:
+if RUN_BACKEND_PROD:
     DATABASES = {
         "default": {
             "ENGINE": os.environ["PGENGINE"],
@@ -135,7 +142,7 @@ else:
 #         "USER": "postgres",
 #         "PASSWORD": os.environ["PGPASSWORD"],
 #         "HOST": "127.0.0.1",
-#         "PORT": "56863",
+#         "PORT": "65279",
 #         "OPTIONS": {
 #             "sslmode": "require",
 #         },

@@ -1,3 +1,5 @@
-from django.test import TestCase
+# from random import randint
 
-# Create your tests here.
+# print(randint(1000000000000000000,90000000000000000000) / 1000000000000000000000)
+
+

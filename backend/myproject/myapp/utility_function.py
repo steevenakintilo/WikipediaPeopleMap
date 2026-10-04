@@ -7,7 +7,12 @@
 # pylint: disable=W0702
 
 from collections import Counter
+from discord_webhook import DiscordWebhook
+from dotenv import load_dotenv
 from random import randint
+
+import os
+load_dotenv()
 
 def write_into_file(path:str, data:str) -> None:
     """A function that write data into a file"""
@@ -122,3 +127,13 @@ def dms_to_decimal(dms,name=""):
     except:
         return 999999999999999 ,999999999999999
         return -32.8471,-47.3926
+
+def send_message_discord(msg):
+    """A function that send discord message with webhook"""
+    try:    
+        webhook = DiscordWebhook(url=os.environ["DISCORD_WEBHOOK_KEY"], content=msg)
+        webhook.execute()
+    except:
+        import traceback
+        traceback.print_exc()
+        pass

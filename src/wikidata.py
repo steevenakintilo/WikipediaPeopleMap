@@ -13,7 +13,7 @@ from datetime import datetime
 from urllib.parse import unquote,quote
 from dateutil import relativedelta
 from unidecode import unidecode
-unidecode
+
 from bs4 import BeautifulSoup
 from libzim.reader import Archive
 
@@ -1856,7 +1856,7 @@ class WikiPeopleData():
                             age = -999
             
             # Pour ceux qui ont un age de 0 tels que Marc-Antoine Charpentier  Isabelle d'Angoulême ou encore Érasme
-            if age <= 0:
+            if age <= 0 or age >= 160:
                 birth_year_is_real_but_month_and_day_are_not = False
                 try:
                     # CAS 1 1643 Marc-Antoine Charpentier
@@ -1894,13 +1894,13 @@ class WikiPeopleData():
                                 birth_date+="-01-01"
                     except:
                         birth_date = "Undefined"
-                        traceback.print_exc()
+                        
                     
                     # CAS 4 V. 1188 / 1192 Isabelle d'Angoulême
                     try:
                         if "Naissance" in text_normal and "Date de naissance" not in text_normal and (birth_year_is_real_but_month_and_day_are_not is False or "=" in birth_date or "%" in birth_date):
                             birth_date = text_normal.split("Naissance")[1]
-                            if "V." in birth_date.split("\n")[1]:
+                            if "v." in birth_date.split("\n")[1]:
                                 birth_date = birth_date.split("\n")[1].split("href=")[1].split(" ")[0].replace('"',"")
                                 birth_year_is_real_but_month_and_day_are_not = True
                                 birth_date+="-01-01"
@@ -2066,8 +2066,6 @@ class WikiPeopleData():
                         birth_year_is_real_but_month_and_day_are_not = False
                     
                 except:
-                    print("proutprout")
-                    traceback.print_exc()
                     pass
             
             try:
@@ -3048,7 +3046,6 @@ class WikiPeopleData():
                         _birth_month = birth_month
                         birth_year = int(birth_date.split("-")[1]) * -1
                         birth_month = NUMBER_TO_MONTH_DICT[(birth_date.split("-")[2])]
-                        print(check_date_again,_birth_month,birth_month)
                         if _birth_month != birth_month:
                             check_date_again = True
                         birth_day = int(birth_date.split("-")[3])
@@ -3119,15 +3116,21 @@ class WikiPeopleData():
                 pass    
 
             if check_date_again:
-                if str(birth_year)[0] == "-" and str(death_year)[0] == "-":
-                    age = (birth_year * -1) - (death_year * -1)
-
-                if str(birth_year)[0] == "-" and str(death_year)[0] != "-":
-                    age = (death_year + ABSOLUTE_DATE_VALUE) - (ABSOLUTE_DATE_VALUE - abs(birth_year))
-                
-                if str(birth_year)[0] != "-" and str(death_year)[0] != "-":
-                    age = death_year - birth_year
-
+                try:
+                    if str(birth_year)[0] == "-" and str(death_year)[0] == "-":
+                        age = (birth_year * -1) - (death_year * -1)
+                except:
+                    pass
+                try:
+                    if str(birth_year)[0] == "-" and str(death_year)[0] != "-":
+                        age = (death_year + ABSOLUTE_DATE_VALUE) - (ABSOLUTE_DATE_VALUE - abs(birth_year))
+                except:
+                    pass    
+                try:
+                    if str(birth_year)[0] != "-" and str(death_year)[0] != "-":
+                        age = death_year - birth_year
+                except:
+                    pass
             if (len(str(birth_date)) <= 1 or str(birth_date).count("-") <= 1) and age == -999:
                 time_period_of_birth = "Undefined"
                 #CODER QQCH
@@ -3173,7 +3176,19 @@ class WikiPeopleData():
                     century_of_death = int(str(death_year + 1)[0:2]) + 1
             except:
                 century_of_death = -999
-            
+
+
+            try:
+                if age >= 150 and is_alive:
+                    is_alive = False
+                    if is_alive is False:
+                        death_date = "Undefined"
+                        death_year = 123456789
+                        death_month = "Undefined"
+                        death_day = "Undefined"
+                        age = -999
+            except:
+                pass
             if country_birth_place == "":
                 country_birth_place = "Undefined"
             if birth_date == "":
@@ -3449,7 +3464,10 @@ class WikiPeopleData():
             except:
                 pass
 
-            
+
+
+
+
             if potential_bad_page and potential_bad_page2:
                 potential_bad_bad_page = True
 
@@ -3571,7 +3589,7 @@ class WikiPeopleData():
             death_town_localisation = unicodedata.normalize("NFKC", death_town_localisation)
             death_town_localisation = " ".join(death_town_localisation.split())
 
-            print(born_and_died_after_christ,born_and_died_after_christ,born_before_christ_and_died_after_christ)
+            #print(born_and_died_after_christ,born_and_died_after_christ,born_before_christ_and_died_after_christ)
             if born_before_chirst and died_before_christ:
                 born_and_died_before_christ = True
                 born_and_died_after_christ = True
