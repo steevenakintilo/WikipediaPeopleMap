@@ -1,63 +1,46 @@
-import { useEffect } from "react";
-import { useMap } from "react-leaflet";
-import L from "leaflet";
+import { useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
+import { cn } from "@steevenakintilo/ui";
 
-const Legend = () => {
-  const map = useMap();
+import { gender_to_color, gender_to_color2 } from "../utils/global_variable.tsx";
 
-  useEffect(() => {
-    const legend = new L.Control({ position: "bottomleft" });
-    
-    legend.onAdd = () => {
-      const div = L.DomUtil.create("div", "info legend");
+// Mêmes couleurs que les cercles de la carte (genre + vivant/décédé)
+const LEGEND_ITEMS = [
+  { color: gender_to_color.ManTrue, label: "Naissance : homme vivant" },
+  { color: gender_to_color.ManFalse, label: "Naissance : homme décédé" },
+  { color: gender_to_color2.ManFalse, label: "Décès : homme" },
+  { color: gender_to_color.WomanTrue, label: "Naissance : femme vivante" },
+  { color: gender_to_color.WomanFalse, label: "Naissance : femme décédée" },
+  { color: gender_to_color2.WomanFalse, label: "Décès : femme" },
+];
 
-      div.innerHTML = `
-        <h4>Légende</h4>
+const Legend = ({ className }: { className?: string }) => {
+  // Repliée par défaut sur mobile pour laisser la place à la carte
+  const [open, set_open] = useState(() => window.innerWidth > 768);
 
-        <div>
-          <span class="legend-circle legend-birth-man-alive"></span>
-          Lieu de naissance: Homme vivant
-        </div>
-
-        <div>
-          <span class="legend-circle legend-birth-man-dead"></span>
-          Lieu de naissance: Homme mort  
-        </div>
-
-        <div>
-          <span class="legend-circle legend-death-man-place"></span>
-          Lieu de mort: Homme mort  
-        </div>
-        
-        <div>
-          <span class="legend-circle legend-birth-woman-alive"></span>
-            Lieu de naissance: Femme vivante
-          </div>
-
-        <div>
-          <span class="legend-circle legend-birth-woman-dead"></span>
-          Lieu de naissance: Femme morte
-        </div>
-        
-        <div>
-          <span class="legend-circle legend-death-woman-place"></span>
-          Lieu de mort: Femme morte
-        </div>
-        
-      `;
-
-      return div;
-    };
-
-    legend.addTo(map);
-
-    return () => {
-      legend.remove();
-    };
-  }, [map]);
-
-  return null;
+  return (
+    <div className={cn("w-56 rounded-lg border bg-background/95 text-xs shadow-md backdrop-blur", className)}>
+      <button
+        type="button"
+        aria-expanded={open}
+        className="flex w-full items-center justify-between px-3 py-2 font-medium"
+        onClick={() => set_open(!open)}
+      >
+        Légende
+        <ChevronDownIcon className={cn("size-4 text-muted-foreground transition-transform", open && "rotate-180")} />
+      </button>
+      {open && (
+        <ul className="space-y-1.5 px-3 pb-3">
+          {LEGEND_ITEMS.map((item) => (
+            <li key={item.label} className="flex items-center gap-2">
+              <span className="size-3 shrink-0 rounded-full ring-1 ring-foreground/25" style={{ backgroundColor: item.color }} />
+              {item.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default Legend;
-

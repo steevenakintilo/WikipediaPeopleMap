@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Tests UX (Playwright) : rapports et résultats générés
+tests/ux/report
+tests/ux/results

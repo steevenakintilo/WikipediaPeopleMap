@@ -1,6 +1,4 @@
 
-import { useState} from 'react';
-
 export function generate_random_colour() {
     return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 }
@@ -228,20 +226,6 @@ export function make_a_stacked_bar_graphic(
 
     return graph_data
 }
-
-  export function navbar() {
-    
-      return (
-            <nav className="navbar navbar-expand-lg  navbarBGcolor fixed-top navbar_color">
-              <div className="container-fluid">
-                  
-                  <div className="d-grid gap-2">
-                      <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                  </div>
-              </div>
-            </nav>
-      )  
-    }
 
 // A GARDER SI JE VEUX RETESTER LES SCATTER
 export function generate_list_of_dict_for_scatter(list_:any,big_index:number) {

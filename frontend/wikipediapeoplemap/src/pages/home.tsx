@@ -6,163 +6,186 @@ import {
   useMap
 } from "react-leaflet";
 
-import {random_localisation_in_france} from "../utils/global_variable.tsx"
-import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
-
 import { useEffect, useState } from 'react';
-
-import "leaflet/dist/leaflet.css";
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
-polyfillCountryFlagEmojis();
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { Button, cn } from "@steevenakintilo/ui";
 
 // Mes imports
-import "../utils/global.css"
+import { random_localisation_in_france } from "../utils/global_variable.tsx"
+import { LOGO_URL } from "../components/nav_links.ts";
+
+const longitude_position_of_france = 6.6034
+const latitude_position_of_france = 48.8883
+
+// Menu de l'accueil : un bouton par page, avec une courte explication
+const HOME_MENU_WITH_DESCRIPTION = [
+  {
+    id: "WorldMapPageButton",
+    to: "/WorldMap",
+    label: "Explorer la Map",
+    description: "Une carte interactive des lieux de naissance et de décès de toutes les personnes ayant une page Wikipédia en français, avec un système de filtres.",
+  },
+  {
+    id: "StatisticsPageButton",
+    to: "/Statistics",
+    label: "Statistiques détaillées",
+    description: "Des statistiques et des graphiques sur les résultats d'une recherche faite avec les filtres avancés.",
+  },
+  {
+    id: "OtherStatisticsPageButton",
+    to: "/OtherStatistics",
+    label: "Autres statistiques",
+    description: "Le classement des noms, villes, pays… selon un score, et le ratio hommes/femmes par ville, pays, âge…",
+  },
+  {
+    id: "QjisMapPageButton",
+    to: "/Qjis",
+    label: "Carte pour QGIS",
+    description: "Disponible sur PC : génère un fichier CSV utilisable dans le logiciel QGIS à partir des filtres choisis.",
+    desktop_only: true,
+  },
+  {
+    id: "AboutPageButton",
+    to: "/About",
+    label: "À propos",
+    description: "L'idée du projet, le calcul du classement et les explications techniques.",
+  },
+]
+
+// Menu de l'accueil : un bouton par page, avec une courte explication
+const HOME_MENU = [
+  {
+    id: "WorldMapPageButton",
+    to: "/WorldMap",
+    label: "Explorer la Map",
+    description: "",
+  },
+  {
+    id: "StatisticsPageButton",
+    to: "/Statistics",
+    label: "Statistiques détaillées",
+    description: "",
+  },
+  {
+    id: "OtherStatisticsPageButton",
+    to: "/OtherStatistics",
+    label: "Autres statistiques",
+    description: "",
+  },
+  {
+    id: "QjisMapPageButton",
+    to: "/Qjis",
+    label: "Carte pour QGIS",
+    description: "",
+    desktop_only: true,
+  },
+  {
+    id: "AboutPageButton",
+    to: "/About",
+    label: "À propos",
+    description: "",
+  },
+]
+
+const MapController = ({
+  latitude,
+  longitude,
+  zoom,
+}: {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}) => {
+  const map = useMap();
+
+
+  useEffect(() => {
+    map.setView([latitude, longitude], zoom);
+  }, [latitude, longitude, zoom, map]);
+
+  return null;
+};
 
 const Home = () => {
-  var list_of_random_position : any = []
-  var list_of_random_position : any = random_localisation_in_france.sort(() => Math.random() - 0.5);
-
-  const longitude_position_of_france = 6.6034
-  const latitude_position_of_france = 48.8883
-  const [longitude] = useState(longitude_position_of_france)
-  const [latitude] = useState(latitude_position_of_france)
-  const [zoom] = useState(6)
-  
-  const MapController = ({
-    latitude,
-    longitude,
-    zoom,
-  }: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  }) => {
-    const map = useMap();
-
-    
-    useEffect(() => {
-      map.setView([latitude, longitude], zoom);
-    }, [latitude, longitude, zoom, map]);
-
-    return null;
-  };
+  // Mélangé une seule fois par affichage de la page (copie : le tableau global n'est plus modifié)
+  const [list_of_random_position] : any = useState(() => [...random_localisation_in_france].sort(() => Math.random() - 0.5));
 
   return (
+    <main className="flex min-h-dvh">
+      <Helmet>
+        <html lang="fr" />
+        <title>Wikipedia People Map - La carte des personnes de Wikipédia</title>
+        <meta name="description" content="Explorez sur une carte interactive les lieux de naissance et de décès des personnes ayant une page Wikipédia en français, avec des statistiques et des filtres avancés." />
+      </Helmet>
+      <h1 className="sr-only">Wikipedia People Map</h1>
 
-    <div>   
-
-      <div className="d-flex align-items-stretch min-vh-100">
-        <div className="map-wrapper border-end border-end border-2 border-secondary desktop-only"
-          style={{
-            position: "sticky",
-            top: 0,
-            height: "100vh",
-          }}
+      {/* Ordinateur : la carte prend toute la hauteur, à gauche du menu */}
+      <div className="sticky top-0 isolate hidden h-dvh min-w-0 flex-1 border-r-2 border-neutral-500 md:block">
+        <MapContainer
+          minZoom={2}
+          maxZoom={18}
+          zoomControl={true}
+          scrollWheelZoom={true}
+          className="size-full"
         >
-          <MapContainer
-            minZoom={2}
-            maxZoom={18}
-            zoomControl={true}
-            scrollWheelZoom={true}
-            className="world-map"
-          >
 
-          <MapController
-            latitude={latitude}
-            longitude={longitude}
-            zoom={zoom}
+        <MapController
+          latitude={latitude_position_of_france}
+          longitude={longitude_position_of_france}
+          zoom={6}
+        />
+
+
+          <TileLayer
+            attribution="&copy; Google Maps"
+            url="https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
+            subdomains={["mt0", "mt1", "mt2", "mt3"]}
           />
 
-            
-            <TileLayer
-              attribution="&copy; Google Maps"
-              url="https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
-              subdomains={["mt0", "mt1", "mt2", "mt3"]}
-            />
-            
-            {list_of_random_position.slice(0, 100).map((position:any,index:number) =>
-                
-              (
-                <CircleMarker 
-                  key={index}
-                  center={((position))}
-                  radius={10}
-                  pathOptions={{
-                    fillColor: "black",
-                    color: "black",
-                    fillOpacity: 0.3
-                  }}
-                >                
-                </CircleMarker>
-              )
-                
-            )}
-            
-          </MapContainer>
-          
-        </div>
-        <div className="desktop-only" style={{flexShrink:0 }}>
-            <div className="card">
-              <ul className="list-group list-group-flush">
-              <div>
-              
-              <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1789683297/how-to-draw-an-earth-step-6_1_go2k7j.jpg" style={{ cursor: "pointer" }} alt="" width="500" height="440" className="me-2"/>
-              </div>
-              <br></br>
-              <br></br>
-              
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="WorldMapPageButton"href="/WorldMap">Explorer la Map</a>
-              <br></br>
-              
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="StatisticsPageButton" href="/Statistics">Statistiques détaillées</a>
-              <br></br>
+          {list_of_random_position.slice(0, 100).map((position:any,index:number) =>
 
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="OtherStatisticsPageButton" href="/OtherStatistics">Autres statistiques</a>
-              <br></br>
+            (
+              <CircleMarker
+                key={index}
+                center={((position))}
+                radius={10}
+                pathOptions={{
+                  fillColor: "black",
+                  color: "black",
+                  fillOpacity: 0.3
+                }}
+              >
+              </CircleMarker>
+            )
 
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="QjisMapPageButton" href="/Qjis">Carte pour qjis</a>
-              <br></br>
-              
-              <a type="button" className="btn btn-dark btn-xl" style={{margin :"auto"}} id="AboutPageButton" href="/About">À propos</a>
-              <br></br>
-              
-              </ul>
-            </div>
-        </div>            
-          
-        <div className="mobile-only" style={{flexShrink:0 }}>
-            <div className="card position-absolute top-50 start-50 translate-middle">
-              <ul className="list-group list-group-flush">
-              <div>
-              
-              <img src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1789683297/how-to-draw-an-earth-step-6_1_go2k7j.jpg" style={{ cursor: "pointer" }} alt="" width="350" height="350" className="me-2"/>
-              </div>
-              <br></br>
-              <br></br>
-              
-              <a type="button" className="btn btn-dark btn-xl" id="WorldMapPageButton" style={{margin :"auto"}} href="/WorldMap">Explorer la Map</a>
-              <br></br>
-              
-              <a type="button" className="btn btn-dark btn-xl" id="StatisticsPageButton" style={{margin :"auto"}} href="/Statistics">Statistiques détaillées</a>
-              <br></br>
+          )}
 
-              <a type="button" className="btn btn-dark btn-xl" id="OtherStatisticsPageButton" style={{margin :"auto"}} href="/OtherStatistics">Autres statistiques</a>
-              <br></br>
-              
-              <a type="button" className="btn btn-dark btn-xl" id="AboutPageButton" style={{margin :"auto"}} href="/About">À propos</a>
-              <br></br>
-              
-              </ul>
-            </div>
-        </div>            
-        
-
+        </MapContainer>
       </div>
-    </div>
-    
+
+      <div className="flex w-full flex-col items-center justify-center gap-5 px-4 py-5 md:h-dvh md:w-[520px] md:shrink-0">
+        <img
+          src={LOGO_URL}
+          alt=""
+          className="size-[270px] max-w-full object-contain md:h-auto md:max-h-[50dvh] md:w-full"
+        />
+
+        <nav aria-label="Pages du site" className="flex flex-col items-center gap-3.5">
+          {HOME_MENU.map((item) => (
+            <div key={item.id} className={cn("flex-col items-center gap-1 text-center", item.desktop_only ? "hidden md:flex" : "flex")}>
+              <Button
+                asChild
+                className="h-auto w-72 rounded-[5px] bg-[#212529] px-5 py-2.5 text-xl font-normal text-white hover:bg-[#424649] dark:ring-1 dark:ring-white/20"
+              >
+                <Link id={item.id} to={item.to}>{item.label}</Link>
+              </Button>
+              <p className="max-w-sm text-xs text-pretty text-muted-foreground">{item.description}</p>
+            </div>
+          ))}
+        </nav>
+      </div>
+    </main>
   );
 };
 

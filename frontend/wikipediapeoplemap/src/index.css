@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "@steevenakintilo/ui/styles.css";
+
+/* Couleur principale du site : le noir des boutons du menu (#212529) */
+:root {
+  --primary: #212529;
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.556 0 0);
+}
+
+/* En sombre, un noir serait invisible sur le fond : on garde le gris clair du design system */
+.dark {
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --ring: oklch(0.556 0 0);
+}
+
+@theme inline {
+  /* Police des drapeaux (polyfill pour Windows) en premier, Geist pour tout le reste */
+  --font-sans: "Twemoji Country Flags", "Geist Variable", sans-serif;
+}
+
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+}
+
+/* Popups de la carte aux couleurs du thème (clair / sombre) */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--popover);
+  color: var(--popover-foreground);
+}
+
+/* Pas de flou derrière les fenêtres : flouter la carte Leaflet fait ramer le navigateur */
+[data-slot="dialog-overlay"],
+[data-slot="sheet-overlay"],
+[data-slot="alert-dialog-overlay"] {
+  backdrop-filter: none;
+  background-color: rgb(0 0 0 / 0.4);
+}

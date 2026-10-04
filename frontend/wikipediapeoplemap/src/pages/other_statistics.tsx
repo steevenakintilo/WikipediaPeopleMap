@@ -1,609 +1,239 @@
-import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
-import { Accordion } from 'react-bootstrap';
-import {useState,useEffect } from 'react';
+import { BLACK_BUTTON } from "../utils/styles.ts"
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { SearchIcon } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, Spinner, Tabs, TabsContent, TabsList, TabsTrigger } from "@steevenakintilo/ui";
 
-import { AgCharts } from "ag-charts-react";
-import {
-    ModuleRegistry,
-    AllCommunityModule
-} from "ag-charts-community";
+import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING , LIST_OF_THEME_FOR_GENDER_RATIO , THEME_TO_SUB_THEMES_FOR_GENDER_RATIO} from '../utils/global_variable'
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+import {make_a_graphic ,generate_list_of_dict_with_three_params_as_data, generate_list_of_dict_with_four_params_as_data , make_a_stacked_bar_graphic , is_screen_for_mobile} from "../utils/utility_function.tsx";
+import { other_statistics_query, retry_if_failed } from "../api/queries.ts";
+import { DataTableDialog } from "../components/data_table_dialog.tsx";
+import { EmptyState, ErrorState, LoadingState, PageHeader } from "../components/page.tsx";
+import { StatChartCard } from "../components/stat_chart.tsx";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+const NO_DATA = {}
+const NO_CHARTS = {
+  list_of_graph: [], list_of_dict: [], list_of_keys_name: [],
+  list_of_graph2: [], list_of_dict2: [], list_of_keys_name2: [],
+}
 
-import "../utils/global.css";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+const format_number = (value: any) => (typeof value === "number" ? value.toLocaleString("fr-FR") : value)
 
-import {THEME_TO_SUB_THEMES_FOR_RANKING, LIST_OF_THEME_FOR_RANKING , LIST_OF_THEME_FOR_GENDER_RATIO , THEME_TO_SUB_THEMES_FOR_GENDER_RATIO,backend_url_local,backend_url_prod} from '../utils/global_variable'
+// Construit les graphiques de classement (1) et de ratio hommes / femmes (2)
+function build_charts(list_of_ranking_data: any, list_of_gender_data: any) {
+  const keys = Object.keys(list_of_ranking_data);
+  const keys2 = Object.keys(list_of_gender_data);
 
-import {make_a_graphic ,generate_list_of_dict_with_three_params_as_data, generate_list_of_dict_with_four_params_as_data , make_a_stacked_bar_graphic , is_screen_for_mobile , navbar} from "../utils/utility_function.tsx";
+  const list_of_graph: any[] = [];
+  const list_of_dict: any[] = [];
+  const list_of_keys_name: string[] = [];
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper
-} from "@mui/material";
+  const list_of_graph2: any[] = [];
+  const list_of_dict2: any[] = [];
+  const list_of_keys_name2: string[] = [];
+  let number_of_bar_to_display = 10;
+  if (is_screen_for_mobile() == true) {
+    number_of_bar_to_display = 3
+  }
 
-polyfillCountryFlagEmojis();
+  for (let i = 0; i < keys.length - 1; i++) {
+      const key = keys[i];
+
+      if (list_of_ranking_data[key].length >= 1) {
+        const generic_dict = generate_list_of_dict_with_three_params_as_data(
+            list_of_ranking_data[key],
+            number_of_bar_to_display
+        );
+
+        list_of_keys_name.push(key);
+        list_of_graph.push(make_a_graphic("bar", generic_dict, key));
+        list_of_dict.push(generate_list_of_dict_with_three_params_as_data(list_of_ranking_data[key], 50000000));
+      }
+  }
+
+  for (let i = 0; i < keys2.length - 1; i++) {
+      const key = keys2[i];
+
+      if (list_of_gender_data[key].length >= 1) {
+        const generic_dict = generate_list_of_dict_with_four_params_as_data(
+            list_of_gender_data[key],
+            number_of_bar_to_display
+        );
+
+        list_of_keys_name2.push(key);
+        list_of_graph2.push(make_a_stacked_bar_graphic(generic_dict, key));
+        list_of_dict2.push(generate_list_of_dict_with_four_params_as_data(list_of_gender_data[key], 50000000));
+      }
+  }
+
+  return { list_of_graph, list_of_dict, list_of_keys_name, list_of_graph2, list_of_dict2, list_of_keys_name2 }
+}
+
+function total_occurences(data_dict: any[]) {
+  let total_number = 0
+  data_dict.forEach((data: any) => {
+    total_number += data.data_occurence
+  })
+  return total_number
+}
+
+// Titre du tableau : le nom de la statistique quand c'en est un ("Les …")
+function detail_title(keys_info: string) {
+  return keys_info[0] == "L" ? keys_info : "Statistiques détaillées"
+}
 
 const OtherStatistics = () => {
 
-    const [list_of_ranking_data,set_list_of_ranking_data] : any = useState({});
-    const [list_of_gender_data,set_list_of_gender_data] : any = useState({});
-    
+    const [search_launched,set_search_launched] = useState(false)
+    // Tableau détaillé ouvert : graphique de classement ou de ratio
+    const [detail,set_detail] = useState<{ kind: "ranking" | "gender", index: number } | null>(null)
 
+    // L'appel API passe par TanStack Query : relancer la recherche répond depuis le cache
+    const other_statistics = useQuery({
+      ...other_statistics_query(),
+      enabled: search_launched,
+    })
+    const list_of_ranking_data : any = other_statistics.data?.ranking_list_of_dict ?? NO_DATA
+    const list_of_gender_data : any = other_statistics.data?.gender_ratio_list_of_dict ?? NO_DATA
+    const loading = other_statistics.isLoading
+    const server_error_found = other_statistics.isError
+    const result_found = other_statistics.data !== undefined && !other_statistics.isError
 
-    const [list_of_graph, set_list_of_graph] = useState<any[]>([]);
-    const [list_of_dict, set_list_of_dict] = useState<any[]>([]);
-    const [list_of_keys_name, set_list_of_keys_name] = useState<string[]>([]);
+    const charts = result_found ? build_charts(list_of_ranking_data, list_of_gender_data) : NO_CHARTS
 
-    const [list_of_graph2, set_list_of_graph2] = useState<any[]>([]);
-    const [list_of_dict2, set_list_of_dict2] = useState<any[]>([]);
-    const [list_of_keys_name2, set_list_of_keys_name2] = useState<string[]>([]);
-    
-    const [result_found,set_result_found] : any = useState(false)
-    const [loading,set_loading] : any = useState(false)
-    const [server_error_found,set_server_error_found] : any = useState(false)
-    
-    const [dict_info,set_dict_info] : any = useState({});
-    const [keys_info,set_keys_info] : any = useState({});
-    const [text_input, settext_input] = useState("");
-    
+    const ranking_rows : any[] = detail?.kind === "ranking" ? (charts.list_of_dict[detail.index] ?? []) : []
+    const ranking_key = detail?.kind === "ranking" ? charts.list_of_keys_name[detail.index] : ""
+    const gender_rows : any[] = detail?.kind === "gender" ? (charts.list_of_dict2[detail.index] ?? []) : []
+    const gender_key = detail?.kind === "gender" ? charts.list_of_keys_name2[detail.index] : ""
 
-    function handle_list_of_user_data(data_recieved:any) {
-        set_list_of_ranking_data(data_recieved.ranking_list_of_dict)
-        set_list_of_gender_data(data_recieved.gender_ratio_list_of_dict)
-        
+    function get_list_of_user_other_advanced_statistics() {
+      set_search_launched(true)
+      retry_if_failed(other_statistics_query().queryKey)
     }
 
-
-
-    useEffect(() => {
-    if (!result_found) {
-        return;
-    }
-      
-      const keys = Object.keys(list_of_ranking_data);
-      const keys2 = Object.keys(list_of_gender_data);
-      
-      const new_list_of_graph: any[] = [];
-      const new_list_of_dict: any[] = [];
-      const new_list_of_keys_name: string[] = [];
-
-      const new_list_of_graph2: any[] = [];
-      const new_list_of_dict2: any[] = [];
-      const new_list_of_keys_name2: string[] = [];
-      var number_of_bar_to_display = 10;
-      if (is_screen_for_mobile() == true) {
-        number_of_bar_to_display = 3
+    function close_detail(open: boolean) {
+      if (!open) {
+        set_detail(null)
       }
-
-      for (let i = 0; i < keys.length - 1; i++) {
-
-          const key = keys[i];
-
-          if (list_of_ranking_data[key].length >= 1) {
-              
-
-            const generic_dict = generate_list_of_dict_with_three_params_as_data(
-                list_of_ranking_data[key],
-                number_of_bar_to_display
-            );
-
-            const generic_chart = make_a_graphic(
-                "bar",
-                generic_dict,
-                key
-            );
-            
-              new_list_of_keys_name.push(key);
-
-                  new_list_of_graph.push(generic_chart);
-
-                  new_list_of_dict.push(
-                      generate_list_of_dict_with_three_params_as_data(
-                          list_of_ranking_data[key],
-                          50000000
-                      )
-                  );
-              }
-            }
-      
-      for (let i = 0; i < keys2.length - 1; i++) {
-
-          const key = keys2[i];
-          if (list_of_gender_data[key].length >= 1) {
-              
-
-            const generic_dict = generate_list_of_dict_with_four_params_as_data(
-                list_of_gender_data[key],
-                number_of_bar_to_display
-            );
-
-            const generic_chart = make_a_stacked_bar_graphic(
-                generic_dict,
-                key
-            );
-            
-              new_list_of_keys_name2.push(key);
-
-                  new_list_of_graph2.push(generic_chart);
-
-                  new_list_of_dict2.push(
-                      generate_list_of_dict_with_four_params_as_data(
-                          list_of_gender_data[key],
-                          50000000
-                      )
-                  );
-              }
-            }
-      
-      
-      set_list_of_graph(new_list_of_graph);
-      set_list_of_dict(new_list_of_dict);
-      set_list_of_keys_name(new_list_of_keys_name);
-
-      set_list_of_graph2(new_list_of_graph2);
-      set_list_of_dict2(new_list_of_dict2);
-      set_list_of_keys_name2(new_list_of_keys_name2);
-      
-    }, [list_of_ranking_data , list_of_gender_data ,result_found]);
-
-    // A function that handle dict/keys name information
-
-    function handle_dict_and_keys_info(dict_info:any,keys_info:string) {
-      set_dict_info(dict_info)
-      set_keys_info(keys_info)
     }
 
-    // A function that get other advanced statistics about wikipedia user
-
-    async function get_list_of_user_other_advanced_statistics() {      
-      set_loading(true)
-      set_server_error_found(false)
-
-      const response = await fetch(`${backend_url_prod}/get_other_statistics`, {
-          method: 'GET',
-          headers: {"Content-Type" : "application/json"},
-
-      })
-      
-      if (response.status == 500) {
-          set_server_error_found(true)
-          set_loading(false)
-          set_result_found(false)
-          return {}
-      }
-      const data_fetch = await response.json()
-      set_result_found(true)
-      set_loading(false)
-      return data_fetch
-
-    }
-
-
-    // A function to handle text input
-    
-    function handle_text_input (event:any) {
-      settext_input(event.target.value)
-    }
-  
-  
-    // A function that show detailed stat about ranking statistics
-
-    function detailed_stat_modal(data_dict:any) {
-      var graph_name = ""      
-      if (result_found == false) {
-        data_dict = {}
-        graph_name = ""
-      }
-
-      var total_number : any = 0
-      var text_to_display = "son score"
-      {Object.values(data_dict).map((data:any) => (
-        total_number+=data.data_occurence
-      ))}
-      
-
-      if (keys_info[0] == "L") {
-        graph_name = keys_info
-      } 
-      return(
-         <div>
-           <div className="modal fade" id="exampleModal2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-             <div className="modal-dialog modal-xl">
-               <div className="modal-content">
-                 <div className="modal-header">
-                   <h1 className="modal-title fs-5" id="exampleModalLabel2">Statistiques détaillées: {graph_name}</h1>
-                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                  
-                 <div className="modal-body">
-                    {/* <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/> */}
-                    
-                    <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/>
-                    <TableContainer component={Paper}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>{"."}</TableCell>
-                          <TableCell>{"Element"}</TableCell>
-                          <TableCell>{text_to_display}</TableCell>
-                          <TableCell>{"Nombre de fois qu'il est présent"}</TableCell>
-                          <TableCell>{"Nombre d'élements"}</TableCell>
-                          
-                          
-                        </TableRow>
-                      </TableHead>
-
-                      <TableBody>
-                        {Object.values(data_dict).map((data:any,index:number) => (
-
-                          data.data_name.toString().toLowerCase().includes(text_input.toLowerCase()) != "" && (
-                            <TableRow key={index}>
-                              <TableCell>{(index + 1) + "/" + data_dict.length.toString()}</TableCell>
-                              <TableCell>{data.data_name}</TableCell>
-                              <TableCell>{data.data_number}</TableCell>
-                              <TableCell>{data.data_occurence}</TableCell>
-                              <TableCell>{total_number}</TableCell>
-                              
-                              
-                              
-                            </TableRow>
-                          )
-                        ))}
-                      </TableBody>
-                    
-                    </Table>
-                  </TableContainer>
-                    <br></br>
-                    
-                 </div>
-                 
-                 <div className="modal-footer">
-                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div> 
-       )
-    }
-
-    // A function that show detailed stat about ratio statistics
-    
-    function detailed_stat_modal2(data_dict:any) {
-      if (result_found == false || keys_info.length == 0) {
-        data_dict = {}
-      }
-
-      var total_number : any = 0
-      {Object.values(data_dict).map((data:any) => (
-        total_number+=data.data_occurence
-      ))}
-      
-      var graph_name = ""
-      
-      if (keys_info[0] == "L") {
-        graph_name = keys_info
-      } 
-      
-      
-      return(
-         <div>
-           <div className="modal fade" id="exampleModal3" aria-labelledby="exampleModalLabel3" aria-hidden="true">
-             <div className="modal-dialog modal-xl">
-               <div className="modal-content">
-                 <div className="modal-header">
-                   <h1 className="modal-title fs-5" id="exampleModalLabel3">Statistiques détaillées: {graph_name}</h1>
-                   <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                  
-                 <div className="modal-body">
-                    {/* <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/> */}
-                    
-                    <input name="myInput" placeholder={"Cherche ton élement"} onChange={handle_text_input}/>
-                    <TableContainer component={Paper}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>{"."}</TableCell>
-                          <TableCell>{"Element"}</TableCell>
-                          <TableCell>{"% de femme"}</TableCell>
-                          <TableCell>{"% d'homme"}</TableCell>
-                          <TableCell>{"Nombre de fois qu'il est présent"}</TableCell>
-                          
-                          
-                          
-                        </TableRow>
-                      </TableHead>
-
-                      <TableBody>
-                        {Object.values(data_dict).map((data:any,index:number) => (
-
-                          data.data_name.toString().toLowerCase().includes(text_input.toLowerCase()) != "" && (
-                            <TableRow key={index}>
-                              <TableCell>{(index + 1) + "/" + data_dict.length.toString()}</TableCell>
-                              <TableCell>{data.data_name}</TableCell>
-                              <TableCell>{data.ratio_girl}</TableCell>
-                              <TableCell>{data.ratio_boy}</TableCell>
-                              <TableCell>{total_number}</TableCell>
-                            </TableRow>
-                          )
-                        ))}
-                      </TableBody>
-                    
-                    </Table>
-                  </TableContainer>
-                    <br></br>
-                    
-                 </div>
-                 
-                 <div className="modal-footer">
-                   <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div> 
-       )
-    }
-    
    return (
+    <main className="mx-auto w-full max-w-7xl flex-1 space-y-6 px-4 py-10">
+      <PageHeader
+        title="Autres statistiques"
+        description="Classements des noms, villes, pays… par rapport à un score, et ratio hommes / femmes par ville, pays, âge, etc."
+      >
+        {result_found && (
+          <Button variant="outline" onClick={() => other_statistics.refetch()} disabled={other_statistics.isFetching}>
+            {other_statistics.isFetching ? <Spinner /> : <SearchIcon />} Actualiser
+          </Button>
+        )}
+      </PageHeader>
 
-    <div className="container">
-        <div
-            className=""
+      {server_error_found && <ErrorState on_retry={() => other_statistics.refetch()} />}
+
+      {loading && <LoadingState />}
+
+      {!loading && result_found && (
+        <Tabs defaultValue="gender" className="gap-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <TabsList>
+              <TabsTrigger value="gender">Ratio hommes / femmes</TabsTrigger>
+              <TabsTrigger value="ranking">Classements</TabsTrigger>
+            </TabsList>
+            <p className="text-sm text-muted-foreground">
+              Le score correspond à la moyenne de tous les utilisateurs possédant cette variable.
+            </p>
+          </div>
+
+          <TabsContent value="gender">
+            <Accordion type="multiple" className="rounded-xl border px-4">
+              {charts.list_of_keys_name2.map((key: string) => (
+                LIST_OF_THEME_FOR_GENDER_RATIO.includes(key) && (
+                  <AccordionItem key={key} value={key}>
+                    <AccordionTrigger className="text-base">
+                      {THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[key].split("classé(e)s")[0]}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="space-y-10 pt-2">
+                        {charts.list_of_graph2.map((graph: any, index2: number) => (
+                          THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[charts.list_of_keys_name2[index2]] === key && (
+                            <StatChartCard key={index2} options={graph} on_show_table={() => set_detail({ kind: "gender", index: index2 })} />
+                          )
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                )
+              ))}
+            </Accordion>
+          </TabsContent>
+
+          <TabsContent value="ranking">
+            <Accordion type="multiple" className="rounded-xl border px-4">
+              {charts.list_of_keys_name.map((key: string) => (
+                LIST_OF_THEME_FOR_RANKING.includes(key) && (
+                  <AccordionItem key={key} value={key}>
+                    <AccordionTrigger className="text-base">
+                      {THEME_TO_SUB_THEMES_FOR_RANKING[key].split("classé(e)s")[0]}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="space-y-10 pt-2">
+                        {charts.list_of_graph.map((graph: any, index2: number) => (
+                          THEME_TO_SUB_THEMES_FOR_RANKING[charts.list_of_keys_name[index2]] === key && (
+                            <StatChartCard key={index2} options={graph} on_show_table={() => set_detail({ kind: "ranking", index: index2 })} />
+                          )
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                )
+              ))}
+            </Accordion>
+          </TabsContent>
+        </Tabs>
+      )}
+
+      {!loading && !result_found && !server_error_found && (
+        <EmptyState
+          title="Consultez d'autres statistiques liées aux pages Wikipédia"
+          description="Le chargement peut prendre quelques minutes la première fois, ensuite les résultats sont gardés en cache."
         >
+          <Button className={BLACK_BUTTON} onClick={() => get_list_of_user_other_advanced_statistics()}>
+            <SearchIcon /> Afficher les statistiques
+          </Button>
+        </EmptyState>
+      )}
 
-        
+      <DataTableDialog
+        open={detail?.kind === "ranking"}
+        on_open_change={close_detail}
+        title={detail_title(ranking_key)}
+        summary={[{ label: "Nombre d'éléments", value: format_number(total_occurences(ranking_rows)) }]}
+        columns={[
+          { header: "Élément", cell: (data) => data.data_name },
+          { header: "Score", numeric: true, cell: (data) => format_number(data.data_number) },
+          { header: "Occurrences", numeric: true, cell: (data) => format_number(data.data_occurence) },
+        ]}
+        rows={ranking_rows}
+      />
 
-        {result_found == false &&(
-            <div>
-                
-                
-                <br></br>
-                
-                <br></br>
-                <h1 className="wikifont">
-                    Consultez d'autre statistiques lié au page Wikipedia.
-                </h1>
-                <br></br>
+      <DataTableDialog
+        open={detail?.kind === "gender"}
+        on_open_change={close_detail}
+        title={detail_title(gender_key)}
+        summary={[{ label: "Nombre d'éléments", value: format_number(total_occurences(gender_rows)) }]}
+        columns={[
+          { header: "Élément", cell: (data) => data.data_name },
+          { header: "% de femmes", numeric: true, cell: (data) => format_number(data.ratio_girl) },
+          { header: "% d'hommes", numeric: true, cell: (data) => format_number(data.ratio_boy) },
+          { header: "Occurrences", numeric: true, cell: (data) => format_number(data.data_occurence) },
+        ]}
+        rows={gender_rows}
+      />
+    </main>
 
-
-                <div className="d-grid gap-2">
-                    <button type="button" className="btn btn-dark" onClick={() => get_list_of_user_other_advanced_statistics().then((result) => handle_list_of_user_data(result))}>Rechercher les statistiques🔎</button>
-                    
-                </div>
-
-                <br></br>
-                <br></br>
-
-                <div className="d-grid gap-2">
-                  <a type="button" className="btn btn-secondary" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                </div>
-                <br></br>
-                <br></br>
-
-                {server_error_found === true &&(
-                  <h2 className="wikifont">
-                    Erreur serveur, veuillez patienter quelques minutes.
-                  </h2>
-                  
-
-                )}
-                {loading == true &&(
-                <div>
-                    <h2 className="wikifont">
-                        Ça charge veuillez patienter quelques minutes
-                    </h2>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="2 min Countdown"></img>
-                </div>
-                )}
-            </div>
-
-        )}
-        
-        
-        {result_found == true &&(
-            <div>
-
-                {loading == true &&(
-                    <div>
-
-                        <div className="d-grid gap-2">
-                            <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                        </div>
-                        <br></br>
-                        
-
-                        
-                        <h2>
-                          Ça charge veuillez patienter quelques minutes
-                        </h2>
-                        <img className="mobile-only" src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif" width="300" height="300"></img>
-                        <img className="desktop-only" src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790270925/homer-simpson-the-simpsons_ovduma.gif" width="700" height="700"></img>
-                        
-                        {/* <div className="tenor-gif-embed" data-postid="17234189" data-share-method="host" data-aspect-ratio="1.19403" data-width="100%"><a href="https://tenor.com/view/homer-simpson-the-simpsons-spinning-walking-floor-gif-17234189">Homer Simpson The Simpsons GIF</a>from <a href="https://tenor.com/search/homer+simpson-gifs">Homer Simpson GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-                     */}
-                    
-                    </div>
-                    )}
-
-                    {loading != true &&(
-                    <div>
-                    {navbar()}
-
-                    <br></br>
-
-                    
-                    {/* <div className="d-grid gap-2">
-                        <a type="button" className="btn btn-dark" href="/Home" style={{margin :"auto"}}>Retourner au menu</a>
-                    </div>
-                     */}
-                    <br></br>
-                    <br></br>
-                    <br></br>
-
-                    <h1 className="wikifont">
-                      Autres statistiques intéressantes !
-                    </h1>
-                    
-                    <br></br>
-                    <h1 className="wikifont">
-                      Le score correspond à la moyenne de tous les utilisateurs possédant cette variable.
-                    </h1>
-
-                    
-
-                    <br></br>
-                    
-                    
-
-                    {/* <AgCharts options={list_of_graph2[69]} /> */}
-                    
-
-                    <Accordion>
-                        <Accordion.Item eventKey={"Ratio Homme Femme"}>
-                          <Accordion.Header>
-                          {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
-                          
-                          <strong style={{fontSize : "30px"}}>- {"Ratio Homme Femme!"}</strong>
-                          
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            {list_of_keys_name2.map((_: any, index: number) => (
-                              <div key={list_of_keys_name2[index]}>
-                                {LIST_OF_THEME_FOR_GENDER_RATIO.includes(list_of_keys_name2[index]) && (
-                                  <div>
-                                    <br /><br /><br /><br />
-
-                                    <Accordion>
-                                      <Accordion.Item eventKey={list_of_keys_name2[index]}>
-                                        <Accordion.Header>
-                                        {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
-                                        
-                                        <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[list_of_keys_name2[index]].split("classé(e)s")[0]}</strong>
-                                        
-                                        </Accordion.Header>
-                                        <Accordion.Body>
-                                          {list_of_graph2.map((graph: any, index2: number) => (
-                                            <div key={index2}>
-                                              {[list_of_keys_name2[index]].includes(THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[list_of_keys_name2[index2]]) && (
-                                                <div>
-                                                  <AgCharts options={graph} />
-                                                  <br /><br />
-                                                  <br /><br />
-                                                  <br /><br />
-                                                  
-                                                  
-                                                  <div className="d-grid gap-2">
-                                                    <button
-                                                      className="btn btn-secondary"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#exampleModal3"
-                                                      onClick={() => handle_dict_and_keys_info(list_of_dict2[index2], list_of_keys_name2[index2])}
-                                                    >
-                                                      {"Toutes les statistiques 📊"}
-                                                    </button>
-                                                  </div>
-                                                </div>
-                                              )}
-                                            </div>
-                                          ))}
-                                        </Accordion.Body>
-                                      </Accordion.Item>
-                                    </Accordion>
-                                  </div>
-                                )}
-                              </div>
-                            ))}
-                            
-                          </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-                            
-
-                      <br></br>
-                      <br></br>
-                      <br></br>
-                      
-                      <Accordion>
-                        <Accordion.Item eventKey={"Classement"}>
-                          <Accordion.Header>
-                          {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
-                          
-                          <strong style={{fontSize : "30px"}}>- {"Classement!"}</strong>
-                          
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            {list_of_keys_name.map((_: any, index: number) => (
-                              <div key={list_of_keys_name[index]}>
-                                {LIST_OF_THEME_FOR_RANKING.includes(list_of_keys_name[index]) && (
-                                  <div>
-                                    <br /><br /><br /><br />
-
-                                    <Accordion>
-                                      <Accordion.Item eventKey={list_of_keys_name[index]}>
-                                        <Accordion.Header>
-                                        {/* <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]]}</strong> */}
-                                        
-                                        <strong style={{fontSize : "30px"}}>- {THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index]].split("classé(e)s")[0]}</strong>
-                                        
-                                        </Accordion.Header>
-                                        <Accordion.Body>
-                                          {list_of_graph.map((graph: any, index2: number) => (
-                                            <div key={index2}>
-                                              {[list_of_keys_name[index]].includes(THEME_TO_SUB_THEMES_FOR_RANKING[list_of_keys_name[index2]]) && (
-                                                <div>
-                                                  <AgCharts options={graph} />
-                                                  <br /><br />
-                                                  <br /><br />
-                                                  <br /><br />
-                                                  
-                                                  
-                                                  <div className="d-grid gap-2">
-                                                    <button
-                                                      className="btn btn-secondary"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#exampleModal2"
-                                                      onClick={() => handle_dict_and_keys_info(list_of_dict[index2], list_of_keys_name[index2])}
-                                                    >
-                                                      {"Toutes les statistiques 📊"}
-                                                    </button>
-                                                  </div>
-                                                </div>
-                                              )}
-                                            </div>
-                                          ))}
-                                        </Accordion.Body>
-                                      </Accordion.Item>
-                                    </Accordion>
-                                  </div>
-                                )}
-                              </div>
-                            ))}
-                            
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      </Accordion>
-                  </div>
-                )}
-                
-            </div>
-
-        )}
-
-        {detailed_stat_modal(dict_info)}
-        {detailed_stat_modal2(dict_info)}
-        </div>
-    </div>
-    
   );
 };
 
