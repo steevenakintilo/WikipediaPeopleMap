@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useMutation } from "@tanstack/react-query"
-import { FlagIcon, SendIcon } from "lucide-react"
+import { CircleCheckIcon, FlagIcon, SendIcon } from "lucide-react"
 import {
   Button,
   Checkbox,
@@ -44,15 +44,32 @@ const REPORT_FIELDS: ReportField[] = [
   
 ]
 
+const REPORT_FIELDS2: ReportField[] = [
+  { field: "picture_url", label: "Photo de profil", current: () => "" },
+  { field: "is_alive", label: "Statut (vivant / décédé)", current: (user) => (user.is_alive ? "Vivant(e)" : "Décédé(e)") },
+  { field: "death_date", label: "Date de mort", current: (user) => user.death_date, dead_only: true },
+  { field: "age", label: "Âge", current: (user) => (user.age > 0 ? `${user.age} ans` : "") },
+  { field: "town_death_place", label: "Lieu de mort (ville)", current: (user) => user.town_death_place, dead_only: true },
+  { field: "country_death_place", label: "Pays de mort", current: (user) => user.country_death_place, dead_only: true },
+  { field: "continent_of_death", label: "Continent de mort", current: (user) => user.continent_of_death, dead_only: true },
+  { field: "region_of_death", label: "Région de mort", current: (user) => user.region_of_death, dead_only: true },
+  
+]
+
 const RED_BUTTON = "bg-red-600 text-white hover:bg-red-700"
+const ORANGE_BUTTON = "bg-orange-400 text-white hover:bg-orange-500";
 
 // Bouton rouge + fenêtre : le visiteur coche les informations fausses ou manquantes, la vérification est faite à la main
 export function ReportButton({ user }: { user: any }) {
   const [open, set_open] = useState(false)
   const [checked_fields, set_checked_fields] = useState<ReportableField[]>([])
+  var fields = REPORT_FIELDS.filter((field) => !field.dead_only || !user.is_alive)
 
-  const fields = REPORT_FIELDS.filter((field) => !field.dead_only || !user.is_alive)
-
+  console.log("user " , user.update_level)
+  if (user.update_level == 2) {
+    fields = REPORT_FIELDS2.filter((field) => !field.dead_only || !user.is_alive)
+  }
+  
   const report = useMutation({
     mutationFn: update_user_info_status,
     onSuccess: () => {
@@ -67,12 +84,17 @@ export function ReportButton({ user }: { user: any }) {
     set_checked_fields((prev) => (checked ? [...prev, field] : prev.filter((item) => item !== field)))
   }
 
+  var button_color : string = ORANGE_BUTTON
+  if (user.update_level == 3) {
+    button_color = RED_BUTTON
+  } 
   return (
     <>
-      <Button size="sm" className={RED_BUTTON} onClick={() => set_open(true)}>
+      <Button size="sm" className={button_color} onClick={() => set_open(true)}>
         <FlagIcon /> Reporter une information erronée ou inexistante
       </Button>
 
+      
       <Dialog open={open} onOpenChange={set_open}>
         <DialogContent className="flex max-h-[90dvh] flex-col gap-0 p-0 sm:max-w-xl">
           <DialogHeader className="border-b p-4">

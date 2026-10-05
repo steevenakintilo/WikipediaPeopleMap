@@ -18,10 +18,10 @@ from ..utility_function  import *
 
 import os
 
-
+@ratelimit(key='ip', rate='5/m')
 @csrf_exempt
 def get_other_statistics(request):
-    """Display chunck (10000 users) of user info"""
+    """Display other statistics"""
     if request.method != "GET":
         return HttpResponse(f"Error!", status=404)
 

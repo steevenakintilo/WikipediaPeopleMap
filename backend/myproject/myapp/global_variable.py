@@ -79,7 +79,13 @@ HISTORICAL_PERIODS_DICT_TO_FRENCH = {
     "Renaissance": "Renaissance",
     "Contemporary Period": "Époque contemporaine",
     "Today Time": "Époque actuelle",
-    "Undefined":"Indéfinie"
+    "Undefined":"Indéfinie",
+    "Préhistoire": "Préhistoire",
+    "Antiquité": "Antiquité",
+    "Moyen Âge": "Moyen Âge",
+    "Époque contemporaine": "Époque contemporaine",
+    "Époque actuelle": "Époque actuelle",
+    "Indéfinie": "Indéfinie"
 }
 
 HISTORICAL_PERIODS_DICT_TO_FRENCH_WITH_DATE = {

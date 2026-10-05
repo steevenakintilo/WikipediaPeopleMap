@@ -44,6 +44,11 @@ export function other_statistics_query() {
   })
 }
 
+export function validate_an_user(user: string) {
+  return api_fetch(`/validate_an_user/${user}`, { method: "POST"})
+
+}
+
 // Génère un fichier à télécharger : c'est une action (useMutation), pas une donnée à mettre en cache
 export function download_qjis_csv(search: any): Promise<Blob> {
   return api_fetch("/display_chunck_of_user_info_advanced_search_qjis", { method: "POST", body: search, response_type: "blob" })

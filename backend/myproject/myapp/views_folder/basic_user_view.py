@@ -24,8 +24,8 @@ import os
 import json
 import csv
 
+@ratelimit(key='ip', rate='3/m')
 def display_chunck_of_user_info(request,chunk_nb=0):
-    
     """Display chunck (10000 users) of user info"""
     
     if request.method != "GET":

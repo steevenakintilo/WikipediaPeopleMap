@@ -1,6 +1,6 @@
 import { useImperativeHandle, useState, type ReactNode, type Ref } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { ExternalLinkIcon, TriangleAlertIcon } from "lucide-react"
+import { CircleCheckIcon , ExternalLinkIcon, TriangleAlertIcon } from "lucide-react"
 import {
   Alert,
   AlertDescription,
@@ -19,7 +19,11 @@ import { NUMBER_OF_USER } from "../utils/global_variable.tsx"
 import { ErrorState } from "./page.tsx"
 import { ReportButton } from "./report_dialog.tsx"
 import { user_info_query } from "../api/queries.ts"
+import { validate_an_user } from "../api/queries.ts"
 import { query_client } from "../api/query_client.ts"
+import {voted_users} from "../utils/global_variable.tsx"
+
+const GRAY_BUTTON = "bg-gray-300 text-gray-800 hover:bg-gray-400";
 
 const gender_to_french_dict : any = {
   "Man":"Homme",
@@ -31,7 +35,6 @@ const gender_to_french_dict : any = {
 const UPDATE_LEVEL_TEXT: Record<number, string> = {
   1: "Page vérifiée et validée.",
   2: "Page vérifiée et validée, mais la personne a pu prendre un an de plus ou mourir depuis.",
-  3: "Page non vérifiée : les informations proviennent de mon code.",
   4: "Page en cours de validation.",
 }
 
@@ -94,6 +97,16 @@ function TopList({ title, items }: { title: string, items: any[] | undefined }) 
   )
 }
 
+function check_validate_vote(user:string,id:number) {
+  if (voted_users.has(id) == false) {
+    validate_an_user(user)
+    voted_users.add(id);
+    localStorage.setItem(
+      "votedUsers",
+      JSON.stringify([...voted_users])
+    );
+  }
+}
 function has_complete_date(week_day: string, day: string, year: number) {
   return week_day != "Indéfini" && day != "Indéfini" && year != 123456789
 }
@@ -131,14 +144,21 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
             <ExternalLinkIcon /> Voir sur Wikipédia
           </a>
         </Button>
-
-        {user_data_info.update_level == 2 || user_data_info.update_level == 3 &&
+        
+        {(user_data_info.update_level == 3) && voted_users.has(user_data_info.id) == false &&(
+          <Button size="sm" className={GRAY_BUTTON} onClick={() => check_validate_vote(user_data_info.page_name,user_data_info.id)}>
+            <CircleCheckIcon /> Valider les informations de la personne
+          </Button>
+          
+        )}
+        
+        {(user_data_info.update_level == 2 || user_data_info.update_level == 3) && (
           <ReportButton user={user_data_info} />
-        }
+        )}
         
       </div>
 
-      {user_data_info.age >= 110 && user_data_info.is_alive == true && (
+      {user_data_info.age >= 110 && user_data_info.is_alive == true && (user_data_info.update_level == 3 || user_data_info.update_level == 4) && (
         <Alert>
           <TriangleAlertIcon />
           <AlertDescription>

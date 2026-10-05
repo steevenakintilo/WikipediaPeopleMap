@@ -27,6 +27,7 @@ import csv
 import time
 
 @csrf_exempt
+@ratelimit(key='ip', rate='1/m')
 def get_advanced_statistics(request):
     """Get advanced statistics"""
 

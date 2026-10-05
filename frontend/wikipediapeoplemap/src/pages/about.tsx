@@ -105,11 +105,13 @@ const About = () => {
                         J’ai ensuite développé un script permettant de récupérer les informations de chaque page. Le script fonctionne bien, mais il est impossible de garantir une récupération des informations à 100% pour plus de 700 000 pages.
                     </p>
                     <p>
-                        Si les informations d'une page sont incorrectes ou manquantes, n'hésitez pas à les signaler sur le bouton de signalement présent sur le profil.
-                        Je vérifierai et corrigerai moi-même les informations à la main.
+                        Si les informations d'une page sont incorrectes ou manquantes, n'hésitez pas à les signaler depuis le profil.
                     </p>
                     <p>
-                        En pourcentage, il y a très peu d'utilisateurs avec des données erronées, et la plupart du temps c'est parce que la mise en page d'une page Wikipédia n'est pas uniforme d'une page à l'autre, donc c'est compliqué pour mon code. De toute façon, on peut choisir de filtrer les utilisateurs par rapport au % de précision de la page.
+                        Les informations d'une page sont considérées comme valides lorsqu'un certain nombre de personnes (100) les ont validées grâce au bouton « Valider les informations de la personne » présent sur le profil.
+                    </p>
+                    <p>
+                        En pourcentage, il y a très peu d'utilisateurs avec des données erronées, et la plupart du temps c'est parce que la mise en page d'une page Wikipédia n'est pas uniforme d'une page à l'autre, donc c'est compliqué pour mon code.
                     </p>
                     <p>
                         De même, toutes les nouveautés apportées aux pages après le 23 février 2026 (personnes décédées, nouveaux liens ajoutés sur une page, nouvelles informations, etc.) ne sont pas disponibles sur le site hors signalement individuel.

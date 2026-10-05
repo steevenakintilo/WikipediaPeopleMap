@@ -8,7 +8,7 @@ from .views_folder import database_view
 from .views_folder import display_user_info_view
 from .views_folder import get_other_statistics_view
 from .views_folder import update_user
-#from .views_folder import rb
+from .views_folder import rb
 
 urlpatterns = [
     path("add_a_wikipedia_user_to_the_database",database_view.add_a_wikipedia_user_to_the_database),
@@ -24,7 +24,8 @@ urlpatterns = [
     path("get_other_statistics",get_other_statistics_view.get_other_statistics),
     path("update_user_info_status",update_user.update_user_info_status),
     path("update_user_info",update_user.update_user_info),
-    #path("rbnb",rb.rbnb)
-
-            
+    path("validate_an_user/<str:user>",update_user.validate_an_user),
+    path("rbnb",rb.rbnb),
+    path("brbr",rb.brbr)
+        
 ]

@@ -25,6 +25,7 @@ import json
 import csv
 
 @csrf_exempt
+@ratelimit(key='ip', rate='3/m')
 def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     """Display chunck of user info with advanced search"""
     if request.method != "POST":

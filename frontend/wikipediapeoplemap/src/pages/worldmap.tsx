@@ -246,6 +246,8 @@ const WorldMap = () => {
     }
 
     function handle_complete_profile_user(user:string) {
+      // Le panneau mobile (modal) bloquerait le défilement de la fiche : on le ferme
+      set_panel_open(false)
       profile_host.current?.open(user)
     }
 
@@ -398,7 +400,7 @@ const WorldMap = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="outline" size="icon" onClick={() => geolocate()} aria-label="Me géolocaliser">
-                  <LocateFixedIcon />
+                  <MapPinIcon />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Me géolocaliser</TooltipContent>

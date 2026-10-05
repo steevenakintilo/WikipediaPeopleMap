@@ -135,19 +135,19 @@ else:
 
 # # LOCAL POSTGRESS
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "railway",
-#         "USER": "postgres",
-#         "PASSWORD": os.environ["PGPASSWORD"],
-#         "HOST": "127.0.0.1",
-#         "PORT": "65279",
-#         "OPTIONS": {
-#             "sslmode": "require",
-#         },
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": os.environ["PGPASSWORD"],
+        "HOST": "127.0.0.1",
+        "PORT": "53025",
+        "OPTIONS": {
+            "sslmode": "require",
+        },
+    }
+}
 
 print(DATABASES)
 # Password validation

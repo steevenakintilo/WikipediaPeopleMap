@@ -16,7 +16,13 @@ class WikiopediaUserToUpdate(models.Model):
     update_level = models.IntegerField(
         default=1
     )
-
+    nb_of_good_report = models.IntegerField(
+        default=0
+    )
+    nb_of_bad_report = models.IntegerField(
+        default=0
+    )
+    
     # 1 MORT ET VERIFIER
     # 2 VIVANT ET VERIFIER
     # 3 NON VERIFIER
