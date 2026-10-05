@@ -84,8 +84,7 @@ const About = () => {
                     <p>
                         Ensuite, pour effectuer le calcul, je prends le résultat des 3 variables que je pondère sur une unité précise pour éviter que la taille de la page soit beaucoup plus grande que le nombre de liens, puis je divise le résultat par 3.
                         Cela explique pourquoi certaines personnes « inconnues » sont très élevées dans le classement, comme le top 3, car elles sont toutes mentionnées par plus de 8 800 personnes.
-                    </p>
-                </AccordionContent>
+                    </p>                </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="technical">

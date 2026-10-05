@@ -2,6 +2,7 @@ import './App.css';
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SiteLayout from './components/site_layout';
+import { Analytics } from '@vercel/analytics/react';
 
 // Chaque page est téléchargée seulement quand on y va (la carte et les graphiques sont lourds)
 const WorldMap = lazy(() => import('./pages/worldmap'));
@@ -33,6 +34,7 @@ function App() {
         {/* /Profile/"+currentUsername */}
 
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
