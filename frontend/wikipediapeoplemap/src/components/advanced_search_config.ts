@@ -50,7 +50,7 @@ const SORT_OPTIONS: Option[] = [
 const IDENTITY: FilterSection = {
   title: "Identité",
   fields: [
-    { key: "last_name", label: "Nom", type: "text", description: "# pour plusieurs noms, + pour les noms contenant le texte" },
+    { key: "last_name", label: "Nom de famille", type: "text", description: "# pour plusieurs noms, + pour les noms contenant le texte" },
     { key: "first_name", label: "Prénom", type: "text", description: "# pour plusieurs prénoms, + pour les prénoms contenant le texte" },
     { key: "job", label: "Métier", type: "text", placeholder: "acteur ou chanteuse#peintre", description: "Ex : acteur ou chanteuse#peintre#médecin ou foot" },
     { key: "page_name", label: "Nom de la page wikipedia", type: "text", description: "# pour plusieurs pages, + pour les pages contenant le texte" },
