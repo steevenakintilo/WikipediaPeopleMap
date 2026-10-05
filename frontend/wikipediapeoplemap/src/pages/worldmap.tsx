@@ -14,7 +14,6 @@ import {
   ChevronRightIcon,
 
   ListIcon,
-  LocateFixedIcon,
   MapPinIcon,
 
   SearchIcon,
