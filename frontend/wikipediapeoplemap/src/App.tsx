@@ -25,6 +25,7 @@ function App() {
           <Route path="/Qjis" element={<QjisMap />} />
           <Route path="/About" element={<About />} />
           <Route path="/OtherStatistics" element={<OtherStatistics />} />
+          <Route path="*" element={<HomePage/>}/>
         </Route>
 
 
