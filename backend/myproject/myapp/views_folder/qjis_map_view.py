@@ -27,9 +27,17 @@ import string
 import secrets
 
 @csrf_exempt
-@ratelimit(key='ip', rate='10/m')
-def display_chunck_user_birth_town_localisation_qjis(request,chunk_nb=0):
+@ratelimit(key='ip', rate='10/15m', block=False)
+def display_chunck_user_birth_town_localisation_qjis(request):
     """Display chunck (10000 users) of user birth town localisation"""
+    if getattr(request, 'limited', False):
+        return JsonResponse(
+            {
+                "error": "too_many_requests",
+                "message": "Trop de requêtes. Veuillez patienter quelques instants."
+            },
+            status=429
+        )
     if request.method != "POST":
         return HttpResponse(f"Error!", status=404)
 

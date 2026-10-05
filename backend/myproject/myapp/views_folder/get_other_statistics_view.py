@@ -100,11 +100,14 @@ def get_other_statistics(request):
                 #print(line.split("#####"))
 
 
+    # TEST
+
     #print(list_of_file_data[0])
     #print(list_of_file_name[0])
 
     # print(file_path_for_ranking)
     # print(os.listdir(file_path_for_ranking))
     #return HttpResponse(f"YAAAY", status=200)
+    print(dict_of_data2)
     
     return JsonResponse({"ranking_list_of_dict":dict_of_data,"gender_ratio_list_of_dict":dict_of_data2},status=200)

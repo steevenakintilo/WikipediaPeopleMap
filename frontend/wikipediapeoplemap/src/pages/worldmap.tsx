@@ -48,7 +48,7 @@ import {gender_to_color , gender_to_color2} from "../utils/global_variable.tsx"
 import { RANDOM_CHUNK, retry_if_failed, user_list_query } from "../api/queries.ts"
 import { ActiveFilters, AdvancedSearchDialog } from "../components/advanced_search.tsx";
 import { count_active_filters, MAP_FILTERS } from "../components/advanced_search_config.ts";
-import { EmptyState, ErrorState } from "../components/page.tsx";
+import { EmptyState, ErrorState , TooMuchRequestError} from "../components/page.tsx";
 import { PersonPicture } from "../components/person_picture.tsx";
 import { ProfileHost, type ProfileHostHandle } from "../components/user_profile_dialog.tsx";
 
@@ -324,7 +324,10 @@ const WorldMap = () => {
   const page_label = current_chunck_index == RANDOM_PAGE_INDEX ? "Page aléatoire" : `Page ${current_chunck_index + 1}`
 
   function render_people_list() {
-    console.log("user_list " , user_list)
+    var too_much_request_status = ''
+    if (user_list.error != null) {
+      too_much_request_status = user_list.error.toString()
+    }
     if (user_list.isPending) {
       return (
         <ul className="divide-y" aria-busy="true">
@@ -341,7 +344,15 @@ const WorldMap = () => {
       )
     }
 
-    if (user_list.isError) {
+    if (too_much_request_status == "ApiError: Erreur HTTP 429") {
+      return( 
+        <div className="p-4">
+          <TooMuchRequestError description="Tu as fait trop de requêtes, patiente 15 minutes." on_retry={() => user_list.refetch()} />
+        </div>
+      )
+      
+    }
+    else if (user_list.isError) {
       return (
         <div className="p-4">
           <ErrorState description="Impossible de charger la liste des personnes." on_retry={() => user_list.refetch()} />
@@ -349,7 +360,7 @@ const WorldMap = () => {
       )
     }
 
-    if (people.length === 0) {
+    else if (people.length === 0) {
       return (
         <div className="p-4">
           <EmptyState

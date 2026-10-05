@@ -11,7 +11,7 @@ import { advanced_statistics_query, retry_if_failed } from "../api/queries.ts";
 import { ActiveFilters, AdvancedSearchDialog } from "../components/advanced_search.tsx";
 import { count_active_filters, STATISTICS_FILTERS } from "../components/advanced_search_config.ts";
 import { DataTableDialog } from "../components/data_table_dialog.tsx";
-import { EmptyState, ErrorState, LoadingState, PageHeader } from "../components/page.tsx";
+import { EmptyState, ErrorState, LoadingState, PageHeader,TooMuchRequestError } from "../components/page.tsx";
 import { StatChartCard } from "../components/stat_chart.tsx";
 
 const NO_DATA = {}
@@ -178,6 +178,19 @@ const Statistics = () => {
     const list_of_user_data : any = statistics_query.data?.all_wikipedia_info ?? NO_DATA
     const loading = statistics_query.isLoading || statistics_query.isPlaceholderData
     const server_error_found = statistics_query.isError
+    var error_type = 0
+    if (server_error_found) {
+      error_type = 1
+    }
+    if (statistics_query.error?.toString() === "ApiError: Erreur HTTP 429") {
+      error_type = 2;
+    }
+    
+    
+    // 0 OK
+    // 1 ERREUR SERVEUR
+    // 2 TROP DE REQUETTES
+    
     const result_found = statistics_query.data !== undefined && !statistics_query.isError
     const active_filters_count = count_active_filters(STATISTICS_FILTERS, dict_of_advance_search)
 
@@ -210,7 +223,13 @@ const Statistics = () => {
 
       <ActiveFilters sections={STATISTICS_FILTERS} filters={dict_of_advance_search} set_filters={set_dict_of_advance_search} />
 
-      {server_error_found && <ErrorState on_retry={() => statistics_query.refetch()} />}
+      {error_type == 1 &&(
+          <ErrorState on_retry={() => statistics_query.refetch()} />
+      )}
+            
+      {error_type == 2 &&(
+        <TooMuchRequestError description="Tu as fait trop de requêtes, patiente 15 minutes." on_retry={() => statistics_query.refetch()} />
+      )}
 
       {loading && <LoadingState />}
 

@@ -65,7 +65,6 @@ export function ReportButton({ user }: { user: any }) {
   const [checked_fields, set_checked_fields] = useState<ReportableField[]>([])
   var fields = REPORT_FIELDS.filter((field) => !field.dead_only || !user.is_alive)
 
-  console.log("user " , user.update_level)
   if (user.update_level == 2) {
     fields = REPORT_FIELDS2.filter((field) => !field.dead_only || !user.is_alive)
   }

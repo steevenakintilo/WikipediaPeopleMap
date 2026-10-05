@@ -25,9 +25,19 @@ import json
 import csv
 
 @csrf_exempt
-@ratelimit(key='ip', rate='3/m')
+@ratelimit(key='ip', rate='30/15m',block=False)
 def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     """Display chunck of user info with advanced search"""
+
+    if getattr(request, 'limited', False):
+        return JsonResponse(
+            {
+                "error": "too_many_requests",
+                "message": "Trop de requêtes. Veuillez patienter quelques instants."
+            },
+            status=429
+        )
+
     if request.method != "POST":
         return HttpResponse(f"Error!", status=404)
 
@@ -240,6 +250,17 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             else:
                 filters["first_name"] = recieved_data["first_name"].lower()
 
+    if "page_name" in recieved_data:
+        if len(recieved_data["page_name"]) != 0:
+            if "+" in recieved_data["page_name"]:
+                filters["page_name__icontains"] = recieved_data["page_name"].replace("+","").lower()
+            elif "#" in recieved_data["page_name"]:
+                accept_multiple_element = True
+                for name in recieved_data["page_name"].split("#"):
+                    query |= Q(first_name=name.lower())
+            else:
+                filters["page_name"] = recieved_data["page_name"].lower()
+    
     if "last_name" in recieved_data:
         if len(recieved_data["last_name"]) != 0:
             if "+" in recieved_data["last_name"]:

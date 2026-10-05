@@ -27,11 +27,19 @@ import csv
 import time
 
 @csrf_exempt
-@ratelimit(key='ip', rate='1/m')
+@ratelimit(key='ip', rate='15/15m',block=False)
 def get_advanced_statistics(request):
     """Get advanced statistics"""
 
     start = time.perf_counter()
+    if getattr(request, 'limited', False):
+        return JsonResponse(
+            {
+                "error": "too_many_requests",
+                "message": "Trop de requêtes. Veuillez patienter quelques instants."
+            },
+            status=429
+        )
     if request.method != "POST":
         return HttpResponse(f"Error!", status=404)
 
@@ -71,7 +79,7 @@ def get_advanced_statistics(request):
                     searched_region = region
                     break
 
-            print(searched_region)
+            #print(searched_region)
             if recieved_data["country_of_birth"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
                 filters = {
                     "continent_of_birth": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
@@ -258,7 +266,7 @@ def get_advanced_statistics(request):
             else:
                 filters["last_name"] = recieved_data["last_name"].lower()
     
-    print(recieved_data)
+    #print(recieved_data)
     if "town_birth_place" in recieved_data:
         if "#" in recieved_data["town_birth_place"]:
             accept_multiple_element = True
@@ -365,8 +373,8 @@ def get_advanced_statistics(request):
     #filters["age__lte"] = 123
     #filters["town_birth_place"] = "Paris"
             
-    #print(recieved_data)
-    print(filters)
+    ##print(recieved_data)
+    #print(filters)
 
 
     
@@ -429,7 +437,7 @@ def get_advanced_statistics(request):
                     else:
                         all_user_obj = WikipediaUserUniqueTown.objects.filter(**filters).order_by(f"-{sort_user_by}")
             else:
-                print("att")
+                #print("att")
 
                 sort_user_by = "position"
                 if accept_multiple_element:
@@ -1152,7 +1160,7 @@ def get_advanced_statistics(request):
     # for element in block_of_element:
     #     if len(dict_of_counter[element]):
     #         block_of_element_present.append(element)
-    #     print(len(dict_of_counter[element]) , element)
+    #     #print(len(dict_of_counter[element]) , element)
 
     dict_of_counter = {
         key: sort_a_counter(counter,0,key)

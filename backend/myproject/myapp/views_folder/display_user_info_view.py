@@ -29,9 +29,17 @@ def hi():
     return HttpResponse("Hi!")
 
 
-@ratelimit(key='ip', rate='15/m')
+@ratelimit(key='ip', rate='100/15m', block=False)
 def display_user_info(request, username):
     """A function that display user  info"""
+    if getattr(request, 'limited', False):
+        return JsonResponse(
+            {
+                "error": "too_many_requests",
+                "message": "Trop de requêtes. Veuillez patienter quelques instants."
+            },
+            status=429
+        )
     if request.method != "GET":
         return HttpResponse(f"Error! with this {username} info", status=404)
 
@@ -39,7 +47,6 @@ def display_user_info(request, username):
         user_obj = WikipediaUser.objects.filter(page_name=username.strip()).first()
 
         if user_obj is None and username  != "Personne":
-            print("USER NOT FOUND")
             return HttpResponse(f"{username} doesn't exist", status=404)
 
         #print("PAGE NAME :", user_obj.page_name)
@@ -99,10 +106,7 @@ def display_user_info(request, username):
                     update_level = user_obj_update_obj.update_level
             except:
                 update_level = 3
-                print("cacacacaca")
 
-            print("yooo " , update_level)
-            #update_level = 3
             user_info_dict = {
                 "id":user_obj.id,
                 "page_name": page_name,

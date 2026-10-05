@@ -8,7 +8,7 @@ import { ApiError } from "../api/client.ts"
 import { download_qjis_csv } from "../api/queries.ts"
 import { ActiveFilters, AdvancedSearchDialog } from "../components/advanced_search.tsx";
 import { count_active_filters, STATISTICS_FILTERS } from "../components/advanced_search_config.ts";
-import { EmptyState, ErrorState, LoadingState, PageHeader } from "../components/page.tsx";
+import { EmptyState, ErrorState, LoadingState, PageHeader, TooMuchRequestError } from "../components/page.tsx";
 
 const EARTH_GIF = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790349009/earth_qha8vm.gif"
 const FILE_NAME = "qjis_localisation.csv"
@@ -40,6 +40,14 @@ const QjisMap = () => {
     const loading = qjis_csv.isPending
     const no_result_found = qjis_csv.error instanceof ApiError && qjis_csv.error.status == 404
     const server_error_found = qjis_csv.isError && !no_result_found
+    var error_type = 0
+    if (server_error_found) {
+      error_type = 1
+    }
+    if (qjis_csv.error?.toString() === "ApiError: Erreur HTTP 429") {
+      error_type = 2;
+    }
+    
     const active_filters_count = count_active_filters(STATISTICS_FILTERS, dict_of_advance_search)
 
     function get_list_of_user_advanced_search() {
@@ -93,9 +101,14 @@ const QjisMap = () => {
 
         {loading && <LoadingState title="Génération du fichier…" />}
 
-        {!loading && server_error_found && (
-          <ErrorState on_retry={() => get_list_of_user_advanced_search()} />
+        {error_type == 1 &&(
+            <ErrorState on_retry={() => qjis_csv.refetch()} />
         )}
+              
+        {error_type == 2 &&(
+          <TooMuchRequestError description="Tu as fait trop de requêtes, patiente 15 minutes." on_retry={() => qjis_csv.refetch()} />
+        )}
+        
 
         {!loading && no_result_found && (
           <Alert>

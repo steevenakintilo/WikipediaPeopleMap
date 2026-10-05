@@ -23,7 +23,7 @@ export function LoadingState({ title = "Ça charge…", description = "Veuillez 
       <div className="flex items-center gap-2 font-medium">
         <Spinner /> {title}
       </div>
-      <p className="text-sm text-muted-foreground">{description}</p>
+      <p className="text-xl text-muted-foreground">{description}</p>
     </div>
   )
 }
@@ -48,6 +48,33 @@ export function ErrorState({ title = "Erreur serveur", description = "Veuillez p
         <img
           src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790977037/blob_pbtk_lcqgcu.jpg"
           alt="Erreur"
+        />
+      </div>
+    </div>
+  )
+}
+
+
+export function TooMuchRequestError({ title = "Trop de requêtes", description = "Tu as fait trop de requêtes, patiente quelques minutes.", on_retry }: { title?: string, description?: string, on_retry?: () => void }) {
+  return (
+    <div>
+      <Alert variant="destructive">
+        <TriangleAlertIcon />
+        <AlertTitle>{title}</AlertTitle>
+        <AlertDescription>{description}</AlertDescription>
+        {on_retry && (
+          <AlertAction>
+            <Button variant="outline" size="sm" onClick={on_retry}>
+              <RotateCcwIcon /> Réessayer
+            </Button>
+            
+          </AlertAction>
+        )}
+      </Alert>
+      <div className="flex justify-center">
+        <img
+          src="https://res.cloudinary.com/dtwkfeqz3/image/upload/v1791235259/Peter-griffin-death-pose-meme-5_xhteqx.jpg"
+          alt="Trop de requêtes"
         />
       </div>
     </div>

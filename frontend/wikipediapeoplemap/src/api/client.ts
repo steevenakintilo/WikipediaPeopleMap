@@ -29,6 +29,7 @@ export async function api_fetch(path: string, options: ApiFetchOptions = {}) {
   if (!response.ok) {
     throw new ApiError(response.status)
   }
+  
   if (options.response_type === "blob") {
     return response.blob()
   }

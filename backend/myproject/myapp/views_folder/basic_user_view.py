@@ -24,10 +24,18 @@ import os
 import json
 import csv
 
-@ratelimit(key='ip', rate='3/m')
+@ratelimit(key='ip', rate='30/15m', block=False)
 def display_chunck_of_user_info(request,chunk_nb=0):
     """Display chunck (10000 users) of user info"""
-    
+    if getattr(request, 'limited', False):
+        return JsonResponse(
+            {
+                "error": "too_many_requests",
+                "message": "Trop de requêtes. Veuillez patienter quelques instants."
+            },
+            status=429
+        )
+
     if request.method != "GET":
         return HttpResponse(f"Error!", status=404)
 

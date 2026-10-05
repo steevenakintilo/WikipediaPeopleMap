@@ -40,8 +40,6 @@ def update_user_info_status(request):
         user_obj = WikipediaUser.objects.filter(page_name=recieved_data["username"]).first()
         user_obj_update_obj = WikiopediaUserToUpdate.objects.filter(page_name=recieved_data["username"]).first()
         if user_obj_update_obj is None:
-            for data in recieved_data["fields"]:
-                print(data)
             user_obj_update_obj = WikiopediaUserToUpdate(
                 page_name=recieved_data["username"],
                 data_to_update=recieved_data["fields"],
