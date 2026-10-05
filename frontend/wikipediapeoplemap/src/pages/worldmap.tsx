@@ -324,6 +324,7 @@ const WorldMap = () => {
   const page_label = current_chunck_index == RANDOM_PAGE_INDEX ? "Page aléatoire" : `Page ${current_chunck_index + 1}`
 
   function render_people_list() {
+    console.log("user_list " , user_list)
     if (user_list.isPending) {
       return (
         <ul className="divide-y" aria-busy="true">
