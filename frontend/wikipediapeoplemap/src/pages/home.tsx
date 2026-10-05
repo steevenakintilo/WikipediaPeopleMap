@@ -15,10 +15,10 @@ import { Button, cn } from "@steevenakintilo/ui";
 import { random_localisation_in_france } from "../utils/global_variable.tsx"
 import { LOGO_URL } from "../components/nav_links.ts";
 
-const SITE_URL = "https://wikipediapeoplemap.com/"
+const SITE_URL = "https://wikipediapeoplemap.com"
 const SITE_TITLE = "Wikipedia People Map - La carte des personnes de Wikipédia"
 const SITE_DESCRIPTION = "Explorez sur une carte interactive les lieux de naissance et de décès des personnes ayant une page Wikipédia en français, avec des statistiques et des filtres avancés."
-const PREVIEW_IMAGE = `${SITE_URL}/preview.png`
+const PREVIEW_IMAGE = `${SITE_URL}/logo-preview.png`
 
 
 const longitude_position_of_france = 6.6034
