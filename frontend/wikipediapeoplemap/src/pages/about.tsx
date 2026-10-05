@@ -11,10 +11,9 @@ const About = () => {
     <main className="mx-auto w-full max-w-3xl flex-1 space-y-6 px-4 py-10">
         <PageHeader
             title="À propos"
-            description="Le projet, le calcul du classement et quelques explications techniques."
         />
 
-        <Accordion type="multiple" defaultValue={["site"]} className="[&_p]:leading-relaxed [&_p+p]:mt-3">
+        <Accordion type="multiple" className="[&_p]:leading-relaxed [&_p+p]:mt-3">
             <AccordionItem value="site">
                 <AccordionTrigger className="text-base">Explication du site</AccordionTrigger>
 
@@ -95,20 +94,17 @@ const About = () => {
                 <AccordionContent>
                     <p>
                         Voici quelques explications techniques pour ceux que ça intéresse.
-                        Le site a été codé en React + Vite avec TypeScript, avec une interface UI/UX basée sur mon propre design system (shadcn/ui, Radix et Tailwind CSS). Côté backend, il fonctionne avec Django et une base de données SQL.
+                        Le site a été codé en React + Vite avec TypeScript, avec une interface UI/UX basée sur shadcn/ui, Radix et Tailwind CSS. Côté backend, il fonctionne avec Django et une base de données PostgreSQL.
                     </p>
 
                     <p>
-                        Pour récupérer les informations des pages Wikipédia, j’ai téléchargé le fichier ZIM de Wikipédia en français du 23 février 2026 puis j’ai créé un script python permettant de récupérer uniquement les personnes ayant réellement existé.
+                        Pour récupérer les informations des pages Wikipédia, j’ai téléchargé le fichier ZIM de Wikipédia en français du 23 février 2026. J’ai ensuite créé un script Python permettant de récupérer uniquement les personnes ayant réellement existé. Le script fonctionne à 99 %, il est donc possible de trouver, très rarement, des pages qui ne correspondent pas à de vraies personnes.
                     </p>
                     <p>
                         J’ai ensuite développé un script permettant de récupérer les informations de chaque page. Le script fonctionne bien, mais il est impossible de garantir une récupération des informations à 100% pour plus de 700 000 pages.
                     </p>
                     <p>
-                        Si les informations d'une page sont incorrectes ou manquantes, n'hésitez pas à les signaler depuis le profil.
-                    </p>
-                    <p>
-                        Les informations d'une page sont considérées comme valides lorsqu'un certain nombre de personnes (100) les ont validées grâce au bouton « Valider les informations de la personne » présent sur le profil.
+                        Les informations d'une page sont considérées comme valides lorsqu'un certain nombre de personnes les ont validées grâce au bouton "Valider les informations de la personne" présent sur le profil.
                     </p>
                     <p>
                         En pourcentage, il y a très peu d'utilisateurs avec des données erronées, et la plupart du temps c'est parce que la mise en page d'une page Wikipédia n'est pas uniforme d'une page à l'autre, donc c'est compliqué pour mon code.

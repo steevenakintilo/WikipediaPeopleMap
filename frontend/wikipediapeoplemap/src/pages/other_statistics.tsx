@@ -129,6 +129,7 @@ const OtherStatistics = () => {
             {other_statistics.isFetching ? <Spinner /> : <SearchIcon />} Actualiser
           </Button>
         )}
+        
       </PageHeader>
 
       {server_error_found && <ErrorState on_retry={() => other_statistics.refetch()} />}

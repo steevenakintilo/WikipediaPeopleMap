@@ -50,9 +50,10 @@ const SORT_OPTIONS: Option[] = [
 const IDENTITY: FilterSection = {
   title: "Identité",
   fields: [
-    { key: "job", label: "Métier", type: "text", placeholder: "acteur ou chanteuse#peintre", description: "Ex : acteur ou chanteuse#peintre#médecin ou foot" },
     { key: "last_name", label: "Nom", type: "text", description: "# pour plusieurs noms, + pour les noms contenant le texte" },
     { key: "first_name", label: "Prénom", type: "text", description: "# pour plusieurs prénoms, + pour les prénoms contenant le texte" },
+    { key: "job", label: "Métier", type: "text", placeholder: "acteur ou chanteuse#peintre", description: "Ex : acteur ou chanteuse#peintre#médecin ou foot" },
+    { key: "page_name", label: "Nom de la page wikipedia", type: "text", description: "# pour plusieurs pages, + pour les pages contenant le texte" },
     { key: "gender", label: "Genre", type: "choice", options: [{ value: "Homme", label: "Hommes" }, { value: "Femme", label: "Femmes" }, { value: "Les 2", label: "Les deux" }] },
     { key: "alive_status", label: "Mort ou vivant", type: "choice", options: [{ value: "Mort", label: "Décédé(e)s" }, { value: "Vivant", label: "Vivant(e)s" }, { value: "Les 2", label: "Les deux" }] },
   ],

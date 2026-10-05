@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useMutation } from "@tanstack/react-query"
-import { CircleCheckIcon, FlagIcon, SendIcon } from "lucide-react"
+import { FlagIcon, SendIcon } from "lucide-react"
 import {
   Button,
   Checkbox,

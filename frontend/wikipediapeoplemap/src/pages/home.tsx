@@ -19,41 +19,6 @@ const longitude_position_of_france = 6.6034
 const latitude_position_of_france = 48.8883
 
 // Menu de l'accueil : un bouton par page, avec une courte explication
-const HOME_MENU_WITH_DESCRIPTION = [
-  {
-    id: "WorldMapPageButton",
-    to: "/WorldMap",
-    label: "Explorer la Map",
-    description: "Une carte interactive des lieux de naissance et de décès de toutes les personnes ayant une page Wikipédia en français, avec un système de filtres.",
-  },
-  {
-    id: "StatisticsPageButton",
-    to: "/Statistics",
-    label: "Statistiques détaillées",
-    description: "Des statistiques et des graphiques sur les résultats d'une recherche faite avec les filtres avancés.",
-  },
-  {
-    id: "OtherStatisticsPageButton",
-    to: "/OtherStatistics",
-    label: "Autres statistiques",
-    description: "Le classement des noms, villes, pays… selon un score, et le ratio hommes/femmes par ville, pays, âge…",
-  },
-  {
-    id: "QjisMapPageButton",
-    to: "/Qjis",
-    label: "Carte pour QGIS",
-    description: "Disponible sur PC : génère un fichier CSV utilisable dans le logiciel QGIS à partir des filtres choisis.",
-    desktop_only: true,
-  },
-  {
-    id: "AboutPageButton",
-    to: "/About",
-    label: "À propos",
-    description: "L'idée du projet, le calcul du classement et les explications techniques.",
-  },
-]
-
-// Menu de l'accueil : un bouton par page, avec une courte explication
 const HOME_MENU = [
   {
     id: "WorldMapPageButton",
