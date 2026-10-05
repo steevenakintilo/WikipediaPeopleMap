@@ -39,6 +39,8 @@ CORS_ALLOWED_ORIGINS = [
     # Page admin locale (frontend/admin)
     "http://127.0.0.1:5174",
     "http://localhost:5174",
+    "https://www.wikipediapeoplemap.com",
+    "https://www.wikipediapeoplemap.com/"
 ]
 
 from corsheaders.defaults import default_headers
@@ -104,7 +106,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # # PROD
 
 
-RUN_BACKEND_PROD = False
+RUN_BACKEND_PROD = True
 
 if RUN_BACKEND_PROD:
     DATABASES = {
@@ -135,19 +137,19 @@ else:
 
 # # LOCAL POSTGRESS
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": os.environ["PGPASSWORD"],
-        "HOST": "127.0.0.1",
-        "PORT": "53025",
-        "OPTIONS": {
-            "sslmode": "require",
-        },
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "railway",
+#         "USER": "postgres",
+#         "PASSWORD": os.environ["PGPASSWORD"],
+#         "HOST": "127.0.0.1",
+#         "PORT": "59085",
+#         "OPTIONS": {
+#             "sslmode": "require",
+#         },
+#     }
+# }
 
 print(DATABASES)
 # Password validation
