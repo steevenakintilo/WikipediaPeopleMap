@@ -15,6 +15,12 @@ import { Button, cn } from "@steevenakintilo/ui";
 import { random_localisation_in_france } from "../utils/global_variable.tsx"
 import { LOGO_URL } from "../components/nav_links.ts";
 
+const SITE_URL = "https://wikipediapeoplemap.com/"
+const SITE_TITLE = "Wikipedia People Map - La carte des personnes de Wikipédia"
+const SITE_DESCRIPTION = "Explorez sur une carte interactive les lieux de naissance et de décès des personnes ayant une page Wikipédia en français, avec des statistiques et des filtres avancés."
+const PREVIEW_IMAGE = `${SITE_URL}/preview.png`
+
+
 const longitude_position_of_france = 6.6034
 const latitude_position_of_france = 48.8883
 
@@ -78,10 +84,24 @@ const Home = () => {
 
   return (
     <main className="flex min-h-dvh">
-      <Helmet>
+       <Helmet>
         <html lang="fr" />
-        <title>Wikipedia People Map - La carte des personnes de Wikipédia</title>
-        <meta name="description" content="Explorez sur une carte interactive les lieux de naissance et de décès des personnes ayant une page Wikipédia en français, avec des statistiques et des filtres avancés." />
+        <title>{SITE_TITLE}</title>
+        <meta name="description" content={SITE_DESCRIPTION} />
+        <link rel="canonical" href={`${SITE_URL}/`} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Wikipedia People Map" />
+        <meta property="og:title" content={SITE_TITLE} />
+        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <meta property="og:url" content={`${SITE_URL}/`} />
+        <meta property="og:image" content={PREVIEW_IMAGE} />
+        <meta property="og:locale" content="fr_FR" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={SITE_TITLE} />
+        <meta name="twitter:description" content={SITE_DESCRIPTION} />
+        <meta name="twitter:image" content={PREVIEW_IMAGE} />
       </Helmet>
       <h1 className="sr-only">Wikipedia People Map</h1>
 
