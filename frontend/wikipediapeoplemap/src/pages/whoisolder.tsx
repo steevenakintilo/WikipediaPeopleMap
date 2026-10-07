@@ -10,7 +10,7 @@ import { ActiveFilters, AdvancedSearchDialog } from "../components/advanced_sear
 import { count_active_filters, GAME_FILTERS } from "../components/advanced_search_config.ts";
 import { ErrorState, LoadingState, PageHeader, TooMuchRequestError } from "../components/page.tsx";
 
-const EARTH_GIF = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790349009/earth_qha8vm.gif"
+//const EARTH_GIF = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790349009/earth_qha8vm.gif"
 
 const WhoIsOlder = () => {
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
