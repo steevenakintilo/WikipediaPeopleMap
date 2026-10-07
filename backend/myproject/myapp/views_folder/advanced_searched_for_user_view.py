@@ -299,11 +299,11 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                 number_of_people_to_display = int(recieved_data["number_of_people_to_display"])
 
     if "birth_month_day" in recieved_data:
-        if len(recieved_data["birth_month_day"]) != "0":
+        if len(recieved_data["birth_month_day"]) != 0:
             filters["birth_month_day"] = recieved_data["birth_month_day"]
 
     if "death_month_day" in recieved_data:
-        if len(recieved_data["death_month_day"]) != "0":
+        if len(recieved_data["death_month_day"]) != 0:
             filters["death_month_day"] = recieved_data["death_month_day"]
             display_only_death_localisation = True
             display_death_localisation = True
@@ -476,7 +476,8 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     index_start = chunk_nb * nb
     index_end = (chunk_nb + 1) * nb
 
-    
+
+    #number_of_people_to_display = 0
     list_of_localisation = []
     toto = []
     #print(nb,display_death_localisation,display_only_death_localisation)

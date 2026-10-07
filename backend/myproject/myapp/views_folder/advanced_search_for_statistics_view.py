@@ -3,6 +3,7 @@ from unidecode import unidecode
 from django.shortcuts import render
 
 # Create your views here.
+from django.core.cache import cache
 from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -18,10 +19,19 @@ from ..global_variable import *
 from ..utility_function  import *
 
 
+import hashlib
+
 import os
 import json
 
 import time
+
+
+STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
+
+def _stats_cache_key(data: dict) -> str:
+    normalized = json.dumps(data, sort_keys=True, ensure_ascii=False)
+    return "adv_stats:" + hashlib.md5(normalized.encode()).hexdigest()
 
 @csrf_exempt
 @ratelimit(key='ip', rate='15/15m',block=False)
@@ -60,6 +70,12 @@ def get_advanced_statistics(request):
 
     if recieved_data == {'birth_town_localisation__icontains': ' '}:
         recieved_data = {}
+
+    cache_key = _stats_cache_key(recieved_data)
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return JsonResponse(cached, status=200)
+    
     try:
 
 
@@ -140,21 +156,21 @@ def get_advanced_statistics(request):
         filters["preciseness_level__gte"] = recieved_data["preciseness_level"]
 
     if "age" in recieved_data:
-            if int(recieved_data["age"]) <= 0:
-                age = 1
-            else:
-                age = recieved_data["age"]
-            filters["age__gte"] = age
-            if "age_max" not in recieved_data:
-                filters["age__lte"] = MAXIMUM_AGE_TO_DISPLAY
-                
+        if int(recieved_data["age"]) <= 0:
+            age = 1
+        else:
+            age = recieved_data["age"]
+        filters["age__gte"] = age
+        if "age_max" not in recieved_data:
+            filters["age__lte"] = MAXIMUM_AGE_TO_DISPLAY
+            
     if "age_max" in recieved_data:
         if int(recieved_data["age_max"]) <= 0:
             age = 1
         if int(recieved_data["age_max"]) >= MAXIMUM_AGE_TO_DISPLAY:
             age = MAXIMUM_AGE_TO_DISPLAY
         else:
-            age = recieved_data["age"]
+            age = recieved_data["age_max"]
         filters["age__lte"] = age
     
     
@@ -283,11 +299,11 @@ def get_advanced_statistics(request):
 
     
     if "birth_month_day" in recieved_data:
-        if len(recieved_data["birth_month_day"]) != "0":
+        if len(recieved_data["birth_month_day"]) != 0:
             filters["birth_month_day"] = recieved_data["birth_month_day"]
 
     if "death_month_day" in recieved_data:
-        if len(recieved_data["death_month_day"]) != "0":
+        if len(recieved_data["death_month_day"]) != 0:
             filters["death_month_day"] = recieved_data["death_month_day"]
             display_death_localisation = True
         
@@ -1167,7 +1183,10 @@ def get_advanced_statistics(request):
 
         elapsed = time.perf_counter() - start
         print(f"Request processing time: {elapsed:.3f} seconds")
-        return JsonResponse({"all_wikipedia_info":dict_of_counter},status=200)
+        result = {"all_wikipedia_info": dict_of_counter}
+        cache.set(cache_key, result, STATS_CACHE_TTL)
+        return JsonResponse(result, status=200)
+        
     except:
         import traceback
         traceback.print_exc()

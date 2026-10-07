@@ -290,11 +290,11 @@ def who_was_born_first(request):
             filters["is_alive"] = False
 
     if "birth_month_day" in recieved_data:
-        if len(recieved_data["birth_month_day"]) != "0":
+        if len(recieved_data["birth_month_day"]) != 0:
             filters["birth_month_day"] = recieved_data["birth_month_day"]
 
     if "death_month_day" in recieved_data:
-        if len(recieved_data["death_month_day"]) != "0":
+        if len(recieved_data["death_month_day"]) != 0:
             filters["death_month_day"] = recieved_data["death_month_day"]
             display_death_localisation = True
 
@@ -384,6 +384,9 @@ def who_was_born_first(request):
     list_of_all_user_data =  []
     
     nb = int(recieved_data["number_of_rounds"])
+    if nb > 25:
+        nb = 25
+
     for i , user_obj in enumerate(all_user_obj):
         try:
             if len(list_of_all_user_data) < nb:

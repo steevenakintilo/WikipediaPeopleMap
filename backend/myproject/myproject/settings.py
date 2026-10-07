@@ -136,6 +136,20 @@ else:
     }
 
 
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/tmp/django_cache",
+        "TIMEOUT": 60 * 60 * 24 * 7,  # 7 jours
+        "OPTIONS": {
+            "MAX_ENTRIES": 1000,
+            "CULL_FREQUENCY": 3,  # supprime 1/3 des entrées quand c'est plein
+        },
+    }
+}
+
 # # LOCAL POSTGRESS
 
 # DATABASES = {
@@ -145,7 +159,7 @@ else:
 #         "USER": "postgres",
 #         "PASSWORD": os.environ["PGPASSWORD"],
 #         "HOST": "127.0.0.1",
-#         "PORT": "61789",
+#         "PORT": "53674",
 #         "OPTIONS": {
 #             "sslmode": "require",
 #         },

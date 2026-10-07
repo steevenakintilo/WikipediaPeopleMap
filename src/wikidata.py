@@ -49,6 +49,11 @@ class WikiPeopleData():
         self.all_real_people_set = set(self.list_of_wikipedia_page_of_real_people)
         self.list_of_top_2000_town : list[str] = print_file_content("list_of_top_2000_town.txt").split("\n")
 
+
+        
+        with open("data_files/list_of_page_with_the_most_translation.json", "r", encoding="utf-8") as file:
+            self.list_of_translation_of_user = json.load(file)
+        
         with open("data_files/people_dict_power_ranking.json", "r", encoding="utf-8") as file:
             self.power_ranking_json = json.load(file)
         with open("data_files/list_of_link_of_all_users_sorted.json", "r", encoding="utf-8") as file:
@@ -470,7 +475,7 @@ class WikiPeopleData():
 
 
             try:
-            # Find the first image
+                # Find the first image
                 soup = BeautifulSoup(html, "html.parser")
                 img = soup.find("img")
                 img_path = img["src"].lstrip("./")
@@ -480,9 +485,11 @@ class WikiPeopleData():
                 
                 if picture_url == "https://commons.wikimedia.org/wiki/Special:FilePath/langfr-250px-Defaut_2.svg.png" or ".svg." in picture_url or "%D8" in picture_url or "%D7" in picture_url:
                     picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+                if "/lossy-page1-250px-" in picture_url:
+                    picture_url = picture_url.replace("/lossy-page1-250px-","/").replace(".tif.jpg",".tif?width=250")
             except:
                 picture_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-                                
+
             sub_job = []
             if page_nb == -999:
                 reset_file("user_text_info.txt")
@@ -2997,7 +3004,11 @@ class WikiPeopleData():
                 position_pourcentage = -999
                 position_pourcentage_20 = -999
 
-        
+
+            try:
+                nb_of_translation = self.list_of_translation_of_user[page_name]
+            except:
+                nb_of_translation = 0
             # power_ranking = 0
             # position = -999
             # last_position = len(list(self.power_ranking_json.keys()))
@@ -3480,10 +3491,45 @@ class WikiPeopleData():
 
             if country_death_place.lower() == "france" or country_death_place == "" or country_death_place == "Undefined":
                 user_death_outside_france = False
+
+            #game_level = 3
+            nb_of_level_user_can_play = 3
+           # 0 ni date de naissance / age / Localisation de naissance / PP / Pays de naissance
+            # 1 Localisation de naissance / PP / Pays de naissance
+            # 2 Localisation de naissance / Pays de naissance
+            # 3 A toutes les infos (non verifier sur le site)            
+            # 4 A toutes les infos + vérifier
+
+            # # if (type(birth_year) != int or birth_year == 123456789 or birth_year == "Undefined") or (age <= 0 or age >= 150) and (town_birth_place == "" or town_birth_place == "Undefined") or (birth_town_localisation == "" or birth_town_localisation == "Undefined" or len(birth_town_localisation) > 50) or (country_birth_place == "" or country_birth_place == "Undefined") or picture_url == "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
+            # #     game_level = 0
             
+            
+            # # if (town_birth_place == "" or town_birth_place == "Undefined") or (birth_town_localisation == "" or birth_town_localisation == "Undefined" or len(birth_town_localisation) > 50) or (country_birth_place == "" or country_birth_place == "Undefined") or picture_url == "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
+            # #     game_level = 1
+            
+            
+            # # if (town_birth_place == "" or town_birth_place == "Undefined") or (birth_town_localisation == "" or birth_town_localisation == "Undefined" or len(birth_town_localisation) > 50) or (country_birth_place == "" or country_birth_place == "Undefined"):
+            # #     game_level = 2            
+            
+
+            # UN JEU OU TU VEUX LOC NAISSANCE
+            # UN JEU OU TU VEUX AGE
+            # UN JEU OU TU VEUX DATE DE NAISSANCE
+            #list_of_game_user_can_play = ["wikiguessr","ageguessr","whoisolder"]
+            list_of_game_user_can_play = []
+            if town_birth_place != "" and town_birth_place != "Undefined" and birth_town_localisation != "" and birth_town_localisation != "Undefined" and len(birth_town_localisation) < 50 and country_birth_place != "" and country_birth_place != "Undefined" and picture_url != "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
+                list_of_game_user_can_play.append("wikiguessr")
+            if type(birth_year) == int and birth_year != 123456789 and birth_year != "Undefined" and age > 0 and age < 123 and picture_url != "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
+                list_of_game_user_can_play.append("ageguessr")
+                list_of_game_user_can_play.append("whoisolder")
+            list_of_game_user_can_play.append("whoismorefamous")
+                        
+                                
+
             if print_data:
                 print(f"Page name: {page_name}")
                 print(f"Page name lenght: {len(page_name)}")
+                print(f"List of game user can play: {list_of_game_user_can_play}")
                 print(f"Page url: https://fr.wikipedia.org/wiki/{page_name.replace(" ","_")}")
                 print(f"Picture url: {picture_url}")
                 print(f"First name: {first_name}")
@@ -3495,7 +3541,7 @@ class WikiPeopleData():
                 print(f"Country birth place: {country_birth_place}")
                 print(f"Country birth place emojie: {country_birth_place_emoji}")
                 print(f"Birth year time period: {time_period_of_birth}")
-                print(f"Birth country outside france?: {user_birth_outside_france}")                
+                print(f"Birth country outside france?: {user_birth_outside_france}")             
                                     
                 if continent_of_birth != "Undefined" and len(continent_of_birth) != 0:
                     print(f"Continent of birth: {continent_of_birth}")
@@ -3558,6 +3604,7 @@ class WikiPeopleData():
                 print(f"Number of user who_have linked this_user: {number_of_user_who_have_linked_this_user}")
                 print(f"List of friends: {list_of_friend_of_user}")
                 print(f"Number of friends: {len(list_of_friend_of_user)}")
+                print(f"Number of translation: {nb_of_translation}")
                 print(f"Preciseness Level {int(preciseness_level/2)}")
                 print(f"List of unpreciseness data {list_of_unpreciseness_data}")
                                 
@@ -3675,7 +3722,9 @@ class WikiPeopleData():
                 "user_death_outside_france":user_death_outside_france,
                 "list_of_unpreciseness_data":list_of_unpreciseness_data,
                 "country_birth_place_emoji":country_birth_place_emoji,
-                "country_death_place_emoji":country_death_place_emoji
+                "country_death_place_emoji":country_death_place_emoji,
+                "nb_of_translation":nb_of_translation,
+                "list_of_game_user_can_play":list_of_game_user_can_play,
             }
 
             # # A faire apres
@@ -3738,11 +3787,18 @@ class WikiPeopleData():
 
         dict_of_number_of_link_per_page_sorted = {}
         dict_of_people_who_are_the_most_linked_sorted = {}
+        dict_of_people_who_are_the_most_translated_sorted = {}
+                
         dict_of_wikipedia_page_length_sorted = {}
         list_of_link_name_occurence = []
 
         with open("data_files/list_of_link_of_all_user.json", "r", encoding="utf-8") as file:
             people_links = json.load(file)
+
+
+        sorted_data_of_list_of_translation_of_user = dict(
+            sorted(self.list_of_translation_of_user.items(), key=lambda item: item[1], reverse=True)
+        )
                 
         for i , link in enumerate(list_of_dict_link):
             if i % 93000 == 0:
@@ -3911,7 +3967,7 @@ class WikiPeopleData():
 
         for i in range(10):
             print("Most Linked user: " , list_of_element[i],occurence_of_element_list[i])
-
+        
         nb_link_by_user = sum(occurence_of_element_list[0:nbz])
         page_size_of_the_top_500_user = 76198514
         nb_link_by_page_size = int(page_size_of_the_top_500_user / nb_link_by_page)
@@ -3964,20 +4020,44 @@ class WikiPeopleData():
 
         index = 0
         print(len(dict_of_number_of_link_per_page_sorted))
+
+        # TOP 500 a en moyenne 144.34 traduction (Trop eleve)
+        # TOP 1000 a en moyenne 122.08 traduction (Trop eleve)
+        # TOP 2500 a en moyenne 97.157 traduction (Trop eleve)
+        # TOP 10000 a en moyenne 66.3905 traduction (Trop eleve)
+        # TOP 25000 a en moyenne 66.3905 traduction (Trop eleve)
         
+
+        # TOP 500 a en moyenne 116.076 traduction (Trop eleve)
+        # TOP 1000 a en moyenne 93.074 traduction (Trop eleve)
+        # TOP 2500 a en moyenne 65.202 traduction (Trop eleve)
+        # TOP 10000 a en moyenne 33.12 traduction (Trop eleve)
+        # TOP 25000 a en moyenne 20.06 traduction (Trop eleve)
+                        
         for user , data  in dict_of_number_of_link_per_page_sorted.items():
             #print(user,self.all_user_data_file.index(user))
             #print(user,self.list_of_wikipedia_page_of_real_people.index(user))
+            try:
+                translation_score = (sorted_data_of_list_of_translation_of_user[user] + 1) * 50
+            except:
+                translation_score = 0
+
+            try:
+                friend_score = len(self.list_of_friend_of_user[user]) * 66
+            except:
+                friend_score = 0
             page_len = pages_lenght[user]
             merged_data_name.append(user)
-            merged_data_value.append((data * 3.67) + counts[user] + (page_len / nb_link_by_page_size))
+            merged_data_value.append((data * 3.67) + counts[user] + (page_len / nb_link_by_page_size) + translation_score + friend_score)
             if index % 80000 == 0 or user == "Ray Charles" or user == "François Hollande":
                 print(
                     f"User={user} | "
                     f"Data={data * 3.67:.2f} | "
                     f"Links={counts[user]} | "
+                    f"translation_score={translation_score} | "
+                    f"friend_score={friend_score} | "
                     f"Page={page_len / nb_link_by_page_size:.2f} | "
-                    f"Total={(data * 3.67) + dict_of_people_who_are_the_most_linked_sorted[user] + (page_len / nb_link_by_page_size):.2f}"
+                    f"Total={(translation_score) + (data * 3.67) + dict_of_people_who_are_the_most_linked_sorted[user] + (page_len / nb_link_by_page_size):.2f}"
                 )
 
             index+=1
@@ -4004,6 +4084,9 @@ class WikiPeopleData():
 
 
 
+        
+        with open("data_files/list_of_page_with_the_most_translation_sorted.json", "w",encoding="utf-8") as f:
+            json.dump(sorted_data_of_list_of_translation_of_user, f,ensure_ascii=False,indent=4)
         
         with open("data_files/list_of_page_name_linked.json", "w",encoding="utf-8") as f:
             json.dump(dict_of_list_of_page_name_linked_name, f,ensure_ascii=False,indent=4)
