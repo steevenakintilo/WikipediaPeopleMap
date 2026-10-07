@@ -1,14 +1,14 @@
 import { BLACK_BUTTON } from "../utils/styles.ts"
 import { useState } from 'react';
-import { useMutation, useQueries } from '@tanstack/react-query';
-import { CircleCheckIcon, GamepadIcon, MonitorIcon, SearchXIcon, SlidersHorizontalIcon } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle, Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Spinner, toast } from "@steevenakintilo/ui";
+import { useMutation } from '@tanstack/react-query';
+import { CircleCheckIcon, GamepadIcon, SearchXIcon, SlidersHorizontalIcon } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle, Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Spinner } from "@steevenakintilo/ui";
 
 import { ApiError } from "../api/client.ts"
 import { create_who_was_born_first_game } from "../api/queries.ts"
 import { ActiveFilters, AdvancedSearchDialog } from "../components/advanced_search.tsx";
 import { count_active_filters, GAME_FILTERS } from "../components/advanced_search_config.ts";
-import { EmptyState, ErrorState, LoadingState, PageHeader, TooMuchRequestError } from "../components/page.tsx";
+import { ErrorState, LoadingState, PageHeader, TooMuchRequestError } from "../components/page.tsx";
 
 const EARTH_GIF = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790349009/earth_qha8vm.gif"
 
