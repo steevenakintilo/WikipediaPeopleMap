@@ -95,12 +95,12 @@ const AGE_AND_PLACES: FilterSection = {
   ],
 }
 
-const GAME_SETTINGS: FilterSection = {
-  title: "Paramétre de jeu",
-  fields: [
-    { key: "number_of_rounds", label: "Nombre de round (1-25)", type: "number", min:1 , max: 25 }
-  ],
-}
+// const GAME_SETTINGS: FilterSection = {
+//   title: "Paramétre de jeu",
+//   fields: [
+//     { key: "number_of_rounds", label: "Nombre de round (1-25)", type: "number", min:1 , max: 25 }
+//   ],
+// }
 
 const PRECISENESS: FilterField = { key: "preciseness_level", label: "Précision minimale de la page (%)", type: "number", min: 0, max: 100 }
 const LATEST_POSITION: FilterField = { key: "latest_position_of_user_to_display", label: "Position maximale au classement", type: "number", min: 1, max: 712411 }
