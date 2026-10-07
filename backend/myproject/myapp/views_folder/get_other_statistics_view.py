@@ -36,8 +36,11 @@ def get_other_statistics(request):
     list_of_list2 = []
     
     for file in os.listdir(file_path_for_ranking):
-        if len(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")) > 2501:
-            list_of_file_data.append(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")[0:2501])
+        size = 2501
+        if file in ["$aa_name_#a_score_of_size5.txt","$ab_boy_name_#a_score_of_size5.txt","$ab_girl_name_#a_score_of_size5.txt"]:
+            size = len(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n"))
+        if len(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")) > size:
+            list_of_file_data.append(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")[0:size])
         elif len(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")) != 0:
             list_of_file_data.append(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n"))
         list_of_file_name.append(file)

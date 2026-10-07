@@ -43,7 +43,7 @@ def display_user_info(request, username):
             return HttpResponse(f"{username} doesn't exist", status=404)
 
         #print("PAGE NAME :", user_obj.page_name)
-
+        
         if username != "Personne":
             page_name = user_obj.page_name
             list_of_unpreciseness_data = []

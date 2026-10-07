@@ -170,7 +170,7 @@ const WhoIsOlder = () => {
       
       {game_loading.isSuccess &&(
             <PageHeader
-                title="Qui est né avant?"
+                title="Qui est le plus agé?"
             />
         )}
 

@@ -3535,8 +3535,8 @@ Pullman#####28.571#####71.429#####7
 Al Hira#####28.571#####71.429#####7
 Althorp#####28.571#####71.429#####14
 Agoura Hills#####28.571#####71.429#####7
-Kankakee#####28.571#####71.429#####7
 Haddonfield#####28.571#####71.429#####7
+Kankakee#####28.571#####71.429#####7
 Paterson#####28.571#####71.429#####49
 Memel#####28.571#####71.429#####7
 Yamaguchi#####28.571#####71.429#####14
@@ -8151,8 +8151,8 @@ Carry le Rouet#####16.667#####83.333#####6
 Le Mesnil Saint Denis#####16.667#####83.333#####6
 Champigny sur Marne#####16.667#####83.333#####108
 Mirfield#####16.667#####83.333#####6
-Kronberg im Taunus#####16.667#####83.333#####18
 Crans Montana#####16.667#####83.333#####6
+Kronberg im Taunus#####16.667#####83.333#####18
 Esplugues#####16.667#####83.333#####12
 Suse#####16.667#####83.333#####6
 Islip#####16.667#####83.333#####6
@@ -11581,8 +11581,8 @@ Namsos#####11.111#####88.889#####9
 Khimki#####11.111#####88.889#####9
 Conservatoire Giuseppe Verdi (Milan)#####11.111#####88.889#####9
 Tumaco#####11.111#####88.889#####18
-Quatrieme#####11.111#####88.889#####9
 Eccles (Grand Manchester)#####11.111#####88.889#####9
+Quatrieme#####11.111#####88.889#####9
 Telford#####11.111#####88.889#####9
 Valdosta#####11.111#####88.889#####9
 Thorn#####11.111#####88.889#####9
@@ -13868,8 +13868,8 @@ Gottorp#####0#####100#####10
 Lobito#####0#####100#####9
 La Bassee#####0#####100#####20
 Kuching#####0#####100#####6
-Cuiseaux#####0#####100#####9
 Wil#####0#####100#####8
+Cuiseaux#####0#####100#####9
 Mariano#####0#####100#####8
 Alzira#####0#####100#####13
 Bree (Belgique)#####0#####100#####8
@@ -14003,8 +14003,8 @@ Land de Breme#####0#####100#####8
 Merv#####0#####100#####9
 Porto (Portugal)#####0#####100#####13
 Americana#####0#####100#####9
-Beslan#####0#####100#####5
 Gerpinnes#####0#####100#####11
+Beslan#####0#####100#####5
 Etoile sur Rhone#####0#####100#####5
 Andria#####0#####100#####19
 Degerfors#####0#####100#####8
@@ -14029,8 +14029,8 @@ Ibiza (ville)#####0#####100#####10
 Orangeville#####0#####100#####6
 Sandwich (Royaume Uni)#####0#####100#####8
 Kings Langley#####0#####100#####6
-Espelette#####0#####100#####6
 Flixecourt#####0#####100#####7
+Espelette#####0#####100#####6
 Bedford (Massachusetts)#####0#####100#####6
 Clermont#####0#####100#####11
 Stolberg#####0#####100#####14
@@ -14278,8 +14278,8 @@ Polizzi Generosa#####0#####100#####6
 Waxahachie#####0#####100#####8
 Landivisiau#####0#####100#####19
 Laurinburg#####0#####100#####6
-Marciac#####0#####100#####5
 Ile Maurice#####0#####100#####22
+Marciac#####0#####100#####5
 Montdidier (Somme)#####0#####100#####28
 Oppede#####0#####100#####6
 San Cristobal (Venezuela)#####0#####100#####19
@@ -14442,8 +14442,8 @@ Dinkelsbuhl#####0#####100#####6
 Shenandoah (Pennsylvanie)#####0#####100#####5
 Bannockburn#####0#####100#####6
 Oud Heverlee#####0#####100#####6
-Auxon (Aube)#####0#####100#####5
 Chateau d'Osaka#####0#####100#####5
+Auxon (Aube)#####0#####100#####5
 Tongyeong#####0#####100#####8
 Meadville (Pennsylvanie)#####0#####100#####7
 Dudley (Midlands de l'Ouest)#####0#####100#####6
@@ -15108,8 +15108,8 @@ Onex#####0#####100#####5
 Kolpino#####0#####100#####5
 Messigny et Vantoux#####0#####100#####5
 Dammam#####0#####100#####12
-Rouvroy (Pas de Calais)#####0#####100#####7
 Ravenna (Ohio)#####0#####100#####5
+Rouvroy (Pas de Calais)#####0#####100#####7
 Lesmahagow#####0#####100#####5
 Syzran#####0#####100#####7
 Carchi#####0#####100#####7
@@ -15706,8 +15706,8 @@ Castro Urdiales#####0#####100#####12
 Saint Paulien (Haute Loire)#####0#####100#####6
 Damblain#####0#####100#####5
 Vendresse#####0#####100#####5
-Sprimont#####0#####100#####10
 Bassecourt#####0#####100#####8
+Sprimont#####0#####100#####10
 Llanes#####0#####100#####7
 Fourqueux#####0#####100#####5
 Grudziadz#####0#####100#####18
@@ -16111,8 +16111,8 @@ La Suze sur Sarthe#####0#####100#####9
 Carazinho#####0#####100#####7
 Vatan#####0#####100#####6
 Viviez#####0#####100#####8
-Muhldorf am Inn#####0#####100#####8
 Maikop#####0#####100#####11
+Muhldorf am Inn#####0#####100#####8
 Crespano del Grappa#####0#####100#####6
 Courcelles (Belgique)#####0#####100#####9
 Kazimierz#####0#####100#####5
@@ -16211,9 +16211,9 @@ Haigerloch#####0#####100#####10
 Rothenburg ob der Tauber#####0#####100#####8
 Suevres#####0#####100#####5
 Pulsnitz#####0#####100#####5
+Valojyn#####0#####100#####8
 Guerres de Religion#####0#####100#####7
 Guerres de Religion (France)#####0#####100#####6
-Valojyn#####0#####100#####8
 Redding (Californie)#####0#####100#####5
 Wusterhausen/Dosse#####0#####100#####7
 Famille de La Baume de Montrevel#####0#####100#####5
@@ -16717,8 +16717,8 @@ Lerwick#####0#####100#####6
 Grenada (Mississippi)#####0#####100#####6
 Rethy#####0#####100#####5
 Yarumal#####0#####100#####6
-Toa#####0#####100#####5
 Saint Paul en Jarez#####0#####100#####5
+Toa#####0#####100#####5
 Hautem Saint Lievin#####0#####100#####5
 Chateau de Kimbolton#####0#####100#####5
 El Madania#####0#####100#####5

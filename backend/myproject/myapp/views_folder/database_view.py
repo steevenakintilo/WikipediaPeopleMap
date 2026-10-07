@@ -1,19 +1,12 @@
-from collections import Counter
 from unidecode import unidecode
-from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render
-from django.http import HttpResponse , JsonResponse
+from django.http import HttpResponse 
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 
 from myapp.models import WikipediaUser , WikipediaUserUniqueTown
-
-from random import randint
-from random import sample
-from django.db.models import OuterRef, Subquery
 
 from ..global_variable import *
 from ..utility_function  import *
@@ -786,3 +779,40 @@ def update_all_wikipedia_user(request):
         "Users updated in the database",
         status=200
     )
+
+@csrf_exempt
+def delete_user_to_the_database(request):
+    """A function that delete user from the database."""
+
+    if request.method != "DELETE":
+        return HttpResponse("Error!", status=404)
+
+    user_to_delete = [
+    "Orville et Wilbur Wright",
+    "Joel et Ethan Coen",
+    "Siegfried et Roy",
+    "Énée",
+    "Circé",
+    "Europe (fille d’Agénor)",
+    "Priam",
+    "Cassandre",
+    "Romulus et Rémus",
+    "Antonio Rodrigo Minotauro Nogueira",
+    "Freddie Fingers Lee",
+    "John Charlie Whitney",
+    "Johnny Man Young",
+    "Leon Ndugu Chancler",
+    "Mauricio Shogun Rua",
+    "Quinton Rampage Jackson",
+    "Richard Humpty Vission",
+    "William Stage Boyd"
+    ]
+    
+    for user in user_to_delete:
+        try:
+            user = WikipediaUser.objects.get(page_name=user)
+            user.delete()
+        except:
+            pass
+    
+    return HttpResponse("User deleted",status=200)

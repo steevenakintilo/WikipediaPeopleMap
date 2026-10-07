@@ -4324,8 +4324,8 @@ Crete#####0#####100#####10
 Kristiansand#####0#####100#####6
 Lushunkou#####0#####100#####5
 Ely#####0#####100#####5
-Newburyport#####0#####100#####9
 Vernouillet (Eure et Loir)#####0#####100#####6
+Newburyport#####0#####100#####9
 Academie des sciences#####0#####100#####5
 Champagne (province)#####0#####100#####15
 Sundsvall#####0#####100#####7

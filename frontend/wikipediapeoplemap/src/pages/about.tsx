@@ -27,7 +27,7 @@ const About = () => {
                     </p>
 
                     <p>
-                        Il y a quatre pages principales sur le site :
+                        Il y a cinq pages principales sur le site :
                     </p>
 
                     <p>
@@ -52,6 +52,12 @@ const About = () => {
                     <p> <strong>La page Autres Statistiques :</strong> elle permet d’obtenir d’autres statistiques liées au classement des noms/villes/pays, etc.
                         par rapport à un score, et d’avoir le ratio hommes/femmes par ville/pays/âge, etc. </p>
 
+                    <p>
+                        <strong>La page Jeux :</strong> elle regroupe les jeux du site. Pour le moment, il n’y en a qu’un seul : « Qui est né avant ? ».
+                        Le principe est simple : à chaque round, deux personnes vous sont présentées et vous devez deviner laquelle est née en premier.
+                        Vous avez 3 vies, et vous pouvez choisir les filtres pour décider du type de personnes qui apparaîtront.
+                    </p>
+
 
                     <p>
                         Le site a été conçu et développé pour être utilisé sur PC.
@@ -66,7 +72,7 @@ const About = () => {
 
                 <AccordionContent>
                     <p>
-                        Pour classer un utilisateur, j'utilise 3 métriques :
+                        Pour classer un utilisateur, j'utilise 5 métriques :
                     </p>
 
                     <p>
@@ -82,9 +88,17 @@ const About = () => {
                     </p>
 
                     <p>
-                        Ensuite, pour effectuer le calcul, je prends le résultat des 3 variables que je pondère sur une unité précise pour éviter que la taille de la page soit beaucoup plus grande que le nombre de liens, puis je divise le résultat par 3.
-                        Cela explique pourquoi certaines personnes « inconnues » sont très élevées dans le classement, comme le top 3, car elles sont toutes mentionnées par plus de 8 800 personnes.
-                    </p>                </AccordionContent>
+                        <strong>Le nombre d'amis :</strong> Plus une personne a d'amis, plus elle est connectée et importante.
+                    </p>
+
+                    <p>
+                        <strong>Le nombre de traductions :</strong> Plus la page d'une personne est traduite dans de nombreuses langues différentes, plus elle est connue à l'international.
+                    </p>
+
+                    <p>
+                        Ensuite, pour effectuer le calcul, je prends le résultat des 5 variables que je pondère sur une unité précise pour éviter que la taille de la page soit beaucoup plus grande que le nombre de liens, puis je divise le résultat par 5.
+                    </p>
+                </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="technical">

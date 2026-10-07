@@ -426,7 +426,14 @@ class WikipediaUser(models.Model):
     number_of_views = models.IntegerField(
         default=0
     )
-
+    list_of_game_user_can_play = models.JSONField(
+        default=list,
+        blank=True
+    )
+    nb_of_translation = models.IntegerField(
+        default=0
+    )
+    
     
     # created_at = models.DateTimeField(
     #     auto_now_add=True

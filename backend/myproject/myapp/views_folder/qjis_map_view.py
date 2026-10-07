@@ -22,7 +22,8 @@ import secrets
 @csrf_exempt
 @ratelimit(key='ip', rate='10/15m', block=False)
 def display_chunck_user_birth_town_localisation_qjis(request):
-    """Display chunck (10000 users) of user birth town localisation"""
+    """Display chunck of user localisation for qjis"""
+    print("unpeu unpeu")
     if getattr(request, 'limited', False):
         return JsonResponse(
             {
@@ -369,20 +370,20 @@ def display_chunck_user_birth_town_localisation_qjis(request):
         else:
             all_user_obj = WikipediaUser.objects.filter(**filters).order_by(f"{sort_user_by}")
     
-    list_of_first_name = []
+    list_of_first_name = set()
     display_only_one_person_per_first_name = False
     if "display_only_one_person_per_first_name" in recieved_data:
         if recieved_data["display_only_one_person_per_first_name"] == "oui":
             display_only_one_person_per_first_name = True
 
-    list_of_last_name = []
+    list_of_last_name = set()
     display_only_one_person_per_last_name = False
     if "display_only_one_person_per_last_name" in recieved_data:
         print("caca coco popo lili")
         if recieved_data["display_only_one_person_per_last_name"] == "oui":
             display_only_one_person_per_last_name = True
 
-    list_of_job = []
+    list_of_job = set()
     display_only_one_person_per_job = False
     if "display_only_one_person_per_job" in recieved_data:
         if recieved_data["display_only_one_person_per_job"] == "oui":
@@ -395,58 +396,79 @@ def display_chunck_user_birth_town_localisation_qjis(request):
     number_of_people_to_display = 5000000000
     
     nb_of_bad_user = 0
-    for user_obj in all_user_obj:
+    import time
+
+
+    t = time.time()
+    for u in all_user_obj.values("birth_town_localisation", "page_name").iterator(chunk_size=5000):
+        dms_to_decimal(u["birth_town_localisation"], u["page_name"])
+    print("dms_to_decimal :", time.time() - t)
+    # t = time.time()
+    # rows = list(all_user_obj.values_list("id", flat=True))
+    # print("SQL seul :", time.time() - t, "s pour", len(rows), "lignes")
+
+    # t = time.time()
+    # rows = list(all_user_obj.values(
+    #     "page_name", "first_name_standard", "last_name_standard", "job",
+    #     "birth_town_localisation", "town_death_localisation",
+    #     "town_birth_place", "town_death_place", "is_alive",
+    #     # + les champs de user_info_dict
+    # ))
+    # print("values() :", time.time() - t)
+    fields = [
+        "page_name", "first_name_standard", "last_name_standard", "job",
+        "birth_town_localisation", "town_death_localisation",
+        "town_birth_place", "town_death_place", "is_alive",
+        # ajoute ici les champs utilisés dans user_info_dict s'il est construit à partir de user_obj
+    ]
+
+    set_of_first_name = set()
+    set_of_last_name = set()
+    set_of_job = set()
+    town_birth_or_death_place = recieved_data.get("town_birth_or_death_place", "").lower().strip()
+
+    t = time.time()
+    
+    for user_obj in all_user_obj.values(*fields).iterator(chunk_size=5000):
         try:
-            if display_only_one_person_per_first_name and user_obj.first_name_standard in list_of_first_name:
-                nb_of_bad_user+=1
+            if display_only_one_person_per_first_name and user_obj["first_name_standard"] in set_of_first_name:
+                nb_of_bad_user += 1
                 continue
             elif display_only_one_person_per_first_name:
-                list_of_first_name.append(user_obj.first_name_standard)
-            
+                set_of_first_name.add(user_obj["first_name_standard"])
 
-            if display_only_one_person_per_last_name and user_obj.last_name_standard in list_of_last_name:
-                nb_of_bad_user+=1
+            if display_only_one_person_per_last_name and user_obj["last_name_standard"] in set_of_last_name:
+                nb_of_bad_user += 1
                 continue
             elif display_only_one_person_per_last_name:
-                list_of_last_name.append(user_obj.last_name_standard)
+                set_of_last_name.add(user_obj["last_name_standard"])
 
-
-            if display_only_one_person_per_job and user_obj.job not in list_of_job:
-                list_of_job.append(user_obj.job)
+            if display_only_one_person_per_job and user_obj["job"] not in set_of_job:
+                set_of_job.add(user_obj["job"])
             elif display_only_one_person_per_job:
-                nb_of_bad_user+=1
+                nb_of_bad_user += 1
                 continue
-            
-            # elif display_only_one_person_per_first_name:
-            #     continue
-
-            # if display_only_one_person_per_last_name and user_obj.last_name_standard not in list_of_last_name:
-            #     list_of_last_name.append(user_obj.last_name_standard)
-            # elif display_only_one_person_per_last_name:
-            #     continue
 
             if len(list_of_all_user_data) >= number_of_people_to_display:
                 break
 
-
             if display_town_birth_or_death_place is False:
-                list_of_localisation.append(dms_to_decimal(user_obj.birth_town_localisation,user_obj.page_name))
+                list_of_localisation.append(dms_to_decimal(user_obj["birth_town_localisation"], user_obj["page_name"]))
                 if display_only_death_localisation is False:
-                    list_of_all_user_data.append(dms_to_decimal(user_obj.birth_town_localisation,"__qjis__"))
+                    list_of_all_user_data.append(dms_to_decimal(user_obj["birth_town_localisation"], "__qjis__"))
                 else:
                     list_of_all_user_data.append(dms_to_decimal("blablobla"))
-                            
-                if display_death_localisation or display_only_death_localisation:
-                    list_of_all_user_data.append(dms_to_decimal(user_obj.town_death_localisation,"__qjis__"))
-            else:
-                if user_obj.town_birth_place.lower().strip() == recieved_data["town_birth_or_death_place"].lower().strip():
-                    list_of_localisation.append(dms_to_decimal(user_obj.birth_town_localisation,user_obj.page_name))                                            
-                if user_obj.is_alive is False and user_obj.town_death_place.lower().strip() == recieved_data["town_birth_or_death_place"].lower().strip():
-                    list_of_all_user_data.append(dms_to_decimal(user_obj.town_death_localisation,"__qjis__"))
-            list_of_all_user_data.append(user_info_dict)
-        except:
-            pass
 
+                if display_death_localisation or display_only_death_localisation:
+                    list_of_all_user_data.append(dms_to_decimal(user_obj["town_death_localisation"], "__qjis__"))
+            else:
+                if user_obj["town_birth_place"].lower().strip() == town_birth_or_death_place:
+                    list_of_localisation.append(dms_to_decimal(user_obj["birth_town_localisation"], user_obj["page_name"]))
+                if user_obj["is_alive"] is False and user_obj["town_death_place"].lower().strip() == town_birth_or_death_place:
+                    list_of_all_user_data.append(dms_to_decimal(user_obj["town_death_localisation"], "__qjis__"))
+            list_of_all_user_data.append(user_info_dict)
+        except Exception as e:
+            print("ERREUR :", repr(e))    
     with open("data.json", "w", encoding="utf-8") as file:
         json.dump({"all_user_data":list_of_all_user_data}, file, indent=4, ensure_ascii=False)
 
@@ -479,6 +501,6 @@ def display_chunck_user_birth_town_localisation_qjis(request):
     writer = csv.writer(response)
     #writer.writerow(['latitude', 'longitude'])
     writer.writerows(data)
-
+    print("Le temps :", time.time() - t)
     return response
 

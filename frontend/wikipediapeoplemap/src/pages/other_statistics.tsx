@@ -37,7 +37,7 @@ function build_charts(list_of_ranking_data: any, list_of_gender_data: any) {
     number_of_bar_to_display = 3
   }
 
-  for (let i = 0; i < keys.length - 1; i++) {
+  for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
       if (list_of_ranking_data[key].length >= 1) {
@@ -52,7 +52,7 @@ function build_charts(list_of_ranking_data: any, list_of_gender_data: any) {
       }
   }
 
-  for (let i = 0; i < keys2.length - 1; i++) {
+  for (let i = 0; i < keys2.length; i++) {
       const key = keys2[i];
 
       if (list_of_gender_data[key].length >= 1) {

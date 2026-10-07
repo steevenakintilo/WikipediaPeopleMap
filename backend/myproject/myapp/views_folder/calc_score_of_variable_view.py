@@ -495,17 +495,18 @@ def calc_score_of_all_variable(request):
 
 
             if user_obj.time_period_of_birth.lower() != "undefined" and user_obj.time_period_of_birth != "":
+                period = user_obj.time_period_of_birth.replace("Prehistory", "Préhistoire").replace("Antiquity", "Antiquité").replace("Middle Ages", "Moyen Âge").replace("Renaissance", "Renaissance").replace("Contemporary Period", "Époque contemporaine").replace("Today Time", "Époque actuelle")
                 if user_obj.time_period_of_birth not in time_period_of_birth_dict_grade:
-                    time_period_of_birth_dict_grade[user_obj.time_period_of_birth] = 0
-                    time_period_of_birth_dict_grade[user_obj.time_period_of_birth] += user_obj.power_ranking
+                    time_period_of_birth_dict_grade[period] = 0
+                    time_period_of_birth_dict_grade[period] += user_obj.power_ranking
                 else:
-                    time_period_of_birth_dict_grade[user_obj.time_period_of_birth] += user_obj.power_ranking
+                    time_period_of_birth_dict_grade[period] += user_obj.power_ranking
 
                 if user_obj.time_period_of_birth in time_period_of_birth_dict_occurence:
-                    time_period_of_birth_dict_occurence[f"{user_obj.time_period_of_birth}"] += 1
+                    time_period_of_birth_dict_occurence[f"{period}"] += 1
                 else:
-                    time_period_of_birth_dict_occurence[f"{user_obj.time_period_of_birth}"] = 0
-                    time_period_of_birth_dict_occurence[f"{user_obj.time_period_of_birth}"] += 1
+                    time_period_of_birth_dict_occurence[f"{period}"] = 0
+                    time_period_of_birth_dict_occurence[f"{period}"] += 1
 
 
             if user_obj.continent_of_birth != "Undefined" and user_obj.continent_of_birth != "":
@@ -1231,7 +1232,7 @@ def calc_gender_ratio_of_some_variable(request):
                 else:
                     time_period_of_birth_occurence[period] += 1
 
-                gender_key = f"{user_obj.time_period_of_birth}_nb_of_{user_obj.gender.lower()}"
+                gender_key = f"{period}_nb_of_{user_obj.gender.lower()}"
 
                 if gender_key not in time_period_of_birth_gender_nb:
                     time_period_of_birth_gender_nb[gender_key] = 1

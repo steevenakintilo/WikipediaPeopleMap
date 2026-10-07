@@ -121,6 +121,7 @@ export const STATISTICS_FILTERS: FilterSection[] = [
       { key: "display_only_one_person_per_first_name", label: "Une seule personne par prénom", type: "choice", options: YES_NO },
       { key: "display_only_one_person_per_last_name", label: "Une seule personne par nom de famille", type: "choice", options: YES_NO },
       { key: "display_only_one_person_per_job", label: "Une seule personne par métier", type: "choice", options: YES_NO },
+      { key: "display_only_death_localisation", label: "Afficher uniquement les lieux de décès", type: "choice", options: YES_NO }
     ],
   },
 ]

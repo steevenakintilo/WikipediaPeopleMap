@@ -95,7 +95,13 @@ HISTORICAL_PERIODS_DICT_TO_FRENCH_WITH_DATE = {
     "Renaissance": "Renaissance (1492-1788)",
     "Contemporary Period": "Époque contemporaine (1789-1999)",
     "Today Time": "Époque actuelle (2000-????)",
-    "Undefined":"Indéfinie"
+    "Undefined": "Indéfinie",
+    "Préhistoire": "Préhistoire (-99999999-3301)",
+    "Antiquité": "Antiquité (-3300-475)",
+    "Moyen Âge": "Moyen Âge (476-1491)",
+    "Époque contemporaine": "Époque contemporaine (1789-1999)",
+    "Époque actuelle": "Époque actuelle (2000-????)",
+    "Indéfinie": "Indéfinie",
 }
 
 HISTORICAL_PERIODS_DICT = {

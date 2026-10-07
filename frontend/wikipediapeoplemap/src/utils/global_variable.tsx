@@ -1169,7 +1169,7 @@ export const backend_url_local: string = "http://127.0.0.1:8000/"
 
 export const dict_localisation_pin_picture : any = {
     999999999999999: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1787351654/image_mobyht.png",
-    default: "https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png",
+    default: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1791384923/map-pin-icon_kipz9h.png",
   };
 
 export const dict_localisation_pin_picture2 : any = {

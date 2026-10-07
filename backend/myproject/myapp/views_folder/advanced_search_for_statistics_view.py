@@ -560,610 +560,617 @@ def get_advanced_statistics(request):
     length = all_user_obj.count()
     nb_of_bad_user = 0
     print("start get_advanced_statistics function")
-    for user_obj in all_user_obj:
+    try:
+        for user_obj in all_user_obj:
 
-        if display_only_one_person_per_first_name and user_obj.first_name_standard not in set_of_first_name:
-            set_of_first_name.add(user_obj.first_name_standard)
-        elif display_only_one_person_per_first_name:
-            nb_of_bad_user+=1
-            continue
+            if display_only_one_person_per_first_name and user_obj.first_name_standard not in set_of_first_name:
+                set_of_first_name.add(user_obj.first_name_standard)
+            elif display_only_one_person_per_first_name:
+                nb_of_bad_user+=1
+                continue
 
-        if display_only_one_person_per_last_name and user_obj.last_name_standard not in set_of_last_name:
-            set_of_last_name.add(user_obj.last_name_standard)
-        elif display_only_one_person_per_last_name:
-            nb_of_bad_user+=1
-            continue
+            if display_only_one_person_per_last_name and user_obj.last_name_standard not in set_of_last_name:
+                set_of_last_name.add(user_obj.last_name_standard)
+            elif display_only_one_person_per_last_name:
+                nb_of_bad_user+=1
+                continue
 
-        if display_only_one_person_per_job and user_obj.job not in set_of_job:
-            set_of_job.add(user_obj.job)
-        elif display_only_one_person_per_job:
-            nb_of_bad_user+=1
-            continue
-        
-        # ─────────────────────────────────────────────
-        # Names
-        # ─────────────────────────────────────────────
-
-        if user_obj.first_name and user_obj.first_name.lower().strip() != "undefined":
-            first_name_counter[user_obj.first_name] += 1
-
-        if user_obj.first_name_standard and user_obj.first_name_standard.lower().strip() != "undefined":
-            first_name_standard_counter[user_obj.first_name_standard] += 1
-
-        if user_obj.last_name and user_obj.last_name.lower().strip() != "undefined":
-            last_name_counter[user_obj.last_name] += 1
-
-        if user_obj.last_name_standard and user_obj.last_name_standard.lower().strip() != "undefined":
-            last_name_standard_counter[user_obj.last_name_standard] += 1
-
-        if user_obj.century_of_birth != -999 and user_obj.age <= MAXIMUM_AGE_TO_DISPLAY and int(user_obj.century_of_birth) <= 21:
-            century_of_birth_counter[int(user_obj.century_of_birth)] += 1
-        
-        if user_obj.century_of_death != -999 and user_obj.age <= MAXIMUM_AGE_TO_DISPLAY and int(user_obj.century_of_death) <= 21:
-            century_of_death_counter[int(user_obj.century_of_death)] += 1
-        
-        # ─────────────────────────────────────────────
-        # Job
-        # ─────────────────────────────────────────────
-
-        if user_obj.job and user_obj.job.lower().strip() != "undefined":
-            job_counter[user_obj.job] += 1
-
-
-        # ─────────────────────────────────────────────
-        # Birth
-        # ─────────────────────────────────────────────
-
-        if user_obj.town_birth_place and len(user_obj.town_birth_place) > 0 and user_obj.town_birth_place.lower() != "undefined":
-            town_birth_place_counter[user_obj.town_birth_place] += 1
-
-        if user_obj.country_birth_place and len(user_obj.country_birth_place) > 0 and user_obj.country_birth_place.lower() != "undefined":
-            country_birth_place_counter[user_obj.country_birth_place] += 1
-
-        if user_obj.time_period_of_birth and len(user_obj.time_period_of_birth) > 0 and user_obj.time_period_of_birth.lower() != "undefined":
-            time_period_of_birth_counter[HISTORICAL_PERIODS_DICT_TO_FRENCH_WITH_DATE[user_obj.time_period_of_birth]] += 1
-
-        if user_obj.continent_of_birth and len(user_obj.continent_of_birth) > 0 and user_obj.continent_of_birth.lower() != "undefined":
-            continent_of_birth_counter[user_obj.continent_of_birth] += 1
-
-        if user_obj.region_of_birth and len(user_obj.region_of_birth) > 0 and user_obj.region_of_birth.lower() != "undefined":
-            region_of_birth_counter[user_obj.region_of_birth] += 1
-
-        if user_obj.birth_date and len(user_obj.birth_date) > 0 and user_obj.birth_date.lower() != "undefined":
-            birth_date_counter[user_obj.birth_date] += 1
-
-        if user_obj.birth_year is not None and len(str(user_obj.birth_year)) > 0 and str(user_obj.birth_year) != "123456789" and user_obj.birth_year < CURRENT_YEAR + 1:
-            birth_year_counter[user_obj.birth_year] += 1
-
-        try:
-            if user_obj.birth_year is not None and len(str(user_obj.birth_year)) > 0 and str(user_obj.birth_year) != "123456789" and user_obj.birth_year >= 1900 and user_obj.birth_year < CURRENT_YEAR + 1:
-                birth_year_counter_from_1900[user_obj.birth_year] += 1
-        except:
-            pass            
-        if user_obj.birth_month and len(user_obj.birth_month) > 0 and user_obj.birth_month.lower() != "undefined":
-            birth_month_counter[user_obj.birth_month] += 1
-
-        if user_obj.birth_day and len(user_obj.birth_day) > 0 and user_obj.birth_day.lower() != "undefined":
-            birth_day_counter[user_obj.birth_day] += 1
-
-        if user_obj.birth_month_day and len(user_obj.birth_month_day) > 0 and user_obj.birth_month_day.lower() != "undefined":
-            birth_month_day_counter[user_obj.birth_month_day] += 1
-
-
-        if user_obj.town_birth_place == "" or user_obj.town_birth_place.lower() == "undefined":
-            no_town_counter[False] += 1
-        else:
-            no_town_counter[True] += 1
-
-
-        if user_obj.country_birth_place == "" or user_obj.country_birth_place.lower() == "undefined":
-            no_country_counter[False] += 1
-        else:
-            no_country_counter[True] += 1
-                
-        grade_over_20_counter[int(user_obj.grade_over_20)]+=1
-        # ─────────────────────────────────────────────
-        # Death
-        # ─────────────────────────────────────────────
-
-        if user_obj.is_alive is False:
-            if (
-                user_obj.town_death_place
-                and user_obj.town_death_place.lower().strip() not in ["undefined", "alive"]
-            ):
-                death_town_counter[user_obj.town_death_place] += 1
-
-            if (
-                user_obj.country_death_place
-                and user_obj.country_death_place.lower().strip() != "undefined"
-            ):
-                country_death_place_counter[user_obj.country_death_place] += 1
-
-            if (
-                user_obj.continent_of_death
-                and user_obj.continent_of_death.lower().strip() != "undefined"
-            ):
-                continent_of_death_counter[user_obj.continent_of_death] += 1
-
-            if (
-                user_obj.region_of_death
-                and user_obj.region_of_death.lower().strip() != "undefined"
-            ):
-                region_of_death_counter[user_obj.region_of_death] += 1
-
-            if user_obj.death_date and user_obj.death_date.lower().strip() != "undefined":
-                death_date_counter[user_obj.death_date] += 1
-
-            if user_obj.death_year and user_obj.death_year.lower().strip() != "undefined" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) < CURRENT_YEAR + 1:
-                try:
-                    death_year_counter[int(user_obj.death_year)] += 1
-                except:
-                    pass
-
-            if user_obj.death_year and user_obj.death_year.lower().strip() != "undefined" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) >= 1900 and int(user_obj.death_year) < CURRENT_YEAR + 1:
-                try:
-                    death_year_counter_from_1900[int(user_obj.death_year)] += 1
-                except:
-                    pass
+            if display_only_one_person_per_job and user_obj.job not in set_of_job:
+                set_of_job.add(user_obj.job)
+            elif display_only_one_person_per_job:
+                nb_of_bad_user+=1
+                continue
             
-            if user_obj.death_month and user_obj.death_month.lower().strip() != "undefined":
-                death_month_counter[user_obj.death_month] += 1
+            # ─────────────────────────────────────────────
+            # Names
+            # ─────────────────────────────────────────────
 
-            if user_obj.death_day and user_obj.death_day.lower().strip() != "undefined":
-                death_day_counter[user_obj.death_day] += 1
+            if user_obj.first_name and user_obj.first_name.lower().strip() != "undefined":
+                first_name_counter[user_obj.first_name] += 1
 
-            if user_obj.death_month_day and user_obj.death_month_day.lower().strip() != "undefined":
-                death_month_day_counter[user_obj.death_month_day] += 1
+            if user_obj.first_name_standard and user_obj.first_name_standard.lower().strip() != "undefined":
+                first_name_standard_counter[user_obj.first_name_standard] += 1
 
+            if user_obj.last_name and user_obj.last_name.lower().strip() != "undefined":
+                last_name_counter[user_obj.last_name] += 1
 
-        # ─────────────────────────────────────────────
-        # Birth / Death comparisons
-        # ─────────────────────────────────────────────
-        #if user_obj.is_alive is False:
+            if user_obj.last_name_standard and user_obj.last_name_standard.lower().strip() != "undefined":
+                last_name_standard_counter[user_obj.last_name_standard] += 1
 
-        if user_obj.born_and_died_in_the_same_town != "alive":
-            born_and_died_in_the_same_town_counter[
-                user_obj.born_and_died_in_the_same_town
-            ] += 1
+            if user_obj.century_of_birth != -999 and user_obj.age <= MAXIMUM_AGE_TO_DISPLAY and int(user_obj.century_of_birth) <= 21:
+                century_of_birth_counter[int(user_obj.century_of_birth)] += 1
+            
+            if user_obj.century_of_death != -999 and user_obj.age <= MAXIMUM_AGE_TO_DISPLAY and int(user_obj.century_of_death) <= 21:
+                century_of_death_counter[int(user_obj.century_of_death)] += 1
+            
+            # ─────────────────────────────────────────────
+            # Job
+            # ─────────────────────────────────────────────
 
-
-        if user_obj.born_and_died_in_the_same_country != "alive":                
-            born_and_died_in_the_same_country_counter[
-                user_obj.born_and_died_in_the_same_country
-            ] += 1
-
-
-        if user_obj.born_and_died_in_the_same_continent != "alive":                
-            born_and_died_in_the_same_continent_counter[
-                user_obj.born_and_died_in_the_same_continent
-            ] += 1
-
-        if user_obj.born_and_died_in_the_same_day!= "alive":                
-            born_and_died_in_the_same_day_counter[
-                user_obj.born_and_died_in_the_same_day
-            ] += 1
-
-        if user_obj.born_and_died_in_the_same_region != "alive":                
-            born_and_died_in_the_same_region_counter[
-                user_obj.born_and_died_in_the_same_region
-            ] += 1
-        
-        born_before_christ_counter[
-            user_obj.born_before_christ
-        ] += 1
-
-        died_before_christ_counter[
-            user_obj.died_before_christ
-        ] += 1
-
-        born_and_died_before_christ_counter[
-            user_obj.born_and_died_before_christ
-        ] += 1
-
-        born_and_died_after_christ_counter[
-            user_obj.born_and_died_after_christ
-        ] += 1
-
-        born_before_christ_and_died_after_christ_counter[
-            user_obj.born_before_christ_and_died_after_christ
-        ] += 1
+            if user_obj.job and user_obj.job.lower().strip() != "undefined":
+                job_counter[user_obj.job] += 1
 
 
-        if user_obj.is_cause_of_death_known:
-            cause_of_death_counter[user_obj.cause_of_death.lower()] +=1
+            # ─────────────────────────────────────────────
+            # Birth
+            # ─────────────────────────────────────────────
 
-        if user_obj.is_cause_of_death_known or user_obj.cause_of_death == "Unspecified":
-            cause_of_death_known_counter[user_obj.is_cause_of_death_known] +=1
-        
-        # ─────────────────────────────────────────────
-        # Days
-        # ─────────────────────────────────────────────
+            if user_obj.town_birth_place and len(user_obj.town_birth_place) > 0 and user_obj.town_birth_place.lower() != "undefined":
+                town_birth_place_counter[user_obj.town_birth_place] += 1
 
-        if user_obj.week_day_of_birth and user_obj.week_day_of_birth.lower().strip() != "undefined":
-            week_day_of_birth_counter[user_obj.week_day_of_birth] += 1
+            if user_obj.country_birth_place and len(user_obj.country_birth_place) > 0 and user_obj.country_birth_place.lower() != "undefined":
+                country_birth_place_counter[user_obj.country_birth_place] += 1
 
-        if user_obj.week_day_of_death and user_obj.week_day_of_death.lower().strip() != "undefined" and user_obj.is_alive is False:
-            week_day_of_death_counter[user_obj.week_day_of_death] += 1
+            if user_obj.time_period_of_birth and len(user_obj.time_period_of_birth) > 0 and user_obj.time_period_of_birth.lower() != "undefined":
+                time_period_of_birth_counter[HISTORICAL_PERIODS_DICT_TO_FRENCH_WITH_DATE[user_obj.time_period_of_birth]] += 1
 
+            if user_obj.continent_of_birth and len(user_obj.continent_of_birth) > 0 and user_obj.continent_of_birth.lower() != "undefined":
+                continent_of_birth_counter[user_obj.continent_of_birth] += 1
 
-        # ─────────────────────────────────────────────
-        # Personal information
-        # ─────────────────────────────────────────────
+            if user_obj.region_of_birth and len(user_obj.region_of_birth) > 0 and user_obj.region_of_birth.lower() != "undefined":
+                region_of_birth_counter[user_obj.region_of_birth] += 1
 
-        if user_obj.age is not None and 1 <= user_obj.age <= MAXIMUM_AGE_TO_DISPLAY:
-            age_counter[user_obj.age] += 1
+            if user_obj.birth_date and len(user_obj.birth_date) > 0 and user_obj.birth_date.lower() != "undefined":
+                birth_date_counter[user_obj.birth_date] += 1
 
-        is_alive_counter[user_obj.is_alive] += 1
+            if user_obj.birth_year is not None and len(str(user_obj.birth_year)) > 0 and str(user_obj.birth_year) != "123456789" and user_obj.birth_year < CURRENT_YEAR + 1:
+                birth_year_counter[user_obj.birth_year] += 1
 
-        if user_obj.gender and user_obj.gender.lower().strip() != "undefined" and user_obj.gender.lower().strip() != "unclear":
-            gender_counter[GENDER_TO_FRENCH_DICT[user_obj.gender]] += 1
+            try:
+                if user_obj.birth_year is not None and len(str(user_obj.birth_year)) > 0 and str(user_obj.birth_year) != "123456789" and user_obj.birth_year >= 1900 and user_obj.birth_year < CURRENT_YEAR + 1:
+                    birth_year_counter_from_1900[user_obj.birth_year] += 1
+            except:
+                pass            
+            if user_obj.birth_month and len(user_obj.birth_month) > 0 and user_obj.birth_month.lower() != "undefined":
+                birth_month_counter[user_obj.birth_month] += 1
 
+            if user_obj.birth_day and len(user_obj.birth_day) > 0 and user_obj.birth_day.lower() != "undefined":
+                birth_day_counter[user_obj.birth_day] += 1
 
-        # ─────────────────────────────────────────────
-        # Ranking
-        # ─────────────────────────────────────────────
-
-        
-        # ─────────────────────────────────────────────
-        # Wikipedia page analysis
-        # ─────────────────────────────────────────────
-
-        if user_obj.first_char_of_the_page:
-            first_char_of_the_page_counter[
-                user_obj.first_char_of_the_page
-            ] += 1
-
-        if user_obj.wikipedia_page_lenght is not None:
-
-            # if len(str(user_obj.wikipedia_page_lenght)) >= 3:
-            #     nb_of_zero_to_remove = len(str(user_obj.wikipedia_page_lenght)) - 2
-            #     rounded_number = int(user_obj.wikipedia_page_lenght/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
-
-            # else:   
-            #     nb_of_zero_to_remove = len(str(user_obj.wikipedia_page_lenght)) - 1
-            #     rounded_number = int(user_obj.wikipedia_page_lenght/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
-            nb_of_zero_to_remove = len(str(user_obj.wikipedia_page_lenght)) - 1
-            rounded_number = int(user_obj.wikipedia_page_lenght/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
+            if user_obj.birth_month_day and len(user_obj.birth_month_day) > 0 and user_obj.birth_month_day.lower() != "undefined":
+                birth_month_day_counter[user_obj.birth_month_day] += 1
 
 
-            wikipedia_page_lenght_counter[
-                rounded_number
-                #int(user_obj.wikipedia_page_lenght/10 ** len(str(user_obj.wikipedia_page_lenght)) - 2)
-            ] += 1
-
-        if user_obj.number_of_links is not None:
-            number_of_links_counter[
-                user_obj.number_of_links
-            ] += 1
-
-        if user_obj.number_of_user_who_have_linked_this_user is not None:
-            number_of_user_who_have_linked_this_user_counter[
-                user_obj.number_of_user_who_have_linked_this_user
-            ] += 1
-
-        if user_obj.number_of_friends is not None:
-            number_of_friends_counter[
-                user_obj.number_of_friends
-            ] += 1
-
-
-
-        nb_of_zero_to_remove = len(str(user_obj.preciseness_level)) - 1
-        rounded_number = int(user_obj.preciseness_level/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
-        if len(str(str(user_obj.preciseness_level))) == 1:
-            if user_obj.preciseness_level <= 5:
-                rounded_number = 0
+            if user_obj.town_birth_place == "" or user_obj.town_birth_place.lower() == "undefined":
+                no_town_counter[False] += 1
             else:
-                rounded_number = 10
+                no_town_counter[True] += 1
+
+
+            if user_obj.country_birth_place == "" or user_obj.country_birth_place.lower() == "undefined":
+                no_country_counter[False] += 1
+            else:
+                no_country_counter[True] += 1
+                    
+            grade_over_20_counter[int(user_obj.grade_over_20)]+=1
+            # ─────────────────────────────────────────────
+            # Death
+            # ─────────────────────────────────────────────
+
+            if user_obj.is_alive is False:
+                if (
+                    user_obj.town_death_place
+                    and user_obj.town_death_place.lower().strip() not in ["undefined", "alive"]
+                ):
+                    death_town_counter[user_obj.town_death_place] += 1
+
+                if (
+                    user_obj.country_death_place
+                    and user_obj.country_death_place.lower().strip() != "undefined"
+                ):
+                    country_death_place_counter[user_obj.country_death_place] += 1
+
+                if (
+                    user_obj.continent_of_death
+                    and user_obj.continent_of_death.lower().strip() != "undefined"
+                ):
+                    continent_of_death_counter[user_obj.continent_of_death] += 1
+
+                if (
+                    user_obj.region_of_death
+                    and user_obj.region_of_death.lower().strip() != "undefined"
+                ):
+                    region_of_death_counter[user_obj.region_of_death] += 1
+
+                if user_obj.death_date and user_obj.death_date.lower().strip() != "undefined":
+                    death_date_counter[user_obj.death_date] += 1
+
+                if user_obj.death_year and user_obj.death_year.lower().strip() != "undefined" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) < CURRENT_YEAR + 1:
+                    try:
+                        death_year_counter[int(user_obj.death_year)] += 1
+                    except:
+                        pass
+
+                if user_obj.death_year and user_obj.death_year.lower().strip() != "undefined" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) >= 1900 and int(user_obj.death_year) < CURRENT_YEAR + 1:
+                    try:
+                        death_year_counter_from_1900[int(user_obj.death_year)] += 1
+                    except:
+                        pass
+                
+                if user_obj.death_month and user_obj.death_month.lower().strip() != "undefined":
+                    death_month_counter[user_obj.death_month] += 1
+
+                if user_obj.death_day and user_obj.death_day.lower().strip() != "undefined":
+                    death_day_counter[user_obj.death_day] += 1
+
+                if user_obj.death_month_day and user_obj.death_month_day.lower().strip() != "undefined":
+                    death_month_day_counter[user_obj.death_month_day] += 1
+
+
+            # ─────────────────────────────────────────────
+            # Birth / Death comparisons
+            # ─────────────────────────────────────────────
+            #if user_obj.is_alive is False:
+
+            if user_obj.born_and_died_in_the_same_town != "alive":
+                born_and_died_in_the_same_town_counter[
+                    user_obj.born_and_died_in_the_same_town
+                ] += 1
+
+
+            if user_obj.born_and_died_in_the_same_country != "alive":                
+                born_and_died_in_the_same_country_counter[
+                    user_obj.born_and_died_in_the_same_country
+                ] += 1
+
+
+            if user_obj.born_and_died_in_the_same_continent != "alive":                
+                born_and_died_in_the_same_continent_counter[
+                    user_obj.born_and_died_in_the_same_continent
+                ] += 1
+
+            if user_obj.born_and_died_in_the_same_day!= "alive":                
+                born_and_died_in_the_same_day_counter[
+                    user_obj.born_and_died_in_the_same_day
+                ] += 1
+
+            if user_obj.born_and_died_in_the_same_region != "alive":                
+                born_and_died_in_the_same_region_counter[
+                    user_obj.born_and_died_in_the_same_region
+                ] += 1
             
-        if user_obj.preciseness_level is not None:
-            preciseness_level_counter[
-                rounded_number
+            born_before_christ_counter[
+                user_obj.born_before_christ
+            ] += 1
+
+            died_before_christ_counter[
+                user_obj.died_before_christ
+            ] += 1
+
+            born_and_died_before_christ_counter[
+                user_obj.born_and_died_before_christ
+            ] += 1
+
+            born_and_died_after_christ_counter[
+                user_obj.born_and_died_after_christ
+            ] += 1
+
+            born_before_christ_and_died_after_christ_counter[
+                user_obj.born_before_christ_and_died_after_christ
             ] += 1
 
 
-        # ─────────────────────────────────────────────
-        # Country emojis
-        # ─────────────────────────────────────────────
+            if user_obj.is_cause_of_death_known:
+                cause_of_death_counter[user_obj.cause_of_death.lower()] +=1
 
-        
-        # ─────────────────────────────────────────────
-        # Metadata
-        # ─────────────────────────────────────────────
+            if user_obj.is_cause_of_death_known or user_obj.cause_of_death == "Unspecified":
+                cause_of_death_known_counter[user_obj.is_cause_of_death_known] +=1
+            
+            # ─────────────────────────────────────────────
+            # Days
+            # ─────────────────────────────────────────────
 
-        
-        if user_obj.page_lenght is not None:
-            page_lenght_counter[
-                user_obj.page_lenght
-            ] += 1
+            if user_obj.week_day_of_birth and user_obj.week_day_of_birth.lower().strip() != "undefined":
+                week_day_of_birth_counter[user_obj.week_day_of_birth] += 1
 
-        if user_obj.number_of_word_in_page_name is not None:
-            number_of_word_in_page_name_counter[
-                user_obj.number_of_word_in_page_name
-            ] += 1
-
-        # Ville
-
-        if user_obj.town_birth_place.lower().strip() != "undefined" and len(user_obj.town_birth_place) != 0:
-            town_birth_and_death_place_counter[user_obj.town_birth_place] += 1
-        
-        if user_obj.town_death_place.lower().strip() != "undefined" and user_obj.town_death_place.lower().strip() != "alive" and len(user_obj.town_death_place) != 0:
-            town_birth_and_death_place_counter[user_obj.town_death_place] += 1
-        
-
-        if (user_obj.town_birth_place.lower().strip() != "undefined" and len(user_obj.town_birth_place.lower().strip()) != 0) and (user_obj.birth_town_localisation.lower().strip() == "undefined" or user_obj.birth_town_localisation.lower().strip() == ""):
-            town_with_no_locolisation_counter[user_obj.town_birth_place] += 1
-        if (user_obj.town_death_place.lower().strip() != "undefined" and user_obj.town_death_place.lower().strip() != "alive" and len(user_obj.town_death_place.lower().strip()) != 0) and (user_obj.town_death_localisation.lower().strip() == "undefined" or user_obj.town_death_localisation.lower().strip() == ""):
-            town_with_no_locolisation_counter[user_obj.town_death_place] += 1
-        
-        # Pays
-
-        if user_obj.country_birth_place.lower().strip() != "undefined" and len(user_obj.country_birth_place.lower()) != 0 and user_obj.country_birth_place.lower() != " ":
-            country_birth_and_death_place_counter[user_obj.country_birth_place] += 1
-
-        if user_obj.country_death_place.lower().strip() != "undefined" and user_obj.country_death_place.lower().strip() != "alive" and len(user_obj.country_death_place.lower()) != 0 and user_obj.country_death_place.lower() != " ":
-            country_birth_and_death_place_counter[user_obj.country_death_place] += 1
-
-        # Continents
-        
-        if user_obj.continent_of_birth.lower().strip() != "undefined":
-            continent_of_birth_and_death_counter[user_obj.continent_of_birth] += 1
-
-        if user_obj.continent_of_death.lower().strip() != "undefined" and user_obj.continent_of_death.lower().strip() != "alive":
-            continent_of_birth_and_death_counter[user_obj.continent_of_death] += 1
-
-        # Régions
-
-        if user_obj.region_of_birth.lower().strip() != "undefined":    
-            region_of_birth_and_death_counter[user_obj.region_of_birth] += 1
-
-        if user_obj.region_of_death.lower().strip() != "undefined" and user_obj.region_of_death.lower().strip() != "alive":
-            region_of_birth_and_death_counter[user_obj.region_of_death] += 1
-
-        # Dates
-
-        if user_obj.birth_date.lower().strip() != "undefined" and user_obj.birth_date != "alive":
-            birth_and_death_date_counter[user_obj.birth_date] += 1
-        
-        if user_obj.birth_date and user_obj.birth_date.lower().strip() != "undefined":
-            birth_and_death_date_counter[user_obj.birth_date] += 1
-
-        if user_obj.death_date and user_obj.death_date.lower().strip() != "undefined" and user_obj.death_date.lower().strip() != "alive":
-            birth_and_death_date_counter[user_obj.death_date] += 1
+            if user_obj.week_day_of_death and user_obj.week_day_of_death.lower().strip() != "undefined" and user_obj.is_alive is False:
+                week_day_of_death_counter[user_obj.week_day_of_death] += 1
 
 
-        # Années
-        if user_obj.birth_year and str(user_obj.birth_year).lower().strip() != "undefined" and str(user_obj.birth_year) != "123456789" and user_obj.birth_year < CURRENT_YEAR + 1:
-            birth_and_death_year_counter[user_obj.birth_year] += 1
+            # ─────────────────────────────────────────────
+            # Personal information
+            # ─────────────────────────────────────────────
 
-        if user_obj.death_year and str(user_obj.death_year).lower().strip() != "undefined" and str(user_obj.death_year).lower().strip() != "alive" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) < CURRENT_YEAR + 1:
-            try:
-                birth_and_death_year_counter[int(user_obj.death_year)] += 1
-            except:
-                pass
-        
+            if user_obj.age is not None and 1 <= user_obj.age <= MAXIMUM_AGE_TO_DISPLAY:
+                age_counter[user_obj.age] += 1
 
-        if user_obj.birth_year and str(user_obj.birth_year).lower().strip() != "undefined" and str(user_obj.birth_year) != "123456789"and user_obj.birth_year >= 1900 and user_obj.birth_year < CURRENT_YEAR + 1:
-            birth_and_death_year_counter_from_1900[user_obj.birth_year] += 1
+            is_alive_counter[user_obj.is_alive] += 1
 
-        if user_obj.death_year and str(user_obj.death_year).lower().strip() != "undefined" and str(user_obj.death_year).lower().strip() != "alive" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) >= 1900 and int(user_obj.death_year) < CURRENT_YEAR + 1:
-            try:
-                birth_and_death_year_counter_from_1900[int(user_obj.death_year)] += 1
-            except:
-                pass
-        
-        # Mois
-        if user_obj.birth_month and str(user_obj.birth_month).lower().strip() != "undefined":
-            birth_and_death_month_counter[user_obj.birth_month] += 1
-
-        if user_obj.death_month and str(user_obj.death_month).lower().strip() != "undefined" and str(user_obj.death_month).lower().strip() != "alive":
-            birth_and_death_month_counter[user_obj.death_month] += 1
+            if user_obj.gender and user_obj.gender.lower().strip() != "undefined" and user_obj.gender.lower().strip() != "unclear":
+                gender_counter[GENDER_TO_FRENCH_DICT[user_obj.gender]] += 1
 
 
-        # Jours
-        if user_obj.birth_day and str(user_obj.birth_day).lower().strip() != "undefined":
-            birth_and_death_day_counter[user_obj.birth_day] += 1
+            # ─────────────────────────────────────────────
+            # Ranking
+            # ─────────────────────────────────────────────
 
-        if user_obj.death_day and str(user_obj.death_day).lower().strip() != "undefined" and str(user_obj.death_day).lower().strip() != "alive":
-            birth_and_death_day_counter[user_obj.death_day] += 1
+            
+            # ─────────────────────────────────────────────
+            # Wikipedia page analysis
+            # ─────────────────────────────────────────────
+
+            if user_obj.first_char_of_the_page:
+                first_char_of_the_page_counter[
+                    user_obj.first_char_of_the_page
+                ] += 1
+
+            if user_obj.wikipedia_page_lenght is not None:
+
+                # if len(str(user_obj.wikipedia_page_lenght)) >= 3:
+                #     nb_of_zero_to_remove = len(str(user_obj.wikipedia_page_lenght)) - 2
+                #     rounded_number = int(user_obj.wikipedia_page_lenght/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
+
+                # else:   
+                #     nb_of_zero_to_remove = len(str(user_obj.wikipedia_page_lenght)) - 1
+                #     rounded_number = int(user_obj.wikipedia_page_lenght/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
+                nb_of_zero_to_remove = len(str(user_obj.wikipedia_page_lenght)) - 1
+                rounded_number = int(user_obj.wikipedia_page_lenght/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
 
 
-        # Mois + jour
-        if user_obj.birth_month_day and str(user_obj.birth_month_day).lower().strip() != "undefined":
-            birth_and_death_month_day_counter[user_obj.birth_month_day] += 1
+                wikipedia_page_lenght_counter[
+                    rounded_number
+                    #int(user_obj.wikipedia_page_lenght/10 ** len(str(user_obj.wikipedia_page_lenght)) - 2)
+                ] += 1
 
-        if user_obj.death_month_day and str(user_obj.death_month_day).lower().strip() != "undefined" and str(user_obj.death_month_day).lower().strip() != "alive":
-            birth_and_death_month_day_counter[user_obj.death_month_day] += 1
+            if user_obj.number_of_links is not None:
+                number_of_links_counter[
+                    user_obj.number_of_links
+                ] += 1
+
+            if user_obj.number_of_user_who_have_linked_this_user is not None:
+                number_of_user_who_have_linked_this_user_counter[
+                    user_obj.number_of_user_who_have_linked_this_user
+                ] += 1
+
+            if user_obj.number_of_friends is not None:
+                number_of_friends_counter[
+                    user_obj.number_of_friends
+                ] += 1
 
 
-        # Jour de la semaine
-        if user_obj.week_day_of_birth and str(user_obj.week_day_of_birth).lower().strip() != "undefined":
-            week_day_of_birth_and_death_counter[user_obj.week_day_of_birth] += 1
 
-        if user_obj.week_day_of_death and str(user_obj.week_day_of_death).lower().strip() != "undefined" and str(user_obj.week_day_of_death).lower().strip() != "alive":
-            week_day_of_birth_and_death_counter[user_obj.week_day_of_death] += 1
-
-        if "-" not in str(user_obj.age) and user_obj.age > 0 and user_obj.age != 123456789:
-            try:
-                if len(str(user_obj.age)) == 1:
-                    age_group_counter[int(user_obj.age)] += 1        
+            nb_of_zero_to_remove = len(str(user_obj.preciseness_level)) - 1
+            rounded_number = int(user_obj.preciseness_level/10**nb_of_zero_to_remove) * 10**nb_of_zero_to_remove
+            if len(str(str(user_obj.preciseness_level))) == 1:
+                if user_obj.preciseness_level <= 5:
+                    rounded_number = 0
                 else:
-                    if int(str(user_obj.age)[:-1]) <= 12:
-                        age_group_counter[int(str(user_obj.age)[:-1])] += 1
-            except:
-                pass
-        if len(user_obj.list_of_unpreciseness_data) != 0:
-            for error in user_obj.list_of_unpreciseness_data:
-                dict_of_error_counter[UNPRECISENESS_DATA_FR[error]]+=1
-                # try:
-                #     dict_of_error_counter[UNPRECISENESS_DATA_FR[error]]+=1
-                # except:
-                #     dict_of_error_counter[error]+=1
-
-        number_of_error_per_page_counter[len(user_obj.list_of_unpreciseness_data)] +=1
-
-        number_of_view_counter[user_obj.number_of_views] += 1                     
-
-    dict_of_counter = {
-        "first_name": first_name_counter,
-        "first_name_standard": first_name_standard_counter,
-
-        "last_name": last_name_counter,
-        "last_name_standard": last_name_standard_counter,
-        
-        "gender": gender_counter,
-        "age": age_counter,
-        "age_group": age_group_counter,
-        "is_alive": is_alive_counter,
-        "cause_of_death_known_counter":cause_of_death_known_counter,
-        "cause_of_death":cause_of_death_counter,
-        "time_period_of_birth": time_period_of_birth_counter,
-        "job": job_counter,
-        
-        "town_birth_place": town_birth_place_counter,
-        "town_death_place": death_town_counter,
-        "town_birth_and_death_place": town_birth_and_death_place_counter,
-        "town_with_no_locolisation_counter":town_with_no_locolisation_counter,
+                    rounded_number = 10
                 
-        "country_birth_place": country_birth_place_counter,
-        "country_death_place": country_death_place_counter,
-        "country_birth_and_death_place": country_birth_and_death_place_counter,
+            if user_obj.preciseness_level is not None:
+                preciseness_level_counter[
+                    rounded_number
+                ] += 1
 
-        "continent_of_birth": continent_of_birth_counter,
-        "continent_of_death": continent_of_death_counter,
-        "continent_of_birth_and_death": continent_of_birth_and_death_counter,
+
+            # ─────────────────────────────────────────────
+            # Country emojis
+            # ─────────────────────────────────────────────
+
+            
+            # ─────────────────────────────────────────────
+            # Metadata
+            # ─────────────────────────────────────────────
+
+            
+            if user_obj.page_lenght is not None:
+                page_lenght_counter[
+                    user_obj.page_lenght
+                ] += 1
+
+            if user_obj.number_of_word_in_page_name is not None:
+                number_of_word_in_page_name_counter[
+                    user_obj.number_of_word_in_page_name
+                ] += 1
+
+            # Ville
+
+            if user_obj.town_birth_place.lower().strip() != "undefined" and len(user_obj.town_birth_place) != 0:
+                town_birth_and_death_place_counter[user_obj.town_birth_place] += 1
+            
+            if user_obj.town_death_place.lower().strip() != "undefined" and user_obj.town_death_place.lower().strip() != "alive" and len(user_obj.town_death_place) != 0:
+                town_birth_and_death_place_counter[user_obj.town_death_place] += 1
+            
+
+            if (user_obj.town_birth_place.lower().strip() != "undefined" and len(user_obj.town_birth_place.lower().strip()) != 0) and (user_obj.birth_town_localisation.lower().strip() == "undefined" or user_obj.birth_town_localisation.lower().strip() == ""):
+                town_with_no_locolisation_counter[user_obj.town_birth_place] += 1
+            if (user_obj.town_death_place.lower().strip() != "undefined" and user_obj.town_death_place.lower().strip() != "alive" and len(user_obj.town_death_place.lower().strip()) != 0) and (user_obj.town_death_localisation.lower().strip() == "undefined" or user_obj.town_death_localisation.lower().strip() == ""):
+                town_with_no_locolisation_counter[user_obj.town_death_place] += 1
+            
+            # Pays
+
+            if user_obj.country_birth_place.lower().strip() != "undefined" and len(user_obj.country_birth_place.lower()) != 0 and user_obj.country_birth_place.lower() != " ":
+                country_birth_and_death_place_counter[user_obj.country_birth_place] += 1
+
+            if user_obj.country_death_place.lower().strip() != "undefined" and user_obj.country_death_place.lower().strip() != "alive" and len(user_obj.country_death_place.lower()) != 0 and user_obj.country_death_place.lower() != " ":
+                country_birth_and_death_place_counter[user_obj.country_death_place] += 1
+
+            # Continents
+            
+            if user_obj.continent_of_birth.lower().strip() != "undefined":
+                continent_of_birth_and_death_counter[user_obj.continent_of_birth] += 1
+
+            if user_obj.continent_of_death.lower().strip() != "undefined" and user_obj.continent_of_death.lower().strip() != "alive":
+                continent_of_birth_and_death_counter[user_obj.continent_of_death] += 1
+
+            # Régions
+
+            if user_obj.region_of_birth.lower().strip() != "undefined":    
+                region_of_birth_and_death_counter[user_obj.region_of_birth] += 1
+
+            if user_obj.region_of_death.lower().strip() != "undefined" and user_obj.region_of_death.lower().strip() != "alive":
+                region_of_birth_and_death_counter[user_obj.region_of_death] += 1
+
+            # Dates
+
+            if user_obj.birth_date.lower().strip() != "undefined" and user_obj.birth_date != "alive":
+                birth_and_death_date_counter[user_obj.birth_date] += 1
+            
+            if user_obj.birth_date and user_obj.birth_date.lower().strip() != "undefined":
+                birth_and_death_date_counter[user_obj.birth_date] += 1
+
+            if user_obj.death_date and user_obj.death_date.lower().strip() != "undefined" and user_obj.death_date.lower().strip() != "alive":
+                birth_and_death_date_counter[user_obj.death_date] += 1
+
+
+            # Années
+            if user_obj.birth_year and str(user_obj.birth_year).lower().strip() != "undefined" and str(user_obj.birth_year) != "123456789" and user_obj.birth_year < CURRENT_YEAR + 1:
+                birth_and_death_year_counter[user_obj.birth_year] += 1
+
+            if user_obj.death_year and str(user_obj.death_year).lower().strip() != "undefined" and str(user_obj.death_year).lower().strip() != "alive" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) < CURRENT_YEAR + 1:
+                try:
+                    birth_and_death_year_counter[int(user_obj.death_year)] += 1
+                except:
+                    pass
+            
+
+            if user_obj.birth_year and str(user_obj.birth_year).lower().strip() != "undefined" and str(user_obj.birth_year) != "123456789"and user_obj.birth_year >= 1900 and user_obj.birth_year < CURRENT_YEAR + 1:
+                birth_and_death_year_counter_from_1900[user_obj.birth_year] += 1
+
+            if user_obj.death_year and str(user_obj.death_year).lower().strip() != "undefined" and str(user_obj.death_year).lower().strip() != "alive" and str(user_obj.death_year) != "123456789" and int(user_obj.death_year) >= 1900 and int(user_obj.death_year) < CURRENT_YEAR + 1:
+                try:
+                    birth_and_death_year_counter_from_1900[int(user_obj.death_year)] += 1
+                except:
+                    pass
+            
+            # Mois
+            if user_obj.birth_month and str(user_obj.birth_month).lower().strip() != "undefined":
+                birth_and_death_month_counter[user_obj.birth_month] += 1
+
+            if user_obj.death_month and str(user_obj.death_month).lower().strip() != "undefined" and str(user_obj.death_month).lower().strip() != "alive":
+                birth_and_death_month_counter[user_obj.death_month] += 1
+
+
+            # Jours
+            if user_obj.birth_day and str(user_obj.birth_day).lower().strip() != "undefined":
+                birth_and_death_day_counter[user_obj.birth_day] += 1
+
+            if user_obj.death_day and str(user_obj.death_day).lower().strip() != "undefined" and str(user_obj.death_day).lower().strip() != "alive":
+                birth_and_death_day_counter[user_obj.death_day] += 1
+
+
+            # Mois + jour
+            if user_obj.birth_month_day and str(user_obj.birth_month_day).lower().strip() != "undefined":
+                birth_and_death_month_day_counter[user_obj.birth_month_day] += 1
+
+            if user_obj.death_month_day and str(user_obj.death_month_day).lower().strip() != "undefined" and str(user_obj.death_month_day).lower().strip() != "alive":
+                birth_and_death_month_day_counter[user_obj.death_month_day] += 1
+
+
+            # Jour de la semaine
+            if user_obj.week_day_of_birth and str(user_obj.week_day_of_birth).lower().strip() != "undefined":
+                week_day_of_birth_and_death_counter[user_obj.week_day_of_birth] += 1
+
+            if user_obj.week_day_of_death and str(user_obj.week_day_of_death).lower().strip() != "undefined" and str(user_obj.week_day_of_death).lower().strip() != "alive":
+                week_day_of_birth_and_death_counter[user_obj.week_day_of_death] += 1
+
+            if "-" not in str(user_obj.age) and user_obj.age > 0 and user_obj.age != 123456789:
+                try:
+                    if len(str(user_obj.age)) == 1:
+                        age_group_counter[int(user_obj.age)] += 1        
+                    else:
+                        if int(str(user_obj.age)[:-1]) <= 12:
+                            age_group_counter[int(str(user_obj.age)[:-1])] += 1
+                except:
+                    pass
+            if len(user_obj.list_of_unpreciseness_data) != 0:
+                for error in user_obj.list_of_unpreciseness_data:
+                    dict_of_error_counter[UNPRECISENESS_DATA_FR[error]]+=1
+                    # try:
+                    #     dict_of_error_counter[UNPRECISENESS_DATA_FR[error]]+=1
+                    # except:
+                    #     dict_of_error_counter[error]+=1
+
+            number_of_error_per_page_counter[len(user_obj.list_of_unpreciseness_data)] +=1
+
+            number_of_view_counter[user_obj.number_of_views] += 1                     
+
+        dict_of_counter = {
+            "first_name": first_name_counter,
+            "first_name_standard": first_name_standard_counter,
+
+            "last_name": last_name_counter,
+            "last_name_standard": last_name_standard_counter,
+            
+            "gender": gender_counter,
+            "age": age_counter,
+            "age_group": age_group_counter,
+            "is_alive": is_alive_counter,
+            "cause_of_death_known_counter":cause_of_death_known_counter,
+            "cause_of_death":cause_of_death_counter,
+            "time_period_of_birth": time_period_of_birth_counter,
+            "job": job_counter,
+            
+            "town_birth_place": town_birth_place_counter,
+            "town_death_place": death_town_counter,
+            "town_birth_and_death_place": town_birth_and_death_place_counter,
+            "town_with_no_locolisation_counter":town_with_no_locolisation_counter,
+                    
+            "country_birth_place": country_birth_place_counter,
+            "country_death_place": country_death_place_counter,
+            "country_birth_and_death_place": country_birth_and_death_place_counter,
+
+            "continent_of_birth": continent_of_birth_counter,
+            "continent_of_death": continent_of_death_counter,
+            "continent_of_birth_and_death": continent_of_birth_and_death_counter,
+            
+            "region_of_birth": region_of_birth_counter,
+            "region_of_death": region_of_death_counter,
+            "region_of_birth_and_death": region_of_birth_and_death_counter,
+            
+            "birth_date": birth_date_counter,
+            "death_date": death_date_counter,
+            "birth_and_death_date": birth_and_death_date_counter,
+
+            "century_of_birth": century_of_birth_counter,
+            "century_of_death": century_of_death_counter,
+                    
+            "birth_year": birth_year_counter,
+            "death_year": death_year_counter,
+            "birth_year_from_1900": birth_year_counter_from_1900,
+            "death_year_from_1900": death_year_counter_from_1900,
+                    
+            "birth_and_death_year": birth_and_death_year_counter,
+            "birth_and_death_year_from_1900": birth_and_death_year_counter_from_1900,    
+
+            "birth_month": birth_month_counter,
+            "death_month": death_month_counter,
+            "birth_and_death_month": birth_and_death_month_counter,
+
+            "birth_day": birth_day_counter,
+            "death_day": death_day_counter,
+            "birth_and_death_day": birth_and_death_day_counter,
+
+            "birth_month_day": birth_month_day_counter,
+            "death_month_day": death_month_day_counter,
+            "birth_and_death_month_day": birth_and_death_month_day_counter,
+
+            "week_day_of_birth": week_day_of_birth_counter,
+            "week_day_of_death": week_day_of_death_counter,
+            "week_day_of_birth_and_death": week_day_of_birth_and_death_counter,
+
+            "born_and_died_in_the_same_town":
+                born_and_died_in_the_same_town_counter,
+
+            "born_and_died_in_the_same_country":
+                born_and_died_in_the_same_country_counter,
+
+            "born_and_died_in_the_same_continent":
+                born_and_died_in_the_same_continent_counter,
+
+            "born_and_died_in_the_same_day":
+                born_and_died_in_the_same_day_counter,
+
+            "born_and_died_in_the_same_region":
+                born_and_died_in_the_same_region_counter,
+
+            "born_before_christ":
+                born_before_christ_counter,
+
+            "died_before_christ":
+                died_before_christ_counter,
+
+            "born_and_died_before_christ":
+                born_and_died_before_christ_counter,
+
+            "born_and_died_after_christ":
+                born_and_died_after_christ_counter,
+
+            "born_before_christ_and_died_after_christ":
+                born_before_christ_and_died_after_christ_counter,
+            
+            "first_char_of_the_page":
+                first_char_of_the_page_counter,
+
+            "grade_over_20":grade_over_20_counter,
+            "wikipedia_page_lenght":wikipedia_page_lenght_counter,
+            "page_lenght":
+                page_lenght_counter,
+
+            "number_of_word_in_page_name":
+                number_of_word_in_page_name_counter,
+
+            "number_of_links":
+                number_of_links_counter,
+
+            "number_of_user_who_have_linked_this_user":
+                number_of_user_who_have_linked_this_user_counter,
+            "number_of_view":number_of_view_counter,
+            "number_of_friends":
+                number_of_friends_counter,
+            "preciseness_level":preciseness_level_counter,
+            
+
+            
+            "no_country_counter":no_country_counter,
+            "no_town_counter":no_town_counter,
+            "dict_of_error":dict_of_error_counter,
+            "number_of_error_per_page":number_of_error_per_page_counter,
+            
+            }
+
+
+
+        dict_of_counter["birth_year"] = sort_a_counter(birth_year_counter,1)
+        dict_of_counter["death_year"] = sort_a_counter(death_year_counter,1)
+        dict_of_counter["birth_and_death_year"] = sort_a_counter(birth_and_death_year_counter,1)
+
+        dict_of_counter["birth_year_from_1900"] = sort_a_counter(birth_year_counter_from_1900,1)
+        dict_of_counter["death_year_from_1900"] = sort_a_counter(death_year_counter_from_1900,1)
+        dict_of_counter["birth_and_death_year_from_1900"] = sort_a_counter(birth_and_death_year_counter_from_1900,1)
         
-        "region_of_birth": region_of_birth_counter,
-        "region_of_death": region_of_death_counter,
-        "region_of_birth_and_death": region_of_birth_and_death_counter,
+        print("end get_advanced_statistics function")
         
-        "birth_date": birth_date_counter,
-        "death_date": death_date_counter,
-        "birth_and_death_date": birth_and_death_date_counter,
+        dict_of_counter["number_of_error_per_page"] = sort_a_counter(number_of_error_per_page_counter,1)
+        dict_of_counter["preciseness_level"] = sort_a_counter(preciseness_level_counter,1)
+        dict_of_counter["age"] = sort_a_counter(age_counter,1)
+        dict_of_counter["grade_over_20"] = sort_a_counter(grade_over_20_counter,1)
+        dict_of_counter["wikipedia_page_lenght"] = sort_a_counter(wikipedia_page_lenght_counter,1)
+        dict_of_counter["number_of_user_found"] = length - nb_of_bad_user
+        dict_of_counter["age_group"] = sort_a_counter(age_group_counter,1)
+        dict_of_counter["number_of_view"] = sort_a_counter(number_of_view_counter,1)
 
-        "century_of_birth": century_of_birth_counter,
-        "century_of_death": century_of_death_counter,
-                
-        "birth_year": birth_year_counter,
-        "death_year": death_year_counter,
-        "birth_year_from_1900": birth_year_counter_from_1900,
-        "death_year_from_1900": death_year_counter_from_1900,
-                
-        "birth_and_death_year": birth_and_death_year_counter,
-        "birth_and_death_year_from_1900": birth_and_death_year_counter_from_1900,    
-
-        "birth_month": birth_month_counter,
-        "death_month": death_month_counter,
-        "birth_and_death_month": birth_and_death_month_counter,
-
-        "birth_day": birth_day_counter,
-        "death_day": death_day_counter,
-        "birth_and_death_day": birth_and_death_day_counter,
-
-        "birth_month_day": birth_month_day_counter,
-        "death_month_day": death_month_day_counter,
-        "birth_and_death_month_day": birth_and_death_month_day_counter,
-
-        "week_day_of_birth": week_day_of_birth_counter,
-        "week_day_of_death": week_day_of_death_counter,
-        "week_day_of_birth_and_death": week_day_of_birth_and_death_counter,
-
-        "born_and_died_in_the_same_town":
-            born_and_died_in_the_same_town_counter,
-
-        "born_and_died_in_the_same_country":
-            born_and_died_in_the_same_country_counter,
-
-        "born_and_died_in_the_same_continent":
-            born_and_died_in_the_same_continent_counter,
-
-        "born_and_died_in_the_same_day":
-            born_and_died_in_the_same_day_counter,
-
-        "born_and_died_in_the_same_region":
-            born_and_died_in_the_same_region_counter,
-
-        "born_before_christ":
-            born_before_christ_counter,
-
-        "died_before_christ":
-            died_before_christ_counter,
-
-        "born_and_died_before_christ":
-            born_and_died_before_christ_counter,
-
-        "born_and_died_after_christ":
-            born_and_died_after_christ_counter,
-
-        "born_before_christ_and_died_after_christ":
-            born_before_christ_and_died_after_christ_counter,
+        dict_of_counter["century_of_birth"] = sort_a_counter(century_of_birth_counter,1)
+        dict_of_counter["century_of_death"] = sort_a_counter(century_of_death_counter,1)
         
-        "first_char_of_the_page":
-            first_char_of_the_page_counter,
+        # block_of_element = ["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"]
+        # block_of_element_present = []
+        # for element in block_of_element:
+        #     if len(dict_of_counter[element]):
+        #         block_of_element_present.append(element)
+        #     #print(len(dict_of_counter[element]) , element)
 
-        "grade_over_20":grade_over_20_counter,
-        "wikipedia_page_lenght":wikipedia_page_lenght_counter,
-        "page_lenght":
-            page_lenght_counter,
-
-        "number_of_word_in_page_name":
-            number_of_word_in_page_name_counter,
-
-        "number_of_links":
-            number_of_links_counter,
-
-        "number_of_user_who_have_linked_this_user":
-            number_of_user_who_have_linked_this_user_counter,
-        "number_of_view":number_of_view_counter,
-        "number_of_friends":
-            number_of_friends_counter,
-        "preciseness_level":preciseness_level_counter,
-        
-
-        
-        "no_country_counter":no_country_counter,
-        "no_town_counter":no_town_counter,
-        "dict_of_error":dict_of_error_counter,
-        "number_of_error_per_page":number_of_error_per_page_counter,
-        
+        dict_of_counter = {
+            key: sort_a_counter(counter,0,key)
+            for key, counter in dict_of_counter.items()
         }
 
-
-
-    dict_of_counter["birth_year"] = sort_a_counter(birth_year_counter,1)
-    dict_of_counter["death_year"] = sort_a_counter(death_year_counter,1)
-    dict_of_counter["birth_and_death_year"] = sort_a_counter(birth_and_death_year_counter,1)
-
-    dict_of_counter["birth_year_from_1900"] = sort_a_counter(birth_year_counter_from_1900,1)
-    dict_of_counter["death_year_from_1900"] = sort_a_counter(death_year_counter_from_1900,1)
-    dict_of_counter["birth_and_death_year_from_1900"] = sort_a_counter(birth_and_death_year_counter_from_1900,1)
-    
-    print("end get_advanced_statistics function")
-    
-    dict_of_counter["number_of_error_per_page"] = sort_a_counter(number_of_error_per_page_counter,1)
-    dict_of_counter["preciseness_level"] = sort_a_counter(preciseness_level_counter,1)
-    dict_of_counter["age"] = sort_a_counter(age_counter,1)
-    dict_of_counter["grade_over_20"] = sort_a_counter(grade_over_20_counter,1)
-    dict_of_counter["wikipedia_page_lenght"] = sort_a_counter(wikipedia_page_lenght_counter,1)
-    dict_of_counter["number_of_user_found"] = length - nb_of_bad_user
-    dict_of_counter["age_group"] = sort_a_counter(age_group_counter,1)
-    dict_of_counter["number_of_view"] = sort_a_counter(number_of_view_counter,1)
-
-    dict_of_counter["century_of_birth"] = sort_a_counter(century_of_birth_counter,1)
-    dict_of_counter["century_of_death"] = sort_a_counter(century_of_death_counter,1)
-    
-    # block_of_element = ["first_name","gender","town_birth_place","country_birth_place","continent_of_birth","region_of_birth","birth_date","born_and_died_in_the_same_town","born_before_christ","first_char_of_the_page","no_country_counter"]
-    # block_of_element_present = []
-    # for element in block_of_element:
-    #     if len(dict_of_counter[element]):
-    #         block_of_element_present.append(element)
-    #     #print(len(dict_of_counter[element]) , element)
-
-    dict_of_counter = {
-        key: sort_a_counter(counter,0,key)
-        for key, counter in dict_of_counter.items()
-    }
-
-    elapsed = time.perf_counter() - start
-    print(f"Request processing time: {elapsed:.3f} seconds")
-    return JsonResponse({"all_wikipedia_info":dict_of_counter},status=200)
+        elapsed = time.perf_counter() - start
+        print(f"Request processing time: {elapsed:.3f} seconds")
+        return JsonResponse({"all_wikipedia_info":dict_of_counter},status=200)
+    except:
+        import traceback
+        traceback.print_exc()
+        print(f"Request processing time: {elapsed:.3f} seconds")
+        return JsonResponse({"all_wikipedia_info":dict_of_counter},status=403)
+            

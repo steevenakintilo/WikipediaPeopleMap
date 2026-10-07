@@ -74,7 +74,7 @@ const MapController = ({ map_view }: { map_view: any }) => {
 
 // Mini logo Wikipédia d'origine (lien vers la page de la personne)
 const WIKIPEDIA_LOGO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxw6xy-R6L-ethznPligpikS1nTohfbsiKoVEX6WlL3Q&s=10"
-const PIN_BIRTH = "https://uxwing.com/wp-content/themes/uxwing/download/location-travel-map/map-pin-icon.png"
+const PIN_BIRTH = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1791384923/map-pin-icon_kipz9h.png"
 const PIN_DEATH = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1788295917/pin_death_khphfd.png"
 const PIN_UNKNOWN = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1787351654/image_mobyht.png"
 
