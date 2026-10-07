@@ -117,13 +117,12 @@ def validate_an_user(request,user=""):
                     user_obj_update_obj.update_level = 2
                 else:
                     user_obj_update_obj.update_level = 1
-                                
+
             else:
                 user_obj_update_obj.nb_of_good_report+=1
                 user_obj_update_obj.update_level=3
-            print("user_obj_update_obj.nb_of_good_report " , user_obj_update_obj.nb_of_good_report,user_obj_update_obj.update_level)
             user_obj_update_obj.save()
-        
+
         return JsonResponse({"success": True}, status=200)
     except:
         import traceback

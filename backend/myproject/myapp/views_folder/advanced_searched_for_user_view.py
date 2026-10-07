@@ -72,7 +72,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                     searched_region = region
                     break
 
-            print(searched_region)
+            #print(searched_region)
             if recieved_data["country_of_birth"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
                 filters = {
                     "continent_of_birth": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
@@ -270,7 +270,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             else:
                 filters["last_name"] = recieved_data["last_name"].lower()
 
-    print(recieved_data)
+    #print(recieved_data)
     if "town_birth_place" in recieved_data:
         if "#" in recieved_data["town_birth_place"]:
             accept_multiple_element = True
@@ -417,13 +417,13 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         
 
 
-    print(display_death_localisation,display_either_birth_or_death_town,accept_multiple_element)
+    #print(display_death_localisation,display_either_birth_or_death_town,accept_multiple_element)
     filters["position__gte"] = 0
     #filters["age__lte"] = 123
             
-    print(recieved_data)
-    print(filters)
-    print(query , " popopo ")
+    #print(recieved_data)
+    #print(filters)
+    #print(query , " popopo ")
     
     if sort_user_by != "None":
         if accept_multiple_element:
@@ -480,7 +480,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     #number_of_people_to_display = 0
     list_of_localisation = []
     toto = []
-    #print(nb,display_death_localisation,display_only_death_localisation)
+    ##print(nb,display_death_localisation,display_only_death_localisation)
     nb_of_bad_user = 0
     for user_obj in all_user_obj[index_start:index_end]:
         try:
@@ -534,7 +534,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     
             }
 
-            # print(display_death_localisation)
+            # #print(display_death_localisation)
             if display_either_birth_or_death_town is False:
             
                 if display_only_death_localisation is False:
@@ -563,13 +563,13 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                             
             #if display_death_localisation or display_only_death_localisation:
             #    user_info_dict["town_death_localisation"] = dms_to_decimal(user_obj.town_death_localisation)
-            #print(user_info_dict)
+            ##print(user_info_dict)
             list_of_all_user_data.append(user_info_dict)
         except:
             pass
 
-    # print(toto)
-    # print(len(toto))
+    # #print(toto)
+    # #print(len(toto))
     # reset_file("bloblo.txt")
     # write_into_file("bloblo.txt",str(toto))
     if len(list_of_all_user_data) == 0:

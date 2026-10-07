@@ -34,7 +34,7 @@ def _stats_cache_key(data: dict) -> str:
 def display_chunck_user_birth_town_localisation_qjis(request):
     try:
         """Display chunck of user localisation for qjis"""
-        print("unpeu unpeu")
+        #print("unpeu unpeu")
         if getattr(request, 'limited', False):
             return JsonResponse(
                 {
@@ -119,7 +119,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
                         searched_region = region
                         break
 
-                print(searched_region)
+                #print(searched_region)
                 if recieved_data["country_of_birth"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
                     filters = {
                         "continent_of_birth": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
@@ -306,7 +306,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
                 else:
                     filters["last_name"] = recieved_data["last_name"].lower()
         
-        print(recieved_data)
+        #print(recieved_data)
         if "town_birth_place" in recieved_data:
             if "#" in recieved_data["town_birth_place"]:
                 accept_multiple_element = True
@@ -394,7 +394,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
         
         filters["position__gte"] = 0
         
-        print(filters)
+        #print(filters)
 
 
         
@@ -430,7 +430,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
         list_of_last_name = set()
         display_only_one_person_per_last_name = False
         if "display_only_one_person_per_last_name" in recieved_data:
-            print("caca coco popo lili")
+            #print("caca coco popo lili")
             if recieved_data["display_only_one_person_per_last_name"] == "oui":
                 display_only_one_person_per_last_name = True
 
@@ -450,7 +450,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
 
         # t = time.time()
         # rows = list(all_user_obj.values_list("id", flat=True))
-        # print("SQL seul :", time.time() - t, "s pour", len(rows), "lignes")
+        # #print("SQL seul :", time.time() - t, "s pour", len(rows), "lignes")
 
         # t = time.time()
         # rows = list(all_user_obj.values(
@@ -459,7 +459,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
         #     "town_birth_place", "town_death_place", "is_alive",
         #     # + les champs de user_info_dict
         # ))
-        # print("values() :", time.time() - t)
+        # #print("values() :", time.time() - t)
         fields = [
             "page_name", "first_name_standard", "last_name_standard", "job",
             "birth_town_localisation", "town_death_localisation",

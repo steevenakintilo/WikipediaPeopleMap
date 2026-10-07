@@ -159,7 +159,7 @@ CACHES = {
 #         "USER": "postgres",
 #         "PASSWORD": os.environ["PGPASSWORD"],
 #         "HOST": "127.0.0.1",
-#         "PORT": "53674",
+#         "PORT": "52762",
 #         "OPTIONS": {
 #             "sslmode": "require",
 #         },
@@ -167,7 +167,6 @@ CACHES = {
 # }
 
 
-print(DATABASES)
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 

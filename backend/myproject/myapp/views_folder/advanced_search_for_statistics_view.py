@@ -38,7 +38,7 @@ def _stats_cache_key(data: dict) -> str:
 def get_advanced_statistics(request):
     """Get advanced statistics"""
 
-    start = time.perf_counter()
+    #start = time.perf_counter()
     if getattr(request, 'limited', False):
         return JsonResponse(
             {
@@ -92,7 +92,7 @@ def get_advanced_statistics(request):
                     searched_region = region
                     break
 
-            #print(searched_region)
+            ##print(searched_region)
             if recieved_data["country_of_birth"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
                 filters = {
                     "continent_of_birth": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
@@ -279,7 +279,7 @@ def get_advanced_statistics(request):
             else:
                 filters["last_name"] = recieved_data["last_name"].lower()
     
-    #print(recieved_data)
+    ##print(recieved_data)
     if "town_birth_place" in recieved_data:
         if "#" in recieved_data["town_birth_place"]:
             accept_multiple_element = True
@@ -386,8 +386,8 @@ def get_advanced_statistics(request):
     #filters["age__lte"] = 123
     #filters["town_birth_place"] = "Paris"
             
-    ##print(recieved_data)
-    #print(filters)
+    ###print(recieved_data)
+    ##print(filters)
 
 
     
@@ -450,7 +450,7 @@ def get_advanced_statistics(request):
                     else:
                         all_user_obj = WikipediaUserUniqueTown.objects.filter(**filters).order_by(f"-{sort_user_by}")
             else:
-                #print("att")
+                ##print("att")
 
                 sort_user_by = "position"
                 if accept_multiple_element:
@@ -575,7 +575,7 @@ def get_advanced_statistics(request):
 
     length = all_user_obj.count()
     nb_of_bad_user = 0
-    print("start get_advanced_statistics function")
+    ##print("start get_advanced_statistics function")
     try:
         for user_obj in all_user_obj:
 
@@ -1155,7 +1155,7 @@ def get_advanced_statistics(request):
         dict_of_counter["death_year_from_1900"] = sort_a_counter(death_year_counter_from_1900,1)
         dict_of_counter["birth_and_death_year_from_1900"] = sort_a_counter(birth_and_death_year_counter_from_1900,1)
         
-        print("end get_advanced_statistics function")
+        #print("end get_advanced_statistics function")
         
         dict_of_counter["number_of_error_per_page"] = sort_a_counter(number_of_error_per_page_counter,1)
         dict_of_counter["preciseness_level"] = sort_a_counter(preciseness_level_counter,1)
@@ -1174,7 +1174,7 @@ def get_advanced_statistics(request):
         # for element in block_of_element:
         #     if len(dict_of_counter[element]):
         #         block_of_element_present.append(element)
-        #     #print(len(dict_of_counter[element]) , element)
+        #     ##print(len(dict_of_counter[element]) , element)
 
         dict_of_counter = {
             key: sort_a_counter(counter,0,key)
@@ -1182,7 +1182,7 @@ def get_advanced_statistics(request):
         }
 
         elapsed = time.perf_counter() - start
-        print(f"Request processing time: {elapsed:.3f} seconds")
+        ##print(f"Request processing time: {elapsed:.3f} seconds")
         result = {"all_wikipedia_info": dict_of_counter}
         cache.set(cache_key, result, STATS_CACHE_TTL)
         return JsonResponse(result, status=200)
@@ -1190,6 +1190,6 @@ def get_advanced_statistics(request):
     except:
         import traceback
         traceback.print_exc()
-        print(f"Request processing time: {elapsed:.3f} seconds")
+        #print(f"Request processing time: {elapsed:.3f} seconds")
         return JsonResponse({"all_wikipedia_info":dict_of_counter},status=403)
             

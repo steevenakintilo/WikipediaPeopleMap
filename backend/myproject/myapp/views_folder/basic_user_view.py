@@ -54,7 +54,6 @@ def display_chunck_of_user_info(request,chunk_nb=0):
 
 
 
-    tototo = 0
     list_of_localisation = []
     for user_obj in all_user_obj[index_start:index_end]:
         try:
@@ -75,7 +74,6 @@ def display_chunck_of_user_info(request,chunk_nb=0):
             else:
                 page_name_even_shorter_for_mobile = user_obj.page_name
             
-            tototo+=user_obj.number_of_friends
             user_info_dict = {
                 "page_name": user_obj.page_name,
                 "page_name_shorter":page_name_shorter,
@@ -94,8 +92,6 @@ def display_chunck_of_user_info(request,chunk_nb=0):
             }
             list_of_all_user_data.append(user_info_dict)
         except:
-
             pass
-    print(tototo)
-    print(int(tototo/500))
+
     return JsonResponse({"all_user_data":list_of_all_user_data},status=200)
