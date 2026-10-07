@@ -11,7 +11,8 @@ const Statistics = lazy(() => import("./pages/statistics"));
 const QjisMap = lazy(() => import('./pages/qjis_map'));
 const About = lazy(() => import('./pages/about'));
 const OtherStatistics = lazy(() => import('./pages/other_statistics'));
-
+const WikiGames = lazy(() => import('./pages/wikigameshome'));
+const WhoIsOlder = lazy(() => import('./pages/whoisolder'));
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,8 @@ function App() {
           <Route path="/Qjis" element={<QjisMap />} />
           <Route path="/About" element={<About />} />
           <Route path="/OtherStatistics" element={<OtherStatistics />} />
+          <Route path="/WikiGames" element={<WikiGames />} />
+          <Route path="/WhoIsOlder" element={<WhoIsOlder />} />
           <Route path="*" element={<HomePage/>}/>
         </Route>
 

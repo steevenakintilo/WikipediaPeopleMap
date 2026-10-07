@@ -18,7 +18,7 @@ import {
   useTheme,
 } from "@steevenakintilo/ui"
 
-import { LOGO_URL, NAV_LINKS } from "./nav_links.ts"
+import { LOGO_URL, LOGO_URL2 ,NAV_LINKS , NAV_LINKS2 } from "./nav_links.ts"
 
 // Classe fixe (pas de fonction) : NavLink met aria-current="page" sur le lien actif,
 // et SheetClose asChild ne sait fusionner que des className en chaîne
@@ -100,6 +100,29 @@ function SiteHeader() {
   )
 }
 
+function SiteHeader2() {
+  return (
+    <header className="sticky top-0 z-50 h-14 border-b bg-background/90 backdrop-blur">
+      <div className="mx-auto flex h-full max-w-7xl items-center gap-2 px-4">
+        <Link to="/Home" className="mr-auto flex items-center gap-2.5 font-semibold tracking-tight">
+          <img src={LOGO_URL2} alt="" className="size-8" />
+          <span>WikipediaPeopleMap</span>
+        </Link>
+        <nav className="hidden items-center gap-1 md:flex">
+          {NAV_LINKS2.map((link) => (
+            <NavLink key={link.to} to={link.to} className={nav_link_class}>
+              {link.label}
+            </NavLink>
+          ))}
+        </nav>
+        <ThemeToggle />
+        <MobileNav />
+      </div>
+    </header>
+  )
+}
+
+
 function PageFallback() {
   return (
     <div role="status" className="flex flex-1 items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -111,11 +134,16 @@ function PageFallback() {
 const SiteLayout = () => {
   // L'accueil est lui-même le menu (gros boutons) : pas d'en-tête de navigation dessus
   const { pathname } = useLocation()
-  const is_home = pathname === "/" || pathname === "/Home"
-
+  const is_home = pathname === "/" || pathname === "/Home"  
+  const is_game_menu = pathname === "/WikiGames" 
+  const is_game = pathname === "/WhoIsOlder" 
+  
+  
   return (
     <div className="flex min-h-dvh flex-col">
-      {!is_home && <SiteHeader />}
+      {!is_home && !is_game_menu && !is_game && <SiteHeader />}
+      {is_game && <SiteHeader2 />}
+      
       <Suspense fallback={<PageFallback />}>
         <Outlet />
       </Suspense>

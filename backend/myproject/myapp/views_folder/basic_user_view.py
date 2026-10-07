@@ -5,24 +5,18 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 
-from myapp.models import WikipediaUser , WikipediaUserUniqueTown
+from myapp.models import WikipediaUser
 
 from random import randint
 from random import sample
-from django.db.models import OuterRef, Subquery
 
 from ..global_variable import *
 from ..utility_function  import *
 
 
-import ast
 import os
-import json
-import csv
 
 @ratelimit(key='ip', rate='30/15m', block=False)
 def display_chunck_of_user_info(request,chunk_nb=0):

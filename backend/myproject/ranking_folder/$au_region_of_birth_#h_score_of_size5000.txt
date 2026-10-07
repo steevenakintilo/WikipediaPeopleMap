@@ -1,11 +1,12 @@
-Europe de l'Ouest#####58.7553#####203882
-Amérique anglo-saxonne#####56.45356#####60863
-Afrique du Nord#####46.29858#####12650
-Europe du Sud#####44.68435#####56236
-Europe du Nord#####41.89135#####47987
-Europe de l'Est#####41.8456#####31988
-Moyen-Orient#####39.82732#####9613
-Australasie#####39.82628#####7368
-Asie de l'Est#####33.86197#####19474
-Amérique du Sud#####32.982#####17163
-Afrique de l'Ouest#####31.3243#####7342
+Asie de l'Est#####657.44877#####21131
+Moyen-Orient#####608.03137#####10807
+Amérique anglo-saxonne#####606.73727#####87107
+Europe du Nord#####595.58124#####60103
+Europe de l'Est#####575.60551#####34744
+Amérique du Sud#####567.68801#####18683
+Europe du Sud#####559.36983#####61552
+Australasie#####472.39854#####8471
+Europe de l'Ouest#####399.80751#####222124
+Afrique du Nord#####342.12303#####13785
+Afrique centrale#####334.38147#####5471
+Afrique de l'Ouest#####288.28232#####27363

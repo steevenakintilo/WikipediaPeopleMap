@@ -1,5 +1,5 @@
-Antiquity#####72.45763#####2738
-Middle Ages#####65.67478#####25177
-Renaissance#####51.74646#####62508
-Contemporary Period#####45.74666#####581823
-Today Time#####31.72565#####19034
+Antiquity#####924.99265#####2314
+Middle Ages#####672.53951#####22122
+Contemporary Period#####479.74757#####584488
+Renaissance#####449.01624#####60947
+Today Time#####391.78935#####20161

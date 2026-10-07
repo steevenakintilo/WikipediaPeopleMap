@@ -1,17 +1,13 @@
 from collections import Counter
 from unidecode import unidecode
-from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 
 from myapp.models import WikipediaUser
 
-from random import randint
-from random import sample
 
 from ..global_variable import *
 from ..utility_function  import *
@@ -1340,6 +1336,10 @@ def calc_gender_ratio_of_some_variable(request):
 
     alphabet = "abcdefghijklmnopqrstuvwxyz"
 
+    # PAYS DE NAISSANCE
+    # PAYS DE decee
+    # PERIODE HISTORIQUE
+        
     for index in range(len(list_of_dict_occurence)):
 
         print(f"Currently working on women/man {list_of_variable_to_search[index]}")

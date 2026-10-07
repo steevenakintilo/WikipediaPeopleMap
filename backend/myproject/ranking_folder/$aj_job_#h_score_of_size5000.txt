@@ -1,22 +1,22 @@
-Acteur#####108.08659#####34232
-Realisateur#####103.98977#####5769
-Compositeur#####70.37549#####9236
-Actrice#####60.44713#####10460
-Peintre#####58.86571#####9710
-Poete#####58.39193#####6542
-Chanteur#####51.86306#####6959
-Ecrivain#####51.77652#####16104
-Historien#####51.6297#####6357
-Journaliste#####50.60999#####11046
-Artiste peintre#####43.98706#####12903
-Depute francais#####42.21342#####6766
-Homme politique#####38.38805#####17075
-Architecte#####35.59125#####5874
-Personnalite politique#####27.22133#####23377
-Un joueur de rugby#####24.66473#####9273
-Un joueur de basket-ball#####22.48923#####6917
-Coureur#####21.84577#####14070
-Footballeur#####21.40274#####45925
-Un joueur de hockey#####18.4385#####9366
-Athlete#####17.61001#####9195
-Un joueur de football#####15.90257#####7123
+Acteur#####755.9168#####34232
+Realisateur#####679.7256#####5769
+Actrice#####642.47294#####10460
+Footballeur#####636.23828#####45925
+Chanteur#####589.22704#####6959
+Compositeur#####582.22087#####9236
+Poete#####564.3048#####6542
+Peintre#####450.88816#####9710
+Ecrivain#####438.1065#####16104
+Athlete#####437.52104#####9195
+Un joueur de basket-ball#####433.31589#####6917
+Un joueur de football#####406.9482#####7123
+Homme politique#####389.70917#####17075
+Architecte#####346.33623#####5874
+Journaliste#####340.22397#####11046
+Historien#####340.18751#####6357
+Artiste peintre#####327.47911#####12903
+Coureur#####325.88998#####14070
+Un joueur de hockey#####323.09193#####9366
+Personnalite politique#####274.82162#####23377
+Depute francais#####245.36565#####6766
+Un joueur de rugby#####151.72566#####9273

@@ -47,7 +47,7 @@ const QjisMap = () => {
     if (qjis_csv.error?.toString() === "ApiError: Erreur HTTP 429") {
       error_type = 2;
     }
-    
+
     const active_filters_count = count_active_filters(STATISTICS_FILTERS, dict_of_advance_search)
 
     function get_list_of_user_advanced_search() {
@@ -102,11 +102,11 @@ const QjisMap = () => {
         {loading && <LoadingState title="Génération du fichier…" />}
 
         {error_type == 1 &&(
-            <ErrorState on_retry={() => qjis_csv.refetch()} />
+            <ErrorState on_retry={() => qjis_csv.mutate()} />
         )}
               
         {error_type == 2 &&(
-          <TooMuchRequestError description="Tu as fait trop de requêtes, patiente 15 minutes." on_retry={() => qjis_csv.refetch()} />
+          <TooMuchRequestError description="Tu as fait trop de requêtes, patiente 15 minutes." on_retry={() => qjis_csv.mutate()} />
         )}
         
 

@@ -95,6 +95,13 @@ const AGE_AND_PLACES: FilterSection = {
   ],
 }
 
+const GAME_SETTINGS: FilterSection = {
+  title: "Paramétre de jeu",
+  fields: [
+    { key: "number_of_rounds", label: "Nombre de round", type: "number", min:1 , max: 100 }
+  ],
+}
+
 const PRECISENESS: FilterField = { key: "preciseness_level", label: "Précision minimale de la page (%)", type: "number", min: 0, max: 100 }
 const LATEST_POSITION: FilterField = { key: "latest_position_of_user_to_display", label: "Position maximale au classement", type: "number", min: 1, max: 706280 }
 const ONE_PER_TOWN: FilterField = { key: "display_only_one_person_per_town", label: "Une seule personne par ville de naissance", type: "choice", options: YES_NO }
@@ -115,6 +122,19 @@ export const STATISTICS_FILTERS: FilterSection[] = [
       { key: "display_only_one_person_per_last_name", label: "Une seule personne par nom de famille", type: "choice", options: YES_NO },
       { key: "display_only_one_person_per_job", label: "Une seule personne par métier", type: "choice", options: YES_NO },
     ],
+  },
+]
+
+// Page Qui est né avant ? (seuls les filtres pris en compte par la vue create_game_view)
+export const GAME_FILTERS: FilterSection[] = [
+  GAME_SETTINGS,
+  IDENTITY,
+  BIRTH,
+  DEATH,
+  AGE_AND_PLACES,
+  {
+    title: "Sélection",
+    fields: [PRECISENESS, LATEST_POSITION, ONE_PER_TOWN],
   },
 ]
 

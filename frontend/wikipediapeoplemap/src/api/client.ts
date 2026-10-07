@@ -19,7 +19,7 @@ type ApiFetchOptions = {
 
 // Tous les appels au backend passent par ici, et sont appelés uniquement depuis TanStack Query (voir queries.ts)
 export async function api_fetch(path: string, options: ApiFetchOptions = {}) {
-  console.log(path,options)
+  //console.log(path,options)
   const response = await fetch(`${backend_url_prod}${path}`, {
     method: options.method ?? "GET",
     headers: {"Content-Type" : "application/json"},

@@ -937,7 +937,13 @@ export const THEME_TO_SUB_THEMES_FOR_RANKING: Record<string, string> = {
     "Liste des pays de naissance classé(e)s par score présent au moins 250 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
     "Liste des pays de naissance classé(e)s par score présent au moins 500 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
     "Liste des pays de naissance classé(e)s par score présent au moins 1000 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de naissance classé(e)s par score présent au moins 5000 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de naissance classé(e)s par score présent au moins 10000 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
     "Liste des pays de naissance classé(e)s par score présent au moins 2500 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de naissance classé(e)s par score présent au moins 25000 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de naissance classé(e)s par score présent au moins 50000 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de naissance classé(e)s par score présent au moins 100000 fois dans la liste": "Liste des pays de naissance classé(e)s par score présent au moins 5 fois dans la liste",
+    
 
     "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
     "Liste des pays de décès classé(e)s par score présent au moins 25 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
@@ -946,7 +952,12 @@ export const THEME_TO_SUB_THEMES_FOR_RANKING: Record<string, string> = {
     "Liste des pays de décès classé(e)s par score présent au moins 500 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
     "Liste des pays de décès classé(e)s par score présent au moins 1000 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
     "Liste des pays de décès classé(e)s par score présent au moins 2500 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
-
+    
+    "Liste des pays de décès classé(e)s par score présent au moins 5000 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de décès classé(e)s par score présent au moins 10000 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de décès classé(e)s par score présent au moins 25000 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
+    "Liste des pays de décès classé(e)s par score présent au moins 50000 fois dans la liste": "Liste des pays de décès classé(e)s par score présent au moins 5 fois dans la liste",
+    
     "Liste des dates de décès classé(e)s par score présent au moins 5 fois dans la liste": "Liste des dates de décès classé(e)s par score présent au moins 5 fois dans la liste",
 
     "Liste des dates de naissance et de décès classé(e)s par score présent au moins 5 fois dans la liste": "Liste des dates de naissance et de décès classé(e)s par score présent au moins 5 fois dans la liste",
@@ -1152,9 +1163,9 @@ export const STAT_TO_DESCRIPTION : any = {
 
 export const NUMBER_OF_USER : number = 712430
 
-//export const backend_url_prod: string = "https://glorious-nourishment-production-e28f.up.railway.app"
+export const backend_url_prod: string = "https://glorious-nourishment-production-e28f.up.railway.app"
 export const backend_url_local: string = "http://127.0.0.1:8000/"
-export const backend_url_prod: string = "http://127.0.0.1:8000"
+//export const backend_url_prod: string = "http://127.0.0.1:8000"
 
 export const dict_localisation_pin_picture : any = {
     999999999999999: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1787351654/image_mobyht.png",

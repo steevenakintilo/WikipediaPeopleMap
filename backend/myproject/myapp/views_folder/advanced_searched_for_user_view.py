@@ -13,16 +13,13 @@ from myapp.models import WikipediaUser , WikipediaUserUniqueTown
 
 from random import randint
 from random import sample
-from django.db.models import OuterRef, Subquery
 
 from ..global_variable import *
 from ..utility_function  import *
 
 
-import ast
 import os
 import json
-import csv
 
 @csrf_exempt
 @ratelimit(key='ip', rate='30/15m',block=False)

@@ -145,7 +145,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": os.environ["PGPASSWORD"],
         "HOST": "127.0.0.1",
-        "PORT": "63488",
+        "PORT": "49913",
         "OPTIONS": {
             "sslmode": "require",
         },
@@ -199,3 +199,6 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+#Het Gulden Cabinet

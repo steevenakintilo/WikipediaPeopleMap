@@ -1,9 +1,6 @@
-from collections import Counter
 from unidecode import unidecode
-from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
@@ -11,15 +8,11 @@ from django_ratelimit.decorators import ratelimit
 
 from myapp.models import WikipediaUser , WikipediaUserUniqueTown
 
-from random import randint
-from random import sample
-from django.db.models import OuterRef, Subquery
 
 from ..global_variable import *
 from ..utility_function  import *
 
 
-import ast
 import os
 import json
 import csv

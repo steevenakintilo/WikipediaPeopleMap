@@ -37,6 +37,18 @@ export function advanced_statistics_query(search: any) {
   })
 }
 
+
+export function create_who_was_born_first_game(search: any) {
+  return api_fetch(
+    "/create_who_was_born_first_game",
+    {
+      method: "POST",
+      body: search,
+    }
+  )
+}
+
+
 export function other_statistics_query() {
   return queryOptions({
     queryKey: ["statistics", "other"],

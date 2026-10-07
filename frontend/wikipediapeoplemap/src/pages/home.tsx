@@ -52,6 +52,13 @@ const HOME_MENU = [
     desktop_only: true,
   },
   {
+    id: "GamePageButton",
+    to: "/WikiGames",
+    label: "Jeux",
+    description: "",
+    desktop_only: true,
+  },
+  {
     id: "AboutPageButton",
     to: "/About",
     label: "À propos",

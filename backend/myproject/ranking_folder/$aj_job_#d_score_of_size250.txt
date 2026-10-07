@@ -1,324 +1,324 @@
-Une joueuse de tennis#####351.05813#####1359
-Un joueur de tennis#####269.80013#####1551
-Un ancien joueur de tennis#####194.70763#####472
-Princesse#####136.63485#####482
-Metteur en scene#####128.92015#####526
-Un homme d'Etat#####121.12313#####268
-Catcheur#####116.73356#####897
-Directeur de la photographie#####108.32296#####932
-Acteur#####108.08659#####34232
-Realisateur#####103.98977#####5769
-Duc#####101.10043#####926
-Reine#####100.412#####250
-Roi#####98.54354#####712
-Monteur#####95.76211#####454
-Auteure-compositrice-interprete#####95.6236#####356
-Prince#####94.98472#####916
-Dramaturge#####94.45042#####1674
-Aristocrate#####90.75599#####459
-Saxophoniste#####89.5#####310
-Rappeur#####86.96863#####1594
-Membre#####86.85372#####417
-Ministre#####81.91339#####635
-Feudataire#####81.43277#####476
-Dessinateur de bandes dessinees#####79.59327#####1099
-Artiste lyrique#####78.99683#####2208
-Editeur#####78.83681#####1054
-Femme#####78.00369#####271
-Essayiste#####77.96552#####348
-Collectionneur d'oeuvres d'art#####77.38724#####439
-Joueur d'echecs#####77.25#####308
-Auteur-compositeur-interprete#####76.75492#####2183
-Pratiquant#####76.73064#####297
-Chef d'orchestre#####75.4787#####1878
-Historien de l'art#####74.07692#####806
-Realisateur de cinema#####73.86537#####3959
-Pianiste#####72.23044#####2135
-Humoriste#####71.64583#####672
-Autrice-compositrice-interprete#####70.68876#####347
-Musicien de jazz#####70.39301#####715
-Compositeur#####70.37549#####9236
-Producteur de cinema#####70.35836#####1345
-Philosophe#####69.70073#####3268
-Noble#####64.82956#####663
-Scenariste#####64.79652#####2934
-Senateur des Etats-Unis#####64.58803#####284
-Membre de la #####64.55583#####797
-Disc jockey#####64.5186#####430
-Graveur#####63.73166#####954
-Inspecteur general#####63.35178#####253
-Batteur#####63.34649#####456
-Guitariste#####63.18335#####1009
-Violoniste#####63.04011#####698
-Peinture (art)#####62.90278#####432
-Critique litteraire#####62.55866#####358
-Chef #####62.01737#####2649
-DJ#####60.65779#####263
-Actrice#####60.44713#####10460
-Modeliste#####60.34231#####260
-Animateur#####60.24125#####257
-Roi #####59.83144#####1412
-Danseuse#####59.81818#####308
-Scenariste de bande dessinee#####59.70085#####1404
-Lexicographe#####59.54348#####276
-Peintre#####58.86571#####9710
-Poete#####58.39193#####6542
-Choregraphe#####58.27549#####657
-Auteur-compositeur#####57.95382#####498
-Illustrateur#####57.63059#####850
-Artiste-peintre#####57.05827#####532
-Espion#####56.62763#####333
-Dessinateur humoristique#####56.38235#####272
-Animateur de radio#####56.23175#####315
-Romancier#####56.19093#####4698
-Producteur#####55.88488#####443
-Chanteuse#####55.8643#####4149
-Comte#####55.14574#####446
-Gouverneur #####55.14453#####512
-Eveque #####55.12072#####613
-Traducteur#####55.08257#####872
-Organiste#####54.69865#####594
-Histoire de l'art#####54.68571#####280
-Personnalite#####53.17456#####338
-Haut fonctionnaire#####53.12048#####913
-Dessinateur#####52.61391#####575
-Musicologue#####52.2737#####559
-Chanteur#####51.86306#####6959
-Ecrivain#####51.77652#####16104
-Traductrice#####51.63636#####264
-Historien#####51.6297#####6357
-Chef#####51.29231#####260
-Militant#####50.76266#####316
-Theologien#####50.65141#####1311
-Journaliste#####50.60999#####11046
-Realisateur artistique#####50.44709#####378
-Deputee francaise#####50.42289#####603
-Bibliothecaire#####49.50066#####763
-Compositrice#####49.15026#####772
-Poetesse#####49.06292#####1478
-Sculptrice#####48.91304#####322
-Prelat#####48.76963#####382
-Souverain#####48.61047#####783
-Artiste visuel#####48.3617#####282
-Magistrat#####47.9772#####614
-Militaire#####47.81583#####1819
-Archiviste#####47.39024#####328
-Membre du #####46.86184#####608
-Historienne#####46.80684#####673
-Realisatrice de cinema#####46.7634#####765
-Eveque catholique#####46.62556#####665
-Anthropologue#####46.14435#####1344
-Acteur pornographique#####46.12913#####333
-Senateur francais#####46.07777#####1633
-Religieuse#####45.87927#####439
-Psychiatre#####45.81769#####554
-Sculpteur#####45.57615#####4445
-Danseur#####45.42005#####369
-Representante des Etats-Unis#####45.388#####250
-Musicienne#####45.3734#####391
-Pilote#####45.07849#####3083
-Philologue#####44.97059#####408
-Sociologue#####44.93688#####1109
-Musicien#####44.78176#####3597
-Ecrivaine#####44.5924#####3739
-Pedagogue#####44.41304#####414
-Professeur#####44.24854#####342
-Directeur #####44.10511#####333
-Avocat#####44.07608#####1827
-Linguiste#####43.98727#####1728
-Artiste peintre#####43.98706#####12903
-Animateur de television#####43.59274#####496
-Explorateur#####43.18878#####2193
-Depute a l' Assemblee nationale du Quebec#####43.08235#####340
-Diplomate#####43.07554#####3614
-Major general#####42.70145#####345
-President #####42.52959#####676
-Politologue#####42.37446#####462
-Banquier#####42.28784#####806
-Depute francais#####42.21342#####6766
-Ingenieur civil#####42.11724#####290
-Enseignante#####41.91765#####340
-Enseignant#####41.72315#####838
-Moine#####41.68458#####577
-Mathematicien#####41.68345#####4865
-Photographe#####41.67592#####3999
-Rabbin#####41.54762#####798
-Membre de #####41.4907#####430
-Economiste#####41.44659#####2275
-Officier#####40.8926#####4432
-Pasteur#####40.84043#####282
-Industriel#####40.81498#####454
-Soldat#####40.51543#####324
-Romanciere#####40.46702#####940
-Resistante#####40.33602#####372
-Professeur d'universite#####40.26404#####1318
-Revolutionnaire#####40.24603#####252
-Geographe#####40.18475#####682
-Mannequinat#####40.09524#####252
-Militante#####40.00263#####380
-Homme d'affaires#####39.77535#####1144
-Militantisme#####39.60965#####456
-Cycliste#####39.51957#####281
-Pretre catholique#####39.04588#####4468
-Avocat (metier)#####38.99615#####779
-Resistant#####38.77267#####783
-Pretre#####38.74517#####777
-Sportif#####38.732#####750
-Fonctionnaire#####38.57478#####341
-Homme politique#####38.38805#####17075
-Chirurgien#####38.36322#####435
-Juriste#####38.31622#####2065
-Roman (litterature)#####38.28185#####1295
-Geologue#####38.25184#####679
-Archeologue#####37.63649#####740
-Theologie#####37.60643#####498
-Chef cuisinier#####37.54444#####360
-Medecin#####37.50988#####4301
-Professeure d'universite#####37.13675#####351
-Entrepreneur#####37.10094#####1813
-Depute europeen#####36.97177#####921
-Animatrice de television#####36.87023#####262
-Mathematicienne#####36.65171#####468
-Eveque#####36.57588#####257
-Aviateur#####36.56616#####461
-Artiste#####36.48272#####1910
-Physicien#####36.2104#####2481
-Navigateur#####35.93235#####340
-Syndicaliste#####35.92857#####532
-Biologiste#####35.75116#####1081
-Architecte#####35.59125#####5874
-Amiral#####35.39535#####258
-Depute aux Cortes Generales#####35.28049#####328
-Un ancien pilote#####34.79078#####282
-Administrateur colonial#####34.65636#####291
-Juge#####34.54044#####1051
-General#####34.50667#####1875
-Chef d'entreprise#####34.28942#####463
-Alpiniste#####34.14154#####325
-Designer#####34.13268#####407
-Bienheureux#####34.12853#####389
-Saint#####34.04088#####318
-Pretre anglican#####34.00909#####330
-Representant des Etats-Unis#####33.77024#####840
-Golfeur#####33.72222#####288
-Chercheur#####33.23324#####373
-Realisatrice#####32.84806#####283
-Psychologue#####32.54962#####786
-Mannequin#####32.48434#####958
-Agriculteur#####32.41948#####267
-Chimiste#####32.37438#####1811
-General #####32.02798#####679
-Acteur de films pornographiques#####31.90145#####345
-Universitaire#####31.8029#####482
-Echecs#####31.79824#####1933
-Inventeur#####31.06846#####745
-Avocate#####30.93094#####362
-Enseignement#####30.75075#####333
-Naturaliste#####30.70053#####374
-Interprete#####30.64486#####321
-Linguistique#####30.47904#####334
-Botaniste#####29.97489#####3027
-Joueur de cricket#####29.93417#####319
-Biochimiste#####29.85932#####263
-Ingenieur#####29.84459#####3050
-Depute a la Chambre des communes#####29.70805#####894
-Astronome#####29.64731#####2101
-Entomologiste#####29.56336#####584
-Personnalite du monde des affaires#####29.25618#####2022
-Cardinal#####29.21529#####1282
-Capitaine #####29.05415#####277
-Un ancien footballeur#####29.02141#####1448
-Femme politique#####28.98383#####2535
-Scientifique#####28.53077#####390
-Deputee europeenne#####28.5#####542
-Prelature#####27.73793#####290
-Zoologiste#####27.43703#####659
-Un joueur de soccer#####27.4302#####702
-Personnalite politique#####27.22133#####23377
-Fondeuse#####26.9581#####358
-Paleontologue#####26.64249#####386
-Pilote (aviation)#####26.57046#####589
-Entraineur#####26.46382#####1078
-Skieur#####26.44423#####1022
-Samourai#####25.91953#####1106
-Biathlete#####25.07005#####1142
-Un joueur de rugby#####24.66473#####9273
-Informaticien#####24.46961#####724
-Un ancien coureur#####23.69632#####517
-Une joueuse de basket-ball#####23.45303#####1320
-Skieuse#####23.13679#####753
-Pilote automobile#####23.12805#####656
-Fondeur#####23.1068#####515
-Ornithologue#####23.04651#####387
-Pretre orthodoxe#####22.8475#####400
-Un joueur de basket-ball#####22.48923#####6917
-Mangaka#####22.16265#####498
-Patineuse#####21.89118#####680
-Coureur#####21.84577#####14070
-Coureuse#####21.78187#####1655
-Footballeur#####21.40274#####45925
-Conseiller national#####21.3309#####411
-Seiyu#####21.22542#####417
-Un joueur de handball#####19.60471#####425
-Un ancien joueur de football#####19.50704#####355
-Patineur#####19.4994#####833
-Boxeur#####18.95971#####2730
-Un joueur de hockey#####18.4385#####9366
-Footballeuse#####18.34698#####2052
-Un joueur de d'aviron#####18.24951#####513
-Triathlete#####17.71375#####800
-Athlete#####17.61001#####9195
-Joueur de rugby a XV#####17.35511#####352
-Sauteur#####17.3202#####406
-Judokate#####16.99399#####333
-Nageuse#####16.87056#####958
-Un joueur de football#####15.90257#####7123
-Arbitre#####15.52281#####285
-Escrimeuse#####14.95374#####562
-Une joueuse de squash#####14.54801#####427
-Bobeur#####14.42769#####325
-Nageur#####14.09401#####1585
-Un joueur de squash#####13.56778#####509
-Judoka#####13.52035#####811
-Escrimeur#####13.44489#####989
-Une joueuse de rugby#####13.33406#####919
-Un ancien joueur de rugby#####13.08496#####565
-Entraineur #####13.06954#####604
-Rameuse#####12.63618#####492
-Handballeur#####12.59804#####714
-Archer#####12.56705#####261
-Une joueuse de handball#####12.53226#####310
-Skipper#####12.08276#####580
-Gymnaste#####11.85764#####1728
-Astronaute#####11.80925#####346
-Cavalier#####11.58873#####355
-Handballeuse#####11.37627#####590
-Rameur#####11.07953#####767
-Taekwondoiste#####10.92953#####298
-Une joueuse de football#####10.55517#####580
-Lutteur#####10.0771#####1323
-Une joueuse de hockey#####9.60219#####548
-Sprint (athletisme)#####9.35873#####315
-Une joueuse de volley-ball#####9.22328#####1581
-Karate#####9.04085#####563
-Kayakiste#####8.8308#####591
-Aviron (sport)#####8.55319#####423
-Un ancien joueur de basket-ball#####8.51613#####2511
-Ceiste#####8.23211#####517
-Une ancienne joueuse de volley-ball#####7.96759#####648
-Natation#####7.83013#####677
-Halterophile#####7.6996#####506
-Un joueur de volley-ball#####7.41583#####1402
-Athletisme#####7.25937#####2961
-Basket-ball#####7.19756#####491
-Skieur alpin#####6.42262#####336
-Halterophilie#####6.28671#####429
-Tireur#####6.00239#####418
-Judo#####5.78794#####514
-Joueur de hockey sur gazon#####5.28193#####415
-Arbitre (football)#####4.86656#####622
-Volley-ball#####4.58246#####285
-Joueur de water-polo#####4.49169#####301
-Hockey sur gazon#####4.30097#####309
-	Skieur de fond#####3.79931#####289
-Sauteur a ski#####3.75185#####270
+Un homme d'Etat#####1218.11567#####268
+Senateur des Etats-Unis#####1203.10211#####284
+Auteure-compositrice-interprete#####1143.90449#####356
+Une joueuse de tennis#####1094.93893#####1359
+Princesse#####1072.59336#####482
+Joueur d'echecs#####1047.32792#####308
+Roi#####1018.57163#####712
+Duc#####1003.84773#####926
+Biochimiste#####988.42205#####263
+Un joueur de tennis#####971.706#####1551
+Prince#####896.55738#####915
+Astronaute#####895.83815#####346
+Reine#####864.716#####250
+Souverain#####844.88889#####783
+Membre#####835.13669#####417
+Autrice-compositrice-interprete#####811.27089#####347
+Un ancien footballeur#####809.18301#####1448
+Chanteuse#####795.08388#####4149
+Une joueuse de football#####779.30345#####580
+Ministre#####773.93228#####635
+Un ancien joueur de tennis#####763.19492#####472
+Acteur#####755.9168#####34232
+Physicien#####739.1447#####2481
+Feudataire#####724.39579#####475
+Rappeur#####711.50565#####1594
+Representante des Etats-Unis#####707.716#####250
+Batteur#####705.86842#####456
+Un joueur de d'aviron#####704.22612#####513
+Guitariste#####696.32904#####1009
+Realisateur#####679.7256#####5769
+Pratiquant#####677.21549#####297
+Saxophoniste#####665.24194#####310
+Auteur-compositeur-interprete#####654.69995#####2183
+Astronome#####650.75821#####2101
+Philosophe#####648.88066#####3268
+Un joueur de soccer#####646.72934#####702
+Un ancien pilote#####646.52837#####282
+Roi #####643.55807#####1412
+Actrice#####642.47294#####10460
+Pilote#####641.35615#####3083
+Footballeur#####636.23828#####45925
+Chimiste#####620.56102#####1811
+Entraineur #####620.24172#####604
+Aristocrate#####615.24837#####459
+Inventeur#####614.9396#####745
+Patineuse#####606.30294#####680
+Acteur de films pornographiques#####605.07826#####345
+Auteur-compositeur#####604.0743#####498
+Acteur pornographique#####603.84084#####333
+Dramaturge#####603.28435#####1674
+Biologiste#####602.87234#####1081
+Membre de la #####599.00375#####799
+Eveque #####597.29038#####613
+Representant des Etats-Unis#####596.46071#####840
+Bobeur#####594.73538#####325
+Chanteur#####589.22704#####6959
+Rameuse#####588.75407#####492
+Echecs#####583.16503#####1933
+Compositeur#####582.22087#####9236
+Fondeuse#####581.22626#####358
+Archer#####578.30651#####261
+Catcheur#####573.9019#####897
+Realisateur de cinema#####572.0341#####3959
+Metteur en scene#####571.92015#####526
+Seiyu#####571.70024#####417
+Rameur#####571.28292#####767
+Mannequin#####568.33194#####958
+Fondeur#####567.25825#####515
+Gouverneur #####565.64188#####511
+Comte#####564.76009#####446
+Poete#####564.3048#####6542
+Mathematicien#####562.80904#####4865
+Biathlete#####562.01926#####1142
+Chef d'orchestre#####561.9377#####1878
+Explorateur#####559.29184#####2193
+Patineur#####550.56543#####833
+Escrimeur#####547.26087#####989
+Judoka#####546.28977#####811
+Lexicographe#####545.0942#####276
+Un ancien joueur de football#####541.80563#####355
+General #####540.83529#####680
+Lutteur#####540.53968#####1323
+Nageuse#####534.49061#####958
+Judokate#####534.05706#####333
+Sauteur#####534.03448#####406
+Mathematicienne#####533.36966#####468
+Kayakiste#####532.00846#####591
+Femme#####529.71587#####271
+Interprete#####529.66667#####321
+Humoriste#####529.50595#####672
+Halterophile#####529.43874#####506
+Theologien#####529.28604#####1311
+Skieuse#####528.0239#####753
+Depute europeen#####524.81759#####921
+Economiste#####522.95604#####2275
+Informaticien#####516.19337#####724
+Scenariste#####513.49932#####2934
+Collectionneur d'oeuvres d'art#####512.69476#####439
+Anthropologue#####511.8497#####1344
+Musicien de jazz#####511.27692#####715
+Tireur#####510.58612#####418
+Cardinal#####510.38846#####1282
+Violoniste#####509.78223#####698
+Entrepreneur#####509.71098#####1813
+Pianiste#####509.48946#####2135
+Peinture (art)#####505.7037#####432
+Linguiste#####505.6875#####1728
+Skieur#####504.9951#####1021
+Realisateur artistique#####504.89153#####378
+Artiste lyrique#####502.08107#####2208
+Romancier#####501.25564#####4698
+Chef #####499.87967#####2651
+Deputee europeenne#####498.4262#####542
+Eveque#####494.67704#####257
+Gymnaste#####489.80324#####1728
+Traductrice#####487.75758#####264
+Disc jockey#####486.86279#####430
+Realisatrice de cinema#####484.5281#####765
+Roman (litterature)#####484.06564#####1295
+Psychologue#####483.31807#####786
+Artiste-peintre#####483.05827#####532
+Poetesse#####481.79635#####1478
+Producteur de cinema#####480.33309#####1345
+Compositrice#####479.49741#####772
+	Skieur de fond#####478.78893#####289
+Golfeur#####478.5#####288
+Dessinateur de bandes dessinees#####475.10737#####1099
+Skipper#####473.08966#####580
+Modeliste#####472.92692#####260
+Traducteur#####471.51376#####872
+Cycliste#####470.96441#####281
+Membre de #####467.36512#####430
+Noble#####466.33484#####663
+Musicienne#####466.17136#####391
+DJ#####464.07985#####263
+Prelat#####460.69634#####382
+Ingenieur civil#####460.55172#####290
+Danseuse#####456.63636#####308
+Personnalite#####456.60059#####338
+Ecrivaine#####454.34956#####3739
+Botaniste#####453.90287#####3027
+Musicien#####452.01279#####3597
+Joueur de cricket#####451.21317#####319
+Peintre#####450.88816#####9710
+Animateur#####450.67704#####257
+Saint#####449.78302#####318
+Soldat#####449.62654#####324
+Mannequinat#####449.0873#####252
+Alpiniste#####447.79692#####325
+Animatrice de television#####447.77099#####262
+Revolutionnaire#####447.70635#####252
+Un ancien coureur#####446.98066#####517
+Taekwondoiste#####446.06376#####298
+Romanciere#####443.81383#####940
+Footballeuse#####440.83821#####2052
+Joueur de water-polo#####440.72425#####301
+Geologue#####440.4757#####679
+Mangaka#####440.34739#####498
+Directeur de la photographie#####440.22854#####932
+Ecrivain#####438.1065#####16104
+Amiral#####437.96124#####258
+Athlete#####437.52104#####9195
+Ornithologue#####436.81912#####387
+Aviateur#####435.0#####461
+Escrimeuse#####433.7153#####562
+Un joueur de basket-ball#####433.31589#####6917
+Sculptrice#####429.78261#####322
+Samourai#####428.57957#####1106
+Nageur#####423.45678#####1585
+Zoologiste#####422.98179#####659
+Capitaine #####422.33213#####277
+Entraineur#####422.04824#####1078
+Producteur#####421.23928#####443
+Historien de l'art#####420.22581#####806
+Ceiste#####419.17988#####517
+Aviron (sport)#####419.16785#####423
+Militante#####419.13947#####380
+Sauteur a ski#####418.21111#####270
+Arbitre#####414.10526#####285
+Juge#####413.01808#####1051
+Pretre orthodoxe#####411.3725#####400
+Diplomate#####409.62839#####3614
+Femme politique#####409.00907#####2535
+Sprint (athletisme)#####408.95238#####315
+Choregraphe#####407.0274#####657
+Un joueur de football#####406.9482#####7123
+Directeur #####406.84384#####333
+Essayiste#####406.31609#####348
+Paleontologue#####405.57513#####386
+President #####405.28994#####676
+Animateur de television#####403.50806#####496
+Dessinateur humoristique#####401.80882#####272
+Pedagogue#####398.84746#####413
+Espion#####398.15315#####333
+Psychiatre#####397.55415#####554
+Boxeur#####396.35678#####2730
+Moine#####395.83362#####577
+Rabbin#####394.27193#####798
+Animateur de radio#####391.7746#####315
+Membre du #####391.26316#####608
+Homme politique#####389.70917#####17075
+Realisatrice#####381.84452#####283
+Enseignante#####380.51176#####340
+Organiste#####379.06229#####594
+Editeur#####377.34345#####1054
+Danseur#####375.04065#####369
+Volley-ball#####371.81053#####285
+Bienheureux#####371.45501#####389
+Inspecteur general#####371.38492#####252
+Chirurgien#####370.54713#####435
+Scenariste de bande dessinee#####370.39744#####1404
+Militaire#####367.52336#####1819
+Officier#####366.44585#####4432
+Medecin#####366.41246#####4301
+Sportif#####365.012#####750
+Pretre#####363.81853#####777
+Avocate#####362.89779#####362
+Monteur#####361.54626#####454
+Une joueuse de hockey#####361.14964#####548
+Pasteur#####360.67021#####282
+Avocat#####360.37384#####1827
+Navigateur#####359.58529#####340
+Militant#####356.88924#####316
+Critique litteraire#####353.94972#####358
+General#####353.86987#####1875
+Religieuse#####353.65604#####439
+Halterophilie#####352.93007#####429
+Ingenieur#####351.87016#####3050
+Historienne#####351.47548#####673
+Joueur de hockey sur gazon#####351.0747#####415
+Judo#####349.22763#####514
+Professeur d'universite#####349.21093#####1318
+Graveur#####348.83438#####954
+Chef#####348.7#####260
+Philologue#####346.48039#####408
+Architecte#####346.33623#####5874
+Eveque catholique#####345.92481#####665
+Entomologiste#####345.75856#####584
+Designer#####345.70516#####407
+Major general#####344.51014#####345
+Homme d'affaires#####342.96766#####1144
+Journaliste#####340.22397#####11046
+Historien#####340.18751#####6357
+Coureuse#####340.18308#####1655
+Depute aux Cortes Generales#####337.62195#####328
+Scientifique#####337.45385#####390
+Musicologue#####336.64222#####559
+Politologue#####336.49567#####462
+Militantisme#####336.42544#####456
+Fonctionnaire#####334.28152#####341
+Photographe#####334.05051#####3999
+Sculpteur#####332.85444#####4445
+Professeur#####332.80994#####342
+Agriculteur#####332.50936#####267
+Illustrateur#####330.04235#####850
+Artiste peintre#####327.47911#####12903
+Linguistique#####327.41317#####334
+Coureur#####325.88998#####14070
+Banquier#####324.09429#####806
+Un joueur de hockey#####323.09193#####9366
+Professeure d'universite#####322.49288#####351
+Sociologue#####321.33904#####1109
+Une joueuse de basket-ball#####321.3303#####1320
+Naturaliste#####319.2139#####374
+Bibliothecaire#####318.68807#####763
+Dessinateur#####317.98435#####575
+Cavalier#####316.39437#####355
+Skieur alpin#####314.32738#####336
+Handballeuse#####309.88475#####590
+Pretre catholique#####309.78089#####4468
+Athletisme#####305.89497#####2961
+Archeologue#####305.53649#####740
+Un ancien joueur de basket-ball#####305.47431#####2511
+Deputee francaise#####303.24544#####603
+Hockey sur gazon#####297.45955#####309
+Pilote automobile#####296.08537#####656
+Depute a la Chambre des communes#####295.22931#####894
+Pretre anglican#####295.10606#####330
+Juriste#####293.21308#####2065
+Chef cuisinier#####291.2#####360
+Theologie#####290.05622#####498
+Enseignant#####284.4463#####838
+Senateur francais#####280.87508#####1633
+Geographe#####280.32258#####682
+Histoire de l'art#####279.65#####280
+Depute a l' Assemblee nationale du Quebec#####279.38235#####340
+Natation#####276.69276#####677
+Universitaire#####276.40456#####482
+Personnalite politique#####274.82162#####23377
+Haut fonctionnaire#####268.33625#####913
+Un joueur de handball#####267.85882#####425
+Handballeur#####267.14706#####714
+Arbitre (football)#####266.54502#####622
+Artiste#####258.75707#####1910
+Pilote (aviation)#####258.05772#####589
+Triathlete#####256.96125#####800
+Avocat (metier)#####256.03081#####779
+Magistrat#####246.01954#####614
+Depute francais#####245.36565#####6766
+Conseiller national#####245.17518#####411
+Resistante#####241.51344#####372
+Une joueuse de handball#####240.75161#####310
+Administrateur colonial#####237.02749#####291
+Chef d'entreprise#####232.01728#####463
+Industriel#####227.53744#####454
+Une joueuse de volley-ball#####226.59456#####1581
+Syndicaliste#####225.27068#####532
+Basket-ball#####222.39919#####491
+Personnalite du monde des affaires#####221.47676#####2022
+Artiste visuel#####221.34752#####282
+Archiviste#####218.04878#####328
+Resistant#####217.80715#####783
+Enseignement#####192.86486#####333
+Une joueuse de squash#####189.9719#####427
+Chercheur#####186.66488#####373
+Un joueur de volley-ball#####185.42297#####1402
+Un joueur de squash#####177.70923#####509
+Karate#####162.28419#####563
+Une ancienne joueuse de volley-ball#####159.26389#####648
+Prelature#####158.04138#####290
+Une joueuse de rugby#####157.90642#####919
+Un joueur de rugby#####151.72566#####9273
+Joueur de rugby a XV#####142.7983#####352
+Un ancien joueur de rugby#####132.2531#####565

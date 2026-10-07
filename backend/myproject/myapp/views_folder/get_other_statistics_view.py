@@ -1,17 +1,8 @@
-from collections import Counter
-from unidecode import unidecode
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
-from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 from django.views.decorators.csrf import csrf_exempt
-
-from random import randint
-from random import sample
-from random import uniform
 
 from ..global_variable import *
 from ..utility_function  import *
@@ -72,6 +63,9 @@ def get_other_statistics(request):
     # FOR RANKING
     for data , name in zip(list_of_file_data,list_of_file_name):
         graph_name = f"Liste des {VARIABLE_NAME_TO_DICT_FRENCH[name.split("#")[0][4:]]} classé(e)s par score présent au moins {name.split("#")[1].split("size")[1]} fois dans la liste"
+        # print(graph_name)
+        # print(name)
+    
         for index , line in enumerate(data):
             if index == len(data) - 1:
                 dict_of_data[graph_name.replace(".txt","")] = list_of_list
@@ -108,6 +102,6 @@ def get_other_statistics(request):
     # print(file_path_for_ranking)
     # print(os.listdir(file_path_for_ranking))
     #return HttpResponse(f"YAAAY", status=200)
-    print(dict_of_data2)
+    #print(dict_of_data2)
     
     return JsonResponse({"ranking_list_of_dict":dict_of_data,"gender_ratio_list_of_dict":dict_of_data2},status=200)

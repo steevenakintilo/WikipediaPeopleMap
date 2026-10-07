@@ -1,2647 +1,2651 @@
-Fontenay le Comte#####199.70423#####71
-Ferrol (Espagne)#####187.21875#####32
-Leytonstone#####146.48387#####31
-Saint Joseph (Missouri)#####142.5#####34
-Fontenay aux Roses#####142.48571#####70
-Brookline (Massachusetts)#####139.06897#####29
-Dillenburg#####138.73529#####34
-Sanremo#####137.51852#####27
-Lowell (Massachusetts)#####135.20588#####34
-Courbevoie#####134.58278#####151
-Plzen#####134.33333#####36
-Laeken#####133.86957#####46
-Kenosha#####131.2963#####27
-Bois Colombes#####128.36471#####85
-Saginaw#####127.66667#####30
-Rocourt#####127.64865#####37
-Saint Ouen sur Seine#####125.14634#####41
-Joinville (Haute Marne)#####124.57692#####26
-Chamalieres#####122.5#####36
-Knoxville#####121.2973#####37
-Le Vesinet#####120.08108#####37
-Melun#####119.72109#####147
-Dourdan#####117.92#####25
-Chiswick#####117.83333#####30
-Sainte Foy les Lyon#####116.85294#####34
-Saint Maixent l'Ecole#####116.85185#####27
-Montrouge#####115.25806#####62
-Aix les Bains#####114.25714#####70
-Pantin#####114.2449#####49
-Omaha (Nebraska)#####113.78125#####64
-Pont Audemer#####113.59259#####27
-Maisons Laffitte#####113.36842#####57
-Juvisy sur Orge#####113.09524#####42
-San Bernardino (Californie)#####112.79412#####34
-Neuilly sur Seine#####112.40741#####1026
-Soisy sous Montmorency#####112.21622#####37
-Les Lilas#####111.8169#####71
-Levallois Perret#####111.15929#####113
-Chatou#####110.61364#####44
-Summit#####109.30769#####26
-Boulogne Billancourt#####108.23355#####775
-Asnieres sur Seine#####108.13223#####121
-Saint Raphael#####107.75#####28
-Sainte Adresse#####107.44444#####54
-Cleves#####106.8125#####32
-Sainte Foy la Grande#####104.71875#####32
-Chantilly#####103.32258#####31
-Le Cateau Cambresis#####102.93333#####30
-Tambov#####102.75#####28
-Brunn#####101.89286#####28
-Noisy le Sec#####101.45161#####31
-Poissy#####101.19565#####92
-Begles#####100.89655#####29
-Oak Park (Illinois)#####100.75#####32
-Saint Mande#####100.63095#####168
-Vincennes#####100.58678#####121
-Taganrog#####100.3#####40
-Cobourg#####100.22857#####70
-Charenton le Pont#####99.53165#####79
-Saigon#####99.28571#####49
-Montreuil#####99.08527#####129
-Puteaux#####98.7193#####57
-Saint Cloud#####98.60169#####118
-La Garenne Colombes#####97.5283#####53
-Saint Germain en Laye#####97.01215#####247
-La Fere#####96.34375#####32
-Kaohsiung#####95.88889#####27
-Bad Arolsen#####95.5#####32
-Senigallia#####94.64286#####28
-Le Petit Quevilly#####93.97222#####36
-Semur en Auxois#####93.69697#####33
-Tiflis#####93.41667#####36
-Bourges#####92.10985#####264
-Green Bay#####91.74074#####27
-Stettin#####91.72727#####33
-Les Andelys#####91.6129#####31
-Launceston#####91.03125#####32
-Mirecourt#####90.84444#####45
-Beverly#####90.51724#####29
-Gennevilliers#####89.64103#####39
-Paris#####89.61831#####25599
-Modesto#####89.41935#####31
-Enghien les Bains#####89.32222#####90
-San Mateo (Californie)#####89.14815#####27
-Monte Carlo#####89.13793#####29
-Thouars#####88.92683#####41
-Bourg la Reine#####88.6087#####69
-Bar le Duc#####88.23636#####110
-Montbard#####88.23333#####30
-Clamecy (Nievre)#####88.0#####29
-Bergerac#####87.88889#####36
-Louisville (Kentucky)#####87.74528#####106
-Hampstead (Londres)#####87.68033#####122
-Mazamet#####87.48718#####39
-Orel#####86.7931#####29
-Antony#####86.38571#####70
-Ismailia#####86.37037#####27
-Worcester (Massachusetts)#####86.13462#####52
-Alencon#####85.93506#####154
-Twickenham#####85.81481#####27
-Ales#####85.8129#####155
-Chateau Thierry#####85.57778#####45
-Dartford#####85.33333#####33
-Saint Amand Montrond#####85.25#####44
-Cahors#####85.15909#####132
-Nogent le Rotrou#####85.10256#####39
-Honfleur#####84.98462#####65
-Peoria (Illinois)#####84.73077#####26
-Reading (Berkshire)#####83.92857#####42
-Newark (New Jersey)#####83.4375#####160
-Eisenach#####83.38462#####39
-Argenteuil (Val d'Oise)#####83.3125#####48
-Compton#####83.28205#####39
-Nogent sur Marne#####83.25962#####104
-Etterbeek#####83.25397#####252
-Spokane (Washington)#####83.24242#####33
-Decize#####83.03571#####28
-Sevres#####82.75#####100
-Suresnes#####82.66932#####251
-Normandie#####82.45652#####46
-Midland#####82.12#####25
-Arezzo#####81.97727#####88
-Akron#####81.96875#####64
-Saint Maur des Fosses#####81.82114#####123
-Rueil Malmaison#####81.75806#####62
-Clichy#####81.63158#####152
-Nice#####81.62422#####966
-Vanves#####81.37931#####29
-Blois#####81.02137#####234
-Santa Monica#####80.97872#####47
-Austin (Texas)#####80.5#####26
-Memphis (Tennessee)#####80.45133#####113
-Coblence#####80.4434#####106
-Antioche#####80.4186#####43
-Ajaccio#####80.37912#####182
-Lafayette#####80.21053#####38
-Talence#####80.16667#####120
-Yonkers#####80.0#####69
-New Brunswick (New Jersey)#####79.73913#####46
-Falaise (Calvados)#####79.69231#####39
-Gary#####79.55556#####36
-Le Chesnay#####79.54717#####53
-Wolfenbuttel#####79.45238#####42
-Nanterre#####79.38462#####78
-Englewood#####79.27027#####37
-Tarente#####79.26415#####53
-New York#####79.06134#####5804
-Montreuil (Seine Saint Denis)#####79.06#####50
-Guebwiller#####79.02326#####43
-Ludwigshafen#####78.81481#####27
-Malo les Bains#####78.61538#####26
-Nancy#####78.56784#####877
-Fairfield#####78.37931#####29
-Cherbourg#####78.25#####120
-Duluth#####78.21212#####33
-Siegen (Allemagne)#####78.16129#####31
-Corfou#####78.08621#####58
-Vaxjo#####78.07407#####27
-Missoula#####78.03846#####26
-Montargis#####77.81667#####60
-Hartford (Connecticut)#####77.8022#####91
-Lwow#####77.76923#####26
-Fecamp#####77.67347#####49
-Noumea#####77.6069#####145
-Bar sur Aube#####77.47368#####38
-Santurce#####77.44444#####27
-Omaha#####77.375#####88
-Bergerac (Dordogne)#####77.31373#####51
-Senlis#####77.24444#####45
-Le Perreux sur Marne#####77.19231#####26
-Ixelles#####76.97375#####381
-Spanish#####76.92#####25
-Martigues#####76.81176#####85
-Richmond (Londres)#####76.65517#####29
-Montbrison (Loire)#####76.60976#####41
-Saint Chamond#####76.50943#####53
-Vitry sur Seine#####76.38667#####75
-Honolulu#####76.28986#####207
-Issy les Moulineaux#####76.26966#####89
-Provins#####76.22414#####58
-Le Raincy#####76.02381#####42
-Orange (Vaucluse)#####75.97297#####37
-Colombes#####75.97037#####135
-Lexington#####75.74576#####59
-Auray#####75.73529#####34
-Harlem#####75.73469#####98
-Marietta#####75.625#####32
-Lessines#####75.52#####25
-La Mecque#####75.49485#####97
-Carthage#####75.42857#####63
-Maisons Alfort#####75.4#####40
-San Francisco#####75.34797#####888
-Amiens#####75.32645#####484
-Landshut#####75.13333#####30
-Prostejov#####75.10345#####29
-New Rochelle#####74.94#####50
-Staten Island#####74.82353#####34
-Hildburghausen#####74.81481#####27
-Trenton (New Jersey)#####74.72414#####29
-Meudon#####74.6875#####96
-Bridgeport (Connecticut)#####74.66667#####36
-Burbank#####74.56923#####65
-Nerac#####74.46154#####39
-Corbeil Essonnes#####74.43636#####55
-Lectoure#####74.04545#####44
-Phnom#####74.04#####25
-Cauderan#####73.925#####80
-Poitiers#####73.9235#####366
-Paddington#####73.92105#####76
-Louviers#####73.89796#####49
-Saint Jean de Luz#####73.875#####56
-Versailles#####73.81673#####753
-Choisy le Roi#####73.80645#####62
-Lexington (Kentucky)#####73.75#####32
-St. Petersburg#####73.70455#####44
-Kansas City (Missouri)#####73.63707#####259
-Cedar#####73.6129#####31
-Charleville (Ardennes)#####73.56061#####66
-Fort Lauderdale#####73.51471#####68
-Waterbury#####73.48148#####27
-Mayfair#####73.39024#####41
-Brampton#####73.38#####50
-Montauban#####73.24762#####210
-L'Hay les Roses#####73.16#####25
-Pamiers#####73.13208#####53
-South Bend (Indiana)#####73.09524#####42
-Le Blanc Mesnil#####73.08#####50
-Issoire#####73.05263#####38
-La Tronche#####72.9537#####108
-Pont a Mousson#####72.94444#####54
-Champigny sur Marne#####72.8875#####80
-South Shields#####72.78846#####52
-Constantinople#####72.65366#####615
-Long Beach (Californie)#####72.63102#####187
-Woodstock#####72.53571#####28
-Dreux#####72.39252#####107
-Berchem Sainte Agathe#####72.38095#####42
-Etampes#####72.32258#####62
-Noyon#####72.27778#####36
-Bethune#####72.2#####60
-Lemberg#####72.19444#####36
-Chateauroux#####72.11538#####156
-Le Havre#####72.11085#####424
-Champaign#####72.10811#####37
-Windsor (Royaume Uni)#####72.08108#####37
-Ambert#####72.02273#####44
-La Louviere#####72.0#####64
-Argenteuil#####71.98765#####81
-Breslau#####71.71765#####85
-Amarillo#####71.68966#####29
-Concarneau#####71.66667#####33
-Guelma#####71.63636#####33
-Dijon#####71.56676#####704
-Kharkov#####71.54839#####31
-Annonay#####71.48276#####58
-Constanta#####71.47826#####69
-Valenciennes#####71.40129#####309
-Marseille#####71.32206#####2602
-Granville#####71.31707#####82
-Ho#####71.1875#####48
-Le Mans#####71.16302#####411
-Saint Jean de Maurienne#####71.12821#####39
-Baden Baden#####71.11594#####69
-Cannes#####70.96813#####251
-Los Angeles#####70.87792#####2351
-Ogden (Utah)#####70.83333#####30
-Chalons sur Marne#####70.69811#####53
-Vichy#####70.61345#####119
-Woluwe Saint Lambert#####70.57895#####38
-Salon de Provence#####70.48387#####62
-Auxerre#####70.3787#####169
-Lodeve#####70.34615#####26
-San Juan (Porto Rico)#####70.30303#####99
-Arras#####70.2844#####218
-Fontainebleau#####70.23636#####165
-Beaune#####70.21176#####85
-Queens#####70.196#####250
-Tacoma#####70.14706#####102
-Aubagne#####70.06897#####58
-Livry Gargan#####70.0#####27
-Cetinje#####69.97368#####38
-Savigny sur Orge#####69.9697#####33
-Joigny#####69.89744#####39
-Biarritz#####69.87379#####103
-Rouen#####69.71899#####1032
-Grand Rapids (Michigan)#####69.68182#####88
-Elizabeth#####69.65625#####32
-Feurs#####69.60714#####28
-Schiltigheim#####69.5814#####43
-Lansing#####69.39474#####38
-Villeneuve Saint Georges#####69.08696#####92
-Athens#####69.08#####25
-Tampa#####69.04762#####105
-Wiener Neustadt#####69.03333#####30
-Ermont#####69.0#####37
-Tarare (Rhone)#####68.88#####25
-Huntington#####68.83333#####66
-Uccle#####68.80392#####357
-Castelnaudary#####68.73585#####53
-Rochester (New York)#####68.59574#####94
-Allentown#####68.5#####34
-Saint Dizier#####68.425#####40
-Shrewsbury#####68.40351#####57
-Annaba#####68.34259#####108
-Dole (Jura)#####68.28205#####78
-Nevers#####68.24227#####194
-Oakland (Californie)#####68.20472#####127
-Bretagne#####68.17021#####47
-Bayonne#####68.10402#####423
-La Fleche#####67.98039#####51
-Canton (Ohio)#####67.88095#####42
-Chatenay Malabry#####67.85965#####57
-Ceret#####67.78125#####32
-Chattanooga#####67.77193#####57
-Perigueux#####67.75556#####180
-Riom#####67.75#####108
-Arcachon#####67.74138#####58
-El Paso (Texas)#####67.72464#####69
-Figeac#####67.70732#####41
-Fresno (Californie)#####67.7#####40
-Tours#####67.6145#####607
-Rosny sous Bois#####67.56#####25
-Beziers#####67.47475#####297
-Darmstadt#####67.44811#####212
-La Marsa#####67.41026#####39
-Mantoue#####67.38554#####166
-Luneville#####67.37705#####122
-Mount Vernon (New York)#####67.27273#####44
-Nimes#####67.10252#####556
-Lund (Suede)#####67.03571#####28
-Segovie#####67.0#####30
-Memphis#####66.99435#####177
-Villepinte#####66.97872#####47
-Ferrare#####66.97581#####248
-Terrebonne#####66.96154#####26
-Pointe a Pitre#####66.9593#####172
-Salzbourg#####66.94545#####165
-Lyon#####66.89492#####3150
-Cognac#####66.89286#####28
-Ansbach#####66.86747#####83
-Tonnerre (Yonne)#####66.84#####25
-Thiais#####66.81481#####27
-Chicago#####66.76981#####2272
-Teaneck#####66.76667#####30
-Philippeville#####66.7037#####27
-Dieppe (Seine Maritime)#####66.67826#####115
-St Andrews (Ecosse)#####66.64286#####28
-Saint Quentin#####66.64019#####214
-Nyon#####66.6087#####46
-Saint Jean d'Angely#####66.54348#####46
-Hollywood#####66.45333#####150
-Chambery#####66.45183#####301
-Pittsburgh#####66.40377#####478
-Urbana#####66.37037#####27
-Rome#####66.36842#####3686
-Bordeaux#####66.34307#####1574
-Savannah (Georgie)#####66.33333#####45
-Orleans#####66.33087#####541
-Quimper#####66.30332#####211
-Saint Pierre#####66.30159#####63
-Argentan#####66.22857#####70
-Passy (Seine)#####66.17143#####35
-Moulins (Allier)#####66.13492#####126
-Bernay (Eure)#####66.10714#####28
-Beaugency#####66.03846#####26
-Wilkes Barre#####66.0#####34
-Evanston (Illinois)#####65.95349#####43
-Pontoise#####65.94898#####98
-Meaux#####65.91935#####124
-Passaic#####65.85294#####34
-Langres#####65.84211#####114
-Laval (Mayenne)#####65.83077#####260
-Schaerbeek#####65.80579#####242
-Epinal#####65.76503#####183
-Newark#####65.75168#####149
-La Rochelle#####65.73741#####278
-Gentofte#####65.65116#####43
-Somerville (Massachusetts)#####65.6129#####31
-Boulogne sur Mer#####65.59322#####236
-Haguenau#####65.52#####75
-Nantes#####65.46013#####1254
-Sutton#####65.4375#####32
-Walthamstow#####65.39024#####41
-London (Ontario)#####65.36364#####33
-Hull#####65.36364#####44
-Salt Lake City#####65.3401#####197
-Lille#####65.31966#####1073
-Le Puy en Velay#####65.26471#####136
-Mont Saint Aignan#####65.24468#####94
-Montmorency#####65.21875#####32
-Montbeliard#####65.13281#####128
-Evreux#####65.11333#####150
-Saint Louis (Missouri)#####65.09135#####624
-Sartrouville#####65.07692#####26
-Bouxwiller (Bas Rhin)#####65.03846#####26
-Richmond (Virginie)#####65.01667#####60
-Arpajon#####65.0#####29
-Dessau (Saxe Anhalt)#####64.97826#####92
-Montlucon#####64.91964#####112
-Angers#####64.9125#####560
-Sacramento#####64.90952#####210
-Buckeburg#####64.80769#####26
-Sedan#####64.8#####130
-Ealing#####64.75#####36
-Chalons en Champagne#####64.71186#####118
-Charlotte#####64.70297#####101
-Saint Denis#####64.69712#####208
-Eutin#####64.64#####25
-Tulle#####64.5812#####117
-Fontenay sous Bois#####64.57377#####61
-Gap#####64.57143#####126
-Givet#####64.5625#####32
-Beckenham#####64.55882#####34
-Syracuse (New York)#####64.52778#####36
-Limoges#####64.50223#####448
-Rockville#####64.5#####30
-Epinay sur Seine#####64.46296#####54
-Detmold#####64.39024#####41
-Morlaix#####64.36923#####130
-Urbino#####64.31746#####63
-Monastir#####64.13115#####61
-Palm#####64.11111#####36
-Toledo (Ohio)#####64.06818#####44
-Berkeley (Californie)#####64.05128#####39
-La Ciotat#####64.02#####50
-Angouleme#####64.01463#####205
-Chartres#####63.94286#####245
-Tarbes#####63.9122#####205
-Saint Denis (Seine Saint Denis)#####63.88#####75
-Commercy#####63.86667#####30
-Crest (Drome)#####63.84#####25
-Lincoln (Nebraska)#####63.83871#####31
-Mayenne (commune)#####63.81818#####55
-Lannion#####63.81034#####58
-Lund#####63.76596#####47
-Pesaro#####63.75#####80
-Flushing#####63.75#####36
-Montpellier#####63.71135#####925
-Ouidah#####63.66667#####27
-Libourne#####63.62245#####98
-Meulan en Yvelines#####63.60526#####38
-Charlottesville#####63.59184#####49
-Petropolis#####63.55556#####27
-Peronne (Somme)#####63.5#####34
-Aix en Provence#####63.43129#####473
-Pasadena#####63.22642#####159
-Montereau Fault Yonne#####63.15385#####26
-Loudun#####63.11905#####42
-Rochefort (Charente Maritime)#####63.09709#####103
-Zlin#####63.07143#####28
-Sete#####63.02825#####177
-Concord#####63.02326#####43
-San Diego#####62.97898#####333
-Briancon#####62.96667#####60
-Dayton#####62.9625#####80
-Detroit#####62.9375#####464
-Reims#####62.93016#####673
-Tulsa#####62.91453#####117
-Torquay#####62.87179#####39
-Beauvais#####62.86264#####182
-Saumur#####62.84568#####162
-Pont Saint Esprit#####62.84#####25
-Croix#####62.83333#####42
-Macon#####62.80952#####168
-Villefranche sur Saone#####62.79545#####88
-Inverness (Ecosse)#####62.76#####25
-Bruxelles#####62.73502#####1702
-Tanger#####62.72807#####114
-Nemours#####62.7027#####37
-Grasse#####62.69841#####126
-Lucon (Vendee)#####62.67742#####31
-Avignon#####62.6172#####593
-Bab El Oued#####62.58621#####29
-Vernon (Eure)#####62.57377#####61
-Redon#####62.53659#####41
-Saint Servan sur Mer#####62.51613#####31
-New Haven#####62.42105#####190
-Perth (Australie Occidentale)#####62.40541#####37
-Remiremont#####62.4#####80
-Saint Die des Vosges#####62.39726#####73
-Agen#####62.38636#####220
-Drogheda#####62.38462#####26
-Modene#####62.30682#####176
-Houston#####62.27593#####511
-Chateaubriant#####62.26316#####38
-Wimbledon#####62.19565#####46
-Jersey#####62.1938#####129
-Namur#####62.19355#####341
-Lourdes#####62.19355#####62
-Bagnols sur Ceze#####62.19149#####47
-Grenade (Espagne)#####62.16058#####137
-Raleigh#####62.15854#####82
-Phalsbourg#####62.14286#####28
-Chaumont#####62.12903#####31
-Saint Etienne#####62.12525#####495
-Chambray les Tours#####62.12121#####33
-Loches#####62.07895#####38
-Constantine (Algerie)#####62.07317#####123
-Wiesbaden#####62.02878#####139
-Glendale (Californie)#####62.0#####29
-Upper#####61.96774#####31
-Saluces#####61.90323#####31
-Cincinnati#####61.89922#####387
-Rouyn Noranda#####61.85714#####42
-Mantes la Jolie#####61.84524#####84
-Bourg en Bresse#####61.82632#####190
-Bloomsbury (Londres)#####61.8#####25
-Bondy#####61.68478#####92
-Annemasse#####61.58333#####48
-Palo#####61.55172#####58
-Tolede#####61.53409#####88
-Caserte#####61.5#####36
-Pau#####61.44963#####407
-Frejus#####61.44068#####59
-Bayreuth#####61.43939#####66
-Chauny#####61.29545#####44
-Pontarlier#####61.27419#####62
-Oklahoma City#####61.21008#####119
-Rome antique#####61.17892#####408
-Walnut#####61.17857#####28
-Palencia#####61.14286#####28
-Bourgoin Jallieu#####61.11392#####79
-Carmaux#####61.07692#####26
-Montmorency (Val d'Oise)#####61.06452#####31
-Baden (Autriche)#####61.03571#####28
-Belluno#####61.03333#####30
-Mortagne au Perche#####61.02857#####35
-Milwaukee#####60.98355#####304
-Creil#####60.97727#####44
-Melilla#####60.96296#####27
-Portland (Maine)#####60.93023#####43
-Baltimore#####60.91577#####558
-Berkeley#####60.90179#####112
-Pithiviers#####60.9#####40
-Belfort#####60.87255#####204
-Harlow#####60.8#####30
-Bagnolet#####60.78788#####33
-La Nouvelle Orleans#####60.75368#####475
-Roanne#####60.75#####168
-Newton (Massachusetts)#####60.72#####50
-Lons le Saunier#####60.7193#####114
-East Orange#####60.71429#####28
-Chateau Gontier#####60.70312#####64
-Thiers#####60.68293#####41
-Tel Aviv#####60.67164#####67
-Thonon les Bains#####60.67143#####70
-Vannes#####60.635#####200
-Elbeuf#####60.55952#####84
-Clamart#####60.525#####120
-Cheltenham#####60.46835#####79
-Saint Malo#####60.44758#####248
-Ribeauville#####60.42857#####28
-Cambrai#####60.40351#####171
-Drancy#####60.34884#####43
-Paray le Monial#####60.33333#####30
-Comte d'Orange (Californie)#####60.2973#####37
-Antibes#####60.26667#####90
-Dieppe#####60.21538#####65
-Bristol (Angleterre)#####60.15#####100
-Saint Maurice#####60.14286#####42
-Villeurbanne#####60.13793#####87
-Manhattan#####60.125#####416
-Carlsbad#####60.07692#####26
-Sigmaringen#####60.06667#####30
-Chene Bougeries#####60.03846#####26
-Petrograd#####60.03226#####31
-Brive la Gaillarde#####60.02027#####148
-Pavie#####60.00901#####111
-Rennes#####59.98216#####841
-Clermont Ferrand#####59.90406#####542
-Carthagene (Espagne)#####59.85185#####27
-Liege#####59.7582#####1067
-Terre Haute#####59.75758#####33
-Yokosuka#####59.75676#####37
-Bressuire#####59.73529#####34
-Verviers#####59.69959#####243
-Laon#####59.69091#####110
-Vire#####59.61905#####63
-Sens (Yonne)#####59.57647#####85
-Saint Affrique#####59.57143#####28
-Reading (Pennsylvanie)#####59.48889#####45
-Londres#####59.47996#####6413
-Ballymena#####59.4#####25
-Bethesda#####59.3871#####31
-Dayton (Ohio)#####59.37097#####62
-Albuquerque#####59.35484#####93
-Mont de Marsan#####59.29771#####131
-Grenoble#####59.28235#####680
-Johannesburg#####59.23377#####77
-Soissons#####59.21849#####119
-Strasbourg#####59.20203#####1376
-Greensboro#####59.2#####55
-Aubervilliers#####59.17094#####117
-Bronx#####59.10799#####463
-Bournemouth#####59.1#####50
-Saint Gilles (Bruxelles)#####59.08046#####87
-Bassorah#####59.02326#####43
-Lure#####59.0#####29
-Toulouse#####58.98859#####1665
-Medine#####58.98305#####59
-Saint Brieuc#####58.96471#####255
-Compiegne#####58.96117#####103
-Denver#####58.95425#####306
-Bury St Edmunds#####58.90323#####31
-Longjumeau#####58.88525#####61
-Camberwell#####58.86364#####44
-Verdun#####58.84375#####160
-Gainesville#####58.81395#####43
-Moyeuvre Grande#####58.8#####25
-Bailleul (Nord)#####58.77778#####27
-Roubaix#####58.73746#####339
-Rodez#####58.70886#####158
-Orthez#####58.70833#####72
-Mostaganem#####58.68493#####73
-Minneapolis#####58.60641#####343
-Moutiers#####58.59459#####37
-Toul#####58.59341#####91
-Buffalo#####58.58784#####148
-Norfolk (Virginie)#####58.56522#####92
-Foggia#####58.55882#####34
-Nagyvarad#####58.52#####25
-Saint Paul (Minnesota)#####58.49612#####129
-Foix#####58.48889#####45
-Lavelanet#####58.48#####25
-La Corogne#####58.47917#####96
-Vesoul#####58.46617#####133
-Westminster#####58.38636#####176
-Tianjin#####58.37778#####90
-Beaumont sur Oise#####58.36#####25
-Douai#####58.34468#####235
-Lisieux#####58.34444#####90
-Hartford#####58.30556#####72
-Miami#####58.27554#####323
-Bombay#####58.27222#####360
-Hennebont#####58.23256#####43
-Privas#####58.17857#####28
-Pessac#####58.14286#####35
-Stepney#####58.13889#####36
-Brunico#####58.10811#####37
-Titograd#####58.09677#####31
-Besancon#####58.08224#####608
-Armentieres#####58.0625#####64
-Augusta#####58.05#####40
-Potsdam#####58.04566#####219
-Canterbury#####58.01493#####67
-Virginia#####58.0#####38
-Charleville Mezieres#####58.0#####67
-Bad Homburg vor der Hohe#####58.0#####42
-Tucson#####57.97403#####77
-Sarcelles#####57.96341#####82
-Kansas City (Kansas)#####57.90385#####52
-Cuzco#####57.86111#####36
-Vendome#####57.85938#####64
-Wimbledon (Londres)#####57.81081#####37
-Manosque#####57.7907#####43
-Seclin#####57.775#####40
-Poughkeepsie#####57.75676#####37
-Hammersmith#####57.73109#####119
-Brooklyn#####57.71333#####1650
-Palerme#####57.70968#####527
-Sondershausen#####57.67742#####31
-Atlanta#####57.65873#####504
-Joinville le Pont#####57.65625#####32
-Somain#####57.6#####25
-Cleveland#####57.58835#####532
-Pskov#####57.57895#####38
-Florence#####57.55796#####1432
-Belley#####57.55319#####47
-Cognac (Charente)#####57.5#####30
-Woking#####57.5#####26
-Madras#####57.48718#####117
-Kalamazoo#####57.46154#####26
-Reggio de Calabre#####57.44444#####36
-Niort#####57.41176#####204
-Vitry le Francois#####57.40909#####66
-Newport (Rhode Island)#####57.375#####32
-Haderslev#####57.32#####25
-Aurillac#####57.28082#####146
-Chalon sur Saone#####57.175#####160
-Detroit (Michigan)#####57.1443#####298
-Geneve#####57.1435#####1331
-Valence (Drome)#####57.11927#####109
-Toulon#####57.11872#####657
-Pontivy#####57.06667#####60
-Caen#####57.0631#####523
-Brioude#####57.05#####40
-Nantua#####56.96875#####32
-Halle sur Saale#####56.95205#####146
-Chinon#####56.93333#####45
-Kensington (Londres)#####56.90625#####128
-Saint Omer (Pas de Calais)#####56.82143#####112
-Mouscron#####56.81818#####66
-Torrance#####56.76364#####55
-Northampton#####56.67368#####95
-Dornbirn#####56.64#####25
-San Antonio#####56.59218#####179
-Coulommiers (Seine et Marne)#####56.58621#####29
-Dnipropetrovsk#####56.56522#####46
-Salisbury#####56.54545#####55
-La Roche sur Yon#####56.47778#####90
-Saint Petersbourg#####56.44702#####1425
-Cayenne#####56.42857#####133
-Avallon#####56.41667#####48
-Boussu#####56.3125#####32
-Saint Denis (La Reunion)#####56.29897#####97
-Springfield (Massachusetts)#####56.26087#####46
-Portland (Oregon)#####56.24242#####99
-Alger#####56.22116#####1153
-Colmar#####56.19926#####271
-Agrigente#####56.16#####25
-Montceau les Mines#####56.15789#####38
-Borgerhout#####56.15789#####57
-Argenton sur Creuse#####56.14286#####28
-Dax#####56.12069#####174
-Lynn (Massachusetts)#####56.06897#####29
-Middletown#####56.02941#####34
-Salins les Bains#####56.02564#####39
-Anderlecht#####56.01852#####108
-Orenbourg#####55.96875#####32
-Anaheim#####55.96364#####55
-San Jose (Californie)#####55.9542#####131
-Bethlehem#####55.85185#####27
-Givors#####55.85185#####27
-Saintes#####55.80172#####116
-Indianapolis#####55.75486#####257
-Pontefract#####55.73077#####26
-Saint Mihiel#####55.69048#####42
-Uzes#####55.68571#####35
-Ambilly#####55.66667#####30
-Troyes#####55.65868#####334
-Chaumont (Haute Marne)#####55.61404#####57
-Boston#####55.61146#####1117
-Philadelphie#####55.60074#####1618
-Abbeville#####55.56376#####149
-Columbus (Ohio)#####55.55556#####72
-Valognes#####55.55357#####56
-Carpentras#####55.53211#####109
-Altkirch#####55.53125#####32
-Bakersfield#####55.51163#####43
-Solingen#####55.5#####52
-Berlin Charlottenbourg#####55.46552#####58
-Tahiti#####55.44444#####45
-Senlis (Oise)#####55.44444#####36
-Castres#####55.44099#####161
-Rabat#####55.4335#####406
-Oakland#####55.41848#####184
-Binche#####55.28571#####42
-Wichita#####55.26549#####113
-Chatillon sur Seine#####55.19512#####41
-Marcinelle#####55.19231#####26
-Fort Worth#####55.15504#####129
-Shreveport#####55.15068#####73
-Cesena#####55.13924#####79
-Nassau#####55.11864#####59
-Douvres#####55.03448#####29
-Basse Terre#####54.91837#####49
-Luton#####54.89655#####58
-Plainpalais#####54.89474#####38
-Alexandrie#####54.84387#####506
-Saint Jean sur Richelieu#####54.83607#####61
-Pescara#####54.83051#####59
-Harrisburg#####54.83019#####53
-Saratov#####54.80488#####82
-Alexandria#####54.80233#####86
-Oran#####54.7911#####517
-Bone#####54.78125#####32
-Plymouth (Royaume Uni)#####54.76923#####65
-Mulhouse#####54.73548#####465
-Quimperle#####54.7234#####47
-Mayenne#####54.7#####30
-Weimar#####54.69106#####123
-Rimini#####54.69091#####110
-Greiz#####54.66667#####27
-Harfleur#####54.65714#####35
-Brest#####54.65669#####568
-Les Abymes#####54.64286#####84
-Romorantin Lanthenay#####54.62857#####35
-Ivry sur Seine#####54.62264#####106
-Carcassonne#####54.59494#####237
-Aldershot#####54.58537#####41
-Rousse#####54.5#####30
-Streatham#####54.47368#####38
-Bayeux#####54.46988#####83
-Huesca#####54.40625#####32
-Busan#####54.4#####60
-Lorient#####54.37643#####263
-Sombor#####54.34615#####26
-Southampton#####54.344#####125
-Rochefort#####54.34286#####35
-Leicester#####54.335#####200
-Meissen#####54.32653#####49
-Townsville#####54.31579#####38
-Lagny sur Marne#####54.30233#####43
-Leningrad#####54.22711#####273
-Dole#####54.22222#####36
-Skien#####54.17647#####34
-Trabzon#####54.11475#####61
-Rambouillet#####54.10526#####38
-Vitre (Ille et Vilaine)#####54.09375#####32
-Washington#####54.08871#####620
-Valladolid#####54.07568#####185
-Savannah#####54.075#####40
-Dinan#####54.03125#####96
-Annecy#####53.99643#####280
-Winston Salem#####53.96296#####54
-Martinique#####53.92857#####42
-Botosani#####53.81481#####27
-Karlsruhe#####53.79828#####233
-Pula#####53.79245#####53
-Jersey City#####53.75385#####65
-Fougeres#####53.74667#####75
-Joliette#####53.73077#####26
-Montreal#####53.71373#####3102
-Evanston#####53.71084#####83
-Cambridge#####53.62876#####299
-High#####53.6#####30
-Konigsberg#####53.58893#####253
-Narbonne#####53.57297#####185
-Ballarat#####53.54545#####33
-Prato#####53.51786#####56
-Sidcup#####53.48#####25
-Vienne (Isere)#####53.44628#####121
-Casablanca#####53.3967#####910
-Yogyakarta#####53.38462#####26
-Cambridge (Massachusetts)#####53.35897#####78
-Liberec#####53.35556#####45
-Neuwied#####53.35294#####34
-Tournon sur Rhone#####53.33333#####36
-Braila#####53.27907#####43
-Longwy#####53.22727#####44
-Rockhampton#####53.18519#####27
-Glendale#####53.16438#####73
-Birmingham (Alabama)#####53.10345#####58
-La Canee#####53.09677#####31
-Reus#####53.09434#####53
-Pont l'Abbe#####53.05263#####38
-Buffalo (New York)#####53.05072#####138
-Dallas#####53.0095#####421
-Austin#####52.99107#####112
-Brunswick (Basse Saxe)#####52.98333#####120
-Des Moines (Iowa)#####52.96203#####79
-Parme#####52.94422#####251
-Thionville#####52.90845#####142
-Simferopol#####52.89831#####59
-Borough londonien de Hackney#####52.8913#####46
-La Chaux de Fonds#####52.86735#####196
-Kosice#####52.83099#####71
-Hue#####52.76923#####39
-Nicosie#####52.75#####96
-Montclair#####52.73333#####30
-Lamballe#####52.7037#####27
-Hyeres#####52.7#####70
-Torgau#####52.68966#####29
-Salerne#####52.67532#####77
-Schenectady#####52.66667#####48
-Cherbourg Octeville#####52.65934#####91
-Giessen#####52.64935#####77
-Vilvorde#####52.62295#####61
-Lunel#####52.6#####45
-Marmande#####52.5625#####48
-Cremone#####52.544#####125
-Wilmington#####52.47222#####72
-Isleworth#####52.42308#####26
-Oyonnax#####52.4#####35
-Guerande#####52.37931#####29
-Lhassa#####52.37143#####70
-Saint Lo#####52.35227#####88
-Moscou#####52.34315#####2955
-Ernee#####52.32#####25
-Echirolles#####52.28889#####45
-Wakefield#####52.27536#####69
-Arles#####52.22951#####183
-Catane#####52.22346#####179
-Amberg#####52.21875#####32
-Amstelveen#####52.2#####40
-Chester (Royaume Uni)#####52.2#####25
-Iasi#####52.19008#####121
-Wexford#####52.18182#####33
-Ollioules#####52.17647#####34
-Beyrouth#####52.17219#####453
-Greenwich#####52.03947#####76
-Sioux#####52.03571#####28
-Chatellerault#####52.00962#####104
-Kanagawa#####52.0#####44
-Celle (Allemagne)#####52.0#####30
-Morges#####51.95238#####84
-Bergues#####51.92593#####27
-Berkane#####51.92#####25
-Pezenas#####51.87805#####41
-Luxeuil les Bains#####51.86111#####36
-Montivilliers#####51.85185#####27
-La Spezia#####51.80882#####68
-York#####51.75949#####158
-Thann#####51.75#####40
-Taipei#####51.70248#####121
-Romans sur Isere#####51.68116#####69
-Pensacola#####51.68085#####47
-Berlin Ouest#####51.64179#####67
-Madrid#####51.63117#####2047
-Rochester#####51.60645#####155
-Naples#####51.5635#####1370
-Augsbourg#####51.55714#####210
-Worms (Allemagne)#####51.53571#####28
-Porto Alegre#####51.53333#####60
-Guingamp#####51.49057#####53
-Neuruppin#####51.48#####25
-Firminy#####51.46154#####39
-Dusseldorf#####51.42394#####401
-Oak#####51.40476#####42
-Tirlemont#####51.39655#####58
-Lucques#####51.39506#####162
-Vienne (Autriche)#####51.38813#####2646
-Fiesole#####51.38462#####26
-Lancaster#####51.35088#####57
-Evian les Bains#####51.325#####40
-Jaffa#####51.325#####40
-Hampton#####51.31034#####29
-Bucarest#####51.29112#####845
-Corte#####51.29032#####31
-Mannheim#####51.23868#####243
-Morristown#####51.19048#####42
-Saint Pol de Leon#####51.13889#####36
-Nazareth#####51.13636#####44
-Graz#####51.11744#####281
-Jalandhar#####51.08#####25
-Le Creusot#####51.07368#####95
-Milan#####51.06154#####1755
-Chennai#####51.06061#####33
-London#####51.05882#####102
-Shawinigan#####51.02128#####47
-Seraing#####51.0#####42
-La Seyne sur Mer#####50.94545#####55
-Provence#####50.92857#####28
-Turin#####50.92739#####964
-Loudeac#####50.90323#####31
-Albi#####50.89005#####191
-Zwickau#####50.85#####60
-Plaisance (Italie)#####50.83333#####60
-Bridgeport#####50.83333#####30
-Dessau#####50.77778#####27
-Chelsea#####50.77778#####27
-Chieti#####50.75#####32
-Parthenay#####50.74074#####27
-Nijni Novgorod#####50.71875#####96
-Newport#####50.71429#####147
-Seattle#####50.71287#####404
-Moulins#####50.7069#####58
-Ile de France#####50.66667#####33
-Arlon#####50.64384#####73
-Arequipa#####50.57447#####47
-Perth#####50.56904#####239
-Ancone#####50.53774#####106
-Weissenfels#####50.53333#####30
-Las Palmas de Gran Canaria#####50.51852#####54
-Viareggio#####50.51163#####43
-Malaga#####50.47403#####154
-Olomouc#####50.44615#####65
-Buenos Aires#####50.42297#####1733
-Montreux#####50.41304#####46
-Wallasey#####50.37931#####29
-Marylebone#####50.33333#####87
-Nivelles#####50.27692#####65
-Sienne#####50.27074#####229
-Villefranche de Rouergue#####50.26829#####41
-Landau in der Pfalz#####50.24138#####29
-Buckinghamshire#####50.23529#####34
-Blackheath#####50.22581#####31
-Columbus#####50.1871#####155
-Santiago de Cuba#####50.17949#####39
-Belo#####50.09434#####106
-Condom (Gers)#####50.07692#####26
-Safi#####50.07317#####41
-Bangalore#####50.0597#####67
-Charleroi#####50.02281#####263
-Monchengladbach#####50.01667#####60
-Chesterfield#####50.0#####49
-Jacksonville (Floride)#####49.9375#####48
-Paterson (New Jersey)#####49.93023#####43
-Tournai#####49.9291#####268
-Maghnia#####49.92#####25
-Van#####49.91667#####36
-Sopron#####49.91176#####34
-Stockholm#####49.88327#####1088
-Ipswich#####49.87368#####95
-Bizerte#####49.82927#####82
-Toowoomba#####49.82609#####46
-Edirne#####49.79412#####34
-Kiev#####49.77209#####645
-Munich#####49.73068#####1255
-Neustrelitz#####49.71875#####32
-Avranches#####49.71642#####67
-Tunis#####49.68439#####1185
-Forest#####49.68#####25
-Waterford#####49.67647#####34
-Meiningen#####49.67647#####34
-Rzeszow#####49.66667#####36
-Decazeville#####49.65517#####29
-Gannat#####49.58333#####36
-Providence#####49.58163#####98
-Odessa#####49.5598#####393
-Montgomery#####49.55556#####36
-Paimpol#####49.51351#####37
-Macerata#####49.5122#####41
-Watermael Boitsfort#####49.5#####46
-Cholet#####49.48413#####126
-Pest (ville)#####49.42169#####83
-Scranton (Pennsylvanie)#####49.40741#####27
-Livourne#####49.3972#####214
-Coventry#####49.35238#####105
-Sarrebruck#####49.30088#####113
-Phnom Penh#####49.2766#####47
-New Plymouth#####49.26316#####38
-Durban#####49.2562#####242
-Fresno#####49.25424#####59
-Freeport#####49.24138#####29
-Gotha (Allemagne)#####49.19403#####67
-Heidelberg#####49.17512#####217
-Vladivostok#####49.14286#####42
-Gueret#####49.13115#####61
-Epernay#####49.02899#####69
-Fort Wayne (Indiana)#####49.0#####48
-Frameries#####48.97222#####36
-L'Aigle#####48.96667#####30
-Saint Josse ten Noode#####48.96241#####133
-Kyoto#####48.96176#####340
-Hanovre#####48.93103#####377
-Melbourne#####48.92054#####818
-Norwalk#####48.90323#####31
-Minsk#####48.88736#####364
-Tallahassee#####48.86111#####36
-Providence (Rhode Island)#####48.85#####80
-Cassel#####48.83582#####67
-Gonesse#####48.82692#####52
-Pinsk#####48.81818#####33
-Jacksonville#####48.79245#####106
-Carpi#####48.77419#####31
-Sherbrooke#####48.75839#####149
-Spokane#####48.75#####48
-Torrelavega#####48.72#####25
-Eastbourne#####48.68085#####47
-Tivoli#####48.65517#####29
-Reutlingen#####48.64#####25
-Hanau#####48.62353#####85
-Bagneres de Bigorre#####48.60526#####38
-Lausanne#####48.59138#####766
-Venise#####48.55507#####908
-Lerida#####48.54#####50
-Bromley#####48.52113#####71
-Mahdia#####48.52#####25
-Bologne#####48.51728#####810
-Le Bardo#####48.5#####26
-Calais#####48.47191#####178
-Liverpool#####48.45997#####637
-Lubeck#####48.44444#####117
-Louiseville#####48.38462#####26
-Oullins#####48.36207#####58
-Salamanque#####48.35556#####90
-Hamilton (Ontario)#####48.35294#####68
-Cassel (Hesse)#####48.24648#####142
-Lierre (Belgique)#####48.24074#####54
-Kingston upon Thames#####48.19178#####73
-Viterbe#####48.1746#####63
-Burnley#####48.17073#####41
-Carhaix Plouguer#####48.16#####25
-Louvain#####48.1408#####348
-Exeter#####48.1405#####121
-Springfield#####48.12727#####110
-Sydney#####48.04676#####1219
-Chester#####48.04348#####69
-Saint Claude (Jura)#####48.02941#####34
-Mar#####48.0#####52
-Decatur#####48.0#####47
-Sorel Tracy#####47.97872#####47
-Salto#####47.975#####40
-Nishinomiya#####47.97059#####34
-Royal Tunbridge Wells#####47.96774#####31
-Sousse#####47.96581#####117
-Boise#####47.87805#####41
-Brno#####47.80159#####252
-Odense#####47.78862#####123
-Brignoles#####47.73171#####41
-Solihull#####47.72917#####48
-Oloron Sainte Marie#####47.72131#####61
-Saint Nazaire#####47.70968#####124
-Cagliari#####47.70968#####93
-Willemstad#####47.70732#####41
-Montelimar#####47.65476#####84
-Reggio d'Emilie#####47.6338#####71
-Lahore#####47.62281#####114
-Francfort#####47.57576#####33
-Albany (New York)#####47.5#####68
-Deux Ponts#####47.5#####42
-Villeneuve sur Lot#####47.49398#####83
-Comte de Cork#####47.48#####25
-Casbah d'Alger#####47.46429#####28
-Creteil#####47.43077#####130
-Leopoldville#####47.41667#####36
-Cordoba#####47.40458#####131
-Naumbourg (Saale)#####47.39394#####33
-Beaumont#####47.37838#####37
-Hanoi#####47.37313#####134
-Metz#####47.33864#####880
-Zamora#####47.31429#####35
-Murcie#####47.23529#####85
-Breme#####47.23301#####206
-Poole#####47.22222#####36
-Jerusalem#####47.21557#####334
-Cuenca#####47.21429#####28
-Sarreguemines#####47.20588#####68
-Lesneven#####47.18519#####27
-Calcutta#####47.15574#####244
-Les Sables d'Olonne (ancienne commune)#####47.125#####32
-Camden#####47.10976#####82
-Alexandrie (Italie)#####47.03846#####52
-Issoudun#####47.02985#####67
-Rosario#####47.02612#####268
-Prague#####46.9992#####1245
-Trois Rivieres#####46.96711#####152
-Las Vegas#####46.96078#####102
-Tchernivtsi#####46.95775#####71
-Vierzon#####46.92982#####57
-Perpignan#####46.92437#####476
-Colorado Springs#####46.90769#####65
-Tonsberg#####46.9#####50
-Asheville#####46.89655#####29
-Fayetteville#####46.86486#####37
-Little Rock#####46.84615#####91
-Sassari#####46.83784#####37
-Elberfeld#####46.81707#####82
-Saverne#####46.80435#####46
-Stockport#####46.78378#####74
-La Plata#####46.78302#####106
-Merano#####46.73171#####41
-Schwerin#####46.71591#####88
-Laval (Quebec)#####46.7027#####74
-Huntsville#####46.63636#####33
-Cap Haitien#####46.62903#####62
-Dublin#####46.61812#####1181
-Arlington#####46.59091#####66
-Genk#####46.51064#####47
-Schoelcher#####46.5#####26
-Sotchi#####46.45098#####51
-Neuchatel#####46.45038#####262
-Valence (Espagne)#####46.425#####200
-Dunkerque#####46.39437#####213
-Clapham#####46.39394#####33
-Bratislava#####46.35496#####262
-Cologne#####46.35332#####617
-Poznan#####46.3301#####206
-Mons#####46.31868#####273
-Greifswald#####46.31373#####51
-Ashford#####46.3#####50
-Ota#####46.27778#####36
-Aire sur la Lys#####46.26923#####26
-Orange#####46.25#####108
-Portsmouth#####46.2375#####160
-Curepipe#####46.22222#####36
-Coimbra#####46.21053#####95
-La Malbaie#####46.19355#####31
-Belleville#####46.18605#####43
-Rambervillers#####46.18519#####27
-Carouge#####46.18182#####33
-Nuremberg#####46.16949#####354
-Digne les Bains#####46.14754#####61
-Port Louis (Maurice)#####46.14545#####55
-Ravenne#####46.14414#####111
-Malmedy#####46.14286#####35
-Selestat#####46.14035#####57
-Payerne#####46.13793#####29
-Lincoln#####46.07595#####79
-Saint Jean (Nouveau Brunswick)#####46.06522#####46
-Pitesti#####46.05882#####34
-Stamford#####46.05405#####37
-Carthagene#####46.04878#####41
-Louisville#####46.02878#####139
-Birmingham#####46.01307#####612
-Bonn#####46.0093#####215
-Bale#####46.00208#####480
-Barcelone#####45.97024#####1781
-Youngstown#####45.96875#####32
-Chios#####45.94595#####37
-Nashville#####45.92857#####182
-Trenton#####45.91045#####67
-Silver#####45.90244#####41
-Le Caire#####45.89733#####711
-Sarrebourg#####45.875#####40
-Fort de France#####45.85308#####211
-Staten#####45.84615#####52
-Burnaby#####45.84#####25
-Safed#####45.80769#####26
-Gustrow#####45.80769#####26
-Pistoia#####45.8#####85
-Rockford#####45.79412#####34
-Offenbach sur le Main#####45.76471#####51
-Autun#####45.73684#####95
-Long Island#####45.70588#####102
-Berlin#####45.7058#####3032
-Oujda#####45.65957#####94
-Linkoping#####45.65#####40
-Glogow#####45.64706#####34
-Albany#####45.6338#####71
-Oviedo#####45.61538#####104
-Saint Gaudens#####45.53226#####62
-Anvers#####45.52209#####1494
-Bastia#####45.51531#####196
-Pise#####45.515#####200
-Karachi#####45.5#####94
-Cavaillon#####45.5#####44
-Warwick#####45.48387#####31
-Ostende#####45.46584#####161
-Rangoun#####45.44444#####36
-Norwich#####45.44375#####160
-Bedford#####45.44068#####59
-Sidi Bel Abbes#####45.42708#####96
-Salem (Massachusetts)#####45.41667#####48
-Tuzla#####45.4#####50
-Richmond#####45.38158#####152
-Nordhausen#####45.34483#####29
-Doncaster#####45.3125#####32
-Tcheliabinsk#####45.30159#####63
-Livingston#####45.29167#####48
-Chorzow#####45.28947#####38
-Ratisbonne#####45.28947#####114
-Avesnes sur Helpe#####45.27027#####37
-Albertville#####45.22535#####71
-Athenes#####45.22251#####764
-Lecce#####45.21739#####46
-Montfermeil#####45.20833#####48
-Francfort sur le Main#####45.15445#####641
-Maubeuge#####45.06897#####87
-Toronto#####45.03605#####1276
-Bron#####45.0#####46
-Saint Paul#####44.97619#####42
-Minden#####44.88636#####44
-Red#####44.86667#####30
-Oldenbourg#####44.85185#####81
-Mortsel#####44.8#####50
-Charolles#####44.8#####30
-Huy#####44.76042#####96
-Farmington#####44.74074#####27
-Guildford#####44.725#####80
-Tonneins#####44.68966#####29
-Bradford#####44.66447#####152
-Dumfries#####44.66071#####56
-Mogadiscio#####44.65#####40
-Ceuta#####44.64865#####37
-Orsay#####44.63333#####30
-Funchal#####44.62963#####54
-Rudolstadt#####44.61538#####39
-Bloomington#####44.56098#####41
-Stuttgart#####44.51491#####503
-Landerneau#####44.48214#####56
-Courtrai#####44.47236#####199
-Limerick#####44.45455#####99
-Krefeld#####44.3908#####87
-Verone#####44.35849#####265
-Valreas#####44.35714#####28
-Lorenskog#####44.35484#####31
-Osnabruck#####44.33333#####57
-Newcastle#####44.31579#####190
-Brighton#####44.30688#####189
-Lambeth (ville)#####44.3#####40
-Damas#####44.27863#####262
-Aire sur l'Adour#####44.25806#####31
-Saint Helier#####44.23333#####30
-Amboise#####44.225#####40
-Varsovie#####44.22345#####1271
-Constantine#####44.21849#####119
-Phoenix#####44.20732#####164
-Plock#####44.2#####25
-Lodz#####44.18382#####272
-Flint#####44.11667#####60
-Santa#####44.11064#####705
-Port Gentil#####44.10714#####28
-Windsor (Ontario)#####44.05479#####73
-Sallanches#####44.04762#####63
-Saida#####44.04#####25
-Venissieux#####44.0#####43
-Forli#####43.98#####100
-Banja#####43.90909#####33
-Granby#####43.90909#####33
-Chateaudun#####43.85455#####55
-Lierre#####43.85246#####61
-Saint Priest#####43.8#####25
-Savone#####43.79365#####63
-Lviv#####43.78358#####268
-Erlangen#####43.69565#####46
-Valence#####43.67908#####349
-Oxford#####43.67138#####283
-Charleston#####43.65714#####70
-La Haye#####43.65167#####600
-Vevey#####43.64626#####147
-Khartoum#####43.63636#####55
-Maastricht#####43.625#####120
-Hermosillo#####43.625#####32
-Tarascon (Bouches du Rhone)#####43.61765#####34
-Dunfermline#####43.59524#####42
-Great Yarmouth#####43.58824#####34
-Islington (quartier)#####43.5625#####48
-Rehovot#####43.54839#####31
-Leyde#####43.53982#####226
-Herstal#####43.52778#####36
-Francfort sur l'Oder#####43.5#####72
-Tarnow#####43.47619#####42
-Bamberg#####43.45333#####75
-Florianopolis#####43.45161#####31
-Inglewood#####43.43396#####53
-Sarrelouis#####43.39394#####33
-St Albans#####43.36735#####49
-Hachioji#####43.36#####25
-Catanzaro#####43.35135#####37
-Denain#####43.31707#####41
-Winter#####43.28#####25
-Constance (Allemagne)#####43.25641#####39
-Hazebrouck#####43.25581#####43
-Fulham#####43.225#####40
-Dresde#####43.21655#####568
-Leeuwarden#####43.1875#####32
-Vaduz#####43.16667#####30
-Sarlat la Caneda#####43.16216#####37
-Gijon#####43.15909#####88
-Bassano del Grappa#####43.15625#####32
-Kiel#####43.12667#####150
-Cagnes sur Mer#####43.09756#####41
-Delft#####43.096#####125
-Jytomyr#####43.08696#####46
-Hambourg#####43.07169#####1074
-Wissembourg#####43.06818#####44
-Ottawa#####43.06404#####406
-Burgos#####43.05155#####97
-Bergisch#####43.04#####25
-Portland#####42.98522#####203
-Lens#####42.97826#####46
-Breda#####42.94792#####96
-Boulder#####42.94118#####68
-Dantzig#####42.93333#####45
-Innsbruck#####42.91593#####226
-La Reunion#####42.91489#####47
-Salford#####42.90123#####81
-Edimbourg#####42.8755#####747
-Harrow#####42.86364#####44
-Segou#####42.86207#####29
-Vina#####42.84848#####33
-Heerlen#####42.84615#####39
-Heraklion#####42.82456#####57
-Syracuse#####42.81818#####143
-Cracovie#####42.73876#####467
-Tourcoing#####42.73143#####175
-Newcastle upon Tyne#####42.72816#####103
-Adelaide (Australie)#####42.72464#####69
-Tebessa#####42.72#####25
-Gien#####42.69565#####46
-Saint Imier#####42.64516#####31
-Islington#####42.63158#####57
-Asti#####42.61702#####47
-New Westminster#####42.61017#####59
-Casale Monferrato#####42.59375#####32
-Vladikavkaz#####42.58824#####34
-Bruges#####42.56009#####441
-Samara#####42.51724#####58
-Sheffield#####42.49826#####287
-Bristol (Royaume Uni)#####42.488#####250
-Neath#####42.44681#####47
-Ann#####42.44444#####54
-Furth#####42.4386#####57
-Blackpool#####42.42857#####63
-Tlemcen#####42.42667#####150
-Ziguinchor#####42.37143#####35
-Epsom#####42.34146#####41
-Las Palmas de Grande Canarie#####42.33333#####63
-Boucherville#####42.32143#####28
-Swansea#####42.27632#####152
-Hambourg Altona#####42.275#####40
-Johannesbourg#####42.2679#####377
-Watford#####42.25974#####77
-Fairfax#####42.25926#####27
-Tripoli (Libye)#####42.25#####44
-Alep#####42.21935#####155
-Levis#####42.21519#####79
-Hillingdon#####42.19231#####26
-Gelsenkirchen#####42.17949#####78
-St Pancras (Londres)#####42.16#####25
-Douarnenez#####42.15909#####44
-Mayence#####42.15741#####216
-Draguignan#####42.15625#####64
-Messine#####42.15603#####141
-Leeds#####42.12298#####309
-Split#####42.10266#####263
-Mol#####42.08333#####36
-Mission#####42.07407#####27
-Sorengo#####42.0#####25
-Kazan#####41.98347#####121
-Toyonaka#####41.96154#####26
-Gorinchem#####41.93333#####30
-Huddersfield#####41.89394#####66
-Papeete#####41.87736#####106
-Omsk#####41.875#####72
-Coutances#####41.87143#####70
-Saint Hyacinthe#####41.85897#####78
-Saint Domingue#####41.83562#####73
-Pointe Noire#####41.83333#####48
-Derby (Royaume Uni)#####41.79747#####79
-Irkoutsk#####41.77049#####61
-Altenbourg#####41.76596#####47
-Saint Jerome#####41.75472#####53
-Sunderland#####41.74468#####94
-Meknes#####41.73554#####121
-Lubbock#####41.71429#####28
-Martigny#####41.70455#####44
-Worcester#####41.68468#####111
-Auxonne#####41.64286#####28
-Gray (Haute Saone)#####41.625#####48
-Bari#####41.59859#####142
-Baton#####41.58537#####41
-Drummondville#####41.57812#####64
-Caracas#####41.57618#####361
-Rethel#####41.53333#####30
-Avellino#####41.51724#####29
-Millau#####41.51724#####58
-Toledo#####41.5122#####82
-Chamonix Mont Blanc#####41.5#####42
-Sibenik#####41.45763#####59
-Longueuil#####41.44156#####77
-Aurora#####41.4359#####39
-Apt#####41.41935#####31
-Gand#####41.41687#####830
-Colchester#####41.4127#####63
-Ternopil#####41.38462#####26
-Regina#####41.38202#####89
-Cento#####41.37037#####27
-Wesel#####41.34146#####41
-New Delhi#####41.3271#####107
-Port au Prince#####41.32399#####321
-Fribourg en Brisgau#####41.32317#####164
-Stoke on Trent#####41.2381#####84
-Klagenfurt#####41.2375#####80
-Hameenlinna#####41.22581#####31
-Tubingen#####41.1875#####80
-Jerez de la Frontera#####41.16071#####56
-Port d'Espagne#####41.1573#####89
-Trente (Italie)#####41.13158#####38
-Peterborough#####41.11628#####43
-Villerupt#####41.10345#####29
-Skikda#####41.1#####50
-Greenville#####41.08929#####56
-Kothen (Anhalt)#####41.07692#####26
-Marbourg#####41.075#####80
-Guelph#####41.06977#####43
-Aubenas#####41.04762#####63
-Liepaja#####41.04167#####48
-Faenza#####41.01099#####91
-Warren#####41.0#####30
-Durham (Royaume Uni)#####41.0#####30
-Locarno#####41.0#####26
-Maidstone#####40.97778#####45
-Frauenfeld#####40.97143#####35
-Herat#####40.96774#####31
-Fes#####40.96457#####254
-Leipzig#####40.9463#####540
-Harare#####40.93056#####144
-Canton (Chine)#####40.92857#####70
-Nyiregyhaza#####40.90909#####33
-Krementchouk#####40.90625#####32
-Worthing#####40.89744#####39
-Izmir#####40.87692#####130
-Saint Jacques de Compostelle#####40.87273#####55
-Glasgow#####40.83666#####851
-Middlesbrough#####40.81429#####70
-Saint Pierre (Martinique)#####40.81395#####43
-Pretoria#####40.8134#####209
-Kamakura#####40.77419#####31
-Ougree#####40.76471#####51
-Fribourg (ville suisse)#####40.73913#####184
-Nabeul#####40.68421#####38
-Lodi#####40.66#####50
-Krasnodar#####40.65278#####72
-Brzeg#####40.64286#####28
-Eugene#####40.57778#####45
-Lommel#####40.54839#####31
-Lugano#####40.49462#####93
-Cieszyn#####40.48276#####29
-West Palm Beach#####40.46429#####28
-Lautoka#####40.46154#####26
-Poltava#####40.45283#####53
-Savillan#####40.44#####25
-Blackburn#####40.41791#####67
-Nankin#####40.41333#####75
-Rotorua#####40.40816#####49
-Kitchener#####40.38095#####42
-Inverness#####40.375#####40
-Grande Bretagne#####40.31915#####47
-Amritsar#####40.2963#####27
-Setagaya#####40.27869#####61
-Dinant#####40.24242#####66
-Suwon#####40.22857#####35
-Timmins#####40.2#####25
-Quebec (ville)#####40.1991#####442
-Alicante#####40.17822#####101
-Riverside#####40.15385#####52
-Winchester#####40.15094#####53
-Port Said#####40.14286#####42
-Santander (Espagne)#####40.13333#####45
-Targoviste#####40.11538#####26
-Novare#####40.10294#####68
-Thies#####40.06897#####58
-Wloclawek#####40.06667#####30
-Ourense#####40.03571#####28
-Bagdad#####40.01742#####287
-Columbia#####40.01299#####77
-Ath#####40.01124#####89
-Bahia Blanca#####40.0#####41
-Barking#####39.96667#####30
-Pontevedra#####39.95238#####42
-Waterford (Irlande)#####39.94444#####36
-Guayaquil#####39.91538#####130
-Comte de Los Angeles#####39.91429#####35
-Val d'Or#####39.87879#####33
-Belgrade#####39.8625#####720
-Deventer#####39.86207#####58
-Mende#####39.84211#####38
-Ayr#####39.8125#####32
-Molenbeek Saint Jean#####39.78351#####97
-Ratibor#####39.76923#####26
-Kilkenny#####39.75#####28
-Antananarivo#####39.72165#####97
-Kettering#####39.71429#####28
-Craiova#####39.7125#####80
-Changsha#####39.7037#####27
-Seville#####39.70321#####374
-Irvine#####39.7#####70
-Come#####39.63889#####108
-Zurich#####39.63574#####733
-Whittier#####39.62069#####29
-Jette#####39.62069#####29
-Lisbonne#####39.60543#####920
-Vilnius#####39.60068#####293
-Milton#####39.58333#####36
-Bukavu#####39.58#####50
-Dnipro#####39.5641#####78
-Saint Claude#####39.56#####50
-Wroclaw#####39.54795#####365
-Royal Leamington Spa#####39.51515#####33
-Charleston (Caroline du Sud)#####39.49296#####71
-Bath#####39.48175#####137
-Haifa#####39.45033#####151
-Pampelune#####39.44615#####195
-Carmarthen#####39.43478#####46
-Pekin#####39.4172#####314
-Sparte#####39.40541#####37
-Mississauga#####39.39062#####64
-Auch#####39.38739#####111
-Padoue#####39.38514#####296
-Aix la Chapelle#####39.37714#####175
-Perouse#####39.37398#####123
-Victoriaville#####39.36364#####33
-Bury (Grand Manchester)#####39.30769#####52
-Walsall#####39.29268#####41
-Paterson#####39.24#####50
-Chisinau#####39.19663#####178
-Saint Sebastien (Espagne)#####39.18889#####90
-Royan#####39.16216#####37
-Baton Rouge#####39.15789#####57
-Emden#####39.13793#####29
-Laxou#####39.11765#####34
-Perm#####39.08475#####59
-Cardiff#####39.07531#####239
-Mataro#####39.05405#####37
-San Miguel de Tucuman#####39.04918#####61
-Slupsk#####39.04762#####42
-Shanghai#####39.03611#####360
-Woolwich#####39.0#####29
-Riviere du Loup#####38.95238#####42
-Bolton (Grand Manchester)#####38.925#####40
-Nanaimo#####38.89286#####28
-Isola#####38.86207#####29
-San Luis Potosi#####38.85294#####34
-Moutier#####38.85185#####27
-Vicence#####38.84507#####142
-Maribor#####38.82759#####87
-Chengdu#####38.82432#####74
-Fermo#####38.80769#####26
-Daegu#####38.78431#####102
-Wolverhampton#####38.77895#####95
-Reggio#####38.74138#####58
-Nottingham#####38.7382#####233
-Kobe#####38.73457#####162
-Kfar Saba#####38.70968#####31
-Ploiesti#####38.68889#####45
-Malines#####38.68302#####265
-Kairouan#####38.675#####80
-Laguna#####38.65517#####29
-Riga#####38.64933#####519
-Jackson#####38.63636#####88
-Sao Paulo#####38.63235#####272
-Linz#####38.61875#####160
-Hamilton#####38.58065#####217
-Trieste#####38.55311#####273
-Brisbane#####38.53786#####383
-Berg op Zoom#####38.51515#####33
-Grand Londres#####38.51389#####72
-Wilmington (Delaware)#####38.5#####38
-Gatineau#####38.5#####26
-Lanus#####38.45714#####35
-Kumamoto#####38.44928#####69
-Rostov sur le Don#####38.43411#####129
-Halmstad#####38.43182#####44
-Utrecht#####38.41111#####360
-Bilbao#####38.39648#####227
-Beja#####38.3617#####47
-Hyderabad#####38.35294#####51
-Amersfoort#####38.35#####60
-Eibar#####38.33333#####27
-Legnica#####38.32558#####43
-Bolzano#####38.30612#####98
-Nagano#####38.28571#####42
-Malatya#####38.28#####25
-Copenhague#####38.2692#####1185
-Soignies#####38.26415#####53
-La Havane#####38.23326#####463
-Saint Martin d'Heres#####38.17188#####64
-Saint Louis (Senegal)#####38.17172#####99
-Saint Sebastien#####38.09934#####151
-Waremme#####38.06667#####30
-Wandsworth#####38.05263#####38
-Rotherham#####38.03125#####32
-Rieti#####38.02941#####34
-Geel#####38.02222#####45
-Jeonju#####38.0#####34
-Teheran#####37.96567#####699
-Wellington#####37.93511#####262
-Hagen#####37.92857#####28
-Hitchin#####37.88889#####27
-Medellin#####37.88439#####173
-Luxembourg (ville)#####37.86232#####276
-Istres#####37.86207#####29
-Halifax#####37.86111#####108
-Termonde#####37.85366#####82
-Hobart#####37.84615#####78
-Zadar#####37.83824#####68
-Jonkoping#####37.82609#####46
-New Bedford#####37.7931#####29
-Nuku`alofa#####37.77778#####27
-Braine l'Alleud#####37.77419#####31
-Krasnoiarsk#####37.72152#####79
-Machhad#####37.71429#####35
-Forbach#####37.7#####50
-Reading (Royaume Uni)#####37.69863#####73
-Salaberry de Valleyfield#####37.69388#####49
-Paisley#####37.68333#####60
-Madison#####37.66#####100
-Szekesfehervar#####37.65#####40
-Princeton#####37.59574#####47
-Atlantic City#####37.56667#####30
-Taunton#####37.55556#####36
-Wels#####37.55319#####47
-Hastings#####37.54839#####62
-Carlisle#####37.54386#####57
-Tver#####37.54286#####35
-Braine le Comte#####37.52#####25
-Sezanne#####37.46429#####28
-Gerone#####37.45161#####62
-Gold#####37.42105#####38
-Mobile#####37.36842#####38
-Wakayama#####37.36364#####33
-Sudbury#####37.35714#####28
-Catalogne#####37.35417#####48
-Fortaleza#####37.32143#####56
-White#####37.31707#####41
-Saint Julien en Genevois#####37.28#####25
-Kingston (Jamaique)#####37.23734#####316
-Wuhan#####37.22#####50
-Palmerston#####37.20833#####48
-Kenitra#####37.19048#####63
-Douchanbe#####37.17647#####34
-Southport#####37.15789#####38
-Voiron#####37.15217#####46
-Tel Aviv Jaffa#####37.15021#####233
-Saragosse#####37.1098#####255
-Lawrence#####37.0625#####32
-Topeka#####37.03509#####57
-Gaillac#####37.02632#####38
-Canberra#####36.96875#####128
-Dakar#####36.93939#####693
-Gibraltar#####36.93023#####43
-Plaisance#####36.9#####40
-Changchun#####36.89474#####38
-Utica (New York)#####36.88889#####27
-Ingolstadt#####36.85714#####28
-Uppsala#####36.82609#####115
-Palma#####36.82237#####152
-Tripoli (ville de Libye)#####36.82051#####39
-Peoria#####36.81579#####38
-Romford#####36.80851#####47
-Llanelli#####36.79412#####34
-Marrakech#####36.77966#####177
-Empoli#####36.77419#####31
-Ispahan#####36.76991#####113
-Hasselt#####36.7234#####141
-Mobile (Alabama)#####36.6875#####32
-Okayama#####36.68333#####60
-Danderyd#####36.68#####25
-Conegliano#####36.67568#####37
-Marvejols#####36.65385#####26
-Bangui#####36.59091#####66
-Iowa City#####36.58333#####36
-Bergame#####36.58095#####210
-Dortmund#####36.57823#####147
-Duren#####36.57143#####35
-Wuppertal#####36.54667#####75
-Naha#####36.53333#####30
-Hangzhou#####36.52778#####72
-Menton (Alpes Maritimes)#####36.52778#####36
-Pays de Galles#####36.50943#####53
-Leuvarde#####36.50909#####55
-Scarborough#####36.50617#####81
-Castellammare#####36.5#####28
-Vancouver#####36.47324#####598
-Gera#####36.47273#####55
-Bouake#####36.4717#####53
-Osijek#####36.47143#####70
-Frascati#####36.46154#####26
-Wurtzbourg#####36.44915#####236
-Oshawa#####36.43333#####30
-Cordoue#####36.42405#####158
-Hendon#####36.3871#####31
-Wernigerode#####36.34615#####26
-Warrington#####36.31507#####73
-Rio de Janeiro#####36.31474#####1058
-Eindhoven#####36.3#####110
-Oldham#####36.26027#####73
-Salem#####36.2549#####51
-Gubbio#####36.23333#####30
-Solna#####36.22414#####58
-Tokushima#####36.17241#####29
-Belfast#####36.16471#####425
-Alsace#####36.16129#####31
-Gloucester#####36.15493#####71
-Sale#####36.14433#####97
-Sosnowiec#####36.14286#####28
-Budapest#####36.13754#####1745
-Haarlem#####36.13542#####288
-Gosselies#####36.125#####32
-Utsunomiya#####36.11111#####27
-Tripoli (Liban)#####36.07547#####53
-Iaroslavl#####36.07317#####41
-Oakville#####36.06061#####33
-Halberstadt#####36.05882#####51
-Stargard#####36.04#####25
-Chelmsford#####36.03226#####62
-Homiel#####36.0#####30
-Gottingen#####36.0#####108
-Trente#####35.97101#####69
-Rochdale#####35.95122#####41
-Opole#####35.93548#####31
-Pribram#####35.93103#####29
-Barmen#####35.90476#####42
-Evora#####35.9#####30
-Rhodes#####35.89796#####49
-Glostrup#####35.88#####25
-Amsterdam#####35.86991#####1645
-Lecco#####35.85714#####42
-Horsens#####35.82051#####39
-Calgary#####35.81507#####292
-Valparaiso#####35.73529#####102
-Jelgava#####35.71429#####35
-Libreville#####35.7#####130
-Furnes#####35.67742#####31
-Pforzheim#####35.67164#####67
-Jacmel#####35.64516#####31
-Peshawar#####35.64516#####31
-Saint Avold#####35.63889#####36
-Qom#####35.60714#####28
-Stockton on Tees#####35.55556#####45
-Torreon#####35.55556#####27
-Blida#####35.54639#####97
-Tbilissi#####35.54201#####607
-Slough#####35.53846#####39
-Iekaterinbourg#####35.52113#####71
-Annapolis#####35.51429#####35
-Kawasaki#####35.4878#####41
-Manchester#####35.48503#####501
-Mascara#####35.46875#####32
-Belo Horizonte#####35.43333#####30
-Coni#####35.42857#####49
-Bielefeld#####35.42697#####89
-Audenarde#####35.38806#####67
-Toula#####35.36508#####63
-Munster#####35.34899#####149
-Guimaraes#####35.34884#####43
-Bogota#####35.33875#####369
-Pune#####35.33333#####42
-Magdebourg#####35.32035#####231
-Southend on Sea#####35.29032#####31
-Torre#####35.28#####25
-Bendigo#####35.26923#####26
-Almada#####35.18182#####33
-Basingstoke#####35.16667#####36
-Luxembourg Ville#####35.16667#####48
-Morioka#####35.16129#####31
-Hiroshima#####35.13953#####129
-Sassuolo#####35.12#####25
-Saint Sever#####35.11538#####26
-Tokyo#####35.10778#####2032
-Castellon de la Plana#####35.08824#####34
-Le Kef#####35.08#####25
-Pordenone#####35.0625#####32
-Szczecin#####35.03822#####157
-Rimouski#####35.01449#####69
-Kingston upon Hull#####35.0#####123
-Caroline#####34.96774#####31
-Mbanza Kongo#####34.96552#####29
-Rovigo#####34.95238#####42
-Gisborne#####34.92857#####28
-Bucaramanga#####34.9#####30
-Birkenhead#####34.86585#####82
-Abidjan#####34.85185#####459
-Galway#####34.8#####55
-Treichville#####34.78125#####32
-Saint Nicolas#####34.78125#####64
-Middelbourg#####34.76786#####56
-Cottbus#####34.7234#####47
-Volgograd#####34.72059#####68
-Kendal#####34.72#####25
-Galati#####34.7193#####57
-Brazzaville#####34.7037#####243
-Saskatoon#####34.6988#####83
-Newry#####34.68#####25
-Guadeloupe#####34.65517#####29
-Thessalonique#####34.65116#####258
-Hrodna#####34.63636#####66
-Voronej#####34.60494#####81
-Garmisch Partenkirchen#####34.58696#####46
-Ostrava#####34.57831#####83
-Udine#####34.552#####125
-Bursa#####34.55072#####69
-Limassol#####34.51111#####45
-Kongsberg#####34.46154#####26
-Rotterdam#####34.40901#####577
-Nis#####34.4#####55
-Penzance#####34.4#####25
-Berchem (Anvers)#####34.4#####35
-Schweinfurt#####34.3871#####31
-Bialystok#####34.37975#####79
-Porvoo#####34.37931#####29
-Flensbourg#####34.35088#####57
-Dunedin#####34.35#####120
-L'Aquila#####34.31818#####44
-Garoua#####34.31579#####38
-Halifax (Nouvelle Ecosse)#####34.31373#####51
-Khouribga#####34.30556#####36
-Lavaur (Tarn)#####34.2963#####27
-Cadix#####34.27835#####97
-Schaffhouse#####34.27119#####59
-Venlo#####34.23529#####34
-Lucknow#####34.2#####30
-Gorlitz#####34.18966#####58
-Kingston (Ontario)#####34.17333#####75
-Porrentruy#####34.15094#####53
-Kayseri#####34.13158#####38
-Veracruz#####34.13043#####46
-Prades (Pyrenees Orientales)#####34.07692#####26
-Bolton#####34.0#####42
-Quedlinbourg#####34.0#####27
-Grand Sudbury#####33.97143#####35
-Auburn#####33.9697#####33
-Riazan#####33.96429#####28
-Le Lamentin#####33.9375#####32
-Irun#####33.93333#####45
-Hildesheim#####33.91667#####72
-Orlando#####33.90789#####76
-Varese#####33.89157#####83
-Kaliningrad#####33.86111#####36
-Te#####33.85714#####28
-Enugu#####33.85714#####35
-Newport (pays de Galles)#####33.83871#####31
-Plauen#####33.80769#####26
-Kurume#####33.8#####25
-Bellshill#####33.78947#####57
-Gorki#####33.78125#####32
-Borough londonien d'Enfield#####33.7619#####42
-Tomsk#####33.75#####28
-Montigny les Metz#####33.74074#####27
-Preston (Lancashire)#####33.66667#####33
-Treves#####33.65306#####49
-Bienne#####33.64602#####113
-Rovereto#####33.63043#####46
-Yokohama#####33.61176#####255
-Waterloo#####33.6#####30
-Voghera#####33.59259#####27
-Badajoz#####33.57778#####45
-Alma Ata#####33.5625#####32
-Mexico#####33.54935#####1074
-Trevise#####33.48214#####112
-Diekirch#####33.48148#####27
-Lunebourg#####33.44737#####38
-Novo mesto#####33.4375#####32
-Daugavpils#####33.42857#####35
-Zwolle#####33.42593#####54
-Douala#####33.41689#####379
-Sendai#####33.41463#####82
-Delhi#####33.4125#####80
-Crema#####33.38462#####26
-Victoria (Colombie Britannique)#####33.34426#####61
-Brandebourg sur la Havel#####33.33333#####54
-Bangkok#####33.276#####250
-Wilhelmshaven#####33.27586#####29
-Treves (Allemagne)#####33.25#####52
-Bloemfontein#####33.22353#####85
-Cork#####33.21579#####190
-Cotonou#####33.19231#####130
-Kaposvar#####33.16129#####31
-Vic#####33.15217#####46
-Georgie (Etats Unis)#####33.15152#####33
-La Chatre#####33.15152#####33
-Lublin#####33.14583#####96
-Feldkirch#####33.12#####25
-Yamoussoukro#####33.11538#####26
-Colombo#####33.08696#####69
-Limoux#####33.08333#####36
-Kano#####33.02564#####39
-Bois le Duc#####33.01754#####114
-Tetouan#####33.01471#####68
-Brasov#####33.0#####80
-Liestal#####33.0#####27
-Delemont#####33.0#####45
-Istanbul#####32.9844#####641
-Bonheiden#####32.96667#####30
-Groningue (ville)#####32.95455#####66
-Swindon#####32.95238#####42
-Stavanger#####32.9375#####96
-Flardingue#####32.89189#####37
-Winnipeg#####32.8918#####305
-Cali#####32.86538#####156
-Xi'an#####32.86047#####43
-Subotica#####32.81395#####43
-Victoria#####32.8129#####155
-Brockton#####32.8#####25
-Eeklo#####32.775#####40
-Bridgend#####32.76087#####46
-Bochum#####32.75676#####74
-Berne#####32.74634#####410
-Greenock#####32.73585#####53
-Santa Cruz de Tenerife#####32.71429#####28
-Zaandam#####32.65909#####44
-Benevent#####32.65517#####29
-Chiraz#####32.6506#####83
-Heilbronn#####32.59375#####32
-Guatemala (ville)#####32.57143#####133
-Bourg Saint Maurice#####32.48718#####39
-Luoyang#####32.4#####25
-Port Elizabeth#####32.37349#####83
-Miskolc#####32.36667#####60
-Wilrijk#####32.36364#####88
-Narva#####32.36#####25
-Preston#####32.35593#####59
-Saint Catharines#####32.33333#####39
-Monroe#####32.30769#####39
-Moissac#####32.30769#####39
-Iena#####32.28205#####78
-Burlington#####32.25862#####58
-Lisburn#####32.25806#####31
-Batoumi#####32.21875#####32
-Bergen (Norvege)#####32.20253#####79
-Zagreb#####32.20215#####465
-Wittemberg#####32.15217#####46
-Dordrecht#####32.15#####120
-Asmara#####32.15#####60
-Kherson#####32.11864#####59
-Edo (ville)#####32.09722#####144
-Orvieto#####32.08333#####36
-L'Assomption#####32.07143#####28
-Bulawayo#####32.06122#####49
-Albacete#####32.025#####40
-Le Cap#####32.02486#####362
-Monza#####32.01515#####66
-Rive de Gier#####32.0#####25
-Derry#####31.98387#####62
-Halle#####31.91429#####35
-Kaiserslautern#####31.88372#####43
-East London#####31.875#####40
-Kinshasa#####31.86842#####608
-Saint Trond#####31.86585#####82
-Drammen#####31.80357#####56
-Kumasi#####31.78824#####85
-Riyad#####31.78358#####134
-Sabadell#####31.77778#####99
-Saint Jean de Terre Neuve#####31.75758#####33
-Porto#####31.75214#####351
-Brunswick#####31.73333#####60
-Harrogate#####31.68182#####44
-Seoul#####31.64269#####876
-Edmonton#####31.63115#####244
-Soleure#####31.6087#####69
-Kitzbuhel#####31.6#####25
-Gdansk#####31.58095#####210
-Beer Sheva#####31.58065#####31
-Mulheim#####31.57895#####57
-Salta#####31.57692#####26
-Surrey#####31.52778#####72
-Akita#####31.52#####25
-Gabes#####31.48649#####37
-Sverdlovsk#####31.47458#####59
-Gyumri#####31.44186#####43
-Wattrelos#####31.4#####25
-Chongqing#####31.39706#####68
-Zittau#####31.37931#####29
-Ann Arbor#####31.37209#####43
-Sankt Polten#####31.36364#####33
-Le Locle#####31.35484#####62
-Mahiliow#####31.35294#####34
-Lambeth#####31.30189#####53
-Pendjab#####31.29032#####31
-Aylesbury#####31.28#####25
-Diest#####31.27451#####51
-Maceio#####31.24242#####33
-Granollers#####31.24138#####29
-Samarcande#####31.23256#####43
-Cheongju#####31.18519#####27
-Auckland#####31.18417#####619
-Kitakyushu#####31.18182#####55
-Akron (Ohio)#####31.16667#####42
-Sfax#####31.16216#####185
-Badalone#####31.11321#####53
-Barlad#####31.10714#####28
-Sonderborg#####31.1#####30
-Ulm#####31.08537#####82
-Torun#####31.08475#####59
-Dacca#####31.03448#####58
-Osaka#####31.02475#####404
-Salvador (Bahia)#####31.02222#####135
-Niigata#####30.97872#####47
-Gdynia#####30.95556#####45
-Dundee#####30.92405#####158
-Mossoul#####30.91071#####56
-Gafsa#####30.89655#####29
-Plymouth#####30.88462#####78
-Ploermel#####30.88235#####34
-Alost#####30.87273#####110
-Bejaia#####30.77193#####57
-Renaix#####30.75#####44
-Cosenza#####30.73469#####49
-Neuss#####30.67647#####34
-Lucerne#####30.67308#####156
-Arkhangelsk#####30.64516#####31
-Aberdeen#####30.62083#####240
-Sofia#####30.6056#####464
-Macclesfield#####30.6#####30
-Plovdiv#####30.5678#####118
-Saint Georges#####30.53571#####28
-Passau#####30.52#####25
-Guadalajara#####30.5#####168
-Monterrey#####30.46789#####109
-Moncalieri#####30.46667#####30
-Novossibirsk#####30.41758#####91
-Brescia#####30.39931#####288
-Aschaffenbourg#####30.39583#####48
-Cordoba (Argentine)#####30.3617#####47
-Brandon#####30.36#####25
-Tarragone#####30.34483#####58
-Incheon#####30.32967#####91
-Doha#####30.29412#####51
-Terrassa#####30.27692#####65
-Barnsley#####30.2449#####49
-Lima#####30.2194#####629
-Pilsen#####30.20513#####78
-Palo Alto#####30.2#####25
-Port Harcourt#####30.19512#####41
-Okazaki#####30.11538#####26
-Baarn#####30.08#####25
-Ekeren#####30.08#####25
-Winterthour#####30.00943#####106
-Koper#####30.0#####34
-Vinnytsia#####30.0#####36
-Dudelange#####30.0#####40
-Barrie#####30.0#####25
-Esch sur Alzette#####29.9881#####84
-Bordj#####29.97872#####47
-Relizane#####29.94444#####36
-Fukuoka#####29.92715#####151
-Invercargill#####29.92105#####38
-La Paz#####29.88889#####108
-Katowice#####29.82927#####82
-Radom#####29.825#####40
-Heilbronn (ville)#####29.82143#####28
-Tijuana#####29.80556#####36
-Oufa#####29.73846#####65
-Coire#####29.72059#####68
-Kharkiv#####29.71429#####273
-Ciudad Real#####29.69697#####33
-Dewsbury#####29.69444#####36
-Bamako#####29.68308#####325
-Suzhou#####29.68293#####82
-Smolensk#####29.68#####50
-Barranquilla#####29.61644#####73
-Yverdon les Bains#####29.61333#####75
-Kankan#####29.60606#####33
-Kisangani#####29.58824#####34
-Kirkcaldy#####29.57143#####28
-Ouagadougou#####29.57055#####163
-Jyvaskyla#####29.54545#####44
-Astrakhan#####29.51429#####35
-Hoorn#####29.51111#####45
-Kochi#####29.46341#####41
-Agadir#####29.45902#####61
-Erfurt#####29.44138#####145
-Niteroi#####29.42623#####61
-Santiago#####29.41703#####916
-Nelson#####29.39394#####33
-Essen#####29.38421#####190
-Lokeren#####29.36111#####36
-Soumy#####29.36#####25
-Fumel#####29.34615#####26
-Buea#####29.34483#####29
-Porto Novo#####29.30435#####92
-Swidnica#####29.25806#####31
-Lower Hutt#####29.25641#####39
-Vejle#####29.25#####52
-Tongres#####29.2459#####61
-Briansk#####29.2#####30
-Danemark (pays constitutif)#####29.1791#####67
-Saint Gall#####29.14179#####134
-Paisley (Ecosse)#####29.09677#####31
-Almeria#####29.09524#####42
-Waregem#####29.07143#####42
-Oss#####28.96774#####31
-Vantaa#####28.96667#####30
-Paramaribo#####28.96396#####111
-Vasteras#####28.94643#####56
-Bafoussam#####28.91667#####36
-Manille#####28.89674#####184
-Timisoara#####28.86538#####104
-Batna#####28.86458#####96
-Pristina#####28.86364#####44
-Santa Fe (Argentine)#####28.86207#####29
-Berlin Est#####28.83838#####99
-Mansfield#####28.83333#####30
-Nairobi#####28.82051#####156
-Goteborg#####28.79837#####367
-Logrono#####28.7451#####51
-Tanta#####28.74074#####27
-Toyama#####28.72414#####29
-Belize City#####28.72414#####29
-Framingham#####28.72#####25
-Vitebsk#####28.65823#####79
-Erie#####28.6#####40
-Katmandou#####28.5614#####57
-Bangor#####28.55932#####59
-Nova#####28.55385#####65
-Qingdao#####28.54545#####44
-Vitoria Gasteiz#####28.53333#####120
-Santander#####28.5119#####84
-Lubumbashi#####28.50549#####91
-Recife#####28.50459#####109
-Choucha#####28.46939#####49
-Setif#####28.45#####120
-Durango#####28.4375#####32
-Sakai#####28.43396#####53
-Tartu#####28.42763#####152
-Sierre#####28.41304#####46
-San Jose#####28.4#####35
-Volos#####28.33333#####30
-Lugo#####28.32258#####31
-Cluj Napoca#####28.31579#####95
-Koutaissi#####28.27848#####79
-Patras#####28.25#####52
-Yaounde#####28.18182#####385
-Tiaret#####28.18182#####33
-Tallinn#####28.1738#####374
-Eskisehir#####28.16#####25
-Oradea#####28.13043#####46
-Gandja#####28.125#####48
-Kaunas#####28.11732#####179
-Moncton#####28.10145#####69
-Kalisz#####28.05263#####38
-Kolding#####28.02941#####34
-La Valette#####28.02273#####44
-Kaolack#####28.01818#####55
-Imola#####28.0#####44
-Nowy Sacz#####27.96#####25
-Sion#####27.91566#####83
-Rostock#####27.91129#####124
-Rawalpindi#####27.9#####30
-Nagasaki#####27.89552#####67
-Nara#####27.89189#####37
-Loutsk#####27.88462#####26
-Herentals#####27.84615#####52
-Boukhara#####27.80769#####26
-Ypres#####27.78#####100
-Quito#####27.77174#####92
-Reykjavik#####27.76744#####301
-Vyborg#####27.74545#####55
-Campinas#####27.74118#####85
-Bobo Dioulasso#####27.74074#####81
-Wollongong#####27.73585#####53
-Naplouse#####27.71429#####28
-Saint Louis (La Reunion)#####27.68#####25
-Przemysl#####27.66667#####30
-Mersebourg#####27.66667#####45
-Penza#####27.65957#####47
-Goma#####27.64286#####28
-Alkmaar#####27.64103#####78
-Kielce#####27.64103#####39
-Agde#####27.64#####25
-Sapporo#####27.61765#####102
-El Jadida#####27.6087#####46
-Tabriz#####27.60784#####102
-Kaboul#####27.6014#####143
-Durham#####27.59211#####76
-Helsingborg#####27.58228#####79
-Sliven#####27.57692#####26
-Merksem#####27.54545#####33
-Ponte#####27.5#####26
-Villach#####27.45833#####48
-Pontypridd#####27.45455#####33
-Bamenda#####27.44444#####36
-Glaris#####27.42857#####28
-Skelleftea#####27.42308#####26
-Almaty#####27.42149#####121
-Offenbourg#####27.4#####25
-Mykolaiv#####27.38235#####68
-Managua#####27.35294#####51
-Bakou#####27.34958#####595
-Vigo#####27.33333#####60
-Petah#####27.33333#####30
-Taza#####27.33333#####27
-Targu#####27.31429#####35
-Falkirk#####27.31429#####35
-Oslo#####27.30801#####724
-Saint Pierre (La Reunion)#####27.26923#####26
-Gyor#####27.24528#####53
-Malmo#####27.23243#####185
-Recklinghausen#####27.23077#####26
-Monrovia#####27.22727#####66
-Adana#####27.225#####40
-Setubal#####27.18#####50
-Siauliai#####27.16279#####43
-Suginami#####27.11429#####35
-Civitavecchia#####27.06897#####29
-Le Piree#####27.06349#####63
-Paderborn#####27.02439#####41
-Sidon#####27.0#####29
-Edmundston#####26.96667#####30
-Foligno#####26.95122#####41
-Essaouira#####26.92#####25
-Szeged#####26.88172#####93
-Homs#####26.875#####40
-Stockton#####26.86111#####36
-Orebro#####26.79487#####78
-Haugesund#####26.76923#####39
-Lome#####26.73684#####171
-Nador#####26.72#####25
-Wetzlar#####26.69231#####26
-Sion (Valais)#####26.59259#####27
-Roskilde#####26.5303#####66
-Kanazawa#####26.52174#####46
-Gateshead#####26.51282#####39
-Cairns#####26.5#####30
-Biskra#####26.48485#####33
-Macao#####26.46667#####30
-Tachkent#####26.43775#####249
-Leverkusen#####26.4359#####39
-Sarajevo#####26.41004#####239
-Camaguey#####26.36364#####55
-Gaza#####26.36364#####55
-Silkeborg#####26.32432#####37
-Suhl#####26.32432#####37
-Canton de Vaud#####26.30645#####62
-Abomey#####26.28125#####32
-Aoste#####26.2807#####114
-Charlottetown#####26.2449#####49
-Harbin#####26.2375#####80
-Espoo#####26.22857#####70
-Chatham (Kent)#####26.21739#####46
-El Biar#####26.20513#####39
-Trujillo#####26.2#####25
-Groningue#####26.16438#####73
-Bad Kreuznach#####26.14815#####27
-Wigan#####26.09722#####72
-Cochabamba#####26.0#####38
-Kagoshima#####25.97368#####76
-Mesa#####25.96875#####32
-Olten#####25.96154#####26
-Zarzis#####25.96#####25
-St Helens (Merseyside)#####25.95082#####61
-Falun#####25.94737#####38
-Surabaya#####25.90909#####44
-Pecs#####25.90385#####52
-Bydgoszcz#####25.90123#####81
-Truro#####25.87879#####33
-Stralsund#####25.87179#####39
-Jerez#####25.83871#####31
-Guadalajara (Mexique)#####25.83051#####59
-Clinton#####25.82759#####29
-Frederiksberg#####25.81633#####147
-Bissau#####25.79798#####99
-Saint Jean#####25.79688#####64
-Tchernihiv#####25.78947#####38
-Bridgetown#####25.78125#####32
-Helsinki#####25.77554#####695
-Hamamatsu#####25.76364#####55
-Viborg#####25.72727#####33
-Manrese#####25.7037#####27
-Pas de Calais#####25.7#####30
-Uzice#####25.69231#####26
-Nimegue#####25.69027#####113
-Sibiu#####25.66667#####54
-Pusan#####25.65591#####93
-Christchurch#####25.63208#####212
-Thoune#####25.62162#####37
-Hvidovre#####25.61538#####26
-Zoug#####25.57143#####35
-Curacao#####25.5625#####32
-Viljandi#####25.53846#####26
-Huelva#####25.48485#####33
-Baden#####25.475#####40
-Gliwice#####25.44737#####38
-Gosford#####25.44#####25
-Mikkeli#####25.42308#####26
-Montevideo#####25.39211#####811
-Erzurum#####25.35714#####28
-Prefecture de Kanagawa#####25.35714#####28
-Sabac#####25.32432#####37
-Arendal#####25.26923#####26
-Kouba#####25.26087#####46
-Bielsko Biala#####25.25806#####31
-Sebastopol#####25.24242#####33
-Conakry#####25.22907#####227
-Karlstad#####25.22222#####27
-Terni#####25.22222#####36
-Ravensbourg#####25.22222#####27
-Penrith#####25.17857#####28
-Suva#####25.13265#####98
-Zenica#####25.12821#####39
-Larissa#####25.05405#####37
-Bujumbura#####25.02564#####39
-Ljubljana#####25.01333#####300
-Lagos#####24.98711#####388
-Monthey#####24.96296#####27
-Ankara#####24.95732#####164
-Jakarta#####24.92537#####201
-Bandung#####24.88333#####60
-Donetsk#####24.84211#####95
-Bacau#####24.83784#####37
-Wrexham#####24.83673#####49
-Irlande du Nord#####24.8125#####32
-Boras#####24.7907#####43
-Arnhem#####24.77876#####113
-Almere#####24.76923#####26
-Kyiv#####24.76923#####26
-Aarau#####24.7377#####61
-Reno#####24.71875#####32
-Menin#####24.69048#####42
-Paarl#####24.66667#####45
-Kampala#####24.59551#####89
-Tilbourg#####24.59155#####71
-Herford#####24.58974#####39
-Arabie#####24.57407#####54
-Rufisque#####24.56098#####41
-Puebla#####24.52083#####48
-Barquisimeto#####24.51852#####27
-Kuala#####24.4898#####49
-Eupen#####24.4878#####41
-Zrenjanin#####24.48485#####33
-Apeldoorn#####24.48387#####31
-Curitiba#####24.47826#####92
-Chemnitz#####24.40541#####111
-Leon#####24.39759#####83
-Witten#####24.38462#####26
-Soweto#####24.36232#####69
-Novi Sad#####24.36207#####58
-Jesenice#####24.36111#####36
-Amman#####24.33696#####92
-Annaberg Buchholz#####24.32#####25
-Shenyang#####24.29688#####64
-Fredericton#####24.29545#####44
-Maracaibo#####24.29091#####55
-Nagoya#####24.28667#####150
-Novi#####24.25455#####110
-Anchorage#####24.2381#####42
-Chamonix#####24.21212#####33
-Abadan#####24.2#####30
-Rivne#####24.18519#####27
-Barnaoul#####24.14286#####35
-Otaru#####24.13793#####29
-Erevan#####24.12014#####283
-Avellaneda#####24.08696#####46
-Pietermaritzburg#####24.08#####50
-Avila#####24.07407#####27
-Aguascalientes#####24.06897#####29
-Georgetown#####24.06349#####63
-Cavalese#####24.03846#####26
-Duisbourg#####24.01613#####124
-Davos#####24.0#####57
-Kaduna#####24.0#####49
-Prefecture de Hyogo#####23.95652#####46
-Debrecen#####23.93671#####79
-San Jose (Costa Rica)#####23.88393#####112
-Gouda#####23.88235#####68
-Goiania#####23.875#####32
-Khabarovsk#####23.8125#####32
-Dar#####23.76#####25
-Valencia#####23.74359#####39
-Hillerod#####23.72414#####29
-Brasschaat#####23.63333#####30
-Verceil#####23.58929#####56
-Nykoping#####23.58065#####31
-Ivano Frankivsk#####23.57143#####42
-Elblag#####23.56667#####30
-Matanzas#####23.55102#####49
-Hamar#####23.53333#####30
-Ijevsk#####23.51429#####35
-Kigali#####23.50725#####69
-Heerenveen#####23.5#####26
-Thourout#####23.47059#####34
-Panama (ville)#####23.41549#####142
-Geelong#####23.41176#####51
-Shizuoka#####23.38636#####88
-Aomori#####23.36667#####30
-Ramat#####23.34211#####38
-Kragujevac#####23.30612#####49
-Trondheim#####23.2625#####160
-Olsztyn#####23.25641#####39
-Ichikawa#####23.24#####25
-Akureyri#####23.18519#####27
-Gwangju#####23.16393#####61
-Helmond#####23.14706#####34
-Fulda#####23.05263#####38
-Enschede#####23.04#####50
-Merida#####23.03774#####53
-Hal#####23.03571#####28
-Cienfuegos#####23.03226#####31
-Astana#####23.0#####30
-Boufarik#####22.96774#####31
-Culiacan#####22.95#####40
-Hamm#####22.9#####40
-Ludwigshafen sur le Rhin#####22.77778#####27
-Praia#####22.75#####44
-Addis Abeba#####22.71429#####119
-Czestochowa#####22.71053#####38
-Louhansk#####22.70732#####41
-Hilversum#####22.69492#####59
-Bressanone#####22.65957#####47
-Jos#####22.46667#####30
-Stirling#####22.45283#####53
-Sivas#####22.42308#####26
-Gorizia#####22.375#####40
-Schiedam#####22.36585#####41
-Alesund#####22.36364#####44
-Arad#####22.31429#####35
-Valmiera#####22.30769#####26
-Chiba#####22.29412#####85
-Asahikawa#####22.27586#####29
-Ibadan#####22.25397#####63
-Berchtesgaden#####22.21154#####52
-Walbrzych#####22.2#####25
-Tegucigalpa#####22.18462#####65
-Saint Marin#####22.09091#####66
-Djeddah#####22.05634#####71
-Saitama#####22.05208#####96
-Daejeon#####22.04545#####44
-Aarhus#####21.97826#####184
-Mostar#####21.97333#####75
-Baerum#####21.94667#####75
-Guantanamo#####21.9375#####32
-Roulers#####21.90909#####110
-Bergen#####21.87943#####141
-N'Djamena#####21.82716#####81
-Lusaka#####21.82456#####57
-Tromso#####21.82051#####39
-Whangarei#####21.78125#####32
-Cascais#####21.75862#####29
-Aalborg#####21.73529#####68
-Accra#####21.71739#####322
-Saint Nicolas (Flandre Orientale)#####21.69565#####46
-Kalmar#####21.68966#####29
-Zabrze#####21.62857#####35
-Deinze#####21.60526#####38
-Makhatchkala#####21.6#####40
-Tirana#####21.57031#####128
-Achgabat#####21.5#####42
-Oberstdorf#####21.46154#####26
-Darwin#####21.40741#####27
-Busto Arsizio#####21.38462#####26
-Varazdin#####21.34211#####38
-Szombathely#####21.30357#####56
-Tabor#####21.28#####25
-Dubai#####21.26154#####65
-Nitra#####21.23529#####34
-Apia#####21.23077#####65
-Karlskrona#####21.17647#####34
-Dubrovnik#####21.14286#####70
-Oita#####21.11538#####26
-Montebelluna#####21.11111#####27
-Potchefstroom#####21.03846#####26
-Pyongyang#####21.01869#####107
-Turku#####21.0084#####119
-Randers#####21.0#####44
-Ningbo#####21.0#####30
-Umea#####20.95349#####43
-Ahvaz#####20.88889#####27
-Carthagene des Indes#####20.7037#####27
-Ioannina#####20.69697#####33
-Antofagasta#####20.65714#####35
-Mindelo#####20.64286#####28
-Klaipeda#####20.53846#####65
-Tielt#####20.51282#####39
-Callao#####20.50794#####63
-Iseghem#####20.48#####25
-Oberhausen#####20.46875#####32
-Elseneur#####20.46429#####28
-Asuncion#####20.4633#####218
-Maracay#####20.44#####25
-Barakaldo#####20.4375#####48
-Brasilia#####20.43662#####71
-Turnhout#####20.35#####120
-Prefecture d'Osaka#####20.33333#####36
-Grozny#####20.26316#####38
-Ribeirao#####20.14286#####35
-Kristiansand#####20.10938#####64
-Landskrona#####20.03704#####27
-Hokkaido#####20.02247#####89
-Fredericia#####19.92593#####27
-Zilina#####19.91176#####34
-Puerto Limon#####19.83333#####30
-Skopje#####19.77273#####154
-Norrkoping#####19.73333#####60
-Kotka#####19.72222#####36
-Bekescsaba#####19.72#####25
-Niamey#####19.69767#####86
-Leoben#####19.65385#####26
-Santos#####19.6#####75
-Poperinge#####19.48485#####33
-Hartlepool#####19.44444#####27
-Ninove#####19.4375#####32
-Eskilstuna#####19.40625#####32
-Lattaquie#####19.31034#####29
-Deurne#####19.25926#####27
-Purmerend#####19.14286#####35
-Pori#####18.93103#####29
-Chlef#####18.89362#####47
-Gifu#####18.88571#####35
-Benghazi#####18.86207#####29
-Esbjerg#####18.82927#####41
-Bourgas#####18.82051#####39
-Bermudes#####18.81481#####27
-Baoding#####18.78571#####28
-Uster#####18.76923#####26
-Molde#####18.7561#####41
-Lillehammer#####18.75385#####65
-Duffel#####18.74194#####31
-Belem#####18.71429#####49
-San Salvador (Salvador)#####18.58333#####72
-Konya#####18.57143#####28
-Benin City#####18.55814#####43
-Karaganda#####18.52778#####36
-Maputo#####18.5#####92
-Matosinhos#####18.5#####28
-Bassano#####18.5#####32
-Mendoza#####18.42308#####52
-Oulu#####18.42308#####78
-Braga#####18.40909#####44
-Larvik#####18.37931#####29
-Civilisation maya#####18.21212#####33
-Nowy#####18.2#####25
-Niksic#####18.18919#####37
-Voorburg#####18.10345#####29
-Torshavn#####17.97826#####46
-Gizeh#####17.94737#####38
-Stellenbosch#####17.88#####25
-Pays Bas (pays constitutif)#####17.85417#####48
-Vaasa#####17.80435#####46
-Ulsan#####17.75862#####29
-Cacak#####17.75#####48
-Tampere#####17.73832#####107
-Freetown#####17.68182#####66
-Vipiteno#####17.68#####25
-Oblast#####17.65789#####38
-Oulan Bator#####17.65574#####61
-Maroussi#####17.5#####26
-Koweit (ville)#####17.38028#####71
-Iles#####17.22449#####49
-Shkoder#####17.20755#####53
-Mombasa#####17.2#####30
-Fredrikstad#####17.18919#####37
-Gavle#####17.18182#####33
-Kraljevo#####17.15152#####33
-Tauranga#####17.11765#####34
-Podgorica#####17.08621#####58
-Andorre la Vieille#####17.02041#####49
-Punta#####16.96552#####29
-Tcherkassy#####16.88889#####27
-Suita#####16.88#####25
-Paysandu#####16.84615#####26
-Windhoek#####16.82222#####90
-Zottegem#####16.75862#####29
-Zemun#####16.74359#####39
-Pardubice#####16.73077#####26
-Ostersund#####16.5#####28
-Celje#####16.46429#####56
-Colon#####16.42424#####33
-Abou#####16.36667#####30
-Bichkek#####16.36585#####41
-Banjul#####16.16667#####60
-Lahti#####16.08219#####73
-Koszalin#####16.0#####38
-Porsgrunn#####15.96429#####28
-Esmeraldas#####15.825#####40
-Monte#####15.72727#####33
-Benguela#####15.66667#####30
-Dalian#####15.65574#####61
-Campo#####15.61111#####36
-Barreiro#####15.58974#####39
-Parnu#####15.58696#####46
-Hussein Dey (commune)#####15.51351#####37
-Tizi#####15.5#####58
-Vitoria#####15.42424#####33
-Concepcion#####15.18519#####54
-Hawick#####15.06667#####30
-Rijeka#####14.89#####100
-Kuopio#####14.76667#####60
-El Harrach#####14.73333#####30
-Luanda#####14.69697#####264
-Vila Nova de Gaia#####14.54545#####44
-Prefecture d'Aichi#####14.53846#####26
-Santo Andre (Sao Paulo)#####14.5#####30
-Varna#####14.30189#####53
-Rovaniemi#####14.23077#####39
-Krusevac#####14.11765#####34
-Almelo#####13.97297#####37
-Kranj#####13.875#####88
-Zaporijjia#####13.81633#####49
-Pavlodar#####13.76923#####26
-Panevezys#####13.7027#####37
-Zakopane#####13.59649#####57
-Jilemnice#####13.5#####30
-Zaporijia#####13.0#####27
-Sport#####12.83333#####48
-Pleven#####12.475#####40
-Jilin#####12.46875#####32
-Sundsvall#####12.21875#####32
-Prefecture de Fukuoka#####12.21429#####28
-Chimkent#####11.06452#####31
-Szolnok#####10.80645#####31
-Alajuela#####10.55172#####29
-Cuiaba#####10.22222#####27
-La Ceiba (Honduras)#####9.46429#####28
-Kotor#####9.38462#####26
+Brookline (Massachusetts)#####1619.75862#####29
+La Mecque#####1378.4433#####97
+Leytonstone#####1340.48387#####31
+Medine#####1311.66129#####62
+Omaha (Nebraska)#####1291.43077#####65
+Summit#####1228.15385#####26
+Brunn#####1222.67857#####28
+Dillenburg#####1193.0#####35
+Modesto#####1176.32258#####31
+Saint Joseph (Missouri)#####1174.02941#####34
+Pomona#####1154.32#####25
+Chiswick#####1149.9#####30
+Eisenach#####1135.23077#####39
+Kenosha#####1132.40741#####27
+Oak Park (Illinois)#####1117.78788#####33
+Sparte#####1116.84615#####39
+Chennai#####1061.84848#####33
+Richmond (Londres)#####1056.24138#####29
+Dartford#####1056.0#####33
+Ludwigshafen#####1050.37037#####27
+Reading (Berkshire)#####1045.11905#####42
+White Plains (New York)#####1043.0#####37
+Gary#####1041.44444#####36
+Hamamatsu#####1034.81818#####55
+Yokosuka#####1029.16216#####37
+Utsunomiya#####1025.22222#####27
+Petropolis#####1020.14815#####27
+Jalandhar#####1014.52#####25
+Lexington#####1007.34483#####58
+Lowell (Massachusetts)#####1007.02941#####34
+Athens#####1004.28#####25
+Sigmaringen#####1002.0#####31
+Halmstad#####996.8#####45
+Burbank#####996.32308#####65
+Saginaw#####994.27586#####29
+Beverly#####992.7931#####29
+Bombay#####989.96685#####362
+Augusta#####988.7#####40
+Lexington (Kentucky)#####981.81818#####33
+Suwon#####978.74286#####35
+Vaxjo#####975.7037#####27
+Lemberg#####974.86111#####36
+Herat#####971.5625#####32
+Senigallia#####969.53333#####30
+Compton#####968.82051#####39
+Salto#####966.53846#####39
+Newton (Massachusetts)#####966.52#####50
+Missoula#####966.19231#####26
+Kawasaki#####960.60976#####41
+Hampstead (Londres)#####958.33607#####122
+Tel Aviv#####956.19403#####67
+Stettin#####954.75758#####33
+Allentown#####951.75758#####33
+Wolfenbuttel#####943.69048#####42
+Huntington#####942.95522#####67
+Shizuoka#####939.88636#####88
+Hildburghausen#####933.62963#####27
+Bassorah#####932.55814#####43
+Marietta#####932.0#####32
+Busan#####931.66667#####60
+Maceio#####928.87879#####33
+Kaifeng#####928.84#####25
+Tiflis#####928.63889#####36
+Edirne#####919.79412#####34
+Buckeburg#####919.5#####26
+Solna#####917.84746#####59
+Teaneck#####916.23333#####30
+Lwow#####914.61538#####26
+Sutton#####909.8125#####32
+Lanus#####908.74286#####35
+Laeken#####908.43478#####46
+Kharkov#####907.93548#####31
+Urbana#####906.14815#####27
+Daegu#####903.56863#####102
+Toyonaka#####900.65385#####26
+Evanston#####900.0#####83
+Suita#####899.68#####25
+Cobourg#####894.97143#####70
+Duluth#####894.93939#####33
+Bad Arolsen#####890.6875#####32
+San Jose#####889.65714#####35
+Harlow#####888.2#####30
+Palo#####882.37288#####59
+Fort Lauderdale#####876.83824#####68
+Honolulu#####876.07658#####222
+Bridgeport (Connecticut)#####874.31429#####35
+Cuzco#####873.62162#####37
+Neustrelitz#####872.46875#####32
+Jeonju#####869.52941#####34
+Sanremo#####867.42857#####28
+Incheon#####865.49451#####91
+Cheongju#####864.81481#####27
+Sotchi#####863.92308#####52
+Wilkes Barre#####863.23529#####34
+Pune#####859.66667#####42
+Torgau#####859.37931#####29
+Yonkers#####857.94203#####69
+Changchun#####857.63158#####38
+Amritsar#####856.44444#####27
+Paddington#####854.92208#####77
+Doncaster#####853.0625#####32
+Enugu#####850.67647#####34
+Englewood#####850.40541#####37
+Tivoli#####849.55172#####29
+Ashford#####847.98#####50
+Hollywood#####847.37255#####153
+Breslau#####845.83529#####85
+Gotha (Allemagne)#####844.29851#####67
+Woodstock#####843.14286#####28
+Hyderabad#####841.2549#####51
+Monte Carlo#####840.17241#####29
+Brampton#####839.82#####50
+Newark (New Jersey)#####839.5119#####168
+Dessau (Saxe Anhalt)#####839.11828#####93
+Plzen#####835.77778#####36
+Springfield#####835.3211#####109
+Malatya#####835.0#####25
+Okazaki#####832.88462#####26
+Chiba#####829.37647#####85
+Detmold#####829.21951#####41
+Haderslev#####828.84#####25
+New Delhi#####827.40187#####107
+Taganrog#####826.6#####40
+Hammersmith#####824.98305#####118
+Gwangju#####823.91803#####61
+Flushing#####822.08333#####36
+Celle (Allemagne)#####820.26667#####30
+Amberg#####818.09375#####32
+Omaha#####818.02299#####87
+Harlem#####816.36735#####98
+Changsha#####816.14815#####27
+Austin#####815.97297#####111
+Trabzon#####815.36066#####61
+Huntsville#####815.30303#####33
+East Orange#####814.71429#####28
+Bad Homburg vor der Hohe#####814.33333#####42
+Torrance#####812.59322#####59
+Meissen#####812.32653#####49
+Mogadiscio#####812.25#####40
+Antioche#####811.35556#####45
+Lafayette#####810.91892#####37
+Kitakyushu#####809.90909#####55
+Lund#####809.85417#####48
+Mount Vernon (New York)#####809.18182#####44
+Zamora#####807.42857#####35
+Saitama#####806.67708#####96
+Boukhara#####806.19231#####26
+Bagdad#####805.62116#####293
+Ribeirao#####805.22857#####35
+Wilmington#####804.46575#####73
+Delhi#####804.4625#####80
+Berlin Ouest#####803.97101#####69
+Dessau#####803.65385#####26
+Long Beach (Californie)#####802.93048#####187
+Twickenham#####802.55556#####27
+Camberwell#####802.31818#####44
+Dnipropetrovsk#####802.26087#####46
+Orel#####801.75862#####29
+Kayseri#####800.5#####38
+Monchengladbach#####799.25#####60
+Leningrad#####799.13504#####274
+Porvoo#####797.75862#####29
+Oita#####797.19231#####26
+Morristown#####796.90476#####42
+Constantinople#####796.08455#####615
+Ismailia#####795.25926#####27
+Los Angeles#####794.98771#####2359
+Kothen (Anhalt)#####794.07692#####26
+Queens#####792.31621#####253
+Shrewsbury#####791.14035#####57
+Cleves#####790.90909#####33
+Francfort#####789.69697#####33
+Laguna#####789.55172#####29
+Virginia#####789.10526#####38
+Lorenskog#####789.0#####31
+Phnom Penh#####788.79167#####48
+Milton#####788.25#####36
+Amarillo#####786.72414#####29
+Cetinje#####786.13158#####38
+Berkeley#####785.54464#####112
+Vejle#####784.58491#####53
+Landskrona#####784.40741#####27
+Tulsa#####783.86441#####118
+Luoyang#####781.38462#####26
+Weimar#####780.20968#####124
+Middletown#####779.26471#####34
+Rangoun#####779.16667#####36
+Vantaa#####779.16667#####30
+Greenwich#####777.32895#####76
+Wiener Neustadt#####774.7#####30
+Worcester (Massachusetts)#####772.36538#####52
+Bethlehem#####771.11111#####27
+Islington#####770.98246#####57
+Glostrup#####769.96#####25
+Epsom#####768.68293#####41
+Schenectady#####767.78846#####52
+Viljandi#####766.61538#####26
+Darmstadt#####766.44444#####216
+Ulsan#####766.37931#####29
+Savannah (Georgie)#####766.2#####45
+Lambeth#####766.0566#####53
+Pristina#####765.90909#####44
+Green Bay#####765.59259#####27
+Solingen#####765.19231#####52
+Van#####763.97222#####36
+Belleville#####760.35714#####42
+New Rochelle#####759.54#####50
+Southport#####759.27027#####37
+Gainesville#####759.04651#####43
+Botosani#####758.92593#####27
+Hangzhou#####758.80556#####72
+Tchernivtsi#####758.28169#####71
+Bethesda#####757.70968#####31
+Rome antique#####756.91827#####416
+Karlsruhe#####756.21941#####237
+Farmington#####756.07407#####27
+Xi'an#####755.51163#####43
+Karachi#####755.28723#####94
+Landshut#####754.93333#####30
+Indianapolis#####753.67153#####274
+Madras#####753.51695#####118
+Fort Worth#####753.34109#####129
+Norwalk#####751.6129#####31
+South Bend (Indiana)#####750.44186#####43
+Eskilstuna#####750.28125#####32
+Umea#####750.2093#####43
+Anaheim#####750.03636#####55
+Odense#####749.39837#####123
+New Haven#####749.37895#####190
+Daejeon#####748.68182#####44
+Oak#####748.34146#####41
+Almada#####748.33333#####33
+Drammen#####747.80357#####56
+Southampton#####747.54762#####126
+Meiningen#####746.85294#####34
+Chios#####746.5641#####39
+Baden (Autriche)#####746.39286#####28
+Kitzbuhel#####746.24#####25
+Stockholm#####745.64384#####1095
+Gentofte#####745.51163#####43
+Danderyd#####745.08#####25
+Ichikawa#####745.0#####25
+Campinas#####744.83721#####86
+Midland#####744.52#####25
+Royal Leamington Spa#####743.27273#####33
+Fresno (Californie)#####742.0#####41
+Katmandou#####741.82456#####57
+Cambridge (Massachusetts)#####741.33333#####78
+Sakai#####741.18868#####53
+Pasadena#####741.0679#####162
+Berkeley (Californie)#####740.92308#####39
+Peshawar#####740.67742#####31
+Colorado Springs#####740.63077#####65
+Hachioji#####739.92#####25
+Miami#####739.18209#####335
+Qingdao#####739.13636#####44
+Sassari#####739.12821#####39
+Hoorn#####738.53333#####45
+Campo#####736.61111#####36
+Gelsenkirchen#####736.59494#####79
+Manhattan#####736.20813#####418
+New York#####735.59278#####5820
+Sonderborg#####735.23333#####30
+Knoxville#####734.7027#####37
+Lancaster#####733.98246#####57
+Alexandria#####732.82558#####86
+Harrow#####732.77273#####44
+Gliwice#####731.92105#####38
+Saratov#####731.89535#####86
+Pekin#####731.78025#####314
+Osnabruck#####731.14035#####57
+Hanau#####730.93103#####87
+Chicago#####730.70588#####2295
+Kumamoto#####730.42029#####69
+Salford#####730.40741#####81
+Omsk#####729.45833#####72
+Kalmar#####729.27586#####29
+La Ceiba (Honduras)#####728.96429#####28
+San Bernardino (Californie)#####728.91176#####34
+Raleigh#####728.80723#####83
+Riyad#####728.51493#####134
+Cedar#####728.25806#####31
+Little Rock#####727.78261#####92
+Caserte#####727.7027#####37
+Stockport#####727.67568#####74
+Torquay#####726.66667#####39
+Tacoma#####726.2451#####102
+Comte d'Orange (Californie)#####725.43243#####37
+Tambov#####725.39286#####28
+Pittsburgh#####725.1002#####499
+Oakland#####724.55978#####184
+Harrisburg#####724.41509#####53
+Barking#####724.36667#####30
+Atlanta#####724.20155#####516
+Tirana#####723.82031#####128
+Cassel#####723.55882#####68
+Normandie#####721.52083#####48
+Alesund#####721.22727#####44
+Windsor (Royaume Uni)#####720.83784#####37
+Eutin#####720.8#####25
+Aurora#####720.71795#####39
+Jytomyr#####720.56522#####46
+Houston#####720.44507#####537
+Hvidovre#####720.30769#####26
+Spokane#####719.70833#####48
+Linkoping#####719.5#####40
+Prenzlau#####719.26923#####26
+Seoul#####719.20819#####879
+Horsens#####719.20513#####39
+Memphis#####719.16949#####177
+Batoumi#####718.71875#####32
+Canton (Ohio)#####718.21429#####42
+Wimbledon#####718.19565#####46
+Salzbourg#####718.00602#####166
+Maidstone#####717.1087#####46
+Helsingborg#####717.0#####79
+Santa Monica#####716.89362#####47
+Walsall#####716.65854#####41
+Memphis (Tennessee)#####716.64912#####114
+Blackheath#####716.54839#####31
+Blackpool#####716.2381#####63
+New Brunswick (New Jersey)#####716.21739#####46
+Montclair#####715.44828#####29
+Greenville#####715.33333#####57
+Naha#####715.33333#####30
+Fairfield#####715.2069#####29
+Basingstoke#####715.16667#####36
+Santa#####714.4943#####702
+Macclesfield#####714.13333#####30
+Washington#####713.22294#####619
+Kano#####712.15385#####39
+Soumy#####712.08#####25
+Titograd#####711.32258#####31
+Pavie#####711.22807#####114
+Wuhan#####711.02#####50
+San Francisco#####710.48315#####890
+Ansbach#####710.19277#####83
+Baerum#####709.84#####75
+Lodi#####709.14545#####55
+La Plata#####708.85849#####106
+Duren#####706.91429#####35
+Lincoln (Nebraska)#####706.3125#####32
+Asuncion#####705.79817#####218
+Rosario#####705.78229#####271
+Kobe#####705.57407#####162
+Albuquerque#####705.44086#####93
+Walnut#####705.17857#####28
+Lucknow#####704.8#####30
+San Antonio#####704.78889#####180
+Hiroshima#####704.03846#####130
+Chelsea#####703.88#####25
+Arezzo#####702.6413#####92
+Eibar#####702.48148#####27
+Pinsk#####701.24242#####33
+Castellammare#####700.96296#####27
+Clapham#####700.51515#####33
+Oufa#####700.35385#####65
+Detroit#####700.0368#####462
+Baoding#####699.96552#####29
+Charleston#####699.92754#####69
+Bury St Edmunds#####699.87097#####31
+Mobile#####698.52632#####38
+Esmeraldas#####698.275#####40
+Santiago de Cuba#####697.92308#####39
+Arlington#####697.86364#####66
+Carthagene#####697.83333#####42
+Champaign#####697.78378#####37
+Fukuoka#####697.7451#####153
+Coblence#####697.34906#####106
+Wiesbaden#####697.2518#####139
+Bissau#####696.9899#####99
+Bergen (Norvege)#####696.6625#####80
+Fiesole#####696.15385#####26
+Brunico#####696.0#####37
+Norrkoping#####695.6#####60
+Alma Ata#####695.5#####32
+Jacksonville (Floride)#####695.4375#####48
+Launceston#####695.3871#####31
+Bronx#####695.27586#####464
+Dayton#####695.1125#####80
+Koweit (ville)#####695.01408#####71
+Glendale#####692.58333#####72
+Puerto Limon#####692.5#####30
+Staten#####692.26923#####52
+Shkoder#####692.15094#####53
+Kettering#####692.14286#####28
+Juvisy sur Orge#####692.04651#####43
+Modene#####691.64407#####177
+Stepney#####691.63889#####36
+Saint Raphael#####691.40741#####27
+Tartu#####691.30519#####154
+Tampa#####690.59091#####110
+Irkoutsk#####690.375#####64
+Waterbury#####690.2963#####27
+Charlotte#####689.93069#####101
+Drogheda#####689.84615#####26
+Ourense#####689.75#####28
+Rousse#####688.5#####30
+Douchanbe#####688.17647#####34
+San Mateo (Californie)#####687.88889#####27
+Hillingdon#####687.65385#####26
+Tallahassee#####687.64865#####37
+Sainte Foy les Lyon#####687.61765#####34
+Asheville#####686.7#####30
+Kansas City (Kansas)#####686.51923#####52
+Bournemouth#####686.3#####50
+Slough#####686.20513#####39
+Wakayama#####685.90909#####33
+Rudolstadt#####685.07692#####39
+Lahore#####684.85088#####114
+Bakersfield#####684.59524#####42
+Rome#####684.25436#####3782
+Pusan#####684.15054#####93
+Ealing#####684.08333#####36
+Guayaquil#####684.00769#####130
+Chesterfield#####683.22449#####49
+Altenbourg#####682.74468#####47
+Portsmouth#####682.39752#####161
+Nanaimo#####681.41379#####29
+London#####681.18#####100
+Wloclawek#####681.13333#####30
+Pont Audemer#####680.48148#####27
+Jelgava#####680.22857#####35
+Bristol (Angleterre)#####680.19802#####101
+Bayreuth#####679.68182#####66
+Zaandam#####679.47727#####44
+Kansas City (Missouri)#####679.45946#####259
+Paramaribo#####679.40179#####112
+Austin (Texas)#####679.2963#####27
+Columbus#####679.10968#####155
+Oakland (Californie)#####678.72656#####128
+Tver#####678.4#####35
+Medellin#####678.04624#####173
+Newport#####677.55405#####148
+Heidelberg#####677.35135#####222
+Setagaya#####676.79032#####62
+Springfield (Massachusetts)#####676.21277#####47
+Palm#####675.62857#####35
+Petah#####675.3#####30
+Toledo#####675.07317#####82
+San Diego#####674.81682#####333
+Nova#####674.80952#####63
+Trenton (New Jersey)#####674.32143#####28
+Royal Tunbridge Wells#####673.58065#####31
+Kurume#####673.4#####25
+Kaduna#####672.20408#####49
+Ningbo#####672.2#####30
+Livingston#####671.7234#####47
+Buffalo#####671.42857#####147
+Avellaneda#####671.17391#####46
+Bretagne#####671.14286#####49
+Montbard#####670.96667#####30
+Nicosie#####670.875#####96
+Walthamstow#####670.46341#####41
+La Corogne#####669.91667#####96
+Cremone#####669.82677#####127
+Waco (Texas)#####669.64#####25
+Siegen (Allemagne)#####669.32258#####31
+Giessen#####668.7013#####77
+Oldham#####668.60811#####74
+Terre Haute#####668.54545#####33
+Flint#####668.54237#####59
+Hartford#####668.53521#####71
+Jerusalem#####668.52819#####337
+Sioux City#####668.21622#####37
+Morioka#####667.41935#####31
+Decatur#####667.10638#####47
+Bridgeport#####667.03226#####31
+Ballymena#####667.0#####26
+Kaliningrad#####666.69444#####36
+Scranton (Pennsylvanie)#####666.68966#####29
+Dallas#####666.14645#####437
+Rockville#####665.7#####30
+Las Vegas#####665.63107#####103
+Panama (ville)#####664.9507#####142
+Boston#####664.3634#####1131
+Birmingham (Alabama)#####664.1#####60
+Espoo#####663.95775#####71
+Plock#####663.8#####25
+Lviv#####662.94815#####270
+Lecco#####662.7619#####42
+Mindelo#####662.5#####28
+Paterson (New Jersey)#####661.46512#####43
+Sacramento#####660.39815#####216
+Nagyvarad#####660.2#####25
+West Palm Beach#####659.46429#####28
+Oklahoma City#####659.27731#####119
+Coventry#####658.8#####105
+Tianjin#####658.74725#####91
+Calcutta#####658.60656#####244
+Chantilly#####658.40625#####32
+Portland#####658.02927#####205
+Bury (Grand Manchester)#####657.65385#####52
+Kumasi#####656.82353#####85
+Elizabeth#####656.71875#####32
+Alexandrie (Italie)#####656.67308#####52
+Akron#####656.33871#####62
+Cheltenham#####656.325#####80
+Saint Louis (Missouri)#####656.18429#####624
+Chester#####656.13043#####69
+Westminster#####656.0339#####177
+Potsdam#####655.62115#####227
+Spokane (Washington)#####655.60606#####33
+Newark#####655.42466#####146
+Bangalore#####655.41176#####68
+Lubbock#####655.35714#####28
+Crema#####655.15385#####26
+Saint Paul (Minnesota)#####654.52273#####132
+Glendale (Californie)#####654.36667#####30
+Toledo (Ohio)#####654.11364#####44
+La Nouvelle Orleans#####653.99791#####478
+Spire#####653.88#####25
+Kaiserslautern#####653.52273#####44
+San Jose (Californie)#####653.50746#####134
+Cassel (Hesse)#####653.35461#####141
+Oslo#####653.06216#####740
+Pise#####652.71078#####204
+Cesena#####652.475#####80
+Astrakhan#####652.37143#####35
+Mantoue#####652.10843#####166
+Aomori#####652.03333#####30
+Savone#####651.49231#####65
+Pyongyang#####651.20561#####107
+Jacksonville#####651.09434#####106
+Northampton#####650.63158#####95
+Niigata#####650.46809#####47
+Rehovot#####650.32258#####31
+Fredericia#####650.2963#####27
+Goteborg#####650.16621#####367
+Mbanza Kongo#####649.10345#####29
+Hartford (Connecticut)#####649.05319#####94
+Cambridge#####649.0302#####298
+Eldoret#####648.68#####25
+Seattle#####648.60291#####413
+Wandsworth#####648.47368#####38
+Silkeborg#####648.27027#####37
+Gold#####647.89474#####38
+Hanovre#####647.82804#####378
+Cincinnati#####647.82456#####399
+Montgomery#####647.61111#####36
+Inglewood#####647.43396#####53
+Belo#####647.22857#####105
+Neuruppin#####646.96154#####26
+Trenton#####646.73529#####68
+Oviedo#####646.68571#####105
+Tucson#####646.0#####78
+Sapporo#####645.5534#####103
+Grand Rapids (Michigan)#####645.49438#####89
+Shenyang#####645.20312#####64
+Livourne#####644.89767#####215
+Braila#####644.72093#####43
+Wilmington (Delaware)#####644.71795#####39
+Burnaby#####644.4#####25
+Vasteras#####644.375#####56
+Kensington (Londres)#####644.3125#####128
+Carthage#####644.25397#####63
+Las Palmas de Gran Canaria#####644.07407#####54
+Milwaukee#####643.98052#####308
+Pendjab#####643.93548#####31
+Topeka#####643.49123#####57
+Marylebone#####642.97701#####87
+Sliven#####642.5#####26
+Leicester#####642.375#####200
+Suhl#####641.94737#####38
+Belo Horizonte#####641.875#####32
+Saint Marin#####641.73134#####67
+Preston (Lancashire)#####641.68571#####35
+Kiel#####641.67333#####150
+Riverside#####641.65385#####52
+Coimbra#####641.26316#####95
+Simferopol#####640.74194#####62
+Ratisbonne#####640.68103#####116
+Saigon#####640.67347#####49
+Brooklyn#####640.46999#####1666
+Toula#####639.93651#####63
+Fairfax#####639.74074#####27
+Iena#####639.5641#####78
+Nishinomiya#####639.5#####34
+Bedford#####639.44828#####58
+Philadelphie#####639.41961#####1642
+Silver#####639.12195#####41
+Skopje#####638.95513#####156
+Vaduz#####638.9#####30
+Ponte#####638.42308#####26
+Patras#####638.28846#####52
+Reykjavik#####638.17219#####302
+Irvine#####637.84286#####70
+Zwolle#####637.68519#####54
+Dantzig#####637.64444#####45
+Larvik#####637.55172#####29
+Orenbourg#####637.15625#####32
+El Paso (Texas)#####636.97101#####69
+Columbia#####636.81818#####77
+Saint Jacques de Compostelle#####636.57143#####56
+Jackson#####636.40909#####88
+Poltava#####636.38596#####57
+Penzance#####636.08#####25
+Schwerin#####636.03158#####95
+Vinnytsia#####636.0#####36
+Wimbledon (Londres)#####635.91892#####37
+Nijni Novgorod#####635.19792#####96
+Evanston (Illinois)#####635.11628#####43
+Wittemberg#####635.1087#####46
+Romford#####634.7234#####47
+Bochum#####634.25333#####75
+Pesaro#####634.0#####81
+Baltimore#####633.63972#####569
+Maracay#####633.4#####25
+Jersey City#####632.86154#####65
+Lincoln#####632.64103#####78
+Orlando#####632.51948#####77
+Rimini#####632.23894#####113
+Machhad#####631.82857#####35
+Guadalajara#####631.3432#####169
+Rostov sur le Don#####631.22481#####129
+Copenhague#####631.16821#####1189
+Santos#####630.97468#####79
+Reading (Pennsylvanie)#####630.77778#####45
+Deux Ponts#####630.7381#####42
+Yokohama#####630.68872#####257
+Porto Alegre#####630.56452#####62
+Mikkeli#####630.42308#####26
+Scarborough#####630.25926#####81
+Wichita#####630.22609#####115
+Colon#####630.18182#####33
+Kiev#####630.12329#####657
+Curitiba#####629.85417#####96
+Oulan Bator#####629.77419#####62
+Samara#####629.44828#####58
+Taunton#####629.35135#####37
+Amstelveen#####629.15#####40
+Sheffield#####628.97909#####287
+Prague#####628.62184#####1264
+Lawrence#####628.5#####32
+Riga#####628.42256#####523
+Charleston (Caroline du Sud)#####628.09722#####72
+Leoben#####627.80769#####26
+Pampelune#####627.43367#####196
+York#####626.72327#####159
+Vilnius#####626.71477#####298
+Mission#####626.66667#####27
+Wels#####626.61702#####47
+Melilla#####626.59259#####27
+Bad Kreuznach#####626.37037#####27
+Minneapolis#####626.13006#####346
+Saint Domingue#####626.10959#####73
+Greensboro#####626.10909#####55
+Cochabamba#####625.36842#####38
+Huddersfield#####625.28788#####66
+Orebro#####625.10256#####78
+Reggio de Calabre#####624.67568#####37
+Monroe#####624.675#####40
+Arequipa#####624.61702#####47
+Konigsberg#####624.54902#####255
+Urbino#####624.28788#####66
+Tallinn#####624.28457#####376
+Rotherham#####624.28125#####32
+Londres#####624.0832#####6466
+Skelleftea#####623.73077#####26
+Birkenhead#####622.84146#####82
+Canterbury#####622.8209#####67
+Newport (Rhode Island)#####622.8125#####32
+Mataro#####622.56757#####37
+Shanghai#####622.42623#####366
+Paysandu#####622.30769#####26
+Graz#####622.08481#####283
+Kragujevac#####622.04082#####49
+Des Moines (Iowa)#####622.0#####79
+Taipei#####621.95041#####121
+Salt Lake City#####621.86802#####197
+Soweto#####621.81159#####69
+Sarasota#####621.48#####25
+Soisy sous Montmorency#####621.02703#####37
+Kherson#####621.0#####59
+Madrid#####620.9821#####2067
+Las Palmas de Grande Canarie#####620.84127#####63
+Oldenbourg#####620.59524#####84
+Ibadan#####620.5#####64
+Kanagawa#####620.5#####44
+Aschaffenbourg#####620.39583#####48
+Nassau#####620.37288#####59
+Waterford#####620.02941#####34
+Eastbourne#####620.0#####47
+Carlsbad#####619.84615#####26
+Syracuse (New York)#####619.60526#####38
+Aldershot#####619.26829#####41
+Whittier#####619.25#####28
+Stavanger#####618.9375#####96
+Gavle#####618.87879#####33
+Baden Baden#####618.65217#####69
+Montevideo#####618.58918#####813
+Syracuse#####618.31944#####144
+Louisville (Kentucky)#####618.17273#####110
+Rocourt#####617.81081#####37
+Shreveport#####617.60759#####79
+Munich#####617.60157#####1270
+St. Petersburg#####617.47727#####44
+Akureyri#####617.33333#####27
+Roskilde#####617.22727#####66
+Ravenne#####616.7094#####117
+Catalogne#####616.47917#####48
+Venise#####616.31499#####927
+Funchal#####616.0#####54
+Reus#####615.58491#####53
+Monrovia#####615.43939#####66
+Arabie#####615.03636#####55
+Suginami#####614.82857#####35
+Manille#####614.56684#####187
+Clamecy (Nievre)#####614.34483#####29
+Poole#####614.0#####36
+Fresno#####614.0#####59
+Camden#####613.975#####80
+Annaberg Buchholz#####613.84#####25
+Boras#####613.39535#####43
+Vienne (Autriche)#####613.38855#####2656
+Bursa#####613.32#####75
+Cuiaba#####613.18519#####27
+Port Harcourt#####612.87805#####41
+Parnu#####612.84783#####46
+Malmo#####612.60541#####185
+Richmond#####612.5894#####151
+Loutsk#####612.26923#####26
+Louisville#####612.24265#####136
+Berlin Est#####612.04854#####103
+Gorki#####612.03125#####32
+Innsbruck#####611.41129#####248
+Baton Rouge#####611.36207#####58
+Burlington#####611.2807#####57
+Mannheim#####611.25514#####243
+Vladivostok#####611.09524#####42
+Ann Arbor#####610.95349#####43
+Brunswick (Basse Saxe)#####610.5082#####122
+Salisbury#####610.0#####55
+Wolverhampton#####609.85263#####95
+Ferrol (Espagne)#####609.78125#####32
+Kyiv#####609.69231#####26
+Heerenveen#####609.65385#####26
+Heraklion#####609.49123#####57
+Bolton (Grand Manchester)#####609.48718#####39
+Novo mesto#####609.0625#####32
+Savannah#####608.975#####40
+Ferrare#####608.512#####250
+Poissy#####608.47826#####92
+Dunfermline#####608.21429#####42
+Bradford#####608.07843#####153
+Sidcup#####608.04#####25
+Melbourne#####607.88364#####825
+Santa Fe (Argentine)#####607.46667#####30
+Neath#####607.42553#####47
+Rochdale#####606.97561#####41
+Dnipro#####606.82051#####78
+Foggia#####606.44118#####34
+Kyoto#####606.25788#####349
+San Juan (Porto Rico)#####606.18182#####99
+Hue#####606.0#####39
+Cleveland#####605.02403#####541
+Sundsvall#####604.84375#####32
+Kingston upon Thames#####604.74324#####74
+Detroit (Michigan)#####604.73927#####303
+Winchester#####604.60377#####53
+Plovdiv#####604.55833#####120
+Danemark (pays constitutif)#####604.55224#####67
+Anchorage#####604.42857#####42
+Minsk#####604.1631#####374
+Santander (Espagne)#####603.97872#####47
+Luton#####603.7931#####58
+Apeldoorn#####603.64516#####31
+Kaboul#####602.92517#####147
+Maribor#####602.3908#####87
+Jyvaskyla#####602.31818#####44
+Nottingham#####602.29185#####233
+Trente (Italie)#####601.66667#####39
+Uppsala#####601.17391#####115
+Beckenham#####600.85294#####34
+Hampton#####600.67857#####28
+Esbjerg#####600.58537#####41
+Portland (Oregon)#####600.20408#####98
+Tbilissi#####600.19376#####609
+Constance (Allemagne)#####600.0#####37
+Lahti#####599.87629#####97
+Breme#####599.52427#####206
+Almere#####598.84615#####26
+Rzeszow#####598.5#####36
+Smolensk#####598.28#####50
+Kamakura#####597.84375#####32
+Stuttgart#####597.64453#####512
+Klagenfurt#####597.6375#####80
+Haugesund#####597.28205#####39
+Norfolk (Virginie)#####596.96774#####93
+Erlangen#####596.87234#####47
+Tarnow#####596.86047#####43
+Halle sur Saale#####596.83108#####148
+Badajoz#####596.82222#####45
+Oxford#####596.80282#####284
+Saint Petersbourg#####596.65966#####1428
+Fort Wayne (Indiana)#####596.625#####48
+Columbus (Ohio)#####596.45205#####73
+Salem#####596.17647#####51
+Merano#####596.0#####41
+Nara#####595.94595#####37
+Sosnowiec#####595.78571#####28
+Berlin Charlottenbourg#####595.2931#####58
+Florence#####595.20914#####1444
+Rochester#####595.09091#####154
+Willemstad#####594.92683#####41
+Plaisance#####594.5641#####39
+Ann#####594.48148#####54
+Monza#####594.25758#####66
+Denver#####594.1672#####311
+Courbevoie#####594.14474#####152
+Bialystok#####594.125#####80
+Woluwe Saint Lambert#####593.94737#####38
+Segovie#####593.86667#####30
+Offenbach sur le Main#####593.84314#####51
+Aalborg#####593.47059#####68
+Ternopil#####593.46154#####26
+Peoria (Illinois)#####593.42857#####28
+Ouidah#####593.32143#####28
+Malaga#####593.26452#####155
+Targoviste#####593.19231#####26
+Barakaldo#####593.10417#####48
+Agrigente#####592.8#####25
+Skien#####592.70588#####34
+Bloomington#####592.65854#####41
+St Albans#####592.58#####50
+Achgabat#####592.30952#####42
+Frascati#####592.22222#####27
+Joinville (Haute Marne)#####592.18519#####27
+Split#####592.04059#####271
+Mayfair#####591.87805#####41
+Vladikavkaz#####591.82353#####34
+Hastings#####591.80645#####62
+Nagasaki#####591.50746#####67
+Woking#####591.36#####25
+Goiania#####591.3125#####32
+Tegucigalpa#####590.80303#####66
+San Jose (Costa Rica)#####590.63393#####112
+Bristol (Royaume Uni)#####590.55777#####251
+Wexford#####590.48485#####33
+Kaohsiung#####590.48148#####27
+Guatemala (ville)#####590.37594#####133
+Monterrey#####590.34234#####111
+Porto#####590.15341#####352
+Groningue (ville)#####589.98485#####66
+Stralsund#####589.87179#####39
+Dayton (Ohio)#####589.85484#####62
+Liestal#####589.74074#####27
+Daugavpils#####589.65714#####35
+Legnica#####589.25581#####43
+Lubeck#####589.24786#####117
+Odessa#####589.02771#####397
+Phoenix#####588.79755#####163
+Somerville (Massachusetts)#####587.93548#####31
+Huesca#####587.90625#####32
+Gorlitz#####587.38983#####59
+Pitesti#####587.29412#####34
+Borough londonien d'Enfield#####586.95238#####42
+Conegliano#####586.67568#####37
+Kfar Saba#####586.51613#####31
+Albany (New York)#####586.29412#####68
+Chongqing#####586.27536#####69
+Cracovie#####586.20755#####477
+Fayetteville#####586.16216#####37
+Randers#####586.0#####44
+Haarlem#####585.89655#####290
+Voronej#####585.79268#####82
+Harbin#####585.5125#####80
+Hamar#####585.4#####30
+Sarajevo#####584.79918#####244
+Trondheim#####584.79191#####173
+Saint Sebastien#####584.74834#####151
+Osijek#####584.7#####70
+Logrono#####584.5098#####51
+Gijon#####584.31818#####88
+Bellshill#####584.24561#####57
+Moscou#####584.15408#####3005
+Yogyakarta#####584.07143#####28
+Quito#####584.0#####92
+Vitoria Gasteiz#####583.59836#####122
+Benin City#####583.44186#####43
+Nashville#####583.17647#####187
+Nagoya#####583.04667#####150
+Peterborough#####582.97674#####43
+Wernigerode#####582.88462#####26
+Mersebourg#####582.67391#####46
+Bergisch#####582.08#####25
+Nazareth#####581.6#####45
+Tel Aviv Jaffa#####581.50855#####234
+Guantanamo#####581.45161#####31
+Ostrava#####581.18824#####85
+Khabarovsk#####580.375#####32
+Zwickau#####580.31667#####60
+Niteroi#####579.69355#####62
+Winston Salem#####579.63636#####55
+La Valette#####579.56818#####44
+Kagoshima#####579.50667#####75
+Olomouc#####579.48529#####68
+Asahikawa#####579.37931#####29
+Pescara#####579.11667#####60
+Haifa#####578.94079#####152
+Francfort sur le Main#####578.87191#####648
+Aarhus#####578.75#####184
+Guildford#####578.65#####80
+Utica (New York)#####578.17241#####29
+Asti#####577.90196#####51
+Princeton#####577.85106#####47
+Rio de Janeiro#####577.42857#####1064
+Canton (Chine)#####577.3#####70
+Prato#####577.25#####60
+Greifswald#####577.13725#####51
+Leeds#####576.91909#####309
+Jaffa#####576.725#####40
+Madison#####576.7#####100
+Mossoul#####576.61017#####59
+Long Island#####576.58824#####102
+Neuwied#####576.41176#####34
+Pula#####576.38889#####54
+Akron (Ohio)#####576.27273#####44
+Tokushima#####575.89655#####29
+Tonsberg#####575.82#####50
+Derry#####575.66129#####62
+Erfurt#####575.59184#####147
+Norwich#####575.5375#####160
+Lund (Suede)#####575.51852#####27
+Boulder#####575.5#####68
+Hendon#####575.48387#####31
+Kazan#####575.46341#####123
+Lerida#####575.46#####50
+Le Caire#####575.3488#####711
+Liverpool#####575.18623#####639
+Weissenfels#####575.13333#####30
+Pforzheim#####574.80597#####67
+Osaka#####574.79607#####407
+Perth#####574.6125#####240
+Bolton#####574.02381#####42
+Newcastle#####573.75936#####187
+Gorinchem#####573.4#####30
+Charlottesville#####572.93878#####49
+Tromso#####572.69231#####39
+Bergen#####572.41429#####140
+Brandebourg sur la Havel#####572.22222#####54
+Tachkent#####572.192#####250
+Concord#####572.13953#####43
+Prefecture de Hyogo#####572.02222#####45
+Lagos#####571.92072#####391
+Macao#####571.73333#####30
+Krasnoiarsk#####571.67089#####79
+Dresde#####571.59478#####575
+Niksic#####571.54054#####37
+Hambourg#####571.16527#####1077
+Szekesfehervar#####571.05#####40
+Lynn (Massachusetts)#####571.03448#####29
+Colchester#####571.03175#####63
+Valladolid#####570.73404#####188
+Salvador (Bahia)#####570.61029#####136
+Port d'Espagne#####570.55056#####89
+Terrassa#####570.4#####65
+Kirkcaldy#####570.37037#####27
+Kochi#####570.14634#####41
+Pilsen#####569.96203#####79
+Doha#####569.86275#####51
+Chattanooga#####569.84211#####57
+Bahia Blanca#####569.56098#####41
+Gibraltar#####569.40909#####44
+Chambray les Tours#####569.27273#####33
+Krasnodar#####569.09722#####72
+Cento#####569.07407#####27
+La Paz#####568.83333#####108
+Cairns#####568.43333#####30
+Fontenay aux Roses#####568.14286#####70
+Iowa City#####567.97222#####36
+Casale Monferrato#####567.58065#####31
+Minden#####567.15909#####44
+Wallasey#####567.0#####29
+Vigo#####566.9#####60
+Valmiera#####566.69231#####26
+Oberstdorf#####566.53846#####26
+Forli#####566.49505#####101
+Garmisch Partenkirchen#####566.2069#####58
+Stockton#####566.16216#####37
+Sendai#####566.07317#####82
+Dourdan#####566.0#####25
+Rockford#####566.0#####33
+Limassol#####565.88889#####45
+Barquisimeto#####565.77778#####27
+Quedlinbourg#####565.62963#####27
+Molde#####565.58537#####41
+Birmingham#####565.38562#####612
+Albany#####565.38028#####71
+Cienfuegos#####565.16129#####31
+Nagano#####565.04762#####42
+Helmond#####565.02941#####34
+Ceuta#####564.84211#####38
+Savillan#####564.84#####25
+Olsztyn#####564.74359#####39
+Hamm#####564.26829#####41
+Verone#####563.81716#####268
+Accra#####563.74462#####325
+Kosice#####563.22535#####71
+Johannesburg#####563.05195#####77
+Bouxwiller (Bas Rhin)#####562.65385#####26
+Turku#####562.65#####120
+Miskolc#####562.63333#####60
+Bassano del Grappa#####562.59375#####32
+Orange#####562.34545#####110
+Frejus#####561.74576#####59
+Alexandrie#####561.56778#####509
+Ostersund#####561.42857#####28
+Bratislava#####561.24275#####276
+Pribram#####561.10345#####29
+Lublin#####561.05051#####99
+Suzhou#####560.85366#####82
+Swindon#####560.2381#####42
+Belluno#####560.23333#####30
+Palerme#####560.19397#####531
+Hamilton#####560.10138#####217
+New Westminster#####559.9322#####59
+Tokyo#####559.90228#####2057
+Torun#####559.89831#####59
+Providence#####559.86735#####98
+Hildesheim#####559.86486#####74
+Ljubljana#####559.78344#####314
+Donetsk#####559.74737#####95
+Ioannina#####559.48485#####33
+Bakou#####559.48247#####599
+Red#####559.4#####30
+Buenos Aires#####559.30778#####1735
+San Salvador (Salvador)#####559.27778#####72
+Jos#####559.06667#####30
+Streatham#####559.0#####38
+Fulda#####559.0#####38
+Essen#####558.88542#####192
+Mansfield#####558.83333#####30
+Mississauga#####558.79688#####64
+Wuppertal#####558.73333#####75
+South Shields#####558.32692#####52
+Great Yarmouth#####558.11765#####34
+Inverness#####558.025#####40
+Dusseldorf#####557.89552#####402
+Caracas#####557.85637#####369
+Arnhem#####557.43363#####113
+Lansing#####556.86842#####38
+Stockton on Tees#####556.84444#####45
+Liberec#####556.82222#####45
+Mobile (Alabama)#####556.8125#####32
+Montreuil#####556.71318#####129
+Sverdlovsk#####556.25424#####59
+Warrington#####556.05405#####74
+Falaise (Calvados)#####556.0#####39
+Le Blanc Mesnil#####555.84#####50
+Aylesbury#####555.84#####25
+Akita#####555.6#####25
+Erevan#####555.52113#####284
+Lisbonne#####555.33902#####938
+Emden#####555.13793#####29
+Civitavecchia#####555.0#####29
+Cordoba#####554.57143#####133
+Jonkoping#####554.56522#####46
+Francfort sur l'Oder#####554.46575#####73
+Leyde#####554.34211#####228
+Jesenice#####554.08333#####36
+Torreon#####553.85185#####27
+Caroline#####553.74194#####31
+Halle#####553.62857#####35
+Milan#####553.4036#####1779
+Iasi#####553.33058#####121
+Sopron#####553.20588#####34
+Ipswich#####553.07292#####96
+Dublin#####553.05374#####1191
+Constanta#####553.01449#####69
+Lecce#####552.82609#####46
+Chieti#####552.75#####32
+Sabadell#####552.56566#####99
+Stamford#####552.10811#####37
+Passaic#####551.97059#####34
+Wesel#####551.82927#####41
+Saint Paul#####551.54762#####42
+Tolede#####551.35227#####88
+Gottingen#####550.98148#####108
+Chamalieres#####550.61111#####36
+Chelmsford#####550.49206#####63
+Tubingen#####550.4375#####80
+Tarente#####550.43396#####53
+Leipzig#####550.37937#####543
+Saint Pierre#####550.375#####64
+Novossibirsk#####550.04255#####94
+Baden#####550.025#####40
+Samarcande#####549.74419#####43
+Erzurum#####549.35714#####28
+La Canee#####549.22581#####31
+Plaisance (Italie)#####549.18033#####61
+Karlstad#####548.92593#####27
+Bloomsbury (Londres)#####548.92#####25
+Lillehammer#####548.89157#####83
+Sao Paulo#####548.64643#####280
+Torshavn#####548.54348#####46
+Brighton#####548.39153#####189
+Sorengo#####548.24#####25
+Koutaissi#####548.22785#####79
+Exeter#####547.42149#####121
+Toyama#####547.41379#####29
+Izmir#####547.26718#####131
+Tuzla#####546.96#####50
+Zaporijjia#####546.67347#####49
+Decize#####546.65517#####29
+Paterson#####546.6#####50
+Arkhangelsk#####546.58065#####31
+Furth#####546.47368#####57
+Falun#####546.15789#####38
+Tripoli (ville de Libye)#####546.15385#####39
+Leeuwarden#####546.125#####32
+Stoke on Trent#####546.11765#####85
+Rochester (New York)#####545.84375#####96
+Vyborg#####545.74545#####55
+Bulawayo#####545.65306#####49
+Vitebsk#####545.65#####80
+Santo Andre (Sao Paulo)#####545.56667#####30
+Barcelos#####544.96#####25
+Irun#####544.95556#####45
+Saluces#####544.67742#####31
+Edimbourg#####544.03867#####750
+Isola#####543.82759#####29
+Schweinfurt#####543.80645#####31
+Karaganda#####543.75#####36
+Vancouver#####543.64559#####601
+Bilbao#####543.63158#####228
+Fredrikstad#####543.62162#####37
+Kongsberg#####543.61538#####26
+Auburn#####543.42424#####33
+Gerone#####543.29032#####62
+Damas#####543.21212#####264
+Kendal#####542.72#####25
+Perm#####542.64407#####59
+Brzeg#####542.42857#####28
+Honfleur#####541.62687#####67
+Upper#####541.5#####32
+Prostejov#####541.31034#####29
+Pskov#####541.12821#####39
+Grenade (Espagne)#####541.06569#####137
+Moncalieri#####541.0#####30
+Cologne#####540.99359#####624
+Le Vesinet#####540.89189#####37
+Nowy Sacz#####540.84#####25
+Hambourg Altona#####540.725#####40
+Lima#####540.68847#####642
+Sydney#####540.29421#####1227
+Tcheliabinsk#####539.96825#####63
+Kingston (Jamaique)#####539.93396#####318
+Carthagene (Espagne)#####539.84#####25
+Blackburn#####539.70149#####67
+Alajuela#####539.65517#####29
+Beer Sheva#####539.64516#####31
+Salem (Massachusetts)#####539.54167#####48
+Fortaleza#####538.75#####56
+Linz#####538.73125#####160
+Valparaiso#####538.65686#####102
+Preston#####538.29825#####57
+Varsovie#####537.8437#####1286
+Granollers#####537.7931#####29
+Ota#####537.44444#####36
+Glasgow#####537.3769#####857
+Praia#####537.29545#####44
+Celje#####537.21429#####56
+Ingolstadt#####537.06897#####29
+Frauenfeld#####537.02857#####35
+Kalamazoo#####537.0#####26
+Jerez#####536.87097#####31
+Fribourg en Brisgau#####536.78788#####165
+Setubal#####536.22#####50
+Mar#####536.11538#####52
+Pontefract#####536.03846#####26
+Amman#####535.98925#####93
+La Garenne Colombes#####535.75472#####53
+Catane#####535.64641#####181
+Kaposvar#####535.48387#####31
+Come#####535.43519#####108
+Mexico#####535.32407#####1080
+Varese#####535.24096#####83
+Viterbe#####534.96825#####63
+Istanbul#####534.77829#####654
+Bonn#####534.66055#####218
+Manchester#####534.48708#####503
+Liepaja#####534.41667#####48
+Cardiff#####534.39669#####242
+Zagreb#####534.37917#####480
+Augsbourg#####534.24424#####217
+Salerne#####534.20513#####78
+Chatou#####534.15909#####44
+Ho#####534.12766#####47
+Toronto#####533.60927#####1295
+Martigues#####533.5977#####87
+Swansea#####533.48684#####152
+Mayence#####533.42396#####217
+Koper#####533.17647#####34
+Warwick#####533.03226#####31
+Turin#####532.76089#####987
+Berlin#####532.61193#####3069
+Rovaniemi#####532.4359#####39
+Bologne#####532.43313#####815
+Adelaide (Australie)#####532.34286#####70
+Helsinki#####532.30329#####699
+Chorzow#####532.23684#####38
+Reno#####532.15625#####32
+Watford#####531.67949#####78
+Bichkek#####531.67442#####43
+Dortmund#####531.67114#####149
+Oakville#####531.45455#####33
+Almelo#####530.83784#####37
+Greiz#####530.51852#####27
+Kristiansand#####530.48438#####64
+Colombo#####530.45714#####70
+Sienne#####530.41631#####233
+Elberfeld#####530.32927#####82
+Larissa#####530.24324#####37
+La Haye#####530.20432#####602
+Sarrebruck#####529.95652#####115
+Kampala#####529.91111#####90
+Kitchener#####529.7619#####42
+Rieti#####529.73529#####34
+Baton#####529.34146#####41
+Hrodna#####529.31884#####69
+Oss#####528.96774#####31
+Sassuolo#####528.72#####25
+Belize City#####528.51724#####29
+Choucha#####528.46939#####49
+Longjumeau#####528.13115#####61
+Chisinau#####528.02809#####178
+Jersey#####527.75385#####130
+Iaroslavl#####527.53659#####41
+Oshawa#####527.23333#####30
+Saint Sebastien (Espagne)#####527.15385#####91
+Staten Island#####527.08571#####35
+Ulm#####526.93976#####83
+Seville#####526.83777#####376
+Calgary#####526.7349#####298
+Solihull#####526.6875#####48
+Nankin#####526.26316#####76
+Senlis#####526.15217#####46
+Mahiliow#####525.70588#####34
+Lodz#####525.58608#####273
+Briansk#####525.2#####30
+Cieszyn#####525.03448#####29
+Sofia#####524.59754#####487
+Villach#####524.33333#####48
+Zilina#####524.14706#####34
+Poznan#####524.09709#####206
+Brasilia#####524.05063#####79
+Louhansk#####523.97561#####41
+Subotica#####523.69767#####43
+San Luis Potosi#####523.55882#####34
+Boulogne Billancourt#####523.45385#####780
+Neuilly sur Seine#####523.43466#####1033
+Santander#####523.39024#####82
+Naples#####523.30642#####1387
+Rijeka#####523.07339#####109
+Le Chesnay#####522.9434#####53
+Djeddah#####522.8169#####71
+Padoue#####522.74013#####304
+Chengdu#####522.02667#####75
+Pecs#####521.94231#####52
+Wroclaw#####521.79508#####366
+Meulan en Yvelines#####521.71053#####38
+Plymouth#####521.70513#####78
+Ramat#####521.65789#####38
+Flardingue#####521.64865#####37
+Rostock#####521.54032#####124
+Berchtesgaden#####521.36538#####52
+Kaunas#####521.10929#####183
+Katowice#####521.10714#####84
+Breda#####521.09375#####96
+Sivas#####520.96154#####26
+Marbourg#####520.87654#####81
+Corfou#####520.84746#####59
+Chiraz#####520.84524#####84
+Tabriz#####520.60577#####104
+Benguela#####520.53333#####30
+Cavalese#####520.5#####26
+Villepinte#####520.43478#####46
+Figeac#####520.39024#####41
+Townsville#####519.94737#####38
+Budapest#####519.57435#####1762
+Mykolaiv#####519.5#####68
+Levallois Perret#####519.27193#####114
+Warren#####519.06667#####30
+Bamberg#####519.02632#####76
+Dalian#####518.95161#####62
+Safed#####518.26923#####26
+Athenes#####518.23667#####769
+Ogden (Utah)#####518.23333#####30
+Barnaoul#####518.2#####35
+Macerata#####518.02174#####46
+Saint Germain en Laye#####517.88845#####251
+Tanta#####517.7037#####27
+Amersfoort#####517.51667#####60
+Frederiksberg#####517.2585#####147
+Gera#####517.05357#####56
+Hobart#####516.65823#####79
+Islington (quartier)#####516.64583#####48
+Cordoba (Argentine)#####516.55556#####45
+Richmond (Virginie)#####516.27869#####61
+Rhodes#####516.18367#####49
+Inverness (Ecosse)#####516.12#####25
+Heerlen#####516.02564#####39
+Rotterdam#####515.90706#####581
+Swidnica#####515.70968#####31
+Pistoia#####515.63529#####85
+Orvieto#####515.54054#####37
+Cali#####515.43038#####158
+Ballarat#####515.42424#####33
+Dubrovnik#####515.16667#####72
+Kielce#####515.12821#####39
+Pest (ville)#####514.89157#####83
+Novi#####514.15315#####111
+Venlo#####513.94118#####34
+Bolzano#####513.67327#####101
+Berchem Sainte Agathe#####513.47619#####42
+Ispahan#####513.39655#####116
+Jakarta#####513.05473#####201
+Zabrze#####512.88571#####35
+Fermo#####512.81481#####27
+Paisley#####512.39344#####61
+Montebelluna#####512.37037#####27
+Zadar#####512.04412#####68
+Tcherkassy#####511.77778#####27
+Sunderland#####511.61702#####94
+Monte#####511.54545#####33
+La Havane#####511.29526#####464
+Herford#####511.05128#####39
+Karlskrona#####511.0#####34
+Jilemnice#####510.96667#####30
+Douvres#####510.93333#####30
+Eindhoven#####510.78378#####111
+Trente#####510.69565#####69
+Pensacola#####510.2549#####51
+Bielsko Biala#####510.22581#####31
+Reutlingen#####510.08#####25
+Vicence#####509.95139#####144
+Tahiti#####509.53333#####45
+Cacak#####509.29167#####48
+Kuala#####509.25#####48
+Palma#####509.11184#####152
+Tampere#####509.00935#####107
+Gennevilliers#####508.92308#####39
+Southend on Sea#####508.90323#####31
+Torrelavega#####508.48#####25
+Belfast#####508.29577#####426
+Porsgrunn#####508.17857#####28
+Durango#####507.75#####32
+Tchernihiv#####507.63158#####38
+Jilin#####507.59375#####32
+Mesa#####507.45161#####31
+Peoria#####507.35135#####37
+Naumbourg (Saale)#####507.09091#####33
+Heilbronn#####506.78125#####32
+Locarno#####506.53846#####26
+Guadalajara (Mexique)#####506.47458#####59
+Buckinghamshire#####505.48571#####35
+Sondershausen#####505.35484#####31
+Merida#####504.96154#####52
+Kharkiv#####504.96029#####277
+Leuvarde#####504.8#####55
+Penza#####504.7234#####47
+Cottbus#####504.7234#####47
+Asmara#####504.31667#####60
+Sibiu#####504.25926#####54
+Le Piree#####504.20635#####63
+Udine#####503.83333#####126
+Glogow#####503.58824#####34
+Mostar#####503.28#####75
+Derby (Royaume Uni)#####502.88608#####79
+Verceil#####502.81356#####59
+Utrecht#####502.72778#####360
+Buffalo (New York)#####502.26429#####140
+London (Ontario)#####501.85714#####35
+Eugene#####501.82222#####45
+Krefeld#####501.76136#####88
+Viareggio#####501.65909#####44
+Gustrow#####501.57692#####26
+Annapolis#####501.25#####36
+Grand Londres#####500.84722#####72
+Feldkirch#####500.8#####25
+Aix la Chapelle#####500.79661#####177
+Oberhausen#####500.53125#####32
+Brno#####500.45946#####259
+Fecamp#####499.95918#####49
+Avellino#####499.93103#####29
+Wellington#####499.42966#####263
+Gdansk#####498.80952#####210
+Czestochowa#####498.65789#####38
+Teheran#####498.58773#####701
+Poughkeepsie#####498.28205#####39
+Narva#####498.2#####25
+Andorre la Vieille#####498.08163#####49
+Middelbourg#####497.83929#####56
+Kingston upon Hull#####497.82927#####123
+Schaffhouse#####497.82258#####62
+Worcester#####497.75676#####111
+Barcelone#####497.57677#####1791
+Bath#####497.43796#####137
+Bridgetown#####497.28125#####32
+Reading (Royaume Uni)#####497.09589#####73
+Cagliari#####497.04301#####93
+Wurtzbourg#####496.94118#####238
+Te#####496.71429#####28
+Nis#####496.03636#####55
+Ajaccio#####495.53514#####185
+Purmerend#####495.48571#####35
+Barreiro#####495.2#####40
+Newry#####495.08#####25
+Saragosse#####495.0428#####257
+Recife#####494.72174#####115
+Brandon#####494.52#####25
+Baarn#####494.4#####25
+Craiova#####494.3125#####80
+Sankt Polten#####494.15152#####33
+Ahvaz#####494.14815#####27
+Viborg#####493.48485#####33
+Salamanque#####493.40217#####92
+Comte de Los Angeles#####492.94286#####35
+Badalone#####492.4717#####53
+Kolding#####491.97059#####34
+Pardubice#####491.92593#####27
+Belgrade#####491.77108#####747
+Portland (Maine)#####491.74419#####43
+Trieste#####491.21864#####279
+Amsterdam#####491.16364#####1650
+Schiedam#####491.14634#####41
+Wakefield#####490.94203#####69
+Abou#####490.63333#####30
+Ales#####490.17197#####157
+Varna#####490.15094#####53
+Greenock#####489.83019#####53
+Landau in der Pfalz#####489.62069#####29
+Callao#####489.57812#####64
+Cordoue#####489.40994#####161
+Delft#####489.256#####125
+Voorburg#####488.10345#####29
+Bergame#####487.83721#####215
+Puebla#####487.4375#####48
+Montrouge#####487.41935#####62
+Brunswick#####487.36667#####60
+Addis Abeba#####487.08333#####120
+Erie#####487.0#####40
+Grozny#####486.26316#####38
+Vaasa#####486.08511#####47
+Aix les Bains#####486.05714#####70
+Bangkok#####485.98413#####252
+Sibenik#####485.89831#####59
+Pordenone#####485.75#####32
+Bale#####485.70686#####481
+Durham (Royaume Uni)#####485.39286#####28
+Rivne#####485.2963#####27
+Saint Catharines#####485.225#####40
+Burnley#####485.19512#####41
+Witten#####484.38462#####26
+Cascais#####484.17241#####29
+Murcie#####483.97674#####86
+Bressanone#####483.12766#####47
+Managua#####482.82692#####52
+Krementchouk#####482.78125#####32
+Messine#####482.39456#####147
+Ivano Frankivsk#####482.38095#####42
+Halifax#####482.24074#####108
+Valencia#####482.15385#####39
+Fulham#####481.675#####40
+Plauen#####481.66667#####27
+Tripoli (Libye)#####481.52273#####44
+Gorizia#####481.5#####44
+Ancone#####481.48113#####106
+Nuremberg#####481.08451#####355
+Ziguinchor#####481.0#####35
+Prefecture de Kanagawa#####481.0#####28
+Voghera#####480.85185#####27
+Coni#####480.7931#####58
+Hitchin#####480.25926#####27
+Palencia#####480.14286#####28
+Culiacan#####479.7#####40
+Faenza#####479.6413#####92
+Zakopane#####479.46341#####82
+La Spezia#####479.45588#####68
+Slupsk#####479.42857#####42
+Kanazawa#####479.25532#####47
+Gateshead#####479.02564#####39
+Timmins#####478.84#####25
+Oulu#####478.7284#####81
+Empoli#####478.64516#####31
+Mulheim#####478.42105#####57
+Zurich#####478.41543#####739
+Ribeauville#####478.34483#####29
+Gifu#####478.08571#####35
+Middlesbrough#####478.01429#####70
+Winterthour#####477.74528#####106
+Etterbeek#####477.52174#####253
+Surabaya#####477.45455#####44
+East London#####477.325#####40
+Guelph#####477.28889#####45
+Sainte Adresse#####476.6#####55
+Szczecin#####476.43478#####161
+Parme#####476.16602#####259
+Dewsbury#####476.08333#####36
+Pori#####476.03448#####29
+Magdebourg#####475.56277#####231
+Bar sur Aube#####475.47368#####38
+Aguascalientes#####475.24138#####29
+Banja#####475.06061#####33
+Groningue#####475.0411#####73
+Flensbourg#####475.01724#####58
+Atlantic City#####474.76667#####30
+Grasse#####474.53125#####128
+Paderborn#####474.31818#####44
+Klaipeda#####473.83077#####65
+Homiel#####473.8#####30
+Harrogate#####473.40909#####44
+Falkirk#####472.97143#####35
+Arendal#####472.80769#####26
+Dordrecht#####472.58333#####120
+Framingham#####472.34615#####26
+Nyon#####472.23404#####47
+Dundee#####471.93671#####158
+San Miguel de Tucuman#####471.90164#####61
+Gyor#####471.62264#####53
+Waterloo#####471.33333#####30
+Thoune#####471.15789#####38
+Briancon#####470.93333#####60
+Providence (Rhode Island)#####470.525#####80
+Cork#####470.29016#####193
+Bucarest#####470.01641#####853
+Belem#####469.81633#####49
+Podgorica#####469.5#####58
+Lugo#####469.22581#####31
+Hamilton (Ontario)#####468.66667#####69
+Cuenca#####468.65517#####29
+Enschede#####468.56#####50
+Gloucester#####468.15493#####71
+Lucques#####467.8#####165
+Mol#####467.69444#####36
+Noisy le Sec#####467.25#####32
+Carmarthen#####467.17391#####46
+Heilbronn (ville)#####466.96429#####28
+Coire#####466.92647#####68
+Antofagasta#####466.48571#####35
+Bogota#####466.10782#####371
+Edmonton#####465.06426#####249
+Wetzlar#####465.0#####27
+Uzice#####464.92308#####26
+Johannesbourg#####464.73491#####381
+Manrese#####464.2963#####27
+Barnsley#####464.2449#####49
+St Andrews (Ecosse)#####464.14286#####28
+Hokkaido#####464.0#####90
+Georgie (Etats Unis)#####464.0#####34
+Gandja#####463.20833#####48
+Nogent le Rotrou#####462.28205#####39
+Kuopio#####462.26667#####60
+Braga#####462.09091#####44
+Nairobi#####461.97484#####159
+Saint Mande#####461.66667#####168
+Worms (Allemagne)#####461.61538#####26
+Bouake#####461.33962#####53
+Siauliai#####461.2093#####43
+Safi#####461.19048#####42
+Hillerod#####460.68966#####29
+Deventer#####460.06897#####58
+Pontevedra#####460.04762#####42
+Sarrelouis#####459.93939#####33
+Barmen#####459.57143#####42
+Hermosillo#####459.5#####32
+Ottawa#####459.48916#####415
+Nelson#####459.21212#####33
+Santiago#####459.13058#####919
+Carpi#####459.09677#####31
+Maghnia#####459.04#####25
+Ratibor#####459.0#####26
+Lugano#####458.68085#####94
+Varazdin#####458.60526#####38
+Port Gentil#####458.46429#####28
+Bromley#####458.23944#####71
+Galway#####458.21818#####55
+Bydgoszcz#####457.67778#####90
+Bendigo#####457.26923#####26
+Perouse#####457.25806#####124
+Halifax (Nouvelle Ecosse)#####457.02#####50
+Newcastle upon Tyne#####456.71296#####108
+Kotka#####456.61111#####36
+Invercargill#####456.18421#####38
+Wrexham#####456.10204#####49
+Georgetown#####455.5873#####63
+Mirecourt#####455.55556#####45
+Bandung#####455.45#####60
+Brisbane#####455.3876#####387
+Alkmaar#####455.1519#####79
+Okayama#####455.05#####60
+Munster#####454.96622#####148
+Timisoara#####454.84615#####104
+Ciudad Real#####454.72727#####33
+Panevezys#####454.45946#####37
+Reggio d'Emilie#####454.3662#####71
+Chalons sur Marne#####454.35849#####53
+Kalisz#####454.31579#####38
+Cherbourg#####453.72881#####118
+Bagnols sur Ceze#####453.68085#####47
+Moutiers#####453.51351#####37
+Opole#####453.22581#####31
+Astana#####452.53333#####30
+La Fere#####452.33333#####33
+Luxembourg (ville)#####452.33094#####278
+Schoelcher#####452.25926#####27
+Arad#####452.14286#####35
+Guimaraes#####452.13953#####43
+Sarcelles#####452.06024#####83
+Punta#####452.0#####28
+Burgos#####451.96939#####98
+Zemun#####451.92308#####39
+Aberdeen#####451.84519#####239
+Chatham (Kent)#####451.34783#####46
+Florianopolis#####450.93548#####31
+Vincennes#####450.7686#####121
+Nemours#####450.21622#####37
+Borough londonien de Hackney#####450.1087#####46
+Freeport#####450.07143#####28
+Walbrzych#####449.8#####25
+Kotor#####449.76923#####26
+Novare#####449.60563#####71
+Chemnitz#####449.59649#####114
+Maracaibo#####449.49091#####55
+Conflans Sainte Honorine#####449.44#####25
+Youngstown#####449.25806#####31
+Almaty#####449.12308#####130
+Montbeliard#####448.78906#####128
+Neuss#####448.61765#####34
+Plymouth (Royaume Uni)#####448.52308#####65
+Konya#####448.5#####28
+Ermont#####448.45946#####37
+Cluj Napoca#####447.6875#####96
+Clinton#####447.34483#####29
+Aubagne#####446.93103#####58
+Gubbio#####446.875#####32
+Kranj#####446.67045#####88
+Pretoria#####446.65072#####209
+Halberstadt#####446.48077#####52
+Thouars#####446.39024#####41
+Zaporijia#####446.18519#####27
+Bedford (Royaume Uni)#####446.12#####25
+Bucaramanga#####446.1#####30
+Duisbourg#####445.704#####125
+Bari#####445.32414#####145
+Veracruz#####444.53333#####45
+Geelong#####444.43137#####51
+Paris#####444.36569#####25743
+Durham#####444.13924#####79
+Freetown#####444.07576#####66
+Ravensbourg#####443.88889#####27
+Comte de Cork#####443.56#####25
+Beyrouth#####443.54066#####455
+Creil#####443.52273#####44
+Salta#####443.34615#####26
+Montfermeil#####443.08163#####49
+Cognac (Charente)#####443.03333#####30
+Hameenlinna#####442.51613#####31
+Lodeve#####442.42308#####26
+Reggio#####442.42105#####57
+Foligno#####442.40909#####44
+Lambeth (ville)#####441.7#####40
+Edo (ville)#####441.68056#####144
+Les Abymes#####441.35714#####84
+New Bedford#####441.31034#####29
+Cosenza#####441.30612#####49
+Maastricht#####441.175#####120
+Fontenay le Comte#####441.13889#####72
+Przemysl#####441.0#####30
+Durban#####440.92713#####247
+Bourgas#####440.92308#####39
+Tomsk#####440.53571#####28
+Saint Cloud#####440.5339#####118
+Thessalonique#####440.41065#####263
+Perth (Australie Occidentale)#####440.27778#####36
+Vilvorde#####440.06557#####61
+Khartoum#####439.49123#####57
+Bloemfontein#####438.47059#####85
+Boise#####438.31707#####41
+Wilhelmshaven#####437.55172#####29
+Nordhausen#####437.41379#####29
+Iekaterinbourg#####437.40789#####76
+Blois#####436.85897#####234
+Elseneur#####436.82143#####28
+Barranquilla#####435.94521#####73
+Radom#####435.725#####40
+Colombes#####435.61029#####136
+Sainte Foy la Grande#####435.59375#####32
+Surrey#####435.38028#####71
+High#####435.33333#####30
+Ploiesti#####435.31111#####45
+Lavelanet#####435.12#####25
+Trevise#####434.66372#####113
+Naplouse#####434.64286#####28
+Asnieres sur Seine#####434.55738#####122
+Ekeren#####434.53846#####26
+Audenarde#####434.32353#####68
+Ijevsk#####434.31429#####35
+Regina#####434.23913#####92
+Khouribga#####433.97222#####36
+Esch sur Alzette#####433.94048#####84
+Cadix#####433.37374#####99
+Dumfries#####433.16071#####56
+Luanda#####432.5188#####266
+Bois Colombes#####431.98824#####85
+Dole (Jura)#####431.84416#####77
+La Fleche#####431.5098#####51
+Borgerhout#####431.01724#####58
+Vitoria#####430.69697#####33
+Provins#####430.32759#####58
+Le Cap#####429.5663#####362
+Vipiteno#####428.72#####25
+Chateaubriant#####428.57895#####38
+Rotorua#####428.53061#####49
+Antony#####428.43662#####71
+Nykoping#####428.35484#####31
+Nice#####428.28218#####971
+Volgograd#####428.21429#####70
+Terrebonne#####427.96154#####26
+Victoria#####427.66879#####157
+Vina#####427.625#####32
+Le Perreux sur Marne#####427.5#####26
+Leverkusen#####427.1#####40
+La Ciotat#####426.98#####50
+Termonde#####426.85366#####82
+Hartlepool#####426.5#####28
+Treves#####426.46#####50
+Nerac#####426.25#####40
+Saint Jean de Luz#####426.20339#####59
+Lure#####426.17241#####29
+Albacete#####425.875#####40
+La Louviere#####425.65625#####64
+Dacca#####424.89831#####59
+Les Andelys#####424.83871#####31
+Lisburn#####424.64516#####31
+Harfleur#####424.2#####35
+Saint Trond#####423.92771#####83
+Argenteuil (Val d'Oise)#####423.85714#####49
+Riazan#####423.82143#####28
+Catanzaro#####423.78378#####37
+Zoug#####422.71429#####35
+Zittau#####422.1#####30
+Pointe a Pitre#####421.96532#####173
+Segou#####421.96429#####28
+Maisons Alfort#####421.45238#####42
+Champigny sur Marne#####421.21687#####83
+Guebwiller#####420.74419#####43
+Evora#####420.48387#####31
+L'Hay les Roses#####420.44#####25
+Maisons Laffitte#####420.2807#####57
+Macon#####420.03571#####168
+Victoria (Colombie Britannique)#####420.01667#####60
+Windsor (Ontario)#####419.9726#####73
+Brasov#####419.675#####80
+Hanoi#####419.23881#####134
+Berne#####418.96627#####415
+Montreuil (Seine Saint Denis)#####418.1#####50
+Granville#####416.89157#####83
+Saint Jean de Maurienne#####416.5#####38
+Sebastopol#####416.39394#####33
+Prefecture d'Osaka#####416.38889#####36
+Brescia#####416.2646#####291
+Port Said#####416.19048#####42
+Pavlodar#####416.0#####26
+Wigan#####415.84722#####72
+Gdynia#####415.57778#####45
+Enghien les Bains#####415.18889#####90
+Szeged#####415.11828#####93
+Ostende#####414.64198#####162
+Bayonne#####414.62588#####425
+Adana#####414.625#####40
+Glaris#####414.42857#####28
+Pleven#####414.0#####41
+Ankara#####413.61809#####199
+Rawalpindi#####413.48387#####31
+Almeria#####413.47619#####42
+Saint Maur des Fosses#####413.38211#####123
+Alicante#####412.9703#####101
+Targu#####412.68571#####35
+Sevres#####412.53#####100
+Chester (Royaume Uni)#####412.36#####25
+Jerez de la Frontera#####412.01754#####57
+Meudon#####411.78788#####99
+Wollongong#####411.43396#####53
+Suresnes#####411.40316#####253
+Winnipeg#####411.32581#####310
+Vic#####411.28261#####46
+Clichy#####410.66667#####153
+Harare#####410.32877#####146
+Gisborne#####410.14286#####28
+Huelva#####409.91176#####34
+Provence#####409.64286#####28
+Imola#####409.40909#####44
+Pontoise#####409.34343#####99
+Chatenay Malabry#####409.12069#####58
+Szombathely#####409.05357#####56
+Saint Amand Montrond#####408.47727#####44
+Worthing#####408.4359#####39
+Saint Nicolas#####408.33333#####63
+Sudbury#####408.21429#####28
+Concarneau#####408.15152#####33
+Debrecen#####408.06329#####79
+Ougree#####408.01961#####51
+Mortsel#####407.72549#####51
+Hilversum#####407.54237#####59
+Alencon#####405.93506#####154
+Corbeil Essonnes#####405.78182#####55
+Avila#####405.7037#####27
+Vernon (Eure)#####405.55738#####61
+Melun#####405.47619#####147
+Penrith#####405.03571#####28
+Chene Bougeries#####404.80769#####26
+Rosny sous Bois#####404.68#####25
+Iquique#####404.24#####25
+Bujumbura#####403.74359#####39
+Dornbirn#####403.68#####25
+Amiens#####403.25257#####487
+Saint Denis#####403.20488#####205
+Saint Jean de Terre Neuve#####402.08824#####34
+Tebessa#####402.0#####25
+Santa Cruz de Tenerife#####401.85714#####28
+Lierre#####401.4918#####61
+Saint Gall#####401.45522#####134
+Valence#####401.38109#####349
+Valence (Espagne)#####401.18137#####204
+Semur en Auxois#####401.0303#####33
+Santurce#####400.85185#####27
+Puteaux#####400.77586#####58
+Versailles#####400.69393#####758
+Bassano#####400.5625#####32
+Port au Prince#####400.51515#####330
+Woolwich#####400.44828#####29
+Arpajon#####399.82759#####29
+Alep#####399.73077#####156
+Bar le Duc#####399.72973#####111
+Montargis#####399.5082#####61
+Nimegue#####399.26549#####113
+Annemasse#####399.08333#####48
+Treves (Allemagne)#####398.92157#####51
+Zenica#####398.87179#####39
+Isleworth#####398.80769#####26
+Limerick#####398.71717#####99
+Stargard#####398.03846#####26
+Civilisation maya#####397.84848#####33
+Kraljevo#####397.81818#####33
+Ayr#####397.75#####32
+Saint Ouen sur Seine#####397.16667#####42
+Galati#####397.03509#####57
+Passau#####396.92#####25
+Le Havre#####396.79953#####424
+Ceret#####396.59375#####32
+Vila Nova de Gaia#####395.77273#####44
+Mahdia#####395.53846#####26
+St Helens (Merseyside)#####395.29508#####61
+Lucerne#####394.85256#####156
+Hull#####394.18182#####44
+Orange (Vaucluse)#####393.82857#####35
+Bangor#####393.50847#####59
+Charenton le Pont#####392.93902#####82
+Kingston (Ontario)#####392.86667#####75
+Meaux#####392.4127#####126
+Leon#####392.31707#####82
+Port Elizabeth#####392.20482#####83
+Pont a Mousson#####392.2037#####54
+Pontypridd#####392.12121#####33
+Gaza#####391.94737#####57
+Vichy#####390.79167#####120
+Libreville#####390.29008#####131
+Busto Arsizio#####390.23077#####26
+Annonay#####390.13793#####58
+Bonheiden#####389.36667#####30
+Montivilliers#####389.18519#####27
+Genk#####389.06383#####47
+Elblag#####388.56667#####30
+Dijon#####388.54366#####710
+Benevent#####388.53333#####30
+Noumea#####388.35172#####145
+Abidjan#####388.12043#####465
+Saint Martin d'Heres#####388.04688#####64
+Carlisle#####387.05263#####57
+Saint Die des Vosges#####386.89041#####73
+Matanzas#####386.85714#####49
+Trujillo#####386.68#####25
+Chimkent#####386.67742#####31
+Pontarlier#####386.53226#####62
+Givors#####386.44444#####27
+Anvers#####386.38615#####1502
+Soleure#####386.33333#####69
+Bondy#####385.6129#####93
+Bekescsaba#####385.48#####25
+Beaumont#####385.05405#####37
+Uccle#####384.65181#####359
+Davos#####384.38596#####57
+Camaguey#####384.21429#####56
+Novi Sad#####383.57895#####57
+Dudelange#####383.55#####40
+Carthagene des Indes#####383.07143#####28
+Duffel#####383.0#####31
+Tijuana#####382.13889#####36
+Poitiers#####382.04076#####368
+Toowoomba#####381.65217#####46
+Truro#####381.63636#####33
+Nogent sur Marne#####381.51429#####105
+Ollioules#####381.11765#####34
+Saint Jean#####380.93651#####63
+Montereau Fault Yonne#####380.76923#####26
+Cayenne#####380.62963#####135
+Gouda#####380.45833#####72
+Ixelles#####380.4267#####382
+Recklinghausen#####380.07692#####26
+Curepipe#####379.83333#####36
+Abomey#####379.71875#####32
+Hagen#####379.42857#####28
+Krusevac#####378.70588#####34
+Canberra#####378.43411#####129
+Dieppe#####378.31818#####66
+Bourg la Reine#####378.11594#####69
+Bone#####377.78125#####32
+Darwin#####377.40741#####27
+Thann#####377.15#####40
+Rovereto#####376.1087#####46
+Bois le Duc#####375.86957#####115
+Dieppe (Seine Maritime)#####375.70796#####113
+Zrenjanin#####375.27273#####33
+Douala#####374.78646#####384
+Herentals#####374.76923#####52
+Bailleul (Nord)#####374.73077#####26
+Terni#####374.34211#####38
+Bab El Oued#####374.31034#####29
+Savigny sur Orge#####373.84848#####33
+Lusaka#####373.7193#####57
+Lautoka#####373.69231#####26
+Les Lilas#####373.61972#####71
+Luxembourg Ville#####373.45833#####48
+Saskatoon#####373.29412#####85
+Senlis (Oise)#####373.22857#####35
+Whangarei#####372.40625#####32
+Talence#####372.25#####120
+Qom#####372.03571#####28
+Roulers#####372.01786#####112
+Aubervilliers#####371.99145#####117
+Morges#####371.52941#####85
+Mendoza#####371.5#####52
+Laon#####371.2973#####111
+Schaerbeek#####371.0823#####243
+Oradea#####370.86957#####46
+Montauban#####370.76777#####211
+Papeete#####370.34579#####107
+Sabac#####370.2973#####37
+Grand Sudbury#####370.25714#####35
+Bobo Dioulasso#####370.06173#####81
+Yamoussoukro#####370.03846#####26
+Lunebourg#####369.81579#####38
+La Chaux de Fonds#####369.80303#####198
+Tanger#####369.71304#####115
+Castellon de la Plana#####369.61765#####34
+Zlin#####369.22222#####27
+Louviers#####369.16327#####49
+Lommel#####369.12903#####31
+Maputo#####368.92708#####96
+Valenciennes#####368.9#####310
+Evreux#####368.03333#####150
+Berg op Zoom#####368.0#####34
+Bruges#####367.8809#####445
+Marseille#####367.76269#####2621
+Echirolles#####367.62222#####45
+Biarritz#####367.47115#####104
+Charlottetown#####367.34694#####49
+Rueil Malmaison#####367.27419#####62
+Petrograd#####367.06452#####31
+Bacau#####366.89189#####37
+Louvain#####366.55682#####352
+Tirlemont#####366.54237#####59
+Saint Priest#####366.36#####25
+Deurne#####366.34615#####26
+Nancy#####366.24464#####887
+Vitry sur Seine#####365.92105#####76
+Rouen#####365.8343#####1038
+Boulogne sur Mer#####365.36709#####237
+Bruxelles#####365.29649#####1710
+Saint Denis (La Reunion)#####365.10204#####98
+Beaune#####364.82353#####85
+Sidon#####364.7931#####29
+Chambery#####364.79208#####303
+Mouscron#####364.66667#####66
+Bangui#####364.19403#####67
+Fontainebleau#####364.13095#####168
+Lagny sur Marne#####363.93023#####43
+Kilkenny#####363.89286#####28
+Lattaquie#####362.9#####30
+Bukavu#####362.14#####50
+Drancy#####361.7907#####43
+Auray#####361.65714#####35
+Tilbourg#####361.60563#####71
+Etampes#####361.58065#####62
+Saumur#####361.43827#####162
+Livry Gargan#####361.11111#####27
+Choisy le Roi#####361.06452#####62
+Forbach#####360.94#####50
+Le Mans#####360.83212#####411
+Otaru#####360.66667#####30
+Yaounde#####360.50259#####386
+Vesoul#####360.43704#####135
+Creteil#####360.26718#####131
+Montlucon#####360.09821#####112
+Gyumri#####359.5814#####43
+Loudeac#####359.54839#####31
+Belley#####359.54348#####46
+Maubeuge#####359.22989#####87
+La Tronche#####359.20183#####109
+Christchurch#####358.80374#####214
+Geel#####358.68889#####45
+Banjul#####358.53333#####60
+Geneve#####358.48987#####1333
+Tours#####358.11419#####613
+Auckland#####357.896#####625
+Bourg Saint Maurice#####357.71795#####39
+Bergerac#####357.47059#####34
+Dunedin#####357.35#####120
+Koszalin#####357.10526#####38
+Bethune#####356.9#####60
+Dreux#####356.76636#####107
+Rovigo#####356.5814#####43
+Cannes#####356.49805#####257
+Beauvais#####356.47802#####182
+Cap Haitien#####356.46774#####62
+Beziers#####356.21549#####297
+Saint Claude#####355.94118#####51
+Lower Hutt#####355.61538#####39
+Llanelli#####355.55882#####34
+Luxeuil les Bains#####355.37838#####37
+Zutphen#####355.32#####25
+Remiremont#####355.225#####80
+Riom#####355.15741#####108
+Angouleme#####354.69756#####205
+Argenteuil#####354.6875#####80
+Concepcion#####354.58929#####56
+Gizeh#####354.57895#####38
+Aarau#####354.5082#####61
+Epinal#####353.87432#####183
+Gosford#####353.84#####25
+Lhassa#####353.83099#####71
+Courtrai#####353.56158#####203
+Avignon#####353.32776#####598
+Newport (pays de Galles)#####353.19355#####31
+Thiais#####352.82143#####28
+Mantes la Jolie#####352.82143#####84
+Nanterre#####352.73418#####79
+Epinay sur Seine#####352.12963#####54
+Gand#####351.99524#####840
+Thies#####351.96552#####58
+Le Puy en Velay#####351.61765#####136
+Pietermaritzburg#####351.32#####50
+Mazamet#####351.28205#####39
+Vendome#####350.85938#####64
+Cambrai#####350.83815#####173
+Luneville#####350.68852#####122
+Boussu#####350.4375#####32
+Lille#####350.41667#####1080
+Corte#####349.87097#####31
+Auxerre#####349.63314#####169
+Abadan#####349.0#####30
+Strasbourg#####348.65753#####1387
+Moulins (Allier)#####348.52#####125
+Roubaix#####348.35942#####345
+Eeklo#####348.275#####40
+Uzes#####348.02857#####35
+Bielefeld#####347.95604#####91
+Tongres#####347.7377#####61
+Gonesse#####347.55769#####52
+Saint Servan sur Mer#####347.48387#####31
+Ambilly#####347.46667#####30
+Quimper#####347.24528#####212
+Merksem#####347.24242#####33
+Waterford (Irlande)#####347.16667#####36
+Cahors#####346.90152#####132
+Curacao#####346.66667#####33
+Lyon#####346.64207#####3171
+Mombasa#####346.53333#####30
+Tonnerre (Yonne)#####346.36#####25
+Pays de Galles#####346.20755#####53
+Irlande du Nord#####346.1875#####32
+Albertville#####346.15493#####71
+Lectoure#####346.13043#####46
+Pont l'Abbe#####346.10526#####38
+Offenbourg#####345.72#####25
+Barlad#####345.67857#####28
+Mortagne au Perche#####344.85714#####35
+Oullins#####344.71186#####59
+Cauderan#####344.6#####80
+Hyeres#####344.58571#####70
+Oyonnax#####344.45714#####35
+Bamako#####344.2485#####334
+Beja#####344.16667#####48
+Croix#####343.83333#####42
+Liege#####343.77528#####1068
+St Pancras (Londres)#####343.76#####25
+Sedan#####343.53435#####131
+Arras#####343.30594#####219
+Condom (Gers)#####343.28#####25
+Agen#####343.23529#####221
+Eupen#####343.0#####42
+Joigny#####342.92308#####39
+Sens (Yonne)#####342.82353#####85
+Montreal#####342.30215#####3111
+Castelnaudary#####342.16981#####53
+Colmar#####342.01465#####273
+Garoua#####341.84615#####39
+Marcinelle#####341.57692#####26
+La Marsa#####341.35897#####39
+Ambert#####341.2#####45
+Beaumont sur Oise#####340.92#####25
+Gannat#####340.47222#####36
+Makhatchkala#####340.2#####40
+Wilrijk#####340.16854#####89
+Dubai#####340.15385#####65
+Bourgoin Jallieu#####340.0#####79
+Seclin#####339.975#####40
+Avallon#####339.70833#####48
+Brignoles#####339.62791#####43
+L'Aquila#####339.58696#####46
+Bressuire#####339.44118#####34
+Brockton#####339.28#####25
+Buea#####339.27586#####29
+Diekirch#####339.18519#####27
+Paisley (Ecosse)#####339.03333#####30
+Nimes#####338.89029#####556
+Saint Jean sur Richelieu#####338.77049#####61
+Antananarivo#####338.5#####98
+Tripoli (Liban)#####338.30189#####53
+Dakar#####338.03994#####701
+Bourges#####337.86842#####266
+Villefranche sur Saone#####337.84091#####88
+Montmorency#####337.71875#####32
+Villeneuve Saint Georges#####337.35484#####93
+Issy les Moulineaux#####336.56044#####91
+Basse Terre#####336.55102#####49
+Tourcoing#####336.22599#####177
+Tetouan#####336.22059#####68
+Angers#####335.85009#####567
+Benghazi#####335.75862#####29
+Volos#####335.33333#####30
+Reims#####335.21976#####678
+Montreux#####335.16667#####48
+Bagneres de Bigorre#####335.07895#####38
+La Rochelle#####334.88929#####280
+New Plymouth#####334.84211#####38
+Bridgend#####334.58696#####46
+Jette#####334.58621#####29
+Neuchatel#####334.37262#####263
+Gap#####334.09524#####126
+Furnes#####333.96875#####32
+Rodez#####333.8481#####158
+Bernay (Eure)#####333.75#####28
+Bourg en Bresse#####333.74479#####192
+Ninove#####333.625#####32
+Tarragone#####333.49153#####59
+Limoges#####333.34735#####452
+Niamey#####333.33333#####90
+Bienne#####333.03509#####114
+Homs#####332.875#####40
+Rockhampton#####332.74074#####27
+Sion#####332.71084#####83
+Firminy#####332.69231#####39
+Libourne#####332.63#####100
+Zottegem#####332.62069#####29
+Bordeaux#####332.59862#####1592
+Nitra#####332.35294#####34
+Saint Dizier#####332.14634#####41
+Pithiviers#####332.0#####40
+Argentan#####331.14286#####70
+Saint Malo#####330.83004#####253
+Tulle#####330.75214#####117
+Salon de Provence#####330.53968#####63
+Clamart#####330.39837#####123
+Chartres#####330.35484#####248
+Lons le Saunier#####330.2807#####114
+Barrie#####329.84#####25
+Arles#####329.35484#####186
+Mont Saint Aignan#####329.17895#####95
+Valognes#####328.76786#####56
+Tauranga#####328.70588#####34
+Malines#####328.70301#####266
+Nantes#####327.28244#####1264
+Paarl#####327.24444#####45
+Loches#####327.0#####39
+Mont de Marsan#####326.67176#####131
+Narbonne#####326.59893#####187
+Herstal#####326.13889#####36
+Romorantin Lanthenay#####325.97222#####36
+Montpellier#####325.97018#####939
+Orleans#####325.96494#####542
+Fes#####325.78682#####258
+Sallanches#####325.35938#####64
+Rouyn Noranda#####325.28571#####42
+Annecy#####325.09187#####283
+Waregem#####325.06977#####43
+Tabor#####325.04#####25
+Niort#####324.76471#####204
+Kinshasa#####324.34691#####614
+Saint Gilles (Bruxelles)#####324.32558#####86
+Le Raincy#####323.69048#####42
+Ouagadougou#####323.54268#####164
+Saint Quentin#####323.38532#####218
+Le Cateau Cambresis#####323.13333#####30
+Pessac#####322.75#####36
+Chamonix#####322.63636#####33
+Vitry le Francois#####322.40909#####66
+Verdun#####322.03185#####157
+Casablanca#####321.69584#####914
+Constantine#####321.68595#####121
+Saint Maixent l'Ecole#####321.37037#####27
+Grenoble#####320.90525#####686
+Iseghem#####320.88#####25
+Oloron Sainte Marie#####320.7377#####61
+Pantin#####320.65306#####49
+Aix en Provence#####320.44979#####478
+Saint Denis (Seine Saint Denis)#####320.41026#####78
+Manosque#####319.7907#####43
+Pointe Noire#####319.29787#####47
+Alost#####319.2#####110
+Matosinhos#####319.06897#####29
+Morlaix#####318.99248#####133
+Martigny#####318.65909#####44
+Ludwigshafen sur le Rhin#####318.25926#####27
+Besancon#####318.23077#####611
+Palmerston#####318.08333#####48
+Saint Georges#####317.81481#####27
+Sete#####317.58192#####177
+Leopoldville#####317.41667#####36
+Vire#####317.36508#####63
+Lunel#####317.26667#####45
+La Roche sur Yon#####317.16667#####90
+Marrakech#####317.05#####180
+Saint Maurice#####316.72093#####43
+Boucherville#####316.32143#####28
+Verviers#####316.30864#####243
+Moulins#####316.15254#####59
+Ivry sur Seine#####315.99065#####107
+Uster#####315.84615#####26
+Issoire#####315.73684#####38
+Lens#####315.71739#####46
+Perigueux#####315.68508#####181
+Belfort#####315.42718#####206
+Vannes#####315.36893#####206
+Brasschaat#####315.03333#####30
+Saint Chamond#####314.88679#####53
+Laxou#####314.52941#####34
+Lamballe#####314.33333#####27
+Louiseville#####313.61538#####26
+Hasselt#####313.32414#####145
+Saint Josse ten Noode#####313.26119#####134
+Rabat#####313.14599#####411
+Lausanne#####312.81088#####772
+Hal#####312.67857#####28
+Le Kef#####312.36#####25
+Fontenay sous Bois#####311.68852#####61
+Nevers#####311.17949#####195
+Lome#####310.91228#####171
+Caen#####310.54857#####525
+Namur#####310.05202#####346
+Venissieux#####309.86047#####43
+Le Lamentin#####309.8125#####32
+Sarrebourg#####309.525#####40
+Lourdes#####309.25806#####62
+Dinant#####309.22388#####67
+Fort de France#####309.2093#####215
+Feurs#####308.89286#####28
+Anderlecht#####308.68807#####109
+Ypres#####308.62376#####101
+Kairouan#####308.275#####80
+Kigali#####308.25352#####71
+Pont Saint Esprit#####308.12#####25
+Charleroi#####307.49624#####266
+Moyeuvre Grande#####307.36#####25
+Rochefort (Charente Maritime)#####307.22549#####102
+Chateauroux#####307.15287#####157
+Renaix#####306.97727#####44
+Carpentras#####306.69091#####110
+Menin#####306.67442#####43
+Chateau Gontier#####306.48438#####64
+La Seyne sur Mer#####306.18182#####55
+Pontivy#####305.6#####60
+Somain#####304.96#####25
+Thonon les Bains#####303.75342#####73
+Nuku`alofa#####303.60714#####28
+Redon#####303.54762#####42
+Castres#####303.51534#####163
+Villeurbanne#####303.11236#####89
+Roanne#####302.66272#####169
+Troyes#####302.57612#####335
+Chaumont#####302.45161#####31
+Lierre (Belgique)#####302.41509#####53
+Sidi Bel Abbes#####301.76042#####96
+Le Petit Quevilly#####301.75#####36
+Potchefstroom#####301.57692#####26
+Saint Jean (Nouveau Brunswick)#####301.34043#####47
+Mulhouse#####301.00628#####478
+Tunis#####300.61757#####1195
+Longwy#####300.59091#####44
+Charleville Mezieres#####300.29851#####67
+Toul#####300.16129#####93
+Bizerte#####300.14634#####82
+Chalons en Champagne#####299.97479#####119
+Constantine (Algerie)#####298.92623#####122
+Brive la Gaillarde#####298.70861#####151
+Saint Omer (Pas de Calais)#####298.44643#####112
+Prefecture de Fukuoka#####298.28571#####28
+Bergerac (Dordogne)#####298.24528#####53
+Conakry#####297.9697#####231
+Saint Brieuc#####296.86381#####257
+Pays Bas (pays constitutif)#####296.63265#####49
+Port Louis (Maurice)#####296.54545#####55
+Marmande#####296.1875#####48
+Toulouse#####296.0597#####1675
+Paray le Monial#####295.93333#####30
+Sherbrooke#####295.82781#####151
+Tournai#####295.74539#####271
+Olten#####295.65385#####26
+Abbeville#####295.34899#####149
+Elbeuf#####295.22619#####84
+Cherbourg Octeville#####295.07527#####93
+Payerne#####294.96552#####29
+Dar#####294.96#####25
+Pau#####294.87864#####412
+Laval (Mayenne)#####294.53846#####260
+Alger#####294.46851#####1159
+Rennes#####294.42642#####863
+Sale#####294.17526#####97
+Montceau les Mines#####293.97436#####39
+Kankan#####293.18182#####33
+Saida#####293.0#####25
+Saint Etienne#####292.6996#####496
+Stirling#####292.67925#####53
+Alsace#####292.35484#####31
+Denain#####292.29268#####41
+Eskisehir#####291.92#####25
+Lokeren#####290.69444#####36
+Saint Pol sur Ternoise#####290.64#####25
+Deinze#####290.55263#####38
+Grande Bretagne#####290.41304#####46
+Gabes#####290.2973#####37
+Calais#####290.27717#####184
+Berkane#####290.16#####25
+Saint Nazaire#####289.41935#####124
+Oran#####289.11407#####526
+Fredericton#####288.97727#####44
+Soignies#####288.57407#####54
+Haguenau#####288.56579#####76
+Wissembourg#####288.20455#####44
+Malmedy#####288.14286#####35
+Tarbes#####288.11165#####206
+Martinique#####286.86047#####43
+Sombor#####286.26923#####26
+Saint Affrique#####285.78571#####28
+Sousse#####285.67521#####117
+Antibes#####285.66667#####90
+Gosselies#####285.5#####32
+Sion (Valais)#####285.18519#####27
+Windhoek#####285.17778#####90
+Saint Louis (Senegal)#####285.10101#####99
+Bayeux#####285.09639#####83
+Le Creusot#####285.09474#####95
+Douai#####284.63404#####235
+Turnhout#####284.14634#####123
+Rochefort#####283.94444#####36
+Waremme#####283.93333#####30
+Lannion#####283.45#####60
+Huy#####283.32292#####96
+Saint Julien en Genevois#####283.28#####25
+Lubumbashi#####283.20879#####91
+Hennebont#####283.16279#####43
+Vierzon#####282.92982#####57
+Seraing#####282.85714#####42
+Carouge#####282.72727#####33
+Rambouillet#####282.68421#####38
+Commercy#####282.53333#####30
+Bagnolet#####282.41176#####34
+Szolnok#####282.22581#####31
+Clermont Ferrand#####282.14154#####544
+Maroussi#####282.03846#####26
+Toulon#####281.96402#####667
+Altkirch#####281.78788#####33
+Aire sur la Lys#####281.34615#####26
+Chaumont (Haute Marne)#####281.26316#####57
+Poperinge#####281.18182#####33
+Foix#####280.88889#####45
+Saint Louis (La Reunion)#####280.48#####25
+Compiegne#####280.47573#####103
+Pamiers#####280.12963#####54
+Mostaganem#####279.78082#####73
+Orthez#####279.70833#####72
+Thionville#####279.58042#####143
+Schiltigheim#####279.34884#####43
+Thiers#####278.19512#####41
+Rufisque#####277.92683#####41
+Brest#####277.87263#####581
+Soissons#####277.50833#####120
+Lorient#####277.14286#####266
+Chamonix Mont Blanc#####277.11905#####42
+Jacmel#####277.0#####31
+Aoste#####276.57895#####114
+Bastia#####276.01531#####196
+Coulommiers (Seine et Marne)#####275.89655#####29
+Mons#####275.84307#####274
+Decazeville#####275.72414#####29
+Aurillac#####275.38514#####148
+Chatillon sur Seine#####275.23256#####43
+Saint Helier#####274.43333#####30
+Monastir#####274.14516#####62
+Stellenbosch#####273.56#####25
+Valence (Drome)#####273.23364#####107
+L'Aigle#####273.1#####30
+Relizane#####272.33333#####36
+Phalsbourg#####272.14286#####28
+Riviere du Loup#####272.0#####42
+Carmaux#####271.84615#####26
+Autun#####271.72449#####98
+Cavaillon#####271.68182#####44
+Metz#####270.97968#####886
+Prades (Pyrenees Orientales)#####270.76923#####26
+Suva#####270.75#####100
+Sierre#####270.58333#####48
+Fribourg (ville suisse)#####270.47027#####185
+Pezenas#####270.36585#####41
+Plainpalais#####270.15789#####38
+Cagnes sur Mer#####269.7381#####42
+Bamenda#####269.72222#####36
+Sarreguemines#####269.70588#####68
+Guerande#####269.2069#####29
+Begles#####269.10345#####29
+Vienne (Isere)#####268.86777#####121
+Nador#####268.48#####25
+Saintes#####268.24786#####117
+Arlon#####268.19737#####76
+Arcachon#####268.15517#####58
+Malo les Bains#####268.15385#####26
+Prefecture d'Aichi#####268.07692#####26
+Saint Nicolas (Flandre Orientale)#####267.93617#####47
+Lesneven#####267.92593#####27
+Royan#####267.34211#####38
+Romans sur Isere#####266.86957#####69
+Meknes#####266.64754#####122
+Taza#####266.59259#####27
+Loudun#####266.54762#####42
+Montelimar#####265.75#####84
+Villerupt#####265.65517#####29
+Saint Mihiel#####265.59524#####42
+Avranches#####265.42647#####68
+Nivelles#####265.35385#####65
+Thourout#####265.34286#####35
+Givet#####265.25#####32
+Douarnenez#####265.15556#####45
+Brazzaville#####265.12602#####246
+Istres#####264.75862#####29
+Saint Lo#####264.73864#####88
+Tielt#####263.94872#####39
+Tonneins#####263.93103#####29
+Charolles#####263.46667#####30
+Hawick#####262.73333#####30
+Chalon sur Saone#####262.1#####160
+Laval (Quebec)#####261.45333#####75
+Guelma#####261.33333#####33
+Bermudes#####261.14286#####28
+Crest (Drome)#####260.8#####25
+Kenitra#####260.60938#####64
+Guingamp#####260.5#####54
+Saint Gaudens#####259.85484#####62
+Aubenas#####259.73438#####64
+Dinan#####259.60825#####97
+Nabeul#####259.52632#####38
+Tlemcen#####259.32#####150
+Sartrouville#####259.23077#####26
+Belleville (Seine)#####259.04#####25
+Braine l'Alleud#####258.93548#####31
+Zarzis#####258.76#####25
+Drummondville#####258.73438#####64
+Vevey#####258.51701#####147
+Dax#####258.49143#####175
+Quebec (ville)#####258.41575#####457
+Cotonou#####258.05303#####132
+Gien#####257.77551#####49
+Beaugency#####257.5#####26
+Nyiregyhaza#####257.45455#####33
+Montbrison (Loire)#####257.375#####40
+Saint Jerome#####257.26415#####53
+Chateau Thierry#####257.04444#####45
+Salins les Bains#####256.89744#####39
+Sarlat la Caneda#####256.56757#####37
+Langres#####256.45614#####114
+Epernay#####256.33333#####69
+Carcassonne#####255.82917#####240
+Granby#####255.64516#####31
+Gatineau#####255.51852#####27
+Selestat#####254.73684#####57
+Molenbeek Saint Jean#####254.60204#####98
+Digne les Bains#####254.46667#####60
+Montmorency (Val d'Oise)#####254.29032#####31
+Trois Rivieres#####254.05161#####155
+Le Bardo#####253.11538#####26
+Saverne#####252.74468#####47
+Annaba#####252.33945#####109
+Armentieres#####252.09375#####64
+Villefranche de Rouergue#####251.16667#####42
+Hazebrouck#####250.97674#####43
+Fougeres#####250.94667#####75
+Bejaia#####250.10526#####57
+Sorel Tracy#####249.79167#####48
+Saint Sever#####249.55556#####27
+Tarare (Rhone)#####248.56#####25
+Chatellerault#####248.52885#####104
+Sfax#####248.16757#####185
+Levis#####248.06329#####79
+Gray (Haute Saone)#####248.04167#####48
+Longueuil#####247.83333#####78
+Chauny#####247.61364#####44
+Bergues#####247.40741#####27
+Batna#####246.78125#####96
+Dole#####246.7027#####37
+Philippeville#####246.40741#####27
+Landerneau#####246.26786#####56
+Oujda#####245.95745#####94
+Valreas#####245.5#####28
+Joinville le Pont#####243.84375#####32
+Evian les Bains#####243.825#####40
+El Biar#####242.76923#####39
+Chateaudun#####242.61818#####55
+Apia#####242.12308#####65
+Rimouski#####242.01429#####70
+La Malbaie#####241.54839#####31
+Dunkerque#####241.06512#####215
+Monthey#####240.81481#####27
+Saint Jean d'Angely#####240.44681#####47
+Draguignan#####240.22388#####67
+Salaberry de Valleyfield#####239.65306#####49
+Mascara#####239.53125#####32
+Goma#####239.35714#####28
+Perpignan#####239.07083#####480
+Bafoussam#####238.52778#####36
+Montigny les Metz#####237.07407#####27
+Lisieux#####236.78889#####90
+Porto Novo#####236.2043#####93
+Sezanne#####236.03571#####28
+Moutier#####235.96296#####27
+Saint Imier#####235.03226#####31
+Orsay#####234.1#####30
+Privas#####232.46429#####28
+Tournon sur Rhone#####232.38889#####36
+Passy (Seine)#####231.65714#####35
+Saint Pierre (Martinique)#####231.60465#####43
+La Reunion#####231.59184#####49
+Skikda#####231.5#####50
+Bron#####231.47826#####46
+Setif#####231.45#####120
+Delemont#####231.13333#####45
+Lessines#####230.72#####25
+Villeneuve sur Lot#####230.08333#####84
+Kisangani#####229.64706#####34
+Rethel#####228.53333#####30
+Albi#####227.09845#####193
+Victoriaville#####227.0#####33
+Binche#####224.85714#####42
+Quimperle#####224.25532#####47
+Nantua#####223.78125#####32
+Marvejols#####222.73077#####26
+Wattrelos#####222.6#####25
+Gueret#####222.40984#####61
+Carhaix Plouguer#####222.16#####25
+Chinon#####221.6#####45
+Issoudun#####220.8806#####67
+Fumel#####220.65385#####26
+Rambervillers#####220.18519#####27
+Yverdon les Bains#####219.16#####75
+Vitre (Ille et Vilaine)#####218.96875#####32
+Le Locle#####218.70968#####62
+Auch#####218.48214#####112
+Mayenne#####218.35484#####31
+Brioude#####218.0#####40
+Cognac#####216.89286#####28
+Amboise#####216.525#####40
+Ernee#####216.24#####25
+Watermael Boitsfort#####215.54348#####46
+Millau#####214.03448#####58
+Gaillac#####213.55263#####38
+Moncton#####213.35714#####70
+N'Djamena#####213.31707#####82
+Voiron#####213.23913#####46
+Frameries#####212.41667#####36
+Rive de Gier#####212.08#####25
+Berchem (Anvers)#####211.88889#####36
+Treichville#####211.33333#####33
+Mayenne (commune)#####211.11111#####54
+Bordj#####210.37778#####45
+El Jadida#####209.17391#####46
+Saint Pol de Leon#####207.97222#####36
+Joliette#####207.6#####25
+Noyon#####206.83333#####36
+Argenton sur Creuse#####206.64286#####28
+Shawinigan#####206.5#####48
+Moissac#####206.35897#####39
+Saint Avold#####206.25#####36
+Diest#####205.86275#####51
+Saint Claude (Jura)#####203.81818#####33
+Gafsa#####203.37931#####29
+Val d'Or#####203.21212#####33
+Casbah d'Alger#####199.14815#####27
+Peronne (Somme)#####199.14706#####34
+Paimpol#####197.35135#####37
+Apt#####197.16129#####31
+Cholet#####196.94574#####129
+Saint Hyacinthe#####196.65385#####78
+Guadeloupe#####196.10345#####29
+L'Assomption#####194.35714#####28
+Charleville (Ardennes)#####193.68182#####66
+Coutances#####192.58333#####72
+Menton (Alpes Maritimes)#####190.25#####36
+Tiaret#####190.06061#####33
+Vanves#####190.0#####29
+Les Sables d'Olonne (ancienne commune)#####187.625#####32
+Ile de France#####187.51515#####33
+Blida#####186.43299#####97
+Tarascon (Bouches du Rhone)#####185.73529#####34
+Agadir#####184.40984#####61
+Porrentruy#####182.67925#####53
+Ath#####182.52809#####89
+Tizi#####182.43103#####58
+Kaolack#####180.69643#####56
+Mende#####179.68421#####38
+Hussein Dey (commune)#####178.84211#####38
+Aire sur l'Adour#####178.23333#####30
+Parthenay#####176.0#####27
+Edmundston#####174.36667#####30
+Chlef#####174.12766#####47
+Biskra#####173.63636#####33
+Lucon (Vendee)#####167.62069#####29
+Auxonne#####167.14286#####28
+Braine le Comte#####164.48#####25
+La Chatre#####161.39394#####33
+Saint Pierre (La Reunion)#####160.48#####25
+Agde#####153.5#####26
+Kouba#####152.34783#####46
+Avesnes sur Helpe#####148.89189#####37
+Ploermel#####142.76471#####34
+Lavaur (Tarn)#####141.25926#####27
+Essaouira#####139.4#####25
+El Harrach#####136.26667#####30
+Boufarik#####121.67742#####31
+Canton de Vaud#####119.24194#####62
+Limoux#####116.08333#####36
+Pas de Calais#####115.08571#####35
