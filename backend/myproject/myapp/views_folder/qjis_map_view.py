@@ -19,15 +19,7 @@ import json
 import csv
 import string
 import secrets
-import hashlib
-
-
-STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
-
-def _stats_cache_key(data: dict) -> str:
-    normalized = json.dumps(data, sort_keys=True, ensure_ascii=False)
-    return "adv_stats:" + hashlib.md5(normalized.encode()).hexdigest()
-
+#import hashlib
 
 @csrf_exempt
 @ratelimit(key='ip', rate='10/15m', block=False)
@@ -65,7 +57,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
             recieved_data = {}
         recieved_data["current_page"] = "qjis_map"
 
-        cache_key = _stats_cache_key(recieved_data)
+        cache_key = stats_cache_key(recieved_data)
         cached = cache.get(cache_key)
         if cached is not None:
 

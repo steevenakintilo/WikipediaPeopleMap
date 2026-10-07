@@ -3,6 +3,7 @@ from unidecode import unidecode
 from django.shortcuts import render
 
 # Create your views here.
+from django.core.cache import cache
 from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -18,6 +19,7 @@ from ..global_variable import *
 from ..utility_function  import *
 
 
+#import hashlib
 import os
 import json
 
@@ -58,12 +60,18 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
 
     if recieved_data == {'birth_town_localisation__icontains': ' '}:
         recieved_data = {}
+
+    cache_key = stats_cache_key(recieved_data)
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return JsonResponse(cached, status=200)
+    
     try:
         if "Tous les pays sauf la france".lower() in recieved_data["country_of_birth"].lower():
             filters = {
                 "born_outside_france":True
             }
-         
+        
         elif recieved_data["country_of_birth"] != "" and "/" not in recieved_data["country_of_birth"] and "Tous les pays" not in recieved_data["country_of_birth"]:
 
             searched_region = ""
@@ -157,7 +165,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
     if "birth_year" in recieved_data:
         if "time_period_of_birth" in recieved_data:
             if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
-               pass 
+                pass 
             else:
                 try:
                     if "+" in recieved_data["birth_year"]:
@@ -224,7 +232,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         else:
             filters["job__icontains"] = unidecode(recieved_data["job"])
 
-     
+    
     if "time_period_of_birth" in recieved_data:
         if len(recieved_data["time_period_of_birth"]) != 0 and recieved_data["time_period_of_birth"] in HISTORICAL_PERIODS_WITH_DATE:
             filters["time_period_of_birth"] = HISTORICAL_PERIODS_DICT[recieved_data["time_period_of_birth"]]
@@ -374,7 +382,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
                 sort_user_by = "number_of_user_who_have_linked_this_user"
             if recieved_data["sort_user_by"] == "Taille du nom de la page":
                 sort_user_by = "number_of_word_in_page_name"
-                                 
+                                
             #sort_user_by = recieved_data["sort_user_by"]
         if "display_people_with_no_localisation" not in recieved_data:
             display_people_with_no_localisation = True
@@ -589,4 +597,6 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         }
         
         list_of_all_user_data.append(user_info_dict)
-    return JsonResponse({"all_user_data":list_of_all_user_data},status=200)
+    cache.set(cache_key, list_of_all_user_data, STATS_CACHE_TTL)
+    return JsonResponse({"all_user_data":list_of_all_user_data}, status=200)
+    

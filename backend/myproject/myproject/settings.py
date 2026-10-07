@@ -159,7 +159,7 @@ CACHES = {
 #         "USER": "postgres",
 #         "PASSWORD": os.environ["PGPASSWORD"],
 #         "HOST": "127.0.0.1",
-#         "PORT": "52762",
+#         "PORT": "65524",
 #         "OPTIONS": {
 #             "sslmode": "require",
 #         },

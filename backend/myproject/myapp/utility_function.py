@@ -11,8 +11,18 @@ from discord_webhook import DiscordWebhook
 from dotenv import load_dotenv
 from random import randint
 
+import json
 import os
+import hashlib
+
 load_dotenv()
+
+STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
+
+def stats_cache_key(data: dict) -> str:
+    """A function that store cache data"""
+    normalized = json.dumps(data, sort_keys=True, ensure_ascii=False)
+    return "adv_stats:" + hashlib.md5(normalized.encode()).hexdigest()
 
 def write_into_file(path:str, data:str) -> None:
     """A function that write data into a file"""

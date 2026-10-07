@@ -19,7 +19,7 @@ from ..global_variable import *
 from ..utility_function  import *
 
 
-import hashlib
+#import hashlib
 
 import os
 import json
@@ -27,11 +27,11 @@ import json
 import time
 
 
-STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
+# STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
 
-def _stats_cache_key(data: dict) -> str:
-    normalized = json.dumps(data, sort_keys=True, ensure_ascii=False)
-    return "adv_stats:" + hashlib.md5(normalized.encode()).hexdigest()
+# def stats_cache_key(data: dict) -> str:
+#     normalized = json.dumps(data, sort_keys=True, ensure_ascii=False)
+#     return "adv_stats:" + hashlib.md5(normalized.encode()).hexdigest()
 
 @csrf_exempt
 @ratelimit(key='ip', rate='15/15m',block=False)
@@ -71,7 +71,7 @@ def get_advanced_statistics(request):
     if recieved_data == {'birth_town_localisation__icontains': ' '}:
         recieved_data = {}
 
-    cache_key = _stats_cache_key(recieved_data)
+    cache_key = stats_cache_key(recieved_data)
     cached = cache.get(cache_key)
     if cached is not None:
         return JsonResponse(cached, status=200)

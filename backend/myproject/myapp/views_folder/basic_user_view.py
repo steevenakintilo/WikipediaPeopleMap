@@ -3,6 +3,7 @@ from unidecode import unidecode
 from django.shortcuts import render
 
 # Create your views here.
+from django.core.cache import cache
 from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
 from django_ratelimit.decorators import ratelimit
@@ -16,7 +17,15 @@ from ..global_variable import *
 from ..utility_function  import *
 
 
+#import hashlib
+import json
 import os
+
+# STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
+
+# def stats_cache_key(data: dict) -> str:
+#     normalized = json.dumps(data, sort_keys=True, ensure_ascii=False)
+#     return "adv_stats:" + hashlib.md5(normalized.encode()).hexdigest()
 
 @ratelimit(key='ip', rate='30/15m', block=False)
 def display_chunck_of_user_info(request,chunk_nb=0):
@@ -32,6 +41,7 @@ def display_chunck_of_user_info(request,chunk_nb=0):
 
     if request.method != "GET":
         return HttpResponse(f"Error!", status=404)
+
 
     all_user_obj = WikipediaUser.objects.all().order_by("position").filter(position__gte=0)
 
