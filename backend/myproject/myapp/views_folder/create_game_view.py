@@ -8,6 +8,7 @@ from django.http import HttpResponse , JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
+from django.db.models import Case, When
 
 from myapp.models import WikipediaUser , WikipediaUserUniqueTown
 
@@ -24,8 +25,11 @@ import os
 import json
 import csv
 
+import random
+import traceback
+
 @csrf_exempt
-@ratelimit(key='ip', rate='1000/2m', block=False)
+@ratelimit(key='ip', rate='20/2m', block=False)
 def who_was_born_first(request):
     """A function that create a who is older game"""
     try:
@@ -74,7 +78,7 @@ def who_was_born_first(request):
                         searched_region = region
                         break
 
-                print(searched_region)
+                #print(searched_region)
                 if recieved_data["country_of_birth"][0:-2].replace("-"," ") in LIST_OF_CONTINENT_NAME:
                     filters = {
                         "continent_of_birth": recieved_data["country_of_birth"][0:-2].replace("-"," ").replace("Amérique","Amerique")
@@ -272,7 +276,7 @@ def who_was_born_first(request):
                 else:
                     filters["last_name"] = recieved_data["last_name"].lower()
 
-        print(recieved_data)
+        #print(recieved_data)
         if "town_birth_place" in recieved_data:
             if "#" in recieved_data["town_birth_place"]:
                 accept_multiple_element = True
@@ -358,36 +362,39 @@ def who_was_born_first(request):
             
 
 
-        print(display_death_localisation,display_either_birth_or_death_town,accept_multiple_element)
+        #print(display_death_localisation,display_either_birth_or_death_town,accept_multiple_element)
         filters["position__gte"] = 0
         #filters["age__lte"] = 123
                 
-        print(recieved_data)
-        print(filters)
-        print(query , " popopo ")
+        #print(recieved_data)
+        #print(filters)
+        #print(query , " popopo ")
 
 
         #list_of_game_user_can_play
         #filters["list_of_game_user_can_play__contains"] = ["whoisolder"]
+        
+        model = WikipediaUser
+        if recieved_data.get("display_only_one_person_per_town") == "oui":
+            model = WikipediaUserUniqueTown
 
         if accept_multiple_element:
-            all_user_obj = WikipediaUser.objects.filter(query,**filters).order_by("?")
+            ids = list(model.objects.filter(query, **filters).values_list("pk", flat=True))
         else:
-            all_user_obj = WikipediaUser.objects.filter(**filters).order_by("?")
+            ids = list(model.objects.filter(**filters).values_list("pk", flat=True))
 
-        if "display_only_one_person_per_town" in recieved_data:
-            if recieved_data["display_only_one_person_per_town"] == "oui":
-                if accept_multiple_element:
-                    all_user_obj = WikipediaUserUniqueTown.objects.filter(query,**filters).order_by("?")
-                else:
-                    all_user_obj = WikipediaUserUniqueTown.objects.filter(**filters).order_by("?")
-
-        list_of_all_user_data =  []
-        
-        nb = int(recieved_data["number_of_rounds"])
+        nb = 25
+        if "number_of_rounds" in recieved_data:        
+            nb = int(recieved_data["number_of_rounds"])
         if nb > 25:
             nb = 25
 
+        picked = sample(ids, min(nb, len(ids)))
+        order = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(picked)])
+        all_user_obj = model.objects.filter(pk__in=picked).order_by(order)
+        list_of_all_user_data =  []
+        nb = 25
+        
         for i , user_obj in enumerate(all_user_obj):
             try:
                 if len(list_of_all_user_data) < nb:
@@ -423,9 +430,8 @@ def who_was_born_first(request):
                 "birth_year2":"personne",
             }
             list_of_all_user_data.append(user_info_dict)
-        print(len(list_of_all_user_data))
+        #print(len(list_of_all_user_data))
         return JsonResponse({"all_game_data":list_of_all_user_data},status=200)
     except:
-        import traceback
         traceback.print_exc()
         return JsonResponse({"all_game_data":{}},status=200)

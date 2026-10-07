@@ -14,7 +14,7 @@ from random import randint
 import json
 import os
 import hashlib
-
+import traceback
 load_dotenv()
 
 STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
@@ -144,6 +144,5 @@ def send_message_discord(msg):
         webhook = DiscordWebhook(url=os.environ["DISCORD_WEBHOOK_KEY"], content=msg)
         webhook.execute()
     except:
-        import traceback
         traceback.print_exc()
         pass

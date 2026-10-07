@@ -53,7 +53,7 @@ const About = () => {
                         par rapport à un score, et d’avoir le ratio hommes/femmes par ville/pays/âge, etc. </p>
 
                     <p>
-                        <strong>La page Jeux :</strong> elle regroupe les jeux du site. Pour le moment, il n’y en a qu’un seul : « Qui est né avant ? ».
+                        <strong>La page Jeux :</strong> disponible uniquement sur PC, elle regroupe les jeux du site. Pour le moment, il n’y en a qu’un seul : « Qui est né avant ? ».
                         Le principe est simple : à chaque round, deux personnes vous sont présentées et vous devez deviner laquelle est née en premier.
                         Vous avez 3 vies, et vous pouvez choisir les filtres pour décider du type de personnes qui apparaîtront.
                     </p>

@@ -25,7 +25,7 @@ import os
 import json
 
 import time
-
+import traceback
 
 # STATS_CACHE_TTL = 60 * 60 * 24 * 7  # 7 jours
 
@@ -554,7 +554,7 @@ def get_advanced_statistics(request):
 
     week_day_of_birth_and_death_counter = Counter()
 
-    town_with_no_locolisation_counter = Counter()
+    #town_with_no_locolisation_counter = Counter()
     cause_of_death_counter = Counter()
     cause_of_death_known_counter = Counter()
 
@@ -908,10 +908,10 @@ def get_advanced_statistics(request):
                 town_birth_and_death_place_counter[user_obj.town_death_place] += 1
             
 
-            if (user_obj.town_birth_place.lower().strip() != "undefined" and len(user_obj.town_birth_place.lower().strip()) != 0) and (user_obj.birth_town_localisation.lower().strip() == "undefined" or user_obj.birth_town_localisation.lower().strip() == ""):
-                town_with_no_locolisation_counter[user_obj.town_birth_place] += 1
-            if (user_obj.town_death_place.lower().strip() != "undefined" and user_obj.town_death_place.lower().strip() != "alive" and len(user_obj.town_death_place.lower().strip()) != 0) and (user_obj.town_death_localisation.lower().strip() == "undefined" or user_obj.town_death_localisation.lower().strip() == ""):
-                town_with_no_locolisation_counter[user_obj.town_death_place] += 1
+            # if (user_obj.town_birth_place.lower().strip() != "undefined" and len(user_obj.town_birth_place.lower().strip()) != 0) and (user_obj.birth_town_localisation.lower().strip() == "undefined" or user_obj.birth_town_localisation.lower().strip() == ""):
+            #     town_with_no_locolisation_counter[user_obj.town_birth_place] += 1
+            # if (user_obj.town_death_place.lower().strip() != "undefined" and user_obj.town_death_place.lower().strip() != "alive" and len(user_obj.town_death_place.lower().strip()) != 0) and (user_obj.town_death_localisation.lower().strip() == "undefined" or user_obj.town_death_localisation.lower().strip() == ""):
+            #     town_with_no_locolisation_counter[user_obj.town_death_place] += 1
             
             # Pays
 
@@ -1040,7 +1040,7 @@ def get_advanced_statistics(request):
             "town_birth_place": town_birth_place_counter,
             "town_death_place": death_town_counter,
             "town_birth_and_death_place": town_birth_and_death_place_counter,
-            "town_with_no_locolisation_counter":town_with_no_locolisation_counter,
+            #"town_with_no_locolisation_counter":town_with_no_locolisation_counter,
                     
             "country_birth_place": country_birth_place_counter,
             "country_death_place": country_death_place_counter,
@@ -1181,14 +1181,12 @@ def get_advanced_statistics(request):
             for key, counter in dict_of_counter.items()
         }
 
-        elapsed = time.perf_counter() - start
         ##print(f"Request processing time: {elapsed:.3f} seconds")
         result = {"all_wikipedia_info": dict_of_counter}
         cache.set(cache_key, result, STATS_CACHE_TTL)
         return JsonResponse(result, status=200)
         
     except:
-        import traceback
         traceback.print_exc()
         #print(f"Request processing time: {elapsed:.3f} seconds")
         return JsonResponse({"all_wikipedia_info":dict_of_counter},status=403)

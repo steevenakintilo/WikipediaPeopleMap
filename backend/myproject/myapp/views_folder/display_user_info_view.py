@@ -22,7 +22,7 @@ def hi():
     return HttpResponse("Hi!")
 
 
-@ratelimit(key='ip', rate='100/15m', block=False)
+@ratelimit(key='ip', rate='1/15m', block=False)
 def display_user_info(request, username):
     """A function that display user  info"""
     if getattr(request, 'limited', False):
@@ -248,7 +248,5 @@ def display_user_info(request, username):
  
 
     except Exception as e:
-        print("========== ERROR ==========")
         traceback.print_exc()
-        print("============================")
-        raise
+        return JsonResponse({},status=403)

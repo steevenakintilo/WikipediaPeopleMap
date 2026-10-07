@@ -1,5 +1,5 @@
 import { BLACK_BUTTON } from "../utils/styles.ts"
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { CircleCheckIcon, GamepadIcon, SearchXIcon, SlidersHorizontalIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle, Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Spinner } from "@steevenakintilo/ui";
@@ -26,6 +26,7 @@ const WhoIsOlder = () => {
     const [round_nb,set_round_nb] = useState(0)
     const [number_of_tries_left,set_number_of_tries_left] = useState(3)
     const [feedback,set_feedback] = useState<{success: boolean, text: string} | null>(null)
+    const feedback_end_ref = useRef<HTMLDivElement>(null)
     const loading = game_loading.isPending
     const all_game_data : any[] = game_loading.data?.all_game_data ?? []
     const current_round = all_game_data[round_nb]
@@ -42,6 +43,13 @@ const WhoIsOlder = () => {
     if (game_loading.error?.toString() === "ApiError: Erreur HTTP 429") {
       error_type = 2;
     }
+
+    const is_game_over = has_lost || (feedback !== null && is_last_round)
+
+    // Fait défiler jusqu'au message de résultat dès qu'il apparaît
+    useEffect(() => {
+        if (feedback) feedback_end_ref.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
+    }, [feedback])
 
     const active_filters_count = count_active_filters(GAME_FILTERS, dict_of_advance_search)
     
@@ -107,22 +115,29 @@ const WhoIsOlder = () => {
 
         {game_loading.isSuccess == false &&(
             
-            <PageHeader
-                title="Qui est né avant?"
-                description="Jeu simple où vous allez avoir une série de personnes (2 par round) et où vous devrez deviner qui est né avant qui."
-            />
+            <div>
 
+                <PageHeader
+                    title="Qui est né avant?"
+                    description="Jeu simple où vous allez avoir une série de personnes (2 par round) et où vous devrez deviner qui est né avant qui."
+                />
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Personnes à exporter</CardTitle>
+                        <CardDescription>
+                        {active_filters_count === 0
+                            ? "Aucun filtre : le jeu contiendra toutes les personnes."
+                            : "Le jeu contiendra les personnes correspondant à ces filtres."}
+                        </CardDescription>
+                    </CardHeader>
+                    
+                </Card>
+            </div>
+            
         )}
       <div className="space-y-6 md:block">
         <Card>
-          <CardHeader>
-            <CardTitle>Personnes à exporter</CardTitle>
-            <CardDescription>
-              {active_filters_count === 0
-                ? "Aucun filtre : le jeu contiendra toutes les personnes."
-                : "Le jeu contiendra les personnes correspondant à ces filtres."}
-            </CardDescription>
-          </CardHeader>
           {active_filters_count > 0 && (
             <CardContent>
               <ActiveFilters sections={GAME_FILTERS} filters={dict_of_advance_search} set_filters={set_dict_of_advance_search} />
@@ -193,13 +208,13 @@ const WhoIsOlder = () => {
                   </Alert>
                 ) : (
                   <>
-                    <p className="text-center text-sm text-muted-foreground">Qui est la personne la plus âgée ?</p>
+                    <p className="text-center text-sm text-muted-foreground">Qui est la personne la plus âgée ? (mon site peut se trompé)</p>
                     <div className="grid grid-cols-2 gap-4 w-full justify-items-center">
                       {([1, 2] as const).map((choice) => {
                         const name = choice === 1 ? current_round.page_name : current_round.page_name2
                         const picture_url = choice === 1 ? current_round.picture_url : current_round.picture_url2
                         return (
-                          <div key={choice} className="flex flex-col items-center gap-4 w-full max-w-[400px] h-[400px]">
+                          <div key={choice} className="flex flex-col items-center gap-4 w-full max-w-[200px] h-[200px]">
                             <Button variant="outline" disabled={feedback !== null} onClick={() => validate_choice(choice)}>
                               {name}
                             </Button>
@@ -212,21 +227,23 @@ const WhoIsOlder = () => {
                         )
                       })}
                     </div>
+                    
                     {feedback && (
                       <Alert variant={feedback.success ? "default" : "destructive"}>
                         <AlertTitle>{feedback.success ? "Bravo" : "Raté"}</AlertTitle>
                         <AlertDescription>{feedback.text}</AlertDescription>
                       </Alert>
                     )}
-                    {has_won && (
+                    {is_game_over && (
                       <Alert>
                         <CircleCheckIcon />
                         <AlertTitle>Partie terminée</AlertTitle>
-                        <AlertDescription>Tu as terminé tous les rounds, bravo !</AlertDescription>
+                        <AlertDescription>{has_won ? "Tu as terminé tous les rounds, bravo !" : "C'était le dernier round."}</AlertDescription>
                       </Alert>
                     )}
                   </>
                 )}
+                <div ref={feedback_end_ref} />
             </CardContent>
             <CardFooter className="gap-2">
                 {!has_lost && feedback && !is_last_round && (

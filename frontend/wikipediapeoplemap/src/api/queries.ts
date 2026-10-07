@@ -81,6 +81,7 @@ export type ReportableField =
   | "picture_url" | "birth_date" | "death_date" | "is_alive" | "gender" | "age" | "job"
   | "town_birth_place" | "country_birth_place" | "continent_of_birth" | "region_of_birth"
   | "town_death_place" | "country_death_place" | "continent_of_death" | "region_of_death" | "time_period_of_birth"
+  | "birth_town_localisation" | "death_town_localisation"
 
 // username = page_name de la personne (même identifiant que la route display_user_info/<username>)
 export type UserInfoReport = { username: string, fields: ReportableField[] }

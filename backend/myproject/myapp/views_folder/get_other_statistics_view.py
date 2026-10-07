@@ -4,10 +4,12 @@ from django.http import HttpResponse , JsonResponse
 from django_ratelimit.decorators import ratelimit
 from django.views.decorators.csrf import csrf_exempt
 
+
 from ..global_variable import *
 from ..utility_function  import *
 
 import os
+import traceback
 
 @ratelimit(key='ip', rate='5/m')
 @csrf_exempt
@@ -110,7 +112,6 @@ def get_other_statistics(request):
         
         return JsonResponse({"ranking_list_of_dict":dict_of_data,"gender_ratio_list_of_dict":dict_of_data2},status=200)
     except:
-        import traceback
         traceback.print_exc()
         return JsonResponse({"ranking_list_of_dict":{},"gender_ratio_list_of_dict":{}},status=200)
         

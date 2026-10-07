@@ -17,8 +17,8 @@ from ..utility_function  import *
 import os
 import json
 import csv
-import string
 import secrets
+import traceback
 #import hashlib
 
 @csrf_exempt
@@ -60,42 +60,15 @@ def display_chunck_user_birth_town_localisation_qjis(request):
         cache_key = stats_cache_key(recieved_data)
         cached = cache.get(cache_key)
         if cached is not None:
+            if len(cached) == 0:
+                return HttpResponse("No result found!", status=404)
 
-            with open("data.json", "w", encoding="utf-8") as file:
-                json.dump({"all_user_data":cached}, file, indent=4, ensure_ascii=False)
-            
-            with open("data.json", "r", encoding="utf-8") as file:
-                list_of_loc = json.load(file)
-                list_of_loc = list_of_loc["all_user_data"]
-        
-            if len(list_of_loc) == 0:
-                return HttpResponse("No result found!",status=404)
-        
-            data = [
-                ['latitude', 'longitude']
-            ]
-            for x in list_of_loc:
-                data.append(x)
-        
-        
-            with open('data.csv', 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile)
-                writer.writerows(data)
-        
-        
-        
-            alphabet = string.ascii_letters + string.digits
-            password = ''.join(secrets.choice(alphabet) for _ in range(32))
-
-            response = HttpResponse(content_type='text/csv')
-            response['Content-Disposition'] = f"attachment; filename=qjis_list_of_localisation_{password}"
-                    
+            response = HttpResponse(content_type="text/csv")
+            response["Content-Disposition"] = f"attachment; filename=qjis_list_of_localisation_{secrets.token_urlsafe(24)}.csv"
             writer = csv.writer(response)
-            #writer.writerow(['latitude', 'longitude'])
-            writer.writerows(data)
-        
+            writer.writerow(["latitude", "longitude"])
+            writer.writerows(cached)
             return response
-        
         try:
 
             if "Tous les pays sauf la france".lower() in recieved_data["country_of_birth"].lower():
@@ -401,18 +374,15 @@ def display_chunck_user_birth_town_localisation_qjis(request):
 
 
         sort_user_by = "position"
-        if "display_only_one_person_per_town" in recieved_data:
-            if recieved_data["display_only_one_person_per_town"] == "oui":
-                if accept_multiple_element:
-                    all_user_obj = WikipediaUserUniqueTown.objects.filter(query,**filters).order_by(f"{sort_user_by}")
-                else:
-                    all_user_obj = WikipediaUserUniqueTown.objects.filter(**filters).order_by(f"{sort_user_by}")
+        if recieved_data.get("display_only_one_person_per_town") == "oui":
+            model = WikipediaUserUniqueTown
         else:
-            if accept_multiple_element:
-                all_user_obj = WikipediaUser.objects.filter(query,**filters).order_by(f"{sort_user_by}")
-            else:
-                all_user_obj = WikipediaUser.objects.filter(**filters).order_by(f"{sort_user_by}")
-        
+            model = WikipediaUser
+
+        if accept_multiple_element:
+            all_user_obj = model.objects.filter(query, **filters).order_by(sort_user_by)
+        else:
+            all_user_obj = model.objects.filter(**filters).order_by(sort_user_by)
         list_of_first_name = set()
         display_only_one_person_per_first_name = False
         if "display_only_one_person_per_first_name" in recieved_data:
@@ -502,47 +472,22 @@ def display_chunck_user_birth_town_localisation_qjis(request):
                         list_of_localisation.append(dms_to_decimal(user_obj["birth_town_localisation"], user_obj["page_name"]))
                     if user_obj["is_alive"] is False and user_obj["town_death_place"].lower().strip() == town_birth_or_death_place:
                         list_of_all_user_data.append(dms_to_decimal(user_obj["town_death_localisation"], "__qjis__"))
-                list_of_all_user_data.append(user_info_dict)
+                
             except Exception as e:
                 print("ERREUR :", repr(e))    
 
         cache.set(cache_key, list_of_all_user_data, STATS_CACHE_TTL)
-        with open("data.json", "w", encoding="utf-8") as file:
-            json.dump({"all_user_data":list_of_all_user_data}, file, indent=4, ensure_ascii=False)
 
-        with open("data.json", "r", encoding="utf-8") as file:
-            list_of_loc = json.load(file)
-            list_of_loc = list_of_loc["all_user_data"]
+        if len(list_of_all_user_data) == 0:
+            return HttpResponse("No result found!", status=404)
 
-        if len(list_of_loc) == 0:
-            return HttpResponse("No result found!",status=404)
-
-        data = [
-            ['latitude', 'longitude']
-        ]
-        for x in list_of_loc:
-            data.append(x)
-
-
-        with open('data.csv', 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerows(data)
-
-
-
-        alphabet = string.ascii_letters + string.digits
-        password = ''.join(secrets.choice(alphabet) for _ in range(32))
-
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = f"attachment; filename=qjis_list_of_localisation_{password}"
-
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = f"attachment; filename=qjis_list_of_localisation_{secrets.token_urlsafe(24)}.csv"
         writer = csv.writer(response)
-        #writer.writerow(['latitude', 'longitude'])
-        writer.writerows(data)
+        writer.writerow(["latitude", "longitude"])
+        writer.writerows(list_of_all_user_data)
         return response
-
     except:
-        import traceback
         traceback.print_exc()
-        return ""
+        return HttpResponse("Erreur serveur", status=500)
     

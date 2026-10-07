@@ -3519,7 +3519,7 @@ class WikiPeopleData():
             list_of_game_user_can_play = []
             if town_birth_place != "" and town_birth_place != "Undefined" and birth_town_localisation != "" and birth_town_localisation != "Undefined" and len(birth_town_localisation) < 50 and country_birth_place != "" and country_birth_place != "Undefined" and picture_url != "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
                 list_of_game_user_can_play.append("wikiguessr")
-            if type(birth_year) == int and birth_year != 123456789 and birth_year != "Undefined" and age > 0 and age < 123 and picture_url != "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
+            if type(birth_year) == int and birth_year != 123456789 and birth_year != "Undefined" and birth_year < 2010 and age > 0 and age < 123 and picture_url != "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
                 list_of_game_user_can_play.append("ageguessr")
                 list_of_game_user_can_play.append("whoisolder")
             list_of_game_user_can_play.append("whoismorefamous")

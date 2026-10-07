@@ -20,6 +20,7 @@ from ..global_variable import *
 from ..utility_function  import *
 
 
+import traceback
 import ast
 import os
 import json
@@ -51,7 +52,7 @@ def update_user_info_status(request):
     except:
         import traceback
         traceback.print_exc()
-        return JsonResponse({"error": False}, status=400)
+        return JsonResponse({"error": False}, status=403)
 
 @csrf_exempt
 def update_user_info(request):
@@ -88,7 +89,7 @@ def update_user_info(request):
     except:
         import traceback
         traceback.print_exc()
-        return JsonResponse({"error": False}, status=400)
+        return JsonResponse({"error": False}, status=403)
 
 
 @ratelimit(key='ip', rate='1/m')
@@ -125,6 +126,5 @@ def validate_an_user(request,user=""):
 
         return JsonResponse({"success": True}, status=200)
     except:
-        import traceback
         traceback.print_exc()
-        return JsonResponse({"error": False}, status=400)
+        return JsonResponse({"error": False}, status=403)
