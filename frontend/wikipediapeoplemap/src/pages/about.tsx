@@ -46,7 +46,8 @@ const About = () => {
                     <p>
                         <strong>La page QGIS :</strong> disponible uniquement sur PC,
                         elle permet de générer un fichier csv utilisable sur QGIS à partir des filtres
-                        sélectionnés.
+                        sélectionnés. Pour cette carte QGIS, je me suis surtout inspiré des vidéos "Plan cartes" des Échos, dont voici la{" "}
+                        <a className={link_class} href="https://www.youtube.com/watch?v=x-GdnOCRGos&list=PLMSqTg60yCbR3SR63lyqF4bOEtdAXfVMl" target="_blank" rel="noopener noreferrer">playlist</a>.
                     </p>
 
                     <p> <strong>La page Autres Statistiques :</strong> elle permet d’obtenir d’autres statistiques liées au classement des noms/villes/pays, etc.
