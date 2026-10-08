@@ -97,7 +97,7 @@ const About = () => {
                     </p>
 
                     <p>
-                        Ensuite, pour effectuer le calcul, je prends le résultat des 5 variables que je pondère sur une unité précise pour éviter que la taille de la page soit beaucoup plus grande que le nombre de liens, puis je divise le résultat par 5.
+                        Ensuite, pour effectuer le calcul, je prends le résultat des 5 variables, que je pondère sur une unité précise afin d’éviter que certaines variables soient plus importantes que d’autres.
                     </p>
                 </AccordionContent>
             </AccordionItem>
