@@ -112,6 +112,8 @@ def get_other_statistics(request):
         #return HttpResponse(f"YAAAY", status=200)
         #print(dict_of_data2)
         
+        print(dict_of_data)
+        print(dict_of_data2)
         return JsonResponse({"ranking_list_of_dict":dict_of_data,"gender_ratio_list_of_dict":dict_of_data2},status=200)
     except:
         traceback.print_exc()

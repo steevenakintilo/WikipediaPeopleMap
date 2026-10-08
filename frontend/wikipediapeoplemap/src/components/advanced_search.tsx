@@ -2,6 +2,10 @@ import { BLACK_BUTTON } from "../utils/styles.ts"
 import type { Dispatch, SetStateAction } from "react"
 import { RotateCcwIcon, SearchIcon, XIcon } from "lucide-react"
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Badge,
   Button,
   Combobox,
@@ -173,17 +177,30 @@ export function AdvancedSearchDialog({ open, on_open_change, sections, filters, 
           </DialogDescription>
         </DialogHeader>
 
-        <div className="min-h-0 flex-1 space-y-6 overflow-y-auto p-4">
-          {sections.map((section) => (
-            <section key={section.title} className="space-y-3">
-              <h3 className="text-sm font-semibold">{section.title}</h3>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {section.fields.map((field) => (
-                  <FilterInput key={field.key} field={field} filters={filters} set_filters={set_filters} />
-                ))}
-              </div>
-            </section>
-          ))}
+        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-2">
+          {/* Seule la première section (thème principal) est ouverte, les autres se déplient à la demande */}
+          <Accordion type="multiple" defaultValue={sections.slice(0, 1).map((section) => section.title)}>
+            {sections.map((section) => {
+              const section_active_count = section.fields.filter((field) => is_active(filters[field.key])).length
+              return (
+                <AccordionItem key={section.title} value={section.title}>
+                  <AccordionTrigger>
+                    <span className="flex items-center gap-2">
+                      {section.title}
+                      {section_active_count > 0 && <Badge variant="secondary">{section_active_count}</Badge>}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="grid gap-4 p-1 sm:grid-cols-2">
+                      {section.fields.map((field) => (
+                        <FilterInput key={field.key} field={field} filters={filters} set_filters={set_filters} />
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              )
+            })}
+          </Accordion>
         </div>
 
         <DialogFooter className="m-0 flex-row items-center border-t p-4">

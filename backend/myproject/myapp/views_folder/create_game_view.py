@@ -383,18 +383,20 @@ def who_was_born_first(request):
         else:
             ids = list(model.objects.filter(**filters).values_list("pk", flat=True))
 
-        nb = 25
+        nb = 21
         if "number_of_rounds" in recieved_data:        
             nb = int(recieved_data["number_of_rounds"])
-        if nb > 25:
-            nb = 25
+        if nb > 21:
+            nb = 21
 
         picked = sample(ids, min(nb, len(ids)))
         order = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(picked)])
         all_user_obj = model.objects.filter(pk__in=picked).order_by(order)
         list_of_all_user_data =  []
-        nb = 25
-        
+        nb = 21
+
+        if len(all_user_obj) < 3:
+            return JsonResponse({"all_game_data":{}},status=404)
         for i , user_obj in enumerate(all_user_obj):
             try:
                 if len(list_of_all_user_data) < nb:
