@@ -143,10 +143,6 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": os.environ["REDIS_URL"],
         "TIMEOUT": 60 * 60 * 24 * 7,
-        "OPTIONS": {
-            "MAX_ENTRIES": 1000,
-            "CULL_FREQUENCY": 3,  # supprime 1/3 des entrées quand c'est plein
-        },
     }
 }
 
