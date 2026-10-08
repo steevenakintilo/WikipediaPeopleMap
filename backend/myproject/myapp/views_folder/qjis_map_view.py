@@ -57,7 +57,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
             recieved_data = {}
         recieved_data["current_page"] = "qjis_map"
 
-        cache_key = stats_cache_key(recieved_data)
+        cache_key = stats_cache_key("qjis_stat",recieved_data)
         cached = cache.get(cache_key)
         if cached is not None:
             if len(cached) == 0:

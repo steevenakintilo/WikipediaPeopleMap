@@ -65,7 +65,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             recieved_data = {}
 
         #print(recieved_data)
-        cache_key = stats_cache_key(recieved_data)
+        cache_key = stats_cache_key("adv_searchs",recieved_data)
         cached = cache.get(cache_key)
         if cached is not None:
             return JsonResponse({"all_user_data":cached}, status=200)
