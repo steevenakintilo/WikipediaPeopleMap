@@ -43,18 +43,18 @@ def get_other_statistics(request):
         for file in os.listdir(file_path_for_ranking):
             size = 2501
             if file in ["$aa_name_#a_score_of_size5.txt","$ab_boy_name_#a_score_of_size5.txt","$ab_girl_name_#a_score_of_size5.txt"]:
-                size = len(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n"))
+                size = len(print_file_content(rf"{file_path_for_ranking}{file}").split("\n"))
             if len(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")) > size:
                 list_of_file_data.append(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")[0:size])
-            elif len(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n")) != 0:
+            elif len(print_file_content(rf"{file_path_for_ranking}{file}").split("\n")) != 0:
                 list_of_file_data.append(print_file_content(rf"{file_path_for_ranking}\{file}").split("\n"))
             list_of_file_name.append(file)
 
         
         for file in os.listdir(file_path_for_gender_ratio):
-            if len(print_file_content(rf"{file_path_for_gender_ratio}\{file}").split("\n")) > 2501:
+            if len(print_file_content(rf"{file_path_for_gender_ratio}{file}").split("\n")) > 2501:
                 list_of_file_data2.append(print_file_content(rf"{file_path_for_gender_ratio}\{file}").split("\n")[0:2501])
-            elif len(print_file_content(rf"{file_path_for_gender_ratio}\{file}").split("\n")) > 0:
+            elif len(print_file_content(rf"{file_path_for_gender_ratio}{file}").split("\n")) > 0:
                 list_of_file_data2.append(print_file_content(rf"{file_path_for_gender_ratio}\{file}").split("\n"))
             list_of_file_name2.append(file)
     
@@ -117,5 +117,6 @@ def get_other_statistics(request):
         return JsonResponse({"ranking_list_of_dict":dict_of_data,"gender_ratio_list_of_dict":dict_of_data2},status=200)
     except:
         traceback.print_exc()
-        return JsonResponse({"ranking_list_of_dict":{},"gender_ratio_list_of_dict":{}},status=200)
+        print("ici")
+        return JsonResponse({"ranking_list_of_dict":{},"gender_ratio_list_of_dict":{}},status=403)
         
