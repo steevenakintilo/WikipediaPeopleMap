@@ -1163,9 +1163,9 @@ export const STAT_TO_DESCRIPTION : any = {
 
 export const NUMBER_OF_USER : number = 712411
 
-//export const backend_url_prod: string = "https://glorious-nourishment-production-e28f.up.railway.app"
+export const backend_url_prod: string = "https://glorious-nourishment-production-e28f.up.railway.app"
 export const backend_url_local: string = "http://127.0.0.1:8000/"
-export const backend_url_prod: string = "http://127.0.0.1:8000"
+//export const backend_url_prod: string = "http://127.0.0.1:8000"
 
 export const dict_localisation_pin_picture : any = {
     999999999999999: "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1787351654/image_mobyht.png",
