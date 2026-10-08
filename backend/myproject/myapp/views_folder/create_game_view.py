@@ -372,7 +372,7 @@ def who_was_born_first(request):
 
 
         #list_of_game_user_can_play
-        #filters["list_of_game_user_can_play__contains"] = ["whoisolder"]
+        filters["list_of_game_user_can_play__contains"] = ["whoisolder"]
         
         model = WikipediaUser
         if recieved_data.get("display_only_one_person_per_town") == "oui":

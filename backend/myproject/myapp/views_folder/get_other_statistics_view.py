@@ -21,7 +21,8 @@ def get_other_statistics(request):
 
         file_path_for_ranking = rf"{os.getcwd()}\ranking_folder"
         file_path_for_gender_ratio = rf"{os.getcwd()}\ratio_of_man_and_woman"
-
+        print("file_path_for_ranking: " , file_path_for_ranking)
+        print("os.getcwd(): " , os.getcwd())
 
         # FOR RANKING
             

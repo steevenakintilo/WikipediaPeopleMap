@@ -138,11 +138,14 @@ def dms_to_decimal(dms,name=""):
         return 999999999999999 ,999999999999999
         return -32.8471,-47.3926
 
+
+
 def send_message_discord(msg):
-    """A function that send discord message with webhook"""
-    try:    
-        webhook = DiscordWebhook(url=os.environ["DISCORD_WEBHOOK_KEY"], content=msg)
-        webhook.execute()
-    except:
+    url = os.environ.get("DISCORD_WEBHOOK_KEY")
+    if not url:
+        return
+
+    try:
+        DiscordWebhook(url=url, content=msg).execute()
+    except Exception:
         traceback.print_exc()
-        pass
