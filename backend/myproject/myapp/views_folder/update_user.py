@@ -101,7 +101,7 @@ def validate_an_user(request,user=""):
         return HttpResponse(f"Bad request!", status=404)
 
     try:
-        NUMBER_OF_GOOD_REPORT_NEEDED = 99
+        NUMBER_OF_GOOD_REPORT_NEEDED = 19
         user_obj_update_obj = WikiopediaUserToUpdate.objects.filter(page_name=user).first()
         user_obj = WikipediaUser.objects.filter(page_name=user).first()
         if user_obj_update_obj is None:

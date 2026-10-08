@@ -288,7 +288,8 @@ export function UserProfileDialog({ open, on_open_change, page_name, user_info }
 
         {user_info.isLoading && <ProfileSkeleton />}
         {user_info.isError && <ErrorState description="Impossible de charger ce profil pour le moment." on_retry={() => user_info.refetch()} />}
-        {user_info.data && <ProfileContent user_data_info={user_info.data} />}
+        {!user_info.isError && user_info.data && <ProfileContent user_data_info={user_info.data} />}
+
       </DialogContent>
     </Dialog>
     </>

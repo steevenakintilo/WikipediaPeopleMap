@@ -152,19 +152,19 @@ CACHES = {
 
 # # LOCAL POSTGRESS
 
-# # DATABASES = {
-# #     "default": {
-# #         "ENGINE": "django.db.backends.postgresql",
-# #         "NAME": "railway",
-# #         "USER": "postgres",
-# #         "PASSWORD": os.environ["PGPASSWORD"],
-# #         "HOST": "127.0.0.1",
-# #         "PORT": "51349",
-# #         "OPTIONS": {
-# #             "sslmode": "require",
-# #         },
-# #     }
-# # }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "railway",
+#         "USER": "postgres",
+#         "PASSWORD": os.environ["PGPASSWORD"],
+#         "HOST": "127.0.0.1",
+#         "PORT": "52428",
+#         "OPTIONS": {
+#             "sslmode": "require",
+#         },
+#     }
+# }
 
 
 # Password validation

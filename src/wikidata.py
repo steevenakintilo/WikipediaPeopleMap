@@ -3522,9 +3522,28 @@ class WikiPeopleData():
             if type(birth_year) == int and birth_year != 123456789 and birth_year != "Undefined" and birth_year < 2010 and age > 0 and age < 123 and picture_url != "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg":
                 list_of_game_user_can_play.append("ageguessr")
                 list_of_game_user_can_play.append("whoisolder")
-            list_of_game_user_can_play.append("whoismorefamous")
-                        
-                                
+            
+            if (
+                country_birth_place not in ("", "Undefined")
+                and town_birth_place not in ("", "Undefined")
+                and type(birth_year) == int
+                and birth_year != 123456789
+                and birth_year < 2010
+                and age > 15
+                and age < 123
+                and time_period_of_birth not in ("", "Undefined")
+                and gender not in ("", "Undefined")
+                and picture_url != "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+                and (
+                    is_alive
+                    or (
+                        country_death_place not in ("", "Undefined")
+                        and town_death_place not in ("", "Undefined")
+                    )
+                )
+            ):
+                list_of_game_user_can_play.append("blablapedia")        
+
 
             if print_data:
                 print(f"Page name: {page_name}")
@@ -4298,7 +4317,7 @@ toto = WikiPeopleData()
 
 # Remmettre la fonction des liens
 
-do_user_data =  False
+do_user_data =  True
 do_stat = False
 
 

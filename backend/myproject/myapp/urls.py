@@ -9,12 +9,12 @@ from .views_folder import display_user_info_view
 from .views_folder import get_other_statistics_view
 from .views_folder import update_user
 from .views_folder import create_game_view
-#from .views_folder import rb
+from .views_folder import rb
 
 urlpatterns = [
-    path("add_a_wikipedia_user_to_the_database",database_view.add_a_wikipedia_user_to_the_database),
-    path("add_a_wikipedia_user_to_the_database_unique_town",database_view.add_a_wikipedia_user_to_the_database_unique_town),
-    path("delete_user_from_the_database",database_view.delete_user_to_the_database),
+    # path("add_a_wikipedia_user_to_the_database",database_view.add_a_wikipedia_user_to_the_database),
+    # path("add_a_wikipedia_user_to_the_database_unique_town",database_view.add_a_wikipedia_user_to_the_database_unique_town),
+    # path("delete_user_from_the_database",database_view.delete_user_to_the_database),
     path("display_user_info/<str:username>",display_user_info_view.display_user_info),
     path("display_chunck_of_user_info/<int:chunk_nb>/",basic_user_view.display_chunck_of_user_info),
     path("display_chunck_of_user_info_advanced_search_qjis",qjis_map_view.display_chunck_user_birth_town_localisation_qjis),

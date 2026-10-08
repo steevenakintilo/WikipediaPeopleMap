@@ -24,7 +24,7 @@ def hi():
 def add_a_wikipedia_user_to_the_database(request):
     """Add Wikipedia users to the database."""
 
-    if request.method != "POST":
+    if request.method != "POST" or request.headers.get("X-Admin-API-Key") != os.environ["ADMIN_API_KEY"]:
         return HttpResponse("Error!", status=404)
 
     user_data_dict = print_file_content(USER_DICT_FILE_PATH).split("\n")
@@ -434,7 +434,7 @@ def add_a_wikipedia_user_to_the_database_unique_town(request):
 def update_all_wikipedia_user(request):
     """Update all Wikipedia users"""
 
-    if request.method != "POST":
+    if request.method != "POST" or request.headers.get("X-Admin-API-Key") != os.environ["ADMIN_API_KEY"]:
         return HttpResponse("Error!", status=404)
 
     user_data_dict = print_file_content(USER_DICT_FILE_PATH).split("\n")
@@ -783,7 +783,8 @@ def update_all_wikipedia_user(request):
 @csrf_exempt
 def delete_user_to_the_database(request):
     """A function that delete user from the database."""
-
+    if request.headers.get("X-Admin-API-Key") != os.environ["ADMIN_API_KEY"]:
+        return HttpResponse("Error!", status=401)
     if request.method != "DELETE":
         return HttpResponse("Error!", status=404)
 
