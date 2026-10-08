@@ -60,9 +60,11 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         except:
             pass
 
+        recieved_data["chunk_nb"] = chunk_nb
         if recieved_data == {'birth_town_localisation__icontains': ' '}:
             recieved_data = {}
 
+        #print(recieved_data)
         cache_key = stats_cache_key(recieved_data)
         cached = cache.get(cache_key)
         if cached is not None:
