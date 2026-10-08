@@ -22,7 +22,7 @@ def hi():
     return HttpResponse("Hi!")
 
 
-@ratelimit(key='ip', rate='1/15m', block=False)
+@ratelimit(key='ip', rate='100/15m', block=False)
 def display_user_info(request, username):
     """A function that display user  info"""
     if getattr(request, 'limited', False):
@@ -170,6 +170,7 @@ def display_user_info(request, username):
                 "century_of_birth":user_obj.century_of_birth,
                 "century_of_death":user_obj.century_of_death,
                 "update_level":update_level,
+                "nb_of_translation":user_obj.nb_of_translation
                             
             }
             #user_obj.number_of_views += 1
@@ -242,6 +243,7 @@ def display_user_info(request, username):
             "number_of_unpreciseness_date": "personne",
             "country_birth_place_emoji": "🏴‍☠️",
             "country_death_place_emoji": "🏴‍☠️",
+            "nb_of_translation":3000
         }
     
         return JsonResponse(user_info_dict,status=200)

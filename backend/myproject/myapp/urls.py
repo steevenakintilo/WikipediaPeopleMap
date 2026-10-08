@@ -9,7 +9,7 @@ from .views_folder import display_user_info_view
 from .views_folder import get_other_statistics_view
 from .views_folder import update_user
 from .views_folder import create_game_view
-#from .views_folder import rb
+from .views_folder import rb
 
 urlpatterns = [
     # path("add_a_wikipedia_user_to_the_database",database_view.add_a_wikipedia_user_to_the_database),
@@ -21,14 +21,14 @@ urlpatterns = [
     path("display_chunck_of_user_info_advanced_search/<int:chunk_nb>/",advanced_searched_for_user_view.display_chunck_of_user_info_advanced_search),
     path("get_advanced_statistics",advanced_search_for_statistics_view.get_advanced_statistics),
     path("calc_score_of_all_variable",calc_score_of_variable_view.calc_score_of_all_variable),
-    path("update_all_wikipedia_user",database_view.update_all_wikipedia_user),
+    #path("update_all_wikipedia_user",database_view.update_all_wikipedia_user),
     path("calc_gender_ratio_of_some_variable",calc_score_of_variable_view.calc_gender_ratio_of_some_variable),
     path("get_other_statistics",get_other_statistics_view.get_other_statistics),
     path("update_user_info_status",update_user.update_user_info_status),
     path("update_user_info",update_user.update_user_info),
     path("validate_an_user/<str:user>",update_user.validate_an_user),
     path("create_who_was_born_first_game",create_game_view.who_was_born_first),
-    # path("rbnb",rb.rbnb),
+    path("rbnb",rb.rbnb_create),
     # path("brbr",rb.brbr)
         
 ]

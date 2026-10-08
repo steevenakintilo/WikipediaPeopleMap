@@ -7,7 +7,7 @@ CURRENT_YEAR = int(x.year)
 USER_DICT_FILE_PATH = rf"{os.getcwd().split(r"\backend\myproject")[0]}\src\user_info_dict.txt"
 NUMBER_OF_USER = 706208
 NUMBER_OF_USER = 712430
-NUMBER_OF_USER = 712411
+NUMBER_OF_USER = 712408
 
 MAXIMUM_AGE_TO_DISPLAY = 122
 

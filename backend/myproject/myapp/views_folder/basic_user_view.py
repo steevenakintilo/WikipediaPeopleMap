@@ -43,7 +43,7 @@ def display_chunck_of_user_info(request,chunk_nb=0):
         return HttpResponse(f"Error!", status=404)
 
 
-    all_user_obj = WikipediaUser.objects.all().order_by("position").filter(position__gte=0)
+    all_user_obj = WikipediaUser.objects.all().order_by("position","id").filter(position__gte=0)
 
     #all_user_obj = WikipediaUser.objects.filter(number_of_user_who_have_linked_this_user=0,position__gte=0,position__lte=35000).order_by("position")
     
@@ -67,6 +67,7 @@ def display_chunck_of_user_info(request,chunk_nb=0):
     list_of_localisation = []
     for user_obj in all_user_obj[index_start:index_end]:
         try:
+            print(user_obj.page_name)
             # if user_obj.birth_town_localisation == "" or user_obj.birth_town_localisation.lower() == "undefined":
             #     continue
 
@@ -102,6 +103,8 @@ def display_chunck_of_user_info(request,chunk_nb=0):
             }
             list_of_all_user_data.append(user_info_dict)
         except:
+            print(user_obj.page_name)
+            traceback.print_exc()
             pass
 
     return JsonResponse({"all_user_data":list_of_all_user_data},status=200)

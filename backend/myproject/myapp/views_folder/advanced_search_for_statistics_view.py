@@ -358,7 +358,8 @@ def get_advanced_statistics(request):
                 sort_user_by = "number_of_user_who_have_linked_this_user"
             if recieved_data["sort_user_by"] == "Taille du nom de la page":
                 sort_user_by = "number_of_word_in_page_name"
-                                 
+            if recieved_data["sort_user_by"] == "Nombre de langues dans lesquelles la page est traduite":
+                sort_user_by = "nb_of_translation"   
             #sort_user_by = recieved_data["sort_user_by"]
     #filters["town_death_localisation__icontains"] = "Undefined"
     

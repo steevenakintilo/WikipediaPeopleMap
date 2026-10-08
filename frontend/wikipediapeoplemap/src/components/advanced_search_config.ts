@@ -45,6 +45,8 @@ const SORT_OPTIONS: Option[] = [
   { value: "Nombre d'ami(e)", label: "Nombre d'ami(e)s" },
   { value: "Taille du nom de la page", label: "Taille du nom de la page" },
   { value: "Nombre de vue(s)", label: "Nombre de vues" },
+  { value: "Nombre de langues dans lesquelles la page est traduite", label: "Nombre de langues dans lesquelles la page est traduite" },
+  
 ]
 
 const IDENTITY: FilterSection = {

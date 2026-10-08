@@ -230,6 +230,8 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
         <InfoRow label="Nombre de liens">{format_number(user_data_info.number_of_links)}</InfoRow>
         <InfoRow label="Personnes qui la mentionnent">{format_number(user_data_info.number_of_user_who_have_linked_this_user)}</InfoRow>
         <InfoRow label="Ami(e)s (mentions dans les deux sens)">{format_number(user_data_info.number_of_friends)}</InfoRow>
+        <InfoRow label="Nombre de langues dans lesquelles la page est traduite">{format_number(user_data_info.nb_of_translation)}</InfoRow>
+        
         <div className="grid gap-x-6">
           <TopList title="Liens sur sa page" items={user_data_info.all_links_of_a_page} />
           <TopList title="Personnes qui la mentionnent" items={user_data_info.list_of_page_name_linked_sorted} />
