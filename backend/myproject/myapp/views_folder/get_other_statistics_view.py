@@ -22,9 +22,7 @@ def get_other_statistics(request):
 
         file_path_for_ranking = os.path.join(settings.BASE_DIR, "ranking_folder")
         file_path_for_gender_ratio =  os.path.join(settings.BASE_DIR, "ratio_of_man_and_woman")
-        print("file_path_for_ranking: " , file_path_for_ranking)
-        print("os.getcwd(): " , os.getcwd())
-
+        
         # FOR RANKING
             
         list_of_file_data = []
@@ -40,23 +38,21 @@ def get_other_statistics(request):
         dict_of_data2 = {}
         list_of_list2 = []
         
-        for file in os.listdir(file_path_for_ranking):
+        # sorted(): os.listdir order is arbitrary on Linux (alphabetical on Windows)
+        for file in sorted(os.listdir(file_path_for_ranking)):
+            lines = print_file_content(os.path.join(file_path_for_ranking, file)).split("\n")
             size = 2501
             if file in ["$aa_name_#a_score_of_size5.txt","$ab_boy_name_#a_score_of_size5.txt","$ab_girl_name_#a_score_of_size5.txt"]:
-                size = len(print_file_content(rf"{file_path_for_ranking}/{file}").split("\n"))
-            if len(print_file_content(rf"{file_path_for_ranking}/{file}").split("\n")) > size:
-                list_of_file_data.append(print_file_content(rf"{file_path_for_ranking}/{file}").split("\n")[0:size])
-            elif len(print_file_content(rf"{file_path_for_ranking}/{file}").split("\n")) != 0:
-                list_of_file_data.append(print_file_content(rf"{file_path_for_ranking}/{file}").split("\n"))
-            list_of_file_name.append(file)
+                size = len(lines)
+            if len(lines) != 0:
+                list_of_file_data.append(lines[0:size])
+                list_of_file_name.append(file)
 
-        
-        for file in os.listdir(file_path_for_gender_ratio):
-            if len(print_file_content(rf"{file_path_for_gender_ratio}/{file}").split("\n")) > 2501:
-                list_of_file_data2.append(print_file_content(rf"{file_path_for_gender_ratio}/{file}").split("\n")[0:2501])
-            elif len(print_file_content(rf"{file_path_for_gender_ratio}/{file}").split("\n")) > 0:
-                list_of_file_data2.append(print_file_content(rf"{file_path_for_gender_ratio}/{file}").split("\n"))
-            list_of_file_name2.append(file)
+        for file in sorted(os.listdir(file_path_for_gender_ratio)):
+            lines = print_file_content(os.path.join(file_path_for_gender_ratio, file)).split("\n")
+            if len(lines) > 0:
+                list_of_file_data2.append(lines[0:2501])
+                list_of_file_name2.append(file)
     
 
             # try:
@@ -112,11 +108,8 @@ def get_other_statistics(request):
         #return HttpResponse(f"YAAAY", status=200)
         #print(dict_of_data2)
         
-        print(dict_of_data)
-        print(dict_of_data2)
         return JsonResponse({"ranking_list_of_dict":dict_of_data,"gender_ratio_list_of_dict":dict_of_data2},status=200)
     except:
         traceback.print_exc()
-        print("ici")
         return JsonResponse({"ranking_list_of_dict":{},"gender_ratio_list_of_dict":{}},status=403)
         
