@@ -100,13 +100,14 @@ function FilterInput({ field, filters, set_filters }: { field: FilterField } & O
           type="single"
           variant="outline"
           size="sm"
+          className="w-full"
           aria-label={field.label}
           value={value ?? ""}
           // Recliquer sur l'option choisie la désélectionne (= pas de filtre)
           onValueChange={(next) => set_value(next === "" ? undefined : next)}
         >
           {field.options.map((option) => (
-            <ToggleGroupItem key={option.value} value={option.value} className="data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-primary">
+            <ToggleGroupItem key={option.value} value={option.value} className="min-w-0 flex-1 px-2 data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-primary">
               {option.label}
             </ToggleGroupItem>
           ))}
@@ -178,8 +179,8 @@ export function AdvancedSearchDialog({ open, on_open_change, sections, filters, 
         </DialogHeader>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-4 py-2">
-          {/* Seule la première section (thème principal) est ouverte, les autres se déplient à la demande */}
-          <Accordion type="multiple" defaultValue={sections.slice(0, 1).map((section) => section.title)}>
+          {/* Desktop : seule la première section (thème principal) est ouverte. Mobile : tout est fermé, l'utilisateur déplie ce qu'il veut */}
+          <Accordion type="multiple" defaultValue={window.matchMedia("(max-width: 639px)").matches ? [] : sections.slice(0, 1).map((section) => section.title)}>
             {sections.map((section) => {
               const section_active_count = section.fields.filter((field) => is_active(filters[field.key])).length
               return (

@@ -173,7 +173,7 @@ def display_user_info(request, username):
                 "nb_of_translation":user_obj.nb_of_translation
                             
             }
-            #user_obj.number_of_views += 1
+            user_obj.number_of_views += 1
             
             user_obj.save()
             for key , value in user_info_dict.items():

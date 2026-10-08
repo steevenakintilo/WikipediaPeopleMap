@@ -44,22 +44,23 @@ const SORT_OPTIONS: Option[] = [
   { value: "Âge", label: "Âge" },
   { value: "Nombre d'ami(e)", label: "Nombre d'ami(e)s" },
   { value: "Taille du nom de la page", label: "Taille du nom de la page" },
-  { value: "Nombre de vue(s)", label: "Nombre de vues" },
-  { value: "Nombre de langues dans lesquelles la page est traduite", label: "Nombre de langues dans lesquelles la page est traduite" },
-  
+  { value: "Nombre de vue(s)", label: "Nombre de vues" },  
 ]
 
-const IDENTITY: FilterSection = {
-  title: "Identité",
-  fields: [
-    { key: "last_name", label: "Nom de famille", type: "text", description: "# pour plusieurs noms, + pour les noms contenant le texte" },
-    { key: "first_name", label: "Prénom", type: "text", description: "# pour plusieurs prénoms, + pour les prénoms contenant le texte" },
-    { key: "job", label: "Métier", type: "text", placeholder: "acteur ou chanteuse#peintre", description: "Ex : acteur ou chanteuse#peintre#médecin ou foot" },
-    { key: "page_name", label: "Nom de la page wikipedia", type: "text", description: "# pour plusieurs pages, + pour les pages contenant le texte" },
-    { key: "gender", label: "Genre", type: "choice", options: [{ value: "Homme", label: "Hommes" }, { value: "Femme", label: "Femmes" }, { value: "Les 2", label: "Les deux" }] },
-    { key: "alive_status", label: "Mort ou vivant", type: "choice", options: [{ value: "Mort", label: "Décédé(e)s" }, { value: "Vivant", label: "Vivant(e)s" }, { value: "Les 2", label: "Les deux" }] },
-  ],
-}
+const PAGE_NAME: FilterField = { key: "page_name", label: "Nom de la page wikipedia", type: "text", description: "# pour plusieurs pages, + pour les pages contenant le texte" }
+
+const IDENTITY_FIELDS: FilterField[] = [
+  { key: "last_name", label: "Nom de famille", type: "text", description: "# pour plusieurs noms, + pour les noms contenant le texte" },
+  { key: "first_name", label: "Prénom", type: "text", description: "# pour plusieurs prénoms, + pour les prénoms contenant le texte" },
+  { key: "job", label: "Métier", type: "text", placeholder: "acteur ou chanteuse#peintre", description: "Ex : acteur ou chanteuse#peintre#médecin ou foot" },
+  { key: "gender", label: "Genre", type: "choice", options: [{ value: "Homme", label: "Hommes" }, { value: "Femme", label: "Femmes" }, { value: "Les 2", label: "Les deux" }] },
+  { key: "alive_status", label: "Mort ou vivant", type: "choice", options: [{ value: "Mort", label: "Décédé(e)s" }, { value: "Vivant", label: "Vivant(e)s" }, { value: "Les 2", label: "Les deux" }] },
+]
+
+const IDENTITY: FilterSection = { title: "Identité", fields: [...IDENTITY_FIELDS.slice(0, 3), PAGE_NAME, ...IDENTITY_FIELDS.slice(3)] }
+
+// Page Carte : le nom de la page est dans « Affichage »
+const IDENTITY_WITHOUT_PAGE_NAME: FilterSection = { title: "Identité", fields: IDENTITY_FIELDS }
 
 const BIRTH: FilterSection = {
   title: "Naissance",
@@ -148,7 +149,7 @@ export const GAME_FILTERS: FilterSection[] = [
 
 // Page Carte
 export const MAP_FILTERS: FilterSection[] = [
-  IDENTITY,
+  IDENTITY_WITHOUT_PAGE_NAME,
   BIRTH,
   DEATH,
   AGE_AND_PLACES,
@@ -162,6 +163,7 @@ export const MAP_FILTERS: FilterSection[] = [
       ONE_PER_TOWN,
       { key: "display_people_with_no_localisation", label: "Afficher les gens qui n'ont pas de localisation de naissance ?", type: "choice", options: YES_NO },
       { key: "display_only_death_localisation", label: "Afficher uniquement les lieux de décès", type: "choice", options: YES_NO },
+      PAGE_NAME,
     ],
   },
 ]
