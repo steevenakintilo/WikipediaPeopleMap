@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse , JsonResponse
 from django_ratelimit.decorators import ratelimit
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 
 from ..global_variable import *
@@ -19,8 +20,8 @@ def get_other_statistics(request):
         if request.method != "GET":
             return HttpResponse(f"Error!", status=404)
 
-        file_path_for_ranking = rf"{os.getcwd()}ranking_folder"
-        file_path_for_gender_ratio = rf"{os.getcwd()}ratio_of_man_and_woman"
+        file_path_for_ranking = os.path.join(settings.BASE_DIR, "ranking_folder")
+        file_path_for_gender_ratio =  os.path.join(settings.BASE_DIR, "ratio_of_man_and_woman")
         print("file_path_for_ranking: " , file_path_for_ranking)
         print("os.getcwd(): " , os.getcwd())
 
