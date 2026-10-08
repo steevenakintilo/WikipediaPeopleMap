@@ -9,7 +9,7 @@ from .views_folder import display_user_info_view
 from .views_folder import get_other_statistics_view
 from .views_folder import update_user
 from .views_folder import create_game_view
-from .views_folder import rb
+#from .views_folder import rb
 
 urlpatterns = [
     # path("add_a_wikipedia_user_to_the_database",database_view.add_a_wikipedia_user_to_the_database),
