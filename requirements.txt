@@ -8,3 +8,4 @@ Requests==2.34.2
 selenium==4.49.0
 Unidecode==1.4.0
 discord-webhook==1.4.1
+redis==7.3.0

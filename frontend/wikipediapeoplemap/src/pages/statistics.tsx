@@ -66,7 +66,10 @@ function build_charts(list_of_user_data: any) {
 
               list_of_graph.push(make_a_graphic("bar", generic_dict, VAR_TO_DESCRIPTION[key]));
 
-              if (
+              if (key === "first_name" || key === "first_name_standard") {
+                  // Prénoms avec et sans accent, limités à 10000
+                  list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 10000));
+              } else if (
                   key !== "town_birth_and_death_place" &&
                   key !== "town_birth_place" &&
                   key !== "town_death_place" &&

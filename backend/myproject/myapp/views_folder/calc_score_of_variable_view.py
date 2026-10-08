@@ -23,7 +23,9 @@ def calc_score_of_all_variable(request):
     """Compute the score of almost all varible"""
     if request.method != "GET":
         return HttpResponse(f"Error!", status=404)
-
+    if request.headers.get("X-Admin-API-Key") != os.environ["ADMIN_API_KEY"]:
+        return HttpResponse(f"Error!", status=404)
+        
 
     print("ko")
     name_dict_grade = {}
@@ -496,13 +498,13 @@ def calc_score_of_all_variable(request):
 
             if user_obj.time_period_of_birth.lower() != "undefined" and user_obj.time_period_of_birth != "":
                 period = user_obj.time_period_of_birth.replace("Prehistory", "Préhistoire").replace("Antiquity", "Antiquité").replace("Middle Ages", "Moyen Âge").replace("Renaissance", "Renaissance").replace("Contemporary Period", "Époque contemporaine").replace("Today Time", "Époque actuelle")
-                if user_obj.time_period_of_birth not in time_period_of_birth_dict_grade:
+                if period not in time_period_of_birth_dict_grade:
                     time_period_of_birth_dict_grade[period] = 0
                     time_period_of_birth_dict_grade[period] += user_obj.power_ranking
                 else:
                     time_period_of_birth_dict_grade[period] += user_obj.power_ranking
 
-                if user_obj.time_period_of_birth in time_period_of_birth_dict_occurence:
+                if period in time_period_of_birth_dict_occurence:
                     time_period_of_birth_dict_occurence[f"{period}"] += 1
                 else:
                     time_period_of_birth_dict_occurence[f"{period}"] = 0
@@ -786,7 +788,9 @@ def calc_gender_ratio_of_some_variable(request):
 
     if request.method != "GET":
         return HttpResponse("Error!", status=404)
-
+    if request.headers.get("X-Admin-API-Key") != os.environ["ADMIN_API_KEY"]:
+        return HttpResponse(f"Error!", status=404)
+    
     last_name_occurence = {}
     last_name_gender_nb = {}
     last_name_ratio = {}
