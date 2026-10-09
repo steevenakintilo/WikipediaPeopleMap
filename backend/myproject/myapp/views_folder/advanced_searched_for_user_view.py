@@ -287,18 +287,18 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         if "town_birth_place" in recieved_data:
             if "#" in recieved_data["town_birth_place"]:
                 accept_multiple_element = True
-                for town in recieved_data["town_birth_place"].split("#"):
+                for town in recieved_data["town_birth_place"].replace("-"," ").split("#"):
                     query |= Q(town_birth_place__icontains=unidecode(town))
             else:
-                filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"])
+                filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"].replace("-"," "))
 
         if "town_death_place" in recieved_data:
             if "#" in recieved_data["town_death_place"]:
                 accept_multiple_element = True
-                for town in recieved_data["town_death_place"].split("#"):
+                for town in recieved_data["town_death_place"].replace("-"," ").split("#"):
                     query |= Q(town_death_place__icontains=unidecode(town))
             else:
-                filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"])
+                filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"]).replace("-"," ")
                 filters["is_alive"] = False
 
         number_of_people_to_display = NUMBER_OF_USERS_TO_SEARCH

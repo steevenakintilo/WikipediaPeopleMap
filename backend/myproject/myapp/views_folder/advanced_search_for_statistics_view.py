@@ -283,18 +283,18 @@ def get_advanced_statistics(request):
     if "town_birth_place" in recieved_data:
         if "#" in recieved_data["town_birth_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_birth_place"].split("#"):
+            for town in recieved_data["town_birth_place"].replace("-"," ").split("#"):
                 query |= Q(town_birth_place__icontains=town)
         else:
-            filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"])
+            filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"].replace("-"," "))
 
     if "town_death_place" in recieved_data:
         if "#" in recieved_data["town_death_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_death_place"].split("#"):
+            for town in recieved_data["town_death_place"].replace("-"," ").split("#"):
                 query |= Q(town_death_place__icontains=town)
         else:
-            filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"])
+            filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"].replace("-"," "))
             filters["is_alive"] = False
 
     
@@ -378,7 +378,7 @@ def get_advanced_statistics(request):
 
     if "town_birth_or_death_place" in recieved_data:
         accept_multiple_element = True
-        query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"]) | Q(town_death_place__icontains=recieved_data["town_birth_or_death_place"])
+        query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"].replace("-"," ")) | Q(town_death_place__icontains=recieved_data["town_birth_or_death_place"].replace("-"," "))
         display_death_localisation = True
 
     
