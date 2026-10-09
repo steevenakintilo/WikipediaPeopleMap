@@ -116,9 +116,15 @@ def validate_an_user(request,user=""):
                 user_obj_update_obj.nb_of_good_report = NUMBER_OF_GOOD_REPORT_NEEDED
                 if user_obj.is_alive:
                     user_obj_update_obj.update_level = 2
+                                            
                 else:
                     user_obj_update_obj.update_level = 1
 
+                try:
+                    user_obj.list_of_game_user_can_play.append("ageguessr")
+                    user_obj.list_of_game_user_can_play.append("whoisolder")
+                except:
+                    pass
             else:
                 user_obj_update_obj.nb_of_good_report+=1
                 user_obj_update_obj.update_level=3

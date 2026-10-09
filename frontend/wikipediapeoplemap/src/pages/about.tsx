@@ -21,9 +21,7 @@ const About = () => {
                     <p>
                         L’idée m’est venue après avoir vu sur Twitter un site qui
                         répertoriait les lieux de naissance de tous les joueurs
-                        participant à la Coupe du monde 2026 en juillet 2026. Je me suis alors dit :
-                        pourquoi ne pas faire la même chose pour toutes les personnes
-                        réelles ayant une page Wikipédia en français ?
+                        participant à la Coupe du monde 2026 en juillet 2026.
                     </p>
 
                     <p>
