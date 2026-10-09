@@ -292,11 +292,11 @@ def display_chunck_user_birth_town_localisation_qjis(request):
         
         if "birth_month_day" in recieved_data:
             if len(recieved_data["birth_month_day"]) != "0":
-                filters["birth_month_day"] = recieved_data["birth_month_day"]
+                filters["birth_month_day"] = recieved_data["birth_month_day"].lower()
 
         if "death_month_day" in recieved_data:
             if len(recieved_data["death_month_day"]) != "0":
-                filters["death_month_day"] = recieved_data["death_month_day"]
+                filters["death_month_day"] = recieved_data["death_month_day"].lower()
                 display_death_localisation = True
             
 
