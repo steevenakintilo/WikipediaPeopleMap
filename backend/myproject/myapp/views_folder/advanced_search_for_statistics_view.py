@@ -278,23 +278,23 @@ def get_advanced_statistics(request):
             
             else:
                 filters["last_name"] = recieved_data["last_name"].lower()
-    
+
     ##print(recieved_data)
     if "town_birth_place" in recieved_data:
         if "#" in recieved_data["town_birth_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_birth_place"].replace("-"," ").split("#"):
+            for town in recieved_data["town_birth_place"].replace("-"," ").lower().split("#"):
                 query |= Q(town_birth_place__icontains=town)
         else:
-            filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"].replace("-"," "))
+            filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"].replace("-"," ").lower())
 
     if "town_death_place" in recieved_data:
         if "#" in recieved_data["town_death_place"]:
             accept_multiple_element = True
-            for town in recieved_data["town_death_place"].replace("-"," ").split("#"):
+            for town in recieved_data["town_death_place"].replace("-"," ").lower().split("#"):
                 query |= Q(town_death_place__icontains=town)
         else:
-            filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"].replace("-"," "))
+            filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"].replace("-"," ").lower())
             filters["is_alive"] = False
 
     
@@ -378,7 +378,7 @@ def get_advanced_statistics(request):
 
     if "town_birth_or_death_place" in recieved_data:
         accept_multiple_element = True
-        query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"].replace("-"," ")) | Q(town_death_place__icontains=recieved_data["town_birth_or_death_place"].replace("-"," "))
+        query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"].replace("-"," ").lower()) | Q(town_death_place__icontains=recieved_data["town_birth_or_death_place"].replace("-"," ").lower())
         display_death_localisation = True
 
     

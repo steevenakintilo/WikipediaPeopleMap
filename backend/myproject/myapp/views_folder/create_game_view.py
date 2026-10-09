@@ -280,15 +280,15 @@ def who_was_born_first(request):
         if "town_birth_place" in recieved_data:
             if "#" in recieved_data["town_birth_place"]:
                 accept_multiple_element = True
-                for town in recieved_data["town_birth_place"].replace("-"," ").split("#"):
+                for town in recieved_data["town_birth_place"].replace("-"," ").lower().split("#"):
                     query |= Q(town_birth_place__icontains=unidecode(town))
             else:
-                filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"].replace("-"," "))
+                filters["town_birth_place__icontains"] = unidecode(recieved_data["town_birth_place"].replace("-"," ").lower())
 
         if "town_death_place" in recieved_data:
             if "#" in recieved_data["town_death_place"]:
                 accept_multiple_element = True
-                for town in recieved_data["town_death_place"].replace("-"," ").split("#"):
+                for town in recieved_data["town_death_place"].replace("-"," ").lower().split("#"):
                     query |= Q(town_death_place__icontains=unidecode(town))
             else:
                 filters["town_death_place__icontains"] = unidecode(recieved_data["town_death_place"]).replace("-"," ")
