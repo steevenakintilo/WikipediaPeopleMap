@@ -5,6 +5,8 @@ import { country_to_flag } from "./flags.ts"
 import { MANUAL_ONLY, UNPRECISENESS, detect_unpreciseness, preciseness_level, to_unpreciseness_keys } from "./unpreciseness.ts"
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ?? "http://127.0.0.1:8000"
+const BACKEND_PROD = import.meta.env.VITE_BACKEND_PROD ?? "http://127.0.0.1:8000"
+
 const ADMIN_API_KEY = import.meta.env.VITE_ADMIN_API_KEY ?? ""
 
 // Champs envoyés à /update_user_info (mêmes noms que le modèle Django WikipediaUser)
@@ -279,7 +281,7 @@ export function Admin() {
     set_loading(true)
     set_status("")
     try {
-      const response = await fetch(`${BACKEND_URL}/display_user_info/${encodeURIComponent(username)}`)
+      const response = await fetch(`${BACKEND_PROD}/display_user_info/${encodeURIComponent(username)}`)
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       const data = await response.json()
       const user = Array.isArray(data) ? data[0] : (data.user ?? data)
