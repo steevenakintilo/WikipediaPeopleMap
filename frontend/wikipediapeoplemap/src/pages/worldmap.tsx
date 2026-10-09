@@ -408,6 +408,9 @@ const WorldMap = () => {
               <SlidersHorizontalIcon /> Filtres avancés
               {active_filters_count > 0 && <Badge className="ml-1">{active_filters_count}</Badge>}
             </Button>
+            <Button variant="outline" className="flex-1" onClick={() => get_list_of_user_advanced_search(current_chunck_index,true)}>
+              <SearchIcon /> Rechercher
+            </Button>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="outline" size="icon" onClick={() => geolocate()} aria-label="Me géolocaliser">

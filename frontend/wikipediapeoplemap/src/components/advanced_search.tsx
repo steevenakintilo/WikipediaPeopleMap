@@ -63,6 +63,7 @@ export function ActiveFilters({ sections, filters, set_filters }: FiltersStatePr
       <Button variant="link" size="xs" onClick={() => set_filters({})}>
         Tout effacer
       </Button>
+      
     </div>
   )
 }
