@@ -75,14 +75,17 @@ def update_user_info(request):
 
         #user_obj = WikipediaUser.objects.filter(page_name=recieved_data["username"]).first()
         #user_obj.save()
-        if recieved_data["is_alive"] is False:
-            user_obj_update_obj.data_to_update = []
-            user_obj_update_obj.update_level = 1
+        try:
+            if recieved_data["is_alive"] is False:
+                user_obj_update_obj.data_to_update = []
+                user_obj_update_obj.update_level = 1
 
-        else:
-            user_obj_update_obj.data_to_update = []
-            user_obj_update_obj.update_level = 2
-            
+            else:
+                user_obj_update_obj.data_to_update = []
+                user_obj_update_obj.update_level = 2
+
+        except:
+            pass        
         user_obj_update_obj.save()
         user_obj.save()
         return JsonResponse({"success": True}, status=200)

@@ -64,11 +64,16 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
         if recieved_data == {'birth_town_localisation__icontains': ' '}:
             recieved_data = {}
 
+        skip_cache = False
+        if "sort_user_by" in recieved_data:
+            if recieved_data["sort_user_by"] == "Nombre de vue(s)":
+                skip_cache = True
         #print(recieved_data)
-        cache_key = stats_cache_key("adv_searchs",recieved_data)
-        cached = cache.get(cache_key)
-        if cached is not None:
-            return JsonResponse({"all_user_data":cached}, status=200)
+        if skip_cache is False:
+            cache_key = stats_cache_key("adv_searchs",recieved_data)
+            cached = cache.get(cache_key)
+            if cached is not None:
+                return JsonResponse({"all_user_data":cached}, status=200)
 
         
         try:
