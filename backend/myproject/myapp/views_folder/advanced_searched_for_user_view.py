@@ -69,11 +69,10 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             if recieved_data["sort_user_by"] == "Nombre de vue(s)":
                 skip_cache = True
         #print(recieved_data)
-        if skip_cache is False:
-            cache_key = stats_cache_key("adv_searchs",recieved_data)
-            cached = cache.get(cache_key)
-            if cached is not None:
-                return JsonResponse({"all_user_data":cached}, status=200)
+        cache_key = stats_cache_key("adv_searchs",recieved_data)
+        cached = cache.get(cache_key)
+        if cached is not None and skip_cache is False:
+            return JsonResponse({"all_user_data":cached}, status=200)
 
         
         try:
