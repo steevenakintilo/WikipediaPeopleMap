@@ -459,20 +459,18 @@ def display_chunck_user_birth_town_localisation_qjis(request):
                     break
 
                 if display_town_birth_or_death_place is False:
-                    list_of_localisation.append(dms_to_decimal(user_obj["birth_town_localisation"], user_obj["page_name"]))
-                    if display_only_death_localisation is False:
-                        list_of_all_user_data.append(dms_to_decimal(user_obj["birth_town_localisation"], "__qjis__"))
-                    else:
-                        list_of_all_user_data.append(dms_to_decimal("blablobla"))
+                    #list_of_localisation.append(dms_to_decimal(user_obj["birth_town_localisation"], user_obj["page_name"]))
+                    x = dms_to_decimal(user_obj["birth_town_localisation"], "__qjis__")
+                    if display_only_death_localisation is False and x != (999999999999999,999999999999999):
+                        list_of_all_user_data.append(x)
 
-                    if display_death_localisation or display_only_death_localisation:
-                        list_of_all_user_data.append(dms_to_decimal(user_obj["town_death_localisation"], "__qjis__"))
+                    x = dms_to_decimal(user_obj["town_death_localisation"], "__qjis__")
+                    if display_death_localisation or display_only_death_localisation and x != (999999999999999,999999999999999):
+                        list_of_all_user_data.append(x)
                 else:
-                    if user_obj["town_birth_place"].lower().strip() == town_birth_or_death_place:
-                        list_of_localisation.append(dms_to_decimal(user_obj["birth_town_localisation"], user_obj["page_name"]))
-                    if user_obj["is_alive"] is False and user_obj["town_death_place"].lower().strip() == town_birth_or_death_place:
-                        list_of_all_user_data.append(dms_to_decimal(user_obj["town_death_localisation"], "__qjis__"))
-                
+                    x = dms_to_decimal(user_obj["town_death_localisation"], "__qjis__")
+                    if user_obj["is_alive"] is False and user_obj["town_death_place"].lower().strip() == town_birth_or_death_place and x != (999999999999999,999999999999999):
+                        list_of_all_user_data.append(x)
             except Exception as e:
                 print("ERREUR :", repr(e))    
 
