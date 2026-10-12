@@ -1165,6 +1165,8 @@ export const NUMBER_OF_USER : number = 712408
 
 export const backend_url_prod: string = "https://glorious-nourishment-production-e28f.up.railway.app"
 export const backend_url_local: string = "http://127.0.0.1:8000/"
+export const backend_url_prod: string = "https://glorious-nourishment-production-e28f.up.railway.app"
+
 //export const backend_url_prod: string = "http://127.0.0.1:8000"
 
 export const dict_localisation_pin_picture : any = {
