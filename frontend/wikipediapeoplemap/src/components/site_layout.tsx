@@ -19,7 +19,7 @@ import {
   useTheme,
 } from "@steevenakintilo/ui"
 
-import { LOGO_URL, LOGO_URL2 ,NAV_LINKS , NAV_LINKS2 } from "./nav_links.ts"
+import { LOGO_URL, LOGO_URL2, LOGO_URL_ENGLISH, LOGO_URL2_ENGLISH, NAV_LINKS , NAV_LINKS2 } from "./nav_links.ts"
 import { LanguageToggle } from "./language_toggle.tsx"
 
 // Classe fixe (pas de fonction) : NavLink met aria-current="page" sur le lien actif,
@@ -84,13 +84,13 @@ function MobileNav() {
 }
 
 function SiteHeader() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   return (
     <header className="sticky top-0 z-50 h-14 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-full max-w-7xl items-center gap-2 px-4">
         <Link to="/Home" className="mr-auto flex items-center gap-2.5 font-semibold tracking-tight">
-          <img src={LOGO_URL} alt="" className="size-8" />
+          <img src={i18n.language === "en" ? LOGO_URL_ENGLISH : LOGO_URL} alt="" className="size-8" />
           <span>WikipediaPeopleMap</span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
@@ -109,13 +109,13 @@ function SiteHeader() {
 }
 
 function SiteHeader2() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   return (
     <header className="sticky top-0 z-50 h-14 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-full max-w-7xl items-center gap-2 px-4">
         <Link to="/Home" className="mr-auto flex items-center gap-2.5 font-semibold tracking-tight">
-          <img src={LOGO_URL2} alt="" className="size-8" />
+          <img src={i18n.language === "en" ? LOGO_URL2_ENGLISH : LOGO_URL2} alt="" className="size-8" />
           <span>WikipediaPeopleMap</span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">

@@ -14,7 +14,7 @@ import { Button, cn } from "@steevenakintilo/ui";
 
 // Mes imports
 import { random_localisation_in_france } from "../utils/global_variable.tsx"
-import { LOGO_URL } from "../components/nav_links.ts";
+import { LOGO_URL, LOGO_URL_ENGLISH } from "../components/nav_links.ts";
 
 const SITE_URL = "https://wikipediapeoplemap.com"
 const SITE_TITLE = "Wikipedia People Map - La carte des personnes de Wikipédia"
@@ -162,7 +162,7 @@ const Home = () => {
 
       <div className="flex w-full flex-col items-center justify-center gap-5 px-4 py-5 md:h-dvh md:w-[520px] md:shrink-0">
         <img
-          src={LOGO_URL}
+          src={i18n.language === "en" ? LOGO_URL_ENGLISH : LOGO_URL}
           alt=""
           className="size-[270px] max-w-full object-contain md:h-auto md:max-h-[50dvh] md:w-full"
         />
