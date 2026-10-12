@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/react';
 // Chaque page est téléchargée seulement quand on y va (la carte et les graphiques sont lourds)
 const WorldMap = lazy(() => import('./pages/worldmap'));
 const HomePage = lazy(() => import('./pages/home'));
+const HomeEnglish = lazy(() => import('./pages/home_english'));
 const Statistics = lazy(() => import("./pages/statistics"));
 const QjisMap = lazy(() => import('./pages/qjis_map'));
 const About = lazy(() => import('./pages/about'));
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<HomePage />}/>
           <Route path="/WorldMap" element={<WorldMap />} />
           <Route path="/Home" element={<HomePage />} />
+          <Route path="/en" element={<HomeEnglish />} />
           <Route path="/Statistics" element={<Statistics />} />
           <Route path="/Qjis" element={<QjisMap />} />
           <Route path="/About" element={<About />} />

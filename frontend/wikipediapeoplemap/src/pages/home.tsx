@@ -15,6 +15,7 @@ import { Button, cn } from "@steevenakintilo/ui";
 // Mes imports
 import { random_localisation_in_france } from "../utils/global_variable.tsx"
 import { LOGO_URL, LOGO_URL_ENGLISH } from "../components/nav_links.ts";
+import type { LanguageCode } from "../i18n/index.ts";
 
 const SITE_URL = "https://wikipediapeoplemap.com"
 const SITE_TITLE = "Wikipedia People Map - La carte des personnes de Wikipédia"
@@ -86,28 +87,43 @@ const MapController = ({
   return null;
 };
 
-const Home = () => {
+// route_language : langue imposée par la route (/en), sinon la langue choisie par le visiteur
+const Home = ({ route_language }: { route_language?: LanguageCode }) => {
   const { t, i18n } = useTranslation();
-  const site_title = t(SITE_TITLE)
-  const site_description = t(SITE_DESCRIPTION)
+  // Le helmet suit la route et non le sélecteur de langue, pour que /en reste toujours en anglais
+  const seo_language = route_language ?? i18n.language
+  const seo_t = i18n.getFixedT(seo_language)
+  const site_title = seo_t(SITE_TITLE)
+  const site_description = seo_t(SITE_DESCRIPTION)
+  const page_url = `${SITE_URL}${route_language === "en" ? "/en" : "/"}`
+
+  useEffect(() => {
+    if (route_language && i18n.language !== route_language) {
+      i18n.changeLanguage(route_language)
+    }
+  }, [route_language, i18n])
+
   // Mélangé une seule fois par affichage de la page (copie : le tableau global n'est plus modifié)
   const [list_of_random_position] : any = useState(() => [...random_localisation_in_france].sort(() => Math.random() - 0.5));
 
   return (
     <main className="flex min-h-dvh">
        <Helmet>
-        <html lang={i18n.language} />
+        <html lang={seo_language} />
         <title>{site_title}</title>
         <meta name="description" content={site_description} />
-        <link rel="canonical" href={`${SITE_URL}/`} />
+        <link rel="canonical" href={page_url} />
+        <link rel="alternate" hrefLang="fr" href={`${SITE_URL}/`} />
+        <link rel="alternate" hrefLang="en" href={`${SITE_URL}/en`} />
+        <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/`} />
 
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Wikipedia People Map" />
         <meta property="og:title" content={site_title} />
         <meta property="og:description" content={site_description} />
-        <meta property="og:url" content={`${SITE_URL}/`} />
+        <meta property="og:url" content={page_url} />
         <meta property="og:image" content={PREVIEW_IMAGE} />
-        <meta property="og:locale" content={i18n.language === "fr" ? "fr_FR" : "en_US"} />
+        <meta property="og:locale" content={seo_language === "fr" ? "fr_FR" : "en_US"} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={site_title} />
