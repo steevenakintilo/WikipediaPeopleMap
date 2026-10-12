@@ -136,7 +136,7 @@ const SiteLayout = () => {
   const { pathname } = useLocation()
   const is_home = pathname === "/" || pathname === "/Home"  
   const is_game_menu = pathname === "/WikiGames" 
-  const is_game = pathname === "/WhoIsOlder" 
+  const is_game = pathname === "/WhoIsOlder" || pathname === "/WikiBirthGuessr"
   
   
   return (

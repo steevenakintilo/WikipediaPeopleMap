@@ -353,7 +353,7 @@ def display_chunck_user_birth_town_localisation_qjis(request):
         if "town_birth_or_death_place" in recieved_data:
             accept_multiple_element = True
             display_town_birth_or_death_place = True
-            query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"]) | Q(town_death_place__icontains=["town_birth_or_death_place"])
+            query |= Q(town_birth_place__icontains=recieved_data["town_birth_or_death_place"]) | Q(town_death_place__icontains=recieved_data["town_birth_or_death_place"])
             display_death_localisation = True
 
         

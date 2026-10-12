@@ -4317,7 +4317,7 @@ toto = WikiPeopleData()
 
 # Remmettre la fonction des liens
 
-do_user_data =  True
+do_user_data =  False
 do_stat = False
 
 

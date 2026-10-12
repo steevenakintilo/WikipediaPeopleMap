@@ -52,10 +52,19 @@ const About = () => {
                         par rapport à un score, et d’avoir le ratio hommes/femmes par ville/pays/âge, etc. </p>
 
                     <p>
-                        <strong>La page Jeux :</strong> disponible uniquement sur PC, elle regroupe les jeux du site. Pour le moment, il n’y en a qu’un seul : « Qui est né avant ? ».
-                        Le principe est simple : à chaque round, deux personnes vous sont présentées et vous devez deviner laquelle est née en premier.
-                        Vous avez 3 vies, et vous pouvez choisir les filtres pour décider du type de personnes qui apparaîtront.
+                        <strong>La page Jeux :</strong> disponible uniquement sur PC, elle regroupe les jeux du site. Pour le moment, il y en a deux, et dans les deux vous pouvez choisir les filtres pour décider du type de personnes qui apparaîtront.
                     </p>
+                    <ul className="list-disc space-y-2 pl-6">
+                        <li>
+                            <strong>« Qui est né avant ? » :</strong> à chaque round, deux personnes vous sont présentées et vous devez deviner laquelle est née en premier.
+                            Vous avez 3 vies.
+                        </li>
+                        <li>
+                            <strong>« Où est-il né ? » :</strong> à chaque round, une personne vous est présentée (nom et photo) et vous devez placer un pin sur la carte à l’endroit où elle est née.
+                            Chaque round rapporte de 0 à 2000 points selon la distance entre votre pin et le vrai lieu de naissance.
+                            Trois niveaux de difficulté : en facile le pays et le continent de naissance sont affichés, en normal seulement le continent, en difficile aucun indice.
+                        </li>
+                    </ul>
 
 
                     <p>

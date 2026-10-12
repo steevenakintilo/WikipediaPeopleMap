@@ -27,5 +27,7 @@ urlpatterns = [
     path("update_user_info",update_user.update_user_info),
     path("validate_an_user/<str:user>",update_user.validate_an_user),
     path("create_who_was_born_first_game",create_game_view.who_was_born_first),
+    path("wikibirthguessr",create_game_view.wikiguessr),
+        
         
 ]

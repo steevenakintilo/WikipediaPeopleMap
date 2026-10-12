@@ -27,6 +27,13 @@ const GAME_MENU = [
     desktop_only:true
   },
   {
+    id: "WikiBirthGuessr",
+    to: "/WikiBirthGuessr",
+    label: "Où est-il né ?",
+    description: "",
+    desktop_only:true
+  },
+  {
     id: "Menu",
     to: "/Home",
     label: "Menu Principal",

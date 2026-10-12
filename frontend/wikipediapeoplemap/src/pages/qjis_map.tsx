@@ -47,7 +47,7 @@ const QjisMap = () => {
     if (qjis_csv.error?.toString() === "ApiError: Erreur HTTP 429") {
       error_type = 2;
     }
-
+    
     const active_filters_count = count_active_filters(STATISTICS_FILTERS, dict_of_advance_search)
 
     function get_list_of_user_advanced_search() {

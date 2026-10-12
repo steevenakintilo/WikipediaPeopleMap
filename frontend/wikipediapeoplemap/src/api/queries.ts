@@ -49,6 +49,17 @@ export function create_who_was_born_first_game(search: any) {
 }
 
 
+export function create_wiki_birth_guessr_game(search: any) {
+  return api_fetch(
+    "/wikibirthguessr",
+    {
+      method: "POST",
+      body: search,
+    }
+  )
+}
+
+
 export function other_statistics_query() {
   return queryOptions({
     queryKey: ["statistics", "other"],

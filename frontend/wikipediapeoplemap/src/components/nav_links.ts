@@ -14,6 +14,7 @@ export const NAV_LINKS = [
 
 export const NAV_LINKS2 = [
   { to: "/WhoIsOlder", label: "Qui est né avant?", icon: InfoIcon },
+  { to: "/WikiBirthGuessr", label: "Où est-il né ?", icon: MapIcon },
   { to: "/WikiGames", label: "Menu", icon: HouseIcon },
   
 ]

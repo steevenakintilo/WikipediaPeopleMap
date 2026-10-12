@@ -75,6 +75,7 @@ const BIRTH: FilterSection = {
   ],
 }
 
+
 const DEATH: FilterSection = {
   title: "Décès",
   fields: [
@@ -135,6 +136,23 @@ export const GAME_FILTERS: FilterSection[] = [
   {
     title : "Paramètres de jeu",
     fields: [{ key: "number_of_rounds", label: "Nombre de round (1-25)", type: "number", min:1 , max: 25 },
+      LATEST_POSITION]
+  },
+  IDENTITY,
+  BIRTH,
+  DEATH,
+  AGE_AND_PLACES,
+  {
+    title: "Sélection",
+    fields: [PRECISENESS, ONE_PER_TOWN],
+  },
+]
+
+export const GAME_FILTERS_WIKIGUESSR: FilterSection[] = [
+
+  {
+    title : "Paramètres de jeu",
+    fields: [
       LATEST_POSITION]
   },
   IDENTITY,
