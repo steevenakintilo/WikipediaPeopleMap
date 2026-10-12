@@ -11,7 +11,11 @@ export function is_screen_for_mobile() {
     return false
     
 }
-export function generate_list_of_dict(list_:any,big_index:number) {
+// Texte français (clé de traduction) -> texte affiché ; sans traducteur, le texte reste en français
+type Translate = (text: string) => string
+const keep_french: Translate = (text) => text
+
+export function generate_list_of_dict(list_:any,big_index:number,t:Translate = keep_french,translate_name:(name:any)=>any = (name) => name) {
     let list_of_dict:any = [];
 
     try {
@@ -19,11 +23,11 @@ export function generate_list_of_dict(list_:any,big_index:number) {
         if (index < big_index) {
             
             if (data[0].toString().toLowerCase() == "true") {
-                list_of_dict.push({ data_name: data[1] + " Vrai", data_number: data[1] });
+                list_of_dict.push({ data_name: data[1] + " " + t("Vrai"), data_number: data[1] });
             } else if (data[0].toString().toLowerCase() == "false") {
-                list_of_dict.push({ data_name: data[1] + " Faux", data_number: data[1] });
+                list_of_dict.push({ data_name: data[1] + " " + t("Faux"), data_number: data[1] });
             } else {
-                list_of_dict.push({ data_name: data[0], data_number: data[1] });
+                list_of_dict.push({ data_name: translate_name(data[0]), data_number: data[1] });
             }
             
             
@@ -76,13 +80,13 @@ export function generate_list_of_dict_with_a_lenght_limit(list_:any,big_index:nu
 
 
 
-export function generate_list_of_dict_with_three_params_as_data(list_:any,big_index:number) {
+export function generate_list_of_dict_with_three_params_as_data(list_:any,big_index:number,translate_name:(name:any)=>any = (name) => name) {
     let list_of_dict:any = [];
 
     try {
      list_.forEach((data:any, index:number) => {
         if (index < big_index) {
-            list_of_dict.push({ data_name: data[0], data_number: data[1] , data_occurence: data[2]});
+            list_of_dict.push({ data_name: translate_name(data[0]), data_number: data[1] , data_occurence: data[2]});
         }
         
     });
@@ -96,13 +100,13 @@ export function generate_list_of_dict_with_three_params_as_data(list_:any,big_in
     return list_of_dict
 }
 
-export function generate_list_of_dict_with_four_params_as_data(list_:any,big_index:number) {
+export function generate_list_of_dict_with_four_params_as_data(list_:any,big_index:number,translate_name:(name:any)=>any = (name) => name) {
     let list_of_dict:any = [];
 
     try {
      list_.forEach((data:any, index:number) => {
         if (index < big_index) {
-            list_of_dict.push({ data_name: data[0], ratio_girl: data[1] , ratio_boy: data[2],data_occurence : data[3]});
+            list_of_dict.push({ data_name: translate_name(data[0]), ratio_girl: data[1] , ratio_boy: data[2],data_occurence : data[3]});
         }
         
     });
@@ -164,7 +168,8 @@ export function make_a_graphic(type:string,dict_data:string,graph_title:string) 
 
 export function make_a_stacked_bar_graphic(
     dict_data: any,
-    graph_title: string
+    graph_title: string,
+    t: Translate = keep_french
 ) {
 
     let series_data: any = []
@@ -174,7 +179,7 @@ export function make_a_stacked_bar_graphic(
             type: 'bar',
             xKey: 'data_name',
             yKey: 'ratio_boy',
-            yName: 'Homme',
+            yName: t('Homme'),
             stacked: true,
             normalizedTo: 100,
             fill: generate_random_colour()
@@ -183,7 +188,7 @@ export function make_a_stacked_bar_graphic(
             type: 'bar',
             xKey: 'data_name',
             yKey: 'ratio_girl',
-            yName: 'Femme',
+            yName: t('Femme'),
             stacked: true,
             normalizedTo: 100,
             fill: generate_random_colour()
@@ -204,7 +209,7 @@ export function make_a_stacked_bar_graphic(
                 type: "category",
                 position: "bottom",
                 title: {
-                    text: "Variable"
+                    text: t("Variable")
                 }
             },
             y: {
@@ -218,7 +223,7 @@ export function make_a_stacked_bar_graphic(
                     }
                 },
                 title: {
-                    text: "Pourcentage"
+                    text: t("Pourcentage")
                 }
             }
         },

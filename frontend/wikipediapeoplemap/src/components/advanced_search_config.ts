@@ -15,8 +15,17 @@ export type FilterSection = { title: string, fields: FilterField[] }
 
 export type Filters = Record<string, string>
 
-// Le backend retire le drapeau à la fin de la valeur : "France 🇫🇷"
-export const COUNTRY_OPTIONS = list_of_countries.map((country, i) => ({ value: `${country} ${list_of_country_flag[i]}` }))
+// Le backend retire le drapeau à la fin de la valeur : "France 🇫🇷". La valeur envoyée reste donc toujours
+// le nom français ; seul le libellé affiché est traduit (name = clé de traduction, voir country_label)
+export const COUNTRY_OPTIONS = list_of_countries.map((country, i) => ({ value: `${country} ${list_of_country_flag[i]}`, name: country, flag: list_of_country_flag[i] }))
+
+const COUNTRY_BY_VALUE = new Map(COUNTRY_OPTIONS.map((option) => [option.value, option]))
+
+// "France 🇫🇷" -> "France 🇫🇷" en français, "Germany 🇩🇪" pour "Allemagne 🇩🇪" en anglais
+export function country_label(value: string, t: (text: string) => string) {
+  const option = COUNTRY_BY_VALUE.get(value)
+  return option ? `${t(option.name)} ${option.flag}` : value
+}
 
 const YES_NO: Option[] = [
   { value: "oui", label: "Oui" },

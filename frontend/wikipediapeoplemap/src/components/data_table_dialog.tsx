@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react"
 import { SearchIcon } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import {
   Dialog,
   DialogContent,
@@ -37,6 +38,7 @@ type DataTableDialogProps = {
 
 // Vue tableau d'un graphique : toutes les valeurs, avec recherche par élément
 export function DataTableDialog({ open, on_open_change, title, description, summary, columns, rows, hide_index = false }: DataTableDialogProps) {
+  const { t } = useTranslation()
   const [search, set_search] = useState("")
   const visible_rows = rows
     .map((row, index) => ({ row, index }))
@@ -53,15 +55,15 @@ export function DataTableDialog({ open, on_open_change, title, description, summ
     <Dialog open={open} onOpenChange={handle_open_change}>
       <DialogContent className="flex max-h-[90dvh] flex-col sm:max-w-4xl">
         <DialogHeader>
-          <DialogTitle className="pr-8 text-pretty">{title}</DialogTitle>
-          <DialogDescription>{description ?? `${rows.length} élément${rows.length > 1 ? "s" : ""}`}</DialogDescription>
+          <DialogTitle className="pr-8 text-pretty">{t(title)}</DialogTitle>
+          <DialogDescription>{description ? t(description) : t(rows.length > 1 ? "{{n}} éléments" : "{{n}} élément", { n: rows.length })}</DialogDescription>
         </DialogHeader>
 
         {summary && summary.length > 0 && (
           <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {summary.map((item) => (
               <div key={item.label} className="rounded-lg border px-3 py-2">
-                <dt className="text-xs text-muted-foreground">{item.label}</dt>
+                <dt className="text-xs text-muted-foreground">{t(item.label)}</dt>
                 <dd className="text-base font-semibold">{item.value}</dd>
               </div>
             ))}
@@ -73,8 +75,8 @@ export function DataTableDialog({ open, on_open_change, title, description, summ
             <SearchIcon />
           </InputGroupAddon>
           <InputGroupInput
-            placeholder="Chercher un élément"
-            aria-label="Chercher un élément"
+            placeholder={t("Chercher un élément")}
+            aria-label={t("Chercher un élément")}
             value={search}
             onChange={(event) => set_search(event.target.value)}
           />
@@ -87,7 +89,7 @@ export function DataTableDialog({ open, on_open_change, title, description, summ
                 {!hide_index && <TableHead className="w-20">#</TableHead>}
                 {columns.map((column) => (
                   <TableHead key={column.header} className={column.numeric ? "text-right" : undefined}>
-                    {column.header}
+                    {t(column.header)}
                   </TableHead>
                 ))}
               </TableRow>
@@ -110,7 +112,7 @@ export function DataTableDialog({ open, on_open_change, title, description, summ
             </TableBody>
           </Table>
           {visible_rows.length === 0 && (
-            <p className="p-6 text-center text-sm text-muted-foreground">Aucun élément ne correspond à « {search} ».</p>
+            <p className="p-6 text-center text-sm text-muted-foreground">{t("Aucun élément ne correspond à « {{search}} ».", { search })}</p>
           )}
         </div>
       </DialogContent>

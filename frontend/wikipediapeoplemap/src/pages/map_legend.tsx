@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@steevenakintilo/ui";
 
 import { gender_to_color, gender_to_color2 } from "../utils/global_variable.tsx";
@@ -15,6 +16,7 @@ const LEGEND_ITEMS = [
 ];
 
 const Legend = ({ className }: { className?: string }) => {
+  const { t } = useTranslation();
   // Repliée par défaut sur mobile pour laisser la place à la carte
   const [open, set_open] = useState(() => window.innerWidth > 768);
 
@@ -26,7 +28,7 @@ const Legend = ({ className }: { className?: string }) => {
         className="flex w-full items-center justify-between px-3 py-2 font-medium"
         onClick={() => set_open(!open)}
       >
-        Légende
+        {t("Légende")}
         <ChevronDownIcon className={cn("size-4 text-muted-foreground transition-transform", open && "rotate-180")} />
       </button>
       {open && (
@@ -34,7 +36,7 @@ const Legend = ({ className }: { className?: string }) => {
           {LEGEND_ITEMS.map((item) => (
             <li key={item.label} className="flex items-center gap-2">
               <span className="size-3 shrink-0 rounded-full ring-1 ring-foreground/25" style={{ backgroundColor: item.color }} />
-              {item.label}
+              {t(item.label)}
             </li>
           ))}
         </ul>

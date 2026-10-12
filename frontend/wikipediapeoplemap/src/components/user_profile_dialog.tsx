@@ -1,6 +1,7 @@
 import { useImperativeHandle, useState, type ReactNode, type Ref } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { CircleCheckIcon , ExternalLinkIcon, TriangleAlertIcon } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import {
   Alert,
   AlertDescription,
@@ -21,6 +22,8 @@ import { ReportButton } from "./report_dialog.tsx"
 import { user_info_query } from "../api/queries.ts"
 import { validate_an_user } from "../api/queries.ts"
 import { query_client } from "../api/query_client.ts"
+import { useNumberFormat } from "../i18n/index.ts"
+import { translate_job, translate_place, translate_text } from "../i18n/data_names.ts"
 import {voted_users} from "../utils/global_variable.tsx"
 
 const GRAY_BUTTON = "bg-gray-300 text-gray-800 hover:bg-gray-400";
@@ -38,8 +41,6 @@ const UPDATE_LEVEL_TEXT: Record<number, string> = {
   4: "Page en cours de validation.",
 }
 
-const format_number =(value: any) => (typeof value === "number" ? value.toLocaleString("fr-FR") : value)
-
 // "Vivant", "Décédée"… accordé selon le genre quand il est connu
 function status_of(user_data_info: any) {
   const dead = !user_data_info.is_alive
@@ -54,40 +55,48 @@ function status_of(user_data_info: any) {
 
 // Une information principale de la fiche : libellé au-dessus, valeur en gras
 function KeyFact({ label, className, children }: { label: string, className?: string, children: ReactNode }) {
+  const { t } = useTranslation()
+
   return (
     <div className={cn("rounded-lg border px-3 py-2", className)}>
-      <dt className="text-xs text-muted-foreground">{label}</dt>
+      <dt className="text-xs text-muted-foreground">{t(label)}</dt>
       <dd className="font-medium text-pretty">{children}</dd>
     </div>
   )
 }
 
 function InfoRow({ label, children }: { label: string, children: ReactNode }) {
+  const { t } = useTranslation()
+
   return (
     <div className="flex justify-between gap-4 py-1.5 text-sm">
-      <dt className="text-muted-foreground">{label}</dt>
+      <dt className="text-muted-foreground">{t(label)}</dt>
       <dd className="text-right font-medium">{children}</dd>
     </div>
   )
 }
 
 function Section({ title, children }: { title: string, children: ReactNode }) {
+  const { t } = useTranslation()
+
   return (
     <section className="rounded-xl border p-4">
-      <h3 className="mb-1 text-sm font-semibold">{title}</h3>
+      <h3 className="mb-1 text-sm font-semibold">{t(title)}</h3>
       <dl className="divide-y">{children}</dl>
     </section>
   )
 }
 
 function TopList({ title, items }: { title: string, items: any[] | undefined }) {
+  const { t } = useTranslation()
+
   if (items === undefined || items.length === 0) {
     return null
   }
 
   return (
     <div className="pt-2">
-      <p className="mb-1 text-xs text-muted-foreground">{title} (top {items.length})</p>
+      <p className="mb-1 text-xs text-muted-foreground">{t(title)} (top {items.length})</p>
       <ol className="list-inside list-decimal space-y-0.5 text-sm">
         {items.map((item: any, i: number) => (
           <li key={i}>{item}</li>
@@ -112,6 +121,9 @@ function has_complete_date(week_day: string, day: string, year: number) {
 }
 
 function ProfileContent({ user_data_info }: { user_data_info: any }) {
+  const { t } = useTranslation()
+  const format_number = useNumberFormat()
+
   return (
     <div className="space-y-4">
       {/* Grande photo carrée, et les informations principales juste en dessous */}
@@ -127,27 +139,27 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
             className="me-2"
           />
         <dl className="grid w-full max-w-lg grid-cols-3 gap-2 text-center">
-          <KeyFact label="Statut">{status_of(user_data_info)}</KeyFact>
-          <KeyFact label="Genre">{gender_to_french_dict[user_data_info.gender] ?? "Non précisé"}</KeyFact>
+          <KeyFact label="Statut">{t(status_of(user_data_info))}</KeyFact>
+          <KeyFact label="Genre">{t(gender_to_french_dict[user_data_info.gender] ?? "Non précisé")}</KeyFact>
           <KeyFact label={user_data_info.is_alive ? "Âge" : "Âge au décès"}>
-            {user_data_info.age > 0 ? `${user_data_info.age} ans` : "Inconnu"}
+            {user_data_info.age > 0 ? t("{{n}} ans", { n: user_data_info.age }) : t("Inconnu")}
           </KeyFact>
-          <KeyFact label="Métier" className="col-span-3">{user_data_info.job || "Non précisé"}</KeyFact>
+          <KeyFact label="Métier" className="col-span-3">{translate_job(user_data_info.job, t) || t("Non précisé")}</KeyFact>
           <KeyFact label="Nombre de vue sur le site" className="col-span-3">{format_number(user_data_info.number_of_views + 1)}</KeyFact>
           {UPDATE_LEVEL_TEXT[user_data_info.update_level] && (
-            <KeyFact label="Vérification de la page" className="col-span-3">{UPDATE_LEVEL_TEXT[user_data_info.update_level]}</KeyFact>
+            <KeyFact label="Vérification de la page" className="col-span-3">{t(UPDATE_LEVEL_TEXT[user_data_info.update_level])}</KeyFact>
           )}
           
         </dl>
         <Button variant="outline" size="sm" asChild>
           <a href={user_data_info.page_url} target="_blank" rel="noopener noreferrer">
-            <ExternalLinkIcon /> Voir sur Wikipédia
+            <ExternalLinkIcon /> {t("Voir sur Wikipédia")}
           </a>
         </Button>
         
         {(user_data_info.update_level == 3) && voted_users.has(user_data_info.id) == false &&(
           <Button size="sm" className={GRAY_BUTTON} onClick={() => check_validate_vote(user_data_info.page_name,user_data_info.id)}>
-            <CircleCheckIcon /> Valider les informations de la personne
+            <CircleCheckIcon /> {t("Valider les informations de la personne")}
           </Button>
           
         )}
@@ -162,7 +174,7 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
         <Alert>
           <TriangleAlertIcon />
           <AlertDescription>
-            Cette personne est probablement décédée : le site se trompe souvent pour les âges très élevés.
+            {t("Cette personne est probablement décédée : le site se trompe souvent pour les âges très élevés.")}
           </AlertDescription>
         </Alert>
       )}
@@ -176,17 +188,17 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
             </InfoRow>
           )}
           <InfoRow label="Lieu">
-            {user_data_info.country_birth_place_emoji} {user_data_info.town_birth_place}, {user_data_info.country_birth_place}
+            {user_data_info.country_birth_place_emoji} {user_data_info.town_birth_place}, {translate_place(user_data_info.country_birth_place, t)}
           </InfoRow>
-          <InfoRow label="Région du monde">{user_data_info.region_of_birth}</InfoRow>
-          <InfoRow label="Continent">{user_data_info.continent_of_birth}</InfoRow>
+          <InfoRow label="Région du monde">{translate_place(user_data_info.region_of_birth, t)}</InfoRow>
+          <InfoRow label="Continent">{translate_place(user_data_info.continent_of_birth, t)}</InfoRow>
           <InfoRow label="Période historique">{user_data_info.time_period_of_birth}</InfoRow>
         </Section>
 
         {!user_data_info.is_alive && (
           <Section title="Décès">
             {user_data_info.is_cause_of_death_known == true && (
-              <InfoRow label="Cause">{user_data_info.cause_of_death}</InfoRow>
+              <InfoRow label="Cause">{translate_text(user_data_info.cause_of_death, t)}</InfoRow>
             )}
             <InfoRow label="Date">{user_data_info.death_date}</InfoRow>
             {has_complete_date(user_data_info.week_day_of_death, user_data_info.death_day, user_data_info.death_year) && (
@@ -195,10 +207,10 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
               </InfoRow>
             )}
             <InfoRow label="Lieu">
-              {user_data_info.country_death_place_emoji} {user_data_info.town_death_place}, {user_data_info.country_death_place}
+              {user_data_info.country_death_place_emoji} {user_data_info.town_death_place}, {translate_place(user_data_info.country_death_place, t)}
             </InfoRow>
-            <InfoRow label="Région du monde">{user_data_info.region_of_death}</InfoRow>
-            <InfoRow label="Continent">{user_data_info.continent_of_death}</InfoRow>
+            <InfoRow label="Région du monde">{translate_place(user_data_info.region_of_death, t)}</InfoRow>
+            <InfoRow label="Continent">{translate_place(user_data_info.continent_of_death, t)}</InfoRow>
           </Section>
         )}
 
@@ -206,7 +218,7 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
           <InfoRow label="Position">{format_number(user_data_info.position + 1)} / {format_number(NUMBER_OF_USER)}</InfoRow>
           <InfoRow label="Score">{user_data_info.power_ranking}</InfoRow>
           <InfoRow label="Note">{user_data_info.grade_over_20} / 20</InfoRow>
-          <InfoRow label="Position en %">top {user_data_info.position_percentage} % des meilleures pages</InfoRow>
+          <InfoRow label="Position en %">{t("top {{n}} % des meilleures pages", { n: user_data_info.position_percentage })}</InfoRow>
         </Section>
 
         <Section title="Précision des données">
@@ -214,10 +226,10 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
           <InfoRow label="Éléments non trouvés sur la page">{user_data_info.number_of_unpreciseness_date}</InfoRow>
           {user_data_info.list_of_unpreciseness_data?.length > 0 && (
             <div className="pt-2">
-              <p className="mb-1 text-xs text-muted-foreground">Erreurs sur la page</p>
+              <p className="mb-1 text-xs text-muted-foreground">{t("Erreurs sur la page")}</p>
               <ul className="list-inside list-disc space-y-0.5 text-sm">
                 {user_data_info.list_of_unpreciseness_data.map((error: any, i: number) => (
-                  <li key={i}>{error}</li>
+                  <li key={i}>{translate_text(error, t)}</li>
                 ))}
               </ul>
             </div>
@@ -226,7 +238,7 @@ function ProfileContent({ user_data_info }: { user_data_info: any }) {
       </div>
 
       <Section title="Page Wikipédia">
-        <InfoRow label="Longueur de la page">{format_number(user_data_info.wikipedia_page_length)} caractères</InfoRow>
+        <InfoRow label="Longueur de la page">{t("{{n}} caractères", { n: format_number(user_data_info.wikipedia_page_length) })}</InfoRow>
         <InfoRow label="Nombre de liens">{format_number(user_data_info.number_of_links)}</InfoRow>
         <InfoRow label="Personnes qui la mentionnent">{format_number(user_data_info.number_of_user_who_have_linked_this_user)}</InfoRow>
         <InfoRow label="Ami(e)s (mentions dans les deux sens)">{format_number(user_data_info.number_of_friends)}</InfoRow>
@@ -271,6 +283,8 @@ type UserProfileDialogProps = {
 }
 
 export function UserProfileDialog({ open, on_open_change, page_name, user_info }: UserProfileDialogProps) {
+  const { t } = useTranslation()
+
   return (
     // Non modale : avec 500 lignes et 500 cercles sur la carte, le mode modal de Radix
     // (blocage du défilement, masquage du reste de la page) faisait ramer l’ouverture.
@@ -283,7 +297,7 @@ export function UserProfileDialog({ open, on_open_change, page_name, user_info }
           <DialogTitle className="pr-8 text-xl">{user_info.data?.page_name ?? page_name}</DialogTitle>
           <DialogDescription>
           
-          <strong>ATTENTION: Le site peut se tromper.</strong>
+          <strong>{t("ATTENTION: Le site peut se tromper.")}</strong>
             
           </DialogDescription>
         </DialogHeader>

@@ -1,6 +1,7 @@
 import { BLACK_BUTTON } from "../utils/styles.ts"
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useTranslation } from "react-i18next";
 import { CircleCheckIcon, DownloadIcon, MonitorIcon, SearchXIcon, SlidersHorizontalIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle, Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Spinner, toast } from "@steevenakintilo/ui";
 
@@ -26,6 +27,7 @@ function download_file(blob: Blob, file_name: string) {
 }
 
 const QjisMap = () => {
+    const { t } = useTranslation()
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [filters_open,set_filters_open] = useState(false)
 
@@ -34,7 +36,7 @@ const QjisMap = () => {
       mutationFn: download_qjis_csv,
       onSuccess: (blob) => {
         download_file(blob, FILE_NAME)
-        toast.success("Fichier généré", { description: `Le téléchargement de ${FILE_NAME} a démarré.` })
+        toast.success(t("Fichier généré"), { description: t("Le téléchargement de {{file}} a démarré.", { file: FILE_NAME }) })
       },
     })
     const loading = qjis_csv.isPending
@@ -76,11 +78,11 @@ const QjisMap = () => {
       <div className="hidden space-y-6 md:block">
         <Card>
           <CardHeader>
-            <CardTitle>Personnes à exporter</CardTitle>
+            <CardTitle>{t("Personnes à exporter")}</CardTitle>
             <CardDescription>
               {active_filters_count === 0
-                ? "Aucun filtre : le fichier contiendra toutes les personnes."
-                : "Le fichier contiendra les personnes correspondant à ces filtres."}
+                ? t("Aucun filtre : le fichier contiendra toutes les personnes.")
+                : t("Le fichier contiendra les personnes correspondant à ces filtres.")}
             </CardDescription>
           </CardHeader>
           {active_filters_count > 0 && (
@@ -90,11 +92,11 @@ const QjisMap = () => {
           )}
           <CardFooter className="flex-wrap gap-2">
             <Button variant="outline" onClick={() => set_filters_open(true)}>
-              <SlidersHorizontalIcon /> Filtres avancés
+              <SlidersHorizontalIcon /> {t("Filtres avancés")}
               {active_filters_count > 0 && <Badge className="ml-1">{active_filters_count}</Badge>}
             </Button>
             <Button className={BLACK_BUTTON} onClick={() => get_list_of_user_advanced_search()} disabled={loading}>
-              {loading ? <Spinner /> : <DownloadIcon />} Générer le fichier
+              {loading ? <Spinner /> : <DownloadIcon />} {t("Générer le fichier")}
             </Button>
           </CardFooter>
         </Card>
@@ -113,16 +115,16 @@ const QjisMap = () => {
         {!loading && no_result_found && (
           <Alert>
             <SearchXIcon />
-            <AlertTitle>Aucun résultat</AlertTitle>
-            <AlertDescription>Aucune page Wikipédia ne correspond à ces filtres : essayez-en d'autres.</AlertDescription>
+            <AlertTitle>{t("Aucun résultat")}</AlertTitle>
+            <AlertDescription>{t("Aucune page Wikipédia ne correspond à ces filtres : essayez-en d'autres.")}</AlertDescription>
           </Alert>
         )}
 
         {!loading && qjis_csv.isSuccess && (
           <Alert>
             <CircleCheckIcon />
-            <AlertTitle>Fichier prêt</AlertTitle>
-            <AlertDescription>Les pages Wikipédia ont été trouvées : le téléchargement de {FILE_NAME} a démarré automatiquement.</AlertDescription>
+            <AlertTitle>{t("Fichier prêt")}</AlertTitle>
+            <AlertDescription>{t("Les pages Wikipédia ont été trouvées : le téléchargement de {{file}} a démarré automatiquement.", { file: FILE_NAME })}</AlertDescription>
           </Alert>
         )}
       </div>

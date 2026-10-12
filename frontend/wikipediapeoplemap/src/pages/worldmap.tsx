@@ -9,6 +9,7 @@ import {
 
 import { useEffect, useRef, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useTranslation } from "react-i18next";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -48,6 +49,7 @@ import {gender_to_color , gender_to_color2} from "../utils/global_variable.tsx"
 import { RANDOM_CHUNK, retry_if_failed, user_list_query } from "../api/queries.ts"
 import { ActiveFilters, AdvancedSearchDialog } from "../components/advanced_search.tsx";
 import { count_active_filters, MAP_FILTERS } from "../components/advanced_search_config.ts";
+import { translate_place } from "../i18n/data_names.ts";
 import { EmptyState, ErrorState , TooMuchRequestError} from "../components/page.tsx";
 import { PersonPicture } from "../components/person_picture.tsx";
 import { ProfileHost, type ProfileHostHandle } from "../components/user_profile_dialog.tsx";
@@ -95,11 +97,12 @@ type PersonRowProps = {
 }
 
 function PersonRow({ user, rank, total, on_locate, on_open_profile }: PersonRowProps) {
+  const { t } = useTranslation()
   const birth_known = is_known_location(user.birth_town_localisation)
 
   return (
     <li className="flex gap-3 px-4 py-3 transition-colors hover:bg-muted/40">
-      <button type="button" className="shrink-0" onClick={on_open_profile} aria-label={`Profil de ${user.page_name}`}>
+      <button type="button" className="shrink-0" onClick={on_open_profile} aria-label={t("Profil de {{name}}", { name: user.page_name })}>
         <PersonPicture src={picture_of(user)} name={user.page_name} stretch className="size-[70px] cursor-pointer" />
       </button>
       <div className="min-w-0 flex-1 space-y-1">
@@ -114,17 +117,17 @@ function PersonRow({ user, rank, total, on_locate, on_open_profile }: PersonRowP
         <div className="flex flex-wrap items-center gap-1">
           <Tooltip>
             <TooltipTrigger asChild>
-              <span className="cursor-default text-lg leading-none" aria-label={user.birth_country_name}>{user.country_birth_place_emoji}</span>
+              <span className="cursor-default text-lg leading-none" aria-label={translate_place(user.birth_country_name, t)}>{user.country_birth_place_emoji}</span>
             </TooltipTrigger>
-            <TooltipContent>{user.birth_country_name}</TooltipContent>
+            <TooltipContent>{translate_place(user.birth_country_name, t)}</TooltipContent>
           </Tooltip>
           {/* Mes pins d'origine : naissance, lieu non trouvé, mort */}
           <button
             type="button"
             className="shrink-0"
             disabled={!birth_known}
-            title={birth_known ? "Lieu de naissance" : "Lieu de naissance non trouvé"}
-            aria-label={birth_known ? "Voir le lieu de naissance" : "Lieu de naissance non trouvé"}
+            title={birth_known ? t("Lieu de naissance") : t("Lieu de naissance non trouvé")}
+            aria-label={birth_known ? t("Voir le lieu de naissance") : t("Lieu de naissance non trouvé")}
             onClick={() => on_locate(user.birth_town_localisation)}
           >
             <img src={birth_known ? PIN_BIRTH : PIN_UNKNOWN} alt="" className="size-[1.125rem] object-contain" />
@@ -134,8 +137,8 @@ function PersonRow({ user, rank, total, on_locate, on_open_profile }: PersonRowP
               type="button"
               className="shrink-0"
               disabled={!is_known_location(user.town_death_localisation)}
-              title={is_known_location(user.town_death_localisation) ? "Lieu de mort" : "Lieu de mort non trouvé"}
-              aria-label={is_known_location(user.town_death_localisation) ? "Voir le lieu de mort" : "Lieu de mort non trouvé"}
+              title={is_known_location(user.town_death_localisation) ? t("Lieu de mort") : t("Lieu de mort non trouvé")}
+              aria-label={is_known_location(user.town_death_localisation) ? t("Voir le lieu de mort") : t("Lieu de mort non trouvé")}
               onClick={() => on_locate(user.town_death_localisation)}
             >
               <img src={is_known_location(user.town_death_localisation) ? PIN_DEATH : PIN_UNKNOWN} alt="" className="size-[1.125rem] object-contain" />
@@ -145,15 +148,15 @@ function PersonRow({ user, rank, total, on_locate, on_open_profile }: PersonRowP
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="icon-xs" asChild>
-                  <a href={user.page_url} target="_blank" rel="noopener noreferrer" aria-label="Page Wikipédia">
+                  <a href={user.page_url} target="_blank" rel="noopener noreferrer" aria-label={t("Page Wikipédia")}>
                     <img src={WIKIPEDIA_LOGO} alt="" className="size-[1.125rem] object-contain" />
                   </a>
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Page Wikipédia</TooltipContent>
+              <TooltipContent>{t("Page Wikipédia")}</TooltipContent>
             </Tooltip>
             <Button variant="outline" size="xs" onClick={on_open_profile}>
-              + d'info
+              {t("+ d'info")}
             </Button>
           </div>
         </div>
@@ -163,6 +166,7 @@ function PersonRow({ user, rank, total, on_locate, on_open_profile }: PersonRowP
 }
 
 const WorldMap = () => {
+    const { t } = useTranslation()
     const [my_geolocation,set_my_geolocalisation] : any = useState([])
 
     useEffect(() => {
@@ -293,7 +297,7 @@ const WorldMap = () => {
 
   function geolocate() {
     if (my_geolocation.length !== 2) {
-      toast.error("Position indisponible", { description: "Autorisez l'accès à votre position dans le navigateur." })
+      toast.error(t("Position indisponible"), { description: t("Autorisez l'accès à votre position dans le navigateur.") })
       return
     }
     locate(my_geolocation)
@@ -321,7 +325,7 @@ const WorldMap = () => {
     .map((user: any, index: number) => ({ user, rank: start_index + index + 1 }))
     .filter(({ user }) => user.page_name.toLowerCase().includes(searched_name.toLowerCase()))
 
-  const page_label = current_chunck_index == RANDOM_PAGE_INDEX ? "Page aléatoire" : `Page ${current_chunck_index + 1}`
+  const page_label = current_chunck_index == RANDOM_PAGE_INDEX ? t("Page aléatoire") : t("Page {{n}}", { n: current_chunck_index + 1 })
 
   function render_people_list() {
     var too_much_request_status = ''
@@ -366,7 +370,7 @@ const WorldMap = () => {
           <EmptyState
             icon={<SearchXIcon />}
             title="Aucune personne trouvée"
-            description={searched_name != "" ? `Personne sur cette page ne correspond à « ${searched_name} ».` : "Essayez d'autres filtres."}
+            description={searched_name != "" ? t("Personne sur cette page ne correspond à « {{name}} ».", { name: searched_name }) : "Essayez d'autres filtres."}
           />
         </div>
       )
@@ -397,35 +401,35 @@ const WorldMap = () => {
               <SearchIcon />
             </InputGroupAddon>
             <InputGroupInput
-              placeholder="Filtrer cette page par nom"
-              aria-label="Filtrer cette page par nom"
+              placeholder={t("Filtrer cette page par nom")}
+              aria-label={t("Filtrer cette page par nom")}
               value={searched_name}
               onChange={(event) => handle_searched_name(event)}
             />
           </InputGroup>
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" className="flex-1" onClick={() => set_filters_open(true)}>
-              <SlidersHorizontalIcon /> Filtres avancés
+              <SlidersHorizontalIcon /> {t("Filtres avancés")}
               {active_filters_count > 0 && <Badge className="ml-1">{active_filters_count}</Badge>}
             </Button>
             <Button variant="outline" className="flex-1" onClick={() => get_list_of_user_advanced_search(current_chunck_index,true)}>
-              <SearchIcon /> Rechercher
+              <SearchIcon /> {t("Rechercher")}
             </Button>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="outline" size="icon" onClick={() => geolocate()} aria-label="Me géolocaliser">
+                <Button variant="outline" size="icon" onClick={() => geolocate()} aria-label={t("Me géolocaliser")}>
                   <MapPinIcon />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Me géolocaliser</TooltipContent>
+              <TooltipContent>{t("Me géolocaliser")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="outline" size="icon" onClick={() => handle_chunck(0)} aria-label="Page aléatoire">
+                <Button variant="outline" size="icon" onClick={() => handle_chunck(0)} aria-label={t("Page aléatoire")}>
                   <ShuffleIcon />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Page aléatoire</TooltipContent>
+              <TooltipContent>{t("Page aléatoire")}</TooltipContent>
             </Tooltip>
           </div>
           <ActiveFilters sections={MAP_FILTERS} filters={dict_of_advance_search} set_filters={set_dict_of_advance_search} />
@@ -433,14 +437,14 @@ const WorldMap = () => {
 
         <div className="flex items-center justify-between border-b px-2 py-1.5">
           <Button variant="ghost" size="sm" onClick={() => handle_chunck(-1)} disabled={current_chunck_index == 0}>
-            <ChevronLeftIcon /> Précédente
+            <ChevronLeftIcon /> {t("Précédente")}
           </Button>
           <span className="flex items-center gap-2 text-sm font-medium">
             {user_list.isFetching && <Spinner className="size-3.5" />}
             {page_label}
           </span>
           <Button variant="ghost" size="sm" onClick={() => handle_chunck(+1)}>
-            Suivante <ChevronRightIcon />
+            {t("Suivante")} <ChevronRightIcon />
           </Button>
         </div>
 
@@ -485,14 +489,14 @@ const WorldMap = () => {
               >
                   <Popup>
                     <div className="flex w-[250px] flex-col gap-2">
-                      <button type="button" onClick={() => handle_complete_profile_user(user.page_name)} aria-label={`Profil de ${user.page_name}`}>
+                      <button type="button" onClick={() => handle_complete_profile_user(user.page_name)} aria-label={t("Profil de {{name}}", { name: user.page_name })}>
                         <PersonPicture src={picture_of(user)} name={user.page_name} stretch className="size-[250px] cursor-pointer [&_[data-slot=avatar-fallback]]:text-4xl" />
                       </button>
                       <p className="text-sm leading-snug font-medium">{user.page_name}</p>
                       <div className="flex flex-wrap gap-1.5">
-                        <Button size="xs" onClick={() => handle_complete_profile_user(user.page_name)}>+ d'info</Button>
+                        <Button size="xs" onClick={() => handle_complete_profile_user(user.page_name)}>{t("+ d'info")}</Button>
                         <Button size="xs" variant="outline" onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])}>
-                          <MapPinIcon /> Centrer
+                          <MapPinIcon /> {t("Centrer")}
                         </Button>
                       </div>
                     </div>
@@ -520,14 +524,14 @@ const WorldMap = () => {
               >
                   <Popup>
                     <div className="flex w-[250px] flex-col gap-2">
-                      <a href={user.page_url} target="_blank" rel="noopener noreferrer" aria-label="Page Wikipédia">
+                      <a href={user.page_url} target="_blank" rel="noopener noreferrer" aria-label={t("Page Wikipédia")}>
                         <PersonPicture src={picture_of(user)} name={user.page_name} stretch className="size-[250px] cursor-pointer [&_[data-slot=avatar-fallback]]:text-4xl" />
                       </a>
-                      <p className="text-sm leading-snug font-medium">{user.page_name} <span className="font-normal text-muted-foreground">(lieu de décès)</span></p>
+                      <p className="text-sm leading-snug font-medium">{user.page_name} <span className="font-normal text-muted-foreground">({t("lieu de décès")})</span></p>
                       <div className="flex flex-wrap gap-1.5">
-                        <Button size="xs" onClick={() => handle_complete_profile_user(user.page_name)}>+ d'info</Button>
+                        <Button size="xs" onClick={() => handle_complete_profile_user(user.page_name)}>{t("+ d'info")}</Button>
                         <Button size="xs" variant="outline" onClick={() => change_latitude_and_longitude(user.birth_town_localisation[0],user.birth_town_localisation[1])}>
-                          <MapPinIcon /> Lieu de naissance
+                          <MapPinIcon /> {t("Lieu de naissance")}
                         </Button>
                       </div>
                     </div>
@@ -544,12 +548,12 @@ const WorldMap = () => {
 
         {user_list.isFetching && (
           <div className="absolute top-3 left-1/2 z-[1000] flex -translate-x-1/2 items-center gap-2 rounded-full border bg-background/95 px-3 py-1.5 text-xs font-medium shadow-md">
-            <Spinner className="size-3.5" /> Chargement…
+            <Spinner className="size-3.5" /> {t("Chargement…")}
           </div>
         )}
 
         <Button className="absolute top-3 right-3 z-[1000] shadow-md md:hidden" onClick={() => set_panel_open(true)}>
-          <ListIcon /> Liste
+          <ListIcon /> {t("Liste")}
           {active_filters_count > 0 && <Badge variant="secondary" className="ml-1">{active_filters_count}</Badge>}
         </Button>
       </div>
@@ -563,8 +567,8 @@ const WorldMap = () => {
       <Sheet open={panel_open} onOpenChange={set_panel_open}>
         <SheetContent side="bottom" className="gap-0 p-0 data-[side=bottom]:h-[85dvh]" onOpenAutoFocus={(event) => event.preventDefault()}>
           <SheetHeader className="border-b">
-            <SheetTitle>Personnes · {page_label}</SheetTitle>
-            <SheetDescription>Touchez un pin pour voir le lieu sur la carte.</SheetDescription>
+            <SheetTitle>{t("Personnes")} · {page_label}</SheetTitle>
+            <SheetDescription>{t("Touchez un pin pour voir le lieu sur la carte.")}</SheetDescription>
           </SheetHeader>
           {render_panel()}
         </SheetContent>

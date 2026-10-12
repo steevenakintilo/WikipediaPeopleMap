@@ -1,6 +1,7 @@
 import { BLACK_BUTTON } from "../utils/styles.ts"
 import { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useTranslation } from "react-i18next";
 import { CircleCheckIcon, GamepadIcon, SearchXIcon, SlidersHorizontalIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle, Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Spinner } from "@steevenakintilo/ui";
 
@@ -12,7 +13,10 @@ import { ErrorState, LoadingState, PageHeader, TooMuchRequestError } from "../co
 
 //const EARTH_GIF = "https://res.cloudinary.com/dtwkfeqz3/image/upload/v1790349009/earth_qha8vm.gif"
 
+type Feedback = { success: boolean, text_key: string, params: Record<string, string | number> }
+
 const WhoIsOlder = () => {
+    const { t } = useTranslation()
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     const [filters_open,set_filters_open] = useState(false)
 
@@ -25,7 +29,7 @@ const WhoIsOlder = () => {
 
     const [round_nb,set_round_nb] = useState(0)
     const [number_of_tries_left,set_number_of_tries_left] = useState(3)
-    const [feedback,set_feedback] = useState<{success: boolean, text: string} | null>(null)
+    const [feedback,set_feedback] = useState<Feedback | null>(null)
     const feedback_end_ref = useRef<HTMLDivElement>(null)
     const loading = game_loading.isPending
     const all_game_data : any[] = game_loading.data?.all_game_data ?? []
@@ -68,7 +72,8 @@ const WhoIsOlder = () => {
         if (year_1 === year_2) {
             set_feedback({
                 success: true,
-                text: `Réussi ! ${current_round.page_name} et ${current_round.page_name2} ont le même âge (nés en ${year_1}).`,
+                text_key: "Réussi ! {{name1}} et {{name2}} ont le même âge (nés en {{year}}).",
+                params: { name1: current_round.page_name, name2: current_round.page_name2, year: year_1 },
             })
             return
         }
@@ -78,14 +83,14 @@ const WhoIsOlder = () => {
         const older_year = first_is_older ? year_1 : year_2
         const younger_name = first_is_older ? current_round.page_name2 : current_round.page_name
         const younger_year = first_is_older ? year_2 : year_1
-        const younger_sentence = `${younger_name} est né(e) en ${younger_year}.`
+        const params = { older_name, older_year, younger_name, younger_year }
         const is_correct = (choice === 1) === first_is_older
 
         if (is_correct) {
-            set_feedback({ success: true, text: `Réussi ! ${older_name} est la personne la plus âgée (née en ${older_year}). ${younger_sentence}` })
+            set_feedback({ success: true, text_key: "Réussi ! {{older_name}} est la personne la plus âgée (née en {{older_year}}). {{younger_name}} est né(e) en {{younger_year}}.", params })
         } else {
             set_number_of_tries_left(number_of_tries_left - 1)
-            set_feedback({ success: false, text: `Raté ! ${older_name} est la personne la plus âgée (née en ${older_year}). ${younger_sentence}` })
+            set_feedback({ success: false, text_key: "Raté ! {{older_name}} est la personne la plus âgée (née en {{older_year}}). {{younger_name}} est né(e) en {{younger_year}}.", params })
         }
     }
 
@@ -124,11 +129,11 @@ const WhoIsOlder = () => {
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Personnes à exporter</CardTitle>
+                        <CardTitle>{t("Personnes à exporter")}</CardTitle>
                         <CardDescription>
                         {active_filters_count === 0
-                            ? "Aucun filtre : le jeu contiendra toutes les personnes."
-                            : "Le jeu contiendra les personnes correspondant à ces filtres."}
+                            ? t("Aucun filtre : le jeu contiendra toutes les personnes.")
+                            : t("Le jeu contiendra les personnes correspondant à ces filtres.")}
                         </CardDescription>
                     </CardHeader>
                     
@@ -145,11 +150,11 @@ const WhoIsOlder = () => {
           )}
           <CardFooter className="flex-wrap gap-2">
             <Button variant="outline" onClick={() => set_filters_open(true)}>
-              <SlidersHorizontalIcon /> Filtres avancés
+              <SlidersHorizontalIcon /> {t("Filtres avancés")}
               {active_filters_count > 0 && <Badge className="ml-1">{active_filters_count}</Badge>}
             </Button>
             <Button className={BLACK_BUTTON} onClick={() => get_list_of_user_advanced_search()} disabled={loading}>
-              {loading ? <Spinner /> : <GamepadIcon />} Générer une partie
+              {loading ? <Spinner /> : <GamepadIcon />} {t("Générer une partie")}
             </Button>
           </CardFooter>
         </Card>
@@ -168,8 +173,8 @@ const WhoIsOlder = () => {
         {!loading && no_result_found && (
           <Alert>
             <SearchXIcon />
-            <AlertTitle>Aucun résultat</AlertTitle>
-            <AlertDescription>Aucune page Wikipédia ne correspond à ces filtres : essayez-en d'autres.</AlertDescription>
+            <AlertTitle>{t("Aucun résultat")}</AlertTitle>
+            <AlertDescription>{t("Aucune page Wikipédia ne correspond à ces filtres : essayez-en d'autres.")}</AlertDescription>
           </Alert>
         )}
         
@@ -185,7 +190,7 @@ const WhoIsOlder = () => {
       
       {game_loading.isSuccess &&(
             <PageHeader
-                title="Qui est le plus agé?"
+                title="Qui est le plus âgé ?"
             />
         )}
 
@@ -194,21 +199,21 @@ const WhoIsOlder = () => {
         <Card className="w-full max-w-2xl mx-auto">
             <CardHeader>
                 <CardTitle>
-                Round: {round_nb + 1}/{all_game_data.length}
+                {t("Round")}: {round_nb + 1}/{all_game_data.length}
                 </CardTitle>
                 <CardTitle>
-                Nombre d'essais restants : {number_of_tries_left}
+                {t("Nombre d'essais restants :")} {number_of_tries_left}
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 pt-6">
                 {has_lost ? (
                   <Alert variant="destructive">
-                    <AlertTitle>Tu as perdu</AlertTitle>
-                    <AlertDescription>{feedback?.text}</AlertDescription>
+                    <AlertTitle>{t("Tu as perdu")}</AlertTitle>
+                    <AlertDescription>{feedback && t(feedback.text_key, feedback.params)}</AlertDescription>
                   </Alert>
                 ) : (
                   <>
-                    <p className="text-center text-sm text-muted-foreground">Qui est la personne la plus âgée ? (mon site peut se trompé)</p>
+                    <p className="text-center text-sm text-muted-foreground">{t("Qui est la personne la plus âgée ? (mon site peut se tromper)")}</p>
                     <div className="grid grid-cols-2 gap-4 w-full justify-items-center">
                       {([1, 2] as const).map((choice) => {
                         const name = choice === 1 ? current_round.page_name : current_round.page_name2
@@ -230,15 +235,15 @@ const WhoIsOlder = () => {
                     
                     {feedback && (
                       <Alert variant={feedback.success ? "default" : "destructive"}>
-                        <AlertTitle>{feedback.success ? "Bravo" : "Raté"}</AlertTitle>
-                        <AlertDescription>{feedback.text}</AlertDescription>
+                        <AlertTitle>{feedback.success ? t("Bravo") : t("Raté")}</AlertTitle>
+                        <AlertDescription>{t(feedback.text_key, feedback.params)}</AlertDescription>
                       </Alert>
                     )}
                     {is_game_over && (
                       <Alert>
                         <CircleCheckIcon />
-                        <AlertTitle>Partie terminée</AlertTitle>
-                        <AlertDescription>{has_won ? "Tu as terminé tous les rounds, bravo !" : "C'était le dernier round."}</AlertDescription>
+                        <AlertTitle>{t("Partie terminée")}</AlertTitle>
+                        <AlertDescription>{has_won ? t("Tu as terminé tous les rounds, bravo !") : t("C'était le dernier round.")}</AlertDescription>
                       </Alert>
                     )}
                   </>
@@ -247,7 +252,7 @@ const WhoIsOlder = () => {
             </CardContent>
             <CardFooter className="gap-2">
                 {!has_lost && feedback && !is_last_round && (
-                  <Button className={BLACK_BUTTON} onClick={() => next_round()}>Round suivant</Button>
+                  <Button className={BLACK_BUTTON} onClick={() => next_round()}>{t("Round suivant")}</Button>
                 )}
                 {/* {(has_lost || has_won) && (
                   <Button className={BLACK_BUTTON} onClick={() => reset_game()}>Recommencer</Button>

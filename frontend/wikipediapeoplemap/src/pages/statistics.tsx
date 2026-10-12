@@ -1,5 +1,6 @@
 import { BLACK_BUTTON } from "../utils/styles.ts"
 import { useState } from 'react';
+import { useTranslation } from "react-i18next";
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { SearchIcon, SlidersHorizontalIcon } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Spinner } from "@steevenakintilo/ui";
@@ -13,14 +14,14 @@ import { count_active_filters, STATISTICS_FILTERS } from "../components/advanced
 import { DataTableDialog } from "../components/data_table_dialog.tsx";
 import { EmptyState, ErrorState, LoadingState, PageHeader,TooMuchRequestError } from "../components/page.tsx";
 import { StatChartCard } from "../components/stat_chart.tsx";
+import { useNumberFormat } from "../i18n/index.ts";
+import { data_name_translator } from "../i18n/data_names.ts";
 
 const NO_DATA = {}
 const NO_CHARTS = { list_of_graph: [], list_of_dict: [], list_of_keys_name: [] }
 
-const format_number = (value: any) => (typeof value === "number" ? value.toLocaleString("fr-FR") : value)
-
 // Construit les graphiques et les tableaux détaillés à partir des statistiques reçues
-function build_charts(list_of_user_data: any) {
+function build_charts(list_of_user_data: any, t: (text: string) => string) {
   const keys = Object.keys(list_of_user_data);
 
   const list_of_graph: any[] = [];
@@ -35,6 +36,7 @@ function build_charts(list_of_user_data: any) {
   for (let i = 0; i < keys.length - 1; i++) {
 
       const key = keys[i];
+      const translate_name = data_name_translator(key, t);
 
       if (list_of_user_data[key].length > 0) {
 
@@ -61,34 +63,38 @@ function build_charts(list_of_user_data: any) {
 
               const generic_dict = generate_list_of_dict(
                   list_of_user_data[key],
-                  number_of_bar_to_display
+                  number_of_bar_to_display,
+                  t,
+                  translate_name
               );
 
-              list_of_graph.push(make_a_graphic("bar", generic_dict, VAR_TO_DESCRIPTION[key]));
+              list_of_graph.push(make_a_graphic("bar", generic_dict, t(VAR_TO_DESCRIPTION[key])));
 
               if (key === "first_name" || key === "first_name_standard") {
                   // Prénoms avec et sans accent, limités à 10000
-                  list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 10000));
+                  list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 10000, t, translate_name));
               } else if (
                   key !== "town_birth_and_death_place" &&
                   key !== "town_birth_place" &&
                   key !== "town_death_place" &&
                   key !== "dict_of_error_counter"
               ) {
-                  list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 2000));
+                  list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 2000, t, translate_name));
               } else {
-                  list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 500));
+                  list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 500, t, translate_name));
               }
 
           } else if (key === "dict_of_error") {
 
               const generic_dict = generate_list_of_dict(
                   list_of_user_data[key],
-                  3
+                  3,
+                  t,
+                  translate_name
               );
 
-              list_of_graph.push(make_a_graphic("bar", generic_dict, VAR_TO_DESCRIPTION[key]));
-              list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 500));
+              list_of_graph.push(make_a_graphic("bar", generic_dict, t(VAR_TO_DESCRIPTION[key])));
+              list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 500, t, translate_name));
 
           } else if (
               key === "birth_year" ||
@@ -101,18 +107,20 @@ function build_charts(list_of_user_data: any) {
                   50000000
               );
 
-              list_of_graph.push(make_a_graphic("bar", generic_dict as any, VAR_TO_DESCRIPTION[key]));
+              list_of_graph.push(make_a_graphic("bar", generic_dict as any, t(VAR_TO_DESCRIPTION[key])));
               list_of_dict.push(generate_list_of_dict_with_a_lenght_limit(list_of_user_data[key], 50000000));
 
           } else {
 
               const generic_dict = generate_list_of_dict(
                   list_of_user_data[key],
-                  10000000
+                  10000000,
+                  t,
+                  translate_name
               );
 
-              list_of_graph.push(make_a_graphic("bar", generic_dict, VAR_TO_DESCRIPTION[key]));
-              list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 50000000));
+              list_of_graph.push(make_a_graphic("bar", generic_dict, t(VAR_TO_DESCRIPTION[key])));
+              list_of_dict.push(generate_list_of_dict(list_of_user_data[key], 50000000, t, translate_name));
           }
       }
   }
@@ -164,6 +172,8 @@ function compute_summary(data_dict: any, keys_info: string, list_of_user_data: a
 }
 
 const Statistics = () => {
+    const { t } = useTranslation()
+    const format_number = useNumberFormat()
     const [dict_of_advance_search,set_dict_of_advance_search] : any = useState({})
     // Filtres de la dernière recherche lancée (null tant qu'aucune recherche n'a été faite)
     const [submitted_search,set_submitted_search] : any = useState(null)
@@ -197,7 +207,7 @@ const Statistics = () => {
     const result_found = statistics_query.data !== undefined && !statistics_query.isError
     const active_filters_count = count_active_filters(STATISTICS_FILTERS, dict_of_advance_search)
 
-    const { list_of_graph, list_of_dict, list_of_keys_name } = result_found ? build_charts(list_of_user_data) : NO_CHARTS
+    const { list_of_graph, list_of_dict, list_of_keys_name } = result_found ? build_charts(list_of_user_data, t) : NO_CHARTS
 
     const detail_rows : any[] = detail_index === null ? [] : (list_of_dict[detail_index] ?? [])
     const detail_key = detail_index === null ? "" : list_of_keys_name[detail_index]
@@ -216,11 +226,11 @@ const Statistics = () => {
         description="Consultez les statistiques détaillées des pages Wikipédia et affinez vos recherches grâce aux filtres avancés."
       >
         <Button variant="outline" onClick={() => set_filters_open(true)}>
-          <SlidersHorizontalIcon /> Filtres avancés
+          <SlidersHorizontalIcon /> {t("Filtres avancés")}
           {active_filters_count > 0 && <Badge className="ml-1">{active_filters_count}</Badge>}
         </Button>
         <Button className={BLACK_BUTTON} onClick={() => get_list_of_user_advanced_statistics()} disabled={loading}>
-          {loading ? <Spinner /> : <SearchIcon />} Rechercher
+          {loading ? <Spinner /> : <SearchIcon />} {t("Rechercher")}
         </Button>
       </PageHeader>
 
@@ -239,7 +249,7 @@ const Statistics = () => {
       {!loading && result_found && (
         <section className="space-y-4">
           <h2 className="text-lg font-semibold">
-            Statistiques des {format_number(list_of_user_data.number_of_user_found ?? 0)} pages Wikipédia trouvées
+            {t("Statistiques des {{n}} pages Wikipédia trouvées", { n: format_number(list_of_user_data.number_of_user_found ?? 0) })}
           </h2>
 
           <Accordion type="multiple" className="rounded-xl border px-4">
@@ -247,7 +257,7 @@ const Statistics = () => {
               LIST_OF_THEME.includes(key) && (
                 <AccordionItem key={key} value={key}>
                   <AccordionTrigger className="text-base">
-                    {LIST_OF_THEME.indexOf(key) + 1}. {STAT_TO_DESCRIPTION[key]}
+                    {LIST_OF_THEME.indexOf(key) + 1}. {t(STAT_TO_DESCRIPTION[key])}
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className="space-y-10 pt-2">
@@ -271,10 +281,10 @@ const Statistics = () => {
           description="Sans filtre, les statistiques portent sur toutes les pages Wikipédia. Utilisez les filtres avancés pour cibler un métier, un pays, une époque…"
         >
           <Button variant="outline" onClick={() => set_filters_open(true)}>
-            <SlidersHorizontalIcon /> Filtres avancés
+            <SlidersHorizontalIcon /> {t("Filtres avancés")}
           </Button>
           <Button className={BLACK_BUTTON} onClick={() => get_list_of_user_advanced_statistics()}>
-            <SearchIcon /> Rechercher
+            <SearchIcon /> {t("Rechercher")}
           </Button>
         </EmptyState>
       )}

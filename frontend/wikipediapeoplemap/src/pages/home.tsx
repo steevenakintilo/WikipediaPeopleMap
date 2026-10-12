@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { Button, cn } from "@steevenakintilo/ui";
 
 // Mes imports
@@ -86,28 +87,31 @@ const MapController = ({
 };
 
 const Home = () => {
+  const { t, i18n } = useTranslation();
+  const site_title = t(SITE_TITLE)
+  const site_description = t(SITE_DESCRIPTION)
   // Mélangé une seule fois par affichage de la page (copie : le tableau global n'est plus modifié)
   const [list_of_random_position] : any = useState(() => [...random_localisation_in_france].sort(() => Math.random() - 0.5));
 
   return (
     <main className="flex min-h-dvh">
        <Helmet>
-        <html lang="fr" />
-        <title>{SITE_TITLE}</title>
-        <meta name="description" content={SITE_DESCRIPTION} />
+        <html lang={i18n.language} />
+        <title>{site_title}</title>
+        <meta name="description" content={site_description} />
         <link rel="canonical" href={`${SITE_URL}/`} />
 
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Wikipedia People Map" />
-        <meta property="og:title" content={SITE_TITLE} />
-        <meta property="og:description" content={SITE_DESCRIPTION} />
+        <meta property="og:title" content={site_title} />
+        <meta property="og:description" content={site_description} />
         <meta property="og:url" content={`${SITE_URL}/`} />
         <meta property="og:image" content={PREVIEW_IMAGE} />
-        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:locale" content={i18n.language === "fr" ? "fr_FR" : "en_US"} />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={SITE_TITLE} />
-        <meta name="twitter:description" content={SITE_DESCRIPTION} />
+        <meta name="twitter:title" content={site_title} />
+        <meta name="twitter:description" content={site_description} />
         <meta name="twitter:image" content={PREVIEW_IMAGE} />
       </Helmet>
       <h1 className="sr-only">Wikipedia People Map</h1>
@@ -163,14 +167,14 @@ const Home = () => {
           className="size-[270px] max-w-full object-contain md:h-auto md:max-h-[50dvh] md:w-full"
         />
 
-        <nav aria-label="Pages du site" className="flex flex-col items-center gap-3.5">
+        <nav aria-label={t("Pages du site")} className="flex flex-col items-center gap-3.5">
           {HOME_MENU.map((item) => (
             <div key={item.id} className={cn("flex-col items-center gap-1 text-center", item.desktop_only ? "hidden md:flex" : "flex")}>
               <Button
                 asChild
                 className="h-auto w-72 rounded-[5px] bg-[#212529] px-5 py-2.5 text-xl font-normal text-white hover:bg-[#424649] dark:ring-1 dark:ring-white/20"
               >
-                <Link id={item.id} to={item.to}>{item.label}</Link>
+                <Link id={item.id} to={item.to}>{t(item.label)}</Link>
               </Button>
               <p className="max-w-sm text-xs text-pretty text-muted-foreground">{item.description}</p>
             </div>

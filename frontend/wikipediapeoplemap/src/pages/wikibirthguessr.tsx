@@ -9,6 +9,7 @@ import {
 
 import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useTranslation } from "react-i18next";
 import { GamepadIcon, MapPinIcon, SearchXIcon, SlidersHorizontalIcon, TrophyIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle, Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Spinner } from "@steevenakintilo/ui";
 
@@ -17,6 +18,7 @@ import { ApiError } from "../api/client.ts"
 import { create_wiki_birth_guessr_game } from "../api/queries.ts"
 import { ActiveFilters, AdvancedSearchDialog } from "../components/advanced_search.tsx";
 import { count_active_filters, GAME_FILTERS_WIKIGUESSR } from "../components/advanced_search_config.ts";
+import { translate_place } from "../i18n/data_names.ts";
 import { ErrorState, LoadingState, PageHeader, TooMuchRequestError } from "../components/page.tsx";
 import { PersonPicture } from "../components/person_picture.tsx";
 
@@ -75,8 +77,8 @@ function score_of_distance(distance_km: number) {
   return Math.round(MAX_SCORE_PER_ROUND * Math.exp(-distance_km / SCORE_DECAY_KM))
 }
 
-function format_distance(distance_km: number) {
-  return distance_km < 10 ? `${distance_km.toFixed(1)} km` : `${Math.round(distance_km).toLocaleString("fr-FR")} km`
+function format_distance(distance_km: number, locale: string) {
+  return distance_km < 10 ? `${distance_km.toFixed(1)} km` : `${Math.round(distance_km).toLocaleString(locale)} km`
 }
 
 // Le backend renvoie parfois une URL à la place de l'emoji : on ne garde que le vrai emoji
@@ -120,6 +122,7 @@ const MapFramer = ({ guess, answer, round_key }: { guess: LatLng | null, answer:
 }
 
 const WikiBirthGuessr = () => {
+  const { t, i18n } = useTranslation()
   const [dict_of_advance_search, set_dict_of_advance_search]: any = useState({})
   const [filters_open, set_filters_open] = useState(false)
 
@@ -189,7 +192,7 @@ const WikiBirthGuessr = () => {
       <div className="space-y-6">
         <PageHeader
           title="Où est-il né ?"
-          description={`Une personne Wikipédia s'affiche : placez un pin sur la carte à l'endroit où elle est née. Chaque round rapporte de 0 à ${MAX_SCORE_PER_ROUND} points selon votre précision.`}
+          description={t("Une personne Wikipédia s'affiche : placez un pin sur la carte à l'endroit où elle est née. Chaque round rapporte de 0 à {{max}} points selon votre précision.", { max: MAX_SCORE_PER_ROUND })}
         />
         <Card>
           {active_filters_count > 0 && (
@@ -198,7 +201,7 @@ const WikiBirthGuessr = () => {
             </CardContent>
           )}
           <CardContent className="space-y-2">
-            <p className="text-sm font-medium">Difficulté</p>
+            <p className="text-sm font-medium">{t("Difficulté")}</p>
             <div className="flex flex-wrap gap-2">
               {DIFFICULTIES.map((level) => (
                 <Button
@@ -207,26 +210,26 @@ const WikiBirthGuessr = () => {
                   aria-pressed={difficulty === level.id}
                   onClick={() => set_difficulty(level.id)}
                 >
-                  {level.label}
+                  {t(level.label)}
                 </Button>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground">{DIFFICULTIES.find((level) => level.id === difficulty)?.description}</p>
+            <p className="text-xs text-muted-foreground">{t(DIFFICULTIES.find((level) => level.id === difficulty)?.description ?? "")}</p>
           </CardContent>
           <CardHeader>
             <CardDescription>
               {active_filters_count === 0
-                ? `Aucun filtre : ${DEFAULT_NUMBER_OF_ROUNDS} personnes tirées au hasard.`
-                : "La partie contiendra des personnes correspondant à ces filtres."}
+                ? t("Aucun filtre : {{n}} personnes tirées au hasard.", { n: DEFAULT_NUMBER_OF_ROUNDS })
+                : t("La partie contiendra des personnes correspondant à ces filtres.")}
             </CardDescription>
           </CardHeader>
           <CardFooter className="flex-wrap gap-2">
             <Button variant="outline" onClick={() => set_filters_open(true)}>
-              <SlidersHorizontalIcon /> Filtres avancés
+              <SlidersHorizontalIcon /> {t("Filtres avancés")}
               {active_filters_count > 0 && <Badge className="ml-1">{active_filters_count}</Badge>}
             </Button>
             <Button className={BLACK_BUTTON} onClick={() => start_game()} disabled={loading}>
-              {loading ? <Spinner /> : <GamepadIcon />} Générer une partie
+              {loading ? <Spinner /> : <GamepadIcon />} {t("Générer une partie")}
             </Button>
           </CardFooter>
         </Card>
@@ -239,8 +242,8 @@ const WikiBirthGuessr = () => {
         {!loading && no_result_found && (
           <Alert>
             <SearchXIcon />
-            <AlertTitle>Aucun résultat</AlertTitle>
-            <AlertDescription>Pas assez de pages Wikipédia avec un lieu de naissance connu pour ces filtres : essayez-en d'autres.</AlertDescription>
+            <AlertTitle>{t("Aucun résultat")}</AlertTitle>
+            <AlertDescription>{t("Pas assez de pages Wikipédia avec un lieu de naissance connu pour ces filtres : essayez-en d'autres.")}</AlertDescription>
           </Alert>
         )}
       </div>
@@ -251,12 +254,12 @@ const WikiBirthGuessr = () => {
     return (
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Round {round_nb + 1}/{all_game_data.length}</CardTitle>
+          <CardTitle>{t("Round")} {round_nb + 1}/{all_game_data.length}</CardTitle>
           <CardDescription>
-            {DIFFICULTIES.find((level) => level.id === difficulty)?.label} · Score total : {total_score} / {MAX_SCORE_PER_ROUND * all_game_data.length}
+            {t(DIFFICULTIES.find((level) => level.id === difficulty)?.label ?? "")} · {t("Score total :")} {total_score} / {MAX_SCORE_PER_ROUND * all_game_data.length}
           </CardDescription>
           <CardDescription>
-            Mon site peut se tromper!
+            {t("Mon site peut se tromper !")}
           </CardDescription>
           
         </CardHeader>
@@ -267,25 +270,32 @@ const WikiBirthGuessr = () => {
             {!result && difficulty !== "hard" && (
               <div className="flex flex-wrap justify-center gap-2">
                 {difficulty === "easy" && (
-                  <Badge variant="secondary">{emoji_of(current_round)} {current_round.country_of_birth}</Badge>
+                  <Badge variant="secondary">{emoji_of(current_round)} {translate_place(current_round.country_of_birth, t)}</Badge>
                 )}
-                <Badge variant="secondary">{current_round.continent_of_birth}</Badge>
+                <Badge variant="secondary">{translate_place(current_round.continent_of_birth, t)}</Badge>
               </div>
             )}
           </div>
 
           {!result && (
             <p className="text-center text-sm text-muted-foreground">
-              {guess ? "Vous pouvez déplacer le pin avant de valider." : "Cliquez sur la carte pour deviner son lieu de naissance."}
+              {guess ? t("Vous pouvez déplacer le pin avant de valider.") : t("Cliquez sur la carte pour deviner son lieu de naissance.")}
             </p>
           )}
 
           {result && (
             <Alert>
               <MapPinIcon />
-              <AlertTitle>{result.score} / {MAX_SCORE_PER_ROUND} points</AlertTitle>
+              <AlertTitle>{t("{{score}} / {{max}} points", { score: result.score, max: MAX_SCORE_PER_ROUND })}</AlertTitle>
               <AlertDescription>
-                Vous étiez à {format_distance(result.distance)}. {current_round.page_name} est né(e) aux/en {current_round.country_of_birth} {emoji_of(current_round)} à {current_round.town_birth_place}  ({current_round.continent_of_birth}).
+                {t("Vous étiez à {{distance}}. {{name}} est né(e) aux/en {{country}} {{emoji}} à {{town}} ({{continent}}).", {
+                  distance: format_distance(result.distance, i18n.language === "en" ? "en-US" : "fr-FR"),
+                  name: current_round.page_name,
+                  country: translate_place(current_round.country_of_birth, t),
+                  emoji: emoji_of(current_round),
+                  town: current_round.town_birth_place,
+                  continent: translate_place(current_round.continent_of_birth, t),
+                })}
               </AlertDescription>
             </Alert>
           )}
@@ -293,22 +303,22 @@ const WikiBirthGuessr = () => {
           {is_game_over && (
             <Alert>
               <TrophyIcon />
-              <AlertTitle>Partie terminée</AlertTitle>
-              <AlertDescription>Score final : {total_score} / {MAX_SCORE_PER_ROUND * all_game_data.length}</AlertDescription>
+              <AlertTitle>{t("Partie terminée")}</AlertTitle>
+              <AlertDescription>{t("Score final :")} {total_score} / {MAX_SCORE_PER_ROUND * all_game_data.length}</AlertDescription>
             </Alert>
           )}
         </CardContent>
         <CardFooter className="gap-2">
           {!result && (
             <Button className={BLACK_BUTTON} onClick={() => validate_guess()} disabled={!guess}>
-              <MapPinIcon /> Valider
+              <MapPinIcon /> {t("Valider")}
             </Button>
           )}
           {result && !is_last_round && (
-            <Button className={BLACK_BUTTON} onClick={() => next_round()}>Round suivant</Button>
+            <Button className={BLACK_BUTTON} onClick={() => next_round()}>{t("Round suivant")}</Button>
           )}
           {is_game_over && (
-            <Button className={BLACK_BUTTON} onClick={() => game_loading.reset()}>Nouvelle partie</Button>
+            <Button className={BLACK_BUTTON} onClick={() => game_loading.reset()}>{t("Nouvelle partie")}</Button>
           )}
         </CardFooter>
       </Card>
@@ -349,8 +359,8 @@ const WikiBirthGuessr = () => {
 
         {result && (
           <div className="absolute bottom-3 left-3 z-[1000] flex items-center gap-3 rounded-md border bg-background/95 px-3 py-1.5 text-xs shadow-md">
-            <span className="flex items-center gap-1"><span className="size-3 rounded-full" style={{ background: GUESS_COLOR }} /> Votre réponse</span>
-            <span className="flex items-center gap-1"><span className="size-3 rounded-full" style={{ background: ANSWER_COLOR }} /> Lieu de naissance</span>
+            <span className="flex items-center gap-1"><span className="size-3 rounded-full" style={{ background: GUESS_COLOR }} /> {t("Votre réponse")}</span>
+            <span className="flex items-center gap-1"><span className="size-3 rounded-full" style={{ background: ANSWER_COLOR }} /> {t("Lieu de naissance")}</span>
           </div>
         )}
       </div>

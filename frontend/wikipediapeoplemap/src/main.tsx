@@ -7,6 +7,7 @@ import { ThemeProvider, Toaster, TooltipProvider } from '@steevenakintilo/ui'
 import { HelmetProvider } from 'react-helmet-async'
 import 'leaflet/dist/leaflet.css'
 import './index.css'
+import './i18n/index.ts'
 import App from './App.tsx'
 import { query_client } from './api/query_client.ts'
 

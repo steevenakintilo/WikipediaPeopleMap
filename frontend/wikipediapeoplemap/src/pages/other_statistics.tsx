@@ -1,5 +1,6 @@
 import { BLACK_BUTTON } from "../utils/styles.ts"
 import { useState } from 'react';
+import { useTranslation } from "react-i18next";
 import { useQuery } from '@tanstack/react-query';
 import { SearchIcon } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, Spinner, Tabs, TabsContent, TabsList, TabsTrigger } from "@steevenakintilo/ui";
@@ -11,6 +12,8 @@ import { other_statistics_query, retry_if_failed } from "../api/queries.ts";
 import { DataTableDialog } from "../components/data_table_dialog.tsx";
 import { EmptyState, ErrorState, LoadingState, PageHeader } from "../components/page.tsx";
 import { StatChartCard } from "../components/stat_chart.tsx";
+import { useNumberFormat } from "../i18n/index.ts";
+import { ranking_name_translator } from "../i18n/data_names.ts";
 
 const NO_DATA = {}
 const NO_CHARTS = {
@@ -18,10 +21,8 @@ const NO_CHARTS = {
   list_of_graph2: [], list_of_dict2: [], list_of_keys_name2: [],
 }
 
-const format_number = (value: any) => (typeof value === "number" ? value.toLocaleString("fr-FR") : value)
-
 // Construit les graphiques de classement (1) et de ratio hommes / femmes (2)
-function build_charts(list_of_ranking_data: any, list_of_gender_data: any) {
+function build_charts(list_of_ranking_data: any, list_of_gender_data: any, t: (text: string) => string) {
   const keys = Object.keys(list_of_ranking_data);
   const keys2 = Object.keys(list_of_gender_data);
 
@@ -41,14 +42,16 @@ function build_charts(list_of_ranking_data: any, list_of_gender_data: any) {
       const key = keys[i];
 
       if (list_of_ranking_data[key].length >= 1) {
+        const translate_name = ranking_name_translator(key, t);
         const generic_dict = generate_list_of_dict_with_three_params_as_data(
             list_of_ranking_data[key],
-            number_of_bar_to_display
+            number_of_bar_to_display,
+            translate_name
         );
 
         list_of_keys_name.push(key);
-        list_of_graph.push(make_a_graphic("bar", generic_dict, key));
-        list_of_dict.push(generate_list_of_dict_with_three_params_as_data(list_of_ranking_data[key], 50000000));
+        list_of_graph.push(make_a_graphic("bar", generic_dict, t(key)));
+        list_of_dict.push(generate_list_of_dict_with_three_params_as_data(list_of_ranking_data[key], 50000000, translate_name));
       }
   }
 
@@ -56,14 +59,16 @@ function build_charts(list_of_ranking_data: any, list_of_gender_data: any) {
       const key = keys2[i];
 
       if (list_of_gender_data[key].length >= 1) {
+        const translate_name = ranking_name_translator(key, t);
         const generic_dict = generate_list_of_dict_with_four_params_as_data(
             list_of_gender_data[key],
-            number_of_bar_to_display
+            number_of_bar_to_display,
+            translate_name
         );
 
         list_of_keys_name2.push(key);
-        list_of_graph2.push(make_a_stacked_bar_graphic(generic_dict, key));
-        list_of_dict2.push(generate_list_of_dict_with_four_params_as_data(list_of_gender_data[key], 50000000));
+        list_of_graph2.push(make_a_stacked_bar_graphic(generic_dict, t(key), t));
+        list_of_dict2.push(generate_list_of_dict_with_four_params_as_data(list_of_gender_data[key], 50000000, translate_name));
       }
   }
 
@@ -78,12 +83,19 @@ function total_occurences(data_dict: any[]) {
   return total_number
 }
 
-// Titre du tableau : le nom de la statistique quand c'en est un ("Les …")
+// Titre du tableau : le nom de la statistique quand c'en est un ("Liste des …")
 function detail_title(keys_info: string) {
   return keys_info[0] == "L" ? keys_info : "Statistiques détaillées"
 }
 
+// "Liste des âges classé(e)s par score…" -> "Liste des âges" (et "List of ages ranked by score…" -> "List of ages")
+function title_before_ranking(text: string) {
+  return text.split(/ ?(?:classé\(e\)s|ranked)/)[0]
+}
+
 const OtherStatistics = () => {
+    const { t } = useTranslation()
+    const format_number = useNumberFormat()
 
     const [search_launched,set_search_launched] = useState(false)
     // Tableau détaillé ouvert : graphique de classement ou de ratio
@@ -100,7 +112,7 @@ const OtherStatistics = () => {
     const server_error_found = other_statistics.isError
     const result_found = other_statistics.data !== undefined && !other_statistics.isError
 
-    const charts = result_found ? build_charts(list_of_ranking_data, list_of_gender_data) : NO_CHARTS
+    const charts = result_found ? build_charts(list_of_ranking_data, list_of_gender_data, t) : NO_CHARTS
 
     const ranking_rows : any[] = detail?.kind === "ranking" ? (charts.list_of_dict[detail.index] ?? []) : []
     const ranking_key = detail?.kind === "ranking" ? charts.list_of_keys_name[detail.index] : ""
@@ -126,7 +138,7 @@ const OtherStatistics = () => {
       >
         {result_found && (
           <Button variant="outline" onClick={() => other_statistics.refetch()} disabled={other_statistics.isFetching}>
-            {other_statistics.isFetching ? <Spinner /> : <SearchIcon />} Actualiser
+            {other_statistics.isFetching ? <Spinner /> : <SearchIcon />} {t("Actualiser")}
           </Button>
         )}
         
@@ -140,11 +152,11 @@ const OtherStatistics = () => {
         <Tabs defaultValue="gender" className="gap-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <TabsList>
-              <TabsTrigger value="gender">Ratio hommes / femmes</TabsTrigger>
-              <TabsTrigger value="ranking">Classements</TabsTrigger>
+              <TabsTrigger value="gender">{t("Ratio hommes / femmes")}</TabsTrigger>
+              <TabsTrigger value="ranking">{t("Classements")}</TabsTrigger>
             </TabsList>
             <p className="text-sm text-muted-foreground">
-              Le score correspond à la moyenne de tous les utilisateurs possédant cette variable.
+              {t("Le score correspond à la moyenne de tous les utilisateurs possédant cette variable.")}
             </p>
           </div>
 
@@ -154,7 +166,7 @@ const OtherStatistics = () => {
                 LIST_OF_THEME_FOR_GENDER_RATIO.includes(key) && (
                   <AccordionItem key={key} value={key}>
                     <AccordionTrigger className="text-base">
-                      {THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[key].split("classé(e)s")[0]}
+                      {title_before_ranking(t(THEME_TO_SUB_THEMES_FOR_GENDER_RATIO[key]))}
                     </AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-10 pt-2">
@@ -177,7 +189,7 @@ const OtherStatistics = () => {
                 LIST_OF_THEME_FOR_RANKING.includes(key) && (
                   <AccordionItem key={key} value={key}>
                     <AccordionTrigger className="text-base">
-                      {THEME_TO_SUB_THEMES_FOR_RANKING[key].split("classé(e)s")[0]}
+                      {title_before_ranking(t(THEME_TO_SUB_THEMES_FOR_RANKING[key]))}
                     </AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-10 pt-2">
@@ -202,7 +214,7 @@ const OtherStatistics = () => {
           description="Le chargement peut prendre quelques minutes la première fois, ensuite les résultats sont gardés en cache."
         >
           <Button className={BLACK_BUTTON} onClick={() => get_list_of_user_other_advanced_statistics()}>
-            <SearchIcon /> Afficher les statistiques
+            <SearchIcon /> {t("Afficher les statistiques")}
           </Button>
         </EmptyState>
       )}
