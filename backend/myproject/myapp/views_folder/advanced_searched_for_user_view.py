@@ -236,7 +236,7 @@ def display_chunck_of_user_info_advanced_search(request,chunk_nb=0):
             if "#" in recieved_data["job"]:
                 accept_multiple_element = True
                 for job in recieved_data["job"].split("#"):
-                    query |= Q(job__icontains=job)
+                    query |= Q(job__icontains=unidecode(job))
                 
             else:
                 filters["job__icontains"] = unidecode(recieved_data["job"])

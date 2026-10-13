@@ -226,7 +226,7 @@ def who_was_born_first(request):
             if "#" in recieved_data["job"]:
                 accept_multiple_element = True
                 for job in recieved_data["job"].split("#"):
-                    query |= Q(job__icontains=job)
+                    query |= Q(job__icontains=unidecode(job))
                 
             else:
                 filters["job__icontains"] = unidecode(recieved_data["job"])
