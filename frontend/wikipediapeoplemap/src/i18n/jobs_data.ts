@@ -8,6 +8,9 @@ export const JOBS: Entry[] = [
   // --- arts, cinéma, musique
   ["acteur|actrice|comedien|comedienne", "actor"],
   ["acteur pornographique|actrice pornographique|acteur de films pornographiques|actrice de films pornographiques", "adult film actor"],
+  // Synonymes de recherche en anglais : même formes françaises, l'affichage garde la première traduction
+  ["acteur pornographique|actrice pornographique|acteur de films pornographiques|actrice de films pornographiques", "pornstar"],
+  ["acteur pornographique|actrice pornographique|acteur de films pornographiques|actrice de films pornographiques", "porn star"],
   ["acteur de doublage|actrice de doublage|comedien de doublage|comedienne de doublage", "voice actor"],
   ["seiyu", "voice actor"],
   ["chanteur|chanteuse", "singer"],
